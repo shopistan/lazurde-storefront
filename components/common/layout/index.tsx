@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { FC, useEffect } from "react";
 import styles from "../../../styles/Layout.module.css";
 import useTranslation from 'next-translate/useTranslation';
+import { fetchItems } from '../../../lib/algolia'
 
 
 interface LayoutProps {
@@ -57,6 +58,16 @@ const Layout: FC<LayoutProps> = ({ children }): JSX.Element => {
     };
 
     useEffect(() => {
+
+        const fetchItemsFromAlgolia = async () => {
+            try {
+                const algoliaRes = await fetchItems('bracelet')
+                console.log('Algolia items', algoliaRes)
+            } catch (error) {
+                console.log('Error from algolia', (error as any).messsage)
+            }
+        }
+        fetchItemsFromAlgolia()
         if (locale && locale.split("-").length > 0) {
             setLang(locale.split("-")[0] || "en");
             setRegion(locale.split("-")[1] || "sa");
