@@ -3,7 +3,7 @@
  */
 import React from "react";
 import { Preview } from "@teamfabric/xpm";
-import { componentsById } from "../../components/xm-component-library";
+import { componentsById } from "components/xm-component-library"
 
 const PreviewPage = () => {
   console.log("componentsById", componentsById);
