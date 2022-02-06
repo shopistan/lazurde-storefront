@@ -1,0 +1,1 @@
+[{"type":"Component","id":"LazurdeHeroBanner","label":"Lazurde Hero Banner","internal":false,"isGlobal":false,"allowNestedComponents":false,"attributes":{"heroImage":{"type":"Image","label":"Hero Image","url":{"type":"String","label":"URL","default":""},"altText":{"type":"String","label":"Alt text","default":""}}}}]
