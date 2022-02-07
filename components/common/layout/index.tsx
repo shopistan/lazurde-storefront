@@ -13,21 +13,21 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children }): JSX.Element => {
     const router = useRouter();
     const { locales, locale, pathname, query, asPath } = router;
-    console.log(
-        "Configured Locales",
-        locales,
-        "Locale",
-        locale,
-        "Pathname",
-        pathname,
-        "Query",
-        query,
-        "AsPath",
-        asPath
-    );
+    // console.log(
+    //     "Configured Locales",
+    //     locales,
+    //     "Locale",
+    //     locale,
+    //     "Pathname",
+    //     pathname,
+    //     "Query",
+    //     query,
+    //     "AsPath",
+    //     asPath
+    // );
 
     const { t } = useTranslation('common')
-    console.log('TEE', t('sampleTranslationText'))
+    //console.log('TEE', t('sampleTranslationText'))
 
     const setLang = (lang: string) => {
         window.localStorage.setItem("lang", lang);
