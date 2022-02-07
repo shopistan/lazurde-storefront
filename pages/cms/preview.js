@@ -21,8 +21,13 @@ const PreviewPage = () => {
 
 export default PreviewPage;
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ locale, defaultLocale }) {
+  if (locale !== defaultLocale) {
+    return {
+      notFound: true
+    }
+  }
   return {
-    notFound: true
+    props: {}
   }
 }
