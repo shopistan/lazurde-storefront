@@ -5,6 +5,9 @@ import { HEADERS } from "lib/api/headers";
 import { ErrorObject } from "lib/types/common";
 
 export const fetchXMComponents = async (pageUrl: string = "/") => {
+  console.log(
+    `XM URL: ${API_DOMAIN}${ENDPOINTS.XM.FETCH_PAGE_BY_URL}?url=${pageUrl}`
+  );
   try {
     const response = await Axios.get(
       `${API_DOMAIN}${ENDPOINTS.XM.FETCH_PAGE_BY_URL}?url=${pageUrl}`,
@@ -23,6 +26,7 @@ export const fetchXMComponents = async (pageUrl: string = "/") => {
 };
 
 export const fetchGlobalComponents = async (): Promise<any> => {
+  console.log(`GC URL: ${API_DOMAIN}${ENDPOINTS.XM.FETCH_GLOBAL_COMPONENTS}`);
   try {
     const response = await Axios.get(
       `${API_DOMAIN}${ENDPOINTS.XM.FETCH_GLOBAL_COMPONENTS}`,
