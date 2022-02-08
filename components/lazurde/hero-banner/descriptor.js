@@ -11,5 +11,6 @@ exports.default = Types.Component({
       url: Types.String({ label: "URL" }),
       altText: Types.String({ label: "Alt text" }),
     }),
+    heroBannerText: Types.String({ label: 'Hero Banner Text' })
   },
 });
