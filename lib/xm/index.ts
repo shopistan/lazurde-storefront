@@ -31,7 +31,7 @@ export const fetchGlobalComponents = async (): Promise<any> => {
       }
     );
     console.log("Global Components: ", response.data);
-    return null;
+    return response.data;
   } catch (error: any) {
     console.log(
       `Error fetching global components: `,
