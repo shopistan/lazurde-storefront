@@ -68,12 +68,12 @@ export default LazurdeHome;
 export async function getServerSideProps(context: any) {
   const globalComponents = await fetchGlobalComponents();
   const pageComponents = await fetchXMComponents("/home");
-  const headerProps = globalComponents.find(
-    (item: XMComponent) => item.id === "Header"
-  ).params;
-  const footerProps = globalComponents.find(
-    (item: XMComponent) => item.id === "Footer"
-  ).params;
+  const headerProps =
+    globalComponents.find((item: XMComponent) => item.id === "Header").params ||
+    {};
+  const footerProps =
+    globalComponents.find((item: XMComponent) => item.id === "Footer").params ||
+    {};
   return {
     props: {
       headerProps,
