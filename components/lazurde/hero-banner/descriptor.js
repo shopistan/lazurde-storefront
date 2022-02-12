@@ -8,7 +8,7 @@ exports.default = Types.Component({
   attributes: {
     backgroundImage: Types.Image({
       label: "Background Image",
-      imageUrl: Types.String({ label: "URL" }),
+      url: Types.String({ label: "URL" }),
       altText: Types.String({ label: "Alt text" }),
     }),
     bannerText: Types.String({ label: 'Hero Banner Text' }),

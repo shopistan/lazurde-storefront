@@ -19,7 +19,7 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({
   return (
     <div className={styles["hero-banner-container"]}>
       <Image
-        src={(backgroundImage || {}).imageUrl || "/placeholder.jpg"}
+        src={(backgroundImage || {}).url || "/placeholder.jpg"}
         layout="fill"
         objectFit="cover"
         quality={100}

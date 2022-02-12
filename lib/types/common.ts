@@ -9,7 +9,7 @@ export type ErrorObject = {
 };
 
 export type ImageObject = {
-  imageUrl: string;
+  url: string;
   altText: string;
 };
 
