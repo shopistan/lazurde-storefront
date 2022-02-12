@@ -22,7 +22,7 @@ const LazurdeHome: FC<PageProps> = ({
       <Header {...headerProps}></Header>
       <AppContentWrapper>
         <div className={styles.container}>
-          <div className={styles.links}>
+          {/* <div className={styles.links}>
             <Link href={"/en-sa"} locale="en-sa">
               <a>Lazurde en-sa</a>
             </Link>
@@ -48,7 +48,7 @@ const LazurdeHome: FC<PageProps> = ({
             <Link href={"/missl"}>
               <a>Miss'L HomePage</a>
             </Link>
-          </div>
+          </div> */}
           {pageComponents.map((component: XMComponent, index) => {
             const Component = componentsById[component.id];
             if (Component) {

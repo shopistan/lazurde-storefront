@@ -6,11 +6,13 @@ exports.default = Types.Component({
   description: ``,
 
   attributes: {
-    heroImage: Types.Image({
-      label: "Hero Image",
-      url: Types.String({ label: "URL" }),
+    backgroundImage: Types.Image({
+      label: "Background Image",
+      imageUrl: Types.String({ label: "URL" }),
       altText: Types.String({ label: "Alt text" }),
     }),
-    heroBannerText: Types.String({ label: 'Hero Banner Text' })
+    bannerText: Types.String({ label: 'Hero Banner Text' }),
+    buttonText: Types.String({ label: 'Button Text' }),
+    buttonLink: Types.String({ label: 'Button Link' })
   },
 });

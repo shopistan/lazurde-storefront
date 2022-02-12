@@ -2,11 +2,12 @@
   "name": "fabric-lazurde",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "npm run descriptors && next build",
     "start": "next start",
     "lint": "next lint",
-    "descriptors": "node ./lib/xm/combine-descriptors.js"
+    "descriptors": "node ./lib/xm/combine-descriptors.js",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@teamfabric/xpm": "^1.5.0",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@types/node": "17.0.10",
     "@types/react": "17.0.38",
+    "cypress": "^9.4.1",
     "eslint": "8.7.0",
     "eslint-config-next": "12.0.8",
     "typescript": "4.5.5"
