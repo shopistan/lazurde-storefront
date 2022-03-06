@@ -36,5 +36,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
+# cypress
 /cypress
 cypress.json

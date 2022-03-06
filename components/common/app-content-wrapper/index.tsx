@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import React, { FC } from "react";
-import styles from "../../../styles/Wrapper.module.css";
+import styles from "./AppContentWrapper.module.css";
 import useTranslation from "next-translate/useTranslation";
 
-interface AppContentWrapperProps {}
+interface AppContentWrapperProps { }
 
 const AppContentWrapper: FC<AppContentWrapperProps> = ({
   children,
@@ -25,14 +25,14 @@ const AppContentWrapper: FC<AppContentWrapperProps> = ({
   const { t } = useTranslation("common");
 
   return (
-    <div className={styles.layout_container}>
-      <h3>{t("sampleTranslationText")}</h3>
+    <div className={styles.wrapper}>
+      {/* <h3>{t("sampleTranslationText")}</h3> */}
       <main>{children}</main>
-      <footer>
+      {/* <footer>
         <span onClick={() => router.back()} className={styles.go_back}>
           Go Back
         </span>
-      </footer>
+      </footer> */}
     </div>
   );
 };

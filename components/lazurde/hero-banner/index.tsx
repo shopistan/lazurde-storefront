@@ -25,8 +25,10 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({
         quality={100}
         className={styles["bg-image"]}
       />
-      <h3>{bannerText || ""}</h3>
-      <button>{buttonText || ""}</button>
+      <div className={styles['banner-text-section']}>
+        <h3>{bannerText || ""}</h3>
+        <button>{buttonText || ""}</button>
+      </div>
     </div>
   );
 };
