@@ -30,5 +30,22 @@ export type FooterProps = {
 export type PageProps = {
   headerProps: HeaderProps;
   footerProps: FooterProps;
-  pageComponents: XMComponent[];
+  pageComponents?: XMComponent[];
 };
+
+export type ProductAttribute = {
+  id: string
+  name: string,
+  description: string,
+  mapping: string,
+  type: string,
+  value: string
+}
+
+export type Product = {
+  sku: string;
+  itemId: number,
+  categories: any[],
+  attributes: ProductAttribute[],
+  variants: any[]
+}
