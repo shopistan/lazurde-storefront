@@ -1,4 +1,4 @@
-import { Product } from "lib/types/common";
+import { Product } from "lib/types/product";
 
 export const getAttributeValue = (product: Product, attributeName: string) => {
   const { attributes = [] } = product;
