@@ -7,7 +7,7 @@ const addition = (a: number, b: number) => {
 };
 
 test("simple addition test", () => {
-  expect(addition(2, 2)).toBe(4);
+  expect(addition(2, 2)).toBe(5);
 });
 
 // test("component test", () => {
