@@ -16,6 +16,7 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({
   buttonText,
   buttonLink,
 }): JSX.Element => {
+  console.log("testing build")
   return (
     <div className={styles["hero-banner-container"]}>
       <Image
