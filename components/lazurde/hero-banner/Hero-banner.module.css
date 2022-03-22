@@ -1,19 +1,72 @@
-.hero-banner-container {
-  height: 100vh;
-  position: relative;
+.w-100 {
   width: 100%;
+  height: auto;
+}
+.hero-banner-container {
+  height: 500px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  padding: 50px;
+  background: linear-gradient(to bottom right, gray, white);
 }
 
-.bg-image {
-  /* position: fixed; */
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  z-index: -1;
+.welcome-message {
+  width: 50%;
+  padding: 10px;
+  align-items: center;
+  justify-content: left;
 }
 
-.banner-text-section {
-  position: absolute;
-  top: 100px;
-  left: 100px;
+.welcome-message-h {
+  font-size: 50px;
+}
+
+.welcome-message-p {
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.button-1 {
+  background-color: black;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-1:hover,
+.button-1:focus {
+  background-color: gray;
+}
+
+.trending-h {
+  margin: 20px;
+}
+
+.whats-trending-section {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
 }

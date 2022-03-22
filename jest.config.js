@@ -18,6 +18,7 @@ module.exports = {
   },
   moduleDirectories: ["node_modules", path.join(__dirname, "src"), "shared"],
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: ["pages/**/*.{js,jsx,tsx,ts}", "!pages/cms/*.{js,jsx,tsx,ts}"],
+  setupFiles: ['./setup.js'],
 };
