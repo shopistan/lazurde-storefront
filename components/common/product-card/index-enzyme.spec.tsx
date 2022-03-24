@@ -12,7 +12,7 @@ const getComponent = (props: Object) => {
 };
 
 describe("Product Cart", () => {
-  it("should render the elements", () => {
+  test("should render the elements", () => {
     const { component } = getComponent({
       title: "Airpods",
       description: "Airpods are used for listening",
@@ -22,7 +22,7 @@ describe("Product Cart", () => {
     expect(component.props()).not.toBeNull();
   });
 
-  it("should have the elements", () => {
+  test("should have the elements", () => {
     const { component } = getComponent({
       title: "Airpods",
       description: "Airpods are used for listening",

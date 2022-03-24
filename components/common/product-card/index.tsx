@@ -1,10 +1,9 @@
 import React, { FC } from "react";
 import styles from "./Product-card.module.css";
-import { ImageObject } from "lib/types/common";
 import Image from "next/image";
 
 interface ProductCartPorps {
-  title: string;
+  title: string | null;
   description: string;
   price: Number;
 }
@@ -15,7 +14,7 @@ const ProductCard: FC<ProductCartPorps> = ({
   price,
 }): JSX.Element => {
   return (
-    <div className={styles["product-card"]}>
+    <div className={styles["product-card"]} data-testid="product-card">
       <div className={styles["logo-cart"]}>
         <Image
           src="/public/placeholder.jpg"
@@ -35,7 +34,7 @@ const ProductCard: FC<ProductCartPorps> = ({
         />
       </div>
       <div>
-        <span className={styles["title-h"]}>{title || "Title Here"}</span>
+        <span className={styles["title-h"]} data-testid='test-title'>{title || "Title Here"}</span>
         <p className="shoe-details-p">{description || "Description Here"}</p>
       </div>
       <div className="color-price">
