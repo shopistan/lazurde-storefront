@@ -32,3 +32,5 @@ export type PageProps = {
   footerProps: FooterProps;
   pageComponents?: XMComponent[];
 };
+
+export type Brand = "lazurde" | "missl" | "kenaz";

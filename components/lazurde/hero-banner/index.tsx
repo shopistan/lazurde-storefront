@@ -1,6 +1,7 @@
+import { AppContext } from "lib/context";
 import { ImageObject } from "lib/types/common";
 import Image from "next/image";
-import React, { FC } from "react";
+import React, { FC, useContext, useEffect } from "react";
 import styles from "./Hero-banner.module.css";
 
 interface LazurdeHeroBannerProps {
@@ -16,7 +17,12 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({
   buttonText,
   buttonLink,
 }): JSX.Element => {
-  console.log("testing build")
+  const { brand, setBrand } = useContext(AppContext);
+  useEffect(() => {
+    setBrand("missl");
+  }, []);
+  console.log("Brand", brand);
+
   return (
     <div className={styles["hero-banner-container"]}>
       <Image
@@ -26,7 +32,7 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({
         quality={100}
         className={styles["bg-image"]}
       />
-      <div className={styles['banner-text-section']}>
+      <div className={styles["banner-text-section"]}>
         <h3>{bannerText || ""}</h3>
         <button>{buttonText || ""}</button>
       </div>
