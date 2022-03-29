@@ -1,5 +1,6 @@
 import { AppContext } from "lib/context";
 import { ImageObject } from "lib/types/common";
+import { addProductToCart } from "lib/utils/cart";
 import useTranslation from "next-translate/useTranslation";
 import Image from "next/image";
 import React, { FC, useContext, useEffect } from "react";
@@ -18,12 +19,7 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({
   buttonText,
   buttonLink,
 }): JSX.Element => {
-  const { brand, setBrand } = useContext(AppContext);
   const { t } = useTranslation("common");
-  useEffect(() => {
-    setBrand("missl");
-  }, []);
-  console.log("Brand", brand);
 
   return (
     <div className={styles["hero-banner-container"]}>

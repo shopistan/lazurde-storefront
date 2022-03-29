@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { API_DOMAIN } from "general-config";
-import { ENDPOINTS } from "lib/api/endpoints";
-import { HEADERS } from "lib/api/headers";
+import ENDPOINTS from "lib/api/endpoints";
+import HEADERS from "lib/api/headers";
 import { ErrorObject } from "lib/types/common";
 
 export const fetchXMComponents = async (pageUrl: string = "/") => {

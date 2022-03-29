@@ -1,4 +1,4 @@
-export const ENDPOINTS = {
+const ENDPOINTS = {
   XM: {
     FETCH_PAGE_BY_URL: "/api-xpm/page/live",
     FETCH_GLOBAL_COMPONENTS: "/api-xpm/global-component/live",
@@ -30,3 +30,5 @@ export const ENDPOINTS = {
     CREATE_ORDER: "/api-order/orders",
   },
 };
+
+export default ENDPOINTS;
