@@ -81,6 +81,6 @@ export async function getServerSideProps(context: any) {
       footerProps,
       pageComponents,
     },
-    revalidate: 5,
+    // revalidate: 5,
   };
 }
