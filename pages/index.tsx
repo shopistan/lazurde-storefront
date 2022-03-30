@@ -1,5 +1,6 @@
 import Footer from "components/common/footer";
 import Header from "components/common/header";
+import ProductCard from "components/lazurde/product-card";
 import { componentsById } from "components/xm-component-library";
 import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
@@ -56,6 +57,7 @@ const LazurdeHome: FC<PageProps> = ({
             }
             return null;
           })}
+          <ProductCard image={{url: '', altText: ''}} title={'some title'} description={'some description'} price={'some price'} ></ProductCard>
         </div>
       </AppContentWrapper>
       <Footer {...footerProps}></Footer>
