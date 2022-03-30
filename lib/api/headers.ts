@@ -1,6 +1,6 @@
 import { ACCOUNT, CHANNEL, STAGE } from "general-config";
 
-export const HEADERS = {
+const HEADERS = {
   common: {
     "Content-Type": "application/json",
     "x-site-context": JSON.stringify({
@@ -11,3 +11,5 @@ export const HEADERS = {
     }),
   },
 };
+
+export default HEADERS;
