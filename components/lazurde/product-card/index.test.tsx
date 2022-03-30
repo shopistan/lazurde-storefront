@@ -4,7 +4,7 @@ import ProductCard from "./index";
 
 const getComponent = (props: Object) => {
   const component = render(
-    <ProductCard title="" description="" price={1.5} {...props} image={ {url: '', altText: ''}}/>
+    <ProductCard title="" description="" price={"1.5"} {...props} image={ {url: '', altText: ''}}/>
   );
   return {
     component: component,
@@ -16,7 +16,7 @@ describe("Product Cart", () => {
     const props = {
       title: "Airpods",
       description: "Airpods are used for listening",
-      price: 30,
+      price: "30",
     }
     const { component } = getComponent(props);
 
@@ -27,7 +27,7 @@ describe("Product Cart", () => {
     const { component } = getComponent({
       title: "Airpods",
       description: "Airpods are used for listening",
-      price: 30,
+      price: "30",
     });
 
     expect(screen.getByTestId('product-card')).toBeInTheDocument();
@@ -37,7 +37,7 @@ describe("Product Cart", () => {
     const props = {
       title: "Airpods",
       description: "Airpods are used for listening",
-      price: 30,
+      price: "30",
     }
     const { component } = getComponent(props);
 
@@ -50,7 +50,7 @@ describe("Product Cart", () => {
     const props = {
       title: "",
       description: "",
-      price: 30,
+      price: "30",
     }
     const { component } = getComponent(props);
 

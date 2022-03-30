@@ -7,7 +7,7 @@ interface ProductCartPorps {
   image: ImageObject,
   title: string;
   description: string;
-  price: Number;
+  price: string;
 }
 
 const ProductCard: FC<ProductCartPorps> = ({
