@@ -1,10 +1,9 @@
-const path = require('path');
+const path = require("path");
 
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  preset: 'ts-jest',
+  preset: "ts-jest",
   coveragePathIgnorePatterns: [],
-  coverageThreshold: null,
   testEnvironment: "jsdom",
   transform: {
     "^.+\\.tsx?$": "esbuild-jest",
@@ -17,6 +16,21 @@ module.exports = {
   },
   moduleDirectories: ["node_modules", path.join(__dirname, "src"), "shared"],
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
+  // coverageThreshold: {
+  //   global: {
+  //     branches: 80,
+  //     functions: 80,
+  //     lines: 80,
+  //     statements: -10,
+  //   },
+  // },
   collectCoverage: true,
-  collectCoverageFrom: ["pages/**/*.{js,jsx,tsx,ts}", "!pages/cms/*.{js,jsx,tsx,ts}"],
+  collectCoverageFrom: [
+    "components/**/*.{js,jsx,tsx,ts}",
+    "!components/**/descriptor.js",
+    "!components/icons/*.{js,jsx,tsx,ts}",
+    "!components/xm-component-library.ts",
+    "!pages/cms/*.{js,jsx,tsx,ts}",
+  ],
+  setupFiles: ["./setup.js"],
 };
