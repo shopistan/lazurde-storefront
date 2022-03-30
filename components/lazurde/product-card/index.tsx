@@ -18,19 +18,11 @@ const ProductCard: FC<ProductCartPorps> = ({
 }): JSX.Element => {
   return (
     <div className={styles["product-card"]} data-testid="product-card">
-      <div className={styles["logo-cart"]}>
-        <Image
-          src={image.url || '/public/placeholder.jpg'}
-          alt={image.altText || "logo"}
-          className={styles["logo-cart-img"]}
-          layout="fill"
-        />
-      </div>
       <div className={styles["main-images"]}>
         <Image
           id="blue"
           className={styles["blue active"]}
-          src="/public/favicon.ico"
+          src={image?.url || '/public/placeholder.jpg'}
           alt="blue"
           layout="fill"
         />
