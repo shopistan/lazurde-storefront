@@ -3,6 +3,7 @@
   height: auto;
 }
 .hero-banner-container {
+  width: 100%;
   height: 500px;
   position: relative;
   display: flex;
@@ -10,6 +11,10 @@
   align-items: left;
   padding: 50px;
   background: linear-gradient(to bottom right, gray, white);
+}
+
+.banner-text-section {
+  z-index: 1;
 }
 
 .welcome-message {

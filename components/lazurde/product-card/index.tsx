@@ -1,14 +1,17 @@
 import React, { FC } from "react";
+import { ImageObject } from "lib/types/common";
 import styles from "./Product-card.module.css";
 import Image from "next/image";
 
 interface ProductCartPorps {
-  title: string | null;
+  image: ImageObject,
+  title: string;
   description: string;
   price: Number;
 }
 
 const ProductCard: FC<ProductCartPorps> = ({
+  image,
   title,
   description,
   price,
@@ -17,12 +20,11 @@ const ProductCard: FC<ProductCartPorps> = ({
     <div className={styles["product-card"]} data-testid="product-card">
       <div className={styles["logo-cart"]}>
         <Image
-          src="/public/placeholder.jpg"
-          alt="logo"
+          src={image.url || '/public/placeholder.jpg'}
+          alt={image.altText || "logo"}
           className={styles["logo-cart-img"]}
           layout="fill"
         />
-        <i className="bx bx-shopping-bag"></i>
       </div>
       <div className={styles["main-images"]}>
         <Image

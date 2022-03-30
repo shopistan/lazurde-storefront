@@ -4,7 +4,7 @@ import ProductCard from "./index";
 
 const getComponent = (props: Object) => {
   const component = render(
-    <ProductCard title="" description="" price={1.5} {...props} />
+    <ProductCard title="" description="" price={1.5} {...props} image={ {url: '', altText: ''}}/>
   );
   return {
     component: component,

@@ -1,5 +1,5 @@
 import React from "react";
-import LazurdeHeroBanner from "./index";
+import LazurdeHeroBanner from "../hero-banner/index";
 import { screen, render } from "@testing-library/react";
 
 let products = [

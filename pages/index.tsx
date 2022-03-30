@@ -57,7 +57,6 @@ const LazurdeHome: FC<PageProps> = ({
             }
             return null;
           })}
-          <LazurdeHeroBannerStatic bannerText={"Welcome to L'azurde"} buttonText={"Browse More"} backgroundImage={''} buttonLink={''} products={''} />
         </div>
       </AppContentWrapper>
       <Footer {...footerProps}></Footer>
