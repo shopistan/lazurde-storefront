@@ -57,7 +57,6 @@ const LazurdeHome: FC<PageProps> = ({
             }
             return null;
           })}
-          <ProductCard image={{url: '', altText: ''}} title={'some title'} description={'some description'} price={'some price'} ></ProductCard>
         </div>
       </AppContentWrapper>
       <Footer {...footerProps}></Footer>
