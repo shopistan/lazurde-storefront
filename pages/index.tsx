@@ -7,6 +7,7 @@ import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
 import styles from "../styles/Home.module.css";
+import LazurdeHeroBannerStatic from './../components/lazurde/hero-banner-static/index';
 
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
@@ -56,6 +57,7 @@ const LazurdeHome: FC<PageProps> = ({
             }
             return null;
           })}
+          <LazurdeHeroBannerStatic bannerText={"Welcome to L'azurde"} buttonText={"Browse More"} backgroundImage={''} buttonLink={''} products={''} />
         </div>
       </AppContentWrapper>
       <Footer {...footerProps}></Footer>
