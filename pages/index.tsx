@@ -66,7 +66,7 @@ const LazurdeHome: FC<PageProps> = ({
 
 export default LazurdeHome;
 
-export async function getServerSideProps(context: any) {
+export async function getStaticProps(context: any) {
   const globalComponents = await fetchGlobalComponents();
   const pageComponents = await fetchXMComponents("/home");
   const headerProps =
@@ -81,6 +81,6 @@ export async function getServerSideProps(context: any) {
       footerProps,
       pageComponents,
     },
-    // revalidate: 5,
+    revalidate: 5,
   };
 }
