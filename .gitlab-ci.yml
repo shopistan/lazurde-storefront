@@ -59,9 +59,9 @@ qa-tests: # This job runs after successfully build.
   image: node:12.13.0-alpine
   script:
     - git clone https://adil.peter@gitlab.com/adil.peter/lazurde-api-tests.git
-    - ls
     - cd lazurde-api-tests
     - git checkout main
+    - newman run https://www.postman.com/collections/b2f013b5c68673f4a828
     - echo "Running API tests"
     - echo "API tests complete."
 
