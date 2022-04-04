@@ -62,7 +62,7 @@ const Header = ({ navLinks, brandImage }: HeaderProps) => {
       region = (locale.split("-")[1] || "sa") as RegionType;
     }
     const brand: BrandType = "lazurde";
-    const channel: ChannelType = getChannelFromLocale(locale);
+    const channel: ChannelType = getChannelFromLocale(locale as LocaleType);
     const newAppState: AppStateType = {
       lang,
       region,
