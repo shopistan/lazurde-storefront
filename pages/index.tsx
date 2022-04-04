@@ -1,10 +1,8 @@
 import Footer from "components/common/footer";
 import Header from "components/common/header";
-import ProductCard from "components/lazurde/product-card";
 import { componentsById } from "components/xm-component-library";
 import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
-import Link from "next/link";
 import React, { FC, useEffect } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
 import styles from "../styles/Home.module.css";
@@ -68,7 +66,7 @@ export default LazurdeHome;
 
 export async function getStaticProps(context: any) {
   const globalComponents = await fetchGlobalComponents();
-  const pageComponents = await fetchXMComponents("/home");
+  const pageComponents = await fetchXMComponents(12, "/home");
   const headerProps =
     (globalComponents.find((item: XMComponent) => item.id === "Header") || {})
       .params || {};

@@ -4,13 +4,13 @@ import ENDPOINTS from "lib/api/endpoints";
 import HEADERS from "lib/api/headers";
 import { ErrorObject } from "lib/types/common";
 
-export const fetchXMComponents = async (pageUrl: string = "/") => {
-  console.log(
-    `XM URL: ${API_DOMAIN}${ENDPOINTS.XM.FETCH_PAGE_BY_URL}?url=${pageUrl}`
-  );
+export const fetchXMComponents = async (
+  channel: number,
+  pageUrl: string = "/"
+) => {
   try {
     const response = await Axios.get(
-      `${API_DOMAIN}${ENDPOINTS.XM.FETCH_PAGE_BY_URL}?url=${pageUrl}`,
+      `${API_DOMAIN}${ENDPOINTS.XM.FETCH_PAGE_BY_URL(channel, pageUrl)}`,
       {
         headers: HEADERS.common,
       }

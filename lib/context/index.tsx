@@ -1,13 +1,28 @@
-import { Brand } from "lib/types/common";
+import { AppStateType } from "lib/types/common";
+import { DEFAULT_APP_STATE } from "lib/utils/constants";
 import React, { FC, useState } from "react";
 
 export const AppContext = React.createContext<any>({});
 
 const ContextProvider: FC = ({ children }) => {
-  const [brand, setBrand] = useState<Brand>("lazurde");
+  const [appState, setAppState] = useState<AppStateType>(DEFAULT_APP_STATE);
+
+  const saveAppState = ({
+    lang,
+    region,
+    channel,
+    locale,
+    brand,
+  }: AppStateType) => {
+    window.localStorage.setItem(
+      "app-state",
+      JSON.stringify({ lang, region, channel, locale, brand })
+    );
+    setAppState({ lang, region, channel, locale, brand });
+  };
 
   return (
-    <AppContext.Provider value={{ brand, setBrand }}>
+    <AppContext.Provider value={{ appState, saveAppState }}>
       {children}
     </AppContext.Provider>
   );

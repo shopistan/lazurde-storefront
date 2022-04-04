@@ -33,4 +33,25 @@ export type PageProps = {
   pageComponents?: XMComponent[];
 };
 
-export type Brand = "lazurde" | "missl" | "kenaz";
+export type BrandType = "lazurde" | "missl" | "kenaz";
+export type LangType = "en" | "ar";
+export type RegionType = "sa" | "ae" | "eg";
+export type LocaleType =
+  | "en"
+  | "en-sa"
+  | "en-ae"
+  | "en-eg"
+  | "ar"
+  | "ar-sa"
+  | "ar-ae"
+  | "ar-eg";
+
+export type ChannelType = 12 | 13 | 14 | 0;
+
+export type AppStateType = {
+  channel: ChannelType;
+  brand: BrandType;
+  locale: LocaleType;
+  lang: LangType;
+  region: RegionType;
+};

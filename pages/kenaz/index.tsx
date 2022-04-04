@@ -49,7 +49,7 @@ export default KenazHome;
 
 export async function getStaticProps() {
   const globalComponents = await fetchGlobalComponents();
-  const pageComponents = await fetchXMComponents("/kenaz");
+  const pageComponents = await fetchXMComponents(12, "/kenaz");
   const headerProps =
     (globalComponents.find((item: XMComponent) => item.id === "Header") || {})
       .params || {};

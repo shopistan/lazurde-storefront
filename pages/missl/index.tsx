@@ -49,7 +49,7 @@ export default MissLHome;
 
 export async function getStaticProps() {
   const globalComponents = await fetchGlobalComponents();
-  const pageComponents = await fetchXMComponents("/missl");
+  const pageComponents = await fetchXMComponents(12, "/missl");
   const headerProps =
     (globalComponents.find((item: XMComponent) => item.id === "Header") || {})
       .params || {};

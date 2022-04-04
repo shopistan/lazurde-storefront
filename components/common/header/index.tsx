@@ -1,48 +1,52 @@
-import { HeaderProps } from "lib/types/common";
+import { AppContext } from "lib/context";
+import {
+  AppStateType,
+  BrandType,
+  ChannelType,
+  HeaderProps,
+  LangType,
+  LocaleType,
+  RegionType,
+} from "lib/types/common";
+import { getChannelFromLocale } from "lib/utils/common";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./Header.module.css";
 
 const Header = ({ navLinks, brandImage }: HeaderProps) => {
   const brandIconUrl =
     "https://cdn.lazurde.com/static/version1643995588/frontend/Gurubhyo/Lazurde/ar_SA/images/logo.svg";
   const router = useRouter();
-  const { locales, locale, pathname, query, asPath } = router;
+  const { locales, locale, pathname, query, asPath, defaultLocale } = router;
   // console.log(
-  //     "Configured Locales",
-  //     locales,
-  //     "Locale",
-  //     locale,
-  //     "Pathname",
-  //     pathname,
-  //     "Query",
-  //     query,
-  //     "AsPath",
-  //     asPath
+  //   "Configured Locales",
+  //   locales,
+  //   "Locale",
+  //   locale,
+  //   "Pathname",
+  //   pathname,
+  //   "Query",
+  //   query,
+  //   "AsPath",
+  //   asPath,
+  //   "defaultLocale",
+  //   defaultLocale
   // );
 
-  const setLang = (lang: string) => {
-    window.localStorage.setItem("lang", lang);
-  };
-
-  const setRegion = (region: string) => {
-    window.localStorage.setItem("region", region);
-  };
-
-  const getLocale = () => {
-    const lang = window.localStorage.getItem("lang") || "en";
-    const region = window.localStorage.getItem("region") || "sa";
-    return `${lang}-${region}`;
-  };
+  const { appState, saveAppState } = useContext(AppContext);
 
   const navigateToLocale = () => {
-    router.push({ pathname, query }, asPath, { locale: getLocale() });
+    router.push({ pathname, query }, asPath, { locale: appState.locale });
   };
 
   const onRegionSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setRegion(event.target.value);
+    saveAppState({
+      ...appState,
+      region: event.target.value,
+      locale: `${appState.lang}-${event.target.value}`,
+    });
     navigateToLocale();
   };
 
@@ -51,11 +55,26 @@ const Header = ({ navLinks, brandImage }: HeaderProps) => {
   };
 
   useEffect(() => {
+    let lang: LangType = "en";
+    let region: RegionType = "sa";
     if (locale && locale.split("-").length > 0) {
-      setLang(locale.split("-")[0] || "en");
-      setRegion(locale.split("-")[1] || "sa");
+      lang = (locale.split("-")[0] || "en") as LangType;
+      region = (locale.split("-")[1] || "sa") as RegionType;
     }
+    const brand: BrandType = "lazurde";
+    const channel: ChannelType = getChannelFromLocale(locale);
+    const newAppState: AppStateType = {
+      lang,
+      region,
+      brand,
+      locale: locale as LocaleType,
+      channel,
+    };
+    saveAppState(newAppState);
   }, []);
+  useEffect(() => {
+    navigateToLocale();
+  }, [appState]);
   return (
     <div className={styles["header-container"]}>
       <Link href={"/"} locale={false}>
@@ -74,8 +93,11 @@ const Header = ({ navLinks, brandImage }: HeaderProps) => {
       <div className={styles["locale-selector-wrapper"]}>
         <span
           onClick={() => {
-            setLang("ar");
-            navigateToLocale();
+            saveAppState({
+              ...appState,
+              lang: "ar",
+              locale: `ar-${appState.region}`,
+            });
           }}
           className={styles.lang}
         >
@@ -84,8 +106,11 @@ const Header = ({ navLinks, brandImage }: HeaderProps) => {
         <span className={styles.lang}> | </span>
         <span
           onClick={() => {
-            setLang("en");
-            navigateToLocale();
+            saveAppState({
+              ...appState,
+              lang: "en",
+              locale: `en-${appState.region}`,
+            });
           }}
           className={styles.lang}
         >
