@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import { ImageObject } from "lib/types/common";
+import { ImageType } from "lib/types/common";
 import styles from "./Product-card.module.css";
 import Image from "next/image";
 
 interface ProductCartPorps {
-  image: ImageObject,
+  image: ImageType,
   title: string;
   description: string;
   price: string;

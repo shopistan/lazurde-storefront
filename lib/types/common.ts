@@ -8,7 +8,7 @@ export type ErrorObject = {
   message: string;
 };
 
-export type ImageObject = {
+export type ImageType = {
   url: string;
   altText: string;
 };
@@ -20,7 +20,7 @@ export type NavLinks = {
 
 export type HeaderProps = {
   navLinks: NavLinks[];
-  brandImage: ImageObject;
+  brandImage: ImageType;
 };
 
 export type FooterProps = {

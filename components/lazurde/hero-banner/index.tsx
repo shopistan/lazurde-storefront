@@ -1,5 +1,5 @@
 import { AppContext } from "lib/context";
-import { ImageObject } from "lib/types/common";
+import { ImageType } from "lib/types/common";
 import { addProductToCart } from "lib/utils/cart";
 import useTranslation from "next-translate/useTranslation";
 import Image from "next/image";
@@ -7,7 +7,7 @@ import React, { FC, useContext, useEffect } from "react";
 import styles from "./Hero-banner.module.css";
 
 interface LazurdeHeroBannerProps {
-  backgroundImage: ImageObject;
+  backgroundImage: ImageType;
   bannerText: string;
   buttonText: string;
   buttonLink: string;
