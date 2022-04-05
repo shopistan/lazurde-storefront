@@ -21,6 +21,9 @@ export type NavLinks = {
 export type HeaderProps = {
   navLinks: NavLinks[];
   brandImage: ImageType;
+  promoTitle: string;
+  promoLinkText: string;
+  promoLink: string;
 };
 
 export type FooterProps = {
