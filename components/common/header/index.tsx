@@ -14,8 +14,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import styles from "./Header.module.css";
+import PromoBar from "./promo-bar";
 
-const Header = ({ navLinks, brandImage }: HeaderProps) => {
+const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink }: HeaderProps) => {
   const brandIconUrl =
     "https://cdn.lazurde.com/static/version1643995588/frontend/Gurubhyo/Lazurde/ar_SA/images/logo.svg";
   const router = useRouter();
@@ -77,6 +78,7 @@ const Header = ({ navLinks, brandImage }: HeaderProps) => {
   }, [appState]);
   return (
     <div className={styles["header-container"]}>
+      <PromoBar title={promoTitle || "Save up to 50%"} linkText={promoLinkText || "Shop All Our Markdowns"} link={promoLink || '/'} bgColor='#C3A856'/>
       <Link href={"/"} locale={false}>
         <a>
           <Image src={brandIconUrl} width={100} height={75}></Image>

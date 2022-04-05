@@ -20,6 +20,10 @@ exports.default = Types.Component({
                     linkText: Types.String({ label: 'Link Text' }),
                 }
             })
-        })
+        }),
+
+        promoTitle: Types.String({ label: 'promobar title' }),
+        promoLinkText: Types.String({ label: 'promobar link text' }),
+        promoLink: Types.String({ label: 'promobar link' })
     },
 });
