@@ -78,10 +78,15 @@
     border-top: 1px solid rgba(255, 255, 255, 0.4);
 
     li {
-      margin-right: 12px;
+      cursor: alias;
+      margin-right: 12px !important;
 
       &:last-child {
         margin-right: 0;
+      }
+
+      a {
+        cursor: auto;
       }
     }
   }
