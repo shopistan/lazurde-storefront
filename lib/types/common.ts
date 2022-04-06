@@ -32,8 +32,7 @@ interface footerLinks {
 }
 interface iconsObj {
   link: string;
-  url: string;
-  altText: string;
+  icon: ImageType;
 }
 interface footerLogoProp {
   url: string;
