@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import styles from "./Header.module.css";
 import PromoBar from "./promo-bar";
+import UserNavBar from "./user-navbar";
 
 const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink }: HeaderProps) => {
   const brandIconUrl =
@@ -79,6 +80,7 @@ const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink }: 
   return (
     <div className={styles["header-container"]}>
       <PromoBar title={promoTitle || "Save up to 50%"} linkText={promoLinkText || "Shop All Our Markdowns"} link={promoLink || '/'} bgColor='#C3A856'/>
+      <UserNavBar title={promoTitle || "Save up to 50%"} linkText={promoLinkText || "Shop All Our Markdowns"} link={promoLink || '/'}></UserNavBar>
       <Link href={"/"} locale={false}>
         <a>
           <Image src={brandIconUrl} width={100} height={75}></Image>
