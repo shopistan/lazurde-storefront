@@ -23,8 +23,31 @@ export type HeaderProps = {
   brandImage: ImageType;
 };
 
+interface footerLinks {
+  linkHeading: string;
+  links: [];
+}
+interface iconsObj {
+  link: string;
+  url: string;
+  altText: string;
+}
+interface footerLogoProp {
+  url: string;
+  altText: string;
+}
+
 export type FooterProps = {
-  footerLinks: NavLinks[];
+  footerLinks: footerLinks[];
+  heading: string;
+  subHeading: string;
+  linkLabel: string;
+  linkUrl: string;
+  subscriptionText: string;
+  socialIconText: string;
+  socialLinks: iconsObj[];
+  footerLogo: footerLogoProp;
+  paymentLinks: iconsObj[];
 };
 
 export type PageProps = {
