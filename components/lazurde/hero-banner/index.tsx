@@ -43,7 +43,7 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps[]> = ({
                 <h5 className={styles["sample-text"]}>
                   { appState?.lang == 'en' ? bannerBodyText || "" : t("bannerBodyText")}
                 </h5>
-                <Button buttonText ={appState?.lang == 'en' ? buttonText : t("buttonText") } />
+                <Button backgroundColor='black' buttonText ={appState?.lang == 'en' ? buttonText : t("buttonText") } />
               </div>
             </div>
           );
