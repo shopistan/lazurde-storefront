@@ -11,8 +11,8 @@ module.exports = {
   },
   moduleNameMapper: {
     "\\module\\.css$": "identity-obj-proxy",
-    // "\\.css$": require.resolve("./test/mockcss.js"),
-    // "\\.scss$": require.resolve("./test/mockcss.js"),
+    "\\.css$": require.resolve("./styles/mockcss.js"),
+    "\\.scss$": require.resolve("./styles/mockcss.js"),
   },
   moduleDirectories: ["node_modules", path.join(__dirname, "src"), "shared"],
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],

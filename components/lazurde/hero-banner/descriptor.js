@@ -7,6 +7,7 @@ exports.default = Types.Component({
 
   attributes: {
     heroBannerArray: Types.Array({
+      label : 'Hero Banner',
       children: Types.Shape({
         children: {
           backgroundImage: Types.Image({
