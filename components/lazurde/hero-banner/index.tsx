@@ -1,8 +1,7 @@
 import { ImageType } from "lib/types/common";
 import Image from "next/image";
-import React, { FC, useContext } from "react";
+import React, { FC } from "react";
 import styles from "./Hero-banner.module.scss";
-import { AppContext } from "lib/context";
 
 interface LazurdeHeroBannerProps {
   backgroundImage: ImageType;
@@ -12,10 +11,28 @@ interface LazurdeHeroBannerProps {
   bannerBodyText: string;
 }
 
+interface PropTypes {
+  heroBannerArray : LazurdeHeroBannerProps[];
+}
+
 const LazurdeHeroBanner: FC<LazurdeHeroBannerProps[]> = ({
-  heroBannerArray,
-}): JSX.Element => {
-  const { appState } = useContext(AppContext);
+  heroBannerArray = [
+    {
+      backgroundImage: { url: "", altText: "Image1" },
+      bannerText: "Save 50% off",
+      bannerBodyText:
+        "The greatest selection of sale pieces from the world’s best designers — only on L’AZURDE",
+      buttonText: "Shop Now",
+    },
+    {
+      backgroundImage: { url: "", altText: "" },
+      bannerText: "Save 50% off",
+      bannerBodyText:
+        "The greatest selection of sale pieces from the world’s best designers — only on L’AZURDE",
+      buttonText: "Shop Now",
+    },
+  ],
+} : any  ): JSX.Element => {
   return (
     <div className={styles["hero-banner-block"]}>
       {heroBannerArray &&
