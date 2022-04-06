@@ -1,3 +1,5 @@
+@import '/styles/variables.scss';
+
 .w-100 {
   width: 100%;
   height: auto;
@@ -131,10 +133,10 @@
 }
 
 .banner-button {
-  background: black;
+  background: $black-color;
   border: none;
   border-radius: 100px;
-  color: white;
+  color: $white-color;
   height: 51px;
   width: 220px;
   font-size: 16px;
