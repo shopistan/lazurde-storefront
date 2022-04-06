@@ -23,6 +23,7 @@ export type HeaderProps = {
   brandImage: ImageType;
   promoTitle: string;
   promoLinkText: string;
+  mobilePromoLinkText: string;
   promoLink: string;
 };
 
