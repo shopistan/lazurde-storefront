@@ -5,10 +5,13 @@ import Link from "next/link";
 
 import styles from "./style.module.scss";
 
-interface iconsObj {
-  link: string;
+interface iconProps {
   url: string;
   altText: string;
+}
+interface iconsObj {
+  link: string;
+  icon: iconProps;
 }
 
 interface iconsListType {
@@ -21,15 +24,15 @@ const FooterIcons = ({ iconsList }: iconsListType) => {
       <ul className={styles["icons__container"]}>
         {iconsList?.length > 0 &&
           iconsList.map((socialIcon, index) => {
-            const { link, url, altText } = socialIcon;
+            const { link, icon } = socialIcon;
             return (
               <li className="icons__item" key={index}>
                 <Link href={link}>
                   <a>
                     <img
                       className={styles["icons__custom-img-style"]}
-                      src={url}
-                      alt={altText}
+                      src={icon?.url}
+                      alt={icon?.altText}
                       // width={20}
                       // height={20}
                       // layout="fill"
