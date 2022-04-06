@@ -12,27 +12,12 @@ interface LazurdeHeroBannerProps {
 }
 
 interface PropTypes {
-  heroBannerArray : LazurdeHeroBannerProps[];
+  heroBannerArray: LazurdeHeroBannerProps[];
 }
 
 const LazurdeHeroBanner: FC<LazurdeHeroBannerProps[]> = ({
-  heroBannerArray = [
-    {
-      backgroundImage: { url: "", altText: "Image1" },
-      bannerText: "Save 50% off",
-      bannerBodyText:
-        "The greatest selection of sale pieces from the world’s best designers — only on L’AZURDE",
-      buttonText: "Shop Now",
-    },
-    {
-      backgroundImage: { url: "", altText: "" },
-      bannerText: "Save 50% off",
-      bannerBodyText:
-        "The greatest selection of sale pieces from the world’s best designers — only on L’AZURDE",
-      buttonText: "Shop Now",
-    },
-  ],
-} : any  ): JSX.Element => {
+  heroBannerArray,
+}: any): JSX.Element => {
   return (
     <div className={styles["hero-banner-block"]}>
       {heroBannerArray &&
