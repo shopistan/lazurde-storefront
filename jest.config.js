@@ -9,6 +9,9 @@ module.exports = {
     "^.+\\.tsx?$": "esbuild-jest",
     "^.+\\.jsx?$": "esbuild-jest",
   },
+  modulePaths: [
+    "<rootDir>",
+  ],
   moduleNameMapper: {
     "\\module\\.css$": "identity-obj-proxy",
     "\\.css$": require.resolve("./styles/mockcss.js"),
