@@ -1,8 +1,10 @@
 import { ImageType } from "lib/types/common";
 import Image from "next/image";
-import React, { FC } from "react";
+import React, { FC , useContext } from "react";
 import styles from "./Hero-banner.module.scss";
-
+import {AppContext} from 'lib/context'
+import useTranslation from "next-translate/useTranslation";
+import Button from 'components/common/button/index'
 interface LazurdeHeroBannerProps {
   backgroundImage: ImageType;
   bannerText: string;
@@ -18,14 +20,17 @@ interface PropTypes {
 const LazurdeHeroBanner: FC<LazurdeHeroBannerProps[]> = ({
   heroBannerArray,
 }: any): JSX.Element => {
+  const { t } = useTranslation("common");
+  const { appState} = useContext(AppContext);
+  console.log("AppState" , appState.lang)
   return (
     <div className={styles["hero-banner-block"]}>
       {heroBannerArray &&
-        heroBannerArray.map((object: any) => {
+        heroBannerArray.map((object: any , index: any) => {
           const { backgroundImage, bannerBodyText, bannerText, buttonText } =
             object;
           return (
-            <div className={styles["hero-banner-container"]}>
+            <div className={styles["hero-banner-container"]} key={index} >
               <Image
                 src={(backgroundImage || {}).url || "/placeholder.jpg"}
                 layout="fill"
@@ -34,13 +39,11 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps[]> = ({
                 className={styles["bg-image"]}
               />
               <div className={styles["banner-text-section"]}>
-                <h3 className={styles["banner-text"]}>{bannerText || ""}</h3>
+                <h3 className={styles["banner-text"]}>{ appState?.lang == 'en' ? bannerText || "" :  t("bannerText")}</h3>
                 <h5 className={styles["sample-text"]}>
-                  {bannerBodyText || ""}
+                  { appState?.lang == 'en' ? bannerBodyText || "" : t("bannerBodyText")}
                 </h5>
-                <button className={styles["banner-button"]}>
-                  {buttonText || ""}
-                </button>
+                <Button backgroundColor='black' buttonText ={appState?.lang == 'en' ? buttonText : t("buttonText") } />
               </div>
             </div>
           );

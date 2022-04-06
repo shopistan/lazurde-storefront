@@ -22,20 +22,20 @@ const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink }: 
     "https://cdn.lazurde.com/static/version1643995588/frontend/Gurubhyo/Lazurde/ar_SA/images/logo.svg";
   const router = useRouter();
   const { locales, locale, pathname, query, asPath, defaultLocale } = router;
-  // console.log(
-  //   "Configured Locales",
-  //   locales,
-  //   "Locale",
-  //   locale,
-  //   "Pathname",
-  //   pathname,
-  //   "Query",
-  //   query,
-  //   "AsPath",
-  //   asPath,
-  //   "defaultLocale",
-  //   defaultLocale
-  // );
+  console.log(
+    "Configured Locales",
+    locales,
+    "Locale",
+    locale,
+    "Pathname",
+    pathname,
+    "Query",
+    query,
+    "AsPath",
+    asPath,
+    "defaultLocale",
+    defaultLocale
+  );
 
   const { appState, saveAppState } = useContext(AppContext);
 

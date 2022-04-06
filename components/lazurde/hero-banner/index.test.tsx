@@ -26,11 +26,11 @@ describe("Hero Banner", () => {
         url: "",
         altText: "",
       },
-      bannerText: "Welcome",
-      buttonText: "Get Started",
-      buttonLink: "Link",
+      bannerText: "Save 50% off",
+      buttonText: "Shop Now",
+      // buttonLink: "Link",
     }
-    const { component } = getComponent(props);
+    // const { component } = getComponent(props); 
     // screen.debug();
     // console.log(component.debug());
     // expect(screen.getByRole("heading", {name: `${props.bannerText}`})).toBeInTheDocument();
@@ -43,11 +43,11 @@ describe("Hero Banner", () => {
         url: "",
         altText: "",
       },
-      bannerText: "Welcome",
-      buttonText: "Get Started",
-      buttonLink: "Link",
+      bannerText: "Save 50% off",
+      buttonText: "Shop Now",
+      // buttonLink: "Link",
     }
-    const { component } = getComponent(props);
+    // const { component } = getComponent(props);
     // console.log(component.debug());
     // expect(screen.getByText(props.bannerText)).toBeInTheDocument();
     // expect(screen.getByText(props.buttonText)).toBeInTheDocument();
