@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .w-100 {
   width: 100%;
   height: auto;
@@ -18,8 +20,13 @@
   display: flex;
   justify-content: space-between;
   align-items: left;
-  padding: 50px;
+  padding-top: 24px;
+  padding-left: 24px;
   background: linear-gradient(to bottom right, gray, white);
+
+  @media (min-width: 768px) {
+    padding: 50px;
+  }
 }
 
 .banner-text-section {
@@ -92,17 +99,15 @@
   line-height: 43px;
   letter-spacing: 0em;
   text-align: left;
+  margin-top: 0;
+  margin-bottom: 24px;
   color: white;
-}
-
-@media (min-width: 1200px) {
-  .banner-text {
+  @media (min-width: 1200px) {
     font-size: 64px;
     font-weight: 500;
     line-height: 77px;
     letter-spacing: 0em;
     text-align: left;
-    margin-top: 26px;
     margin-bottom: 32px;
   }
 }
@@ -114,11 +119,9 @@
   line-height: 18px;
   letter-spacing: 0em;
   text-align: left;
+  margin-bottom: 24px;
   color: white;
-}
-
-@media (min-width: 1200px) {
-  .sample-text {
+  @media (min-width: 768px) {
     width: 270px;
     font-size: 24px;
     font-weight: 500;
@@ -131,10 +134,10 @@
 }
 
 .banner-button {
-  background: black;
+  background: $black-color;
   border: none;
   border-radius: 100px;
-  color: white;
+  color: $white-color;
   height: 51px;
   width: 220px;
   font-size: 16px;
