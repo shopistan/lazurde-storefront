@@ -70,11 +70,12 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   opacity: 0;
-  transition: opacity 0.2s; 
-
+  transition: opacity 3s 4s; 
+  display: none;
 
   &[data-opened="true"] {
     opacity: 1;
+    display: block;
   }
 
 }
