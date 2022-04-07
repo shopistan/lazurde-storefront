@@ -28,7 +28,7 @@ const Footer = ({
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
 
-  const testData = appState.lang === "en" ? footerLinks : ArabicfooterLinks;
+  const _footerLinks = appState.lang === "en" ? footerLinks : ArabicfooterLinks;
 
   return (
     <>
@@ -61,7 +61,7 @@ const Footer = ({
             <div
               className={`grid grid-cols-1 lg:grid-cols-3 lg:gap-4 w-full ${styles["footer__sub-container"]}`}
             >
-              {testData?.map((footerLink, index) =>
+              {_footerLinks?.map((footerLink, index) =>
                 width > 1023 ? (
                   <FooterLinks
                     heading={footerLink.linkHeading}
