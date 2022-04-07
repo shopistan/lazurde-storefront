@@ -11,6 +11,11 @@
 
   @media (min-width: 768px) {
     flex-direction: row;
+    justify-content: space-evenly;
+
+    &.block-spacing {
+      width: 99%;
+    }
   }
 }
 .hero-banner-container {
@@ -24,8 +29,22 @@
   padding-left: 24px;
   background: linear-gradient(to bottom right, gray, white);
 
+  &.block-divison {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+    &:nth-child(1) {
+      margin-bottom: 8px;
+    }
+  }
+
   @media (min-width: 768px) {
-    padding: 50px;
+    padding: 76px 50px 50px 80px;
+
+    &.block-divison {
+      width: 49.5%;
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -46,7 +65,7 @@
 
 .welcome-message-p {
   font-size: 20px;
-  margin-left: 20px;
+  margin-inline-start: 20px;
 }
 
 .button-1 {
@@ -119,30 +138,13 @@
   line-height: 18px;
   letter-spacing: 0em;
   text-align: left;
+  margin-top: 0;
   margin-bottom: 24px;
   color: white;
   @media (min-width: 768px) {
-    width: 270px;
+    width: 330px;
     font-size: 24px;
-    font-weight: 500;
     line-height: 29px;
-    letter-spacing: 0em;
-    text-align: left;
-    margin-top: 0;
     margin-bottom: 32px;
   }
-}
-
-.banner-button {
-  background: $black-color;
-  border: none;
-  border-radius: 100px;
-  color: $white-color;
-  height: 51px;
-  width: 220px;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 19px;
-  letter-spacing: 0em;
-  text-align: center;
 }
