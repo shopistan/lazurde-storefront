@@ -102,6 +102,7 @@ const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink, mo
               lang: "ar",
               locale: `ar-${appState.region}`,
             });
+            document.documentElement.dir = 'rtl'
           }}
           className={styles.lang}
         >
@@ -115,6 +116,8 @@ const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink, mo
               lang: "en",
               locale: `en-${appState.region}`,
             });
+            document.documentElement.dir = 'ltr'
+
           }}
           className={styles.lang}
         >

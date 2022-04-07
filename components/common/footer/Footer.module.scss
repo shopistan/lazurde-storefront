@@ -79,10 +79,10 @@
 
     li {
       cursor: alias;
-      margin-right: 12px !important;
+      margin-inline-end: 12px !important;
 
       &:last-child {
-        margin-right: 0;
+        margin-inline-end: 0;
       }
 
       a {
