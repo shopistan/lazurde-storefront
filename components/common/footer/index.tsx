@@ -12,6 +12,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 import Accordion from "../accordion";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
+import { ArabicfooterLinks } from "lib/mock-data/data";
 
 const Footer = ({
   heading = "",
@@ -26,6 +27,8 @@ const Footer = ({
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
+
+  const testData = appState.lang === "en" ? footerLinks : ArabicfooterLinks;
 
   return (
     <>
@@ -50,13 +53,15 @@ const Footer = ({
                 className={`opacity-60 font-normal ${styles["footer__label"]}
             ${styles["footer__signup-text"]}`}
               >
-                {appState.lang === "en" ? subscriptionText : t("subscriptionText")}
+                {appState.lang === "en"
+                  ? subscriptionText
+                  : t("subscriptionText")}
               </Label>
             </div>
             <div
               className={`grid grid-cols-1 lg:grid-cols-3 lg:gap-4 w-full ${styles["footer__sub-container"]}`}
             >
-              {footerLinks?.map((footerLink, index) =>
+              {testData?.map((footerLink, index) =>
                 width > 1023 ? (
                   <FooterLinks
                     heading={footerLink.linkHeading}
