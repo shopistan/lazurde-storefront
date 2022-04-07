@@ -4,11 +4,13 @@ import styles from "./button.module.scss";
 interface ButtonProps {
   buttonText: string;
   backgroundColor: string;
+  dataTestId : string;
 }
 
-const Button = ({ buttonText, backgroundColor }: ButtonProps) => {
+const Button = ({ dataTestId,  buttonText, backgroundColor }: ButtonProps) => {
   return (
     <button
+    data-testid ={dataTestId}
       className={styles["banner-button"]}
       style={{ backgroundColor: backgroundColor }}
     >

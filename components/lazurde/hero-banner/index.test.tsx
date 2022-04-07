@@ -1,72 +1,49 @@
 import React from "react";
-import LazurdeHeroBanner from "../hero-banner/index";
-import { screen, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
+import LazurdeHeroBanner from "./index";
+import ContextProvider from "lib/context";
 
-const getComponent = (props: Object) => {
-  const component = render(
-    <LazurdeHeroBanner
-      backgroundImage={{
-        url: "",
+const renderComponent = () => {
+  const heroBannerArray = [
+    {
+      bannerText: "Save 50% off",
+      bannerBodyText:
+        "The greatest selection of sale pieces from the world’s best designers — only on L’AZURDE",
+      buttonText: "Shop Now",
+      buttonLink: "",
+      backgroundImage: {
+        url: "	http://localhost:3000/_next/image?url=https%3A%2F%…01_07_at_13.22.png%3Fauto%3Dcompress&w=2048&q=100",
         altText: "",
-      }}
-      bannerText={""}
-      buttonText={""}
-      buttonLink={""}
-    />
+      },
+    },
+  ];
+  const appState = { lang: "en" };
+  render(
+    <ContextProvider>
+      <LazurdeHeroBanner heroBannerArray={heroBannerArray} />
+    </ContextProvider>
   );
-  return {
-    component: component,
-  };
 };
 
-describe("Hero Banner", () => {
-  test("if component exists", () => {
-    const props = {
-      backgroundImage: {
-        url: "",
-        altText: "",
-      },
-      bannerText: "Save 50% off",
-      buttonText: "Shop Now",
-      // buttonLink: "Link",
-    }
-    // const { component } = getComponent(props); 
-    // screen.debug();
-    // console.log(component.debug());
-    // expect(screen.getByRole("heading", {name: `${props.bannerText}`})).toBeInTheDocument();
-    // expect(screen.getByRole("button", {name: `${props.buttonText}`})).toBeInTheDocument();
+describe("Hero Banner Tests", () => {
+  test("prop test: banner text", () => {
+    renderComponent();
+
+    const title = screen.getByTestId("banner-text");
+    expect(title).toBeInTheDocument();
   });
 
-  it("should get the props", () => {
-    const props = {
-      backgroundImage: {
-        url: "",
-        altText: "",
-      },
-      bannerText: "Save 50% off",
-      buttonText: "Shop Now",
-      // buttonLink: "Link",
-    }
-    // const { component } = getComponent(props);
-    // console.log(component.debug());
-    // expect(screen.getByText(props.bannerText)).toBeInTheDocument();
-    // expect(screen.getByText(props.buttonText)).toBeInTheDocument();
+  test("prop test: banner body text text", () => {
+    renderComponent();
+
+    const title = screen.getByTestId("bannerBodyText");
+    expect(title).toBeInTheDocument();
   });
 
-  // it("should get the Object props", () => {
-  //   const { component } = getComponent({
-  //     backgroundImage: {
-  //       url: "",
-  //       altText: "Image",
-  //     },
-  //     bannerText: "Welcome to Lazurde",
-  //     buttonText: "Get Started",
-  //     buttonLink: "Link",
-  //   });
-  //   // console.log(component.debug());
-  //   expect(component.prop("backgroundImage")).toMatchObject({
-  //     url: "",
-  //     altText: "Image",
-  //   });
-  // });
+  test("prop test: button text", () => {
+    renderComponent();
+
+    const title = screen.getByTestId("hero-button");
+    expect(title).toBeInTheDocument();
+  });
 });
