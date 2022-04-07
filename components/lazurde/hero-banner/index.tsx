@@ -20,7 +20,6 @@ interface PropTypes {
 const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }: any) => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
-  console.log("AppState", appState.lang);
   return (
     <div
       className={`${styles["hero-banner-block"]}  ${
@@ -43,7 +42,7 @@ const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }: any) => {
                 layout="fill"
                 objectFit="cover"
                 quality={100}
-                className={styles["bg-image"]}
+                className={`${styles["bg-image"]}`}
               />
               <div className={styles["banner-text-section"]}>
                 <h3 className={styles["banner-text"]} data-testid="banner-text">
