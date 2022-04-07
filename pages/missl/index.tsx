@@ -69,5 +69,6 @@ export async function getStaticProps() {
       footerProps,
       pageComponents,
     },
+    revalidate: 5,
   };
 }
