@@ -4,17 +4,25 @@ import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 import { Bag, Heart, MapPin, Divider, MenuIcon, Globe, User } from "components/icons";
+import BrandSidebar from "../brand-sidebar";
 
 
 
 const UserNavBar: FC = (): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
+  const [isOpened, setIsOpened] = useState(false)
 
   return (
     <div className={styles["user-navbar"]} data-testid="product-card">
       <div className={styles["left_div"]}>
-        <div><MenuIcon color="white" /></div>
+        <div >
+          <button className={styles["sidebar_btn"]} type="button" onClick={() => {
+            setIsOpened(!isOpened)
+          }}>
+            <MenuIcon color="white" />
+          </button>
+        </div>
         <div className={styles["boutique_text"]}><span>Shop By Boutique</span></div>
         <div className={styles["brand_ticker"]}>
           <ul>
@@ -52,6 +60,7 @@ const UserNavBar: FC = (): JSX.Element => {
           </a>
         </Link>
       </div>
+      <BrandSidebar isOpened={isOpened} />
     </div>
   );
 };
