@@ -15,26 +15,27 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import styles from "./Header.module.css";
 import PromoBar from "./promo-bar";
+import UserNavBar from "./user-navbar";
 
-const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink }: HeaderProps) => {
+const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink, mobilePromoLinkText }: HeaderProps) => {
   const brandIconUrl =
     "https://cdn.lazurde.com/static/version1643995588/frontend/Gurubhyo/Lazurde/ar_SA/images/logo.svg";
   const router = useRouter();
   const { locales, locale, pathname, query, asPath, defaultLocale } = router;
-  // console.log(
-  //   "Configured Locales",
-  //   locales,
-  //   "Locale",
-  //   locale,
-  //   "Pathname",
-  //   pathname,
-  //   "Query",
-  //   query,
-  //   "AsPath",
-  //   asPath,
-  //   "defaultLocale",
-  //   defaultLocale
-  // );
+  console.log(
+    "Configured Locales",
+    locales,
+    "Locale",
+    locale,
+    "Pathname",
+    pathname,
+    "Query",
+    query,
+    "AsPath",
+    asPath,
+    "defaultLocale",
+    defaultLocale
+  );
 
   const { appState, saveAppState } = useContext(AppContext);
 
@@ -78,7 +79,8 @@ const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink }: 
   }, [appState]);
   return (
     <div className={styles["header-container"]}>
-      <PromoBar title={promoTitle || "Save up to 50%"} linkText={promoLinkText || "Shop All Our Markdowns"} link={promoLink || '/'} bgColor='#C3A856'/>
+      <PromoBar title={promoTitle || "Save up to 50%"} linkText={promoLinkText || "Shop All Our Markdowns"} mobileLinkText={mobilePromoLinkText || "Shop All"} link={promoLink || '/'} bgColor='#C3A856'/>
+      <UserNavBar ></UserNavBar>
       <Link href={"/"} locale={false}>
         <a>
           <Image src={brandIconUrl} width={100} height={75}></Image>
