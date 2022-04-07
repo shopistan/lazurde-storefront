@@ -1,6 +1,6 @@
+import React, { useContext } from "react";
 import { FooterProps } from "lib/types/common";
 import Link from "next/link";
-import React from "react";
 import styles from "./Footer.module.scss";
 import Label from "components/common/ui/label";
 import Heading from "components/common/ui/heading";
@@ -10,6 +10,8 @@ import Image from "next/image";
 import LanguageSelector from "../language-selector";
 import useWindowSize from "lib/utils/useWindowSize";
 import Accordion from "../accordion";
+import { AppContext } from "lib/context";
+import useTranslation from "next-translate/useTranslation";
 
 const Footer = ({
   heading = "",
@@ -22,6 +24,8 @@ const Footer = ({
   paymentLinks = [],
 }: FooterProps) => {
   const [width] = useWindowSize();
+  const { appState } = useContext(AppContext);
+  const { t } = useTranslation("common");
 
   return (
     <>
@@ -30,25 +34,27 @@ const Footer = ({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
             <div className={`${styles["footer__sub-container"]}`}>
               <Heading element="h3" className={styles["footer__heading"]}>
-                {heading}
+                {appState.lang === "en" ? heading : t("footerHeading")}
               </Heading>
               <Label
                 className={`opacity-80 font-medium mb-8 pl-1 lg:pl-0 pr-1 lg:pr-0 ${styles["footer__label"]}`}
               >
-                {subHeading}
+                {appState.lang === "en" ? subHeading : t("footerSubHeading")}
               </Label>
               <Link href={"/"}>
-                <a className={styles["footer__signup-link"]}>Sign Up</a>
+                <a className={styles["footer__signup-link"]}>
+                  {appState.lang === "en" ? "Sign Up" : t("signUpBtnText")}
+                </a>
               </Link>
               <Label
                 className={`opacity-60 font-normal ${styles["footer__label"]}
             ${styles["footer__signup-text"]}`}
               >
-                {subscriptionText}
+                {appState.lang === "en" ? subscriptionText : t("subscriptionText")}
               </Label>
             </div>
             <div
-              className={`grid grid-cols-1 lg:grid-cols-3 lg:gap-4 w-full text-left ${styles["footer__sub-container"]}`}
+              className={`grid grid-cols-1 lg:grid-cols-3 lg:gap-4 w-full ${styles["footer__sub-container"]}`}
             >
               {footerLinks?.map((footerLink, index) =>
                 width > 1023 ? (
@@ -72,7 +78,7 @@ const Footer = ({
               <Label
                 className={`opacity-60 font-normal ${styles["footer__label"]} ${styles["footer__social-link-text"]}`}
               >
-                {socialIconText}
+                {appState.lang === "en" ? socialIconText : t("socialIconText")}
               </Label>
               <FooterIcons iconsList={socialLinks} />
             </div>

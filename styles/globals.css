@@ -21,7 +21,12 @@ ul {
 }
 
 .collapse-arrow .collapse-title:after {
-  top: 12px !important;
+  top: 10px !important;
+}
+
+html[dir="rtl"] .collapse-arrow .collapse-title:after {
+  right: auto;
+  left: 0;
 }
 
 @tailwind base;
