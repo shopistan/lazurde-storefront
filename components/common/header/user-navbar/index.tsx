@@ -23,7 +23,7 @@ const UserNavBar: FC = (): JSX.Element => {
             <MenuIcon color="white" />
           </button>
         </div>
-        <div className={styles["boutique_text"]}><span>Shop By Boutique</span></div>
+        <div className={styles["boutique_text"]}><span>{t("userNavBarTitle")}</span></div>
         <div className={styles["brand_ticker"]}>
           <ul>
             <li className="item-1">{`Lazurde`}</li>
@@ -60,7 +60,7 @@ const UserNavBar: FC = (): JSX.Element => {
           </a>
         </Link>
       </div>
-      <BrandSidebar isOpened={isOpened} />
+      <BrandSidebar isOpened={isOpened} setIsOpened={setIsOpened} />
     </div>
   );
 };
