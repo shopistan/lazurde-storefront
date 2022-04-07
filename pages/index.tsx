@@ -3,19 +3,15 @@ import Header from "components/common/header";
 import { componentsById } from "components/xm-component-library";
 import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
 import styles from "../styles/Home.module.css";
 
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
   footerProps,
-  pageComponents = [],
+  pageComponents,
 }) => {
-  console.log("HomePageProps", pageComponents);
-  useEffect(() => {
-    console.log("HomePage Mounted");
-  }, []);
   return (
     <>
       <Header {...headerProps}></Header>
@@ -65,8 +61,8 @@ const LazurdeHome: FC<PageProps> = ({
 export default LazurdeHome;
 
 export async function getStaticProps(context: any) {
-  const globalComponents = await fetchGlobalComponents();
-  const pageComponents = await fetchXMComponents(12, "/home");
+  const globalComponents = (await fetchGlobalComponents()) || [];
+  const pageComponents = (await fetchXMComponents(12, "/home")) || [];
   const headerProps =
     (globalComponents.find((item: XMComponent) => item.id === "Header") || {})
       .params || {};

@@ -40,6 +40,7 @@ interface BrandProps {
 
 interface SidebarProps {
   isOpened: boolean;
+  setIsOpened: Function;
 
 }
 
@@ -56,12 +57,11 @@ const BrandContainer: FC<BrandProps> = ({ url, altText, label, labelUrl }): JSX.
   )
 }
 
-const BrandSidebar: FC<SidebarProps> = ({ isOpened }): JSX.Element => {
-  const [isClosed, setIsClosed] = useState(false)
+const BrandSidebar: FC<SidebarProps> = ({ isOpened, setIsOpened}): JSX.Element => {
 
   return (
     <>
-      <div className={styles["overlay"]} data-opened={isOpened}></div>
+      <div className={styles["overlay"]} data-opened={isOpened} onClick={(() => setIsOpened(!isOpened))}></div>
       <div className={styles["brand_sidebar"]} data-opened={isOpened}>
         <div className={styles["text_div"]}>
           <div>

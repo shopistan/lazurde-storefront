@@ -41,9 +41,14 @@
   @media (min-width: 768px) {
     padding: 76px 50px 50px 80px;
 
+
     &.block-divison {
       width: 49.5%;
       margin-bottom: 0;
+
+      &:nth-child(1) {
+        margin-bottom: 0px;
+      }
     }
   }
 }
