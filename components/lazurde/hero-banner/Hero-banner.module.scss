@@ -169,7 +169,7 @@ html[dir="rtl"] {
   padding-top: 24px;
   padding-left: 24px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     padding-left: 64px;
     padding-top: 64px;
 
@@ -183,7 +183,7 @@ html[dir="rtl"] {
   padding-top: 24px;
   padding-left: 24px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     padding-top: 60px;
     padding-left: 64px;
   }
