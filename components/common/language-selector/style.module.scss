@@ -11,10 +11,14 @@
   }
 
   &__dropdown {
-    min-width: 137px;
+    min-width: 155.5px;
+
+    @media (min-width: 1024px) {
+      min-width: 137px;
+    }
 
     &:first-child {
-      margin-right: 16px;
+      margin-inline-end: 16px;
     }
 
     select {
