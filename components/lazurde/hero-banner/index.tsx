@@ -28,7 +28,7 @@ const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }: any) => {
       }`}
     >
       {heroBannerArray &&
-        heroBannerArray.map((object: any, index: any) => {
+        heroBannerArray?.map((object: any, index: any) => {
           const { backgroundImage, bannerBodyText, bannerText, buttonText } =
             object;
           return (
