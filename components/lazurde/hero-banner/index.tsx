@@ -27,7 +27,7 @@ const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }: any) => {
       className={`${styles["hero-banner-block"]}  ${
         heroBannerArray.length > 1 && styles["block-spacing"]
       } ${
-        router.asPath == "/kenaz" || router.asPath == "/missl"
+        router?.asPath == "/kenaz" || router?.asPath == "/missl"
           ? styles["kenaz-spacing"]
           : ""
       }`}
@@ -40,8 +40,8 @@ const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }: any) => {
             <div
               className={`${styles["hero-banner-container"]} ${
                 heroBannerArray?.length > 1 && styles["block-divison"]
-              } ${router.asPath == "/kenaz" ? styles["kenaz-block"] : ""} ${
-                router.asPath == "/missl" ? styles["missl-block"] : ""
+              } ${router?.asPath == "/kenaz" ? styles["kenaz-block"] : ""} ${
+                router?.asPath == "/missl" ? styles["missl-block"] : ""
               }`}
               key={index}
             >
