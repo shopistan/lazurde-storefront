@@ -11,6 +11,12 @@
 
   @media (min-width: 768px) {
     flex-direction: row;
+    justify-content: space-evenly;
+
+    &.block-spacing {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
   }
 }
 .hero-banner-container {
@@ -26,6 +32,10 @@
 
   @media (min-width: 768px) {
     padding: 76px 50px 50px 80px;
+
+    &.block-divison {
+      width: 49%;
+    }
   }
 }
 
@@ -123,23 +133,9 @@
   margin-bottom: 24px;
   color: white;
   @media (min-width: 768px) {
-    width: 270px;
+    width: 330px;
     font-size: 24px;
     line-height: 29px;
     margin-bottom: 32px;
   }
-}
-
-.banner-button {
-  background: $black-color;
-  border: none;
-  border-radius: 100px;
-  color: $white-color;
-  height: 51px;
-  width: 220px;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 19px;
-  letter-spacing: 0em;
-  text-align: center;
 }
