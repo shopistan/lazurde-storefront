@@ -1,0 +1,32 @@
+.language-selector {
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+
+    @media (min-width: 1024px) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__dropdown {
+    min-width: 137px;
+
+    &:first-child {
+      margin-right: 16px;
+    }
+
+    select {
+      width: 100%;
+      min-height: 40px;
+      padding: 10px;
+      border-radius: 100px;
+      background-color: #ffffff;
+
+      &:focus {
+        outline: 0;
+      }
+    }
+  }
+}

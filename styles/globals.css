@@ -19,6 +19,10 @@ ul {
   padding: 0;
 }
 
+.collapse-arrow .collapse-title:after {
+  top: 12px !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
