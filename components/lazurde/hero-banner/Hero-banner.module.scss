@@ -29,11 +29,21 @@
   padding-left: 24px;
   background: linear-gradient(to bottom right, gray, white);
 
+  &.block-divison {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+    &:nth-child(1) {
+      margin-bottom: 8px;
+    }
+  }
+
   @media (min-width: 768px) {
     padding: 76px 50px 50px 80px;
 
     &.block-divison {
       width: 49.5%;
+      margin-bottom: 0;
     }
   }
 }
