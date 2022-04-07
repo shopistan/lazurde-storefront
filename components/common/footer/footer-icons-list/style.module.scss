@@ -5,10 +5,10 @@
 
     li {
       list-style: none;
-      margin-right: 28px;
+      margin-inline-end: 28px;
 
       &:last-child {
-        margin-right: 0;
+        margin-inline-end: 0;
       }
 
       a {
