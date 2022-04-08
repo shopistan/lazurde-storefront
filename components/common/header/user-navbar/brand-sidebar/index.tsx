@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from 'next/image';
 import { KenazLogo, LazurdeLogo, LazurdeLSLogo, MisslLogo } from 'components/icons';
 import styles from "./brand-sidebar.module.scss";
-"./publo"
+
 const brandData = [
   {
     url: "/brand-lazurde.jpg",
@@ -38,7 +38,16 @@ interface BrandProps {
   labelUrl: string;
 }
 
+type image = {
+  url: string,
+  altText: string,
+}
+
 interface SidebarProps {
+  mainImg: image,
+  mainTitle: string,
+  logoArr: image[],
+  brandArr: BrandProps[]
   isOpened: boolean;
   setIsOpened: Function;
 
@@ -57,7 +66,7 @@ const BrandContainer: FC<BrandProps> = ({ url, altText, label, labelUrl }): JSX.
   )
 }
 
-const BrandSideBar: FC<SidebarProps> = ({ isOpened, setIsOpened}): JSX.Element => {
+const BrandSideBar: FC<SidebarProps> = ({ mainImg, mainTitle, logoArr, brandArr, isOpened, setIsOpened }): JSX.Element => {
 
   return (
     <>
@@ -65,20 +74,24 @@ const BrandSideBar: FC<SidebarProps> = ({ isOpened, setIsOpened}): JSX.Element =
       <div className={styles["brand_sidebar"]} data-opened={isOpened}>
         <div className={styles["text_div"]}>
           <div>
-            <LazurdeLogo width="182px" height="24px" />
+            <img src={mainImg.url} alt={mainImg.url} />
+            {/* <LazurdeLogo width="182px" height="24px" /> */}
           </div>
           <div className={styles["slogan_div"]}>
-            <span >One Account. One Checkout. Multiple Brands</span>
+            <span >{mainTitle || "One Account. One Checkout. Multiple Brands"}</span>
           </div>
           <div className="flex gap-x-[8px]">
-            <LazurdeLogo width="88px" height="12px" />
+            {logoArr.map((data, index) => {
+              <img src={data.url} alt={data.altText} />
+            })}
+            {/* <LazurdeLogo width="88px" height="12px" />
             <MisslLogo width="80px" height="13px" />
             <KenazLogo width="79px" height="12px" />
-            <LazurdeLSLogo width="77px" height="22px" />
+            <LazurdeLSLogo width="77px" height="22px" /> */}
           </div>
         </div>
         <div className={styles["brand_div"]}>
-          {brandData.map((data) => {
+          {brandArr.map((data) => {
             return BrandContainer({ ...data })
           })}
         </div>
