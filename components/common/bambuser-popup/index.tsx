@@ -6,6 +6,7 @@ interface PopupProps {
   bId: string;
   btnText: string;
 }
+console.log("test");
 
 const BambuserPopup = ({ bId = '34vfkSGTIydQauc1U8Xq', btnText = 'Join show now' }: PopupProps) => {
 
