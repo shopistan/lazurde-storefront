@@ -14,7 +14,7 @@
     justify-content: space-evenly;
 
     &.block-spacing {
-      width: 99%;
+      width: 98.5%;
     }
   }
 }
@@ -30,7 +30,7 @@
   background: linear-gradient(to bottom right, gray, white);
 
   &.block-divison {
-    width: 96%;
+    width: 98%;
     margin-left: auto;
     margin-right: auto;
     &:nth-child(1) {
@@ -44,6 +44,10 @@
     &.block-divison {
       width: 49.5%;
       margin-bottom: 0;
+
+      &:nth-child(1) {
+        margin-bottom: 0px;
+      }
     }
   }
 }
@@ -146,5 +150,46 @@
     font-size: 24px;
     line-height: 29px;
     margin-bottom: 32px;
+  }
+}
+
+html[dir="rtl"] {
+  .bg-image {
+    transform: scaleX(-1);
+  }
+}
+
+.kenaz-spacing {
+  width: 96%;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (min-width: 768px) {
+    margin-top: 16px;
+    width: 98%;
+  }
+}
+
+.kenaz-block {
+  padding-top: 24px;
+  padding-left: 24px;
+
+  @media (min-width: 1024px) {
+    padding-left: 64px;
+    padding-top: 64px;
+
+    &:nth-child(2) {
+      padding-left: 80px;
+    }
+  }
+}
+
+.missl-block {
+  padding-top: 24px;
+  padding-left: 24px;
+
+  @media (min-width: 768px) {
+    padding-top: 60px;
+    padding-left: 64px;
   }
 }

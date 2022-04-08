@@ -5,6 +5,7 @@ import styles from "./Hero-banner.module.scss";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 import Button from "components/common/button/index";
+import { useRouter } from "next/router";
 interface LazurdeHeroBannerProps {
   backgroundImage: ImageType;
   bannerText: string;
@@ -18,13 +19,17 @@ interface PropTypes {
 }
 
 const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }: any) => {
+  const router = useRouter();
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
-  console.log("AppState", appState.lang);
   return (
     <div
       className={`${styles["hero-banner-block"]}  ${
         heroBannerArray.length > 1 && styles["block-spacing"]
+      } ${
+        router?.asPath == "/kenaz" || router?.asPath == "/missl"
+          ? styles["kenaz-spacing"]
+          : ""
       }`}
     >
       {heroBannerArray &&
@@ -35,6 +40,8 @@ const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }: any) => {
             <div
               className={`${styles["hero-banner-container"]} ${
                 heroBannerArray?.length > 1 && styles["block-divison"]
+              } ${router?.asPath == "/kenaz" ? styles["kenaz-block"] : ""} ${
+                router?.asPath == "/missl" ? styles["missl-block"] : ""
               }`}
               key={index}
             >
@@ -43,7 +50,7 @@ const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }: any) => {
                 layout="fill"
                 objectFit="cover"
                 quality={100}
-                className={styles["bg-image"]}
+                className={`${styles["bg-image"]}`}
               />
               <div className={styles["banner-text-section"]}>
                 <h3 className={styles["banner-text"]} data-testid="banner-text">

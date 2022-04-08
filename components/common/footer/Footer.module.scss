@@ -18,14 +18,14 @@
 
     @media (min-width: 1024px) {
       padding: 0 40px;
-      text-align: left;
+      text-align: start;
     }
   }
 
   &__sub-container {
     &:first-child {
       @media (min-width: 1024px) {
-        padding-right: 50px;
+        padding-inline-end: 50px;
       }
     }
   }
@@ -143,6 +143,16 @@
         img {
           width: 100%;
         }
+      }
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .footer {
+    &__sub-footer {
+      ul {
+        direction: ltr;
       }
     }
   }
