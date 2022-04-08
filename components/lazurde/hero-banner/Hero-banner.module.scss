@@ -117,6 +117,7 @@
 }
 
 .banner-text {
+  font-family: Roboto;
   font-size: 36px;
   font-weight: 500;
   line-height: 43px;
@@ -136,6 +137,7 @@
 }
 
 .sample-text {
+  font-family: Roboto;
   width: 190px;
   font-size: 15px;
   font-weight: 500;
@@ -157,6 +159,10 @@ html[dir="rtl"] {
   .bg-image {
     transform: scaleX(-1);
   }
+}
+
+.bg-image {
+  font-family: Roboto;
 }
 
 .kenaz-spacing {
@@ -192,4 +198,9 @@ html[dir="rtl"] {
     padding-top: 60px;
     padding-left: 64px;
   }
+}
+
+.missl-spacing {
+  margin-top: 16px;
+  width: 98%;
 }
