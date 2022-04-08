@@ -4,19 +4,19 @@ import { ImageType } from "lib/types/common";
 import styles from "./card.module.scss";
 
 interface ExploreBrandProps {
-  backgroundImage: ImageType;
+  backGroundImage: ImageType;
   title: string;
 }
 
-const Cards = ({ backgroundImage, title }: ExploreBrandProps): JSX.Element => {
+const Cards = ({ backGroundImage, title }: ExploreBrandProps): JSX.Element => {
   return (
     <>
       <div>
-        {backgroundImage?.url && (
+        {backGroundImage?.url && (
           <Image
             className={styles["explore-image"]}
-            src={backgroundImage.url}
-            alt={backgroundImage.altText}
+            src={backGroundImage.url}
+            alt={backGroundImage.altText}
             layout="fill"
             objectFit="cover"
             quality={100}

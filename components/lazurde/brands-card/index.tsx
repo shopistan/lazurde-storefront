@@ -5,7 +5,7 @@ import styles from './brands-card.module.scss'
 
 interface ExploreBrandsProps {
   title: string;
-  backgroundImage: ImageType;
+  backGroundImage: ImageType;
 }
 
 interface ExploreBrandArray {
@@ -17,9 +17,9 @@ const BrandsCard: FC<ExploreBrandArray> = ({ exploreBrandsArray }) : JSX.Element
     <div className= {styles['explore-container']}>
       {exploreBrandsArray &&
         exploreBrandsArray.map((data: any) => {
-          const { title, backgroundImage } = data;
+          const { title, backGroundImage } = data;
           return (
-              <Cards title={title} backgroundImage={backgroundImage} />
+              <Cards title={title} backGroundImage={backGroundImage} />
           );
         })}
     </div>
