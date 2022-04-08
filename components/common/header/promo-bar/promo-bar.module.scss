@@ -4,16 +4,21 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-block: 12px 12px;
+  height: 40px;
+  // background-color: #c3a856;
+  padding-block: 10px;
+  font-family: "Roboto";
   font-size: 13px;
   color: black;
+  transition: height 0.2s cubic-bezier(0, 0, 0.2, 1), padding 0.2s cubic-bezier(0, 0, 0.2, 1);
 
   @media (min-width: 768px) {
     font-size: 14px;
   }
 
   &[data-visible="true"] {
-    display: none;
+    padding: 0;
+    height: 0;
   }
 
   .title {

@@ -4,7 +4,7 @@ import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 import { Bag, Heart, MapPin, Divider, MenuIcon, Globe, User } from "components/icons";
-import BrandSidebar from "../brand-sidebar";
+import BrandSidebar from "./brand-sidebar";
 
 
 

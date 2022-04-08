@@ -18,7 +18,7 @@ interface iconsListType {
   iconsList?: iconsObj[];
 }
 
-const FooterIcons = ({ iconsList }: iconsListType) => {
+const FooterIcons = ({ iconsList }: iconsListType): JSX.Element => {
   return (
     <>
       <ul className={styles["icons__container"]}>

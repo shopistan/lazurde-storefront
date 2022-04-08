@@ -14,7 +14,7 @@ interface propTypes {
   key: number;
 }
 
-const FooterLinks = ({ heading = "", links = [], key }: propTypes) => {
+const FooterLinks = ({ heading = "", links = [], key }: propTypes): JSX.Element => {
   return (
     <div className={styles["menu__column"]} key={key}>
       <Heading element="h2" className={styles["menu__heading"]}>
