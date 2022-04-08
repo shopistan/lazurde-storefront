@@ -61,8 +61,7 @@ const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }): JSX.Element => {
                     : t("bannerBodyText")}
                 </h5>
                 <Button
-                  dataTestId="hero-button"
-                  backgroundColor="black"
+                  buttonStyle="black"
                   buttonText={
                     appState?.lang == "en" ? buttonText : t("buttonText")
                   }
