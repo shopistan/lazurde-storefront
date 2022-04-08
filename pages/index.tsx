@@ -6,36 +6,11 @@ import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import React, { FC } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
 import styles from "../styles/Home.module.css";
-import ExploreBrands from "components/lazurde/explore-brands";
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
   footerProps,
   pageComponents,
 }) => {
-
-  const exploreData = [
-    {
-      title : 'Lazurd`e',
-      backgroundImage : {
-        url : '',
-        altText : 'Image1',
-      }
-    },
-    {
-      title : 'Missl',
-      backgroundImage : {
-        url : '',
-        altText : 'Image2',
-      }
-    },
-    {
-      title : 'Kenaz',
-      backgroundImage : {
-        url : '',
-        altText : 'Image3',
-      }
-    },
-  ]
   return (
     <>
       <Header {...headerProps}></Header>
@@ -76,7 +51,6 @@ const LazurdeHome: FC<PageProps> = ({
             return null;
           })}
         </div>
-        <ExploreBrands exploreBrandsArray={exploreData} />
       </AppContentWrapper>
       <Footer {...footerProps}></Footer>
     </>
