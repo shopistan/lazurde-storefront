@@ -18,7 +18,7 @@ interface PropTypes {
   heroBannerArray: LazurdeHeroBannerProps[];
 }
 
-const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }: any) => {
+const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }): JSX.Element => {
   const router = useRouter();
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
@@ -61,8 +61,7 @@ const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }: any) => {
                     : t("bannerBodyText")}
                 </h5>
                 <Button
-                  dataTestId="hero-button"
-                  backgroundColor="black"
+                  buttonStyle="black"
                   buttonText={
                     appState?.lang == "en" ? buttonText : t("buttonText")
                   }

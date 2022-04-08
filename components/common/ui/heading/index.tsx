@@ -12,7 +12,7 @@ const Heading = ({
   children,
   element,
   style = {},
-}: headingType) => {
+}: headingType): JSX.Element => {
   const TitleTag = element;
   return (
     <>

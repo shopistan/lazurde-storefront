@@ -10,7 +10,7 @@ const Input = ({
   label = "Placeholder",
   labelClassName,
   onChange,
-}: InputType) => {
+}: InputType): JSX.Element => {
   return (
     <div className={styles["input-container"]}>
       <label className={`${styles["label"]} ${labelClassName}`}>{label}</label>

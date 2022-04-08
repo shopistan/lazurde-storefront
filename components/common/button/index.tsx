@@ -3,16 +3,15 @@ import styles from "./button.module.scss";
 
 interface ButtonProps {
   buttonText: string;
-  backgroundColor: string;
-  dataTestId : string;
+  buttonStyle: string;
 }
 
-const Button = ({ dataTestId,  buttonText, backgroundColor }: ButtonProps) => {
+const Button = ({ buttonText, buttonStyle = 'black' }: ButtonProps): JSX.Element => {
   return (
     <button
-    data-testid ={dataTestId}
+      data-testid={'hero-button'}
+      data-style={buttonStyle}
       className={styles["banner-button"]}
-      style={{ backgroundColor: backgroundColor }}
     >
       {buttonText || ""}
     </button>

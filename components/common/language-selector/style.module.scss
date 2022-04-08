@@ -1,3 +1,16 @@
+.dropdown {
+  .dropdown-content {
+    opacity: 0;
+    // visibility: hidden;
+    transition: opacity 0.2s;
+  }
+
+  &[data-open="true"]:focus-within .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
 .language-selector {
   &__wrapper {
     display: flex;
