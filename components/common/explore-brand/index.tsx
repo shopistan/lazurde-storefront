@@ -1,17 +1,24 @@
 import React from "react";
 import Image from "next/image";
+import { ImageType } from "lib/types/common";
 
 interface ExploreBrandProps {
-  url: string;
-  altText: string;
+  backgroundImage : ImageType;
   title: string;
 }
 
-const ExploreBrand = ({ url, altText, title }: ExploreBrandProps) => {
+const ExploreBrand = ({ backgroundImage, title }: ExploreBrandProps) => {
   return (
     <>
       <div>
-        {url && <Image width={'100%'} height={'100%'} src={url} alt={altText} />}
+        {backgroundImage?.url && (
+          <Image
+            width={"100%"}
+            height={"100%"}
+            src={(backgroundImage || {})?.url || "/placeholder.jpg"}
+            alt={backgroundImage.altText}
+          />
+        )}
         {title && <h3>{title}</h3>}
       </div>
     </>

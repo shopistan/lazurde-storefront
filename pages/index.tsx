@@ -16,18 +16,24 @@ const LazurdeHome: FC<PageProps> = ({
   const exploreData = [
     {
       title : 'Lazurd`e',
-      url : '',
-      altText : 'Image1',
+      backgroundImage : {
+        url : '',
+        altText : 'Image1',
+      }
     },
     {
       title : 'Missl',
-      url : '',
-      altText : 'Image2',
+      backgroundImage : {
+        url : '',
+        altText : 'Image2',
+      }
     },
     {
       title : 'Kenaz',
-      url : '',
-      altText : 'Image3',
+      backgroundImage : {
+        url : '',
+        altText : 'Image3',
+      }
     },
   ]
   return (

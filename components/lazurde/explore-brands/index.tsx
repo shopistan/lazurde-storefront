@@ -1,10 +1,10 @@
 import React , {FC} from "react";
 import ExploreBrand from "components/common/explore-brand";
+import { ImageType } from "lib/types/common";
 
 interface ExploreBrandsProps {
   title: string;
-  url: string;
-  altText: string;
+  backgroundImage : ImageType;
 }
 
 interface ExploreBrandArray {
@@ -15,9 +15,9 @@ const ExploreBrands : FC<ExploreBrandArray> = ({ exploreBrandsArray }: any) => {
   return (
     exploreBrandsArray &&
     exploreBrandsArray.map((data : any) => {
-        const {title , url , altText} = data
+        const {title , backgroundImage} = data
       return (
-        <ExploreBrand title={title} url={url} altText={altText}
+        <ExploreBrand title={title} backgroundImage={backgroundImage}
         />
       );
     })

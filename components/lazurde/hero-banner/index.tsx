@@ -26,7 +26,7 @@ const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }: any) => {
     <div
       className={`${styles["hero-banner-block"]}  ${
         heroBannerArray && heroBannerArray.length > 1 && styles["block-spacing"]
-      } ${router.asPath === '/missl' && styles["missl-spacing"]}`}
+      } ${router?.asPath === '/missl' && styles["missl-spacing"]}`}
     >
       {heroBannerArray &&
         heroBannerArray?.map((object: any, index: any) => {
