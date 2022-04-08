@@ -12,7 +12,7 @@ interface ExploreBrandArray {
   exploreBrandsArray: ExploreBrandsProps[];
 }
 
-const BrandsCard: FC<ExploreBrandArray> = ({ exploreBrandsArray }: any) => {
+const BrandsCard: FC<ExploreBrandArray> = ({ exploreBrandsArray }) : JSX.Element => {
   return (
     <div className= {styles['explore-container']}>
       {exploreBrandsArray &&

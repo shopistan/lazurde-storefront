@@ -1,20 +1,20 @@
 import React from "react";
 import Image from "next/image";
 import { ImageType } from "lib/types/common";
-import styles from './card.module.scss';
+import styles from "./card.module.scss";
 
 interface ExploreBrandProps {
-  backgroundImage : ImageType;
+  backgroundImage: ImageType;
   title: string;
 }
 
-const Cards = ({ backgroundImage, title }: ExploreBrandProps) => {
+const Cards = ({ backgroundImage, title }: ExploreBrandProps): JSX.Element => {
   return (
     <>
       <div>
         {backgroundImage?.url && (
           <Image
-          className={styles["explore-image"]}
+            className={styles["explore-image"]}
             src={backgroundImage.url}
             alt={backgroundImage.altText}
             layout="fill"
