@@ -6,7 +6,7 @@ import ContextProvider from "lib/context";
  * Delete Me!
  */
 
-function LazurdeApp({ Component, pageProps }: any) {
+function LazurdeApp({ Component, pageProps }: AppProps) {
   return (
     <ContextProvider>
       <Component {...pageProps} />
