@@ -2,7 +2,11 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import ContextProvider from "lib/context";
 
-function LazurdeApp({ Component, pageProps }: any) {
+/**
+ * Delete Me!
+ */
+
+function LazurdeApp({ Component, pageProps }: AppProps) {
   return (
     <ContextProvider>
       <Component {...pageProps} />
