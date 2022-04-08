@@ -201,6 +201,9 @@ html[dir="rtl"] {
 }
 
 .missl-spacing {
-  margin-top: 16px;
-  width: 98%;
+  width: 96%;
+  @media (min-width: 768px) {
+    margin-top: 16px;
+    width: 98%;
+  }
 }
