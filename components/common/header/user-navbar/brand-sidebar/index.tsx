@@ -57,7 +57,7 @@ const BrandContainer: FC<BrandProps> = ({ url, altText, label, labelUrl }): JSX.
   )
 }
 
-const BrandSidebar: FC<SidebarProps> = ({ isOpened, setIsOpened}): JSX.Element => {
+const BrandSideBar: FC<SidebarProps> = ({ isOpened, setIsOpened}): JSX.Element => {
 
   return (
     <>
@@ -88,4 +88,4 @@ const BrandSidebar: FC<SidebarProps> = ({ isOpened, setIsOpened}): JSX.Element =
   );
 };
 
-export default BrandSidebar;
+export default BrandSideBar;

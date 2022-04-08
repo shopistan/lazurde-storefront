@@ -18,7 +18,7 @@ interface PropTypes {
   heroBannerArray: LazurdeHeroBannerProps[];
 }
 
-const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }: any) => {
+const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }): JSX.Element => {
   const router = useRouter();
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);

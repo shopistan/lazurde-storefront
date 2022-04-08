@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unknown-property */
+import React from 'react'
 import Link from "next/link";
 import styles from "./style.module.scss";
 
@@ -10,7 +11,7 @@ interface AccordionProps {
   links?: obj[];
 }
 
-const Accordion = ({ index = 0, heading = "", links = [] }: AccordionProps) => {
+const Accordion = ({ index = 0, heading = "", links = [] }: AccordionProps): JSX.Element => {
   return (
     <div
       tabIndex={index}
