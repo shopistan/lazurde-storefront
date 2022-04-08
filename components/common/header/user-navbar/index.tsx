@@ -6,6 +6,27 @@ import { AppContext } from "lib/context";
 import { Bag, Heart, MapPin, Divider, MenuIcon, Globe, User } from "components/icons";
 import BrandSidebar from "./brand-sidebar";
 
+const sidebarData = {
+  mainImg: {
+    url: '/',
+    altText: 'image',
+  },
+  mainTitle: 'main title',
+  logoArr: [
+    {
+      url: '/',
+      altText: 'image',
+    }
+  ],
+  brandArr: [
+    {
+      url: '/',
+      altText: 'image',
+      label: 'label',
+      labelUrl: '/',
+    }
+  ]
+}
 
 
 const UserNavBar: FC = (): JSX.Element => {
@@ -60,7 +81,7 @@ const UserNavBar: FC = (): JSX.Element => {
           </a>
         </Link>
       </div>
-      <BrandSidebar isOpened={isOpened} setIsOpened={setIsOpened} />
+      <BrandSidebar {...sidebarData} isOpened={isOpened} setIsOpened={setIsOpened} />
     </div>
   );
 };
