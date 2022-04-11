@@ -28,14 +28,16 @@ const BrandsCard: FC<ExploreBrandArray> = ({
           exploreBrandsArray.map((data: any) => {
             const { cardTitle, cardImage } = data;
             return (
+              <div className={styles["cards"]}>
               <Cards
                 onClick={onClick}
-                className={"card"}
+                className={styles["brand-card"]}
                 height='100%'
                 width='100%'
                 cardTitle={cardTitle}
                 cardImage={cardImage}
               />
+              </div>
             );
           })}
       </div>

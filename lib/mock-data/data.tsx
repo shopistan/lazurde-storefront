@@ -42,7 +42,11 @@ export const ArabicfooterLinks = [
       },
       {
         url: "/",
-        text: "ةلئسأ",
+        text: "ثرإ",
+      },
+      {
+        url: "/",
+        text: "انب لصتا",
       },
       {
         url: "/",
