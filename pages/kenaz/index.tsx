@@ -9,11 +9,13 @@ import styles from "../../styles/Home.module.css";
 
 const KenazHome: FC<PageProps> = ({
   headerProps,
+  brandSidebarProps,
   footerProps,
   pageComponents,
 }) => {
   return (
     <>
+      <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       {/* <Header {...headerProps}></Header> */}
       <AppContentWrapper>
         <div className={styles.container}>
