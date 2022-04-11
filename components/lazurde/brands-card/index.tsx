@@ -16,7 +16,7 @@ const BrandsCard: FC<ExploreBrandArray> = ({
   exploreBrandsArray,
 }): JSX.Element => {
   return (
-    <div className={`${styles["brands-container"]}`}>
+    <div className={`flex ${styles["brands-container"]}`}>
       {exploreBrandsArray &&
         exploreBrandsArray.map((data: any) => {
           const { title, backGroundImage } = data;
