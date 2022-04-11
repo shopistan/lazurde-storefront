@@ -25,18 +25,18 @@ const BrandsCard: FC<ExploreBrandArray> = ({
       <h3 className={styles["cards-heading"]}>{heading}</h3>
       <div className={`flex justify-between`}>
         {exploreBrandsArray &&
-          exploreBrandsArray.map((data: any) => {
+          exploreBrandsArray.map((data: any, index) => {
             const { cardTitle, cardImage } = data;
             return (
-              <div className={styles["cards"]}>
-              <Cards
-                onClick={onClick}
-                className={styles["brand-card"]}
-                height='100%'
-                width='100%'
-                cardTitle={cardTitle}
-                cardImage={cardImage}
-              />
+              <div className={styles["cards"]} key={index}>
+                <Cards
+                  onClick={onClick}
+                  className={styles["brand-card"]}
+                  height="100%"
+                  width="100%"
+                  cardTitle={cardTitle}
+                  cardImage={cardImage}
+                />
               </div>
             );
           })}

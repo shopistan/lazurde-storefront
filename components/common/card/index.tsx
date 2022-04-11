@@ -2,29 +2,29 @@ import React from "react";
 import Image from "next/image";
 import { ImageType } from "lib/types/common";
 import styles from "./card.module.scss";
-import Label from "components/common/ui/label/index";
+import Label from "components/common/ui/label";
 
 interface ExploreBrandProps {
-  cardImage: ImageType;
-  cardTitle: string;
-  className : string;
-  onClick: Function;
-  width: string;
-  height: string;
+  cardImage?: ImageType;
+  cardTitle?: string;
+  className?: string;
+  onClick?: Function;
+  width?: number | string;
+  height?: number | string;
 }
 
 const Cards = ({
   cardImage,
   cardTitle,
   onClick,
-  className,
-  width,
-  height,
+  className = "",
+  width = 10,
+  height = 10,
 }: ExploreBrandProps): JSX.Element => {
   return (
     <>
       <div
-        className={className}
+        className={styles[`${className}`]}
         onClick={() => {
           onClick;
         }}
@@ -32,8 +32,8 @@ const Cards = ({
         {cardImage?.url && (
           <Image
             className={`${styles["card-image"]}`}
-            src={cardImage.url}
-            alt={cardImage.altText}
+            src={cardImage?.url}
+            alt={cardImage?.altText}
             width={width}
             height={height}
             layout="responsive"
