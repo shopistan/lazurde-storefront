@@ -1,11 +1,22 @@
 .cards-container {
-  width: 100%;
-  padding: 0 80px;
+    width: 100%;
+    padding: 48px 16px 64px;
+  @media (min-width: 768px) {
+    padding: 80px 76px;
+  }
 }
 
 .cards-heading {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: left;
+
   @media (min-width: 768px) {
-    font-family: Roboto;
+    margin-top: 0;
+    margin-bottom: 32px;
     font-size: 24px;
     font-weight: 500;
     line-height: 29px;
@@ -16,15 +27,6 @@
 }
 
 .cards {
-  width: 420px;
-  margin: 0 4px;
-
-  &.label-c {
-    display: none;
-  }
-}
-
-.brand-card {
   p {
     @media (min-width: 768px) {
       color: black;
@@ -34,6 +36,13 @@
       line-height: 19px;
       letter-spacing: 0em;
       text-align: left;
+      margin-top: 16px;
+      margin-bottom: 0;
     }
+  }
+
+  @media (min-width: 768px) {
+    width: 420px;
+    margin: 0 4px;
   }
 }

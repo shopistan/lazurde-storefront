@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import Cards from "components/common/card";
 import { ImageType } from "lib/types/common";
 import styles from "./brands-card.module.scss";
+import useWindowSize from "lib/utils/useWindowSize";
 
 interface ExploreBrandsProps {
   cardTitle: string;
@@ -17,8 +18,9 @@ const BrandsCard: FC<ExploreBrandArray> = ({
   heading,
   exploreBrandsArray,
 }): JSX.Element => {
+  const size = useWindowSize();
   const onClick = () => {
-    console.log("");
+    console.log("hello");
   };
   return (
     <div className={styles["cards-container"]}>
