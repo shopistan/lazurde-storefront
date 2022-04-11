@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Cards from "components/common/card";
 import { ImageType } from "lib/types/common";
-import styles from './brands-card.module.scss'
+import styles from "./brands-card.module.scss";
 
 interface ExploreBrandsProps {
   title: string;
@@ -12,15 +12,15 @@ interface ExploreBrandArray {
   exploreBrandsArray: ExploreBrandsProps[];
 }
 
-const BrandsCard: FC<ExploreBrandArray> = ({ exploreBrandsArray }) : JSX.Element => {
+const BrandsCard: FC<ExploreBrandArray> = ({
+  exploreBrandsArray,
+}): JSX.Element => {
   return (
-    <div className= {styles['explore-container']}>
+    <div className={`${styles["brands-container"]}`}>
       {exploreBrandsArray &&
         exploreBrandsArray.map((data: any) => {
           const { title, backGroundImage } = data;
-          return (
-              <Cards title={title} backGroundImage={backGroundImage} />
-          );
+          return <Cards title={title} backGroundImage={backGroundImage} />;
         })}
     </div>
   );
