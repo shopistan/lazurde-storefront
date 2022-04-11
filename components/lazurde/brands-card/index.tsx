@@ -25,9 +25,10 @@ const BrandsCard: FC<ExploreBrandArray> = ({
   return (
     <div className={styles["cards-container"]}>
       <h3 className={styles["cards-heading"]}>{heading}</h3>
+
       <div className={`flex justify-between`}>
         {exploreBrandsArray &&
-          exploreBrandsArray.map((data: any, index) => {
+          exploreBrandsArray.map((data, index) => {
             const { cardTitle, cardImage } = data;
             return (
               <div className={styles["cards"]} key={index}>
