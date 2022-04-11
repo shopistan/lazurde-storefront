@@ -3,6 +3,10 @@ import Link from "next/link";
 import Image from 'next/image';
 import { KenazLogo, LazurdeLogo, LazurdeLSLogo, MisslLogo } from 'components/icons';
 import styles from "./brand-sidebar.module.scss";
+import {
+  BrandProps,
+  ImageType,
+} from "lib/types/common";
 
 const brandData = [
   {
@@ -31,32 +35,20 @@ const brandData = [
   },
 ]
 
-interface BrandProps {
-  url: string;
-  altText: string;
-  label: string;
-  labelUrl: string;
-}
-
-type image = {
-  url: string,
-  altText: string,
-}
-
 interface SidebarProps {
-  mainImg: image,
+  mainImg: ImageType,
   mainTitle: string,
-  logoArr: image[],
+  logoArr: [{logoImg: ImageType}],
   brandArr: BrandProps[]
   isOpened: boolean;
   setIsOpened: Function;
 
 }
 
-const BrandContainer: FC<BrandProps> = ({ url, altText, label, labelUrl }): JSX.Element => {
+const BrandContainer: FC<BrandProps> = ({ brandImg, label, labelUrl }): JSX.Element => {
   return (
     <div>
-      <Image src={url} alt={altText} width={'186px'} height={'183px'} layout='intrinsic' />
+      <Image src={brandImg.url} alt={brandImg.altText} width={'186px'} height={'183px'} layout='intrinsic' />
       <Link href={labelUrl}>
         <a >
           {label}
@@ -67,22 +59,27 @@ const BrandContainer: FC<BrandProps> = ({ url, altText, label, labelUrl }): JSX.
 }
 
 const BrandSideBar: FC<SidebarProps> = ({ mainImg, mainTitle, logoArr, brandArr, isOpened, setIsOpened }): JSX.Element => {
-
   return (
     <>
       <div className={styles["overlay"]} data-opened={isOpened} onClick={(() => setIsOpened(!isOpened))}></div>
       <div className={styles["brand_sidebar"]} data-opened={isOpened}>
         <div className={styles["text_div"]}>
           <div>
-            <img src={mainImg.url} alt={mainImg.url} />
+            <img src={mainImg?.url} alt={mainImg?.altText} />
             {/* <LazurdeLogo width="182px" height="24px" /> */}
           </div>
           <div className={styles["slogan_div"]}>
             <span >{mainTitle || "One Account. One Checkout. Multiple Brands"}</span>
           </div>
           <div className="flex gap-x-[8px]">
-            {logoArr.map((data, index) => {
-              <img src={data.url} alt={data.altText} />
+            {logoArr?.length > 0 && logoArr.map((data, index) => {
+              const { url, altText } = data.logoImg;
+              return (
+                <div key={index}>
+
+                <img key={index} src={url} alt={altText} />
+                </div>
+              )
             })}
             {/* <LazurdeLogo width="88px" height="12px" />
             <MisslLogo width="80px" height="13px" />
@@ -91,7 +88,7 @@ const BrandSideBar: FC<SidebarProps> = ({ mainImg, mainTitle, logoArr, brandArr,
           </div>
         </div>
         <div className={styles["brand_div"]}>
-          {brandArr.map((data) => {
+          {brandArr?.length > 0 && brandArr.map((data) => {
             return BrandContainer({ ...data })
           })}
         </div>

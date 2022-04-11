@@ -14,7 +14,7 @@ const MissLHome: FC<PageProps> = ({
 }) => {
   return (
     <>
-      <Header {...headerProps}></Header>
+      {/* <Header {...headerProps}></Header> */}
       <AppContentWrapper>
         <div className={styles.container}>
           {/* <h1>This is Miss'L HomePage</h1>

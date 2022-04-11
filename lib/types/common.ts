@@ -18,6 +18,14 @@ export type NavLinks = {
   linkText: string;
 };
 
+export type BrandProps = {
+  url: string;
+  altText: string;
+  label: string;
+  labelUrl: string;
+  brandImg: ImageType;
+}
+
 export type HeaderProps = {
   navLinks: NavLinks[];
   brandImage: ImageType;
@@ -25,6 +33,13 @@ export type HeaderProps = {
   promoLinkText: string;
   mobilePromoLinkText: string;
   promoLink: string;
+};
+
+export type BrandSidebarProps = {
+  mainImg: ImageType;
+  mainTitle: string;
+  logoArr: [{logoImg: ImageType}];
+  brandArr: BrandProps[];
 };
 
 interface footerLinks {
@@ -56,6 +71,7 @@ export type FooterProps = {
 export type PageProps = {
   headerProps: HeaderProps;
   footerProps: FooterProps;
+  brandSidebarProps: BrandSidebarProps;
   pageComponents?: XMComponent[];
 };
 

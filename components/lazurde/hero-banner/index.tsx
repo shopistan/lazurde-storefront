@@ -4,7 +4,7 @@ import React, { FC, useContext } from "react";
 import styles from "./Hero-banner.module.scss";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
-import Button from "components/common/button/index";
+import Button from "components/common/ui/button/index";
 import { useRouter } from "next/router";
 interface LazurdeHeroBannerProps {
   backgroundImage: ImageType;
@@ -65,6 +65,8 @@ const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }): JSX.Element => {
                   buttonText={
                     appState?.lang == "en" ? buttonText : t("buttonText")
                   }
+                  buttonSize={'lr'}
+                  onClick={() => {}}
                 />
               </div>
             </div>

@@ -5,6 +5,9 @@ import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 import { Bag, Heart, MapPin, Divider, MenuIcon, Globe, User } from "components/icons";
 import BrandSidebar from "./brand-sidebar";
+import {
+  BrandSidebarProps,
+} from "lib/types/common";
 
 const sidebarData = {
   mainImg: {
@@ -14,8 +17,10 @@ const sidebarData = {
   mainTitle: 'main title',
   logoArr: [
     {
-      url: '/',
-      altText: 'image',
+      logoImg: {
+        url: '/',
+        altText: 'image',
+      }
     }
   ],
   brandArr: [
@@ -29,11 +34,11 @@ const sidebarData = {
 }
 
 
-const UserNavBar: FC = (): JSX.Element => {
+const UserNavBar: FC<{brandSideBar: BrandSidebarProps}> = ({brandSideBar}): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
   const [isOpened, setIsOpened] = useState(false)
-
+  
   return (
     <div className={styles["user-navbar"]} data-testid="product-card">
       <div className={styles["left_div"]}>
@@ -81,7 +86,7 @@ const UserNavBar: FC = (): JSX.Element => {
           </a>
         </Link>
       </div>
-      <BrandSidebar {...sidebarData} isOpened={isOpened} setIsOpened={setIsOpened} />
+      <BrandSidebar {...brandSideBar} isOpened={isOpened} setIsOpened={setIsOpened} />
     </div>
   );
 };

@@ -8,12 +8,13 @@ import AppContentWrapper from "../components/common/app-content-wrapper";
 import styles from "../styles/Home.module.css";
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
+  brandSidebarProps,
   footerProps,
   pageComponents,
 }) => {
   return (
     <>
-      <Header {...headerProps}></Header>
+      <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
         <div className={styles.container}>
           {/* <div className={styles.links}>
@@ -68,10 +69,14 @@ export async function getStaticProps(context: any) {
   const footerProps =
     (globalComponents.find((item: XMComponent) => item.id === "Footer") || {})
       .params || {};
+  const brandSidebarProps =
+    (globalComponents.find((item: XMComponent) => item.id === "BrandSideBar") || {})
+      .params || {};
   return {
     props: {
       headerProps,
       footerProps,
+      brandSidebarProps,
       pageComponents,
     },
     revalidate: 5,
