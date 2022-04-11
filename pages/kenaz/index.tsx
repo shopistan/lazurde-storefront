@@ -14,7 +14,7 @@ const KenazHome: FC<PageProps> = ({
 }) => {
   return (
     <>
-      <Header {...headerProps}></Header>
+      {/* <Header {...headerProps}></Header> */}
       <AppContentWrapper>
         <div className={styles.container}>
           {/* <h1>This is Kenaz HomePage</h1>
