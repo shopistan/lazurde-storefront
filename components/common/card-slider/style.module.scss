@@ -1,5 +1,6 @@
 .card-slider {
   &__wrapper {
+    width: 100%;
     padding: 48px 0 64px 16px;
 
     @media (min-width: 1024px) {
@@ -13,7 +14,7 @@
     font-weight: 500;
     line-height: 28.8px;
     letter-spacing: 0em;
-    text-align: left;
+    text-align: start;
     text-transform: capitalize;
     color: #000000;
   }
