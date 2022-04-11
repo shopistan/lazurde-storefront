@@ -7,12 +7,13 @@ interface ExploreBrandProps {
   cardImage: ImageType;
   cardTitle: string;
   className : string;
+  onClick : any;
 }
 
-const Cards = ({ cardImage, cardTitle, className }: ExploreBrandProps): JSX.Element => {
+const Cards = ({ cardImage, cardTitle, className ,onClick }: ExploreBrandProps): JSX.Element => {
   return (
     <>
-      <div className={`${styles["card-container"]}`}>
+      <div className={`${styles["card-container"]}`} onClick={onClick}>
         {cardImage?.url && (
           <img
             className={`${styles["card-image"]}`}
