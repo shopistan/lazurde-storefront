@@ -21,23 +21,25 @@ const BrandsCard: FC<ExploreBrandArray> = ({
     console.log("");
   };
   return (
-    <>
-      <h3>{heading}</h3>
-      <div className={`flex justify-evenly ${styles["brands-container"]}`}>
+    <div className={styles["cards-container"]}>
+      <h3 className={styles["cards-heading"]}>{heading}</h3>
+      <div className={`flex justify-between`}>
         {exploreBrandsArray &&
           exploreBrandsArray.map((data: any) => {
             const { cardTitle, cardImage } = data;
             return (
               <Cards
                 onClick={onClick}
-                className={styles["card"]}
+                className={"card"}
+                height='100%'
+                width='100%'
                 cardTitle={cardTitle}
                 cardImage={cardImage}
               />
             );
           })}
       </div>
-    </>
+    </div>
   );
 };
 export default BrandsCard;
