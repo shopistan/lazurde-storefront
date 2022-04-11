@@ -6,6 +6,7 @@ exports.default = Types.Component({
   description: ``,
 
   attributes: {
+    heading: Types.String({ label: "Heading" }),
     exploreBrandsArray: Types.Array({
       label: "Explore Brands",
       children: Types.Shape({
