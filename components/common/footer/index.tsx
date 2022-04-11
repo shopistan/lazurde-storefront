@@ -12,6 +12,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 import Accordion from "../accordion";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
+import { ArabicfooterLinks } from "lib/mock-data/data";
 
 const Footer = ({
   heading = "",
@@ -27,11 +28,9 @@ const Footer = ({
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
 
-  const _footerLinks =
-    appState.lang === "en"
-      ? footerLinks
-      : t("testData.ArabicfooterLinks", { returnObjects: true });
-  console.log("_footerLinks", _footerLinks);
+  const _footerLinks = appState.lang === "en" ? footerLinks : ArabicfooterLinks;
+  //     : t("testData.ArabicfooterLinks", { returnObjects: true });
+  // console.log("_footerLinks", _footerLinks);
 
   return (
     <>
