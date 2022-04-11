@@ -4,22 +4,34 @@ import { ImageType } from "lib/types/common";
 import styles from "./card.module.scss";
 
 interface ExploreBrandProps {
-  backGroundImage: ImageType;
-  title: string;
+  cardImage: ImageType;
+  cardTitle: string;
+  className: string;
+  onClick: Function;
 }
 
-const Cards = ({ backGroundImage, title }: ExploreBrandProps): JSX.Element => {
+const Cards = ({
+  cardImage,
+  cardTitle,
+  className,
+  onClick,
+}: ExploreBrandProps): JSX.Element => {
   return (
     <>
-      <div className={`${styles["explore-container"]}`}>
-        {backGroundImage?.url && (
+      <div
+        className={`${styles["card-container"]}`}
+        onClick={() => {
+          onClick;
+        }}
+      >
+        {cardImage?.url && (
           <img
-            className={`${styles["explore-image"]}`}
-            src={backGroundImage.url}
-            alt={backGroundImage.altText}
+            className={`${styles["card-image"]}`}
+            src={cardImage.url}
+            alt={cardImage.altText}
           />
         )}
-        {title && <h3 className={styles["explore-title"]}>{title}</h3>}
+        {cardTitle && <h3 className={className}>{cardTitle}</h3>}
       </div>
     </>
   );
