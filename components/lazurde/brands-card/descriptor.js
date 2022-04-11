@@ -6,16 +6,17 @@ exports.default = Types.Component({
   description: ``,
 
   attributes: {
+    heading: Types.String({ label: "Heading" }),
     exploreBrandsArray: Types.Array({
       label: "Explore Brands",
       children: Types.Shape({
         children: {
-          backgroundImage: Types.Image({
-            label: "Background Image",
+          cardImage: Types.Image({
+            label: "card Image",
             url: Types.String({ label: "URL" }),
             altText: Types.String({ label: "Alt text" }),
           }),
-          title: Types.String({ label: "Title" }),
+          cardTitle: Types.String({ label: "Title" }),
         },
       }),
     }),
