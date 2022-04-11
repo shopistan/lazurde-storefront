@@ -4,8 +4,8 @@ import { ImageType } from "lib/types/common";
 import styles from "./brands-card.module.scss";
 
 interface ExploreBrandsProps {
-  title: string;
-  backGroundImage: ImageType;
+  cardTitle: string;
+  cardImage: ImageType;
 }
 
 interface ExploreBrandArray {
@@ -25,8 +25,8 @@ const BrandsCard: FC<ExploreBrandArray> = ({
       <div className={`flex justify-evenly ${styles["brands-container"]}`}>
         {exploreBrandsArray &&
           exploreBrandsArray.map((data: any) => {
-            const { title, backGroundImage } = data;
-            return <Cards title={title} backGroundImage={backGroundImage} />;
+            const { cardTitle, cardImage } = data;
+            return <Cards className={styles['card']} cardTitle={cardTitle} cardImage={cardImage} />;
           })}
       </div>
     </>
