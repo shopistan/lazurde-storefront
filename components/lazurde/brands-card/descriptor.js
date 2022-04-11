@@ -10,7 +10,7 @@ exports.default = Types.Component({
       label: "Explore Brands",
       children: Types.Shape({
         children: {
-          backgroundImage: Types.Image({
+          backGroundImage: Types.Image({
             label: "Background Image",
             url: Types.String({ label: "URL" }),
             altText: Types.String({ label: "Alt text" }),
