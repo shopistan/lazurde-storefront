@@ -6,9 +6,10 @@ interface ButtonProps {
   buttonStyle: string;
   buttonSize: "sm" | "md" | "lr" | "xl";
   onClick: MouseEventHandler<HTMLButtonElement>;
+  type: 'button' | 'submit';
 }
 
-const Button = ({ buttonText, buttonStyle = 'black', buttonSize = "md", onClick }: ButtonProps): JSX.Element => {
+const Button = ({ type = 'button', buttonText, buttonStyle = 'black', buttonSize = "md", onClick }: ButtonProps): JSX.Element => {
   return (
     <button
       data-testid={'button'}
@@ -16,6 +17,7 @@ const Button = ({ buttonText, buttonStyle = 'black', buttonSize = "md", onClick 
       data-size={buttonSize}
       className={styles["button"]}
       onClick={onClick}
+      type={type}
     >
       {buttonText || ""}
     </button>

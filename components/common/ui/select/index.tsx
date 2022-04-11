@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import styles from "./style.module.scss";
 
@@ -10,14 +10,16 @@ interface SelectProps {
   defaultValue: string,
 }
 
-
-
 const Select = ({ options = [{ label: 'label', value: 'value' }], onChange, defaultValue }: SelectProps): JSX.Element => {
   const dropdown = useRef(null)
   const [selectedVal, setSelectedVal] = useState<optionProps>({ label: defaultValue, value: defaultValue })
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [position, setPosition] = useState<string>('bottom')
 
+  useEffect (() => {
+    setSelectedVal({ label: defaultValue, value: defaultValue })
+  }, [defaultValue])
+  
   return (
     <div ref={dropdown} tabIndex={0} className={styles["dropdown"]} data-open={isOpen} onBlur={() => setIsOpen(false)}  >
       <span className={styles["select"]} onClick={() => {

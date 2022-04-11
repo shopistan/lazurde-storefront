@@ -30,11 +30,9 @@ const LangSelector: FC = ({
           <span>Select your preferred language and location</span>
         </div>
         <div className={styles["selector"]}>
-          <LanguageSelector />
+          <LanguageSelector showButton={true} />
         </div>
-        <div className={styles["submit-btn"]}>
-          <Button buttonText={"Continue"} buttonStyle={"black"} buttonSize={'sm'} onClick={() => {}}></Button>
-        </div>
+        
       </div>
       <button className={styles["closeButton"]} type='button' onClick={() => {
         setIsClosed(true)

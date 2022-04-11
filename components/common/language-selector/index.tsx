@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import styles from "./style.module.scss";
 import Select from "../ui/select";
+import Button from 'components/common/ui/button/index';
 
 import { useRouter } from "next/router";
 import { getChannelFromLocale } from "lib/utils/common";
@@ -41,12 +42,12 @@ const languageArr = [
     value: 'ar'
   },
 ]
-const LanguageSelector = (): JSX.Element => {
-
+const LanguageSelector = ({showButton}: {showButton: Boolean}): JSX.Element => {
   const router = useRouter();
   const { locales, locale, pathname, query, asPath, defaultLocale } = router;
 
   const { appState, saveAppState } = useContext(AppContext);
+  const [region, setRegion] = useState({ lang: appState.lang, region: appState.region })
 
   const navigateToLocale = (locale: string) => {
     router.push({ pathname, query }, asPath, { locale: locale });
@@ -76,6 +77,12 @@ const LanguageSelector = (): JSX.Element => {
   // }, []);
 
   useEffect(() => {
+    if (!showButton) {
+      navigateToLocale(`${region.lang}-${region.region}`)
+    }
+  }, [region]);
+
+  useEffect(() => {
     if (appState.lang === 'en') {
       document.documentElement.dir = 'ltr'
     } else {
@@ -96,24 +103,27 @@ const LanguageSelector = (): JSX.Element => {
 
   }, [router.locale]);
 
+  const submitChanges = (() => {
+    navigateToLocale(`${region.lang}-${region.region}`)
+  })
 
   const onCountryChange = ((selectedData: optionProps) => {
-    const locale = `${appState.lang}-${selectedData.value}`
-    navigateToLocale(locale)
+    setRegion({ lang: appState.lang, region: selectedData.value })
   })
 
   const onLanguageChange = ((selectedData: optionProps) => {
-    const locale = `${selectedData.value}-${appState.region}`
-    navigateToLocale(locale)
+    setRegion({ region: appState.region, lang: selectedData.value })
   })
 
   return (
     <>
-      <div>
-        <span></span>
-      </div>
       <Select options={countryArr} onChange={onCountryChange} defaultValue={appState.region}></Select>
       <Select options={languageArr} onChange={onLanguageChange} defaultValue={appState.lang}></Select>
+      {showButton &&
+        <div className={styles["submit-btn"]}>
+          <Button type={'button'} buttonText={"Continue"} buttonStyle={"black"} buttonSize={'sm'} onClick={() => submitChanges()}></Button>
+        </div>
+      }
     </>
 
   );
