@@ -9,8 +9,8 @@ interface ExploreBrandProps {
   cardTitle?: string;
   className?: string;
   onClick?: Function;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
 }
 
 const Cards = ({
