@@ -1,0 +1,19 @@
+.icons {
+  &__container {
+    display: flex;
+    align-items: center;
+
+    li {
+      list-style: none;
+      margin-inline-end: 28px;
+
+      &:last-child {
+        margin-inline-end: 0;
+      }
+
+      a {
+        color: #ffffff;
+      }
+    }
+  }
+}
