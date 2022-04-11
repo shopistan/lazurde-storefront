@@ -9,12 +9,13 @@ import styles from "../../styles/Home.module.css";
 
 const MissLHome: FC<PageProps> = ({
   headerProps,
+  brandSidebarProps,
   footerProps,
   pageComponents,
 }) => {
   return (
     <>
-      {/* <Header {...headerProps}></Header> */}
+      <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
         <div className={styles.container}>
           {/* <h1>This is Miss'L HomePage</h1>

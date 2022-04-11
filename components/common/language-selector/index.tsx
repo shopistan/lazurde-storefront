@@ -48,13 +48,13 @@ const LanguageSelector = (): JSX.Element => {
 
   const { appState, saveAppState } = useContext(AppContext);
 
-  const navigateToLocale = () => {
-    router.push({ pathname, query }, asPath, { locale: appState.locale });
+  const navigateToLocale = (locale: string) => {
+    router.push({ pathname, query }, asPath, { locale: locale });
   };
 
-  const getDropdownDefaultValue = () => {
-    return (locale || "").split("-")[1];
-  };
+  // const getDropdownDefaultValue = () => {
+  //   return (locale || "").split("-")[1];
+  // };
 
   // useEffect(() => {
   //   let lang: LangType = "en";
@@ -76,7 +76,6 @@ const LanguageSelector = (): JSX.Element => {
   // }, []);
 
   useEffect(() => {
-    navigateToLocale();
     if (appState.lang === 'en') {
       document.documentElement.dir = 'ltr'
     } else {
@@ -84,23 +83,28 @@ const LanguageSelector = (): JSX.Element => {
     }
   }, [appState]);
 
+  useEffect(() => {
+    if (router.locale.search('-') !== -1) {
+      const route = (router.locale || "").split("-");
+      saveAppState({
+        ...appState,
+        region: route[1],
+        lang: route[0],
+        locale: `${route[0]}-${route[1]}`,
+      });
+    }
+
+  }, [router.locale]);
+
 
   const onCountryChange = ((selectedData: optionProps) => {
-    const region = selectedData.value
-    saveAppState({
-      ...appState,
-      region: region,
-      locale: `${appState.lang}-${region}`,
-    });
+    const locale = `${appState.lang}-${selectedData.value}`
+    navigateToLocale(locale)
   })
 
   const onLanguageChange = ((selectedData: optionProps) => {
-    const language = selectedData.value
-    saveAppState({
-      ...appState,
-      lang: language,
-      locale: `${language}-${appState.region}`,
-    });
+    const locale = `${selectedData.value}-${appState.region}`
+    navigateToLocale(locale)
   })
 
   return (
