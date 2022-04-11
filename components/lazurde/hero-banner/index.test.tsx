@@ -43,7 +43,7 @@ describe("Hero Banner Tests", () => {
   test("prop test: button text", () => {
     renderComponent();
 
-    const title = screen.getByTestId("hero-button");
+    const title = screen.getByTestId("button");
     expect(title).toBeInTheDocument();
   });
 });
