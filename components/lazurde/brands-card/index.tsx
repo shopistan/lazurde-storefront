@@ -17,16 +17,24 @@ const BrandsCard: FC<ExploreBrandArray> = ({
   heading,
   exploreBrandsArray,
 }): JSX.Element => {
+  const onClick = () => {
+    console.log("");
+  };
   return (
     <>
-    <h3>
-      {heading}
-    </h3>
+      <h3>{heading}</h3>
       <div className={`flex justify-evenly ${styles["brands-container"]}`}>
         {exploreBrandsArray &&
           exploreBrandsArray.map((data: any) => {
             const { cardTitle, cardImage } = data;
-            return <Cards className={styles['card']} cardTitle={cardTitle} cardImage={cardImage} />;
+            return (
+              <Cards
+                onClick={onClick}
+                className={styles["card"]}
+                cardTitle={cardTitle}
+                cardImage={cardImage}
+              />
+            );
           })}
       </div>
     </>

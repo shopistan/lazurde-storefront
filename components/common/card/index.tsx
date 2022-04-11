@@ -6,14 +6,24 @@ import styles from "./card.module.scss";
 interface ExploreBrandProps {
   cardImage: ImageType;
   cardTitle: string;
-  className : string;
-  onClick : any;
+  className: string;
+  onClick: Function;
 }
 
-const Cards = ({ cardImage, cardTitle, className ,onClick }: ExploreBrandProps): JSX.Element => {
+const Cards = ({
+  cardImage,
+  cardTitle,
+  className,
+  onClick,
+}: ExploreBrandProps): JSX.Element => {
   return (
     <>
-      <div className={`${styles["card-container"]}`} onClick={onClick}>
+      <div
+        className={`${styles["card-container"]}`}
+        onClick={() => {
+          onClick;
+        }}
+      >
         {cardImage?.url && (
           <img
             className={`${styles["card-image"]}`}
