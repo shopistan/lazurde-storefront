@@ -13,29 +13,6 @@ const LazurdeHome: FC<PageProps> = ({
   footerProps,
   pageComponents,
 }) => {
-  const array = [
-    {
-      title: "hello",
-      backGroundImage: {
-        url: "https://images.unsplash.com/photo-1649423515812-5d7f4adb170c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80",
-        altText: "Image1",
-      },
-    },
-    {
-      title: "hello",
-      backGroundImage: {
-        url: "https://images.unsplash.com/photo-1649423515812-5d7f4adb170c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80",
-        altText: "Image1",
-      },
-    },
-    {
-      title: "hello",
-      backGroundImage: {
-        url: "https://images.unsplash.com/photo-1649423515812-5d7f4adb170c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80",
-        altText: "Image1",
-      },
-    },
-  ];
   return (
     <>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
@@ -76,7 +53,6 @@ const LazurdeHome: FC<PageProps> = ({
             return null;
           })}
         </div>
-        <BrandsCard exploreBrandsArray={array} />
       </AppContentWrapper>
       <Footer {...footerProps}></Footer>
     </>

@@ -9,20 +9,27 @@ interface ExploreBrandsProps {
 }
 
 interface ExploreBrandArray {
+  heading: string;
   exploreBrandsArray: ExploreBrandsProps[];
 }
 
 const BrandsCard: FC<ExploreBrandArray> = ({
+  heading,
   exploreBrandsArray,
 }): JSX.Element => {
   return (
-    <div className={`flex ${styles["brands-container"]}`}>
-      {exploreBrandsArray &&
-        exploreBrandsArray.map((data: any) => {
-          const { title, backGroundImage } = data;
-          return <Cards title={title} backGroundImage={backGroundImage} />;
-        })}
-    </div>
+    <>
+    <h3>
+      {heading}
+    </h3>
+      <div className={`flex justify-evenly ${styles["brands-container"]}`}>
+        {exploreBrandsArray &&
+          exploreBrandsArray.map((data: any) => {
+            const { title, backGroundImage } = data;
+            return <Cards title={title} backGroundImage={backGroundImage} />;
+          })}
+      </div>
+    </>
   );
 };
 export default BrandsCard;

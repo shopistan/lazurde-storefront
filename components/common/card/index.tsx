@@ -17,9 +17,6 @@ const Cards = ({ backGroundImage, title }: ExploreBrandProps): JSX.Element => {
             className={`${styles["explore-image"]}`}
             src={backGroundImage.url}
             alt={backGroundImage.altText}
-            // layout="fill"
-            // objectFit="cover"
-            // quality={100}
           />
         )}
         {title && <h3 className={styles["explore-title"]}>{title}</h3>}
