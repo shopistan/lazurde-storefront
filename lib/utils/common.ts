@@ -12,7 +12,7 @@ import {
 } from "lib/types/common";
 
 export const getAppStateFromLocalStorage = () => {
-  const appState = JSON.parse(window.localStorage.getItem("app-state"));
+  const appState = typeof window !== "undefined" && JSON.parse(window.localStorage.getItem("app-state"));
   return appState;
 };
 

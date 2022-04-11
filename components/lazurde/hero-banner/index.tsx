@@ -67,6 +67,7 @@ const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }): JSX.Element => {
                   }
                   buttonSize={'lr'}
                   onClick={() => {}}
+                  type={'button'}
                 />
               </div>
             </div>

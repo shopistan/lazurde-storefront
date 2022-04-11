@@ -1,11 +1,18 @@
 import { AppStateType } from "lib/types/common";
+import { getAppStateFromLocalStorage } from "lib/utils/common";
 import { DEFAULT_APP_STATE } from "lib/utils/constants";
 import React, { FC, useState } from "react";
 
 export const AppContext = React.createContext<any>({});
 
 const ContextProvider: FC = ({ children }) => {
-  const [appState, setAppState] = useState<AppStateType>(DEFAULT_APP_STATE);
+  let defaultState: AppStateType | string = ''
+  if(getAppStateFromLocalStorage()) {
+    defaultState = getAppStateFromLocalStorage()
+  } else {
+    defaultState = DEFAULT_APP_STATE
+  }
+  const [appState, setAppState] = useState<AppStateType | string>(defaultState);
 
   const saveAppState = ({
     lang,
