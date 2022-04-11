@@ -51,3 +51,62 @@ export const ArabicfooterLinks = [
     ],
   },
 ];
+
+export const sliderData = [
+  {
+    image: {
+      url: "/Bracelets.svg",
+      altText: "Bracelets",
+    },
+    heading: "Bracelets",
+  },
+  {
+    image: {
+      url: "/Rings.svg",
+      altText: "Rings",
+    },
+    heading: "Rings",
+  },
+  {
+    image: {
+      url: "/Earrings.svg",
+      altText: "Earrings",
+    },
+    heading: "Earrings",
+  },
+  {
+    image: {
+      url: "/Necklaces.svg",
+      altText: "Necklaces",
+    },
+    heading: "Necklaces",
+  },
+  {
+    image: {
+      url: "/Bracelets.svg",
+      altText: "Bracelets",
+    },
+    heading: "Bracelets",
+  },
+  {
+    image: {
+      url: "/Rings.svg",
+      altText: "Rings",
+    },
+    heading: "Rings",
+  },
+  {
+    image: {
+      url: "/Earrings.svg",
+      altText: "Earrings",
+    },
+    heading: "Earrings",
+  },
+  {
+    image: {
+      url: "/Necklaces.svg",
+      altText: "Necklaces",
+    },
+    heading: "Necklaces",
+  },
+];
