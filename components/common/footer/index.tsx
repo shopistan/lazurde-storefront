@@ -29,6 +29,8 @@ const Footer = ({
   const { t } = useTranslation("common");
 
   const _footerLinks = appState.lang === "en" ? footerLinks : ArabicfooterLinks;
+  //     : t("testData.ArabicfooterLinks", { returnObjects: true });
+  // console.log("_footerLinks", _footerLinks);
 
   return (
     <>
@@ -61,21 +63,23 @@ const Footer = ({
             <div
               className={`grid grid-cols-1 lg:grid-cols-3 lg:gap-4 w-full ${styles["footer__sub-container"]}`}
             >
-              {_footerLinks?.map((footerLink, index) =>
-                width > 1023 ? (
-                  <FooterLinks
-                    heading={footerLink.linkHeading}
-                    links={footerLink.links}
-                    key={index}
-                  />
-                ) : (
-                  <Accordion
-                    index={index}
-                    heading={footerLink.linkHeading}
-                    links={footerLink.links}
-                  />
-                )
-              )}
+              {Array.isArray(_footerLinks) &&
+                _footerLinks.length > 0 &&
+                _footerLinks.map((footerLink, index) =>
+                  width > 1023 ? (
+                    <FooterLinks
+                      heading={footerLink.linkHeading}
+                      links={footerLink.links}
+                      key={index}
+                    />
+                  ) : (
+                    <Accordion
+                      index={index}
+                      heading={footerLink.linkHeading}
+                      links={footerLink.links}
+                    />
+                  )
+                )}
             </div>
           </div>
           <div className={styles["footer__inner-container"]}>
