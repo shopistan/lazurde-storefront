@@ -17,6 +17,7 @@ const PreviewPageGC = () => {
 export default PreviewPageGC;
 
 export async function getServerSideProps({ locale, defaultLocale }) {
+    console.log("locale test", locale, defaultLocale)
   if (locale !== defaultLocale) {
     return {
       notFound: true,
