@@ -1,7 +1,8 @@
 .dropdown {
   position: relative;
   width: 100%;
-  min-width: 120px;
+  min-width: 137px;
+
   .select {
     display: flex;
     align-items: center;
@@ -12,7 +13,7 @@
     cursor: pointer;
     font-weight: 400;
     font-size: 14px;
-    line-height: 115%;
+    line-height: 16.8px;
     color: #000;
   }
 
@@ -66,6 +67,7 @@
     // transition: transform 0.2s ease-in-out;
     transform: rotateZ(0);
     transform-origin: center;
+    pointer-events: none;
   }
 
   &[data-open="true"] {
@@ -83,6 +85,29 @@
     .select-arrow {
       transform: rotateZ(-180deg);
       transform-origin: center;
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .select-arrow {
+    right: auto;
+    left: 20px;
+  }
+
+  .dropdown {
+    .select {
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 19.5px;
+    }
+
+    &:first-child {
+      .select {
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 18px;
+      }
     }
   }
 }

@@ -115,7 +115,9 @@ const Footer = ({
           </div>
         </div>
         <div className={styles["footer__sub-footer"]}>
-          <LanguageSelector showButton={false}/>
+          <div className={styles["footer__footer-lang-selector"]}>
+            <LanguageSelector showButton={false} />
+          </div>
           <FooterIcons iconsList={paymentLinks} />
         </div>
       </div>
