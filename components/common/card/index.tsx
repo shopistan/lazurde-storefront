@@ -2,36 +2,46 @@ import React from "react";
 import Image from "next/image";
 import { ImageType } from "lib/types/common";
 import styles from "./card.module.scss";
+import Label from "components/common/ui/label";
 
 interface ExploreBrandProps {
-  cardImage: ImageType;
-  cardTitle: string;
-  className: string;
-  onClick: Function;
+  cardImage?: ImageType;
+  cardTitle?: string;
+  className?: string;
+  onClick?: Function;
+  width?: number | string;
+  height?: number | string;
 }
 
 const Cards = ({
   cardImage,
   cardTitle,
-  className,
   onClick,
+  className = "",
+  width = 10,
+  height = 10,
 }: ExploreBrandProps): JSX.Element => {
   return (
     <>
       <div
-        className={`${styles["card-container"]}`}
+        className={styles[`${className}`]}
         onClick={() => {
           onClick;
         }}
       >
         {cardImage?.url && (
-          <img
+          <Image
             className={`${styles["card-image"]}`}
-            src={cardImage.url}
-            alt={cardImage.altText}
+            src={cardImage?.url}
+            alt={cardImage?.altText}
+            width={width}
+            height={height}
+            layout="responsive"
           />
         )}
-        {cardTitle && <h3 className={className}>{cardTitle}</h3>}
+        {cardTitle && (
+          <Label className={styles["card-title"]}>{cardTitle}</Label>
+        )}
       </div>
     </>
   );

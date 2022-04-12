@@ -1,5 +1,5 @@
 import React, { FC, useState, useContext } from "react";
-import styles from "./styles.module.scss";
+import styles from "./style.module.scss";
 import Link from "next/link";
 import Cross from '../../../icons/Cross';
 import useTranslation from "next-translate/useTranslation";
@@ -30,11 +30,9 @@ const LangSelector: FC = ({
           <span>Select your preferred language and location</span>
         </div>
         <div className={styles["selector"]}>
-          <LanguageSelector />
+          <LanguageSelector showButton={true} />
         </div>
-        <div className={styles["submit-btn"]}>
-          <Button buttonText={"Continue"} buttonStyle={"black"} buttonSize={'sm'} onClick={() => {}}></Button>
-        </div>
+        
       </div>
       <button className={styles["closeButton"]} type='button' onClick={() => {
         setIsClosed(true)
