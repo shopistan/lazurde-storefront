@@ -1,7 +1,8 @@
 .card-slider {
   &__wrapper {
     width: 100%;
-    padding: 48px 0 64px 16px;
+    padding: 48px 16px 64px 16px;
+    padding-inline-end: 0;
 
     @media (min-width: 1024px) {
       padding: 83.5px 80px 80px;

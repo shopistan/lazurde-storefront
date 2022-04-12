@@ -16,12 +16,16 @@ interface iconsObj {
 
 interface iconsListType {
   iconsList?: iconsObj[];
+  className?: string;
 }
 
-const FooterIcons = ({ iconsList }: iconsListType): JSX.Element => {
+const FooterIcons = ({
+  iconsList,
+  className = "",
+}: iconsListType): JSX.Element => {
   return (
     <>
-      <ul className={styles["icons__container"]}>
+      <ul className={`${className} ${styles["icons__container"]}`}>
         {iconsList?.length > 0 &&
           iconsList.map((socialIcon, index) => {
             const { link, icon } = socialIcon;
