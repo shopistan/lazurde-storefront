@@ -20,14 +20,17 @@ type optionProps = { label: string, value: string }
 const countryArr = [
   {
     label: 'Egypt',
+    img: '/flag-egypt.png',
     value: 'eg'
   },
   {
     label: 'UAE',
+    img: '/flag-uae.png',
     value: 'ae'
   },
   {
     label: 'KSA',
+    img: '/flag-sa.png',
     value: 'sa'
   }
 ]
@@ -35,14 +38,16 @@ const countryArr = [
 const languageArr = [
   {
     label: 'English',
+    img: '',
     value: 'en'
   },
   {
     label: 'عربي',
+    img: '',
     value: 'ar'
   },
 ]
-const LanguageSelector = ({showButton}: {showButton: Boolean}): JSX.Element => {
+const LanguageSelector = ({ showButton }: { showButton: Boolean }): JSX.Element => {
   const router = useRouter();
   const { locales, locale, pathname, query, asPath, defaultLocale } = router;
 
@@ -116,15 +121,17 @@ const LanguageSelector = ({showButton}: {showButton: Boolean}): JSX.Element => {
   })
 
   return (
-    <>
+    <div className={styles['language-selector']} >
       <Select options={countryArr} onChange={onCountryChange} defaultValue={appState.region}></Select>
       <Select options={languageArr} onChange={onLanguageChange} defaultValue={appState.lang}></Select>
-      {showButton &&
+      {
+        showButton &&
         <div className={styles["submit-btn"]}>
           <Button type={'button'} buttonText={"Continue"} buttonStyle={"black"} buttonSize={'sm'} onClick={() => submitChanges()}></Button>
         </div>
       }
-    </>
+    </div >
+
 
   );
 };

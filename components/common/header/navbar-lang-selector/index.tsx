@@ -1,5 +1,5 @@
 import React, { FC, useState, useContext } from "react";
-import styles from "./styles.module.scss";
+import styles from "./style.module.scss";
 import Link from "next/link";
 import Cross from '../../../icons/Cross';
 import useTranslation from "next-translate/useTranslation";
