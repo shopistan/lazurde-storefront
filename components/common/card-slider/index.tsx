@@ -1,6 +1,8 @@
+import React, { useContext } from "react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import useWindowSize from "lib/utils/useWindowSize";
+import { AppContext } from "lib/context";
 import Cards from "../card";
 import styles from "./style.module.scss";
 
@@ -17,6 +19,7 @@ const CardSlider = ({
   bgColor = "#fff",
 }): JSX.Element => {
   const [width] = useWindowSize();
+  const { appState } = useContext(AppContext);
 
   return (
     <div
@@ -34,9 +37,11 @@ const CardSlider = ({
         slidesPerView={width > 1023 ? 4 : 1.1}
         navigation={width > 1023 ? true : false}
         scrollbar={{ draggable: true }}
-        className="card-slider"
+        className={`card-slider`}
+        key={appState?.lang}
+        dir={appState?.lang === "en" ? "ltr" : "rtl"}
       >
-        <div>
+        <>
           {cards &&
             cards.length > 0 &&
             cards.map((content, i) => {
@@ -53,7 +58,7 @@ const CardSlider = ({
                 </SwiperSlide>
               );
             })}
-        </div>
+        </>
       </Swiper>
     </div>
   );
