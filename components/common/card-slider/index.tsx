@@ -5,6 +5,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import Cards from "../card";
 import styles from "./style.module.scss";
+import useTranslation from "next-translate/useTranslation";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,17 +21,23 @@ const CardSlider = ({
 }): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
+  const { t } = useTranslation("common");
+
+  const _cards =
+    appState.lang === "en"
+      ? cards
+      : t("cardSliderData.cards", {}, { returnObjects: true });
 
   return (
     <div
       className={`${styles["card-slider__wrapper"]} ${className}`}
       style={{ backgroundColor: bgColor }}
     >
-      {sectionHeading && (
-        <Label className={styles["card-slider__section-heading"]}>
-          {sectionHeading}
-        </Label>
-      )}
+      <Label className={styles["card-slider__section-heading"]}>
+        {appState.lang === "en"
+          ? sectionHeading
+          : t("cardSliderData.sectionHeading")}
+      </Label>
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={8}
@@ -42,9 +49,9 @@ const CardSlider = ({
         dir={appState?.lang === "en" ? "ltr" : "rtl"}
       >
         <>
-          {cards &&
-            cards.length > 0 &&
-            cards.map((content, i) => {
+          {Array.isArray(_cards) &&
+            _cards.length > 0 &&
+            _cards.map((content, i) => {
               const { image, heading } = content;
               return (
                 <SwiperSlide key={i}>

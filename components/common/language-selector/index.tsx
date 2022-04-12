@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import styles from "./style.module.scss";
 import Select from "../ui/select";
-import Button from 'components/common/ui/button/index';
+import Button from "components/common/ui/button/index";
 
 import { useRouter } from "next/router";
 import { getChannelFromLocale } from "lib/utils/common";
@@ -15,44 +15,53 @@ import {
 } from "lib/types/common";
 import { AppContext } from "lib/context";
 
-type optionProps = { label: string, value: string }
+type optionProps = { label: string; value: string };
 
 const countryArr = [
   {
-    label: 'Egypt',
-    img: '/flag-egypt.png',
-    value: 'eg'
+    label: "Egypt",
+    img: "/flag-egypt.png",
+    value: "eg",
   },
   {
-    label: 'UAE',
-    img: '/flag-uae.png',
-    value: 'ae'
+    label: "UAE",
+    img: "/flag-uae.png",
+    value: "ae",
   },
   {
-    label: 'KSA',
-    img: '/flag-sa.png',
-    value: 'sa'
-  }
-]
+    label: "KSA",
+    img: "/flag-sa.png",
+    value: "sa",
+  },
+];
 
 const languageArr = [
   {
-    label: 'English',
-    img: '',
-    value: 'en'
+    label: "English",
+    img: "",
+    value: "en",
   },
   {
-    label: 'عربي',
-    img: '',
-    value: 'ar'
+    label: "عربي",
+    img: "",
+    value: "ar",
   },
-]
-const LanguageSelector = ({ showButton }: { showButton: Boolean }): JSX.Element => {
+];
+const LanguageSelector = ({
+  showButton,
+  className = "",
+}: {
+  showButton: Boolean;
+  className?: string;
+}): JSX.Element => {
   const router = useRouter();
   const { locales, locale, pathname, query, asPath, defaultLocale } = router;
 
   const { appState, saveAppState } = useContext(AppContext);
-  const [region, setRegion] = useState({ lang: appState.lang, region: appState.region })
+  const [region, setRegion] = useState({
+    lang: appState.lang,
+    region: appState.region,
+  });
 
   const navigateToLocale = (locale: string) => {
     router.push({ pathname, query }, asPath, { locale: locale });
@@ -83,20 +92,20 @@ const LanguageSelector = ({ showButton }: { showButton: Boolean }): JSX.Element 
 
   useEffect(() => {
     if (!showButton) {
-      navigateToLocale(`${region.lang}-${region.region}`)
+      navigateToLocale(`${region.lang}-${region.region}`);
     }
   }, [region]);
 
   useEffect(() => {
-    if (appState.lang === 'en') {
-      document.documentElement.dir = 'ltr'
+    if (appState.lang === "en") {
+      document.documentElement.dir = "ltr";
     } else {
-      document.documentElement.dir = 'rtl'
+      document.documentElement.dir = "rtl";
     }
   }, [appState]);
 
   useEffect(() => {
-    if (router.locale.search('-') !== -1) {
+    if (router.locale.search("-") !== -1) {
       const route = (router.locale || "").split("-");
       saveAppState({
         ...appState,
@@ -105,34 +114,46 @@ const LanguageSelector = ({ showButton }: { showButton: Boolean }): JSX.Element 
         locale: `${route[0]}-${route[1]}`,
       });
     }
-
   }, [router.locale]);
 
-  const submitChanges = (() => {
-    navigateToLocale(`${region.lang}-${region.region}`)
-  })
+  const submitChanges = () => {
+    navigateToLocale(`${region.lang}-${region.region}`);
+  };
 
-  const onCountryChange = ((selectedData: optionProps) => {
-    setRegion({ lang: appState.lang, region: selectedData.value })
-  })
+  const onCountryChange = (selectedData: optionProps) => {
+    setRegion({ lang: appState.lang, region: selectedData.value });
+  };
 
-  const onLanguageChange = ((selectedData: optionProps) => {
-    setRegion({ region: appState.region, lang: selectedData.value })
-  })
+  const onLanguageChange = (selectedData: optionProps) => {
+    setRegion({ region: appState.region, lang: selectedData.value });
+  };
 
   return (
-    <div className={styles['language-selector']} >
-      <Select options={countryArr} onChange={onCountryChange} defaultValue={appState.region}></Select>
-      <Select options={languageArr} onChange={onLanguageChange} defaultValue={appState.lang}></Select>
-      {
-        showButton &&
+    <div className={styles["language-selector"]}>
+      <Select
+        options={countryArr}
+        onChange={onCountryChange}
+        defaultValue={appState.region}
+        className={className}
+      ></Select>
+      <Select
+        options={languageArr}
+        onChange={onLanguageChange}
+        defaultValue={appState.lang}
+        className={className}
+      ></Select>
+      {showButton && (
         <div className={styles["submit-btn"]}>
-          <Button type={'button'} buttonText={"Continue"} buttonStyle={"black"} buttonSize={'sm'} onClick={() => submitChanges()}></Button>
+          <Button
+            type={"button"}
+            buttonText={"Continue"}
+            buttonStyle={"black"}
+            buttonSize={"sm"}
+            onClick={() => submitChanges()}
+          ></Button>
         </div>
-      }
-    </div >
-
-
+      )}
+    </div>
   );
 };
 export default LanguageSelector;

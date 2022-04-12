@@ -52,6 +52,10 @@
         },
         {
           "url": "/",
+          "text": "ثرإ"
+        },
+        {
+          "url": "/",
           "text": "ةلئسأ"
         },
         {
@@ -60,5 +64,45 @@
         }
       ]
     }
-  ]
+  ],
+  "cardSliderData": {
+    "sectionHeading": "ماسقالا بسح قوست",
+    "cards": [
+      {
+        "heading": "رواسأ",
+        "image": {
+          "url": "/Bracelets.svg",
+          "altText": "رواسأ"
+        }
+      },
+      {
+        "heading": "متاوخ",
+        "image": {
+          "url": "/Rings.svg",
+          "altText": "متاوخ"
+        }
+      },
+      {
+        "heading": "طارقأ",
+        "image": {
+          "url": "/Earrings.svg",
+          "altText": "طارقأ"
+        }
+      },
+      {
+        "heading": "تادالق",
+        "image": {
+          "url": "/Necklaces.svg",
+          "altText": "تادالق"
+        }
+      },
+      {
+        "heading": "طارقأ",
+        "image": {
+          "url": "/Earrings.svg",
+          "altText": "طارقأ"
+        }
+      }
+    ]
+  }
 }
