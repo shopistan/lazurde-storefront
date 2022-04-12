@@ -28,9 +28,10 @@ const Footer = ({
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
 
-  const _footerLinks = appState.lang === "en" ? footerLinks : ArabicfooterLinks;
-  //     : t("testData.ArabicfooterLinks", { returnObjects: true });
-  // console.log("_footerLinks", _footerLinks);
+  const _footerLinks =
+    appState.lang === "en"
+      ? footerLinks
+      : t("arabicfooterLinks", {}, { returnObjects: true });
 
   return (
     <>
@@ -116,9 +117,15 @@ const Footer = ({
         </div>
         <div className={styles["footer__sub-footer"]}>
           <div className={styles["footer__footer-lang-selector"]}>
-            <LanguageSelector showButton={false} />
+            <LanguageSelector
+              className={styles["footer__footer-dropdowns"]}
+              showButton={false}
+            />
           </div>
-          <FooterIcons iconsList={paymentLinks} />
+          <FooterIcons
+            className={styles["footer__footer-icons"]}
+            iconsList={paymentLinks}
+          />
         </div>
       </div>
     </>

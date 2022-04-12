@@ -24,6 +24,7 @@
     }
 
     .swiper-scrollbar {
+      right: 0;
       bottom: 0;
       left: 0;
       width: 97%;
@@ -58,12 +59,12 @@
   }
 
   .swiper-button-prev {
-    left: auto;
-    right: 46.29px;
+    inset-inline-start: auto !important;
+    inset-inline-end: 46.29px !important;
   }
 
   .swiper-button-next {
-    left: auto;
-    right: 16px;
+    inset-inline-start: auto !important;
+    inset-inline-end: 16px !important;
   }
 }
