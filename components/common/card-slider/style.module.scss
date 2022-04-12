@@ -1,0 +1,21 @@
+.card-slider {
+  &__wrapper {
+    width: 100%;
+    padding: 48px 0 64px 16px;
+
+    @media (min-width: 1024px) {
+      padding: 83.5px 80px 80px;
+    }
+  }
+
+  &__section-heading {
+    margin-bottom: -30px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28.8px;
+    letter-spacing: 0em;
+    text-align: start;
+    text-transform: capitalize;
+    color: #000000;
+  }
+}

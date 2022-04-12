@@ -1,0 +1,7 @@
+.language-selector {
+  display: flex;
+
+  & > div:nth-child(2) {
+    margin-inline: 16px 32px;
+  }
+}

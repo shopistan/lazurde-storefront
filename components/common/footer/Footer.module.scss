@@ -1,0 +1,155 @@
+.footer {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 16px;
+    background-color: #000000;
+    color: #ffffff;
+
+    @media (min-width: 1024px) {
+      padding: 80px 40px 40px 40px;
+    }
+  }
+
+  &__content-wrapper {
+    padding: 0 16px;
+    text-align: center;
+
+    @media (min-width: 1024px) {
+      padding: 0 40px;
+      text-align: start;
+    }
+  }
+
+  &__sub-container {
+    &:first-child {
+      @media (min-width: 1024px) {
+        padding-inline-end: 50px;
+      }
+    }
+  }
+
+  &__heading,
+  &__label {
+    color: #ffffff;
+  }
+
+  &__heading {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28.8px;
+    letter-spacing: 0em;
+  }
+
+  &__label {
+    font-size: 14px;
+    line-height: 16.8px;
+    letter-spacing: 0em;
+
+    @media (min-width: 1024px) {
+      font-size: 15px;
+      line-height: 18px;
+    }
+  }
+
+  &__signup-text,
+  &__social-link-text {
+    font-size: 11px;
+    line-height: 13.2px;
+    margin-top: 0;
+    margin-bottom: 16px;
+
+    @media (min-width: 1024px) {
+      font-size: 12px;
+      line-height: 15.6px;
+    }
+  }
+
+  &__signup-text {
+    margin-top: 16px;
+  }
+
+  &__signup-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 138px;
+    min-height: 40px;
+    text-decoration: none;
+    text-transform: capitalize;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 100px;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0em;
+  }
+
+  &__inner-container,
+  &__sub-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (min-width: 1024px) {
+      flex-direction: row;
+    }
+  }
+
+  &__inner-container {
+    margin-top: 86px;
+    flex-direction: column-reverse;
+
+    @media (min-width: 1024px) {
+      flex-direction: row;
+      margin-top: 80px;
+    }
+  }
+
+  &__maroof-logo {
+    margin-bottom: 85px;
+
+    @media (min-width: 1024px) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__sub-footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+
+    @media (min-width: 1024px) {
+      margin-top: 109px;
+    }
+
+    li {
+      cursor: alias;
+      margin-inline-end: 12px !important;
+
+      &:last-child {
+        margin-inline-end: 0;
+      }
+
+      a {
+        cursor: auto;
+      }
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .footer {
+    &__sub-footer {
+      ul {
+        direction: ltr;
+      }
+    }
+  }
+}
