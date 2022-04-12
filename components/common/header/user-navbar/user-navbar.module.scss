@@ -1,0 +1,137 @@
+.user-navbar {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-block: 0;
+  font-size: 13px;
+  background-color: black;
+  color: white;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
+
+  .left_div {
+    display: flex;
+    flex-direction: row;
+
+    & > div {
+      display: flex;
+      margin-inline-start: 16px;
+      align-items: center;
+
+      &:first-child {
+        margin-inline-start: 24px;
+      }
+    }
+
+    .sidebar_btn {
+      background-color: transparent;
+      height: 100%;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      line-height: 0;
+      cursor: pointer;
+    }
+
+    .boutique_text {
+      @media (min-width: 1024px) {
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 18px;
+      }
+    }
+
+    .brand_text {
+      @media (min-width: 1024px) {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16.8px;
+      }
+    }
+
+    .brand_ticker {
+      height: 40px;
+      overflow: hidden;
+      position: relative;
+      ul {
+        margin: 0;
+        padding: 0;
+        animation: scrollUp 5s infinite linear;
+        cursor: default;
+
+        li {
+          opacity: 1;
+          height: 20px;
+          padding-block-start: 40px;
+          list-style: none;
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+
+      @keyframes scrollUp {
+        from {
+          -webkit-transform: translateY(25%);
+                  transform: translateY(25%);
+        }
+        to {
+          -webkit-transform: translateY(-80%);
+                  transform: translateY(-80%);
+        }
+      }
+    }
+  }
+
+  .right_div {
+    display: flex;
+    flex-direction: row;
+
+    & > a,
+    & > div {
+      display: flex;
+      margin-inline-end: 18px;
+      align-items: center;
+
+      &:last-child {
+        margin-inline-end: 24px;
+      }
+    }
+  }
+}
+
+.link-text {
+  color: black;
+  font-weight: 500;
+}
+
+.closeButton {
+  position: absolute;
+  right: 20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+
+  svg {
+    width: 12px;
+    height: 12px;
+
+    @media (min-width: 1024px) {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
