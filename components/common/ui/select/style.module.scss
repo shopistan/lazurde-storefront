@@ -13,7 +13,7 @@
     cursor: pointer;
     font-weight: 400;
     font-size: 14px;
-    line-height: 16.8px;
+    line-height: 115%;
     color: #000;
   }
 
@@ -62,7 +62,7 @@
   .select-arrow {
     position: absolute;
     top: 16px;
-    right: 20px;
+    inset-inline-end: 20px;
     line-height: 0;
     // transition: transform 0.2s ease-in-out;
     transform: rotateZ(0);
@@ -90,11 +90,6 @@
 }
 
 html[dir="rtl"] {
-  .select-arrow {
-    right: auto;
-    left: 20px;
-  }
-
   .dropdown {
     .select {
       font-weight: 400;
