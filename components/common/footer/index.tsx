@@ -28,9 +28,11 @@ const Footer = ({
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
 
-  const _footerLinks = appState.lang === "en" ? footerLinks : ArabicfooterLinks;
-  //     : t("testData.ArabicfooterLinks", { returnObjects: true });
-  // console.log("_footerLinks", _footerLinks);
+  const _footerLinks =
+    appState.lang === "en"
+      ? footerLinks
+      : t("arabicfooterLinks", { returnObjects: true });
+  console.log("_footerLinks", _footerLinks);
 
   return (
     <>
