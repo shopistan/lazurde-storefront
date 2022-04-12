@@ -30,9 +30,11 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     "components/**/*.{js,jsx,tsx,ts}",
+    // "components/common/*/index.{js,jsx,tsx,ts}",
     "!components/**/descriptor.js",
     "!components/icons/*.{js,jsx,tsx,ts}",
     "!components/xm-component-library.ts",
+    "!components/common/ui/**/*.{js,jsx,tsx,ts}",
     "!pages/cms/*.{js,jsx,tsx,ts}",
   ],
   setupFiles: ["./setup.js"],

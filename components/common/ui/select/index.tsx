@@ -1,4 +1,5 @@
 import ArrowDown from "components/icons/ArrowDown";
+import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 
 import styles from "./style.module.scss";
@@ -13,16 +14,20 @@ interface SelectProps {
 
 const Select = ({ options = [{ label: 'label', img: '', value: 'value' }], onChange, defaultValue }: SelectProps): JSX.Element => {
   const dropdown = useRef(null)
-  const [selectedVal, setSelectedVal] = useState<optionProps>({ label: defaultValue, img: defaultValue, value: defaultValue })
+  const [selectedVal, setSelectedVal] = useState<optionProps>()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [position, setPosition] = useState<string>('bottom')
 
   useEffect(() => {
-    setSelectedVal({ label: defaultValue, img: defaultValue, value: defaultValue })
+    setSelectedVal({ label: '', img: '', value: defaultValue })
   }, [defaultValue])
 
+  useEffect(() => {
+
+  }, [selectedVal])
+
   return (
-    <div ref={dropdown} tabIndex={0} className={styles["dropdown"]} data-open={isOpen} onBlur={() => setIsOpen(false)}  >
+    <div key={selectedVal?.value} ref={dropdown} tabIndex={0} className={styles["dropdown"]} data-open={isOpen} onBlur={() => setIsOpen(false)}  >
       <span className={styles["select"]} onClick={() => {
         if (window.innerHeight - dropdown.current.getBoundingClientRect().bottom < 100) {
           setPosition('top')
@@ -31,23 +36,21 @@ const Select = ({ options = [{ label: 'label', img: '', value: 'value' }], onCha
         }
         setIsOpen(!isOpen)
       }}>
-        {selectedVal.label}
-        {selectedVal.img && <img src={selectedVal.img} width='16px' alt="image" />}
+        {selectedVal?.label}
+        {selectedVal?.img && <img src={selectedVal?.img || '/flag-uae.svg'} width={16} alt="image" />}
       </span>
       <ul className={`${styles["options-ul"]}`} data-position={position}>
         {options.map((opData, index) => {
-          selectedVal.value === opData.value && selectedVal.label !== opData.label && setSelectedVal(opData)
+          selectedVal?.value === opData.value && selectedVal?.label === '' && setSelectedVal({ ...opData })
           return (
-            <li key={index} className={`${styles["option"]}`} data-selected={opData.value === selectedVal.value}
+            <li key={`${selectedVal?.value}-${index}`} className={`${styles["option"]}`} data-selected={selectedVal?.value === opData.value }
               onClick={() => {
                 setSelectedVal(opData)
                 setIsOpen(false)
                 onChange(opData)
-
               }}>
               <a>{opData.label}
-
-                {opData.img && <img src={opData.img} width='16px' alt="image" />}
+                {opData.img && <img src={opData.img || '/flag-uae.svg'} width={16} alt="image" />}
               </a>
             </li>)
         })}

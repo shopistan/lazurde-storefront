@@ -58,12 +58,12 @@
   }
 
   .swiper-button-prev {
-    left: auto;
-    right: 46.29px;
+    inset-inline-start: auto !important;
+    inset-inline-end: 46.29px !important;
   }
 
   .swiper-button-next {
-    left: auto;
-    right: 16px;
+    inset-inline-start: auto !important;
+    inset-inline-end: 16px !important;
   }
 }
