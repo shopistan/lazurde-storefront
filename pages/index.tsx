@@ -3,23 +3,19 @@ import Header from "components/common/header";
 import { componentsById } from "components/xm-component-library";
 import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
-import Link from "next/link";
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
 import styles from "../styles/Home.module.css";
-
+import BrandsCard from "components/lazurde/brands-card/index";
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
+  brandSidebarProps,
   footerProps,
-  pageComponents = [],
+  pageComponents,
 }) => {
-  console.log("HomePageProps", pageComponents);
-  useEffect(() => {
-    console.log("HomePage Mounted");
-  }, []);
   return (
     <>
-      <Header {...headerProps}></Header>
+      <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
         <div className={styles.container}>
           {/* <div className={styles.links}>
@@ -65,20 +61,25 @@ const LazurdeHome: FC<PageProps> = ({
 
 export default LazurdeHome;
 
-export async function getServerSideProps(context: any) {
-  const globalComponents = await fetchGlobalComponents();
-  const pageComponents = await fetchXMComponents("/home");
+export async function getStaticProps(context: any) {
+  const globalComponents = (await fetchGlobalComponents()) || [];
+  const pageComponents = (await fetchXMComponents(12, "/home")) || [];
   const headerProps =
     (globalComponents.find((item: XMComponent) => item.id === "Header") || {})
       .params || {};
   const footerProps =
     (globalComponents.find((item: XMComponent) => item.id === "Footer") || {})
       .params || {};
+  const brandSidebarProps =
+    (globalComponents.find((item: XMComponent) => item.id === "BrandSideBar") || {})
+      .params || {};
   return {
     props: {
       headerProps,
       footerProps,
+      brandSidebarProps,
       pageComponents,
     },
+    revalidate: 5,
   };
 }

@@ -1,20 +1,11 @@
+import React from "react";
+
 const Cross = ({ ...props }) => {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      width="24"
-      height="24"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-      shapeRendering="geometricPrecision"
-      {...props}
-    >
-      <path d="M18 6L6 18" />
-      <path d="M6 6l12 12" />
+    <svg width={props.width} height={props.height} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.928932 1.07107L15.0711 15.2132M15.0711 1.07107L0.928932 15.2132" stroke="black" strokeWidth="1.5" />
     </svg>
+
   )
 }
 

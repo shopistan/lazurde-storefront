@@ -1,0 +1,26 @@
+.menu {
+  &__heading {
+    margin: 0 0 24px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.2px;
+    letter-spacing: 0em;
+  }
+
+  &__links {
+    li {
+      margin-bottom: 16px;
+      list-style: none;
+
+      a {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19.2px;
+        letter-spacing: 0em;
+        color: #ffffff;
+        text-decoration: none;
+        text-transform: capitalize;
+      }
+    }
+  }
+}
