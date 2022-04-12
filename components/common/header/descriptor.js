@@ -11,25 +11,36 @@ exports.default = Types.Component({
     promoLinkText: Types.String({ label: "Promo bar link text" }),
     mobilePromoLinkText: Types.String({ label: "Mobile Promo bar link text" }),
     promoLink: Types.String({ label: "Promo bar link" }),
+    siteLogo: Types.Image({
+      label: "Site Logo",
+      url: Types.String({ label: "URL" }),
+      altText: Types.String({ label: "Alt text" }),
+    }),
 
-    footerLinks: Types.Array({
-        label: "Footer Links",
-        title: Types.String({ label: "Promo bar link" }),
-
-        children: Types.Shape({
-          children: {
-            linkHeading: Types.String({ label: "Links heading" }),
-            links: Types.Array({
-              label: "Links",
-              children: Types.Shape({
-                children: {
-                  text: Types.String({ label: "Title" }),
-                  url: Types.String({ label: "URL" }),
-                },
-              }),
+    siteNavBar: Types.Array({
+      label: "Navigation Links",
+      children: Types.Shape({
+        children: {
+          navTitles: Types.String({ label: "Navigation Titles" }),
+          links: Types.Array({
+            label: "navArr",
+            children: Types.Shape({
+              children: {
+                title: Types.String({ label: "Category Heading" }),
+                links: Types.Array({
+                  label: "catArr",
+                  children: Types.Shape({
+                    children: {
+                      title: Types.String({ label: "Title" }),
+                      url: Types.String({ label: "URL" }),
+                    },
+                  }),
+                }),
+              },
             }),
-          },
-        }),
+          }),
+        },
       }),
+    }),
   },
 });
