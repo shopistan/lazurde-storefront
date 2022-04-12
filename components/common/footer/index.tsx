@@ -31,8 +31,7 @@ const Footer = ({
   const _footerLinks =
     appState.lang === "en"
       ? footerLinks
-      : t("arabicfooterLinks", { returnObjects: true });
-  console.log("_footerLinks", _footerLinks);
+      : t("arabicfooterLinks", {}, { returnObjects: true });
 
   return (
     <>
