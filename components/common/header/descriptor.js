@@ -7,19 +7,9 @@ exports.default = Types.Component({
     isGlobal: true,
 
     attributes: {
-        brandImage: Types.Image({
-            label: "Brand Image",
-            url: Types.String({ label: "URL" }),
-            altText: Types.String({ label: "Alt text" }),
-        }),
-        navLinks: Types.Array({
-            label: 'Navigation Links',
-            children: Types.Shape({
-                children: {
-                    url: Types.String({ label: 'URL' }),
-                    linkText: Types.String({ label: 'Link Text' }),
-                }
-            })
-        })
+        promoTitle: Types.String({ label: 'Promo bar title' }),
+        promoLinkText: Types.String({ label: 'Promo bar link text' }),
+        mobilePromoLinkText: Types.String({ label: 'Mobile Promo bar link text' }),
+        promoLink: Types.String({ label: 'Promo bar link' })
     },
 });
