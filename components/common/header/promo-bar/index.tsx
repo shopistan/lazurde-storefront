@@ -12,7 +12,7 @@ interface PromoBarProps {
   link: string;
   bgColor: string;
 }
-console.log("deployment test")
+console.log("test public")
 
 const PromoBar: FC<PromoBarProps> = ({
   title,
