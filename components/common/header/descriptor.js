@@ -7,6 +7,7 @@ exports.default = Types.Component({
   isGlobal: true,
 
   attributes: {
+    headerId: Types.String({ label: "Promo bar title" }),
     promoTitle: Types.String({ label: "Promo bar title" }),
     promoLinkText: Types.String({ label: "Promo bar link text" }),
     mobilePromoLinkText: Types.String({ label: "Mobile Promo bar link text" }),
