@@ -1,6 +1,7 @@
 .cards-container {
   width: 100%;
   padding: 48px 16px 64px;
+  padding-inline-end: 0;
   @media (min-width: 1024px) {
     padding: 80px 76px;
   }
