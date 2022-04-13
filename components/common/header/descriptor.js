@@ -22,6 +22,7 @@ exports.default = Types.Component({
       children: Types.Shape({
         children: {
           navTitle: Types.String({ label: "Navigation Title" }),
+          titleUrl: Types.String({ label: "Title Url (optional)" }),
           navArr: Types.Array({
             label: "Categories",
             children: Types.Shape({
