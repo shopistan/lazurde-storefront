@@ -12,7 +12,6 @@ interface PromoBarProps {
   link: string;
   bgColor: string;
 }
-console.log("admin test 2")
 
 const PromoBar: FC<PromoBarProps> = ({
   title,

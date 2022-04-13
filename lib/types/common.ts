@@ -27,6 +27,7 @@ export type BrandProps = {
 }
 
 export type HeaderProps = {
+  sideNavBar: [];
   navLinks: NavLinks[];
   brandImage: ImageType;
   promoTitle: string;

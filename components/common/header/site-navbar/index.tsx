@@ -37,10 +37,25 @@ const sidebarData = [
 
 ]
 
-const SiteNavBar: FC = (): JSX.Element => {
+type objectData = {
+  title: string, url: string
+}
+interface siteNavBarProps {
+  navTitle: string,
+  navArr: [{ title: string, catArr: [objectData] }],
+}
+
+interface dataProps {
+  title: string, catArr: [objectData]
+}
+
+
+const SiteNavBar = ({ siteNavBar }: { siteNavBar: siteNavBarProps[] }): JSX.Element => {
+
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
-  const [isOpened, setIsOpened] = useState(true)
+  const [isOpened, setIsOpened] = useState(false)
+  const [dropdownData, setDropdownData] = useState<dataProps[]>([])
 
   return (
     <div className={styles['site-navbar']}>
@@ -53,16 +68,17 @@ const SiteNavBar: FC = (): JSX.Element => {
       </div>
       <div>
         <ul>
-          {sidebarData.map((data, index) => {
+          {siteNavBar.map((data, index) => {
             return (
               <li key={index} onMouseOver={() => {
                 setIsOpened(true)
+                setDropdownData(data.navArr)
               }}
-              onMouseLeave={() => {
-                setIsOpened(false)
-              }}
+                onMouseLeave={() => {
+                  setIsOpened(false)
+                }}
               >
-                {data.title}
+                {data.navTitle}
               </li>
             )
           })}
@@ -70,7 +86,7 @@ const SiteNavBar: FC = (): JSX.Element => {
 
       </div>
       <div><Search></Search></div>
-      {isOpened && <CategoryDropDown></CategoryDropDown>}
+      {isOpened && <CategoryDropDown dropdownData={dropdownData}></CategoryDropDown>}
     </div>
   );
 };

@@ -34,14 +34,19 @@ const navArr = [
   },
 ]
 
-const CategoryDropDown: FC = (): JSX.Element => {
+interface DropDownProps {
+  title: string,
+  catArr: [{ title: string, url: string }],
+}
+
+const CategoryDropDown = ({ dropdownData }: { dropdownData: DropDownProps[] }): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
   const [isOpened, setIsOpened] = useState(false)
 
   return (
     <div className={styles['category-dropdown']}>
-      {navArr.map((data, index) => {
+      {dropdownData.map((data, index) => {
         const { title, catArr } = data;
         return (
           <div key={index}>
