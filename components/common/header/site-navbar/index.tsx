@@ -42,6 +42,7 @@ type objectData = {
 }
 interface siteNavBarProps {
   navTitle: string,
+  titleUrl: string,
   navArr: [{ title: string, catArr: [objectData] }],
 }
 
@@ -70,16 +71,20 @@ const SiteNavBar = ({ siteNavBar }: { siteNavBar: siteNavBarProps[] }): JSX.Elem
         <ul>
           {siteNavBar.map((data, index) => {
             return (
-              <li key={index} onMouseOver={() => {
-                setIsOpened(true)
-                setDropdownData(data.navArr)
-              }}
-                onMouseLeave={() => {
-                  setIsOpened(false)
+              <Link key={index} href={data.titleUrl || ''}>
+                <a onMouseOver={() => {
+                  const categoryData = data.navArr[0]
+                  if (categoryData.catArr.length > 0 && categoryData.title) {
+                    setIsOpened(true)
+                    setDropdownData(data.navArr)
+                  }
                 }}
-              >
-                {data.navTitle}
-              </li>
+                  onMouseLeave={() => {
+                    setIsOpened(false)
+                  }}>
+                  {data.navTitle}
+                </a>
+              </Link>
             )
           })}
         </ul>
