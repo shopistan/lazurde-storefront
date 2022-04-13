@@ -21,6 +21,7 @@ const Cards = ({
   width = 10,
   height = 10,
 }: ExploreBrandProps): JSX.Element => {
+  console.log("crads");
   return (
     <>
       <div
