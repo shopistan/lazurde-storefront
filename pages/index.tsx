@@ -6,6 +6,11 @@ import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import React, { FC } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
 import styles from "../styles/Home.module.css";
+
+/**
+ * DELETE ME!
+ */
+
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
   brandSidebarProps,
