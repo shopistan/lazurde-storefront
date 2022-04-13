@@ -5,9 +5,10 @@ import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 import { LazurdeLogo, Search } from "components/icons";
 import {
-  BrandSidebarProps,
+  BrandSidebarProps, ImageType,
 } from "lib/types/common";
 import CategoryDropDown from "./category-dropdown";
+import Image from 'next/image';
 
 const sidebarData = [
   {
@@ -51,47 +52,51 @@ interface dataProps {
 }
 
 
-const SiteNavBar = ({ siteNavBar }: { siteNavBar: siteNavBarProps[] }): JSX.Element => {
+const SiteNavBar = ({ siteNavBar, siteLogo }: { siteNavBar: siteNavBarProps[]; siteLogo: ImageType }): JSX.Element => {
 
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
-  const [isOpened, setIsOpened] = useState(false)
+  const [isOpened, setIsOpened] = useState(true)
   const [dropdownData, setDropdownData] = useState<dataProps[]>([])
 
   return (
     <div className={styles['site-navbar']}>
       <div>
+        <Image src={siteLogo?.url} width={152} height={20} />
         <Link href="/">
           <a >
-            <LazurdeLogo width={100} height={50} />
           </a>
         </Link>
       </div>
-      <div>
-        <ul>
-          {siteNavBar.map((data, index) => {
-            return (
-              <Link key={index} href={data.titleUrl || ''}>
-                <a onMouseOver={() => {
-                  const categoryData = data.navArr[0]
-                  if (categoryData.catArr.length > 0 && categoryData.title) {
-                    setIsOpened(true)
-                    setDropdownData(data.navArr)
-                  }
-                }}
-                  onMouseLeave={() => {
-                    setIsOpened(false)
-                  }}>
+      <div className={styles["nav-links"]}>
+        {siteNavBar.length > 0 && siteNavBar.map((data, index) => {
+          return (
+            <div key={index} className={styles["links"]}
+              onMouseOver={() => {
+                const categoryData = data.navArr[0]
+                if (categoryData.catArr.length > 0 && categoryData.title) {
+                  setIsOpened(true)
+                  setDropdownData(data.navArr)
+                }
+              }}
+              onMouseLeave={() => {
+                setIsOpened(false)
+              }}
+            >
+              <Link href={data.titleUrl || ''}>
+                <a >
                   {data.navTitle}
                 </a>
               </Link>
-            )
-          })}
-        </ul>
+            </div>
+          )
+        })}
 
       </div>
       <div><Search></Search></div>
-      {isOpened && <CategoryDropDown dropdownData={dropdownData}></CategoryDropDown>}
+      <div className={styles["category-dropdown"]} data-opened={isOpened}>
+        <CategoryDropDown setIsOpened={setIsOpened} dropdownData={dropdownData}></CategoryDropDown>
+      </div>
     </div>
   );
 };
