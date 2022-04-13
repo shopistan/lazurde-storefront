@@ -3,6 +3,7 @@ import Header from "components/common/header";
 import { componentsById } from "components/xm-component-library";
 import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
+import Head from "next/head";
 import React, { FC } from "react";
 import AppContentWrapper from "../../components/common/app-content-wrapper";
 import styles from "../../styles/Home.module.css";
@@ -15,6 +16,13 @@ const MissLHome: FC<PageProps> = ({
 }) => {
   return (
     <>
+      <Head>
+        <title>
+          {
+            "Miss L'azurde |  The best 18 karat gold jewelry at the best price in Egypt"
+          }
+        </title>
+      </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
         <div className={styles.container}>
