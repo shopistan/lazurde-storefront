@@ -9,7 +9,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['cdn.lazurde.com', 'greatwall-sandbox-sandbox-image.imgix.net']
+    domains: ['cdn.lazurde.com', 'greatwall-sandbox-sandbox-image.imgix.net', 'www.google.com']
   }
 };
 

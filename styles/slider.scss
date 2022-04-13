@@ -1,0 +1,70 @@
+.card-slider {
+  .swiper-slide {
+    min-height: 352px;
+
+    @media (min-width: 1024px) {
+      min-height: 429px;
+    }
+
+    img {
+      width: 100% !important;
+
+      @media (max-width: 1023px) {
+        object-fit: cover;
+      }
+    }
+  }
+
+  &.swiper {
+    min-height: 500px !important;
+    padding-top: 65px;
+
+    @media (min-width: 1024px) {
+      min-height: 565px !important;
+    }
+
+    .swiper-scrollbar {
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 97%;
+      height: 2px;
+      background-color: rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+
+      @media (min-width: 1024px) {
+        width: 100%;
+      }
+    }
+
+    .swiper-scrollbar-drag {
+      background-color: #000000;
+    }
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 0;
+    width: auto;
+    align-items: flex-end;
+    color: #000000;
+
+    &:after {
+      font-size: 12px;
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.2;
+    }
+  }
+
+  .swiper-button-prev {
+    inset-inline-start: auto !important;
+    inset-inline-end: 46.29px !important;
+  }
+
+  .swiper-button-next {
+    inset-inline-start: auto !important;
+    inset-inline-end: 16px !important;
+  }
+}

@@ -1,0 +1,40 @@
+@import "/styles/slider.scss";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background-color: white;
+}
+
+html[dir="rtl"] html,
+html[dir="rtl"] body {
+  font-family: "Cairo", sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.collapse-arrow .collapse-title:after {
+  top: 10px !important;
+}
+
+html[dir="rtl"] .collapse-arrow .collapse-title:after {
+  right: auto;
+  left: 0;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
