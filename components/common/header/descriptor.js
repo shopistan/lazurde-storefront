@@ -21,14 +21,14 @@ exports.default = Types.Component({
       label: "Navigation Links",
       children: Types.Shape({
         children: {
-          navTitles: Types.String({ label: "Navigation Titles" }),
-          links: Types.Array({
-            label: "navArr",
+          navTitle: Types.String({ label: "Navigation Title" }),
+          navArr: Types.Array({
+            label: "Categories",
             children: Types.Shape({
               children: {
                 title: Types.String({ label: "Category Heading" }),
-                links: Types.Array({
-                  label: "catArr",
+                catArr: Types.Array({
+                  label: "Category List",
                   children: Types.Shape({
                     children: {
                       title: Types.String({ label: "Title" }),

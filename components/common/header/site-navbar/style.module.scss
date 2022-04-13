@@ -1,0 +1,22 @@
+.site-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  & > div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+
+    ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 20px;
+      color: black;
+    }
+  }
+}
