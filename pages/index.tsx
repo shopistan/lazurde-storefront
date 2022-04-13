@@ -11,6 +11,10 @@ import styles from "../styles/Home.module.css";
  * DELETE ME!
  */
 
+/**
+ * DELETE ME AS WELL!
+ */
+
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
   brandSidebarProps,
