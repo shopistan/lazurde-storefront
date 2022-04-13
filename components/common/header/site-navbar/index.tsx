@@ -56,7 +56,7 @@ const SiteNavBar = ({ siteNavBar, siteLogo }: { siteNavBar: siteNavBarProps[]; s
 
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
-  const [isOpened, setIsOpened] = useState(true)
+  const [isOpened, setIsOpened] = useState(false)
   const [dropdownData, setDropdownData] = useState<dataProps[]>([])
 
   return (
