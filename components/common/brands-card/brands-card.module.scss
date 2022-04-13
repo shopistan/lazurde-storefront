@@ -1,7 +1,7 @@
 .cards-container {
   width: 100%;
   padding: 48px 16px 64px;
-  @media (min-width: 1023px) {
+  @media (min-width: 1024px) {
     padding: 80px 76px;
   }
 }
@@ -17,7 +17,7 @@
   margin-bottom: 24px;
   text-align: start;
 
-  @media (min-width: 1023px) {
+  @media (min-width: 1024px) {
     margin-bottom: 32px;
   }
 }
@@ -34,7 +34,7 @@
     margin-bottom: 64px;
     text-align: start;
 
-    @media (min-width: 1023px) {
+    @media (min-width: 1024px) {
       font-size: 16px;
       font-weight: 600;
       line-height: 19px;
@@ -46,7 +46,7 @@
   span {
     height: 353px !important;
 
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       width: 100% !important;
         height: 100% !important;
     }
