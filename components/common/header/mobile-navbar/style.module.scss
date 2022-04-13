@@ -1,0 +1,144 @@
+.mobile-header {
+  &__wrapper {
+    width: 100%;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background-color: #ffffff;
+  }
+
+  &__left,
+  &__right {
+    button {
+      background-color: transparent;
+      border: 0;
+    }
+  }
+
+  &__menu {
+    &-wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 100vh;
+      padding: 24px 24px 60px 24px;
+      z-index: 2;
+      background-color: #fff;
+      transform: translateX(-100%);
+      transition: all 0.3s;
+    }
+
+    &-close-icon {
+      width: 100%;
+      text-align: end;
+
+      button {
+        background-color: transparent;
+        border: 0;
+      }
+    }
+
+    &-list-wrapper {
+      margin-top: 32px;
+    }
+
+    &-list {
+      &-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        list-style: none;
+        margin-bottom: 16px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0em;
+        text-align: start;
+
+        span {
+          padding-inline-end: 10px;
+        }
+      }
+    }
+  }
+
+  &__menu-active {
+    transform: translateX(0);
+  }
+
+  &__sub-menu {
+    &-wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 100vh;
+      padding: 24px 24px 60px 24px;
+      z-index: 2;
+      background-color: #fff;
+      transform: translateX(-100%);
+      transition: all 0.3s;
+    }
+
+    &-active {
+      transform: translate(0);
+    }
+
+    &-close-icon {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      button {
+        background-color: transparent;
+        border: 0;
+      }
+    }
+
+    &-back-btn {
+      display: flex;
+      align-items: center;
+      text-transform: capitalize;
+
+      span {
+        margin-inline-start: 4.77px;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19px;
+        letter-spacing: 0em;
+      }
+    }
+
+    &-list-wrapper {
+      margin-top: 32px;
+    }
+
+    &-list-items,
+    &-list-item {
+      list-style: none;
+    }
+
+    &-list-item {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
+
+    &-heading {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0em;
+      text-align: start;
+      text-transform: capitalize;
+      color: #000000;
+    }
+  }
+}
