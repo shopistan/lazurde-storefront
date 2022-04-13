@@ -1,13 +1,8 @@
 .category-dropdown {
   display: flex;
-  position: absolute;
-  top: 100%;
-  z-index: 100;
+  flex: 1;
   background: white;
   justify-content: center;
-  right: 0;
-  left: 0;
-  height: 478px;
 
     & > div {
       flex: 1;
