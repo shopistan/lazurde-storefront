@@ -42,19 +42,20 @@
 
     .option {
       font-size: 14px;
-      line-height: 120%;
+      line-height: 115%;
       cursor: pointer;
       color: #000;
       padding-block: 8px;
 
-      & > * {
+      a {
+        display: flex;
         cursor: pointer;
       }
 
       &[data-selected="true"] {
         font-weight: 500;
         font-size: 15px;
-        line-height: 120%;
+        line-height: 115%;
       }
     }
   }

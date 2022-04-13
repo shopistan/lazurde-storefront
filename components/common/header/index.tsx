@@ -18,6 +18,7 @@ import styles from "./Header.module.css";
 import PromoBar from "./promo-bar";
 import UserNavBar from "./user-navbar";
 import LangSelector from './navbar-lang-selector/index';
+import SiteNavBar from "./site-navbar";
 
 type AllHeaderProps =
   HeaderProps &
@@ -91,7 +92,8 @@ const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink, mo
       <PromoBar title={promoTitle || "Save up to 50%"} linkText={promoLinkText || "Shop All Our Markdowns"} mobileLinkText={mobilePromoLinkText || "Shop All"} link={promoLink || '/'} bgColor='#C3A856' />
       <UserNavBar brandSideBar={brandSidebarProps} />
       <LangSelector />
-      <Link href={"/"} locale={false}>
+      <SiteNavBar />
+      {/* <Link href={"/"} locale={false}>
         <a>
           <Image src={brandIconUrl} width={100} height={75}></Image>
         </a>
@@ -103,7 +105,7 @@ const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink, mo
         <Link href={"/kenaz"}>
           <a className={styles["header-link"]}>Kenaz</a>
         </Link>
-      </div>
+      </div> */}
       {/* <div className={styles["locale-selector-wrapper"]}>
         <span
           onClick={() => {

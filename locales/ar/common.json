@@ -7,5 +7,102 @@
   "signUpBtnText": "اشتراك",
   "subscriptionText": "قوف رقنا ، كارتشالا ءاغلإل. انب ةصاخلا ةيصوصخلا ةسايسو ماكحألاو طورشلا ىلع قفاوت كنإف ، كارتشالاب .انب ةصاخلا ينورتكلإلا ديربلا لئاسر لفسأ",
   "socialIconText": "هسفن ملألا",
-  "userNavBarTitle": " كيتوبلا قيرط نع قوست"
+  "userNavBarTitle": " كيتوبلا قيرط نع قوست",
+  "arabicfooterLinks": [
+    {
+      "linkHeading": "ءالمعلا ةمدخ",
+      "links": [
+        {
+          "url": "/",
+          "text": "انب لصتا"
+        },
+        {
+          "url": "/",
+          "text": "ةلئسأ"
+        },
+        {
+          "url": "/",
+          "text": "رجتملا عقاوم"
+        }
+      ]
+    },
+    {
+      "linkHeading": "تامدخ",
+      "links": [
+        {
+          "url": "/",
+          "text": "1 عيبلا حيرصت"
+        },
+        {
+          "url": "/",
+          "text": "2 عيبلا حيرصت"
+        },
+        {
+          "url": "/",
+          "text": "طورشلاو نامضلا ماكحألاو"
+        }
+      ]
+    },
+    {
+      "linkHeading": "L’azurde ملاع",
+      "links": [
+        {
+          "url": "/",
+          "text": "انب لصتا"
+        },
+        {
+          "url": "/",
+          "text": "ثرإ"
+        },
+        {
+          "url": "/",
+          "text": "ةلئسأ"
+        },
+        {
+          "url": "/",
+          "text": "رجتملا عقاوم"
+        }
+      ]
+    }
+  ],
+  "cardSliderData": {
+    "sectionHeading": "ماسقالا بسح قوست",
+    "cards": [
+      {
+        "heading": "رواسأ",
+        "image": {
+          "url": "/Bracelets.svg",
+          "altText": "رواسأ"
+        }
+      },
+      {
+        "heading": "متاوخ",
+        "image": {
+          "url": "/Rings.svg",
+          "altText": "متاوخ"
+        }
+      },
+      {
+        "heading": "طارقأ",
+        "image": {
+          "url": "/Earrings.svg",
+          "altText": "طارقأ"
+        }
+      },
+      {
+        "heading": "تادالق",
+        "image": {
+          "url": "/Necklaces.svg",
+          "altText": "تادالق"
+        }
+      },
+      {
+        "heading": "طارقأ",
+        "image": {
+          "url": "/Earrings.svg",
+          "altText": "طارقأ"
+        }
+      }
+    ]
+  }
 }

@@ -142,6 +142,26 @@
       }
     }
   }
+
+  &__footer-icons {
+    img {
+      width: 100%;
+    }
+  }
+
+  &__footer-dropdowns {
+    width: 155.5px !important;
+    margin-bottom: 24px;
+
+    @media (min-width: 1024px) {
+      min-width: 137px !important;
+      margin-bottom: 0;
+    }
+
+    &:nth-child(2) {
+      margin-inline: 16px 0 !important;
+    }
+  }
 }
 
 html[dir="rtl"] {
