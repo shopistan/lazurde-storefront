@@ -39,24 +39,30 @@ interface DropDownProps {
   catArr: [{ title: string, url: string }],
 }
 
-const CategoryDropDown = ({ dropdownData }: { dropdownData: DropDownProps[] }): JSX.Element => {
+const CategoryDropDown = ({ dropdownData, setIsOpened }: { dropdownData: DropDownProps[];setIsOpened: Function }): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
-  const [isOpened, setIsOpened] = useState(false)
 
   return (
-    <div className={styles['category-dropdown']}>
+    <div className={styles['category-dropdown']}
+      onMouseOver={() => {
+        setIsOpened(true)
+      }}
+      onMouseLeave={() => {
+        setIsOpened(false)
+      }}
+    >
       {dropdownData.map((data, index) => {
         const { title, catArr } = data;
         return (
           <div key={index}>
-            <div>
+            <div className={styles['title']}>
               {title}
             </div>
-            <div>
+            <div className={styles['links']}>
               {catArr.map((data, index) => {
                 return (
-                  <div key={index}>{data.title}</div>
+                  <span key={index}>{data.title}</span>
                 )
               })}
             </div>

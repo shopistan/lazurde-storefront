@@ -1,20 +1,39 @@
 .category-dropdown {
   display: flex;
-  position: absolute;
-  top: 100%;
-  z-index: 100;
+  flex: 1;
   background: white;
   justify-content: center;
-  right: 0;
-  left: 0;
-  height: 478px;
+  padding-block-start: 32px;
+  column-gap: 24px;
 
-    & > div {
-      flex: 1;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    width: 211px;
+    color: black;
+
+    .title {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 120%;
+      margin-block-end: 24px;
+    }
+
+    .links {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      row-gap: 8px;
+
+      span {
+        display: inline-block;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 120%;
+        color: rgba(0, 0, 0, 0.6);
+        cursor: pointer;
+      }
     }
+  }
 
   // & > div:nth-child(2) {
   //   display: flex;
