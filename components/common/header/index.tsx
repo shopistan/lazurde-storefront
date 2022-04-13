@@ -26,7 +26,7 @@ type AllHeaderProps =
     brandSidebarProps: BrandSidebarProps;
   }
 
-const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink, mobilePromoLinkText, brandSidebarProps }: AllHeaderProps): JSX.Element => {
+const Header = ({ siteNavBar, siteLogo, promoTitle, promoLinkText, promoLink, mobilePromoLinkText, brandSidebarProps }: AllHeaderProps): JSX.Element => {
   const brandIconUrl =
     "https://cdn.lazurde.com/static/version1643995588/frontend/Gurubhyo/Lazurde/ar_SA/images/logo.svg";
   // const router = useRouter();
@@ -92,7 +92,7 @@ const Header = ({ navLinks, brandImage, promoTitle, promoLinkText, promoLink, mo
       <PromoBar title={promoTitle || "Save up to 50%"} linkText={promoLinkText || "Shop All Our Markdowns"} mobileLinkText={mobilePromoLinkText || "Shop All"} link={promoLink || '/'} bgColor='#C3A856' />
       <UserNavBar brandSideBar={brandSidebarProps} />
       <LangSelector />
-      <SiteNavBar />
+      <SiteNavBar siteNavBar={siteNavBar} siteLogo={siteLogo} />
       {/* <Link href={"/"} locale={false}>
         <a>
           <Image src={brandIconUrl} width={100} height={75}></Image>
