@@ -32,7 +32,7 @@ const MobileMenu = ({
   closeMenu,
   siteLogo,
   menuData,
-}: menuProps) => {
+}: menuProps): JSX.Element => {
   const [isSubMenuOpen, setIsSubMenuOpen] = useState<Boolean>(false);
   const [subMenuData, setSubMenuData] = useState<dataProps[]>([]);
 

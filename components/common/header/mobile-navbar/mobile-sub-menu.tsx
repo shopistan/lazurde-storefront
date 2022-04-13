@@ -30,7 +30,7 @@ const MobileSubMenu = ({
   closeMenu,
   closeSubMenu,
   subMenuData = [],
-}: menuProps) => {
+}: menuProps): JSX.Element => {
   return (
     <div
       className={`${styles[`mobile-header__sub-menu-wrapper`]} ${

@@ -3,8 +3,8 @@ const Bag = ({
   stroke = "#fff",
   ...props
 }: {
-  fill: string;
-  stroke: string;
+  fill?: string;
+  stroke?: string;
 }) => {
   return (
     <svg
