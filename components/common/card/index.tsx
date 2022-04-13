@@ -11,6 +11,7 @@ interface ExploreBrandProps {
   onClick?: Function;
   width?: number | string;
   height?: number | string;
+  color?: string;
 }
 
 const Cards = ({
@@ -20,6 +21,7 @@ const Cards = ({
   className = "",
   width = 10,
   height = 10,
+  color = "#000000",
 }: ExploreBrandProps): JSX.Element => {
   console.log("crads");
   return (
@@ -41,7 +43,9 @@ const Cards = ({
           />
         )}
         {cardTitle && (
-          <Label className={styles["card-title"]}>{cardTitle}</Label>
+          <Label style={{ color: color }} className={styles["card-title"]}>
+            {cardTitle}
+          </Label>
         )}
       </div>
     </>
