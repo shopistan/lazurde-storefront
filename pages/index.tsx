@@ -69,7 +69,7 @@ export async function getStaticProps(context: any) {
   const globalComponents = (await fetchGlobalComponents()) || [];
   const pageComponents = (await fetchXMComponents(12, "/home")) || [];
   const headerProps =
-    (globalComponents.find((item: XMComponent) => item.id === "Header") || {})
+    (globalComponents.find((item: XMComponent) => item.id === "Header" && item.params.headerId === 'lazurdeHeader') || {})
       .params || {};
   const footerProps =
     (globalComponents.find((item: XMComponent) => item.id === "Footer") || {})
