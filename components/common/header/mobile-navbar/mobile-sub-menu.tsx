@@ -2,6 +2,20 @@ import styles from "./style.module.scss";
 import { Cross, BackArrow } from "components/icons";
 import Link from "next/link";
 import Label from "components/common/ui/label";
+interface linksProps {
+  title?: string;
+  catArr?: objectData[];
+}
+
+type objectData = {
+  title?: string;
+  url?: string;
+};
+
+interface dataProps {
+  title?: string;
+  catArr?: objectData[];
+}
 
 interface menuProps {
   active?: Boolean;
@@ -10,26 +24,11 @@ interface menuProps {
   subMenuData?: dataProps[];
 }
 
-interface linksProps {
-  title: string;
-  catArr: objectData[];
-}
-
-type objectData = {
-  title: string;
-  url: string;
-};
-
-interface dataProps {
-  title: string;
-  catArr: [objectData];
-}
-
 const MobileSubMenu = ({
   active = false,
   closeMenu,
   closeSubMenu,
-  subMenuData = [],
+  subMenuData,
 }: menuProps): JSX.Element => {
   return (
     <div
@@ -74,14 +73,12 @@ const MobileSubMenu = ({
                     <ul>
                       {catArr &&
                         catArr.length > 0 &&
-                        catArr?.map((subLinks: objectData, index) => {
+                        catArr?.map((subLinks: objectData, index: number) => {
                           const { title, url } = subLinks;
                           return (
                             <li
                               key={index}
-                              className={
-                                styles["mobile-header__sub-menu-list-item"]
-                              }
+                              className={`opacity-60 ${styles["mobile-header__sub-menu-list-item"]}`}
                             >
                               <Link href={url}>
                                 <a>{title}</a>
