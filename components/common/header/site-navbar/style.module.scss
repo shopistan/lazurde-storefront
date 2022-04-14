@@ -8,8 +8,22 @@
   padding-inline: 24px;
   background-color: #fff;
 
-  & > div:nth-child(1) {
+  .back-btn {
     display: none;
+    a {
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 120%;
+      text-decoration: none;
+
+      div {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+      }
+    }
   }
 
   & > div:nth-child(2) {
@@ -31,7 +45,7 @@
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 57px 57px;
 
-    & > div:nth-child(1) {
+    .back-btn {
       display: block;
       grid-row: 1 / 2;
       grid-column: 1 / 2;
@@ -112,11 +126,11 @@
     inset-inline-start: 0;
     height: 0;
     opacity: 0;
-    transition: height 0.15s ease-in-out  0.1s, opacity 0.15s ease-in-out  0.1s;
+    transition: height 0.15s ease-in-out 0.1s, opacity 0.15s ease-in-out 0.1s;
     overflow: hidden;
 
     &[data-opened="true"] {
-    transition: height 0.15s ease-in-out, opacity 0.15s ease-in-out;
+      transition: height 0.15s ease-in-out, opacity 0.15s ease-in-out;
       opacity: 1;
       height: 478px;
     }
@@ -134,9 +148,9 @@
     -webkit-backdrop-filter: blur(10px);
     opacity: 0;
     transition: opacity 0.2s ease-in-out 0.1s, height 0.2s ease-in-out 0.1s;
-  
+
     &[data-opened="true"] {
-    transition: height 0.15s ease-in-out, opacity 0.15s ease-in-out;
+      transition: height 0.15s ease-in-out, opacity 0.15s ease-in-out;
       opacity: 1;
       height: 100vh;
     }
