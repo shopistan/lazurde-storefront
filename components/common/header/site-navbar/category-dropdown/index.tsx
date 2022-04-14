@@ -39,7 +39,13 @@ interface DropDownProps {
   catArr: [{ title: string, url: string }],
 }
 
-const CategoryDropDown = ({ dropdownData, setIsOpened }: { dropdownData: DropDownProps[];setIsOpened: Function }): JSX.Element => {
+interface CategoryDropDownProp {
+  dropdownData: DropDownProps[]; 
+  setIsOpened: Function
+  isOpened: Boolean;
+}
+
+const CategoryDropDown = ({ dropdownData, setIsOpened, isOpened }: CategoryDropDownProp): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
 
@@ -56,6 +62,8 @@ const CategoryDropDown = ({ dropdownData, setIsOpened }: { dropdownData: DropDow
         const { title, catArr } = data;
         return (
           <div key={index}>
+            <div className={styles["overlay"]} data-opened={isOpened} onClick={(() => setIsOpened(!isOpened))}></div>
+
             <div className={styles['title']}>
               {title}
             </div>
