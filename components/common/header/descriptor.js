@@ -35,6 +35,7 @@ exports.default = Types.Component({
                     children: {
                       title: Types.String({ label: "Title" }),
                       url: Types.String({ label: "URL" }),
+                      isBold: Types.Boolean({ label: 'Is Bold' }),
                     },
                   }),
                 }),

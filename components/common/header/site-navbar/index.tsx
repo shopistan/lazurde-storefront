@@ -112,9 +112,11 @@ const SiteNavBar = ({
       <div className={styles["category-dropdown"]} data-opened={isOpened}>
         <CategoryDropDown
           setIsOpened={setIsOpened}
+          isOpened={isOpened}
           dropdownData={dropdownData}
         ></CategoryDropDown>
       </div>
+      <div className={styles["overlay"]} data-opened={isOpened} onClick={(() => setIsOpened(!isOpened))}></div>
     </div>
   );
 };
