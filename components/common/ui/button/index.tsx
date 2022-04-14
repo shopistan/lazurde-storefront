@@ -5,7 +5,7 @@ interface ButtonProps {
   className?: string;
   buttonText?: string;
   buttonStyle?: string;
-  buttonSize?: "sm" | "md" | "lr" | "xl";
+  buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl";
   onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit";
 }

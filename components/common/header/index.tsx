@@ -34,12 +34,22 @@ const Header = ({
         bgColor={promoBackground}
       />
       {width < 1024 ? (
-        <MobileNavBar menuData={siteNavBar} />
+        <MobileNavBar
+          menuData={siteNavBar}
+          headerId={headerId}
+          brandSideBar={brandSidebarProps}
+        />
       ) : (
         <UserNavBar brandSideBar={brandSidebarProps} />
       )}
       <LangSelector />
-      {width < 1024 ? null : <SiteNavBar siteNavBar={siteNavBar} siteLogo={siteLogo} headerId={headerId} />}
+      {width < 1024 ? null : (
+        <SiteNavBar
+          siteNavBar={siteNavBar}
+          siteLogo={siteLogo}
+          headerId={headerId}
+        />
+      )}
     </div>
   );
 };

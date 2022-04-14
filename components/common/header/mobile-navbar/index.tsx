@@ -4,7 +4,7 @@ import { Bag, Heart, MenuIcon, Search, LazurdeLogo } from "components/icons";
 import Link from "next/link";
 import MobileMenu from "./mobile-menu";
 
-const MobileNavBar = ({ menuData }: any): JSX.Element => {
+const MobileNavBar = ({ menuData, headerId, brandSideBar }: any): JSX.Element => {
   const [menu, setMenu] = useState<Boolean>(false);
   const handleMenu = () => {
     setMenu(!menu);
@@ -52,6 +52,8 @@ const MobileNavBar = ({ menuData }: any): JSX.Element => {
         closeMenu={closeMenu}
         siteLogo={renderSiteLogo}
         menuData={menuData}
+        headerId={headerId}
+        brandSideBar={brandSideBar}
       />
     </>
   );

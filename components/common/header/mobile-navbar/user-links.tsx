@@ -3,7 +3,7 @@ import styles from "./style.module.scss";
 import { CustomerCare, Calendar, Account, Location } from "components/icons";
 import Button from "components/common/ui/button";
 
-const UserLinks = () => {
+const UserLinks = ({}): JSX.Element => {
   return (
     <div className={styles["mobile-header__user-links"]}>
       <ul>
