@@ -2,11 +2,12 @@
     display: flex;
     justify-content: space-between;
     margin: 0;
-    padding-top: 48px;
-    padding-left: 16px;
+    padding-inline-start: 16px;
+    padding-block-start: 48px;
 
     @media (min-width: 1024px) {
-        padding: 80px 78px 95px 80px;
+        padding-inline: 80px 78px;
+        padding-block: 80px 95px;
     }
 }
 
