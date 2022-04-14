@@ -11,3 +11,6 @@ export { default as LazurdeLogo } from './LazurdeLogo'
 export { default as LazurdeLSLogo } from './LazurdeLSLogo'
 export { default as MisslLogo } from './MisslLogo'
 export { default as Search } from './Search'
+export { default as ArrowRight } from './ArrowRight'
+export { default as BackArrow } from './BackArrow'
+

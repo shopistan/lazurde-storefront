@@ -23,7 +23,7 @@ const Cards = ({
   height = 10,
   color = "#000000",
 }: ExploreBrandProps): JSX.Element => {
-  console.log("crads");
+
   return (
     <>
       <div
