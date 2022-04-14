@@ -9,7 +9,7 @@
   width: 100%;
   flex-direction: column;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     flex-direction: row;
     justify-content: space-evenly;
 
@@ -38,7 +38,7 @@
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     padding: 76px 50px 50px 80px;
     height: 700px;
 
@@ -148,7 +148,7 @@
   margin-top: 0;
   margin-bottom: 24px;
   color: white;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     width: 330px;
     font-size: 24px;
     line-height: 29px;
@@ -167,7 +167,7 @@ html[dir="rtl"] {
   margin-top: 0;
   margin-bottom: 0;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     margin-top: 16px;
     width: 98%;
   }
@@ -191,7 +191,7 @@ html[dir="rtl"] {
   padding-top: 24px;
   padding-left: 24px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     padding-top: 60px;
     padding-left: 64px;
   }
@@ -199,7 +199,7 @@ html[dir="rtl"] {
 
 .missl-spacing {
   width: 96%;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     margin-top: 16px;
     width: 98%;
   }
