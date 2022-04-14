@@ -24,7 +24,7 @@
 
 .collection-button {
     position: absolute;
-    left: calc(50% - 70px);
+    inset-inline-start: calc(50% - 70px);
     top: 50%;
 }
 
