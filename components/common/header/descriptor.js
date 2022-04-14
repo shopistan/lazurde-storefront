@@ -12,6 +12,7 @@ exports.default = Types.Component({
     promoLinkText: Types.String({ label: "Promo bar link text" }),
     mobilePromoLinkText: Types.String({ label: "Mobile Promo bar link text" }),
     promoLink: Types.String({ label: "Promo bar link" }),
+    promoBackground: Types.String({ label: "Promo bar background color" }),
     siteLogo: Types.Image({
       label: "Site Logo",
       url: Types.String({ label: "URL" }),
