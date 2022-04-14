@@ -3,12 +3,17 @@ import Header from "components/common/header";
 import { componentsById } from "components/xm-component-library";
 import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
+import Head from "next/head";
 import React, { FC } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
 import styles from "../styles/Home.module.css";
 
 /**
  * DELETE ME!
+ */
+
+/**
+ * DELETE ME AS WELL!
  */
 
 const LazurdeHome: FC<PageProps> = ({
@@ -19,6 +24,11 @@ const LazurdeHome: FC<PageProps> = ({
 }) => {
   return (
     <>
+      <Head>
+        <title>
+          {"L'azurde | Luxury Jewelry, Gifts & Accessories | L'AZURDE"}
+        </title>
+      </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
         <div className={styles.container}>
@@ -75,8 +85,11 @@ export async function getStaticProps(context: any) {
     (globalComponents.find((item: XMComponent) => item.id === "Footer") || {})
       .params || {};
   const brandSidebarProps =
-    (globalComponents.find((item: XMComponent) => item.id === "BrandSideBar") || {})
-      .params || {};
+    (
+      globalComponents.find(
+        (item: XMComponent) => item.id === "BrandSideBar"
+      ) || {}
+    ).params || {};
   return {
     props: {
       headerProps,
