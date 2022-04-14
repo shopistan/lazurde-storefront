@@ -36,11 +36,11 @@ const navArr = [
 
 interface DropDownProps {
   title: string,
-  catArr: [{ title: string, url: string }],
+  catArr: [{ title: string, url: string, isBold: Boolean }],
 }
 
 interface CategoryDropDownProp {
-  dropdownData: DropDownProps[]; 
+  dropdownData: DropDownProps[];
   setIsOpened: Function
   isOpened: Boolean;
 }
@@ -62,7 +62,6 @@ const CategoryDropDown = ({ dropdownData, setIsOpened, isOpened }: CategoryDropD
         const { title, catArr } = data;
         return (
           <div key={index}>
-            <div className={styles["overlay"]} data-opened={isOpened} onClick={(() => setIsOpened(!isOpened))}></div>
 
             <div className={styles['title']}>
               {title}
@@ -70,7 +69,9 @@ const CategoryDropDown = ({ dropdownData, setIsOpened, isOpened }: CategoryDropD
             <div className={styles['links']}>
               {catArr.map((data, index) => {
                 return (
-                  <span key={index}>{data.title}</span>
+                  <Link key={index} href={data.url || ""} >
+                    <a data-isBold={data.isBold}>{data.title}</a>
+                  </Link>
                 )
               })}
             </div>

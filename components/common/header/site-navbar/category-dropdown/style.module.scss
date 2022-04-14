@@ -22,15 +22,20 @@
     .links {
       display: flex;
       flex-direction: column;
-      row-gap: 8px;
+      row-gap: 16px;
 
-      span {
+      a {
+        text-decoration: none;
         display: inline-block;
         font-weight: 500;
         font-size: 16px;
         line-height: 120%;
         color: rgba(0, 0, 0, 0.6);
         cursor: pointer;
+
+        &[data-isBold="true"] {
+          color: rgb(0, 0, 0);
+        }
       }
     }
   }
