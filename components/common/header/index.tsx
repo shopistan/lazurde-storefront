@@ -13,6 +13,7 @@ type AllHeaderProps = HeaderProps & {
 };
 
 const Header = ({
+  headerId,
   siteNavBar,
   siteLogo,
   promoTitle,
@@ -37,7 +38,7 @@ const Header = ({
         <UserNavBar brandSideBar={brandSidebarProps} />
       )}
       <LangSelector />
-      {width < 1024 ? null : <SiteNavBar siteNavBar={siteNavBar} siteLogo={siteLogo}/>}
+      {width < 1024 ? null : <SiteNavBar siteNavBar={siteNavBar} siteLogo={siteLogo} headerId={headerId} />}
     </div>
   );
 };

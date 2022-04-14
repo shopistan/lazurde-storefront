@@ -51,11 +51,13 @@ interface dataProps {
 }
 
 const SiteNavBar = ({
+  headerId,
   siteNavBar,
   siteLogo,
 }: {
   siteNavBar: siteNavBarProps[];
   siteLogo: ImageType;
+  headerId: string;
 }): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
@@ -63,7 +65,14 @@ const SiteNavBar = ({
   const [dropdownData, setDropdownData] = useState<dataProps[]>([]);
 
   return (
-    <div className={styles["site-navbar"]}>
+    <div className={styles["site-navbar"]} data-headerId={headerId}>
+      <div>
+        <Link href={'/'}>
+          <a>
+            back to lazurde
+          </a>
+        </Link>
+      </div>
       <div>
         {siteLogo?.url && (
           <Image src={siteLogo?.url} width={152} height={20} alt={siteLogo?.altText} />
@@ -73,7 +82,7 @@ const SiteNavBar = ({
         </Link>
       </div>
       <div className={styles["nav-links"]}>
-        {siteNavBar.length > 0 &&
+        {siteNavBar && siteNavBar.length > 0 &&
           siteNavBar.map((data, index) => {
             return (
               <div
