@@ -85,3 +85,18 @@
     }
   }
 }
+
+.collection-swiper {
+  &.swiper {
+    .swiper-scrollbar {
+      left: 0;
+      height: 2px;
+      width: 343px;
+
+      .swiper-scrollbar-drag {
+        background: #000000;
+        width: 165px !important;
+      }
+    }
+  }
+}
