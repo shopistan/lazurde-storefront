@@ -36,6 +36,7 @@ export type HeaderProps = {
   promoLinkText: string;
   mobilePromoLinkText: string;
   promoLink: string;
+  promoBackground: string;
 };
 
 export type BrandSidebarProps = {
