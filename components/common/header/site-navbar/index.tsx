@@ -3,7 +3,7 @@ import styles from "./style.module.scss";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
-import { LazurdeLogo, Search } from "components/icons";
+import { BackArrow, LazurdeLogo, Search } from "components/icons";
 import { BrandSidebarProps, ImageType } from "lib/types/common";
 import CategoryDropDown from "./category-dropdown";
 import Image from "next/image";
@@ -67,10 +67,13 @@ const SiteNavBar = ({
 
   return (
     <div className={styles["site-navbar"]} data-headerId={headerId}>
-      <div>
+      <div className={styles["back-btn"]}>
         <Link href={'/'}>
           <a>
-            back to lazurde
+            <div>
+              <BackArrow />
+            </div>
+            Back to L’azurde
           </a>
         </Link>
       </div>
