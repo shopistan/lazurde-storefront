@@ -7,6 +7,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { AppContext } from 'lib/context/index';
+import useTranslation from "next-translate/useTranslation";
 
 interface collectionCardProps {
     collectionbutton: string;
@@ -15,14 +16,19 @@ interface collectionCardProps {
     collectionImage: ImageType;
 }
 
-interface collectionCardPropsArray {
+interface CollectionCardPropsArray {
     collectionCard: collectionCardProps[];
 }
 
 
-const CollectionCard: FC<collectionCardPropsArray> = ({ collectionCard }): JSX.Element => {
+const CollectionCard: FC<CollectionCardPropsArray> = ({ collectionCard }): JSX.Element => {
     const [width] = useWindowSize();
     const { appState } = useContext(AppContext);
+      const { t } = useTranslation("common");
+      const _collectionCard =
+    appState.lang === "en"
+      ? collectionCard
+      : t("arabicCollectionCard", {}, { returnObjects: true });
     return (
 
         <div className={styles["collection-container"]}>
@@ -37,15 +43,14 @@ const CollectionCard: FC<collectionCardPropsArray> = ({ collectionCard }): JSX.E
                 dir={appState?.lang === "en" ? "ltr" : "rtl"}
             >
 
-                {
-
-                    collectionCard && collectionCard.map((data, index) => {
+                {Array.isArray(_collectionCard) &&
+                    _collectionCard && _collectionCard.map((data, index) => {
                         const { collectionImage, collectionbutton, collectiontitle, collectiontext } = data
                         return (
                             <SwiperSlide>
                                 <div className={styles["collection-card"]} key={index}>
                                     <div className={styles["image-section"]}>
-                                        <Image className={styles["collection-image"]} src={collectionImage.url} alt={collectionImage.altText} width={width > 1023 ? 642 : 332} height={width > 1023 ? 409 : 400} layout="responsive" />
+                                        <Image key={index} className={styles["collection-image"]} src={collectionImage.url} alt={collectionImage.altText} width={width > 1023 ? 642 : 332} height={width > 1023 ? 409 : 400} layout="responsive" />
                                         <Button className={styles["collection-button"]} buttonText={collectionbutton} />
                                     </div>
                                     <div>
