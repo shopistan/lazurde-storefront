@@ -36,7 +36,7 @@ const BrandsCard: FC<ExploreBrandArray> = ({
         slidesPerView={width > 1023 ? 3 : 1.29}
         navigation={width > 1023 ? true : false}
         scrollbar={{ draggable: true }}
-        className="card-sliders"
+        className={`card-brands`}
         key={appState?.lang}
         dir={appState?.lang === "en" ? "ltr" : "rtl"}
       >

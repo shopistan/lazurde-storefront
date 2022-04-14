@@ -68,3 +68,20 @@
     inset-inline-end: 16px !important;
   }
 }
+
+/*--------Explore our brands------*/
+
+.card-brands {
+  &.swiper {
+    .swiper-scrollbar {
+      height: 2px;
+      width: 343px;
+
+      .swiper-scrollbar-drag {
+        background: black;
+        width: 165px !important;
+
+      }
+    }
+  }
+}
