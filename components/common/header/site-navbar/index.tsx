@@ -38,6 +38,7 @@ const sidebarData = [
 type objectData = {
   title: string;
   url: string;
+  isBold: Boolean;
 };
 interface siteNavBarProps {
   navTitle: string;

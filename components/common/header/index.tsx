@@ -19,6 +19,7 @@ const Header = ({
   promoTitle,
   promoLinkText,
   promoLink,
+  promoBackground,
   mobilePromoLinkText,
   brandSidebarProps,
 }: AllHeaderProps): JSX.Element => {
@@ -30,7 +31,7 @@ const Header = ({
         linkText={promoLinkText || "Shop All Our Markdowns"}
         mobileLinkText={mobilePromoLinkText || "Shop All"}
         link={promoLink || "/"}
-        bgColor="#C3A856"
+        bgColor={promoBackground}
       />
       {width < 1024 ? (
         <MobileNavBar menuData={siteNavBar} />
