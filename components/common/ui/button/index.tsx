@@ -2,6 +2,7 @@ import React, { MouseEventHandler } from "react";
 import styles from "./button.module.scss";
 
 interface ButtonProps {
+  className?: string;
   buttonText?: string;
   buttonStyle?: string;
   buttonSize?: "sm" | "md" | "lr" | "xl";
@@ -10,6 +11,7 @@ interface ButtonProps {
 }
 
 const Button = ({
+  className = '',
   type = "button",
   buttonText,
   buttonStyle = "black",
@@ -21,7 +23,7 @@ const Button = ({
       data-testid={"button"}
       data-style={buttonStyle}
       data-size={buttonSize}
-      className={styles["button"]}
+      className={`${styles["button"]} ${className}`}
       onClick={onClick}
       type={type}
     >
