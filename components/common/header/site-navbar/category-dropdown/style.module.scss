@@ -9,8 +9,12 @@
   & > div {
     display: flex;
     flex-direction: column;
-    width: 211px;
+    width: 180px;
     color: black;
+
+    @media (min-width: 1200px) {
+      width: 211px;
+    }
 
     .title {
       font-weight: 500;

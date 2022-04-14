@@ -88,12 +88,12 @@ const SiteNavBar = ({
       <div className={styles["nav-links"]}>
         {siteNavBar && siteNavBar.length > 0 &&
           siteNavBar.map((data, index) => {
+            const categoryData = data.navArr[0];
             return (
               <div
                 key={index}
                 className={styles["links"]}
                 onMouseOver={() => {
-                  const categoryData = data.navArr[0];
                   if (categoryData.catArr.length > 0 && categoryData.title) {
                     setIsOpened(true);
                     setDropdownData(data.navArr);
@@ -103,7 +103,10 @@ const SiteNavBar = ({
                   setIsOpened(false);
                 }}
               >
-                <Link href={data.titleUrl || ""}>
+                <Link href={
+                  categoryData.catArr.length > 0 && categoryData.title
+                    ? ""
+                    : data.titleUrl}>
                   <a>{data.navTitle}</a>
                 </Link>
               </div>
@@ -116,12 +119,11 @@ const SiteNavBar = ({
       <div className={styles["category-dropdown"]} data-opened={isOpened}>
         <CategoryDropDown
           setIsOpened={setIsOpened}
-          isOpened={isOpened}
           dropdownData={dropdownData}
         ></CategoryDropDown>
       </div>
-      <div className={styles["overlay"]} data-opened={isOpened} onClick={(() => setIsOpened(!isOpened))}></div>
-    </div>
+      <div className={styles["overlay"]} data-opened={isOpened} onClick={(() => setIsOpened(false))}></div>
+    </div >
   );
 };
 

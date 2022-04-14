@@ -42,10 +42,9 @@ interface DropDownProps {
 interface CategoryDropDownProp {
   dropdownData: DropDownProps[];
   setIsOpened: Function
-  isOpened: Boolean;
 }
 
-const CategoryDropDown = ({ dropdownData, setIsOpened, isOpened }: CategoryDropDownProp): JSX.Element => {
+const CategoryDropDown = ({ dropdownData, setIsOpened }: CategoryDropDownProp): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
 
