@@ -13,6 +13,7 @@
   transition: height 0.2s cubic-bezier(0, 0, 0.2, 1),
     padding 0.2s cubic-bezier(0, 0, 0.2, 1);
   overflow: hidden;
+  background-color: #C3A856;
 
   @media (min-width: 768px) {
     font-size: 14px;

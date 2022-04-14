@@ -74,7 +74,7 @@
   .closeButton {
     position: absolute;
     top: 18px;
-    right: 16px;
+    inset-inline-end: 16px;
     margin: 0;
     background-color: transparent;
     border: none;

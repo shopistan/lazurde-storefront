@@ -31,8 +31,8 @@ ul {
 }
 
 html[dir="rtl"] .collapse-arrow .collapse-title:after {
-  right: auto;
-  left: 0;
+  inset-inline-end: auto;
+  inset-inline-start: 0;
 }
 
 @tailwind base;
