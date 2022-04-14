@@ -119,6 +119,7 @@ const Footer = ({
           <div className={styles["footer__footer-lang-selector"]}>
             <LanguageSelector
               className={styles["footer__footer-dropdowns"]}
+              mainWrapperClass={styles["footer__footer-dropdowns-wrapper"]}
               showButton={false}
             />
           </div>
