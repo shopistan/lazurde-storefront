@@ -71,7 +71,7 @@ html[dir="rtl"] .brand_sidebar {
   width: 100vw;
   height: 165vh;
   top: 100%;
-  right: 0;
+  inset-inline-end: 0;
   z-index: 3;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);

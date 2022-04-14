@@ -62,7 +62,6 @@ const CategoryDropDown = ({ dropdownData, setIsOpened, isOpened }: CategoryDropD
         const { title, catArr } = data;
         return (
           <div key={index}>
-
             <div className={styles['title']}>
               {title}
             </div>
