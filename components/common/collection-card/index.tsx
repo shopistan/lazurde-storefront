@@ -1,4 +1,4 @@
-import React, { FC , useContext } from "react";
+import React, { FC, useContext } from "react";
 import Image from 'next/image'
 import { ImageType } from "lib/types/common";
 import styles from './index.module.scss';
@@ -6,7 +6,7 @@ import Button from 'components/common/ui/button/index'
 import useWindowSize from "lib/utils/useWindowSize";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {AppContext} from 'lib/context/index';
+import { AppContext } from 'lib/context/index';
 
 interface collectionCardProps {
     collectionbutton: string;
@@ -45,7 +45,7 @@ const CollectionCard: FC<collectionCardPropsArray> = ({ collectionCard }): JSX.E
                             <SwiperSlide>
                                 <div className={styles["collection-card"]} key={index}>
                                     <div className={styles["image-section"]}>
-                                        <Image className={styles["collection-image"]} src={collectionImage.url} alt={collectionImage.altText} width='100%' height='100%' />
+                                        <Image className={styles["collection-image"]} src={collectionImage.url} alt={collectionImage.altText} width={width > 1023 ? 642 : 332} height={width > 1023 ? 409 : 400} layout="responsive" />
                                         <Button className={styles["collection-button"]} buttonText={collectionbutton} />
                                     </div>
                                     <div>
