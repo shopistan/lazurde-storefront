@@ -56,13 +56,13 @@ const CategoryDropDown = ({ dropdownData, setIsOpened }: { dropdownData: DropDow
         const { title, catArr } = data;
         return (
           <div key={index}>
-            <div>
+            <div className={styles['title']}>
               {title}
             </div>
-            <div>
+            <div className={styles['links']}>
               {catArr.map((data, index) => {
                 return (
-                  <div key={index}>{data.title}</div>
+                  <span key={index}>{data.title}</span>
                 )
               })}
             </div>
