@@ -50,9 +50,11 @@ const languageArr = [
 const LanguageSelector = ({
   showButton,
   className = "",
+  mainWrapperClass = "",
 }: {
   showButton: Boolean;
   className?: string;
+  mainWrapperClass?: string;
 }): JSX.Element => {
   const router = useRouter();
   const { locales, locale, pathname, query, asPath, defaultLocale } = router;
@@ -129,7 +131,7 @@ const LanguageSelector = ({
   };
 
   return (
-    <div className={styles["language-selector"]}>
+    <div className={`${styles["language-selector"]} ${mainWrapperClass}`}>
       <Select
         options={countryArr}
         onChange={onCountryChange}
