@@ -11,7 +11,8 @@ const renderComponent = () => {
         title={"Promo Bar Title"}
         linkText={"Promo Link Text"}
         link={"./page-change"}
-        bgColor={'#fff'}
+        mobileLinkText={"mobile text"}
+      bgColor={'#fff'}
       />
     </ContextProvider>
   );

@@ -36,10 +36,15 @@ const navArr = [
 
 interface DropDownProps {
   title: string,
-  catArr: [{ title: string, url: string }],
+  catArr: [{ title: string, url: string, isBold: Boolean }],
 }
 
-const CategoryDropDown = ({ dropdownData, setIsOpened }: { dropdownData: DropDownProps[];setIsOpened: Function }): JSX.Element => {
+interface CategoryDropDownProp {
+  dropdownData: DropDownProps[];
+  setIsOpened: Function
+}
+
+const CategoryDropDown = ({ dropdownData, setIsOpened }: CategoryDropDownProp): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
 
@@ -62,7 +67,9 @@ const CategoryDropDown = ({ dropdownData, setIsOpened }: { dropdownData: DropDow
             <div className={styles['links']}>
               {catArr.map((data, index) => {
                 return (
-                  <span key={index}>{data.title}</span>
+                  <Link key={index} href={data.url || ""} >
+                    <a data-isBold={data.isBold}>{data.title}</a>
+                  </Link>
                 )
               })}
             </div>

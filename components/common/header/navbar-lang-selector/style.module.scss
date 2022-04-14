@@ -53,12 +53,14 @@
     }
 
     @media (min-width: 1024px) {
-      padding-inline-start: 189px;
-      margin-inline: 0;
       flex-direction: row;
+      margin-inline: 0;
+      padding-inline-start: 55px;
+      padding-inline-end: 20px;
 
       & > div:nth-child(1) {
         height: 14px;
+        min-width: 200px;
       }
 
       .selector {
@@ -69,12 +71,21 @@
         }
       }
     }
+
+    @media (min-width: 1200px) {
+      padding-inline-start: 189px;
+      padding-inline-end: 20px;
+    }
+
+    @media (min-width: 1450px) {
+      justify-content: center;
+    }
   }
 
   .closeButton {
     position: absolute;
     top: 18px;
-    right: 16px;
+    inset-inline-end: 16px;
     margin: 0;
     background-color: transparent;
     border: none;

@@ -3,7 +3,7 @@ import styles from "./style.module.scss";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
-import { LazurdeLogo, Search } from "components/icons";
+import { BackArrow, LazurdeLogo, Search } from "components/icons";
 import { BrandSidebarProps, ImageType } from "lib/types/common";
 import CategoryDropDown from "./category-dropdown";
 import Image from "next/image";
@@ -38,6 +38,7 @@ const sidebarData = [
 type objectData = {
   title: string;
   url: string;
+  isBold: Boolean;
 };
 interface siteNavBarProps {
   navTitle: string;
@@ -66,10 +67,13 @@ const SiteNavBar = ({
 
   return (
     <div className={styles["site-navbar"]} data-headerId={headerId}>
-      <div>
+      <div className={styles["back-btn"]}>
         <Link href={'/'}>
           <a>
-            back to lazurde
+            <div>
+              <BackArrow />
+            </div>
+            Back to L’azurde
           </a>
         </Link>
       </div>
@@ -84,12 +88,12 @@ const SiteNavBar = ({
       <div className={styles["nav-links"]}>
         {siteNavBar && siteNavBar.length > 0 &&
           siteNavBar.map((data, index) => {
+            const categoryData = data.navArr[0];
             return (
               <div
                 key={index}
                 className={styles["links"]}
                 onMouseOver={() => {
-                  const categoryData = data.navArr[0];
                   if (categoryData.catArr.length > 0 && categoryData.title) {
                     setIsOpened(true);
                     setDropdownData(data.navArr);
@@ -99,7 +103,10 @@ const SiteNavBar = ({
                   setIsOpened(false);
                 }}
               >
-                <Link href={data.titleUrl || ""}>
+                <Link href={
+                  categoryData.catArr.length > 0 && categoryData.title
+                    ? ""
+                    : data.titleUrl}>
                   <a>{data.navTitle}</a>
                 </Link>
               </div>
@@ -115,7 +122,8 @@ const SiteNavBar = ({
           dropdownData={dropdownData}
         ></CategoryDropDown>
       </div>
-    </div>
+      <div className={styles["overlay"]} data-opened={isOpened} onClick={(() => setIsOpened(false))}></div>
+    </div >
   );
 };
 
