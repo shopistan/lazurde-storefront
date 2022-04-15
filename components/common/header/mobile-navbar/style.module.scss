@@ -48,9 +48,36 @@
       width: 100%;
       text-align: end;
 
+      &-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        button {
+          background-color: transparent;
+          border: 0;
+        }
+
+        span {
+          margin-inline-start: 4.77px;
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 19px;
+          letter-spacing: 0em;
+        }
+      }
+
       button {
         background-color: transparent;
         border: 0;
+      }
+
+      span {
+        margin-inline-start: 4.77px;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19px;
+        letter-spacing: 0em;
       }
     }
 
@@ -84,6 +111,16 @@
     }
   }
 
+  &__menu-title {
+    margin-top: 32px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: start;
+    color: #000000;
+  }
+
   &__menu-active {
     transform: translateX(0);
   }
@@ -94,13 +131,14 @@
       top: 0;
       inset-inline-end: 0;
       bottom: 0;
-      left: 0;
+      inset-inline-start: 0;
       height: 100vh;
       padding: 24px 24px 60px 24px;
       z-index: 2;
       background-color: #fff;
       transform: translateX(-100%);
       transition: all 0.3s;
+      overflow-y: auto;
     }
 
     &-active {
@@ -211,7 +249,7 @@
       font-weight: 500;
       line-height: 18px;
       letter-spacing: 0em;
-      text-align: left;
+      text-align: start;
 
       a {
         display: inline-flex;
@@ -228,6 +266,7 @@
 
   &__auth-btns {
     margin-top: 64px;
+    text-align: center;
 
     button {
       &[data-size="sm"] {
@@ -237,6 +276,73 @@
         line-height: 16.8px;
         letter-spacing: 0em;
         text-decoration: underline;
+      }
+    }
+  }
+
+  &__signout-btn {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: center;
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16.8px;
+      letter-spacing: 0em;
+      text-transform: capitalize;
+    }
+
+    svg {
+      margin-inline-end: 10px;
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .mobile-header {
+    &__menu {
+      &-wrapper {
+        transform: translateX(100%);
+      }
+
+      &-list-item {
+        svg {
+          transform: rotateY(180deg);
+        }
+      }
+    }
+
+    &__boutique-btn {
+      svg {
+        transform: rotateY(180deg);
+      }
+    }
+
+    &__menu-active {
+      transform: translateX(0);
+    }
+
+    &__sub-menu {
+      &-wrapper {
+        transform: translateX(100%);
+      }
+
+      &-active {
+        transform: translateX(0);
+      }
+
+      &-back-btn {
+        svg {
+          transform: rotateY(180deg);
+        }
+      }
+    }
+
+    &__signout-btn {
+      svg {
+        transform: rotateY(180deg);
       }
     }
   }
