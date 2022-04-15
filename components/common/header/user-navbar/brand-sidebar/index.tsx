@@ -59,7 +59,7 @@ const BrandContainer: FC<BrandProps> = ({
 }): JSX.Element => {
   const [width] = useWindowSize();
   return (
-    <div>
+    <div className={styles["brands-list"]}>
       {width > 1023 && (
         <Image
           src={brandImg.url}
@@ -87,18 +87,22 @@ const BrandSideBar: FC<SidebarProps> = ({
   closeIcon,
   closeMenu,
 }): JSX.Element => {
+  const [width] = useWindowSize();
+
   return (
     <>
-      <div
-        className={styles["overlay"]}
-        data-opened={isOpened}
-        onClick={() => setIsOpened(!isOpened)}
-      ></div>
+      {width > 1023 && (
+        <div
+          className={styles["overlay"]}
+          data-opened={isOpened}
+          onClick={() => setIsOpened(!isOpened)}
+        ></div>
+      )}
       <div className={styles["brand_sidebar"]} data-opened={isOpened}>
         {closeIcon && (
           <div className={styles["menu-close-icon"]}>
             <div
-              className={`opacity-60 ${styles[""]}`}
+              className={`opacity-60`}
               onClick={() => {
                 setIsOpened(false);
                 closeMenu();
@@ -122,7 +126,7 @@ const BrandSideBar: FC<SidebarProps> = ({
               {mainTitle || "One Account. One Checkout. Multiple Brands"}
             </span>
           </div>
-          <div className="flex gap-x-[8px]">
+          <div className={`flex gap-x-[8px] ${styles["brands-logo"]}`}>
             {logoArr?.length > 0 &&
               logoArr.map((data, index) => {
                 const { url, altText } = data.logoImg;

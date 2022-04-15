@@ -35,7 +35,6 @@ export const fetchGlobalComponents = async (): Promise<any> => {
         headers: HEADERS.common,
       }
     );
-    console.log("HOOOHHAAAA", response.data);
 
     return response.data;
   } catch (error: any) {

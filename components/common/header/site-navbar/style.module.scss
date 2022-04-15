@@ -110,7 +110,11 @@
         transition: width ease-in-out 0.15s, left ease-in-out 0.15s;
       }
 
-      &:hover::after {
+      // &:hover::after {
+      //   width: 100%;
+      //   left: 0;
+      // }
+      &[data-selected="true"]::after {
         width: 100%;
         left: 0;
       }
@@ -125,13 +129,12 @@
     inset-inline-end: 0;
     inset-inline-start: 0;
     height: 0;
-    opacity: 0;
-    transition: height 0.15s ease-in-out 0.1s, opacity 0.15s ease-in-out 0.1s;
+    opacity: 1;
+    transition: height 0.2s ease-in-out 0.1s;
     overflow: hidden;
 
     &[data-opened="true"] {
-      transition: height 0.15s ease-in-out, opacity 0.15s ease-in-out;
-      opacity: 1;
+      transition: height 0.2s ease-in-out;
       height: 478px;
     }
   }
@@ -147,10 +150,10 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     opacity: 0;
-    transition: opacity 0.2s ease-in-out 0.1s, height 0.2s ease-in-out 0.1s;
+    transition: opacity 0.3s ease-in-out 0.1s, height 0.3s ease-in-out 0.5s;
 
     &[data-opened="true"] {
-      transition: height 0.15s ease-in-out, opacity 0.15s ease-in-out;
+      transition: opacity 0.2s ease-in-out, height 0.2s ease-in-out;
       opacity: 1;
       height: 100vh;
     }
