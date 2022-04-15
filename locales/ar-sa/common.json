@@ -14,6 +14,377 @@
   "cardHeading" : "ةيراجتلا انتامالع فشتكا",
   "NavbarLangSelectorTitle" : "عقوملاو ةلضفملا كتغل ددح",
   "langSelectorBtnTxt" : "لمكي",
+  "siteNavLinks": [
+    {
+      "navTitle": "جديد",
+      "navCategoryLinks": []
+    },
+    {
+      "navTitle": "تارھوجم",
+      "navCategoryLinks": [
+        {
+          "linkHeading":"ةئفلاب قوست",
+          "linkTitle": [
+            {
+              "title": "تایلاد و لسلاس"
+            },
+            {
+              "title": "متاوخ"
+            },
+            {
+              "title": "ا ل"
+            },
+            {
+              "title": "طارقا"
+            },
+            {
+              "title": "ط ت"
+            },
+            {
+              "title": "لكلا قوست"
+            }
+          ]
+        },
+        {
+          "linkHeading":"ةراتخم رجاتم",
+          "linkTitle": [
+            {
+              "title": "اعیبم رثكلاا"
+            },
+            {
+              "title": "دیدج"
+            },
+            {
+              "title": "نیلانوا ىرصح"
+            },
+            {
+              "title": "ةصرف رخا"
+            }
+          ]
+        },
+        {
+          "linkHeading":"قوست ب",
+          "linkTitle": [
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            }
+          ]
+        },
+        {
+          "linkHeading":"جحلا عونب قوست",
+          "linkTitle": [
+            {
+              "title": "ساملا" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            }
+          ]
+        },
+        {
+          "linkHeading":"تاعومجم",
+          "linkTitle": [
+            {
+              "title": "ساملا" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "navTitle": "ساملا",
+      "navCategoryLinks": [
+        {
+          "linkHeading":"ةئفلاب قوست",
+          "linkTitle": [
+            {
+              "title": "تایلاد و لسلاس"
+            },
+            {
+              "title": "متاوخ"
+            },
+            {
+              "title": "ا ل"
+            },
+            {
+              "title": "طارقا"
+            },
+            {
+              "title": "ط ت"
+            },
+            {
+              "title": "لكلا قوست"
+            }
+          ]
+        },
+        {
+          "linkHeading":"ةراتخم رجاتم",
+          "linkTitle": [
+            {
+              "title": "اعیبم رثكلاا"
+            },
+            {
+              "title": "دیدج"
+            },
+            {
+              "title": "نیلانوا ىرصح"
+            },
+            {
+              "title": "ةصرف رخا"
+            }
+          ]
+        },
+        {
+          "linkHeading":"قوست ب",
+          "linkTitle": [
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            }
+          ]
+        },
+        {
+          "linkHeading":"جحلا عونب قوست",
+          "linkTitle": [
+            {
+              "title": "ساملا" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            }
+          ]
+        },
+        {
+          "linkHeading":"تاعومجم",
+          "linkTitle": [
+            {
+              "title": "ساملا" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "navTitle": "فافز تارھوجم",
+      "navCategoryLinks": [
+        {
+          "linkHeading":"ةئفلاب قوست",
+          "linkTitle": [
+            {
+              "title": "تایلاد و لسلاس"
+            },
+            {
+              "title": "متاوخ"
+            },
+            {
+              "title": "ا ل"
+            },
+            {
+              "title": "طارقا"
+            },
+            {
+              "title": "ط ت"
+            },
+            {
+              "title": "لكلا قوست"
+            }
+          ]
+        },
+        {
+          "linkHeading":"ةراتخم رجاتم",
+          "linkTitle": [
+            {
+              "title": "اعیبم رثكلاا"
+            },
+            {
+              "title": "دیدج"
+            },
+            {
+              "title": "نیلانوا ىرصح"
+            },
+            {
+              "title": "ةصرف رخا"
+            }
+          ]
+        },
+        {
+          "linkHeading":"قوست ب",
+          "linkTitle": [
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            }
+          ]
+        },
+        {
+          "linkHeading":"جحلا عونب قوست",
+          "linkTitle": [
+            {
+              "title": "ساملا" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "رفصا بھذ" 
+            },
+            {
+              "title": "ةنولم ةمیرك راجح" 
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "navTitle": "ایادھ",
+      "navCategoryLinks": [
+        {
+          "linkHeading":"ةئفلاب قوست",
+          "linkTitle": [
+            {
+              "title": "تایلاد و لسلاس"
+            },
+            {
+              "title": "متاوخ"
+            },
+            {
+              "title": "ا ل"
+            },
+            {
+              "title": "طارقا"
+            },
+            {
+              "title": "ط ت"
+            },
+            {
+              "title": "لكلا قوست"
+            }
+          ]
+        },
+        {
+          "linkHeading":"ةراتخم رجاتم",
+          "linkTitle": [
+            {
+              "title": "اعیبم رثكلاا"
+            },
+            {
+              "title": "دیدج"
+            },
+            {
+              "title": "نیلانوا ىرصح"
+            },
+            {
+              "title": "ةصرف رخا"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "navTitle": "فیلا",
+      "navCategoryLinks": []
+    }
+  ],
   "arabicCollectionCard" : [
     {
       "collectionbutton" : "ءيش لك قوست",
