@@ -1,9 +1,10 @@
+import React from "react";
 import Link from "next/link";
 import styles from "./style.module.scss";
 import { CustomerCare, Calendar, Account, Location } from "components/icons";
-import Button from "components/common/ui/button";
+import AuthLinks from "./auth-links";
 
-const UserLinks = ({}): JSX.Element => {
+const UserLinks = (): JSX.Element => {
   return (
     <div className={styles["mobile-header__user-links"]}>
       <ul>
@@ -40,24 +41,7 @@ const UserLinks = ({}): JSX.Element => {
           </Link>
         </li>
       </ul>
-
-      <div className={styles["mobile-header__auth-btns"]}>
-        <Button
-          buttonStyle="black"
-          buttonText={"sign up"}
-          buttonSize={"xxl"}
-          onClick={() => {}}
-          type={"button"}
-        />
-
-        <Button
-          buttonStyle="white"
-          buttonText={"sign in"}
-          buttonSize={"sm"}
-          onClick={() => {}}
-          type={"button"}
-        />
-      </div>
+      <AuthLinks />
     </div>
   );
 };
