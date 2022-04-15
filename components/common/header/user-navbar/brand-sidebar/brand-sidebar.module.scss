@@ -73,6 +73,11 @@
       a {
         margin-block-end: 16px;
         color: #000000;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0em;
 
         @media (min-width: 1024px) {
           margin-block: 16px;
@@ -129,5 +134,22 @@ html[dir="rtl"] .brand_sidebar {
 
   span {
     margin-inline-start: 4.77px;
+  }
+}
+
+html[dir="rtl"] {
+  .menu-close-icon {
+    svg {
+      transform: rotateY(180deg);
+    }
+  }
+
+  .brands-logo {
+    direction: ltr;
+  }
+
+  .brands-list {
+    a {
+    }
   }
 }
