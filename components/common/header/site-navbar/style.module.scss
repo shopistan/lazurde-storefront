@@ -44,12 +44,14 @@
   &[data-headerId="kenazHeader"] {
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 57px 57px;
+    padding-inline: 0;
 
     .back-btn {
       display: block;
       grid-row: 1 / 2;
       grid-column: 1 / 2;
       min-width: 150px;
+      padding-inline-start: 24px;
     }
 
     & > div:nth-child(2) {
@@ -57,11 +59,12 @@
       grid-column: 2 / 3;
       text-align: center;
       justify-self: center;
+      width: 152px;
     }
 
     .nav-links {
       grid-row: 2 / 3;
-      grid-column: 2 / 3;
+      grid-column: 1 / 4;
       align-self: center;
       width: 100%;
     }
@@ -71,6 +74,8 @@
       grid-column: 3 / 4;
       min-width: 150px;
       text-align: end;
+      padding-inline-end: 24px;
+
     }
   }
 
@@ -156,6 +161,14 @@
       transition: opacity 0.2s ease-in-out, height 0.2s ease-in-out;
       opacity: 1;
       height: 100vh;
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .back-btn {
+    svg {
+      transform: rotateY(180deg)
     }
   }
 }
