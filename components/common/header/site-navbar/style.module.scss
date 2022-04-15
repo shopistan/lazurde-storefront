@@ -159,3 +159,11 @@
     }
   }
 }
+
+html[dir="rtl"] {
+  .back-btn {
+    svg {
+      transform: rotateY(180deg)
+    }
+  }
+}

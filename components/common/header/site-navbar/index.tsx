@@ -53,7 +53,7 @@ const SiteNavBar = ({
             <div>
               <BackArrow />
             </div>
-            Back to L’azurde
+            {t('navbarBackBtn')}
           </a>
         </Link>
       </div>
