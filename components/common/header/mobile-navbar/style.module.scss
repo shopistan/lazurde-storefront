@@ -279,6 +279,25 @@
       }
     }
   }
+
+  &__signout-btn {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: center;
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16.8px;
+      letter-spacing: 0em;
+      text-transform: capitalize;
+    }
+
+    svg {
+      margin-inline-end: 10px;
+    }
+  }
 }
 
 html[dir="rtl"] {
@@ -318,6 +337,12 @@ html[dir="rtl"] {
         svg {
           transform: rotateY(180deg);
         }
+      }
+    }
+
+    &__signout-btn {
+      svg {
+        transform: rotateY(180deg);
       }
     }
   }
