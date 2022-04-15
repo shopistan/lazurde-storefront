@@ -24,9 +24,8 @@ const BrandsCard: FC<ExploreBrandArray> = ({
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const onClick = () => {
-    console.log("hello");
-  };
+  const onClick = () => {};
+  
   return (
     <div className={styles["cards-container"]}>
       <h3 data-testid='heading' className={styles["cards-heading"]}>{appState?.lang === "en" ? heading : t("cardHeading")}</h3>

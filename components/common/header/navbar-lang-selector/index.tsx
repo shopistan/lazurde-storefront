@@ -27,7 +27,7 @@ const LangSelector: FC = ({
     <div className={styles["navbar-lang"]} data-visible={isClosed} data-testid="product-card">
       <div className={styles["main-section"]}>
         <div className={styles["title"]}>
-          <span>Select your preferred language and location</span>
+          <span>{t("NavbarLangSelectorTitle")} </span>
         </div>
         <div className={styles["selector"]}>
           <LanguageSelector showButton={true} />
