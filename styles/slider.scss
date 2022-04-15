@@ -88,6 +88,13 @@
 
 .collection-swiper {
   &.swiper {
+    .swiper-slide {
+      @media (min-width: 1024px) {
+        min-width: 642px !important;
+
+      }
+    }
+
     .swiper-scrollbar {
       left: 0;
       height: 2px;
