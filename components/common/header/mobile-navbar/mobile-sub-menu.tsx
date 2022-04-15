@@ -22,6 +22,7 @@ interface menuProps {
   closeMenu?: Function;
   closeSubMenu?: Function;
   subMenuData?: dataProps[];
+  menuTitle: string;
 }
 
 const MobileSubMenu = ({
@@ -29,6 +30,7 @@ const MobileSubMenu = ({
   closeMenu,
   closeSubMenu,
   subMenuData,
+  menuTitle,
 }: menuProps): JSX.Element => {
   return (
     <div
@@ -53,6 +55,9 @@ const MobileSubMenu = ({
           <Cross width={"20px"} height={"20px"} />
         </button>
       </div>
+      {menuTitle && (
+        <div className={styles["mobile-header__menu-title"]}>{menuTitle}</div>
+      )}
       <div className={styles["mobile-header__sub-menu-list-wrapper"]}>
         <ul className={styles["mobile-header__sub-menu-list"]}>
           {subMenuData &&
