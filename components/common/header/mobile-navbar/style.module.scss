@@ -48,9 +48,36 @@
       width: 100%;
       text-align: end;
 
+      &-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        button {
+          background-color: transparent;
+          border: 0;
+        }
+
+        span {
+          margin-inline-start: 4.77px;
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 19px;
+          letter-spacing: 0em;
+        }
+      }
+
       button {
         background-color: transparent;
         border: 0;
+      }
+
+      span {
+        margin-inline-start: 4.77px;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19px;
+        letter-spacing: 0em;
       }
     }
 
@@ -84,6 +111,16 @@
     }
   }
 
+  &__menu-title {
+    margin-top: 32px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: start;
+    color: #000000;
+  }
+
   &__menu-active {
     transform: translateX(0);
   }
@@ -101,6 +138,7 @@
       background-color: #fff;
       transform: translateX(-100%);
       transition: all 0.3s;
+      overflow-y: auto;
     }
 
     &-active {
@@ -228,6 +266,7 @@
 
   &__auth-btns {
     margin-top: 64px;
+    text-align: center;
 
     button {
       &[data-size="sm"] {

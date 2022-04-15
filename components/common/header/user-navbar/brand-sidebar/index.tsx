@@ -87,13 +87,17 @@ const BrandSideBar: FC<SidebarProps> = ({
   closeIcon,
   closeMenu,
 }): JSX.Element => {
+  const [width] = useWindowSize();
+
   return (
     <>
-      <div
-        className={styles["overlay"]}
-        data-opened={isOpened}
-        onClick={() => setIsOpened(!isOpened)}
-      ></div>
+      {width > 1023 && (
+        <div
+          className={styles["overlay"]}
+          data-opened={isOpened}
+          onClick={() => setIsOpened(!isOpened)}
+        ></div>
+      )}
       <div className={styles["brand_sidebar"]} data-opened={isOpened}>
         {closeIcon && (
           <div className={styles["menu-close-icon"]}>
