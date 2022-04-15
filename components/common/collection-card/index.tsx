@@ -8,12 +8,15 @@ import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { AppContext } from 'lib/context/index';
 import useTranslation from "next-translate/useTranslation";
+import { useRouter } from "next/router";
 
 interface collectionCardProps {
     collectionbutton: string;
     collectiontitle: string;
     collectiontext: string;
     collectionImage: ImageType;
+    collectionImageKenaz: ImageType;
+    collectionImageMissl: ImageType;
 }
 
 interface CollectionCardPropsArray {
@@ -24,11 +27,12 @@ interface CollectionCardPropsArray {
 const CollectionCard: FC<CollectionCardPropsArray> = ({ collectionCard }): JSX.Element => {
     const [width] = useWindowSize();
     const { appState } = useContext(AppContext);
-      const { t } = useTranslation("common");
-      const _collectionCard =
-    appState.lang === "en"
-      ? collectionCard
-      : t("arabicCollectionCard", {}, { returnObjects: true });
+    const router = useRouter();
+    const { t } = useTranslation("common");
+    const _collectionCard =
+        appState.lang === "en"
+            ? collectionCard
+            : t("arabicCollectionCard", {}, { returnObjects: true });
     return (
 
         <div className={styles["collection-container"]}>
@@ -45,12 +49,24 @@ const CollectionCard: FC<CollectionCardPropsArray> = ({ collectionCard }): JSX.E
 
                 {Array.isArray(_collectionCard) &&
                     _collectionCard && _collectionCard.map((data, index) => {
-                        const { collectionImage, collectionbutton, collectiontitle, collectiontext } = data
+                        const { collectionImage, collectionbutton, collectionImageMissl, collectiontitle, collectionImageKenaz, collectiontext } = data
                         return (
                             <SwiperSlide>
                                 <div className={styles["collection-card"]} key={index}>
                                     <div className={styles["image-section"]}>
-                                        <Image key={index} className={styles["collection-image"]} src={collectionImage.url} alt={collectionImage.altText} width={width > 1023 ? 642 : 332} height={width > 1023 ? 409 : 400} layout="responsive" />
+                                        {
+                                           collectionImageKenaz && router.pathname === '/kenaz' &&
+                                            <Image key={index} className={styles["collection-image"]} src={collectionImageKenaz?.url} alt={collectionImage?.altText} width={width > 1023 ? 642 : 332} height={width > 1023 ? 409 : 400} layout="responsive" />
+                                        }
+                                        {
+                                            collectionImageMissl && router.pathname === '/missl' &&
+                                            <Image key={index} className={styles["collection-image"]} src={collectionImageMissl?.url} alt={collectionImage?.altText} width={width > 1023 ? 642 : 332} height={width > 1023 ? 409 : 400} layout="responsive" />
+                                        }
+                                        {
+                                            router.pathname === '/' &&
+                                            <Image key={index} className={styles["collection-image"]} src={collectionImage?.url} alt={collectionImage?.altText} width={width > 1023 ? 642 : 332} height={width > 1023 ? 409 : 400} layout="responsive" />
+                                        }
+
                                         <Button className={styles["collection-button"]} buttonText={collectionbutton} />
                                     </div>
                                     <div>

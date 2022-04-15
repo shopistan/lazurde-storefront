@@ -20,6 +20,14 @@
       "collectionImage": {
         "url": "/collection-2.png",
         "altText": ""
+      },
+      "collectionImageKenaz" : {
+        "url" : "/collection-kenaz1.png",
+        "altText" : ""
+      },
+      "collectionImageMissl" : {
+        "url" : "/collection-missl1.png",
+        "altText" : ""
       }
     },
     {
@@ -29,6 +37,14 @@
       "collectionImage": {
         "url": "/collection-1.png",
         "altText": ""
+      },
+      "collectionImageKenaz" : {
+        "url" : "/collection-kenaz2.png",
+        "altText" : ""
+      },
+      "collectionImageMissl" : {
+        "url" : "/collection-missl2.png",
+        "altText" : ""
       }
     }
   ],
