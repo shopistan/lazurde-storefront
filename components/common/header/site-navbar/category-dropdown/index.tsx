@@ -1,44 +1,66 @@
 import React, { useContext } from "react";
 import styles from "./style.module.scss";
 import Link from "next/link";
-import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 
+type LinkProps = {
+  title: string;
+  url: string;
+  isBold: Boolean;
+};
+
+interface ArabicCategoryProps {
+  linkHeading: string,
+  linkTitle: [
+    {
+      title: string
+    }
+  ]
+}
+
 interface DropDownProps {
-  title: string,
-  catArr: [{ title: string, url: string, isBold: Boolean }],
+  dropdownData: [{
+    title: string;
+    catArr: [LinkProps];
+  }],
+  categoryLinks: ArabicCategoryProps[],
 }
 
 interface CategoryDropDownProps {
-  dropdownData: DropDownProps[];
+  categoryData: DropDownProps;
   setIsOpened: Function
 }
 
-const CategoryDropDown = ({ dropdownData, setIsOpened }: CategoryDropDownProps): JSX.Element => {
-  const { t } = useTranslation("common");
+
+
+const CategoryDropDown = ({ categoryData, setIsOpened }: CategoryDropDownProps): JSX.Element => {
   const { appState } = useContext(AppContext);
 
   return (
     <div className={styles['category-dropdown']}
       onMouseOver={() => {
-        setIsOpened((prev: object) => {return {...prev, opened: true}})
+        setIsOpened((prev: object) => { return { ...prev, opened: true } })
       }}
       onMouseLeave={() => {
-        setIsOpened((prev: object) => {return {...prev, opened: false}})
+        setIsOpened((prev: object) => { return { ...prev, opened: false } })
       }}
     >
-      {dropdownData.map((data, index) => {
+      {categoryData?.dropdownData?.map((data, index) => {
         const { title, catArr } = data;
+        const currentCategoryArabic = categoryData?.categoryLinks?.[index]
         return (
           <div key={index}>
             <div className={styles['title']}>
-              {title}
+              {appState.lang === "en" ? title : currentCategoryArabic?.linkHeading}
             </div>
             <div className={styles['links']}>
-              {catArr.map((data, index) => {
+              {catArr?.map((data, index) => {
+                const categoryLinkArabic = currentCategoryArabic?.linkTitle[index]
+                console.log('categoryLinkArabic', categoryLinkArabic);
+
                 return (
                   <Link key={index} href={data.url || ""} >
-                    <a data-isBold={data.isBold}>{data.title}</a>
+                    <a data-isBold={data.isBold}>{appState.lang === "en" ? data.title : categoryLinkArabic?.title}</a>
                   </Link>
                 )
               })}

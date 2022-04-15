@@ -1,9 +1,15 @@
+import React, { useContext } from "react";
 import Link from "next/link";
 import styles from "./style.module.scss";
 import { CustomerCare, Calendar, Account, Location } from "components/icons";
-import Button from "components/common/ui/button";
+import AuthLinks from "./auth-links";
+import useTranslation from "next-translate/useTranslation";
+import { AppContext } from "lib/context";
 
-const UserLinks = ({}): JSX.Element => {
+const UserLinks = (): JSX.Element => {
+  const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
+
   return (
     <div className={styles["mobile-header__user-links"]}>
       <ul>
@@ -11,7 +17,11 @@ const UserLinks = ({}): JSX.Element => {
           <Link href={"/"}>
             <a>
               <CustomerCare width="16.67px" height="15.42px" fill="#000" />
-              <span>Customer Care</span>
+              <span>
+                {appState.lang === "en"
+                  ? "Customer Care"
+                  : t("customerCareText")}
+              </span>
             </a>
           </Link>
         </li>
@@ -19,7 +29,11 @@ const UserLinks = ({}): JSX.Element => {
           <Link href={"/"}>
             <a>
               <Calendar width="20px" height="20px" fill="#000" />
-              <span>Book an Appointment</span>
+              <span>
+                {appState.lang === "en"
+                  ? "Book an Appointment"
+                  : t("bookAnAppointmentText")}
+              </span>
             </a>
           </Link>
         </li>
@@ -27,7 +41,9 @@ const UserLinks = ({}): JSX.Element => {
           <Link href={"/"}>
             <a>
               <Account width="20px" height="20px" fill="#000" />
-              <span>My Account</span>
+              <span>
+                {appState.lang === "en" ? "My Account" : t("myAccountText")}
+              </span>
             </a>
           </Link>
         </li>
@@ -35,29 +51,16 @@ const UserLinks = ({}): JSX.Element => {
           <Link href={"/"}>
             <a>
               <Location width="20px" height="20px" fill="#000" />
-              <span>Store Locator</span>
+              <span>
+                {appState.lang === "en"
+                  ? "Store Locator"
+                  : t("storeLocatorText")}
+              </span>
             </a>
           </Link>
         </li>
       </ul>
-
-      <div className={styles["mobile-header__auth-btns"]}>
-        <Button
-          buttonStyle="black"
-          buttonText={"sign up"}
-          buttonSize={"xxl"}
-          onClick={() => {}}
-          type={"button"}
-        />
-
-        <Button
-          buttonStyle="white"
-          buttonText={"sign in"}
-          buttonSize={"sm"}
-          onClick={() => {}}
-          type={"button"}
-        />
-      </div>
+      <AuthLinks />
     </div>
   );
 };
