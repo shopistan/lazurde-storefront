@@ -8,5 +8,8 @@
   "subscriptionText": "",
   "socialIconText": "",
   "userNavBarTitle": "Shop By Boutique",
-  "arabicfooterLinks": ""
+  "arabicfooterLinks": "",
+  "langSelectorBtnTxt" : "Continue",
+  "NavbarLangSelectorTitle" : "Select your preferred language and location"
+
 }
