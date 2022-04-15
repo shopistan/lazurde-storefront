@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from "next/router";
 
 import styles from "./style.module.scss";
@@ -8,32 +8,9 @@ import { ArrowRight, BackArrow } from "components/icons";
 import MobileSubMenu from "./mobile-sub-menu";
 import UserLinks from "./user-links";
 import BrandSideBar from "../user-navbar/brand-sidebar/index";
-import { BrandSidebarProps } from "lib/types/common";
-import { Router } from "next/router";
-
-interface menuProps {
-  active?: Boolean;
-  closeMenu?: Function;
-  menuData?: [];
-  siteLogo?: any;
-  headerId?: string;
-  brandSideBar?: BrandSidebarProps;
-}
-
-interface dataProps {
-  title?: string;
-  catArr?: [objectData];
-}
-
-type objectData = {
-  title?: string;
-  url?: string;
-};
-interface linksProps {
-  navTitle?: string;
-  titleUrl?: string;
-  navArr?: [{ title: string; catArr: [objectData] }];
-}
+import useTranslation from "next-translate/useTranslation";
+import { AppContext } from "lib/context";
+import { MenuProps, DataProps, LinksProps } from "./types";
 
 const MobileMenu = ({
   active = false,
@@ -41,13 +18,20 @@ const MobileMenu = ({
   menuData,
   headerId,
   brandSideBar,
-}: menuProps): JSX.Element => {
+}: MenuProps): JSX.Element => {
   const router = useRouter();
-
+  const { appState } = useContext(AppContext);
   const [isSubMenuOpen, setIsSubMenuOpen] = useState<Boolean>(false);
-  const [subMenuData, setSubMenuData] = useState<dataProps[]>([]);
+  const [subMenuData, setSubMenuData] = useState<DataProps>();
   const [isOpened, setIsOpened] = useState(false);
   const [menuTitle, setMenuTitle] = useState("");
+
+  const { t } = useTranslation("common");
+  const sideNavTitlesArray: [{ navTitle: string; navCategoryLinks: [] }] = t(
+    "siteNavLinks",
+    {},
+    { returnObjects: true }
+  );
 
   return (
     <>
@@ -90,7 +74,7 @@ const MobileMenu = ({
           <ul className={styles["mobile-header__menu-list"]}>
             {menuData &&
               menuData.length > 0 &&
-              menuData?.map((links: linksProps, index) => {
+              menuData?.map((links: LinksProps, index) => {
                 const { navTitle, titleUrl, navArr } = links;
                 const categoryData = navArr[0];
 
@@ -105,8 +89,18 @@ const MobileMenu = ({
                           categoryData?.title
                         ) {
                           setIsSubMenuOpen(!isSubMenuOpen);
-                          navArr && setSubMenuData(navArr);
-                          navTitle && setMenuTitle(navTitle);
+                          navArr &&
+                            setSubMenuData({
+                              dropdownData: navArr,
+                              categoryLinks:
+                                sideNavTitlesArray[index].navCategoryLinks,
+                            });
+                          navTitle &&
+                            setMenuTitle(
+                              appState.lang === "en"
+                                ? navTitle
+                                : sideNavTitlesArray[index].navTitle
+                            );
                         }
                       }}
                     >
@@ -114,12 +108,20 @@ const MobileMenu = ({
                       categoryData?.title.length <= 0 ? (
                         <>
                           <Link href={titleUrl}>
-                            <a>{navTitle}</a>
+                            <a>
+                              {appState.lang === "en"
+                                ? navTitle
+                                : sideNavTitlesArray[index].navTitle}
+                            </a>
                           </Link>
                         </>
                       ) : (
                         <>
-                          <span>{navTitle}</span>
+                          <span>
+                            {appState.lang === "en"
+                              ? navTitle
+                              : sideNavTitlesArray[index].navTitle}
+                          </span>
                         </>
                       )}
                       {categoryData?.catArr.length > 0 &&
@@ -138,7 +140,9 @@ const MobileMenu = ({
             setIsOpened(true);
           }}
         >
-          <span>Shop by Boutique</span>
+          <span>
+            {appState.lang === "en" ? "Shop by Boutique" : t("userNavBarTitle")}
+          </span>
           <ArrowRight fill="#000000" width="6" height="8px" />
         </div>
         <UserLinks />
