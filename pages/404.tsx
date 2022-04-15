@@ -1,8 +1,8 @@
-import React from 'react'
-import Label from 'components/common/ui/label'
-import Link from 'next/link'
-import Image from 'next/image'
-import styles from './404.module.scss'
+import React from 'react';
+import Label from 'components/common/ui/label';
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from '../styles/404.module.scss';
 
 const Custom404 = () => {
     return <div className={styles["container-404"]}>
