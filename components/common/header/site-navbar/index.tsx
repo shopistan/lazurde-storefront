@@ -21,8 +21,11 @@ interface siteNavBarProps {
 }
 
 interface DropdownDataProps {
-  title: string;
-  catArr: [LinkProps];
+  dropdownData: [{
+    title: string;
+    catArr: [LinkProps];
+  }],
+  categoryLinks: [],
 }
 
 const SiteNavBar = ({
@@ -33,10 +36,13 @@ const SiteNavBar = ({
   siteNavBar: siteNavBarProps[];
   siteLogo: ImageType;
   headerId: string;
+
 }): JSX.Element => {
   const { t } = useTranslation("common");
+  const sideNavTitlesArray: [{ navTitle: string, navCategoryLinks: [] }] = t("siteNavLinks", {}, { returnObjects: true });
+
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
-  const [dropdownData, setDropdownData] = useState<DropdownDataProps[]>([]);
+  const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
   const { appState } = useContext(AppContext);
 
   return (
@@ -71,7 +77,7 @@ const SiteNavBar = ({
                 onMouseOver={() => {
                   if (hasCategories) {
                     setIsOpened({ opened: true, selected: index });
-                    setDropdownData(data.navArr);
+                    setDropdownData({ dropdownData: data.navArr, categoryLinks: sideNavTitlesArray[index].navCategoryLinks });
                   } else {
                     setIsOpened({ opened: false, selected: index });
                   }
@@ -91,7 +97,7 @@ const SiteNavBar = ({
                   hasCategories
                     ? ""
                     : data.titleUrl}>
-                  <a>{data.navTitle}</a>
+                  <a>{appState.lang === "en" ? data.navTitle : sideNavTitlesArray[index].navTitle}</a>
                 </Link>
               </div>
             );
@@ -103,7 +109,7 @@ const SiteNavBar = ({
       <div className={styles["category-dropdown"]} data-opened={isOpened.opened}>
         <CategoryDropDown
           setIsOpened={setIsOpened}
-          dropdownData={dropdownData}
+          categoryData={dropdownData}
         ></CategoryDropDown>
       </div>
       <div className={styles["overlay"]} data-opened={isOpened.opened} onClick={(() => setIsOpened({ ...isOpened, opened: false }))}></div>
