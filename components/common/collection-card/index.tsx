@@ -19,6 +19,12 @@ interface collectionCardProps {
     collectionImageMissl: ImageType;
 }
 
+interface _collectionCardProps {
+    collectionbutton: string;
+    collectiontitle: string;
+    collectiontext: string;
+}
+
 interface CollectionCardPropsArray {
     collectionCard: collectionCardProps[];
 }
@@ -29,10 +35,8 @@ const CollectionCard: FC<CollectionCardPropsArray> = ({ collectionCard }): JSX.E
     const { appState } = useContext(AppContext);
     const router = useRouter();
     const { t } = useTranslation("common");
-    const _collectionCard =
-        appState.lang === "en"
-            ? collectionCard
-            : t("arabicCollectionCard", {}, { returnObjects: true });
+
+    const _collectionCard : _collectionCardProps[]  = t('collectionCard', {}, { returnObjects: true });
     return (
 
         <div className={styles["collection-container"]}>
@@ -47,15 +51,15 @@ const CollectionCard: FC<CollectionCardPropsArray> = ({ collectionCard }): JSX.E
                 dir={appState?.lang === "en" ? "ltr" : "rtl"}
             >
 
-                {Array.isArray(_collectionCard) &&
-                    _collectionCard && _collectionCard.map((data, index) => {
+                {
+                    collectionCard && collectionCard.map((data, index) => {
                         const { collectionImage, collectionbutton, collectionImageMissl, collectiontitle, collectionImageKenaz, collectiontext } = data
                         return (
                             <SwiperSlide>
                                 <div className={styles["collection-card"]} key={index}>
                                     <div className={styles["image-section"]}>
                                         {
-                                           collectionImageKenaz && router.pathname === '/kenaz' &&
+                                            collectionImageKenaz && router.pathname === '/kenaz' &&
                                             <Image key={index} className={styles["collection-image"]} src={collectionImageKenaz?.url} alt={collectionImage?.altText} width={width > 1023 ? 642 : 332} height={width > 1023 ? 409 : 400} layout="responsive" />
                                         }
                                         {
@@ -67,11 +71,11 @@ const CollectionCard: FC<CollectionCardPropsArray> = ({ collectionCard }): JSX.E
                                             <Image key={index} className={styles["collection-image"]} src={collectionImage?.url} alt={collectionImage?.altText} width={width > 1023 ? 642 : 332} height={width > 1023 ? 409 : 400} layout="responsive" />
                                         }
 
-                                        <Button className={styles["collection-button"]} buttonText={collectionbutton} />
+                                        <Button className={styles["collection-button"]} buttonText={appState.lang === 'en' ? collectionbutton : _collectionCard[index].collectionbutton} />
                                     </div>
                                     <div>
-                                        <h3 className={styles["collection-title"]}>{collectiontitle}</h3>
-                                        <p className={styles["collection-text"]}>{collectiontext}</p>
+                                        <h3 className={styles["collection-title"]}>{appState.lang === 'en' ? collectiontitle : _collectionCard[index].collectiontitle}</h3>
+                                        <p className={styles["collection-text"]}>{appState.lang === 'en' ? collectiontext : _collectionCard[index].collectiontext}</p>
                                     </div>
                                 </div>
 
