@@ -1,29 +1,10 @@
+import React, { useContext } from "react";
 import styles from "./style.module.scss";
 import { Cross, BackArrow } from "components/icons";
 import Link from "next/link";
 import Label from "components/common/ui/label";
-interface linksProps {
-  title?: string;
-  catArr?: objectData[];
-}
-
-type objectData = {
-  title?: string;
-  url?: string;
-};
-
-interface dataProps {
-  title?: string;
-  catArr?: objectData[];
-}
-
-interface menuProps {
-  active?: Boolean;
-  closeMenu?: Function;
-  closeSubMenu?: Function;
-  subMenuData?: dataProps[];
-  menuTitle: string;
-}
+import { AppContext } from "lib/context";
+import { SubMenuProps } from "./types";
 
 const MobileSubMenu = ({
   active = false,
@@ -31,7 +12,9 @@ const MobileSubMenu = ({
   closeSubMenu,
   subMenuData,
   menuTitle,
-}: menuProps): JSX.Element => {
+}: SubMenuProps): JSX.Element => {
+  const { appState } = useContext(AppContext);
+
   return (
     <div
       className={`${styles[`mobile-header__sub-menu-wrapper`]} ${
@@ -60,40 +43,47 @@ const MobileSubMenu = ({
       )}
       <div className={styles["mobile-header__sub-menu-list-wrapper"]}>
         <ul className={styles["mobile-header__sub-menu-list"]}>
-          {subMenuData &&
-            subMenuData.length > 0 &&
-            subMenuData?.map((links: linksProps, index: number) => {
-              const { title, catArr } = links;
+          {subMenuData?.dropdownData &&
+            subMenuData?.dropdownData.length > 0 &&
+            subMenuData?.dropdownData?.map((data, index) => {
+              const { title, catArr } = data;
+              const currentCategoryArabic = subMenuData?.categoryLinks?.[index];
               return (
-                <>
-                  <li
-                    key={index}
-                    className={styles["mobile-header__sub-menu-list-items"]}
-                  >
-                    <Label
-                      className={styles["mobile-header__sub-menu-heading"]}
-                    >
-                      {title}
-                    </Label>
-                    <ul>
-                      {catArr &&
-                        catArr.length > 0 &&
-                        catArr?.map((subLinks: objectData, index: number) => {
-                          const { title, url } = subLinks;
-                          return (
+                <li
+                  key={index}
+                  className={styles["mobile-header__sub-menu-list-items"]}
+                >
+                  <Label className={styles["mobile-header__sub-menu-heading"]}>
+                    {appState.lang === "en"
+                      ? title
+                      : currentCategoryArabic?.linkHeading}
+                  </Label>
+                  <ul>
+                    {catArr &&
+                      catArr.length > 0 &&
+                      catArr?.map((data, index) => {
+                        const categoryLinkArabic =
+                          currentCategoryArabic?.linkTitle[index];
+
+                        return (
+                          <>
                             <li
                               key={index}
-                              className={`opacity-60 ${styles["mobile-header__sub-menu-list-item"]}`}
+                              className={`${styles["mobile-header__sub-menu-list-item"]}`}
                             >
-                              <Link href={url}>
-                                <a>{title}</a>
+                              <Link href={data.url || ""}>
+                                <a data-isBold={data.isBold}>
+                                  {appState.lang === "en"
+                                    ? data.title
+                                    : categoryLinkArabic?.title}
+                                </a>
                               </Link>
                             </li>
-                          );
-                        })}
-                    </ul>
-                  </li>
-                </>
+                          </>
+                        );
+                      })}
+                  </ul>
+                </li>
               );
             })}
         </ul>
