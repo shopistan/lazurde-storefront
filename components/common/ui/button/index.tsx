@@ -3,7 +3,7 @@ import styles from "./button.module.scss";
 
 interface ButtonProps {
   className?: string;
-  buttonText?: string;
+  buttonText?: string | Function;
   buttonStyle?: string;
   buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl";
   onClick?: MouseEventHandler<HTMLButtonElement>;
