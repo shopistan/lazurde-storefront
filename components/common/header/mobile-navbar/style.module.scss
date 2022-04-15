@@ -45,9 +45,16 @@
       z-index: 2;
       background-color: #fff;
       transform: translateX(-100%);
-      transition: all 0.3s;
+      opacity: 1;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
       overflow-y: auto;
     }
+
+    &-active {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  
 
     &-close-icon {
       width: 100%;
@@ -126,10 +133,7 @@
     color: #000000;
   }
 
-  &__menu-active {
-    transform: translateX(0);
-  }
-
+  
   &__sub-menu {
     &-wrapper {
       position: absolute;
@@ -142,12 +146,14 @@
       z-index: 2;
       background-color: #fff;
       transform: translateX(-100%);
-      transition: all 0.3s;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      opacity: 0;
       overflow-y: auto;
     }
 
     &-active {
       transform: translate(0);
+      opacity: 1;
     }
 
     &-close-icon {
