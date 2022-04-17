@@ -46,7 +46,7 @@ const LanguageSelector = ({
   className = "",
   mainWrapperClass = "",
 }: {
-  showButton: Boolean;
+  showButton?: Boolean;
   className?: string;
   mainWrapperClass?: string;
 }): JSX.Element => {

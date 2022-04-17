@@ -145,7 +145,7 @@ const MobileMenu = ({
           </span>
           <ArrowRight fill="#000000" width="6" height="8px" />
         </div>
-        <UserLinks />
+        <UserLinks closeMenu={closeMenu} />
       </div>
       <MobileSubMenu
         active={isSubMenuOpen}
