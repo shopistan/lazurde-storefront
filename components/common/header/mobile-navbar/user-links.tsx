@@ -7,7 +7,7 @@ import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 import MobileLanguageSelector from "./lang-selector";
 
-const UserLinks = ({ closeMenu }: { closeMenu: Function }): JSX.Element => {
+const UserLinks = (): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
 
@@ -61,7 +61,7 @@ const UserLinks = ({ closeMenu }: { closeMenu: Function }): JSX.Element => {
           </Link>
         </li>
       </ul>
-      <MobileLanguageSelector closeMenu={closeMenu} />
+      <MobileLanguageSelector />
       <AuthLinks />
     </div>
   );
