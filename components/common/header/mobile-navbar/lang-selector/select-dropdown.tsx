@@ -36,15 +36,6 @@ const LanguageSelector = ({
       <span
         className={styles["mobile-header__lang-selected"]}
         onClick={() => {
-          if (
-            window.innerHeight -
-              dropdown.current.getBoundingClientRect().bottom <
-            100
-          ) {
-            setPosition("top");
-          } else {
-            setPosition("bottom");
-          }
           setIsOpen(!isOpen);
         }}
       >
@@ -58,13 +49,13 @@ const LanguageSelector = ({
           )}
           <span>
             {selectedVal?.label}
-            {appState.lang === "ar" && selectedVal?.langTitle && (
+            {appState?.lang === "ar" && selectedVal?.langTitle && (
               <span>{`(${selectedVal?.langTitle})`}</span>
             )}
           </span>
         </div>
         <div className={styles["mobile-header__lang-right-side"]}>
-          {appState.lang === "en" && selectedVal?.langTitle && (
+          {appState?.lang === "en" && selectedVal?.langTitle && (
             <span>{selectedVal?.langTitle}</span>
           )}
           <ArrowRight />
@@ -97,12 +88,12 @@ const LanguageSelector = ({
                 <span>
                   {opData.img && (
                     <img
-                      src={opData.img || "/flag-uae.svg"}
+                      src={opData?.img || "/flag-uae.svg"}
                       width={iconWidth}
                       alt="image"
                     />
                   )}
-                  <span>{opData.label}</span>
+                  <span>{opData?.label}</span>
                 </span>
                 <span>{opData?.langTitle}</span>
               </a>
