@@ -1,28 +1,45 @@
-.brand_sidebar {
+.brand_sidebar_div {
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
+  top: 100%;
   width: 100%;
   height: 100vh;
-  z-index: 4;
-  top: 0;
-  transform: translateX(-100%);
-  transition: transform 0.2s, opacity 0.2s;
-  opacity: 0;
+  padding: 0;
+  margin: 0;
   overflow-y: auto;
-  padding: 25px;
+  z-index: 30;
 
   @media (min-width: 1024px) {
     position: absolute;
     top: 100%;
-    width: 500px;
-    height: 892px;
   }
 
-  &[data-opened="true"] {
-    transform: translateX(0);
-    opacity: 1;
+  .brand_sidebar {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+    height: 100vh;
+    z-index: 4;
+    top: 0;
+    transform: translateX(-100%);
+    transition: transform 0.2s, opacity 0.2s;
+    opacity: 0;
+    overflow-y: auto;
+    padding: 25px;
+    pointer-events: all;
+
+
+    @media (min-width: 1024px) {
+      position: absolute;
+      width: 500px;
+      height: 892px;
+    }
+
+    &[data-opened="true"] {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
 
   .text_div {
@@ -97,26 +114,6 @@ html[dir="rtl"] .brand_sidebar {
   }
 }
 
-.overlay {
-  background-color: rgba(0, 0, 0, 0.4);
-  position: absolute;
-  width: 100vw;
-  height: 165vh;
-  top: 100%;
-  inset-inline-end: 0;
-  z-index: 3;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  opacity: 0;
-  transition: opacity 3s 4s;
-  display: none;
-
-  &[data-opened="true"] {
-    opacity: 1;
-    display: block;
-  }
-}
-
 .menu-close-icon {
   z-index: 5;
   width: 100%;
@@ -150,8 +147,4 @@ html[dir="rtl"] {
     direction: ltr;
   }
 
-  .brands-list {
-    a {
-    }
-  }
 }
