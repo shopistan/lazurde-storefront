@@ -57,20 +57,6 @@ ul {
   }
 }
 
-// .collapse-arrow:not(.collapse-close)
-//   input[type="checkbox"]:checked
-//   ~ .collapse-title:after
-//   html[dir="rtl"] {
-//   .collapse-arrow {
-//     .collapse-title {
-//       &:after {
-//         inset-inline-end: 0;
-//         inset-inline-start: auto;
-//       }
-//     }
-//   }
-// }
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
