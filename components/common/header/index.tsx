@@ -10,6 +10,7 @@ import MobileNavBar from "./mobile-navbar";
 
 type AllHeaderProps = HeaderProps & {
   brandSidebarProps: BrandSidebarProps;
+  siteLogoUrl: string;
 };
 
 const Header = ({
@@ -22,6 +23,7 @@ const Header = ({
   promoBackground,
   mobilePromoLinkText,
   brandSidebarProps,
+  siteLogoUrl,
 }: AllHeaderProps): JSX.Element => {
   const [width] = useWindowSize();
   return (
@@ -38,6 +40,8 @@ const Header = ({
           menuData={siteNavBar}
           headerId={headerId}
           brandSideBar={brandSidebarProps}
+          siteLogo={siteLogo}
+          siteLogoUrl={siteLogoUrl}
         />
       ) : (
         <UserNavBar brandSideBar={brandSidebarProps} />

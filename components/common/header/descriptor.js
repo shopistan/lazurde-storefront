@@ -13,6 +13,7 @@ exports.default = Types.Component({
     mobilePromoLinkText: Types.String({ label: "Mobile Promo bar link text" }),
     promoLink: Types.String({ label: "Promo bar link" }),
     promoBackground: Types.String({ label: "Promo bar background color" }),
+    siteLogoUrl: Types.String({ label: "Logo Url" }),
     siteLogo: Types.Image({
       label: "Site Logo",
       url: Types.String({ label: "URL" }),
@@ -36,7 +37,7 @@ exports.default = Types.Component({
                     children: {
                       title: Types.String({ label: "Title" }),
                       url: Types.String({ label: "URL" }),
-                      isBold: Types.Boolean({ label: 'Is Bold' }),
+                      isBold: Types.Boolean({ label: "Is Bold" }),
                     },
                   }),
                 }),
