@@ -4,6 +4,7 @@ import { Bag, Heart, MenuIcon, Search, LazurdeLogo } from "components/icons";
 import Link from "next/link";
 import MobileMenu from "./mobile-menu";
 import Image from "next/image";
+import { MobileHeaderProps } from "lib/types/mobile-header";
 
 const MobileNavBar = ({
   menuData,
@@ -11,7 +12,7 @@ const MobileNavBar = ({
   brandSideBar,
   siteLogo,
   siteLogoUrl,
-}: any): JSX.Element => {
+}: MobileHeaderProps): JSX.Element => {
   const [menu, setMenu] = useState<Boolean>(false);
   const handleMenu = () => {
     setMenu(!menu);

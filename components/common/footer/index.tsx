@@ -9,7 +9,7 @@ import FooterLinks from "./footer-links";
 import Image from "next/image";
 import LanguageSelector from "../language-selector";
 import useWindowSize from "lib/utils/useWindowSize";
-import Accordion from "../accordion";
+import Accordion from "components/common/ui/accordion/Accordion";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 

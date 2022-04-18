@@ -2,7 +2,7 @@
 import { useContext } from "react";
 import { ArrowRight } from "components/icons";
 import React, { useState, useRef, useEffect } from "react";
-import { SelectProps, optionProps } from "../types";
+import { SelectProps, OptionProps } from "lib/types/mobile-header";
 import styles from "../style.module.scss";
 import { AppContext } from "lib/context";
 
@@ -14,7 +14,7 @@ const LanguageSelector = ({
 }: SelectProps): JSX.Element => {
   const dropdown = useRef(null);
   const { appState } = useContext(AppContext);
-  const [selectedVal, setSelectedVal] = useState<optionProps>();
+  const [selectedVal, setSelectedVal] = useState<OptionProps>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [position, setPosition] = useState<string>("bottom");
 

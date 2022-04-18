@@ -3,11 +3,11 @@ import styles from "../style.module.scss";
 import { langSelectData } from "lib/mock-data/data";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
-import { optionProps } from "../types";
+import { OptionProps } from "lib/types/mobile-header";
 
 import LanguageSelector from "./select-dropdown";
 
-const MobileLanguageSelector = () => {
+const MobileLanguageSelector = (): JSX.Element => {
   const router = useRouter();
   const { pathname, query, asPath } = router;
   const { appState, saveAppState } = useContext(AppContext);
@@ -40,7 +40,7 @@ const MobileLanguageSelector = () => {
     }
   }, [router.locale]);
 
-  const handleSelect = (selectedData: optionProps) => {
+  const handleSelect = (selectedData: OptionProps) => {
     const _selectedData = selectedData?.value.split("-");
     setRegion({
       region: _selectedData[1],
