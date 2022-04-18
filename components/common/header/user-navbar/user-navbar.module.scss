@@ -161,3 +161,20 @@
     display: block;
   }
 }
+
+html[dir='rtl'] {
+  .right_div {
+
+    & > a,
+    & > div {
+      margin-inline-end: 24px;
+      &:last-child {
+        margin-inline-end: 16px;
+
+        @media (min-width: 1024px) {
+          margin-inline-end: 24px;
+        }
+      }
+    }
+  }
+}

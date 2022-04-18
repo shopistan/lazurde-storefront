@@ -58,7 +58,7 @@ const BrandSideBar: FC<SidebarProps> = ({
 }): JSX.Element => {
 
   return (
-    <div className={styles["brand_sidebar_div"]} onClick={() => {
+    <div className={styles["brand_sidebar_div"]} data-opened={isOpened} onClick={() => {
       setIsOpened(false);
     }}>
 
