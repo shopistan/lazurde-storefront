@@ -3,11 +3,11 @@ import React from "react";
 import Link from "next/link";
 import styles from "./Accordion.module.scss";
 
-type LinksArr = { url: string; text: string };
+type LinksArrType = { url?: string; text?: string };
 interface AccordionProps {
   index?: number;
   heading?: string;
-  links?: LinksArr[];
+  links?: LinksArrType[];
   isPlusMinusIcon?: boolean;
 }
 

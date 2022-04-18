@@ -2,12 +2,13 @@
 import React from "react";
 import Link from "next/link";
 import styles from "./style.module.scss";
-interface IconsArr {
+
+type IconsType = {
   link?: string;
   icon?: { url: string; altText: string };
-}
+};
 interface IconsListProps {
-  iconsList?: IconsArr[];
+  iconsList?: IconsType[];
   className?: string;
 }
 

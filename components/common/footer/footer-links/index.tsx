@@ -3,13 +3,13 @@ import Link from "next/link";
 import Heading from "components/common/ui/heading";
 import styles from "./style.module.scss";
 
-interface LinksArr {
-  text: string;
-  url: string;
-}
+type LinksArrType = {
+  text?: string;
+  url?: string;
+};
 interface FooterLinkProps {
   heading?: string;
-  links?: LinksArr[];
+  links?: LinksArrType[];
   key?: number;
 }
 
