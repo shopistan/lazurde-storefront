@@ -35,7 +35,7 @@
 
   &__menu {
     &-wrapper {
-      position: absolute;
+      position: fixed;
       top: 0;
       inset-inline-end: 0;
       bottom: 0;
@@ -134,7 +134,7 @@
 
   &__sub-menu {
     &-wrapper {
-      position: absolute;
+      position: fixed;
       top: 0;
       inset-inline-end: 0;
       bottom: 0;
