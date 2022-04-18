@@ -30,6 +30,7 @@ export type HeaderProps = {
   headerId: string;
   siteNavBar: [];
   siteLogo: ImageType;
+  siteLogoUrl: string;
   navLinks: NavLinks[];
   brandImage: ImageType;
   promoTitle: string;
