@@ -4,11 +4,11 @@ import { Cross, BackArrow } from "components/icons";
 import Link from "next/link";
 import Label from "components/common/ui/label";
 import { AppContext } from "lib/context";
-import { SubMenuProps } from "lib/types/mobile-header";
-interface ArabicCategoryProps {
+import { MobileSubMenuProps } from "lib/types/mobile-header";
+type ArabicCategoryType = {
   linkHeading?: string;
   linkTitle?: [{ title: string }];
-}
+};
 
 const MobileSubMenu = ({
   active = false,
@@ -16,7 +16,7 @@ const MobileSubMenu = ({
   closeSubMenu,
   subMenuData,
   menuTitle,
-}: SubMenuProps): JSX.Element => {
+}: MobileSubMenuProps): JSX.Element => {
   const { appState } = useContext(AppContext);
 
   return (
@@ -51,7 +51,7 @@ const MobileSubMenu = ({
             subMenuData?.dropdownData.length > 0 &&
             subMenuData?.dropdownData?.map((data, index) => {
               const { title, catArr } = data;
-              const currentCategoryArabic: ArabicCategoryProps =
+              const currentCategoryArabic: ArabicCategoryType =
                 subMenuData?.categoryLinks?.[index];
               return (
                 <li
