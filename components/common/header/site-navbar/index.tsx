@@ -15,9 +15,13 @@ type LinkProps = {
   isBold: Boolean;
 };
 interface siteNavBarProps {
-  navTitle: string;
-  titleUrl: string;
-  navArr: [{ title: string; catArr: [LinkProps] }];
+  siteNavBar: [{
+    navTitle: string;
+    titleUrl: string;
+    navArr: [{ title: string; catArr: [LinkProps] }];
+  }] | [],
+  siteLogo: ImageType;
+  headerId: string;
 }
 
 interface DropdownDataProps {
@@ -28,15 +32,10 @@ interface DropdownDataProps {
   categoryLinks: [],
 }
 
-const SiteNavBar = ({
+const SiteNavBar: FC<siteNavBarProps> = ({
   headerId,
   siteNavBar,
   siteLogo,
-}: {
-  siteNavBar: siteNavBarProps[];
-  siteLogo: ImageType;
-  headerId: string;
-
 }): JSX.Element => {
   const { t } = useTranslation("common");
   const sideNavTitlesArray: [{ navTitle: string, navCategoryLinks: [] }] = t("siteNavLinks", {}, { returnObjects: true });
@@ -53,7 +52,7 @@ const SiteNavBar = ({
             <div>
               <BackArrow />
             </div>
-            Back to L’azurde
+            {t('navbarBackBtn')}
           </a>
         </Link>
       </div>

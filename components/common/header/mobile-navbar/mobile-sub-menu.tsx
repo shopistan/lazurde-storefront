@@ -70,6 +70,10 @@ const MobileSubMenu = ({
                             <li
                               key={index}
                               className={`${styles["mobile-header__sub-menu-list-item"]}`}
+                              onClick={() => {
+                                closeMenu();
+                                closeSubMenu();
+                              }}
                             >
                               <Link href={data.url || ""}>
                                 <a data-isBold={data.isBold}>

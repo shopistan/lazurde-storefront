@@ -1,61 +1,3 @@
-export const ArabicfooterLinks = [
-  {
-    linkHeading: "ءالمعلا ةمدخ",
-    links: [
-      {
-        url: "/",
-        text: "انب لصتا",
-      },
-      {
-        url: "/",
-        text: "ةلئسأ",
-      },
-      {
-        url: "/",
-        text: "رجتملا عقاوم",
-      },
-    ],
-  },
-  {
-    linkHeading: "تامدخ",
-    links: [
-      {
-        url: "/",
-        text: "1 عيبلا حيرصت",
-      },
-      {
-        url: "/",
-        text: "2 عيبلا حيرصت",
-      },
-      {
-        url: "/",
-        text: "طورشلاو نامضلا ماكحألاو",
-      },
-    ],
-  },
-  {
-    linkHeading: "L’azurde ملاع",
-    links: [
-      {
-        url: "/",
-        text: "انب لصتا",
-      },
-      {
-        url: "/",
-        text: "ثرإ",
-      },
-      {
-        url: "/",
-        text: "انب لصتا",
-      },
-      {
-        url: "/",
-        text: "رجتملا عقاوم",
-      },
-    ],
-  },
-];
-
 export const sliderData = [
   {
     image: {
@@ -112,5 +54,44 @@ export const sliderData = [
       altText: "Necklaces",
     },
     heading: "Necklaces",
+  },
+];
+
+export const langSelectData = [
+  {
+    label: "KSA",
+    img: "/icons/flag-sa.png",
+    value: "en-sa",
+    langTitle: "english",
+  },
+  {
+    label: "KSA",
+    img: "/icons/flag-sa.png",
+    value: "ar-sa",
+    langTitle: "العربية",
+  },
+  {
+    label: "egypt",
+    img: "/icons/flag-egypt.png",
+    value: "en-eg",
+    langTitle: "english",
+  },
+  {
+    label: "egypt",
+    img: "/icons/flag-egypt.png",
+    value: "ar-eg",
+    langTitle: "العربية",
+  },
+  {
+    label: "u.a.e",
+    img: "/icons/flag-uae.png",
+    value: "en-ae",
+    langTitle: "english",
+  },
+  {
+    label: "u.a.e",
+    img: "/icons/flag-uae.png",
+    value: "ar-ae",
+    langTitle: "العربية",
   },
 ];

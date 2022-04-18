@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import ArrowDown from "components/icons/ArrowDown";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
