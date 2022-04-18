@@ -1,42 +1,15 @@
-import React, { FC, useState, useContext } from "react";
+import React, { FC, useState } from "react";
 import styles from "./user-navbar.module.scss";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
-import { AppContext } from "lib/context";
 import { Bag, Heart, MapPin, Divider, MenuIcon, Globe, User } from "components/icons";
 import BrandSidebar from "./brand-sidebar";
 import {
   BrandSidebarProps,
 } from "lib/types/common";
 
-const sidebarData = {
-  mainImg: {
-    url: '/',
-    altText: 'image',
-  },
-  mainTitle: 'main title',
-  logoArr: [
-    {
-      logoImg: {
-        url: '/',
-        altText: 'image',
-      }
-    }
-  ],
-  brandArr: [
-    {
-      url: '/',
-      altText: 'image',
-      label: 'label',
-      labelUrl: '/',
-    }
-  ]
-}
-
-
 const UserNavBar: FC<{brandSideBar: BrandSidebarProps}> = ({brandSideBar}): JSX.Element => {
   const { t } = useTranslation("common");
-  const { appState } = useContext(AppContext);
   const [isOpened, setIsOpened] = useState(false)
   
   return (
