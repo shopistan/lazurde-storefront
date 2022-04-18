@@ -11,6 +11,7 @@ import useTranslation from "next-translate/useTranslation";
 type BrandCardsType = {
   cardTitle: string;
   cardImage: ImageType;
+  favIconSrc : ImageType;
 };
 
 interface BrandCardsProps {
@@ -45,7 +46,7 @@ const BrandCards: FC<BrandCardsProps> = ({
         <div className={`flex justify-between`}>
           {brandCards &&
             brandCards.map((data, index) => {
-              const { cardTitle, cardImage } = data;
+              const { cardTitle, cardImage , favIconSrc } = data;
               return (
                 <SwiperSlide key={index}>
                   <div className={`${styles["cards"]} ${appState.lang == 'ar' && styles["arabic-card"]}`} key={index}>
@@ -56,6 +57,7 @@ const BrandCards: FC<BrandCardsProps> = ({
                       width="100%"
                       cardTitle={cardTitle}
                       cardImage={cardImage}
+                      favIconSrc={favIconSrc}
                     />
                   </div>
                 </SwiperSlide>
