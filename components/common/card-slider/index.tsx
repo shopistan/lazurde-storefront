@@ -13,7 +13,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Label from "../ui/label";
 
-interface CardsArr {
+type CardsArrType = {
   image?: { url: string; altText: string };
   heading?: string;
 }
@@ -21,7 +21,7 @@ interface CardSliderProps {
   className?: string;
   sectionHeading?: string;
   bgColor?: string;
-  cards?: CardsArr[];
+  cards?: CardsArrType[];
 }
 
 const CardSlider = ({
