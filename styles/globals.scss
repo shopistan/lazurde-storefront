@@ -26,13 +26,23 @@ ul {
   padding: 0;
 }
 
-.collapse-arrow .collapse-title:after {
-  top: 10px !important;
+.collapse-arrow {
+  .collapse-title {
+    &:after {
+      top: 10px !important;
+    }
+  }
 }
 
-html[dir="rtl"] .collapse-arrow .collapse-title:after {
-  right: auto;
-  left: 0;
+html[dir="rtl"] {
+  .collapse-arrow {
+    .collapse-title {
+      &:after {
+        inset-inline-end: 0;
+        inset-inline-start: auto;
+      }
+    }
+  }
 }
 
 @tailwind base;

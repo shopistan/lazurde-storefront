@@ -12,7 +12,6 @@ import useWindowSize from "lib/utils/useWindowSize";
 import Accordion from "../accordion";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
-import { ArabicfooterLinks } from "lib/mock-data/data";
 
 const Footer = ({
   heading = "",
@@ -119,6 +118,7 @@ const Footer = ({
           <div className={styles["footer__footer-lang-selector"]}>
             <LanguageSelector
               className={styles["footer__footer-dropdowns"]}
+              mainWrapperClass={styles["footer__footer-dropdowns-wrapper"]}
               showButton={false}
             />
           </div>

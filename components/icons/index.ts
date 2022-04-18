@@ -11,3 +11,12 @@ export { default as LazurdeLogo } from './LazurdeLogo'
 export { default as LazurdeLSLogo } from './LazurdeLSLogo'
 export { default as MisslLogo } from './MisslLogo'
 export { default as Search } from './Search'
+export { default as ArrowRight } from './ArrowRight'
+export { default as BackArrow } from './BackArrow'
+export { default as CustomerCare } from './CustomerCare'
+export { default as Calendar } from './Calendar'
+export { default as Account } from './Account'
+export { default as Location } from './Location'
+export { default as SignOut } from './SignOut'
+
+

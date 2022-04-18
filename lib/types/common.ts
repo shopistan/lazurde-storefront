@@ -1,6 +1,6 @@
 export type XMComponent = {
   id: string;
-  params: object;
+  params: {headerId: string};
 };
 
 export type ErrorObject = {
@@ -27,12 +27,16 @@ export type BrandProps = {
 }
 
 export type HeaderProps = {
+  headerId: string;
+  siteNavBar: [];
+  siteLogo: ImageType;
   navLinks: NavLinks[];
   brandImage: ImageType;
   promoTitle: string;
   promoLinkText: string;
   mobilePromoLinkText: string;
   promoLink: string;
+  promoBackground: string;
 };
 
 export type BrandSidebarProps = {

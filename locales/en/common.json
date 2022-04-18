@@ -8,5 +8,10 @@
   "subscriptionText": "",
   "socialIconText": "",
   "userNavBarTitle": "Shop By Boutique",
-  "arabicfooterLinks": ""
+  "arabicfooterLinks": "",
+  "langSelectorBtnTxt" : "Continue",
+  "navbarBackBtn": "Back to L’azurde",
+  "NavbarLangSelectorTitle" : "Select your preferred language and location"
+  
+
 }

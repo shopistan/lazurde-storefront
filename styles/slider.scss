@@ -24,9 +24,9 @@
     }
 
     .swiper-scrollbar {
-      right: 0;
+      inset-inline-end: 0;
       bottom: 0;
-      left: 0;
+      inset-inline-start: 0;
       width: 97%;
       height: 2px;
       background-color: rgba(0, 0, 0, 0.2);
@@ -66,5 +66,44 @@
   .swiper-button-next {
     inset-inline-start: auto !important;
     inset-inline-end: 16px !important;
+  }
+}
+
+/*--------Explore our brands------*/
+
+.card-brands {
+  &.swiper {
+    .swiper-scrollbar {
+      height: 2px;
+      width: 343px;
+
+      .swiper-scrollbar-drag {
+        background: black;
+        width: 165px !important;
+
+      }
+    }
+  }
+}
+
+.collection-swiper {
+  &.swiper {
+    .swiper-slide {
+      @media (min-width: 1024px) {
+        min-width: 642px !important;
+
+      }
+    }
+
+    .swiper-scrollbar {
+      left: 0;
+      height: 2px;
+      width: 343px;
+
+      .swiper-scrollbar-drag {
+        background: #000000;
+        width: 165px !important;
+      }
+    }
   }
 }
