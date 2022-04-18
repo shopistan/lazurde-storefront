@@ -10,7 +10,7 @@ import UserLinks from "./user-links";
 import BrandSideBar from "../user-navbar/brand-sidebar/index";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
-import { MenuProps, DataProps, LinksProps } from "./types";
+import { MenuProps, DropdownDataProps, LinksProps } from "lib/types/mobile-header";
 
 const MobileMenu = ({
   active = false,
@@ -22,7 +22,7 @@ const MobileMenu = ({
   const router = useRouter();
   const { appState } = useContext(AppContext);
   const [isSubMenuOpen, setIsSubMenuOpen] = useState<Boolean>(false);
-  const [subMenuData, setSubMenuData] = useState<DataProps>();
+  const [subMenuData, setSubMenuData] = useState<DropdownDataProps>();
   const [isOpened, setIsOpened] = useState(false);
   const [menuTitle, setMenuTitle] = useState("");
 
@@ -74,7 +74,7 @@ const MobileMenu = ({
           <ul className={styles["mobile-header__menu-list"]}>
             {menuData &&
               menuData.length > 0 &&
-              menuData?.map((links: LinksProps, index) => {
+              menuData?.map((links: LinksProps, index: number) => {
                 const { navTitle, titleUrl, navArr } = links;
                 const categoryData = navArr[0];
 

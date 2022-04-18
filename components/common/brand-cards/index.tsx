@@ -11,6 +11,7 @@ import useTranslation from "next-translate/useTranslation";
 type BrandCardsType = {
   cardTitle: string;
   cardImage: ImageType;
+  favIconSrc : ImageType;
 };
 
 interface BrandCardsProps {
@@ -18,7 +19,7 @@ interface BrandCardsProps {
   brandCards: BrandCardsType[];
 }
 
-const BrandsCard: FC<BrandCardsProps> = ({
+const BrandCards: FC<BrandCardsProps> = ({
   heading,
   brandCards,
 }): JSX.Element => {
@@ -45,10 +46,10 @@ const BrandsCard: FC<BrandCardsProps> = ({
         <div className={`flex justify-between`}>
           {brandCards &&
             brandCards.map((data, index) => {
-              const { cardTitle, cardImage } = data;
+              const { cardTitle, cardImage , favIconSrc } = data;
               return (
                 <SwiperSlide key={index}>
-                  <div className={styles["cards"]} key={index}>
+                  <div className={`${styles["cards"]} ${appState.lang == 'ar' && styles["arabic-card"]}`} key={index}>
                     <Cards
                       onClick={onClick}
                       className={styles["brand-card"]}
@@ -56,6 +57,7 @@ const BrandsCard: FC<BrandCardsProps> = ({
                       width="100%"
                       cardTitle={cardTitle}
                       cardImage={cardImage}
+                      favIconSrc={favIconSrc}
                     />
                   </div>
                 </SwiperSlide>
@@ -66,4 +68,4 @@ const BrandsCard: FC<BrandCardsProps> = ({
     </div>
   );
 };
-export default BrandsCard;
+export default BrandCards;

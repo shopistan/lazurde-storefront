@@ -7,21 +7,21 @@ import {
   BackArrow,
 } from "components/icons";
 import styles from "./brand-sidebar.module.scss";
-import { BrandProps, ImageType } from "lib/types/common";
+import { BrandArrType, ImageType } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
 
 interface SidebarProps {
   mainImg?: ImageType;
   mainTitle?: string;
   logoArr?: [{ logoImg: ImageType }];
-  brandArr?: BrandProps[];
+  brandArr?: BrandArrType[];
   isOpened?: boolean;
   setIsOpened?: Function;
   closeIcon?: boolean;
   closeMenu?: Function;
 }
 
-const BrandContainer: FC<BrandProps> = ({
+const BrandContainer: FC<BrandArrType> = ({
   brandImg,
   label,
   labelUrl,

@@ -1,28 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Link from "next/link";
-// import Image from "next/image";
-
 import styles from "./style.module.scss";
 
-interface iconProps {
-  url: string;
-  altText: string;
-}
-interface iconsObj {
-  link: string;
-  icon: iconProps;
-}
-
-interface iconsListType {
-  iconsList?: iconsObj[];
+type IconsType = {
+  link?: string;
+  icon?: { url: string; altText: string };
+};
+interface IconsListProps {
+  iconsList?: IconsType[];
   className?: string;
 }
 
 const FooterIcons = ({
   iconsList,
   className = "",
-}: iconsListType): JSX.Element => {
+}: IconsListProps): JSX.Element => {
   return (
     <>
       <ul className={`${className} ${styles["icons__container"]}`}>
@@ -37,9 +30,6 @@ const FooterIcons = ({
                       className={styles["icons__custom-img-style"]}
                       src={icon?.url}
                       alt={icon?.altText}
-                      // width={20}
-                      // height={20}
-                      // layout="fill"
                     />
                   </a>
                 </Link>
