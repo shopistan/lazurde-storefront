@@ -1,6 +1,6 @@
 export type XMComponent = {
   id: string;
-  params: {headerId: string};
+  params: { headerId: string };
 };
 
 export type ErrorObject = {
@@ -18,13 +18,13 @@ export type NavLinks = {
   linkText: string;
 };
 
-export type BrandProps = {
+export type BrandArrType = {
   url: string;
   altText: string;
   label: string;
   labelUrl: string;
   brandImg: ImageType;
-}
+};
 
 export type HeaderProps = {
   headerId: string;
@@ -43,34 +43,35 @@ export type HeaderProps = {
 export type BrandSidebarProps = {
   mainImg: ImageType;
   mainTitle: string;
-  logoArr: [{logoImg: ImageType}];
-  brandArr: BrandProps[];
+  logoArr: [{ logoImg: ImageType }];
+  brandArr: BrandArrType[];
 };
 
-interface footerLinks {
+export type footerLinksType = {
   linkHeading: string;
   links: [];
-}
-interface iconsObj {
+};
+
+export type iconsObjType = {
   link: string;
   icon: ImageType;
-}
+};
 interface footerLogoProp {
   url: string;
   altText: string;
 }
 
 export type FooterProps = {
-  footerLinks: footerLinks[];
+  footerLinks: footerLinksType[];
   heading: string;
   subHeading: string;
   linkLabel: string;
   linkUrl: string;
   subscriptionText: string;
   socialIconText: string;
-  socialLinks: iconsObj[];
+  socialLinks: iconsObjType[];
   footerLogo: footerLogoProp;
-  paymentLinks: iconsObj[];
+  paymentLinks: iconsObjType[];
 };
 
 export type PageProps = {

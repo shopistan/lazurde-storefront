@@ -31,19 +31,45 @@ ul {
     &:after {
       top: 10px !important;
     }
-  }
-}
 
-html[dir="rtl"] {
-  .collapse-arrow {
-    .collapse-title {
+    &.plus-minus-icon {
       &:after {
-        inset-inline-end: 0;
-        inset-inline-start: auto;
+        content: "+";
+        transform: rotateX(0);
+        width: 0;
+        height: 0;
+      }
+    }
+  }
+
+  &:not(.collapse-close) {
+    input[type="checkbox"] {
+      &:checked ~ .collapse-title {
+        &.plus-minus-icon {
+          &:after {
+            content: "_";
+            top: -5px !important;
+            transform: rotate(0) !important;
+          }
+        }
       }
     }
   }
 }
+
+// .collapse-arrow:not(.collapse-close)
+//   input[type="checkbox"]:checked
+//   ~ .collapse-title:after
+//   html[dir="rtl"] {
+//   .collapse-arrow {
+//     .collapse-title {
+//       &:after {
+//         inset-inline-end: 0;
+//         inset-inline-start: auto;
+//       }
+//     }
+//   }
+// }
 
 @tailwind base;
 @tailwind components;

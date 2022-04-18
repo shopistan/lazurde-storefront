@@ -4,7 +4,7 @@ import { Cross, BackArrow } from "components/icons";
 import Link from "next/link";
 import Label from "components/common/ui/label";
 import { AppContext } from "lib/context";
-import { SubMenuProps } from "./types";
+import { SubMenuProps } from "lib/types/mobile-header";
 
 const MobileSubMenu = ({
   active = false,
@@ -48,22 +48,25 @@ const MobileSubMenu = ({
             subMenuData?.dropdownData?.map((data, index) => {
               const { title, catArr } = data;
               const currentCategoryArabic = subMenuData?.categoryLinks?.[index];
+              const {
+                linkHeading,
+                linkTitle,
+              }: { linkHeading: string; linkTitle: [{ title?: string }] } =
+                currentCategoryArabic;
+
               return (
                 <li
                   key={index}
                   className={styles["mobile-header__sub-menu-list-items"]}
                 >
                   <Label className={styles["mobile-header__sub-menu-heading"]}>
-                    {appState.lang === "en"
-                      ? title
-                      : currentCategoryArabic?.linkHeading}
+                    {appState.lang === "en" ? title : linkHeading}
                   </Label>
                   <ul>
                     {catArr &&
                       catArr.length > 0 &&
                       catArr?.map((data, index) => {
-                        const categoryLinkArabic =
-                          currentCategoryArabic?.linkTitle[index];
+                        const categoryLinkArabic = linkTitle[index];
 
                         return (
                           <>

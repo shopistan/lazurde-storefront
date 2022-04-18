@@ -3,18 +3,21 @@ import Link from "next/link";
 import Heading from "components/common/ui/heading";
 import styles from "./style.module.scss";
 
-interface linksObj {
+interface LinksArr {
   text: string;
   url: string;
 }
-
-interface propTypes {
-  heading: string;
-  links: linksObj[];
-  key: number;
+interface FooterLinkProps {
+  heading?: string;
+  links?: LinksArr[];
+  key?: number;
 }
 
-const FooterLinks = ({ heading = "", links = [], key }: propTypes): JSX.Element => {
+const FooterLinks = ({
+  heading = "",
+  links = [],
+  key,
+}: FooterLinkProps): JSX.Element => {
   return (
     <div className={styles["menu__column"]} key={key}>
       <Heading element="h2" className={styles["menu__heading"]}>

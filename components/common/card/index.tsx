@@ -4,7 +4,7 @@ import { ImageType } from "lib/types/common";
 import styles from "./card.module.scss";
 import Label from "components/common/ui/label";
 
-interface ExploreBrandProps {
+interface CardProps {
   cardImage?: ImageType;
   cardTitle?: string;
   className?: string;
@@ -22,8 +22,7 @@ const Cards = ({
   width = 10,
   height = 10,
   color = "#000000",
-}: ExploreBrandProps): JSX.Element => {
-
+}: CardProps): JSX.Element => {
   return (
     <>
       <div
