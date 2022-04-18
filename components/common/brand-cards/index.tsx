@@ -18,7 +18,7 @@ interface BrandCardsProps {
   brandCards: BrandCardsType[];
 }
 
-const BrandsCard: FC<BrandCardsProps> = ({
+const BrandCards: FC<BrandCardsProps> = ({
   heading,
   brandCards,
 }): JSX.Element => {
@@ -66,4 +66,4 @@ const BrandsCard: FC<BrandCardsProps> = ({
     </div>
   );
 };
-export default BrandsCard;
+export default BrandCards;
