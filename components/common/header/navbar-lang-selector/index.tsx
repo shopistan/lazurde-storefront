@@ -4,9 +4,7 @@ import Cross from '../../../icons/Cross';
 import useTranslation from "next-translate/useTranslation";
 import LanguageSelector from './../../language-selector/index';
 
-const LangSelector = ({
-
-}): JSX.Element => {
+const LangSelector = (): JSX.Element => {
   const [isClosed, setIsClosed] = useState(false)
   const { t } = useTranslation("common");
   return (

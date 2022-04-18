@@ -21,6 +21,7 @@ interface siteNavBarProps {
     navArr: [{ title: string; catArr: [LinkProps] }];
   }] | [],
   siteLogo: ImageType;
+  siteLogoUrl: string;
   headerId: string;
 }
 
@@ -36,6 +37,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
   headerId,
   siteNavBar,
   siteLogo,
+  siteLogoUrl,
 }): JSX.Element => {
   const { t } = useTranslation("common");
   const sideNavTitlesArray: [{ navTitle: string, navCategoryLinks: [] }] = t("siteNavLinks", {}, { returnObjects: true });
@@ -57,11 +59,10 @@ const SiteNavBar: FC<siteNavBarProps> = ({
         </Link>
       </div>
       <div>
-        {siteLogo?.url && (
-          <Image src={siteLogo?.url} width={152} height={20} alt={siteLogo?.altText} />
-        )}
-        <Link href="/">
-          <a></a>
+        <Link href={siteLogoUrl || ''}>
+          <a>
+            <Image src={siteLogo?.url} width={152} height={20} alt={siteLogo?.altText} />
+          </a>
         </Link>
       </div>
       <div className={styles["nav-links"]} >

@@ -16,6 +16,7 @@ const Header = ({
   headerId,
   siteNavBar,
   siteLogo,
+  siteLogoUrl,
   promoTitle,
   promoLinkText,
   promoLink,
@@ -38,6 +39,8 @@ const Header = ({
           menuData={siteNavBar}
           headerId={headerId}
           brandSideBar={brandSidebarProps}
+          siteLogo={siteLogo}
+          siteLogoUrl={siteLogoUrl}
         />
       ) : (
         <UserNavBar brandSideBar={brandSidebarProps} />
@@ -47,6 +50,7 @@ const Header = ({
         <SiteNavBar
           siteNavBar={siteNavBar}
           siteLogo={siteLogo}
+          siteLogoUrl={siteLogoUrl}
           headerId={headerId}
         />
       )}

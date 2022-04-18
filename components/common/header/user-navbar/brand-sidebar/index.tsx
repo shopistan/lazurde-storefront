@@ -1,58 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  KenazLogo,
-  LazurdeLogo,
-  LazurdeLSLogo,
-  MisslLogo,
   Cross,
   BackArrow,
 } from "components/icons";
 import styles from "./brand-sidebar.module.scss";
-import { BrandProps, ImageType } from "lib/types/common";
+import { BrandArrType, ImageType } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
-
-const brandData = [
-  {
-    url: "/brand-lazurde.jpg",
-    altText: "brand image",
-    label: "L’azurde",
-    labelUrl: "/",
-  },
-  {
-    url: "/brand-missL.jpg",
-    altText: "brand image",
-    label: "Miss L’",
-    labelUrl: "/",
-  },
-  {
-    url: "/brand-kenaz.jpg",
-    altText: "brand image",
-    label: "Kenaz",
-    labelUrl: "/",
-  },
-  {
-    url: "/brand-lazurdeLS.jpg",
-    altText: "brand image",
-    label: "L’azurde InStyle",
-    labelUrl: "/",
-  },
-];
 
 interface SidebarProps {
   mainImg?: ImageType;
   mainTitle?: string;
   logoArr?: [{ logoImg: ImageType }];
-  brandArr?: BrandProps[];
+  brandArr?: BrandArrType[];
   isOpened?: boolean;
   setIsOpened?: Function;
   closeIcon?: boolean;
   closeMenu?: Function;
 }
 
-const BrandContainer: FC<BrandProps> = ({
+const BrandContainer: FC<BrandArrType> = ({
   brandImg,
   label,
   labelUrl,
@@ -119,7 +88,6 @@ const BrandSideBar: FC<SidebarProps> = ({
         <div className={styles["text_div"]}>
           <div>
             <img src={mainImg?.url} alt={mainImg?.altText} />
-            {/* <LazurdeLogo width="182px" height="24px" /> */}
           </div>
           <div className={styles["slogan_div"]}>
             <span>
