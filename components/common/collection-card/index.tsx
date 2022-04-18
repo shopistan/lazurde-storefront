@@ -10,7 +10,7 @@ import { AppContext } from 'lib/context/index';
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 
-interface collectionCardTypes {
+interface CollectionCardTypes {
     collectionbutton: string;
     collectiontitle: string;
     collectiontext: string;
@@ -19,14 +19,14 @@ interface collectionCardTypes {
     collectionImageMissl: ImageType;
 }
 
-interface _collectionCardTypes {
+interface _CollectionCardTypes {
     collectionbutton: string;
     collectiontitle: string;
     collectiontext: string;
 }
 
 interface CollectionCardProps {
-    collectionCard: collectionCardTypes[];
+    collectionCard: CollectionCardTypes[];
 }
 
 
@@ -36,7 +36,7 @@ const CollectionCard: FC<CollectionCardProps> = ({ collectionCard }): JSX.Elemen
     const router = useRouter();
     const { t } = useTranslation("common");
 
-    const _collectionCard : _collectionCardTypes[]  = t('collectionCard', {}, { returnObjects: true });
+    const _collectionCard : _CollectionCardTypes[]  = t('collectionCard', {}, { returnObjects: true });
     return (
 
         <div className={styles["collection-container"]}>
