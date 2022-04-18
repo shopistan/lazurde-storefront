@@ -24,7 +24,7 @@ const MobileNavBar = ({
   const renderSiteLogo = () => {
     return (
       <div className={styles["mobile-header__logo"]}>
-        <Link href={siteLogoUrl}>
+        <Link href={siteLogoUrl || "/"}>
           <a>
             <Image
               src={siteLogo?.url}
