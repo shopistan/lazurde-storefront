@@ -48,7 +48,7 @@ const BrandCards: FC<BrandCardsProps> = ({
               const { cardTitle, cardImage } = data;
               return (
                 <SwiperSlide key={index}>
-                  <div className={styles["cards"]} key={index}>
+                  <div className={`${styles["cards"]} ${appState.lang == 'ar' && styles["arabic-card"]}`} key={index}>
                     <Cards
                       onClick={onClick}
                       className={styles["brand-card"]}
