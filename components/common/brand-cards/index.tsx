@@ -1,7 +1,7 @@
 import React, { FC, useContext } from "react";
 import Cards from "components/common/card";
 import { ImageType } from "lib/types/common";
-import styles from "./brands-card.module.scss";
+import styles from "./Brand-cards.module.scss";
 import useWindowSize from "lib/utils/useWindowSize";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
