@@ -36,7 +36,7 @@ const CollectionCard: FC<CollectionCardPropsArray> = ({ collectionCard }): JSX.E
     const router = useRouter();
     const { t } = useTranslation("common");
 
-    const _collectionCard : _collectionCardProps[]  = t('collectionCard', {}, { returnObjects: true });
+    const _collectionCard: _collectionCardProps[] = t('collectionCard', {}, { returnObjects: true });
     return (
 
         <div className={styles["collection-container"]}>
