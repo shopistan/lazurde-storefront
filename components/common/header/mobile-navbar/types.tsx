@@ -43,3 +43,17 @@ export interface SubMenuProps {
   subMenuData?: DataProps;
   menuTitle: string;
 }
+
+export type optionProps = {
+  label: string;
+  img: string;
+  value: string;
+  langTitle: string;
+};
+
+export interface SelectProps {
+  options: optionProps[];
+  onChange: Function;
+  defaultValue: string;
+  iconWidth?: string | number;
+}

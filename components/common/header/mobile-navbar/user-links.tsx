@@ -5,6 +5,7 @@ import { CustomerCare, Calendar, Account, Location } from "components/icons";
 import AuthLinks from "./auth-links";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
+import MobileLanguageSelector from "./lang-selector";
 
 const UserLinks = (): JSX.Element => {
   const { t } = useTranslation("common");
@@ -60,6 +61,7 @@ const UserLinks = (): JSX.Element => {
           </Link>
         </li>
       </ul>
+      <MobileLanguageSelector />
       <AuthLinks />
     </div>
   );
