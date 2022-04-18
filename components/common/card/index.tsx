@@ -12,6 +12,7 @@ interface CardProps {
   width?: number | string;
   height?: number | string;
   color?: string;
+  favIconSrc ?: ImageType;
 }
 
 const Cards = ({
@@ -22,6 +23,7 @@ const Cards = ({
   width = 10,
   height = 10,
   color = "#000000",
+  favIconSrc,
 }: CardProps): JSX.Element => {
   return (
     <>
@@ -32,14 +34,20 @@ const Cards = ({
         }}
       >
         {cardImage?.url && (
-          <Image
-            className={`${styles["card-image"]}`}
-            src={cardImage?.url}
-            alt={cardImage?.altText}
-            width={width}
-            height={height}
-            layout="responsive"
-          />
+          <div className={styles["image-section"]}>
+            {
+              favIconSrc &&
+            <img className={styles["fav-icon"]} src={favIconSrc.url} alt={favIconSrc.altText}/>
+            }
+            <Image
+              className={`${styles["card-image"]}`}
+              src={cardImage?.url}
+              alt={cardImage?.altText}
+              width={width}
+              height={height}
+              layout="responsive"
+            />
+          </div>
         )}
         {cardTitle && (
           <Label style={{ color: color }} className={styles["card-title"]}>

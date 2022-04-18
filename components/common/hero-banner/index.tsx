@@ -6,7 +6,7 @@ import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 import Button from "components/common/ui/button/index";
 import { useRouter } from "next/router";
-interface LazurdeHeroBannerProps {
+interface LazurdeHeroBannerTypes {
   backgroundImage: ImageType;
   bannerText: string;
   buttonText: string;
@@ -14,11 +14,11 @@ interface LazurdeHeroBannerProps {
   bannerBodyText: string;
 }
 
-interface PropTypes {
-  heroBannerArray: LazurdeHeroBannerProps[];
+interface LazurdeHeroBannerProps {
+  heroBannerArray: LazurdeHeroBannerTypes[];
 }
 
-const LazurdeHeroBanner: FC<PropTypes> = ({ heroBannerArray }): JSX.Element => {
+const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({ heroBannerArray }): JSX.Element => {
   const router = useRouter();
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
