@@ -7,7 +7,7 @@ exports.default = Types.Component({
 
   attributes: {
     heading: Types.String({ label: "Section Heading" }),
-    exploreBrandsArray: Types.Array({
+    brandCards: Types.Array({
       label: "Brand Cards",
       children: Types.Shape({
         children: {
