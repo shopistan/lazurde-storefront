@@ -12,7 +12,6 @@ import useWindowSize from "lib/utils/useWindowSize";
 import Accordion from "../accordion";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
-import { ArabicfooterLinks } from "lib/mock-data/data";
 
 const Footer = ({
   heading = "",

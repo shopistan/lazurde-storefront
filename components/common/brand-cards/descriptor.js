@@ -1,22 +1,22 @@
 const { Types } = require("@teamfabric/xpm");
 
 exports.default = Types.Component({
-  id: "BrandsCard",
-  label: "Explore Brands",
+  id: "BrandCards",
+  label: "Brand Cards",
   description: ``,
 
   attributes: {
-    heading: Types.String({ label: "Heading" }),
-    exploreBrandsArray: Types.Array({
-      label: "Explore Brands",
+    heading: Types.String({ label: "Section Heading" }),
+    brandCards: Types.Array({
+      label: "Brand Cards",
       children: Types.Shape({
         children: {
           cardImage: Types.Image({
-            label: "card Image",
+            label: "Card Image",
             url: Types.String({ label: "URL" }),
             altText: Types.String({ label: "Alt text" }),
           }),
-          cardTitle: Types.String({ label: "Title" }),
+          cardTitle: Types.String({ label: "Card Title" }),
         },
       }),
     }),

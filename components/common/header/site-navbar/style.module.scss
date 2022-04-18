@@ -8,8 +8,22 @@
   padding-inline: 24px;
   background-color: #fff;
 
-  & > div:nth-child(1) {
+  .back-btn {
     display: none;
+    a {
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 120%;
+      text-decoration: none;
+
+      div {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+      }
+    }
   }
 
   & > div:nth-child(2) {
@@ -17,7 +31,8 @@
   }
 
   .nav-links {
-    width: 705px;
+    min-width: 705px;
+    width: 100%;
   }
 
   & > div:nth-child(4) {
@@ -29,12 +44,14 @@
   &[data-headerId="kenazHeader"] {
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 57px 57px;
+    padding-inline: 0;
 
-    & > div:nth-child(1) {
+    .back-btn {
       display: block;
       grid-row: 1 / 2;
       grid-column: 1 / 2;
       min-width: 150px;
+      padding-inline-start: 24px;
     }
 
     & > div:nth-child(2) {
@@ -42,11 +59,14 @@
       grid-column: 2 / 3;
       text-align: center;
       justify-self: center;
+      width: 152px;
     }
 
     .nav-links {
       grid-row: 2 / 3;
-      grid-column: 2 / 3;
+      grid-column: 1 / 4;
+      align-self: center;
+      width: 100%;
     }
 
     & > div:nth-child(4) {
@@ -54,6 +74,8 @@
       grid-column: 3 / 4;
       min-width: 150px;
       text-align: end;
+      padding-inline-end: 24px;
+
     }
   }
 
@@ -93,7 +115,11 @@
         transition: width ease-in-out 0.15s, left ease-in-out 0.15s;
       }
 
-      &:hover::after {
+      // &:hover::after {
+      //   width: 100%;
+      //   left: 0;
+      // }
+      &[data-selected="true"]::after {
         width: 100%;
         left: 0;
       }
@@ -105,14 +131,44 @@
     position: absolute;
     top: 100%;
     z-index: 100;
-    right: 0;
-    left: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     height: 0;
-    transition: height 0.15s ease-in-out;
+    opacity: 1;
+    transition: height 0.2s ease-in-out 0.1s;
     overflow: hidden;
 
     &[data-opened="true"] {
+      transition: height 0.2s ease-in-out;
       height: 478px;
+    }
+  }
+
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    width: 100vw;
+    height: 0;
+    top: 100%;
+    inset-inline-end: 0;
+    z-index: 3;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out 0.1s, height 0.3s ease-in-out 0.5s;
+
+    &[data-opened="true"] {
+      transition: opacity 0.2s ease-in-out, height 0.2s ease-in-out;
+      opacity: 1;
+      height: 100vh;
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .back-btn {
+    svg {
+      transform: rotateY(180deg)
     }
   }
 }

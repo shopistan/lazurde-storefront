@@ -30,12 +30,14 @@ export type HeaderProps = {
   headerId: string;
   siteNavBar: [];
   siteLogo: ImageType;
+  siteLogoUrl: string;
   navLinks: NavLinks[];
   brandImage: ImageType;
   promoTitle: string;
   promoLinkText: string;
   mobilePromoLinkText: string;
   promoLink: string;
+  promoBackground: string;
 };
 
 export type BrandSidebarProps = {

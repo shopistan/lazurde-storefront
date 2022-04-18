@@ -9,8 +9,12 @@
   & > div {
     display: flex;
     flex-direction: column;
-    width: 211px;
+    width: 180px;
     color: black;
+
+    @media (min-width: 1200px) {
+      width: 211px;
+    }
 
     .title {
       font-weight: 500;
@@ -22,32 +26,21 @@
     .links {
       display: flex;
       flex-direction: column;
-      row-gap: 8px;
+      row-gap: 16px;
 
-      span {
+      a {
+        text-decoration: none;
         display: inline-block;
         font-weight: 500;
         font-size: 16px;
         line-height: 120%;
         color: rgba(0, 0, 0, 0.6);
         cursor: pointer;
+
+        &[data-isBold="true"] {
+          color: rgb(0, 0, 0);
+        }
       }
     }
   }
-
-  // & > div:nth-child(2) {
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   flex: 1;
-
-  //   ul {
-  //     list-style: none;
-  //     display: flex;
-  //     align-items: center;
-  //     justify-content: center;
-  //     column-gap: 20px;
-  //     color: black;
-  //   }
-  // }
 }

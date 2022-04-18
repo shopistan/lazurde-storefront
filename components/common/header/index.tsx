@@ -16,9 +16,11 @@ const Header = ({
   headerId,
   siteNavBar,
   siteLogo,
+  siteLogoUrl,
   promoTitle,
   promoLinkText,
   promoLink,
+  promoBackground,
   mobilePromoLinkText,
   brandSidebarProps,
 }: AllHeaderProps): JSX.Element => {
@@ -30,15 +32,28 @@ const Header = ({
         linkText={promoLinkText || "Shop All Our Markdowns"}
         mobileLinkText={mobilePromoLinkText || "Shop All"}
         link={promoLink || "/"}
-        bgColor="#C3A856"
+        bgColor={promoBackground}
       />
       {width < 1024 ? (
-        <MobileNavBar menuData={siteNavBar} />
+        <MobileNavBar
+          menuData={siteNavBar}
+          headerId={headerId}
+          brandSideBar={brandSidebarProps}
+          siteLogo={siteLogo}
+          siteLogoUrl={siteLogoUrl}
+        />
       ) : (
         <UserNavBar brandSideBar={brandSidebarProps} />
       )}
       <LangSelector />
-      {width < 1024 ? null : <SiteNavBar siteNavBar={siteNavBar} siteLogo={siteLogo} headerId={headerId} />}
+      {width < 1024 ? null : (
+        <SiteNavBar
+          siteNavBar={siteNavBar}
+          siteLogo={siteLogo}
+          siteLogoUrl={siteLogoUrl}
+          headerId={headerId}
+        />
+      )}
     </div>
   );
 };
