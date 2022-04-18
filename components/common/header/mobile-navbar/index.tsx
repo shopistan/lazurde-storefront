@@ -3,8 +3,15 @@ import styles from "./style.module.scss";
 import { Bag, Heart, MenuIcon, Search, LazurdeLogo } from "components/icons";
 import Link from "next/link";
 import MobileMenu from "./mobile-menu";
+import Image from "next/image";
 
-const MobileNavBar = ({ menuData, headerId, brandSideBar }: any): JSX.Element => {
+const MobileNavBar = ({
+  menuData,
+  headerId,
+  brandSideBar,
+  siteLogo,
+  siteLogoUrl,
+}: any): JSX.Element => {
   const [menu, setMenu] = useState<Boolean>(false);
   const handleMenu = () => {
     setMenu(!menu);
@@ -17,9 +24,15 @@ const MobileNavBar = ({ menuData, headerId, brandSideBar }: any): JSX.Element =>
   const renderSiteLogo = () => {
     return (
       <div className={styles["mobile-header__logo"]}>
-        <Link href="/">
+        <Link href={siteLogoUrl}>
           <a>
-            <LazurdeLogo width={152} height={20} />
+            <Image
+              src={siteLogo?.url}
+              width={152}
+              height={20}
+              layout="fixed"
+              alt={siteLogo?.altText}
+            />
           </a>
         </Link>
       </div>
