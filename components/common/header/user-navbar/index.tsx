@@ -20,7 +20,7 @@ const UserNavBar: FC<{brandSideBar: BrandSidebarProps}> = ({brandSideBar}): JSX.
     } else {
       setTimeout(() => {
         document.body.style.overflow = "auto";
-      }, 200)
+      }, 280)
 
     }
   }, [isOpened])
