@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import styles from "./user-navbar.module.scss";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
@@ -7,10 +7,23 @@ import BrandSidebar from "./brand-sidebar";
 import {
   BrandSidebarProps,
 } from "lib/types/common";
+import useWindowSize from "lib/utils/useWindowSize";
 
 const UserNavBar: FC<{brandSideBar: BrandSidebarProps}> = ({brandSideBar}): JSX.Element => {
   const { t } = useTranslation("common");
   const [isOpened, setIsOpened] = useState(false)
+  const [width] = useWindowSize();
+
+  useEffect(() => {
+    if (isOpened) {
+      document.body.style.overflow = "hidden";
+    } else {
+      setTimeout(() => {
+        document.body.style.overflow = "auto";
+      }, 200)
+
+    }
+  }, [isOpened])
   
   return (
     <div className={styles["user-navbar"]} data-testid="product-card">
@@ -59,6 +72,13 @@ const UserNavBar: FC<{brandSideBar: BrandSidebarProps}> = ({brandSideBar}): JSX.
           </a>
         </Link>
       </div>
+      {width > 1023 && (
+        <div
+          className={styles["overlay"]}
+          data-opened={isOpened}
+          onClick={() => setIsOpened(!isOpened)}
+        ></div>
+      )}
       <BrandSidebar {...brandSideBar} isOpened={isOpened} setIsOpened={setIsOpened} />
     </div>
   );

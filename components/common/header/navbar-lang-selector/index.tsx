@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./style.module.scss";
+import styles from "./navbar-lang-selector.module.scss";
 import Cross from '../../../icons/Cross';
 import useTranslation from "next-translate/useTranslation";
 import LanguageSelector from './../../language-selector/index';

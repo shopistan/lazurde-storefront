@@ -137,5 +137,27 @@
       width: 20px;
       height: 20px;
     }
+  
+  
+  }
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 100%;
+  width: 100vw;
+  height: 100vh;
+  inset-inline-end: 0;
+  z-index: 3;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity 3s 4s;
+  display: none;
+
+  &[data-opened="true"] {
+    opacity: 1;
+    display: block;
   }
 }
