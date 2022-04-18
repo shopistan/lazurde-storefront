@@ -4,7 +4,7 @@ import { ImageType } from "lib/types/common";
 import styles from "./card.module.scss";
 import Label from "components/common/ui/label";
 
-interface ExploreBrandProps {
+interface CardProps {
   cardImage?: ImageType;
   cardTitle?: string;
   className?: string;
@@ -12,6 +12,7 @@ interface ExploreBrandProps {
   width?: number | string;
   height?: number | string;
   color?: string;
+  favIconSrc ?: ImageType;
 }
 
 const Cards = ({
@@ -22,8 +23,8 @@ const Cards = ({
   width = 10,
   height = 10,
   color = "#000000",
-}: ExploreBrandProps): JSX.Element => {
-
+  favIconSrc,
+}: CardProps): JSX.Element => {
   return (
     <>
       <div
@@ -33,14 +34,20 @@ const Cards = ({
         }}
       >
         {cardImage?.url && (
-          <Image
-            className={`${styles["card-image"]}`}
-            src={cardImage?.url}
-            alt={cardImage?.altText}
-            width={width}
-            height={height}
-            layout="responsive"
-          />
+          <div className={styles["image-section"]}>
+            {
+              favIconSrc &&
+            <img className={styles["fav-icon"]} src={favIconSrc.url} alt={favIconSrc.altText}/>
+            }
+            <Image
+              className={`${styles["card-image"]}`}
+              src={cardImage?.url}
+              alt={cardImage?.altText}
+              width={width}
+              height={height}
+              layout="responsive"
+            />
+          </div>
         )}
         {cardTitle && (
           <Label style={{ color: color }} className={styles["card-title"]}>

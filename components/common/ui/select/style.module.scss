@@ -96,6 +96,15 @@ html[dir="rtl"] {
       font-weight: 400;
       font-size: 15px;
       line-height: 19.5px;
+      direction: ltr;
+      justify-content: flex-end;
+    }
+
+    .option {
+      display: flex;
+      direction: ltr;
+      justify-content: flex-end;
+      margin-inline-end: 0 !important;
     }
 
     &:first-child {
