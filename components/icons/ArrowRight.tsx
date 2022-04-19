@@ -1,3 +1,5 @@
+import React from "react";
+
 const ArrowRight = ({ fill = "#000", width = "5", height = "8" }) => {
   return (
     <>
