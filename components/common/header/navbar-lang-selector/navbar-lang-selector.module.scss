@@ -45,6 +45,13 @@
 
       span {
         width: 164px;
+        line-height: 120%;
+      }
+
+      div:nth-child(2) {
+        span {
+          font-size: 14px;
+        }
       }
     }
 
@@ -103,6 +110,25 @@
         margin-inline-end: 24px;
         width: 20px;
         height: 20px;
+      }
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .main-section {
+    .selector {
+      div:nth-child(2) {
+        span {
+          font-size: 13px;
+          @media (min-width: 1024px) {
+            font-size: 14px;
+            line-height: 130%;
+          }
+        }
+      }
+      button { 
+        font-size: 15px;
       }
     }
   }
