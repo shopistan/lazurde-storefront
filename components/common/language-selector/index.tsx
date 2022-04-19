@@ -45,10 +45,12 @@ const LanguageSelector = ({
   showButton,
   className = "",
   mainWrapperClass = "",
+  optionClassName = "",
 }: {
   showButton?: Boolean;
   className?: string;
   mainWrapperClass?: string;
+  optionClassName?: string;
 }): JSX.Element => {
   const router = useRouter();
   const { pathname, query, asPath } = router;
@@ -109,12 +111,14 @@ const LanguageSelector = ({
         onChange={onCountryChange}
         defaultValue={appState.region}
         className={className}
+        optionClassName={optionClassName}
       ></Select>
       <Select
         options={languageArr}
         onChange={onLanguageChange}
         defaultValue={appState.lang}
         className={className}
+        optionClassName={optionClassName}
       ></Select>
       {showButton && (
         <div className={styles["submit-btn"]}>
