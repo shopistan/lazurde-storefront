@@ -428,6 +428,11 @@ html[dir="rtl"] {
       }
     }
 
+    &__brand-name {
+      direction: ltr;
+      text-align: right;
+    }
+
     &__menu-active {
       transform: translateX(0);
     }
