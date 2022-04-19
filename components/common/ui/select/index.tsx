@@ -43,7 +43,7 @@ const Select = ({
       onBlur={() => setIsOpen(false)}
     >
       <span
-        className={`${styles["select"]} ${styles[optionClassName]}`}
+        className={`${styles["select"]} ${optionClassName}`}
         onClick={() => {
           if (
             window.innerHeight -
