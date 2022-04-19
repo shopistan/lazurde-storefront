@@ -35,7 +35,7 @@ const CardSlider = ({
   const { t } = useTranslation("common");
 
   const _cards =
-    appState.lang === "en"
+    appState?.lang === "en"
       ? cards
       : t("cardSliderData.cards", {}, { returnObjects: true });
 
@@ -45,7 +45,7 @@ const CardSlider = ({
       style={{ backgroundColor: bgColor }}
     >
       <Label className={styles["card-slider__section-heading"]}>
-        {appState.lang === "en"
+        {appState?.lang === "en"
           ? sectionHeading
           : t("cardSliderData.sectionHeading")}
       </Label>

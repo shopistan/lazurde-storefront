@@ -10,16 +10,16 @@ type LinksArrType = {
 interface FooterLinkProps {
   heading?: string;
   links?: LinksArrType[];
-  key?: number;
+  index?: number;
 }
 
 const FooterLinks = ({
   heading = "",
   links = [],
-  key,
+  index,
 }: FooterLinkProps): JSX.Element => {
   return (
-    <div className={styles["menu__column"]} key={key}>
+    <div className={styles["menu__column"]} key={index}>
       <Heading element="h2" className={styles["menu__heading"]}>
         {heading}
       </Heading>
