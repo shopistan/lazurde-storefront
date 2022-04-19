@@ -4,7 +4,11 @@ import { Cross, BackArrow } from "components/icons";
 import Link from "next/link";
 import Label from "components/common/ui/label";
 import { AppContext } from "lib/context";
-import { SubMenuProps } from "lib/types/mobile-header";
+import { MobileSubMenuProps } from "lib/types/mobile-header";
+type ArabicCategoryType = {
+  linkHeading?: string;
+  linkTitle?: [{ title: string }];
+};
 
 const MobileSubMenu = ({
   active = false,
@@ -12,7 +16,7 @@ const MobileSubMenu = ({
   closeSubMenu,
   subMenuData,
   menuTitle,
-}: SubMenuProps): JSX.Element => {
+}: MobileSubMenuProps): JSX.Element => {
   const { appState } = useContext(AppContext);
 
   return (
@@ -47,26 +51,24 @@ const MobileSubMenu = ({
             subMenuData?.dropdownData.length > 0 &&
             subMenuData?.dropdownData?.map((data, index) => {
               const { title, catArr } = data;
-              const currentCategoryArabic = subMenuData?.categoryLinks?.[index];
-              const {
-                linkHeading,
-                linkTitle,
-              }: { linkHeading: string; linkTitle: [{ title?: string }] } =
-                currentCategoryArabic;
-
+              const currentCategoryArabic: ArabicCategoryType =
+                subMenuData?.categoryLinks?.[index];
               return (
                 <li
                   key={index}
                   className={styles["mobile-header__sub-menu-list-items"]}
                 >
                   <Label className={styles["mobile-header__sub-menu-heading"]}>
-                    {appState.lang === "en" ? title : linkHeading}
+                    {appState?.lang === "en"
+                      ? title
+                      : currentCategoryArabic?.linkHeading}
                   </Label>
                   <ul>
                     {catArr &&
                       catArr.length > 0 &&
                       catArr?.map((data, index) => {
-                        const categoryLinkArabic = linkTitle[index];
+                        const categoryLinkArabic =
+                          currentCategoryArabic?.linkTitle[index];
 
                         return (
                           <>
@@ -78,10 +80,10 @@ const MobileSubMenu = ({
                                 closeSubMenu();
                               }}
                             >
-                              <Link href={data.url || ""}>
-                                <a data-isBold={data.isBold}>
-                                  {appState.lang === "en"
-                                    ? data.title
+                              <Link href={data?.url || ""}>
+                                <a data-isBold={data?.isBold}>
+                                  {appState?.lang === "en"
+                                    ? data?.title
                                     : categoryLinkArabic?.title}
                                 </a>
                               </Link>

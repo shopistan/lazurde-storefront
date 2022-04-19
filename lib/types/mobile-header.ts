@@ -58,7 +58,7 @@ export interface DropdownDataProps {
   categoryLinks?: [];
 }
 
-export interface SubMenuProps {
+export interface MobileSubMenuProps {
   active?: Boolean;
   closeMenu?: Function;
   closeSubMenu?: Function;
