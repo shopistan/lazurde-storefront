@@ -1,3 +1,6 @@
+import React from "react";
+
+
 const BackArrow = ({ opacity = "0.6", fill = "#000000" }) => {
   return (
     <>
