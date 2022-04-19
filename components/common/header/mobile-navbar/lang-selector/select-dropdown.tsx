@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { useContext } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { ArrowRight } from "components/icons";
-import React, { useState, useRef, useEffect } from "react";
 import { SelectProps, OptionProps } from "lib/types/mobile-header";
 import styles from "../style.module.scss";
 import { AppContext } from "lib/context";

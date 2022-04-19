@@ -9,7 +9,12 @@ import LanguageSelector from "./select-dropdown";
 
 const MobileLanguageSelector = (): JSX.Element => {
   const router = useRouter();
-  const { pathname, query, asPath } = router;
+  const { pathname, query, asPath } = router || {
+    pathname: "",
+    query: "",
+    asPath: "",
+  };
+  const { locale, push } = useRouter() || { locale: "", push: () => {} };
   const { appState, saveAppState } = useContext(AppContext);
   const [region, setRegion] = useState({
     lang: appState.lang,
@@ -21,7 +26,7 @@ const MobileLanguageSelector = (): JSX.Element => {
   }, [region]);
 
   useEffect(() => {
-    if (appState.lang === "en") {
+    if (appState?.lang === "en") {
       document.documentElement.dir = "ltr";
     } else {
       document.documentElement.dir = "rtl";
@@ -29,8 +34,8 @@ const MobileLanguageSelector = (): JSX.Element => {
   }, [appState]);
 
   useEffect(() => {
-    if (router.locale.search("-") !== -1) {
-      const route = (router.locale || "").split("-");
+    if (locale?.search("-") !== -1) {
+      const route = (locale || "").split("-");
       saveAppState({
         ...appState,
         region: route[1],
@@ -38,7 +43,7 @@ const MobileLanguageSelector = (): JSX.Element => {
         locale: `${route[0]}-${route[1]}`,
       });
     }
-  }, [router.locale]);
+  }, [locale]);
 
   const handleSelect = (selectedData: OptionProps) => {
     const _selectedData = selectedData?.value.split("-");
@@ -49,7 +54,7 @@ const MobileLanguageSelector = (): JSX.Element => {
   };
 
   const navigateToLocale = (locale: string) => {
-    router.push({ pathname, query }, asPath, { locale: locale });
+    push({ pathname, query }, asPath, { locale: locale });
   };
 
   return (
