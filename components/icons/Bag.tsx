@@ -1,3 +1,5 @@
+import React from "react";
+
 const Bag = ({
   fill = "#fff",
   stroke = "#fff",

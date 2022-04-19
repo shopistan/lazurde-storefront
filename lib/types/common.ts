@@ -19,11 +19,11 @@ export type NavLinks = {
 };
 
 export type BrandArrType = {
-  url: string;
-  altText: string;
-  label: string;
-  labelUrl: string;
-  brandImg: ImageType;
+  url?: string;
+  altText?: string;
+  label?: string;
+  labelUrl?: string;
+  brandImg?: ImageType;
 };
 
 export type HeaderProps = {
@@ -47,9 +47,9 @@ export type BrandSidebarProps = {
   brandArr: BrandArrType[];
 };
 
-export type footerLinksType = {
+export type FooterLinksType = {
   linkHeading: string;
-  links: [];
+  links: [{ url: string; text: string }];
 };
 
 export type iconsObjType = {
@@ -62,7 +62,7 @@ interface footerLogoProp {
 }
 
 export type FooterProps = {
-  footerLinks: footerLinksType[];
+  footerLinks: FooterLinksType[];
   heading: string;
   subHeading: string;
   linkLabel: string;
