@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { PageProps, XMComponent } from "lib/types/common";
-import { GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import Head from "next/head";
 import Header from "components/common/header";
@@ -45,6 +45,16 @@ const LazurdeProductListingPage: FC<PageProps> = ({
 };
 
 export default LazurdeProductListingPage;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = ["necklaces"].map((categoryPath) => ({
+    params: {
+      category_hierarchy: categoryPath,
+    },
+  }));
+
+  return { paths, fallback: false };
+};
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
   console.log("Category Page Context", context);
