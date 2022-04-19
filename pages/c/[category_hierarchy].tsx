@@ -1,18 +1,19 @@
-import Footer from "components/common/footer";
-import Header from "components/common/header";
-import { componentsById } from "components/xm-component-library";
+import React, { FC } from "react";
 import { PageProps, XMComponent } from "lib/types/common";
+import { GetStaticProps } from "next";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import Head from "next/head";
-import React, { FC } from "react";
-import AppContentWrapper from "../components/common/app-content-wrapper";
-import styles from "../styles/Home.module.css";
+import Header from "components/common/header";
+import AppContentWrapper from "components/common/app-content-wrapper";
+import styles from "../../styles/Home.module.css";
+import { componentsById } from "components/xm-component-library";
+import Footer from "components/common/footer";
 
-const LazurdeHome: FC<PageProps> = ({
+const LazurdeProductListingPage: FC<PageProps> = ({
   headerProps,
-  brandSidebarProps,
   footerProps,
   pageComponents,
+  brandSidebarProps,
 }) => {
   return (
     <>
@@ -27,28 +28,6 @@ const LazurdeHome: FC<PageProps> = ({
           {/* <div className={styles.links}>
             <Link href={"/en-sa"} locale="en-sa">
               <a>Lazurde en-sa</a>
-            </Link>
-            <Link href={"/"} locale="ar-sa">
-              <a>Lazurde ar-sa</a>
-            </Link>
-            <Link href={"/"} locale="en-ae">
-              <a>Lazurde en-ae</a>
-            </Link>
-            <Link href={"/"} locale="ar-ae">
-              <a>Lazurde ar-ae</a>
-            </Link>
-            <Link href={"/"} locale="en-eg">
-              <a>Lazurde en-eg</a>
-            </Link>
-            <Link href={"/"} locale="ar-eg">
-              <a>Lazurde ar-eg</a>
-            </Link>
-
-            <Link href={"/kenaz"}>
-              <a>Kenaz HomePage</a>
-            </Link>
-            <Link href={"/missl"}>
-              <a>Miss'L HomePage</a>
             </Link>
           </div> */}
           {pageComponents.map((component: XMComponent, index) => {
@@ -65,14 +44,19 @@ const LazurdeHome: FC<PageProps> = ({
   );
 };
 
-export default LazurdeHome;
+export default LazurdeProductListingPage;
 
-export async function getStaticProps(context: any) {
+export const getStaticProps: GetStaticProps = async (context: any) => {
+  console.log("Category Page Context", context);
   const globalComponents = (await fetchGlobalComponents()) || [];
   const pageComponents = (await fetchXMComponents(12, "/home")) || [];
   const headerProps =
-    (globalComponents.find((item: XMComponent) => item.id === "Header" && item.params.headerId === 'lazurdeHeader') || {})
-      .params || {};
+    (
+      globalComponents.find(
+        (item: XMComponent) =>
+          item.id === "Header" && item.params.headerId === "lazurdeHeader"
+      ) || {}
+    ).params || {};
   const footerProps =
     (globalComponents.find((item: XMComponent) => item.id === "Footer") || {})
       .params || {};
@@ -91,4 +75,4 @@ export async function getStaticProps(context: any) {
     },
     revalidate: 5,
   };
-}
+};
