@@ -36,10 +36,10 @@ const CollectionCard: FC<CollectionCardProps> = ({ collectionCard }): JSX.Elemen
     const router = useRouter();
     const { t } = useTranslation("common");
 
-    const _collectionCard : _CollectionCardTypes[]  = t('collectionCard', {}, { returnObjects: true });
+    const _collectionCard: _CollectionCardTypes[] = t('collectionCard', {}, { returnObjects: true });
     return (
 
-        <div className={styles["collection-container"]}>
+        <div className={`${styles["collection-container"]} ${appState.lang === 'ar' && styles["arabic-card"]}`}>
             <Swiper
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={8}
@@ -75,7 +75,7 @@ const CollectionCard: FC<CollectionCardProps> = ({ collectionCard }): JSX.Elemen
                                     </div>
                                     <div>
                                         <h3 className={styles["collection-title"]}>{appState.lang === 'en' ? collectiontitle : _collectionCard[index].collectiontitle}</h3>
-                                        <p className={styles["collection-text"]}>{appState.lang === 'en' ? collectiontext : _collectionCard[index].collectiontext}</p>
+                                        <p className={`${styles["collection-text"]}`}>{appState.lang === 'en' ? collectiontext : _collectionCard[index].collectiontext}</p>
                                     </div>
                                 </div>
 
