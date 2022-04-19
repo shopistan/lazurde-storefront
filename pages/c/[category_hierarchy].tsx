@@ -5,7 +5,7 @@ import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import Head from "next/head";
 import Header from "components/common/header";
 import AppContentWrapper from "components/common/app-content-wrapper";
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import { componentsById } from "components/xm-component-library";
 import Footer from "components/common/footer";
 
