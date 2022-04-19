@@ -45,3 +45,9 @@
     height: 51px;
   }
 }
+
+html[dir="rtl"] {
+  .button {
+    font-family: "Cairo", sans-serif;
+  }
+}
