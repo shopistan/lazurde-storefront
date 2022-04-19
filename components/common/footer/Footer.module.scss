@@ -158,7 +158,12 @@
     margin-bottom: 24px;
 
     span {
-      font-size: 13px !important;
+      font-size: 13px;
+
+      @media (min-width: 1024px) {
+        font-size: 14px;
+        line-height: 16.8px;
+      }
     }
 
     @media (min-width: 1024px) {
@@ -187,8 +192,13 @@ html[dir="rtl"] {
 
     &__footer-dropdowns {
       span {
-        font-size: 13px !important;
-        line-height: 15.6px !important;
+        font-size: 13px;
+        line-height: 15.6px;
+
+        @media (min-width: 1024px) {
+          font-size: 15px;
+          line-height: 18px;
+        }
       }
     }
   }

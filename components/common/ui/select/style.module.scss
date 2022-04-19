@@ -19,6 +19,16 @@
     @media (min-width: 1024px) {
       font-size: 14px;
     }
+
+    &.footer-dropdown-options {
+      font-size: 13px;
+      line-height: 15.6px;
+
+      @media (min-width: 1024px) {
+        font-size: 14px;
+        line-height: 16.8px;
+      }
+    }
   }
 
   img {
@@ -105,6 +115,44 @@ html[dir="rtl"] {
 
       @media (min-width: 1024px) {
         font-size: 14px;
+      }
+
+      &.footer-dropdown-options {
+        font-size: 13px;
+        line-height: 15.6px;
+
+        @media (min-width: 1024px) {
+          font-size: 15px;
+          line-height: 19.5px;
+        }
+      }
+    }
+
+    &:nth-child(1) {
+      .select {
+        &.footer-dropdown-options {
+          font-weight: 400;
+
+          @media (min-width: 1024px) {
+            font-size: 15px;
+            line-height: 18px;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      .select {
+        &.footer-dropdown-options {
+          font-weight: 500;
+
+          @media (min-width: 1024px) {
+            font-size: 15px;
+            line-height: 19.5px;
+            font-weight: 400;
+          }
+        }
       }
     }
 

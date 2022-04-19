@@ -120,6 +120,7 @@ const Footer = ({
               className={styles["footer__footer-dropdowns"]}
               mainWrapperClass={styles["footer__footer-dropdowns-wrapper"]}
               showButton={false}
+              optionClassName={"footer-dropdown-options"}
             />
           </div>
           <FooterIcons
