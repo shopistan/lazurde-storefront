@@ -1,15 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Cross,
-  BackArrow,
-} from "components/icons";
+import { Cross, BackArrow } from "components/icons";
 import styles from "./brand-sidebar.module.scss";
 import { BrandArrType, ImageType } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
-
+import { AppContext } from "lib/context";
+import { useRouter } from "next/router";
 interface SidebarProps {
   mainImg?: ImageType;
   mainTitle?: string;
@@ -56,13 +54,22 @@ const BrandSideBar: FC<SidebarProps> = ({
   closeIcon,
   closeMenu,
 }): JSX.Element => {
+  const { appState } = useContext(AppContext);
+  const router = useRouter();
 
   return (
-    <div className={styles["brand_sidebar_div"]} data-opened={isOpened} onClick={() => {
-      setIsOpened(false);
-    }}>
-
-      <div className={styles["brand_sidebar"]} data-opened={isOpened} onClick={(event) => event.stopPropagation()}>
+    <div
+      className={styles["brand_sidebar_div"]}
+      data-opened={isOpened}
+      onClick={() => {
+        setIsOpened(false);
+      }}
+    >
+      <div
+        className={styles["brand_sidebar"]}
+        data-opened={isOpened}
+        onClick={(event) => event.stopPropagation()}
+      >
         {closeIcon && (
           <div className={styles["menu-close-icon"]}>
             <div
@@ -70,10 +77,15 @@ const BrandSideBar: FC<SidebarProps> = ({
               onClick={() => {
                 setIsOpened(false);
                 closeMenu();
+                router.push("/");
               }}
             >
               <BackArrow fill="#000000" opacity="0.6" />
-              <span className="opacity-60">Back to L’azurde</span>
+              <span className="opacity-60">
+                {appState?.lang === "en"
+                  ? "Back to L’azurde"
+                  : "ىلا عجرا L’azurde"}
+              </span>
             </div>
             <button onClick={() => setIsOpened(false)}>
               <Cross width={"20px"} height={"20px"} />

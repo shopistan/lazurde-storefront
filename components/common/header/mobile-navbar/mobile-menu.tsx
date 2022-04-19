@@ -10,7 +10,11 @@ import UserLinks from "./user-links";
 import BrandSideBar from "../user-navbar/brand-sidebar/index";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
-import { MenuProps, DropdownDataProps, LinksProps } from "lib/types/mobile-header";
+import {
+  MenuProps,
+  DropdownDataProps,
+  LinksProps,
+} from "lib/types/mobile-header";
 
 const MobileMenu = ({
   active = false,
@@ -49,14 +53,18 @@ const MobileMenu = ({
         >
           {headerId !== "lazurdeHeader" && (
             <div
-              className={`opacity-60 ${styles[""]}`}
+              className={`opacity-60 ${styles["mobile-header__rotate-icon"]}`}
               onClick={() => {
                 router.push("/");
                 closeMenu();
               }}
             >
               <BackArrow fill="#000000" opacity="0.6" />
-              <span className="opacity-60">Back to L’azurde</span>
+              <span className="opacity-60">
+                {appState?.lang === "en"
+                  ? "Back to L’azurde"
+                  : "ىلا عجرا L’azurde"}
+              </span>
             </div>
           )}
           <button className="" onClick={() => closeMenu()}>

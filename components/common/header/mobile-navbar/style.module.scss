@@ -453,5 +453,11 @@ html[dir="rtl"] {
         transform: rotateY(180deg);
       }
     }
+
+    &__rotate-icon {
+      svg {
+        transform: rotateY(180deg);
+      }
+    }
   }
 }
