@@ -1,19 +1,23 @@
 import React, { FC } from "react";
 import { PageProps, XMComponent } from "lib/types/common";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
+import {
+  fetchAllLivePageRoutes,
+  fetchGlobalComponents,
+  fetchXMComponents,
+} from "lib/xm";
 import Head from "next/head";
 import Header from "components/common/header";
 import AppContentWrapper from "components/common/app-content-wrapper";
-import styles from "../../styles/Home.module.css";
 import { componentsById } from "components/xm-component-library";
 import Footer from "components/common/footer";
+import { PageRouteType } from "lib/types/xm";
 
 const LazurdeProductListingPage: FC<PageProps> = ({
   headerProps,
   footerProps,
-  pageComponents,
   brandSidebarProps,
+  pageComponents = [],
 }) => {
   return (
     <>
@@ -24,20 +28,13 @@ const LazurdeProductListingPage: FC<PageProps> = ({
       </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
-        <div className={styles.container}>
-          {/* <div className={styles.links}>
-            <Link href={"/en-sa"} locale="en-sa">
-              <a>Lazurde en-sa</a>
-            </Link>
-          </div> */}
-          {pageComponents.map((component: XMComponent, index) => {
-            const Component = componentsById[component.id];
-            if (Component) {
-              return <Component {...component.params} key={index} />;
-            }
-            return null;
-          })}
-        </div>
+        {pageComponents.map((component: XMComponent, index) => {
+          const Component = componentsById[component.id];
+          if (Component) {
+            return <Component {...component.params} key={index} />;
+          }
+          return null;
+        })}
       </AppContentWrapper>
       <Footer {...footerProps}></Footer>
     </>
@@ -47,19 +44,29 @@ const LazurdeProductListingPage: FC<PageProps> = ({
 export default LazurdeProductListingPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = ["necklaces"].map((categoryPath) => ({
-    params: {
-      category_hierarchy: categoryPath,
-    },
-  }));
-
-  return { paths, fallback: false };
+  const livePageRoutes = (await fetchAllLivePageRoutes()) || [];
+  const listingPageRoutes = livePageRoutes.filter(
+    (pageRoute: PageRouteType) => pageRoute.typeUrl === "/c"
+  );
+  const paths = listingPageRoutes.map((listingPage: PageRouteType) => {
+    const cSlug = listingPage.pageUrl.replace("/", "");
+    return {
+      params: {
+        category_hierarchy: [cSlug],
+      },
+    };
+  });
+  // for (let i = 0; i < paths.length; i++) {
+  //   console.log("CPATH", paths[i].params.category_hierarchy);
+  // }
+  return { paths, fallback: "blocking" };
 };
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
-  console.log("Category Page Context", context);
+  const { category_hierarchy = [] } = context.params || {};
+  const pageUrl = category_hierarchy.join("/");
   const globalComponents = (await fetchGlobalComponents()) || [];
-  const pageComponents = (await fetchXMComponents(12, "/home")) || [];
+  const pageComponents = (await fetchXMComponents(12, `/${pageUrl}`)) || [];
   const headerProps =
     (
       globalComponents.find(
