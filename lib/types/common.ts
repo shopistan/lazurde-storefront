@@ -43,13 +43,13 @@ export type HeaderProps = {
 export type BrandSidebarProps = {
   mainImg: ImageType;
   mainTitle: string;
-  logoArr: [{ logoImg: ImageType }];
+  logoArr: { logoImg: ImageType }[];
   brandArr: BrandArrType[];
 };
 
 export type FooterLinksType = {
   linkHeading: string;
-  links: [{ url: string; text: string }];
+  links: { url: string; text: string }[];
 };
 
 export type iconsObjType = {
@@ -62,7 +62,7 @@ interface footerLogoProp {
 }
 
 export type FooterProps = {
-  footerLinks?: FooterLinksType[];
+  footerLinks?: FooterLinksType[] | [];
   heading?: string;
   subHeading?: string;
   linkLabel?: string;
