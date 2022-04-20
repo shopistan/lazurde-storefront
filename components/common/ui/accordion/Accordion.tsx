@@ -1,17 +1,22 @@
 /* eslint-disable react/no-unknown-property */
-import React from 'react'
+import React from "react";
 import Link from "next/link";
-import styles from "./style.module.scss";
+import styles from "./Accordion.module.scss";
 
-type obj = { url: string; text: string };
-
+type LinksArrType = { url?: string; text?: string };
 interface AccordionProps {
   index?: number;
   heading?: string;
-  links?: obj[];
+  links?: LinksArrType[];
+  isPlusMinusIcon?: boolean;
 }
 
-const Accordion = ({ index = 0, heading = "", links = [] }: AccordionProps): JSX.Element => {
+const Accordion = ({
+  index = 0,
+  heading = "",
+  links = [],
+  isPlusMinusIcon = false,
+}: AccordionProps): JSX.Element => {
   return (
     <div
       tabIndex={index}
@@ -19,7 +24,9 @@ const Accordion = ({ index = 0, heading = "", links = [] }: AccordionProps): JSX
     >
       <input type="checkbox" />
       <div
-        className={`collapse-title text-xl font-medium ${styles["collapse__custom-title"]}`}
+        className={`collapse-title text-xl font-medium ${
+          styles["collapse__custom-title"]
+        } ${isPlusMinusIcon ? "plus-minus-icon" : ""}`}
       >
         {heading}
       </div>

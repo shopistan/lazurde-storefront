@@ -12,7 +12,6 @@ interface PromoBarProps {
   link: string;
   bgColor: string;
 }
-console.log("test public")
 
 const PromoBar: FC<PromoBarProps> = ({
   title,
@@ -29,12 +28,10 @@ const PromoBar: FC<PromoBarProps> = ({
   return (
     <div className={styles["promobar"]} data-visible={isClosed} data-testid="product-card" style={{ backgroundColor: bgColor }}>
       <div className={styles["title"]} data-testid='test-title'>
-        {/* {`${t("promoBarTitle") === ' ' ? title : t("promoBarTitle")} `} */}
         {appState.lang === 'en' ? `${title} ` : t("promoBarTitle")}
         <Link href={link || '/'} locale={false}>
           <a className={styles["link-text"]}>
             <span data-testid='test-title'>
-              {/* {`${t("promoBarLinkTitle") === ' ' ? linkText : t("promoBarLinkTitle")} ` || "Title Here"} */}
               {appState.lang === 'en' ? dynamicText : t("promoBarLinkTitle")}
             </span>
           </a>

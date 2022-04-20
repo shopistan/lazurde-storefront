@@ -5,16 +5,21 @@
   justify-content: center;
   width: 100%;
   height: 40px;
-  // background-color: #c3a856;
   padding-block: 10px;
   font-family: "Roboto";
   font-size: 13px;
   color: black;
   transition: height 0.2s cubic-bezier(0, 0, 0.2, 1),
     padding 0.2s cubic-bezier(0, 0, 0.2, 1);
+  overflow: hidden;
+  background-color: #c3a856;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     font-size: 14px;
+
+    .title {
+      padding-inline-start: 24px;
+    }
   }
 
   &[data-visible="true"] {
@@ -33,13 +38,14 @@
   }
 
   .closeButton {
+    position: absolute;
     margin: 0;
-    margin-inline-end: 16px;
     background-color: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
     line-height: 0;
+    inset-inline-end: 16px;
 
     svg {
       width: 12px;
@@ -47,7 +53,7 @@
     }
 
     @media (min-width: 1024px) {
-      margin-inline-end: 24px;
+      inset-inline-end: 24px;
 
       svg {
         width: 20px;

@@ -13,18 +13,29 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Label from "../ui/label";
 
+type CardsArrType = {
+  image?: { url: string; altText: string };
+  heading?: string;
+}
+interface CardSliderProps {
+  className?: string;
+  sectionHeading?: string;
+  bgColor?: string;
+  cards?: CardsArrType[];
+}
+
 const CardSlider = ({
   cards = [],
   className = "",
   sectionHeading = "",
   bgColor = "#fff",
-}): JSX.Element => {
+}: CardSliderProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
 
   const _cards =
-    appState.lang === "en"
+    appState?.lang === "en"
       ? cards
       : t("cardSliderData.cards", {}, { returnObjects: true });
 
@@ -34,7 +45,7 @@ const CardSlider = ({
       style={{ backgroundColor: bgColor }}
     >
       <Label className={styles["card-slider__section-heading"]}>
-        {appState.lang === "en"
+        {appState?.lang === "en"
           ? sectionHeading
           : t("cardSliderData.sectionHeading")}
       </Label>

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import ArrowDown from "components/icons/ArrowDown";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
@@ -11,6 +12,7 @@ interface SelectProps {
   onChange: Function;
   defaultValue: string;
   className?: string;
+  optionClassName?: string;
 }
 
 const Select = ({
@@ -18,6 +20,7 @@ const Select = ({
   onChange,
   defaultValue,
   className = "",
+  optionClassName = "",
 }: SelectProps): JSX.Element => {
   const dropdown = useRef(null);
   const [selectedVal, setSelectedVal] = useState<optionProps>();
@@ -40,7 +43,7 @@ const Select = ({
       onBlur={() => setIsOpen(false)}
     >
       <span
-        className={styles["select"]}
+        className={`${styles["select"]} ${optionClassName}`}
         onClick={() => {
           if (
             window.innerHeight -

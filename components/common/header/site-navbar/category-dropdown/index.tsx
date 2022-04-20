@@ -1,57 +1,67 @@
-import React, { FC, useState, useContext } from "react";
+import React, { useContext } from "react";
 import styles from "./style.module.scss";
 import Link from "next/link";
-import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
-import { LazurdeLogo, Search } from "components/icons";
-import {
-  BrandSidebarProps,
-} from "lib/types/common";
-const navArr = [
-  {
-    title: "category1",
-    catArr: [
-      {
-        title: 'something1'
-      }
-    ]
-  },
-  {
-    title: "category2",
-    catArr: [
-      {
-        title: 'something2'
-      }
-    ]
-  },
-  {
-    title: "category3",
-    catArr: [
-      {
-        title: 'something3'
-      }
-    ]
-  },
-]
 
-const CategoryDropDown: FC = (): JSX.Element => {
-  const { t } = useTranslation("common");
+type LinkProps = {
+  title: string;
+  url: string;
+  isBold: Boolean;
+};
+
+interface ArabicCategoryProps {
+  linkHeading: string,
+  linkTitle: [
+    {
+      title: string
+    }
+  ]
+}
+
+interface DropDownProps {
+  dropdownData: [{
+    title: string;
+    catArr: [LinkProps];
+  }],
+  categoryLinks: ArabicCategoryProps[],
+}
+
+interface CategoryDropDownProps {
+  categoryData: DropDownProps;
+  setIsOpened: Function
+}
+
+
+
+const CategoryDropDown = ({ categoryData, setIsOpened }: CategoryDropDownProps): JSX.Element => {
   const { appState } = useContext(AppContext);
-  const [isOpened, setIsOpened] = useState(false)
 
   return (
-    <div className={styles['category-dropdown']}>
-      {navArr.map((data, index) => {
+    <div className={styles['category-dropdown']}
+      onMouseOver={() => {
+        setIsOpened((prev: object) => { return { ...prev, opened: true } })
+      }}
+      onMouseLeave={() => {
+        setIsOpened((prev: object) => { return { ...prev, opened: false } })
+      }}
+    >
+      {categoryData?.dropdownData?.map((data, index) => {
         const { title, catArr } = data;
+        const currentCategoryArabic = categoryData?.categoryLinks?.[index]
         return (
           <div key={index}>
-            <div>
-              {title}
+            <div className={styles['title']}>
+              {appState.lang === "en" ? title : currentCategoryArabic?.linkHeading}
             </div>
-            <div>
-              {catArr.map((data, index) => {
+            <div className={styles['links']}>
+              {catArr?.map((data, index) => {
+                const categoryLinkArabic = currentCategoryArabic?.linkTitle[index]
+                console.log('categoryLinkArabic', categoryLinkArabic);
+
                 return (
-                  <div key={index}>{data.title}</div>
+                  <Link key={index} href={data.url || ""} >
+                    <a data-isBold={data.isBold}>{appState.lang === "en" ? data.title : categoryLinkArabic?.title}</a>
+                  </Link>
                 )
               })}
             </div>

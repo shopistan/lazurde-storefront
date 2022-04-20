@@ -7,10 +7,13 @@ exports.default = Types.Component({
   isGlobal: true,
 
   attributes: {
+    headerId: Types.String({ label: "Header Id" }),
     promoTitle: Types.String({ label: "Promo bar title" }),
     promoLinkText: Types.String({ label: "Promo bar link text" }),
     mobilePromoLinkText: Types.String({ label: "Mobile Promo bar link text" }),
     promoLink: Types.String({ label: "Promo bar link" }),
+    promoBackground: Types.String({ label: "Promo bar background color" }),
+    siteLogoUrl: Types.String({ label: "Logo Url" }),
     siteLogo: Types.Image({
       label: "Site Logo",
       url: Types.String({ label: "URL" }),
@@ -22,6 +25,7 @@ exports.default = Types.Component({
       children: Types.Shape({
         children: {
           navTitle: Types.String({ label: "Navigation Title" }),
+          titleUrl: Types.String({ label: "Title Url (optional)" }),
           navArr: Types.Array({
             label: "Categories",
             children: Types.Shape({
@@ -33,6 +37,7 @@ exports.default = Types.Component({
                     children: {
                       title: Types.String({ label: "Title" }),
                       url: Types.String({ label: "URL" }),
+                      isBold: Types.Boolean({ label: "Is Bold" }),
                     },
                   }),
                 }),

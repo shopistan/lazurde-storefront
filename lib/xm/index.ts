@@ -15,6 +15,7 @@ export const fetchXMComponents = async (
         headers: HEADERS.common,
       }
     );
+    
     return response.data?.data?.version[0]?.components ?? null;
   } catch (error: any) {
     console.log(
@@ -34,6 +35,7 @@ export const fetchGlobalComponents = async (): Promise<any> => {
         headers: HEADERS.common,
       }
     );
+
     return response.data;
   } catch (error: any) {
     console.log(
