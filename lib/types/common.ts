@@ -62,16 +62,16 @@ interface footerLogoProp {
 }
 
 export type FooterProps = {
-  footerLinks: FooterLinksType[];
-  heading: string;
-  subHeading: string;
-  linkLabel: string;
-  linkUrl: string;
-  subscriptionText: string;
-  socialIconText: string;
-  socialLinks: iconsObjType[];
-  footerLogo: footerLogoProp;
-  paymentLinks: iconsObjType[];
+  footerLinks?: FooterLinksType[];
+  heading?: string;
+  subHeading?: string;
+  linkLabel?: string;
+  linkUrl?: string;
+  subscriptionText?: string;
+  socialIconText?: string;
+  socialLinks?: iconsObjType[];
+  footerLogo?: footerLogoProp;
+  paymentLinks?: iconsObjType[];
 };
 
 export type PageProps = {
