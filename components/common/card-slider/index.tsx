@@ -1,17 +1,12 @@
 import React, { useContext } from "react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import Cards from "../card";
 import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
-
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import Label from "../ui/label";
+import Label from "components/common/ui/label";
+import Slider from "components/common/ui/slider/slider";
 
 type CardsArrType = {
   image?: { url: string; altText: string };
@@ -52,15 +47,12 @@ const CardSlider = ({
           ? sectionHeading
           : t("cardSliderData.sectionHeading")}
       </Label>
-      <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={8}
-        slidesPerView={width > 1023 ? 4 : 1.1}
+      <Slider
+        desktopSlidePerView={4}
+        mobileSlidePerView={1.1}
         navigation={width > 1023 ? true : false}
-        scrollbar={{ draggable: true }}
+        scrollbar={true}
         className={`card-slider`}
-        key={appState?.lang}
-        dir={appState?.lang === "en" ? "ltr" : "rtl"}
       >
         <>
           {Array.isArray(cards) &&
@@ -86,7 +78,7 @@ const CardSlider = ({
               );
             })}
         </>
-      </Swiper>
+      </Slider>
     </div>
   );
 };
