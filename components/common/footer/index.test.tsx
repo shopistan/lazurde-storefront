@@ -19,7 +19,7 @@ test("Footer testing", () => {
   const heading = "main heading";
   const subHeading = "sub heading";
   const subscriptionText = "subscription Text";
-  const socialIconText = " social Icon Text";
+  const socialIconText = "social Icon Text";
   const footerLogo = {
     url: "/img",
     altText: "alt",
@@ -40,8 +40,8 @@ test("Footer testing", () => {
     </ContextProvider>
   );
 
-  // expect(screen.getByText(heading)).toBeInTheDocument();
-  // expect(screen.getByText(subHeading)).toBeInTheDocument();
-  // expect(screen.getByText(subscriptionText)).toBeInTheDocument();
-  // expect(screen.getByText(socialIconText)).toBeInTheDocument();
+  expect(screen.getByText(heading)).toBeInTheDocument();
+  expect(screen.getByText(subHeading)).toBeInTheDocument();
+  expect(screen.getByText(subscriptionText)).toBeInTheDocument();
+  expect(screen.getByText(socialIconText)).toBeInTheDocument();
 });
