@@ -230,14 +230,14 @@ export const socialLinks = [
     link: "link heading",
     icon: {
       url: "/",
-      atText: "text 1",
+      altText: "text 1",
     },
   },
   {
     link: "link heading 2",
     icon: {
       url: "/",
-      atText: "text 2",
+      altText: "text 2",
     },
   },
 ];
