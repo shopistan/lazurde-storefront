@@ -74,12 +74,12 @@ export type FooterProps = {
   paymentLinks?: iconsObjType[];
 };
 
-export type PageProps = {
+export interface PageProps {
   headerProps: HeaderProps;
   footerProps: FooterProps;
   brandSidebarProps: BrandSidebarProps;
   pageComponents?: XMComponent[];
-};
+}
 
 export type BrandType = "lazurde" | "missl" | "kenaz";
 export type LangType = "en" | "ar";
