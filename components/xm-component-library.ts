@@ -7,6 +7,7 @@ import BrandCards from "./common/brand-cards/index";
 import CardSlider from "./common/card-slider";
 import CollectionCard from "./common/collection-card";
 import ProductListing from "./common/product-listing";
+import PLPCategory from "./common/plp-category";
 
 export const componentsById: any = {
   LazurdeHeroBanner,
@@ -18,4 +19,5 @@ export const componentsById: any = {
   CardSlider,
   CollectionCard,
   ProductListing,
+  PLPCategory
 };
