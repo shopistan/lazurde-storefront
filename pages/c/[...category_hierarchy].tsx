@@ -13,13 +13,26 @@ import { componentsById } from "components/xm-component-library";
 import Footer from "components/common/footer";
 import { PageRouteType } from "lib/types/xm";
 import { fetchCategoryProducts } from "lib/algolia";
+import { AlgoliaProductType } from "lib/types/algolia";
 
-const LazurdeProductListingPage: FC<PageProps> = ({
+interface ProductListingPageProps extends PageProps {
+  algoliaSearchResults: {
+    hits: AlgoliaProductType[];
+    nbHits: number;
+    page: number;
+    nbPages: number;
+    hitsPerPage: number;
+  };
+}
+
+const LazurdeProductListingPage: FC<ProductListingPageProps> = ({
   headerProps,
   footerProps,
   brandSidebarProps,
   pageComponents = [],
+  algoliaSearchResults,
 }) => {
+  console.log("Category Products: ", algoliaSearchResults);
   return (
     <>
       <Head>
@@ -99,7 +112,13 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     });
   }
 
-  const { hits = [], nbHits, page, nbPages, hitsPerPage } = searchResults || {};
+  const {
+    hits = [],
+    nbHits = 0,
+    page = 0,
+    nbPages = 0,
+    hitsPerPage = 0,
+  } = searchResults || {};
 
   return {
     props: {
