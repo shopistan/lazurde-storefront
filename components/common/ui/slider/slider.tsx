@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
@@ -27,19 +27,27 @@ const Slider = ({
 }: SliderProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
+  const [renderSlider, setRendeSlider] = useState(false);
+
+  useEffect(() => {
+    setRendeSlider(true)
+  }, [appState]);
+
   return (
-    <Swiper
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
-      spaceBetween={8}
-      slidesPerView={width > 1023 ? desktopSlidePerView : mobileSlidePerView}
-      navigation={navigation}
-      scrollbar={{ draggable: scrollbar }}
-      className={className}
-      key={appState?.lang}
-      dir={appState?.lang === "en" ? "ltr" : "rtl"}
-    >
-      {children}
-    </Swiper>
+    renderSlider && (
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        spaceBetween={8}
+        slidesPerView={width > 1023 ? desktopSlidePerView : mobileSlidePerView}
+        navigation={navigation}
+        scrollbar={{ draggable: scrollbar }}
+        className={className}
+        key={appState?.lang}
+        dir={appState?.lang === "en" ? "ltr" : "rtl"}
+      >
+        {children}
+      </Swiper>
+    )
   );
 };
 export default Slider;

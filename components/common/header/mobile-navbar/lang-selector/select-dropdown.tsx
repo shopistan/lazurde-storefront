@@ -57,7 +57,7 @@ const LanguageSelector = ({
           {appState?.lang === "en" && selectedVal?.langTitle && (
             <span>{selectedVal?.langTitle}</span>
           )}
-          <ArrowRight />
+          <ArrowRight className={styles["dropdown-arrow"]} />
         </div>
       </span>
       <ul

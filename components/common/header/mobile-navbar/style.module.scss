@@ -272,7 +272,7 @@
         text-decoration: none;
 
         svg {
-          margin-inline-end: 17px;
+          margin-inline-end: 16px;
         }
       }
     }
@@ -390,7 +390,7 @@
       align-items: center;
 
       span {
-        margin-inline-start: 10px;
+        margin-inline-start: 16px;
         text-transform: uppercase;
       }
     }
@@ -403,6 +403,13 @@
 
       svg {
         transform: rotateZ(90deg);
+      }
+    }
+  }
+  &__lang-dropdown {
+    &[data-open="true"] {
+      .dropdown-arrow {
+        transform: rotateZ(270deg);
       }
     }
   }
