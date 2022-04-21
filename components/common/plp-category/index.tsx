@@ -6,6 +6,7 @@ import styles from './plp-category.module.scss'
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context/index";
 import useTranslation from "next-translate/useTranslation";
+import { useRouter } from 'next/router'
 
 type PLPCategoryTypes = {
     cardTitle: string;
@@ -25,6 +26,7 @@ interface PLPCategoryProps {
 
 const PLPCategory: FC<PLPCategoryProps> = ({ title = '', text = '', cards = [] }) => {
     const { appState } = useContext(AppContext);
+    const router = useRouter()
     const { t } = useTranslation("common");
     const _plpCategoryCard: _PLPCategoryTypes[] = t(
         "plpCategoryCard",
@@ -40,9 +42,11 @@ const PLPCategory: FC<PLPCategoryProps> = ({ title = '', text = '', cards = [] }
 
                 {
                     cards.length > 0 && cards.map((card, index) => {
-                        const { cardImage, cardTitle } = card
+                        const { cardImage, cardTitle} = card
                         return (
-                            <Cards width={width > 1023 ? 314 : 167.5} height={width > 1024 ? 331 : 180.5} className={`plp-card`} cardImage={cardImage} cardTitle={appState.lang == 'en' ? cardTitle : _plpCategoryCard[index].cardTitle} key={index} />
+                            <div onClick={() => { router.push('/') }}>
+                                <Cards width={width > 1023 ? 314 : 167.5} height={width > 1024 ? 331 : 180.5} className={`plp-card`} cardImage={cardImage} cardTitle={appState.lang == 'en' ? cardTitle : _plpCategoryCard[index].cardTitle} key={index} />
+                            </div>
 
                         )
                     })
