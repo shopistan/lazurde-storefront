@@ -181,9 +181,9 @@ html[dir="rtl"] {
     padding-block-start: 64px;
     padding-inline-start: 64px;
 
-    &:nth-child(2) {
-      padding-block-start: 80px;
-    }
+    // &:nth-child(2) {
+    //   padding-block-start: 80px;
+    // }
   }
 }
 
