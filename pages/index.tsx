@@ -8,14 +8,6 @@ import React, { FC } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
 import styles from "../styles/Home.module.css";
 
-/**
- * DELETE ME!
- */
-
-/**
- * DELETE ME AS WELL!
- */
-
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
   brandSidebarProps,

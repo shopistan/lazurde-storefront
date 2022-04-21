@@ -53,7 +53,12 @@ const LanguageSelector = ({
   optionClassName?: string;
 }): JSX.Element => {
   const router = useRouter();
-  const { pathname, query, asPath } = router;
+  const { pathname, query, asPath } = router || {
+    pathname: "",
+    query: "",
+    asPath: "",
+  };
+  const { locale, push } = useRouter() || { locale: "", push: () => {} };
   const { t } = useTranslation("common");
 
   const { appState, saveAppState } = useContext(AppContext);
@@ -63,7 +68,7 @@ const LanguageSelector = ({
   });
 
   const navigateToLocale = (locale: string) => {
-    router.push({ pathname, query }, asPath, { locale: locale });
+    push({ pathname, query }, asPath, { locale: locale });
   };
 
   useEffect(() => {
@@ -81,8 +86,8 @@ const LanguageSelector = ({
   }, [appState]);
 
   useEffect(() => {
-    if (router.locale.search("-") !== -1) {
-      const route = (router.locale || "").split("-");
+    if (locale?.search("-") !== -1) {
+      const route = (locale || "").split("-");
       saveAppState({
         ...appState,
         region: route[1],
@@ -90,7 +95,7 @@ const LanguageSelector = ({
         locale: `${route[0]}-${route[1]}`,
       });
     }
-  }, [router.locale]);
+  }, [locale]);
 
   const submitChanges = () => {
     navigateToLocale(`${region.lang}-${region.region}`);

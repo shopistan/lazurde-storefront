@@ -1,13 +1,11 @@
 import { BrandSidebarProps, ImageType } from "lib/types/common";
 export interface MobileHeaderProps {
   menuData?:
-    | [
-        {
-          navTitle?: string;
-          titleUrl?: string;
-          navArr?: [{ title?: string; catArr?: [LinkPropsType] }];
-        }
-      ]
+    | {
+        navTitle?: string;
+        titleUrl?: string;
+        navArr?: { title?: string; catArr?: LinkPropsType[] }[];
+      }[]
     | [];
   siteLogo?: ImageType;
   siteLogoUrl?: string;
@@ -18,13 +16,11 @@ export interface MenuProps {
   active?: Boolean;
   closeMenu?: Function;
   menuData?:
-    | [
-        {
-          navTitle?: string;
-          titleUrl?: string;
-          navArr?: [{ title?: string; catArr?: [LinkPropsType] }];
-        }
-      ]
+    | {
+        navTitle?: string;
+        titleUrl?: string;
+        navArr?: { title?: string; catArr?: LinkPropsType[] }[];
+      }[]
     | [];
   siteLogo?: any;
   headerId?: string;
@@ -45,16 +41,14 @@ export interface CategoryObject {
 export interface LinksProps {
   navTitle?: string;
   titleUrl?: string;
-  navArr?: [{ title?: string; catArr?: [LinkPropsType] }];
+  navArr?: { title?: string; catArr?: LinkPropsType[] }[];
 }
 
 export interface DropdownDataProps {
-  dropdownData?: [
-    {
-      title?: string;
-      catArr?: [LinkPropsType];
-    }
-  ];
+  dropdownData?: {
+    title?: string;
+    catArr?: LinkPropsType[];
+  }[];
   categoryLinks?: [];
 }
 
