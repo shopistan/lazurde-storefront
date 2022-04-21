@@ -9,21 +9,16 @@ type PLPCategoryTypes = {
 }
 
 interface PLPCategoryProps {
-    title: string;
-    text: string;
-    cards: PLPCategoryTypes[];
+    title: string | '';
+    text: string | '';
+    cards: PLPCategoryTypes[] | [];
 }
 
 const PLPCategory: FC<PLPCategoryProps> = ({ title, text, cards }) => {
     return (
-        <> {
-            title &&
+        <>
             <Label>{title}</Label>
-        }
-            {
-                text &&
-                <Label>{text}</Label>
-            }
+            <Label>{text}</Label>
             {
                 cards && cards.length > 0 && cards.map((data, index) => {
                     const { cardImage, cardTitle } = data
