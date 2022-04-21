@@ -28,7 +28,7 @@ const MobileNavBar = ({
         <Link href={siteLogoUrl || "/"}>
           <a>
             <Image
-              src={siteLogo?.url}
+              src={siteLogo?.url || "/placeholder.jpg"}
               width={152}
               height={20}
               layout="fixed"

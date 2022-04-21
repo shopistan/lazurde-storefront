@@ -43,13 +43,13 @@ export type HeaderProps = {
 export type BrandSidebarProps = {
   mainImg: ImageType;
   mainTitle: string;
-  logoArr: [{ logoImg: ImageType }];
+  logoArr: { logoImg: ImageType }[];
   brandArr: BrandArrType[];
 };
 
 export type FooterLinksType = {
   linkHeading: string;
-  links: [{ url: string; text: string }];
+  links: { url: string; text: string }[];
 };
 
 export type iconsObjType = {
@@ -62,24 +62,24 @@ interface footerLogoProp {
 }
 
 export type FooterProps = {
-  footerLinks: FooterLinksType[];
-  heading: string;
-  subHeading: string;
-  linkLabel: string;
-  linkUrl: string;
-  subscriptionText: string;
-  socialIconText: string;
-  socialLinks: iconsObjType[];
-  footerLogo: footerLogoProp;
-  paymentLinks: iconsObjType[];
+  footerLinks?: FooterLinksType[] | [];
+  heading?: string;
+  subHeading?: string;
+  linkLabel?: string;
+  linkUrl?: string;
+  subscriptionText?: string;
+  socialIconText?: string;
+  socialLinks?: iconsObjType[];
+  footerLogo?: footerLogoProp;
+  paymentLinks?: iconsObjType[];
 };
 
-export type PageProps = {
+export interface PageProps {
   headerProps: HeaderProps;
   footerProps: FooterProps;
   brandSidebarProps: BrandSidebarProps;
   pageComponents?: XMComponent[];
-};
+}
 
 export type BrandType = "lazurde" | "missl" | "kenaz";
 export type LangType = "en" | "ar";

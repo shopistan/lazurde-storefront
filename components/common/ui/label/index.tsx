@@ -4,11 +4,17 @@ interface labelType {
   className?: string;
   style?: Object;
   children?: JSX.Element | string;
+  testId?: string;
 }
 
-const Label = ({ className = "", style = {}, children }: labelType): JSX.Element => {
+const Label = ({
+  className = "",
+  style = {},
+  children,
+  testId = "",
+}: labelType): JSX.Element => {
   return (
-    <p className={`label-c ${className}`} style={style}>
+    <p data-testid={testId} className={`label-c ${className}`} style={style}>
       {children}
     </p>
   );

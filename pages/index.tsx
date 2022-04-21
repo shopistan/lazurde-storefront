@@ -8,14 +8,6 @@ import React, { FC } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
 import styles from "../styles/Home.module.css";
 
-/**
- * DELETE ME!
- */
-
-/**
- * DELETE ME AS WELL!
- */
-
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
   brandSidebarProps,
@@ -26,7 +18,7 @@ const LazurdeHome: FC<PageProps> = ({
     <>
       <Head>
         <title>
-          {"L'azurde | Luxury Jewelry, Gifts & Accessories | L'AZURDE"}
+          L&apos;azurde | Luxury Jewelry, Gifts &amp; Accessories | L&apos;AZURDE
         </title>
       </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>

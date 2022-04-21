@@ -5,6 +5,7 @@ import Cross from './../../../icons/Cross';
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 import useWindowSize from "lib/utils/useWindowSize";
+import Button from "components/common/ui/button";
 interface PromoBarProps {
   title: string;
   linkText: string;
@@ -26,21 +27,21 @@ const PromoBar: FC<PromoBarProps> = ({
   const [width] = useWindowSize()
   const dynamicText = width > 1023 ? linkText : mobileLinkText
   return (
-    <div className={styles["promobar"]} data-visible={isClosed} data-testid="product-card" style={{ backgroundColor: bgColor }}>
+    <div className={styles["promobar"]} data-visible={isClosed} data-testid="promo-div" style={{ backgroundColor: bgColor }}>
       <div className={styles["title"]} data-testid='test-title'>
         {appState.lang === 'en' ? `${title} ` : t("promoBarTitle")}
         <Link href={link || '/'} locale={false}>
           <a className={styles["link-text"]}>
-            <span data-testid='test-title'>
+            <span data-testid='link-text'>
               {appState.lang === 'en' ? dynamicText : t("promoBarLinkTitle")}
             </span>
           </a>
         </Link></div>
-      <button className={styles["closeButton"]} type='button' onClick={() => {
+      <Button className={styles["closeButton"]} type='button' onClick={() => {
         setIsClosed(true)
       }}>
         <Cross width={'20px'} height={'20px'} />
-      </button>
+      </Button>
     </div>
   );
 };
