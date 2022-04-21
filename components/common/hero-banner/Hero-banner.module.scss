@@ -180,10 +180,6 @@ html[dir="rtl"] {
   @media (min-width: 1024px) {
     padding-block-start: 64px;
     padding-inline-start: 64px;
-
-    &:nth-child(2) {
-      padding-block-start: 80px;
-    }
   }
 }
 
