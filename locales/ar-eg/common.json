@@ -12,29 +12,29 @@
   "socialIconText": "هسفن ملألا",
   "userNavBarTitle": " كيتوبلا قيرط نع قوست",
   "cardHeading": "ةيراجتلا انتامالع فشتكا",
-  "NavbarLangSelectorTitle" : "عقوملاو ةلضفملا كتغل ددح",
+  "NavbarLangSelectorTitle": "عقوملاو ةلضفملا كتغل ددح",
   "navbarBackBtn": "ىلا عجرا L’azurde",
-  "langSelectorBtnTxt" : "لمكي",
+  "langSelectorBtnTxt": "لمكي",
   "customerCareText": "رعاية العميل",
   "bookAnAppointmentText": "احجز موعدًا",
   "myAccountText": "حسابي",
   "storeLocatorText": "فروعنا",
   "signInBtnText": "تسجيل الدخول",
   "signOutBtnText": "خروج",
-  "plpCategoryTitle" : "استكشف جميع الفئات",
-  "plpCategoryText" : "تعتمد مجوهراتنا على إرث يمتد لأكثر من 180 عامًا من الحرفية الخبيرة مع قلادات ودلايات وأساور وخواتم ومصممة بشكل جميل وغير ذلك.  تُظهر أحدث مجوهراتنا إبداع لازوردي وتصميمه الذي لا مثيل له في أفضل حالاته.",
-  "plpCategoryCard" : [
+  "plpCategoryTitle": "استكشف جميع الفئات",
+  "plpCategoryText": "تعتمد مجوهراتنا على إرث يمتد لأكثر من 180 عامًا من الحرفية الخبيرة مع قلادات ودلايات وأساور وخواتم ومصممة بشكل جميل وغير ذلك.  تُظهر أحدث مجوهراتنا إبداع لازوردي وتصميمه الذي لا مثيل له في أفضل حالاته.",
+  "plpCategoryCard": [
     {
-      "cardTitle":"استكشف جميع الفئات"
+      "cardTitle": "استكشف جميع الفئات"
     },
     {
-      "cardTitle":"استكشف جميع الفئات"
+      "cardTitle": "استكشف جميع الفئات"
     },
     {
-      "cardTitle":"استكشف جميع الفئات"
+      "cardTitle": "استكشف جميع الفئات"
     },
     {
-      "cardTitle":"استكشف جميع الفئات"
+      "cardTitle": "استكشف جميع الفئات"
     }
   ],
   "siteNavLinks": [
@@ -516,5 +516,35 @@
         }
       }
     ]
-  }
+  },
+  "arabicProductCardData": [
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    }
+  ]
 }
