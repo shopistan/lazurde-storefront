@@ -28,7 +28,7 @@ const Cards = ({
   return (
     <>
       <div
-        className={styles[`${className}`]}
+        className={styles[className]}
         onClick={() => {
           onClick;
         }}
