@@ -115,6 +115,7 @@
         border-radius: 100%;
         opacity: 0;
         visibility: hidden;
+        z-index: -1;
       }
     }
 
@@ -126,6 +127,7 @@
       }
 
       .swiper-pagination-bullet {
+        margin: 0 3px;
         opacity: 1;
         background: transparent;
         border: 1px solid rgba(0, 0, 0, 0.4);
@@ -136,6 +138,18 @@
           border: 0;
           background: rgba(0, 0, 0, 0.4);
         }
+      }
+    }
+
+    &.slider-navigation-up {
+      .swiper-pagination {
+        bottom: 34px;
+      }
+    }
+
+    &.slider-navigation-down {
+      .swiper-pagination {
+        bottom: 10px;
       }
     }
   }
@@ -149,6 +163,7 @@
         @media (min-width: 1024px) {
           opacity: 1;
           visibility: visible;
+          z-index: 1;
         }
       }
     }
