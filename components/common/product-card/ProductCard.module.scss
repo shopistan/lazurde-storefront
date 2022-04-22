@@ -1,0 +1,87 @@
+.product-card {
+  &__wrapper {
+    width: 100%;
+    height: auto;
+
+    @media (min-width: 1024px) {
+      width: 24.532%;
+    }
+  }
+
+  &__img-wrapper {
+    position: relative;
+  }
+
+  &__wishlist-icon {
+    position: absolute;
+    top: 10px;
+    inset-inline-end: 11px;
+    inset-inline-start: auto;
+    z-index: 10;
+    cursor: pointer;
+  }
+
+  &__title {
+    margin: 16px 0 8px 0;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: start;
+    color: #000000;
+    text-transform: capitalize;
+  }
+
+  &__price {
+    &-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    &__base-price {
+      margin: 0;
+      margin-inline-end: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16.8px;
+      letter-spacing: 0em;
+      color: #000000;
+    }
+
+    &-discount {
+      margin: 0;
+      margin-inline-end: 4px;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 15.6px;
+      letter-spacing: 0em;
+      color: #000000;
+    }
+
+    &__discounted-price {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16.8px;
+      letter-spacing: 0em;
+      color: #da0059;
+    }
+  }
+
+  &__addtocart-btn {
+    z-index: 10;
+    position: absolute;
+    top: auto;
+    right: 0;
+    bottom: 13px;
+    left: 0;
+    text-align: center;
+    display: none;
+  }
+
+  &:hover {
+    .product-card__addtocart-btn {
+      display: block;
+    }
+  }
+}

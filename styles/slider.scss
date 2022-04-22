@@ -79,7 +79,6 @@
 
       .swiper-scrollbar-drag {
         background: black;
-
       }
     }
   }
@@ -87,7 +86,6 @@
 
 .collection-swiper {
   &.swiper {
-
     .swiper-scrollbar {
       left: 0;
       height: 2px;
@@ -95,6 +93,63 @@
 
       .swiper-scrollbar-drag {
         background: #000000;
+      }
+    }
+  }
+}
+
+/*-----------Product Card Slider ----------*/
+.product-slider {
+  &.swiper {
+    .swiper-button-prev,
+    .swiper-button-next {
+      &:after {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        background: rgba(0, 0, 0, 0.05);
+        font-size: 8px;
+        color: #000000;
+        border-radius: 100%;
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    .swiper-pagination {
+      display: block;
+
+      @media (min-width: 1024px) {
+        display: none;
+      }
+
+      .swiper-pagination-bullet {
+        opacity: 1;
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        transition: all 0.2s;
+
+        &.swiper-pagination-bullet-active {
+          opacity: 1;
+          border: 0;
+          background: rgba(0, 0, 0, 0.4);
+        }
+      }
+    }
+  }
+}
+
+.show-arrow-on-hover {
+  &:hover {
+    .swiper-button-prev,
+    .swiper-button-next {
+      &:after {
+        @media (min-width: 1024px) {
+          opacity: 1;
+          visibility: visible;
+        }
       }
     }
   }
