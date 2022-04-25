@@ -28,7 +28,7 @@ describe('Banner ', () => {
     test('banner image props', () => {
         renderComponent()
 
-        const image = screen.getByTestId('image');
+        const image = screen.getByAltText('image');
         expect(image).toBeInTheDocument();
     });
 })
