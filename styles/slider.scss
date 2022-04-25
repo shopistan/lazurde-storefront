@@ -134,6 +134,7 @@
         background: transparent;
         border: 1px solid rgba(0, 0, 0, 0.4);
         transition: all 0.2s;
+        outline: 0;
 
         &.swiper-pagination-bullet-active {
           opacity: 1;
