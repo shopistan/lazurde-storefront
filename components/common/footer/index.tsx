@@ -19,6 +19,7 @@ const Footer = ({
   subscriptionText = "",
   socialIconText = "",
   footerLogo,
+  footerLogoLink = "/",
   footerLinks = [],
   socialLinks = [],
   paymentLinks = [],
@@ -93,13 +94,17 @@ const Footer = ({
             </div>
             {footerLogo?.url ? (
               <div className={styles["footer__maroof-logo"]}>
-                <Image
-                  src={footerLogo.url}
-                  alt={footerLogo.altText}
-                  width={214}
-                  height={66}
-                  layout="fixed"
-                />
+                <Link href={footerLogoLink || "/"}>
+                  <a>
+                    <Image
+                      src={footerLogo.url}
+                      alt={footerLogo.altText}
+                      width={214}
+                      height={66}
+                      layout="fixed"
+                    />
+                  </a>
+                </Link>
               </div>
             ) : (
               <div className={styles["footer__maroof-logo"]}>
