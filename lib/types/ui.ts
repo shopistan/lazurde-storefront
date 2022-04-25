@@ -8,4 +8,5 @@ export type InputType = {
   label?: string;
   labelClassName?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  showLabel: boolean;
 };
