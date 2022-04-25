@@ -96,7 +96,7 @@
     width: 100%;
     margin: 0;
     padding: 4px 0;
-    background-color: #dbe9da;
+    background-color: #f2f2f2;
     color: #000000;
     font-size: 13px;
     font-weight: 400;
@@ -109,6 +109,51 @@
       padding: 4px 0 5px 0;
       font-size: 14px;
       line-height: 16.8px;
+    }
+  }
+}
+
+.line-through {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    display: block;
+    background-color: #000000;
+  }
+}
+
+html[dir="rtl"] {
+  .product-card {
+    &__price {
+      &-wrapper {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+      }
+
+      &-discount {
+        direction: ltr;
+        margin-inline-start: 4px;
+        margin-inline-end: 0;
+      }
+
+      &__discounted-price {
+        margin-inline-end: 4px;
+      }
+    }
+
+    &__tag {
+      font-size: 15px;
+      line-height: 18px;
+
+      @media (min-width: 1024px) {
+        font-size: 14px;
+        line-height: 18.2px;
+      }
     }
   }
 }
