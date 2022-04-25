@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 interface SidebarProps {
   mainImg?: ImageType;
   mainTitle?: string;
-  logoArr?: [{ logoImg: ImageType }];
+  logoArr?: { logoImg: ImageType }[];
   brandArr?: BrandArrType[];
   isOpened?: boolean;
   setIsOpened?: Function;

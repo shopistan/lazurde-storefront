@@ -10,7 +10,6 @@
 
 .cards-heading {
   color: black;
-  font-family: Roboto;
   font-size: 24px;
   font-weight: 500;
   line-height: 29px;
@@ -27,7 +26,6 @@
 .arabic-card {
   p {
     font-weight: 600 !important;
-    font-family: Roboto;
     font-size: 16px !important;
     line-height: 19px !important;
     text-align: start;
@@ -38,7 +36,6 @@
 .cards {
   p {
     color: black;
-    font-family: Roboto;
     font-size: 14px;
     font-weight: 500;
     line-height: 17px;
@@ -59,8 +56,7 @@
   span {
     height: 353px !important;
 
-    @media (min-width: 1024px) {
-      width: 100% !important;
+    @media (min-width: 768px) {
       height: 100% !important;
     }
   }

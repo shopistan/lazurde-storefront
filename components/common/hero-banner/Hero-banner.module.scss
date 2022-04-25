@@ -118,12 +118,10 @@
 }
 
 .banner-text {
-  font-family: Roboto;
   font-size: 36px;
   font-weight: 500;
   line-height: 43px;
   letter-spacing: 0em;
-  text-align: left;
   margin-top: 0;
   margin-bottom: 24px;
   color: white;
@@ -132,19 +130,16 @@
     font-weight: 500;
     line-height: 77px;
     letter-spacing: 0em;
-    text-align: left;
     margin-bottom: 32px;
   }
 }
 
 .sample-text {
-  font-family: Roboto;
   width: 190px;
   font-size: 15px;
   font-weight: 500;
   line-height: 18px;
   letter-spacing: 0em;
-  text-align: left;
   margin-top: 0;
   margin-bottom: 24px;
   color: white;
@@ -180,10 +175,6 @@ html[dir="rtl"] {
   @media (min-width: 1024px) {
     padding-block-start: 64px;
     padding-inline-start: 64px;
-
-    &:nth-child(2) {
-      padding-block-start: 80px;
-    }
   }
 }
 

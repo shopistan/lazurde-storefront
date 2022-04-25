@@ -1,5 +1,10 @@
 import algoliasearch from "algoliasearch";
 import {
+  FetchCategoryProductsArgs,
+  FilteredSearchArgs,
+  KeywordSearchArgs,
+} from "lib/types/algolia";
+import {
   ALGOLIA_API_KEY,
   ALGOLIA_APP_ID,
   ALGOLIA_SEARCH_INDEX,
@@ -8,15 +13,15 @@ import {
 const ALGOLIA_CLIENT = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
 const INDEX = ALGOLIA_CLIENT.initIndex(ALGOLIA_SEARCH_INDEX);
 
-export const fetchCategoryProducts = async (
+export const fetchCategoryProducts = async ({
   categoryName,
   page = 0,
-  filterParents = false
-) => {
+  filterParents = false,
+}: FetchCategoryProductsArgs) => {
   try {
     let response = await INDEX.search(categoryName, {
       restrictSearchableAttributes: ["Category"],
-      hitsPerPage: 20,
+      //hitsPerPage: 20,
       facetFilters: filterParents ? [["isVariant:false"]] : [],
       page,
     });
@@ -27,7 +32,10 @@ export const fetchCategoryProducts = async (
   }
 };
 
-export const filteredSearch = async (query = "", filters) => {
+export const performFilteredSearch = async ({
+  query = "",
+  filters,
+}: FilteredSearchArgs) => {
   try {
     return new Promise((resolve, reject) => {
       INDEX.search(query, {
@@ -46,12 +54,12 @@ export const filteredSearch = async (query = "", filters) => {
   }
 };
 
-export const fetchItems = async (
+export const performKeywordSearch = async ({
   query,
   pageSize = 500,
   page = 0,
-  filterParents = false
-) => {
+  filterParents = false,
+}: KeywordSearchArgs) => {
   try {
     let response = await INDEX.search(query, {
       // restrictSearchableAttributes: ['title', 'description'],

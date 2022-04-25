@@ -14,6 +14,6 @@ test("footer links unit testing", () => {
       text: "alt",
     },
   ];
-  render(<FooterLinks heading={heading} links={testingData} key={0} />);
+  render(<FooterLinks heading={heading} links={testingData} index={0} />);
   expect(screen.getByText(heading)).toBeInTheDocument();
 });
