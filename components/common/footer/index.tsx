@@ -94,7 +94,7 @@ const Footer = ({
             </div>
             <div className={styles["footer__maroof-logo"]}>
               <Link href={footerLogoLink || "/"}>
-                <a>
+                <a target="_blank">
                   <Image
                     src={footerLogo?.url || "/maroof.svg"}
                     alt={footerLogo?.altText}

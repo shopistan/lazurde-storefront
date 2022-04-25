@@ -262,7 +262,7 @@ export const productCardData = [
   },
   {
     title: "Love Ring with Diamond",
-    basePrice: "$1900",
+    basePrice: "$1,900",
     discount: "",
     discountedPrice: "",
     onlineExclusiveTag: false,
@@ -305,7 +305,7 @@ export const productCardData = [
   },
   {
     title: "Love Ring with Diamond",
-    basePrice: "$1,30",
+    basePrice: "$1,300",
     discount: "",
     discountedPrice: "",
     onlineExclusiveTag: false,

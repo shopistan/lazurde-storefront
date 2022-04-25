@@ -1,8 +1,10 @@
+@import "/styles/variables.scss";
+
 .product-listing {
   &__wrapper {
     padding: 24px 16px 151px;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       padding: 32px 80px 151px;
     }
   }
@@ -14,7 +16,7 @@
     row-gap: 24px;
     column-gap: 0.6%;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       justify-content: flex-start;
     }
   }
