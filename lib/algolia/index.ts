@@ -21,7 +21,7 @@ export const fetchCategoryProducts = async ({
   try {
     let response = await INDEX.search(categoryName, {
       restrictSearchableAttributes: ["Category"],
-      hitsPerPage: 20,
+      //hitsPerPage: 20,
       facetFilters: filterParents ? [["isVariant:false"]] : [],
       page,
     });

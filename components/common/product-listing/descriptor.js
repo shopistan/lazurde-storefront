@@ -32,5 +32,6 @@ exports.default = Types.Component({
       }),
     }),
     applyAttributeFilters: Types.Boolean({ label: "Apply Attribute Filters?" }),
+    categoryName: Types.String({ label: "Category Name" }),
   },
 });
