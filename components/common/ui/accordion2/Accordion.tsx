@@ -2,12 +2,13 @@
 import React, { Children, useState } from "react";
 import Link from "next/link";
 import styles from "./Accordion.module.scss";
+import { MinusIcon, PlusIcon } from "components/icons";
 
 type LinksArrType = { url?: string; text?: string };
 interface AccordionProps {
   index?: number;
   heading?: string | JSX.Element;
-  links?: { [key: string]: string; }[] | [];
+  links?: { [key: string]: string }[] | [];
   isPlusMinusIcon?: boolean;
   children: string | JSX.Element;
   arrowIcon: Boolean;
@@ -36,7 +37,7 @@ const Accordion = ({
             <div>^</div>
           ) : (
             <div className={`${styles["plus-icon"]}`}>
-              +
+              {!isOpened ? <PlusIcon /> : <MinusIcon />}
             </div>
           )}
         </div>

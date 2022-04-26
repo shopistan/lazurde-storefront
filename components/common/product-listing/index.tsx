@@ -8,6 +8,7 @@ import styles from "./style.module.scss";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 import { fetchCategoryProducts, performFilteredSearch } from "lib/algolia";
+// import BreadCrumbs from "components/common/ui/bread-crumbs";
 type Props = {};
 
 const ProductListing = (props: Props) => {
@@ -33,6 +34,8 @@ const ProductListing = (props: Props) => {
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
+        {/* <BreadCrumbs /> */}
+
         {width < 1024 ? (
           <FilterBarMobile></FilterBarMobile>
         ) : (
