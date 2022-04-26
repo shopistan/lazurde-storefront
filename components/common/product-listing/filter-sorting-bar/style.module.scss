@@ -109,6 +109,17 @@
           width: 100%;
           left: 0;
         }
+
+        &[data-has-count="true"] {
+          &::after {
+            width: 100%;
+            left: 0;
+          }
+
+          & > span {
+            color: black;
+          }
+        }
       }
     }
 
@@ -122,7 +133,8 @@
       opacity: 1;
       transition: opacity 0.2s 0.5s ease-in-out;
 
-      &[data-opened="true"], &[data-has-count="false"] {
+      &[data-opened="true"],
+      &[data-has-count="false"] {
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.2s ease-in-out;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProductCard from "components/common/product-card/ProductCard";
 import { productCardData } from "lib/mock-data/data";
 import FilterBar from "./filter-sorting-bar";
@@ -15,6 +15,7 @@ const ProductListing = (props: Props) => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
+  const [filteredData, setFilteredData] = useState([])
 
   const _arabicProductCardData = t(
     "arabicProductCardData",
@@ -22,14 +23,33 @@ const ProductListing = (props: Props) => {
     { returnObjects: true }
   );
 
-  // useEffect(() => {
-  //   console.log(
-  //     fetchCategoryProducts({
-  //       categoryName: "L'azurde > Earrings",
-  //     })
-  //   );
-  //   console.log(performFilteredSearch({ filters: [`Gold`] }));
-  // }, []);
+  useEffect(() => {
+    console.log(
+      fetchCategoryProducts({
+        categoryName: "L'azurde > Earrings",
+      })
+    );
+    // console.log(performFilteredSearch({ filters: [`Gold`] }));
+  }, []);
+
+  const applyFilters = (selectedFilters: any) => {
+    const payload = [];
+
+    Object.keys(selectedFilters).forEach((filterType, index) => {
+      const orFilters: any[] = [];
+      Object.keys(selectedFilters[filterType]).forEach((filterOption) => {
+        const facet = `${filterType}: ${filterOption}`;
+        orFilters.push(facet);
+      });
+      payload.push(orFilters);
+    });
+
+    // console.table(payload);
+
+    //const filteredData = performFilteredSearch({filters: payload})
+    const filteredData = []
+    // setFilteredData(filteredData)
+  };
 
   return (
     <>
@@ -39,12 +59,12 @@ const ProductListing = (props: Props) => {
         {width < 1024 ? (
           <FilterBarMobile></FilterBarMobile>
         ) : (
-          <FilterBar></FilterBar>
+          <FilterBar onApplyFilters={applyFilters}></FilterBar>
         )}
         <div className={styles["product-listing__cards"]}>
           {productCardData &&
             productCardData.length > 0 &&
-            productCardData?.map((data, index) => {
+            productCardData?.map((data: any, index: number) => {
               const {
                 title,
                 basePrice,

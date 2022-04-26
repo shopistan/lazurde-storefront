@@ -44,6 +44,7 @@ interface siteNavBarProps {
       ]
     | [];
   headerId?: string;
+  onApplyFilters: Function;
 }
 
 interface DropdownDataProps {
@@ -59,7 +60,10 @@ const fl = [
     filterName: "Brand",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionsNames: "Brand 1",
+      },
+      {
+        optionsNames: "Brand 2",
       },
     ],
   },
@@ -87,7 +91,10 @@ const fl = [
     filterName: "Metal",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionsNames: "Gold",
+      },
+      {
+        optionsNames: "White Gold",
       },
     ],
   },
@@ -95,7 +102,7 @@ const fl = [
     filterName: "Gemstone",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionsNames: "Diamond",
       },
     ],
   },
@@ -103,7 +110,10 @@ const fl = [
     filterName: "Price",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionsNames: "100",
+      },
+      {
+        optionsNames: "200",
       },
     ],
   },
@@ -112,6 +122,7 @@ const fl = [
 const FilterBar: FC<siteNavBarProps> = ({
   headerId = "",
   filterList = fl,
+  onApplyFilters,
 }): JSX.Element => {
   const { t } = useTranslation("common");
   const link: any = useRef(
@@ -167,6 +178,7 @@ const FilterBar: FC<siteNavBarProps> = ({
                   key={index}
                   className={styles["links"]}
                   ref={link.current[index]}
+                  data-has-count={selectedFilterCount > 0 }
                   onMouseOver={(event) => {
                     event.stopPropagation();
 
@@ -217,6 +229,7 @@ const FilterBar: FC<siteNavBarProps> = ({
             buttonSize={"sm"}
             onClick={() => {
               setSelectedFilters({});
+              onApplyFilters({})
             }}
           />
         </div>
@@ -242,6 +255,7 @@ const FilterBar: FC<siteNavBarProps> = ({
           categoryData={dropdownData}
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
+          onApplyFilters={onApplyFilters}
         ></CategoryDropDown>
       </div>
       <div
