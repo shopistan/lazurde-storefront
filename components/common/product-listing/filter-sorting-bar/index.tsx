@@ -1,21 +1,10 @@
-import React, {
-  FC,
-  useContext,
-  useState,
-  useRef,
-  LegacyRef,
-  RefObject,
-} from "react";
+import React, { FC, useContext, useState, useRef, useEffect } from "react";
 import styles from "./style.module.scss";
-import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
-import { BackArrow, Search } from "components/icons";
-import { ImageType } from "lib/types/common";
 import CategoryDropDown from "./category-dropdown";
-import Image from "next/image";
-import Select from "components/common/ui/select";
 import BorderlessSelect from "components/common/ui/borderless-select";
+import Button from "components/common/ui/button";
 
 const optionsData = [
   {
@@ -140,6 +129,26 @@ const FilterBar: FC<siteNavBarProps> = ({
     [key: string]: { [key: string]: string };
   }>();
   const { appState } = useContext(AppContext);
+  const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+
+  useEffect(() => {
+    let totalCount = 0;
+    if (selectedFilters && Object.keys(selectedFilters).length > 0) {
+      for (
+        let index = 0;
+        index < Object.keys(selectedFilters).length;
+        index++
+      ) {
+        const filterTitle = Object.keys(selectedFilters)[index];
+        const count =
+          filterTitle && Object.keys(selectedFilters[filterTitle]).length;
+        totalCount = Number(totalCount) + Number(count);
+        setTotalSelectedFilterCount(totalCount);
+      }
+    } else {
+      setTotalSelectedFilterCount(0);
+    }
+  }, [selectedFilters]);
 
   return (
     <div className={styles["filter-bar-main"]} data-headerId={headerId}>
@@ -196,6 +205,20 @@ const FilterBar: FC<siteNavBarProps> = ({
                 </div>
               );
             })}
+        </div>
+        <div
+          className={styles["div-clear-btn"]}
+          data-opened={isOpened.opened}
+          data-has-count={totalSelectedFilterCount > 0}
+        >
+          <Button
+            buttonText={"Clear All Filters"}
+            buttonStyle={"white"}
+            buttonSize={"sm"}
+            onClick={() => {
+              setSelectedFilters({});
+            }}
+          />
         </div>
         <div
           className={styles["div-order-dropdown"]}
