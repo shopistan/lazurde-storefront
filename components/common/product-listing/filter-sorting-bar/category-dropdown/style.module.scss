@@ -16,10 +16,6 @@
     flex-wrap: wrap;
     overflow: auto;
 
-    @media (min-width: 1200px) {
-      width: 211px;
-    }
-
     .title {
       display: flex;
       align-items: center;
