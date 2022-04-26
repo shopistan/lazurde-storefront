@@ -133,7 +133,7 @@ const FilterBar: FC<siteNavBarProps> = ({
     {},
     { returnObjects: true }
   );
-
+  
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
   const [selectedFilters, setSelectedFilters] = useState<{
@@ -141,7 +141,7 @@ const FilterBar: FC<siteNavBarProps> = ({
   }>();
   const { appState } = useContext(AppContext);
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
-
+  console.log("test")
   useEffect(() => {
     let totalCount = 0;
     if (selectedFilters && Object.keys(selectedFilters).length > 0) {
