@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ProductCard from "components/common/product-card/ProductCard";
 import { productCardData } from "lib/mock-data/data";
 import FilterBar from "./filter-sorting-bar";
@@ -7,6 +7,7 @@ import FilterBarMobile from "./filter-bar-mobile";
 import styles from "./style.module.scss";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
+import { fetchCategoryProducts, performFilteredSearch } from "lib/algolia";
 type Props = {};
 
 const ProductListing = (props: Props) => {
@@ -20,15 +21,24 @@ const ProductListing = (props: Props) => {
     { returnObjects: true }
   );
 
+  // useEffect(() => {
+  //   console.log(
+  //     fetchCategoryProducts({
+  //       categoryName: "L'azurde > Earrings",
+  //     })
+  //   );
+  //   console.log(performFilteredSearch({ filters: [`Gold`] }));
+  // }, []);
+
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
+        {width < 1024 ? (
+          <FilterBarMobile></FilterBarMobile>
+        ) : (
+          <FilterBar></FilterBar>
+        )}
         <div className={styles["product-listing__cards"]}>
-          {width < 1024 ? (
-            <FilterBarMobile></FilterBarMobile>
-          ) : (
-            <FilterBar></FilterBar>
-          )}
           {productCardData &&
             productCardData.length > 0 &&
             productCardData?.map((data, index) => {

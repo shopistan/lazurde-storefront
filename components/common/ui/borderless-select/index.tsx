@@ -90,21 +90,22 @@ const BorderlessSelect = ({
       className={`${className} ${styles["dropdown"]}`}
       data-open={isOpen}
       onBlur={() => !showInModal && setIsOpen(false)}
+      onClick={() => {
+        if (
+          window.innerHeight -
+            dropdown.current.getBoundingClientRect().bottom <
+          100
+        ) {
+          setPosition("top");
+        } else {
+          setPosition("bottom");
+        }
+        setIsOpen(!isOpen);
+      }}
     >
       <div
         className={`${styles["select"]} ${optionClassName}`}
-        onClick={() => {
-          if (
-            window.innerHeight -
-              dropdown.current.getBoundingClientRect().bottom <
-            100
-          ) {
-            setPosition("top");
-          } else {
-            setPosition("bottom");
-          }
-          setIsOpen(!isOpen);
-        }}
+
       >
         <span>{selectedLabel}</span>
         <span className={styles["selected-text"]}>{selectedVal?.label}</span>

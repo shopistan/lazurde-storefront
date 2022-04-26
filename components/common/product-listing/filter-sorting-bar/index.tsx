@@ -142,9 +142,9 @@ const FilterBar: FC<siteNavBarProps> = ({
   const { appState } = useContext(AppContext);
 
   return (
-    <div className={styles["site-navbar"]} data-headerId={headerId}>
-      <div className={styles["nav-links-div"]}>
-        <div className={styles["nav-links"]}>
+    <div className={styles["filter-bar-main"]} data-headerId={headerId}>
+      <div className={styles["div-filter-bar"]}>
+        <div className={styles["filter-links"]}>
           {filterList &&
             filterList.length > 0 &&
             filterList.map((data, index) => {

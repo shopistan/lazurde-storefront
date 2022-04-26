@@ -16,16 +16,16 @@ const Banner: FC<BannerProps> = ({ bgColor = '#FEFBF4', title = '', text = '', b
     const [width] = useWindowSize();
     return (
         <div className={styles['banner-container']} style={{ backgroundColor: bgColor }}>
+            {
+                backgroundImage && backgroundImage.url &&
+                <div className={styles['banner-image-section']}>
+                    <Image className={styles['banner-image']} src={backgroundImage?.url} width={width > 1023 ? 903 : 329} height={width > 1023 ? 297 : 108} layout={ width > 767 ? 'responsive' : 'fixed'} alt={backgroundImage?.altText || ''} />
+                </div>
+            }
             <div className={styles['banner-text-section']}>
                 <Label className={styles['banner-title']} children={title} />
                 <Label className={styles['banner-text']} children={text} />
             </div>
-            {
-                backgroundImage && backgroundImage.url &&
-                <div className={styles['banner-image-section']}>
-                    <Image className={styles['banner-image']} src={backgroundImage?.url} width={width > 1023 ? 903 : 329} height={width > 1023 ? 246 : 108} layout='responsive' alt={backgroundImage?.altText || ''} />
-                </div>
-            }
         </div>
     )
 }

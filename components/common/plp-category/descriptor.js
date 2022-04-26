@@ -6,6 +6,7 @@ exports.default = Types.Component({
   description: ``,
 
   attributes: {
+    backgroundColor: Types.String({ label: 'background color' }),
     title: Types.String({ label: "PLP Category Heading" }),
     text: Types.String({ label: 'PLP Category Text' }),
     isLeft: Types.Boolean({ label: 'Is Left' }),
