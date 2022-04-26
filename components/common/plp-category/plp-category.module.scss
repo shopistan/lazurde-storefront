@@ -42,11 +42,11 @@
 
 .plpCategory-card {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr 1fr;
   column-gap: 8px;
 
   @media (min-width: $breakPoint-desktop) {
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
   p {
