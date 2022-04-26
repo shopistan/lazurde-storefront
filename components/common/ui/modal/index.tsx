@@ -18,7 +18,7 @@ const Modal = ({
   }, [isOpened]);
 
   return (
-    <div className={styles["div-modal-main"]} data-open={openState}>
+    <div className={styles["div-modal-main"]} data-open={openState} onClick={(event) => {event.stopPropagation()}}>
       <div className={styles["div-top-bar"]}>
         <div className={styles["div-left"]}></div>
         <div
