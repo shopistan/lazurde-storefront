@@ -15,6 +15,12 @@
           display: block;
         }
       }
+
+      .product-card__wishlist-icon {
+        @media (min-width: $breakPoint-desktop) {
+          display: block;
+        }
+      }
     }
   }
 
@@ -30,6 +36,10 @@
     inset-inline-start: auto;
     z-index: 2;
     cursor: pointer;
+
+    @media (min-width: $breakPoint-desktop) {
+      display: none;
+    }
   }
 
   &__title {
