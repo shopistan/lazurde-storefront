@@ -1,13 +1,15 @@
+@import "/styles/variables.scss";
+
 .footer {
   &__container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 40px 16px;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: $black-color;
+    color: $white-color;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       padding: 80px 40px 40px 40px;
     }
   }
@@ -16,7 +18,7 @@
     padding: 0 16px;
     text-align: center;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       padding: 0 40px;
       text-align: start;
     }
@@ -24,7 +26,7 @@
 
   &__sub-container {
     &:first-child {
-      @media (min-width: 1024px) {
+      @media (min-width: $breakPoint-desktop) {
         padding-inline-end: 50px;
       }
     }
@@ -32,7 +34,7 @@
 
   &__heading,
   &__label {
-    color: #ffffff;
+    color: $white-color;
   }
 
   &__heading {
@@ -49,7 +51,7 @@
     line-height: 16.8px;
     letter-spacing: 0em;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       font-size: 15px;
       line-height: 18px;
     }
@@ -62,7 +64,7 @@
     margin-top: 0;
     margin-bottom: 16px;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       font-size: 12px;
       line-height: 15.6px;
     }
@@ -80,8 +82,8 @@
     min-height: 40px;
     text-decoration: none;
     text-transform: capitalize;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: $white-color;
+    color: $black-color;
     border-radius: 100px;
 
     font-size: 15px;
@@ -97,7 +99,7 @@
     align-items: center;
     justify-content: space-between;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       flex-direction: row;
     }
   }
@@ -106,7 +108,7 @@
     margin-top: 86px;
     flex-direction: column-reverse;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       flex-direction: row;
       margin-top: 80px;
     }
@@ -115,7 +117,7 @@
   &__maroof-logo {
     margin-bottom: 85px;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       margin-bottom: 0;
     }
   }
@@ -125,7 +127,7 @@
     padding-top: 24px;
     border-top: 1px solid rgba(255, 255, 255, 0.4);
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       margin-top: 109px;
     }
 
@@ -161,7 +163,7 @@
       font-size: 13px;
       line-height: 15.6px;
 
-      @media (min-width: 1024px) {
+      @media (min-width: $breakPoint-desktop) {
         font-size: 15px;
         line-height: 19.5px;
       }
@@ -170,13 +172,13 @@
     span {
       font-size: 13px;
 
-      @media (min-width: 1024px) {
+      @media (min-width: $breakPoint-desktop) {
         font-size: 14px;
         line-height: 16.8px;
       }
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       min-width: 137px !important;
       margin-bottom: 0;
     }
@@ -205,7 +207,7 @@ html[dir="rtl"] {
         font-size: 13px;
         line-height: 15.6px;
 
-        @media (min-width: 1024px) {
+        @media (min-width: $breakPoint-desktop) {
           font-size: 15px;
           line-height: 18px;
         }
@@ -215,7 +217,7 @@ html[dir="rtl"] {
         font-size: 13px;
         line-height: 15.6px;
 
-        @media (min-width: 1024px) {
+        @media (min-width: $breakPoint-desktop) {
           font-size: 15px;
           line-height: 19.5px;
         }
@@ -225,7 +227,7 @@ html[dir="rtl"] {
         .footer-dropdown-options {
           font-weight: 400;
 
-          @media (min-width: 1024px) {
+          @media (min-width: $breakPoint-desktop) {
             font-size: 15px;
             line-height: 18px;
             font-weight: 500;
@@ -237,7 +239,7 @@ html[dir="rtl"] {
         .footer-dropdown-options {
           font-weight: 500;
 
-          @media (min-width: 1024px) {
+          @media (min-width: $breakPoint-desktop) {
             font-size: 15px;
             line-height: 19.5px;
             font-weight: 400;

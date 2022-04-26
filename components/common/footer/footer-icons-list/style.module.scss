@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .icons {
   &__container {
     display: flex;
@@ -12,7 +14,7 @@
       }
 
       a {
-        color: #ffffff;
+        color: $white-color;
       }
     }
   }

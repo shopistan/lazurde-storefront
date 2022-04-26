@@ -7,10 +7,10 @@ exports.default = Types.Component({
 
   attributes: {
     title: Types.String({ label: "PLP Category Heading" }),
-    text : Types.String({ label : 'PLP Category Text'}),
-    isLeft : Types.Boolean({ label : 'Is Left'}),
-    isCentre : Types.Boolean({ label : 'Is Center'}),
-    isRight : Types.Boolean({ label : 'Is Right'}),
+    text: Types.String({ label: 'PLP Category Text' }),
+    isLeft: Types.Boolean({ label: 'Is Left' }),
+    isCentre: Types.Boolean({ label: 'Is Center' }),
+    isRight: Types.Boolean({ label: 'Is Right' }),
     cards: Types.Array({
       label: "Brand Cards",
       children: Types.Shape({
@@ -21,6 +21,7 @@ exports.default = Types.Component({
             altText: Types.String({ label: "Alt text" }),
           }),
           cardTitle: Types.String({ label: "Card Title" }),
+          cardLink: Types.String({ label: 'Category Link' }),
         },
       }),
     }),

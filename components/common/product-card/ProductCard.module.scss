@@ -1,15 +1,17 @@
+@import "/styles/variables.scss";
+
 .product-card {
   &__wrapper {
     width: 49%;
     height: auto;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       width: 24.532%;
     }
 
     &:hover {
       .product-card__addtocart-btn {
-        @media (min-width: 1024px) {
+        @media (min-width: $breakPoint-desktop) {
           display: block;
         }
       }
@@ -37,7 +39,7 @@
     line-height: 16.8px;
     letter-spacing: 0em;
     text-align: start;
-    color: #000000;
+    color: $black-color;
     text-transform: capitalize;
   }
 
@@ -54,7 +56,7 @@
       font-weight: 500;
       line-height: 16.8px;
       letter-spacing: 0em;
-      color: #000000;
+      color: $black-color;
     }
 
     &-discount {
@@ -64,7 +66,7 @@
       font-weight: 400;
       line-height: 15.6px;
       letter-spacing: 0em;
-      color: #000000;
+      color: $black-color;
     }
 
     &__discounted-price {
@@ -96,8 +98,8 @@
     width: 100%;
     margin: 0;
     padding: 4px 0;
-    background-color: #f2f2f2;
-    color: #000000;
+    background-color: $primary-color;
+    color: $black-color;
     font-size: 13px;
     font-weight: 400;
     line-height: 15.6px;
@@ -105,7 +107,7 @@
     text-align: center;
     text-transform: uppercase;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       padding: 4px 0 5px 0;
       font-size: 14px;
       line-height: 16.8px;
@@ -123,7 +125,7 @@
     width: 100%;
     height: 1px;
     display: block;
-    background-color: #000000;
+    background-color: $black-color;
   }
 }
 
@@ -150,7 +152,7 @@ html[dir="rtl"] {
       font-size: 15px;
       line-height: 18px;
 
-      @media (min-width: 1024px) {
+      @media (min-width: $breakPoint-desktop) {
         font-size: 14px;
         line-height: 18.2px;
       }
