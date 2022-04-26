@@ -1,13 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ProductCard from "components/common/product-card/ProductCard";
 import { productCardData } from "lib/mock-data/data";
+import FilterBar from "./filter-sorting-bar";
+import useWindowSize from "lib/utils/useWindowSize";
+import FilterBarMobile from "./filter-bar-mobile";
 import styles from "./style.module.scss";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
-
+import { fetchCategoryProducts, performFilteredSearch } from "lib/algolia";
 type Props = {};
 
 const ProductListing = (props: Props) => {
+  const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
 
@@ -17,10 +21,23 @@ const ProductListing = (props: Props) => {
     { returnObjects: true }
   );
 
+  // useEffect(() => {
+  //   console.log(
+  //     fetchCategoryProducts({
+  //       categoryName: "L'azurde > Earrings",
+  //     })
+  //   );
+  //   console.log(performFilteredSearch({ filters: [`Gold`] }));
+  // }, []);
+
   return (
     <>
-      {/* <div>ProductListing</div> */}
       <div className={styles["product-listing__wrapper"]}>
+        {width < 1024 ? (
+          <FilterBarMobile></FilterBarMobile>
+        ) : (
+          <FilterBar></FilterBar>
+        )}
         <div className={styles["product-listing__cards"]}>
           {productCardData &&
             productCardData.length > 0 &&

@@ -18,5 +18,6 @@ export { default as Calendar } from './Calendar'
 export { default as Account } from './Account'
 export { default as Location } from './Location'
 export { default as SignOut } from './SignOut'
+export { default as CHevronDown } from './ChevronDown'
 
 

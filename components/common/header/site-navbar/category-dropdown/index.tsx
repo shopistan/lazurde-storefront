@@ -56,7 +56,6 @@ const CategoryDropDown = ({ categoryData, setIsOpened }: CategoryDropDownProps):
             <div className={styles['links']}>
               {catArr?.map((data, index) => {
                 const categoryLinkArabic = currentCategoryArabic?.linkTitle[index]
-                console.log('categoryLinkArabic', categoryLinkArabic);
 
                 return (
                   <Link key={index} href={data.url || ""} >
