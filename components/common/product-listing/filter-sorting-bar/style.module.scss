@@ -111,11 +111,17 @@
       }
     }
 
-    .div-order-dropdown {
+    .div-clear-btn {
+      margin-inline-end: clamp(40px, 7.04%, 96px);
+      margin-inline-start: 20px;
+    }
+
+    .div-order-dropdown,
+    .div-clear-btn {
       opacity: 1;
       transition: opacity 0.2s 0.5s ease-in-out;
 
-      &[data-opened="true"] {
+      &[data-opened="true"], &[data-has-count="false"] {
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.2s ease-in-out;

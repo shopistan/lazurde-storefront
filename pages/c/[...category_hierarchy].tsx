@@ -104,13 +104,17 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     ) || {}
   ).params;
 
+
   let searchResults;
 
-  if (categoryName) {
     searchResults = await fetchCategoryProducts({
-      categoryName,
-    });
-  }
+      categoryName: "L'azurde > Earrings",
+
+    }
+    );
+  console.log("searchResults",     pageComponents.find(
+    (component: XMComponent) => component.id === "ProductListing"
+  ) || {})
 
   const {
     hits = [],
