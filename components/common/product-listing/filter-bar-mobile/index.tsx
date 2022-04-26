@@ -1,13 +1,6 @@
-import React, { FC, useContext, useState, useRef, useEffect } from "react";
+import React, { FC, useState, useRef } from "react";
 import styles from "./style.module.scss";
-import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
-import { AppContext } from "lib/context";
-import { BackArrow, Search } from "components/icons";
-import { ImageType } from "lib/types/common";
-// import CategoryDropDown from "./category-dropdown";
-import Image from "next/image";
-import Select from "components/common/ui/select";
 import BorderlessSelect from "components/common/ui/borderless-select";
 import CategoryDropDown from "./category-dropdown";
 import Accordion from "components/common/ui/accordion2/Accordion";
@@ -148,13 +141,13 @@ const FilterBarMobile: FC<siteNavBarProps> = ({
     [key: string]: { [key: string]: string };
   }>();
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
-  const { appState } = useContext(AppContext);
 
   return (
-    <div className={styles["site-navbar"]} data-headerId={headerId}>
-      <div className={styles["nav-links-div"]}>
-        <div className={styles["nav-links"]}>
+    <div className={styles["filter-bar_wrapper"]} data-headerId={headerId}>
+      <div className={styles["filter-bar_items"]}>
+        <div className={styles["filter-bar_item"]}>
           <BorderlessSelect
+            className={"filter-mobile-select"}
             options={optionsData}
             onChange={() => {}}
             defaultValue={""}
@@ -172,10 +165,11 @@ const FilterBarMobile: FC<siteNavBarProps> = ({
           ></BorderlessSelect>
         </div>
         <div
-          className={styles["div-order-dropdown"]}
+          className={styles["filter-bar_item"]}
           data-opened={isOpened.opened}
         >
           <BorderlessSelect
+            className={styles["filter-mobile-select"]}
             options={optionsData}
             onChange={() => {}}
             defaultValue={sortingSelected}
@@ -193,23 +187,6 @@ const FilterBarMobile: FC<siteNavBarProps> = ({
           ></BorderlessSelect>
         </div>
       </div>
-
-      <div
-        className={styles["category-dropdown"]}
-        data-opened={isOpened.opened}
-      >
-        {/* <CategoryDropDown
-          setIsOpened={setIsOpened}
-          categoryData={dropdownData}
-          selectedFilters={selectedFilters}
-          setSelectedFilters={setSelectedFilters}
-        ></CategoryDropDown> */}
-      </div>
-      <div
-        className={styles["overlay"]}
-        data-opened={isOpened.opened}
-        onClick={() => setIsOpened({ ...isOpened, opened: false })}
-      />
     </div>
   );
 };
@@ -234,7 +211,7 @@ const FilterAccordion = ({
             key={index}
             heading={
               <div className={styles["div-counter"]}>
-                <span>{data.filterName}</span>
+                <span className={styles["filter-name"]}>{data.filterName}</span>
                 <div data-visible={selectedFilterCount > 0}>
                   <span>{selectedFilterCount > 0 && selectedFilterCount}</span>
                 </div>
@@ -258,7 +235,10 @@ const FilterAccordion = ({
         );
       })}
 
-      <div className={styles["div-filter-btns"]} data-has-count={totalSelectedFilterCount > 0}>
+      <div
+        className={styles["div-filter-btns"]}
+        data-has-count={totalSelectedFilterCount > 0}
+      >
         <Button
           buttonText={"Clear All Filters"}
           buttonStyle={"white"}

@@ -15,10 +15,12 @@
     justify-content: space-between;
     row-gap: 24px;
     column-gap: 0.6%;
+    margin-top: 24px;
 
     @media (min-width: $breakPoint-desktop) {
       justify-content: flex-start;
       padding-inline: 80px;
+      margin-top: 32px;
     }
   }
 }
