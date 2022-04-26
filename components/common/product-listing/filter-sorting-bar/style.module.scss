@@ -1,10 +1,10 @@
-.site-navbar {
+.filter-bar-main {
   display: flex;
   align-items: center;
   // justify-content: center;
   position: relative;
-  padding-inline: 24px;
   background-color: #fff;
+  padding-inline: 80px;
 
   .back-btn {
     display: none;
@@ -24,18 +24,20 @@
     }
   }
 
-  .nav-links-div {
+  .div-filter-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex: 1;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin-block: 8px;
 
-    .nav-links {
+    .filter-links {
       display: flex;
       align-items: center;
       // justify-content: center;
       flex: 1;
+      height: 35px;
       column-gap: 60px;
 
       .links {
@@ -125,7 +127,7 @@
     display: flex;
     position: absolute;
     top: 100%;
-    z-index: 100;
+    z-index: 5;
     inset-inline-end: 0;
     inset-inline-start: 0;
     height: 0;

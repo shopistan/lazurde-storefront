@@ -4,7 +4,7 @@
   background: white;
   // justify-content: center;
   flex-direction: column;
-  padding-block-start: 32px;
+  padding-block-start: 16px;
   column-gap: 24px;
 
   .div-titles {
@@ -29,6 +29,10 @@
       width: 180px;
       margin-block-end: 8px;
       height: 27px;
+
+      // &:nth-child(1) {
+      //   height: 35px;
+      // }
 
       .div-tick {
         width: 20px;

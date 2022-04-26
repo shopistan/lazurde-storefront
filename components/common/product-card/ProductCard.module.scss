@@ -28,7 +28,7 @@
     top: 13px;
     inset-inline-end: 11.83px;
     inset-inline-start: auto;
-    z-index: 10;
+    z-index: 2;
     cursor: pointer;
   }
 
@@ -91,7 +91,7 @@
   }
 
   &__tag {
-    z-index: 9;
+    z-index: 1;
     position: absolute;
     top: auto;
     bottom: 0;
