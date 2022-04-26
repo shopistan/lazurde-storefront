@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 type PLPCategoryTypes = {
     cardTitle?: string;
     cardImage?: ImageType;
+    cardLink?: string;
 }
 
 type _PLPCategoryTypes = {
@@ -45,9 +46,9 @@ const PLPCategory: FC<PLPCategoryProps> = ({ title = '', text = '', cards = [], 
 
                 {
                     cards.length > 0 && cards.map((card, index) => {
-                        const { cardImage, cardTitle } = card
+                        const { cardImage, cardTitle ,cardLink } = card
                         return (
-                            <div onClick={() => { router?.push('/') }}>
+                            <div onClick={() => { router?.push(`/c/${cardLink}`) }}>
                                 <Cards width={width > 1023 ? 314 : 167.5} height={width > 1024 ? 331 : 180.5} className={`plp-card`} cardImage={cardImage} cardTitle={appState?.lang == 'en' ? cardTitle : _plpCategoryCard[index]?.cardTitle} key={index} />
                             </div>
 
