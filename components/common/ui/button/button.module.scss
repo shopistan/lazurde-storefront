@@ -18,6 +18,11 @@
   &[data-style="white"] {
     background: white;
     color: black;
+    text-decoration-line: underline;
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 120%;
   }
 
   &[data-size="sm"] {
