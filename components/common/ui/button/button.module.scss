@@ -1,6 +1,7 @@
+@import "/styles/variables.scss";
+
 .button {
-  background: black;
-  font-family: Roboto;
+  background: $black-color;
   border: none;
   border-radius: 100px;
   font-size: 16px;
@@ -11,18 +12,18 @@
   cursor: pointer;
 
   &[data-style="black"] {
-    background: black;
-    color: white;
+    background: $black-color;
+    color: $white-color;
   }
 
   &[data-style="white"] {
-    background: white;
-    color: black;
     text-decoration-line: underline;
     text-transform: capitalize;
     font-weight: 500;
     font-size: 14px;
     line-height: 120%;
+    background: $white-color;
+    color: $black-color;
   }
 
   &[data-size="sm"] {
@@ -48,11 +49,5 @@
   &[data-size="xxl"] {
     width: 327px;
     height: 51px;
-  }
-}
-
-html[dir="rtl"] {
-  .button {
-    font-family: "Cairo", sans-serif;
   }
 }

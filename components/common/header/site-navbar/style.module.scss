@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .site-navbar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -6,7 +8,7 @@
   justify-content: center;
   position: relative;
   padding-inline: 24px;
-  background-color: #fff;
+  background-color: $white-color;
 
   .back-btn {
     display: none;
@@ -75,7 +77,6 @@
       min-width: 150px;
       text-align: end;
       padding-inline-end: 24px;
-
     }
   }
 
@@ -95,7 +96,7 @@
       position: relative;
 
       a {
-        color: black;
+        color: $black-color;
         text-decoration: none;
         font-weight: 500;
         font-size: 16px;
@@ -111,7 +112,7 @@
         height: 2px;
         left: 50%;
         bottom: 15px;
-        background-color: black;
+        background-color: $black-color;
         transition: width ease-in-out 0.15s, left ease-in-out 0.15s;
       }
 
@@ -168,7 +169,7 @@
 html[dir="rtl"] {
   .back-btn {
     svg {
-      transform: rotateY(180deg)
+      transform: rotateY(180deg);
     }
   }
 }
