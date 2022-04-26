@@ -20,9 +20,12 @@ const Banner: FC<BannerProps> = ({ bgColor = '#FEFBF4', title = '', text = '', b
                 <Label className={styles['banner-title']} children={title} />
                 <Label className={styles['banner-text']} children={text} />
             </div>
-            <div className={styles['banner-image-section']}>
-                <Image className={styles['banner-image']} src={backgroundImage?.url} width={width > 1023 ? 903 : 329} height={width > 1023 ? 246: 108} layout='responsive' alt={backgroundImage?.altText} />
-            </div>
+            {
+                backgroundImage && backgroundImage.url &&
+                <div className={styles['banner-image-section']}>
+                    <Image className={styles['banner-image']} src={backgroundImage?.url} width={width > 1023 ? 903 : 329} height={width > 1023 ? 246 : 108} layout='responsive' alt={backgroundImage?.altText || ''} />
+                </div>
+            }
         </div>
     )
 }
