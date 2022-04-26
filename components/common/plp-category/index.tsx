@@ -38,6 +38,7 @@ const PLPCategory: FC<PLPCategoryProps> = ({ title = '', text = '', cards = [], 
         { returnObjects: true }
     );
     const [width] = useWindowSize();
+    console.log('component rendering')
     return (
         <div className={styles['plpCategory-container']}>
             <Label className={` ${isLeft && 'text-left'} ${isCentre && 'text-center'} ${isRight && 'text-right'} ${styles["plpCategory-title"]}`}>{appState.lang == 'en' ? title : t('plpCategoryTitle')}</Label>
