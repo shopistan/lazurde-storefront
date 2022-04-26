@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .mobile-header {
   &__wrapper {
     width: 100%;
@@ -6,7 +8,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    background-color: #ffffff;
+    background-color: $white-color;
   }
 
   &__left,
@@ -30,7 +32,7 @@
     line-height: 28.8px;
     letter-spacing: 0em;
     text-align: start;
-    color: #000000;
+    color: $black-color;
   }
 
   &__menu {
@@ -108,10 +110,10 @@
         line-height: 18px;
         letter-spacing: 0em;
         text-align: start;
-        color: #000000;
+        color: $black-color;
 
         a {
-          color: #000000;
+          color: $black-color;
           text-decoration: none;
         }
 
@@ -129,7 +131,7 @@
     line-height: 18px;
     letter-spacing: 0em;
     text-align: start;
-    color: #000000;
+    color: $black-color;
   }
 
   &__sub-menu {
@@ -215,7 +217,7 @@
       }
 
       a {
-        color: #000000;
+        color: $black-color;
         text-decoration: none;
         opacity: 0.6;
 
@@ -232,7 +234,7 @@
       letter-spacing: 0em;
       text-align: start;
       text-transform: capitalize;
-      color: #000000;
+      color: $black-color;
     }
   }
 
@@ -246,7 +248,7 @@
     letter-spacing: 0em;
     text-align: start;
     text-transform: capitalize;
-    color: #000000;
+    color: $black-color;
     margin-top: 28px;
     margin-bottom: 25px;
     padding-top: 25px;
@@ -268,7 +270,7 @@
       a {
         display: inline-flex;
         align-items: center;
-        color: #000000;
+        color: $black-color;
         text-decoration: none;
 
         svg {
@@ -324,7 +326,7 @@
       font-weight: 500;
       line-height: 18px;
       letter-spacing: 0em;
-      color: #000000;
+      color: $black-color;
     }
 
     &-arrow {
@@ -348,7 +350,7 @@
         font-weight: 400;
         line-height: 18px;
         letter-spacing: 0em;
-        color: #000000;
+        color: $black-color;
 
         &[data-selected="true"] {
           font-weight: 700;
@@ -378,6 +380,7 @@
     }
 
     &-dropdown {
+      outline: 0;
       &[data-open="true"] {
         ul {
           display: block;

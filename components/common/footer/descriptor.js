@@ -11,6 +11,7 @@ exports.default = Types.Component({
     subHeading: Types.String({ label: "Sub Heading" }),
     subscriptionText: Types.String({ label: "Subscription Text" }),
     socialIconText: Types.String({ label: "Social Icon Text" }),
+    footerLogoLink: Types.String({ label: "Footer Logo Link" }),
     footerLogo: Types.Image({
       label: "Footer Logo",
       url: Types.String({ label: "URL" }),

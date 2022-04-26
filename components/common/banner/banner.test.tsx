@@ -4,7 +4,7 @@ import Banner from './index'
 
 const renderComponent = () => {
     const imageProps = {
-        url: '/',
+        url: '',
         altText: 'image',
     }
     render(

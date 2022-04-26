@@ -241,3 +241,117 @@ export const socialLinks = [
     },
   },
 ];
+
+export const productCardData = [
+  {
+    title: "Love Ring with Diamond",
+    basePrice: "$1,250",
+    discount: "-50%",
+    discountedPrice: "$625",
+    onlineExclusiveTag: true,
+    images: [
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    title: "Love Ring with Diamond",
+    basePrice: "$1,900",
+    discount: "",
+    discountedPrice: "",
+    onlineExclusiveTag: false,
+    images: [
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    title: "Love Ring with Diamond",
+    basePrice: "$1,250",
+    discount: "-50%",
+    discountedPrice: "$625",
+    onlineExclusiveTag: false,
+    images: [
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    title: "Love Ring with Diamond",
+    basePrice: "$1,450",
+    discount: "-60%",
+    discountedPrice: "$525",
+    onlineExclusiveTag: true,
+    images: [
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    title: "Love Ring with Diamond",
+    basePrice: "$1,300",
+    discount: "",
+    discountedPrice: "",
+    onlineExclusiveTag: false,
+    images: [
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    title: "Love Ring with Diamond",
+    basePrice: "$1,450",
+    discount: "-60%",
+    discountedPrice: "$525",
+    onlineExclusiveTag: true,
+    images: [
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    title: "Love Ring with Diamond",
+    basePrice: "$1,250",
+    discount: "-50%",
+    discountedPrice: "$625",
+    onlineExclusiveTag: true,
+    images: [
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+    ],
+  },
+];
