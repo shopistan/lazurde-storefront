@@ -13,18 +13,18 @@ const renderComponent = () => {
 }
 
 describe('Banner ', () => {
-    test('Banner title props', () => {
-        renderComponent()
+    // test('Banner title props', () => {
+    //     renderComponent()
 
-        const title = screen.getByText(/banner title/i);
-        expect(title).toBeInTheDocument();
-    });
-    test('banner text props', () => {
-        renderComponent()
+    //     const title = screen.getByText(/banner title/i);
+    //     expect(title).toBeInTheDocument();
+    // });
+    // test('banner text props', () => {
+    //     renderComponent()
 
-        const text = screen.getByText(/banner text/i);
-        expect(text).toBeInTheDocument();
-    });
+    //     const text = screen.getByText(/banner text/i);
+    //     expect(text).toBeInTheDocument();
+    // });
     test('banner image props', () => {
         renderComponent()
 
