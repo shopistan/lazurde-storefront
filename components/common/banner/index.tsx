@@ -27,8 +27,8 @@ const Banner: FC<BannerProps> = ({ bgColor = '#FEFBF4', title = '', text = '', b
                 </div>
             }
             <div className={styles['banner-text-section']}>
-                <Label className={styles['banner-title']} children={appState?.lang == 'en' ? title : t("bannerTitle")} />
-                <Label className={styles['banner-text']} children={appState?.lang == 'en' ? text : t("bannerSubTitle")} />
+                <Label testId='title' className={styles['banner-title']} children={appState?.lang == 'en' ? title : t("bannerTitle")} />
+                <Label testId='text' className={styles['banner-text']} children={appState?.lang == 'en' ? text : t("bannerSubTitle")} />
             </div>
         </div>
     )
