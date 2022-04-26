@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .user-navbar {
   display: flex;
   position: relative;
@@ -6,10 +8,10 @@
   width: 100%;
   padding-block: 0;
   font-size: 13px;
-  background-color: black;
+  background-color: $black-color;
   color: white;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     font-size: 14px;
   }
 
@@ -38,7 +40,7 @@
     }
 
     .boutique_text {
-      @media (min-width: 1024px) {
+      @media (min-width: $breakPoint-desktop) {
         font-size: 15px;
         font-weight: 500;
         line-height: 18px;
@@ -46,7 +48,7 @@
     }
 
     .brand_text {
-      @media (min-width: 1024px) {
+      @media (min-width: $breakPoint-desktop) {
         font-size: 14px;
         font-weight: 400;
         line-height: 16.8px;
@@ -73,7 +75,7 @@
           padding-block-start: 40px;
           list-style: none;
 
-          a{
+          a {
             text-decoration: none;
             color: white;
           }
@@ -135,7 +137,7 @@
       &:last-child {
         margin-inline-end: 16px;
 
-        @media (min-width: 1024px) {
+        @media (min-width: $breakPoint-desktop) {
           margin-inline-end: 24px;
         }
       }
@@ -144,7 +146,7 @@
 }
 
 .link-text {
-  color: black;
+  color: $black-color;
   font-weight: 500;
 }
 
@@ -162,12 +164,10 @@
     width: 12px;
     height: 12px;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       width: 20px;
       height: 20px;
     }
-  
-  
   }
 }
 
@@ -191,16 +191,15 @@
   }
 }
 
-html[dir='rtl'] {
+html[dir="rtl"] {
   .right_div {
-
     & > a,
     & > div {
       margin-inline-end: 24px;
       &:last-child {
         margin-inline-end: 16px;
 
-        @media (min-width: 1024px) {
+        @media (min-width: $breakPoint-desktop) {
           margin-inline-end: 24px;
         }
       }

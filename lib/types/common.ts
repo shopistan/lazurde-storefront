@@ -71,6 +71,7 @@ export type FooterProps = {
   socialIconText?: string;
   socialLinks?: iconsObjType[];
   footerLogo?: footerLogoProp;
+  footerLogoLink?: string;
   paymentLinks?: iconsObjType[];
 };
 

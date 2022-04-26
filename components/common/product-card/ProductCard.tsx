@@ -96,7 +96,11 @@ const ProductCard = ({
       <Label className={styles["product-card__title"]}>{title}</Label>
       <div className={styles["product-card__price-wrapper"]}>
         {basePrice && (
-          <Label className={styles["product-card__price__base-price"]}>
+          <Label
+            className={`${styles["product-card__price__base-price"]} ${
+              discount ? styles["line-through"] : ""
+            }`}
+          >
             {basePrice}
           </Label>
         )}
