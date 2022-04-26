@@ -1,6 +1,10 @@
+@import "/styles/variables.scss";
+
 .bread-crumb {
   &_wrapper {
-    margin: 16px 0 18px 0;
+    @media (min-width: $breakPoint-desktop) {
+      padding: 0 80px 18px 80px;
+    }
   }
 
   &_item {

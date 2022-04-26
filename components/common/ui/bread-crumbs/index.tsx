@@ -6,7 +6,7 @@ const BreadCrumbs = () => {
     <div className={styles["bread-crumb_wrapper"]}>
       <div className={styles["bread-crumb_item"]}>
         <Link href="/">
-          <a>home</a>
+          <a>home / Explore All Category</a>
         </Link>
       </div>
     </div>
