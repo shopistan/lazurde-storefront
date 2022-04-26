@@ -1,0 +1,121 @@
+@import "/styles/variables.scss";
+.div-counter {
+  div {
+    height: 19px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline-start: 4px;
+    transform: scale(0);
+    transition: transform 0.1s ease-in-out, width 0.1s ease-in-out;
+    width: 0;
+
+    &[data-visible="true"] {
+      transform: scale(1);
+      width: 19px;
+    }
+
+    span {
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      border-radius: 100%;
+      background: #c4c4c4;
+      font-weight: 400;
+      font-size: 9px;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+  }
+}
+
+.div-filter-btns {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+  margin-bottom: 78px;
+  padding-block-end: 0px;
+  padding-block-start: 8px;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+
+  button {
+    transition: width 0.1s ease-in-out;
+  }
+
+  &[data-has-count="false"] {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+  }
+}
+
+.filter-bar {
+  &_items {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 0 -16px;
+  }
+
+  &_item {
+    flex: 1;
+    padding: 0 16px;
+  }
+}
+
+.filter-mobile-select {
+  div {
+    &:nth-child(3) {
+      inset-inline-end: 0px;
+    }
+  }
+}
+
+.filter-name {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+  text-transform: capitalize;
+}
+
+.filter-heading {
+  padding-block-end: 8px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 120%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  color: $black-color;
+
+  span {
+    margin-inline-end: 10px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.sorting-filter-wrapper {
+  margin-top: 24px;
+
+  .sorting-filter-item {
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    letter-spacing: 0em;
+    text-align: start;
+    text-transform: capitalize;
+    color: rgba(0, 0, 0, 0.8);
+
+    &[data-selected="true"] {
+      font-weight: 500;
+      color: $black-color;
+    }
+  }
+}
