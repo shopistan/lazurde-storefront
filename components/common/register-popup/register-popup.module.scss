@@ -1,0 +1,42 @@
+@import "/styles/variables.scss";
+
+.register-container {
+    @media (min-width: $breakPoint-desktop) {
+        display: flex;
+        width: 21%;
+        height: 400px;
+        background-color: white;
+        margin: auto;
+    }
+}
+
+.modal-title {
+    @media (min-width: $breakPoint-desktop) {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 38px;
+        letter-spacing: 0em;
+        text-align: start;
+    }
+
+}
+
+.modal-text {
+    @media (min-width: $breakPoint-desktop) {
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0em;
+        text-align: start;
+    }
+}
+
+.modal-button {
+    @media (min-width: $breakPoint-desktop) {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19px;
+        letter-spacing: 0em;
+        text-align: center;
+    }
+}

@@ -30,3 +30,9 @@
         opacity: 0;
     }
 }
+
+.register-modal {
+    @media (min-width: 1024px) {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+}

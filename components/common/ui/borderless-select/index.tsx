@@ -93,7 +93,7 @@ const BorderlessSelect = ({
       onClick={() => {
         if (
           window.innerHeight -
-            dropdown.current.getBoundingClientRect().bottom <
+          dropdown.current.getBoundingClientRect().bottom <
           100
         ) {
           setPosition("top");
@@ -119,6 +119,7 @@ const BorderlessSelect = ({
       </div>
       {showInModal ? (
         <Modal
+          className=""
           isOpened={isOpen}
           onClose={() => {
             setIsOpen(false);
