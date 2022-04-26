@@ -20,6 +20,7 @@ type _PLPCategoryTypes = {
 
 
 interface PLPCategoryProps {
+    backgroundColor?: string;
     title?: string;
     isLeft?: Boolean;
     isRight?: Boolean;
@@ -28,7 +29,7 @@ interface PLPCategoryProps {
     cards?: PLPCategoryTypes[];
 }
 
-const PLPCategory: FC<PLPCategoryProps> = ({ title = '', text = '', cards = [], isLeft = false, isRight = false, isCentre = true }) => {
+const PLPCategory: FC<PLPCategoryProps> = ({ backgroundColor = '#fafafa', title = '', text = '', cards = [], isLeft = false, isRight = false, isCentre = true }) => {
     const { appState } = useContext(AppContext);
     const router = useRouter()
     const { t } = useTranslation("common");
@@ -40,14 +41,14 @@ const PLPCategory: FC<PLPCategoryProps> = ({ title = '', text = '', cards = [], 
     const [width] = useWindowSize();
     console.log('component rendering')
     return (
-        <div className={styles['plpCategory-container']}>
-            <Label className={` ${isLeft && 'text-left'} ${isCentre && 'text-center'} ${isRight && 'text-right'} ${styles["plpCategory-title"]}`}>{appState.lang == 'en' ? title : t('plpCategoryTitle')}</Label>
-            <Label className={`${isLeft && 'text-left'} ${isCentre && 'text-center'} ${isRight && 'text-right'} ${styles["plpCategory-text"]}`}>{appState.lang == 'en' ? text : t('plpCategoryText')}</Label>
+        <div className={styles['plpCategory-container']} style={{backgroundColor: backgroundColor}}>
+            <Label className={` ${styles["plpCategory-title"]}`}>{appState.lang == 'en' ? title : t('plpCategoryTitle')}</Label>
+            <Label className={` ${styles["plpCategory-text"]}`}>{appState.lang == 'en' ? text : t('plpCategoryText')}</Label>
             <div className={` ${isLeft && 'text-left'} ${isCentre && 'text-center'} ${isRight && 'text-right'} ${styles['plpCategory-card']}`}>
 
                 {
                     cards.length > 0 && cards.map((card, index) => {
-                        const { cardImage, cardTitle ,cardLink } = card
+                        const { cardImage, cardTitle, cardLink } = card
                         return (
                             <div onClick={() => { router?.push(`/c/${cardLink}`) }}>
                                 <Cards width={width > 1023 ? 314 : 167.5} height={width > 1024 ? 331 : 180.5} className={`plp-card`} cardImage={cardImage} cardTitle={appState?.lang == 'en' ? cardTitle : _plpCategoryCard[index]?.cardTitle} key={index} />

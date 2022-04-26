@@ -1,15 +1,26 @@
 @import "/styles/variables.scss";
 
 .banner-container {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+
+  @media (min-width :$breakPoint-tablet) {
+    flex-direction: row-reverse;
+  }
+  
   @media (min-width: $breakPoint-desktop) {
-    display: flex;
+    overflow: unset;
   }
 }
 
 .banner-text-section {
+  position: relative;
   padding-inline-start: 16px;
 
   @media (min-width: $breakPoint-desktop) {
+    position: unset;
     padding-inline-start: 80px;
     width: 56%;
   }
@@ -45,7 +56,12 @@
   text-align: start;
   margin-top: 0;
   margin-bottom: 0;
-  padding-inline-end: 153px;
+  padding-inline-end: 145px;
+
+  @media (min-width: $breakPoint-tablet) {
+    padding-bottom: 0;
+    padding-inline-end: 0 ;
+  }
 
   @media (min-width: $breakPoint-desktop) {
     font-size: 14px;
@@ -58,9 +74,11 @@
 .banner-image-section {
   width: 100%;
   height: 100%;
-  float: right;
+  transform: translate(113px);
+  margin-top: -35px;
 
-  @media (min-width: $breakPoint-desktop) {
-    float: left;
+  @media (min-width : $breakPoint-tablet) {
+    margin-top: 0;
+    transform: translate(0);
   }
 }
