@@ -10,7 +10,7 @@ const Input = ({
   placeholder = "This is placeholder text",
   label = "Placeholder",
   labelClassName,
-  onChange,
+  onChange = (e) => {},
   showLabel = true,
 }: InputType): JSX.Element => {
   return (
@@ -25,7 +25,7 @@ const Input = ({
         style={style}
         value={value}
         placeholder={placeholder}
-        onChange={onChange}
+        onChange={(e) => onChange(e)}
       ></input>
     </div>
   );

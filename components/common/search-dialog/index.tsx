@@ -20,6 +20,9 @@ const SearchDialog: FC<SearchDialogProps> = ({
   setOpenSearchDialog,
   openSearchDialog,
 }): JSX.Element => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("input triggers", e.target.value);
+  };
   return (
     <div className={styles["search-dialog"]} data-opened={openSearchDialog}>
       <div className={styles["search-bar"]}>
@@ -43,6 +46,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
             showLabel={false}
             className={styles["search-input"]}
             placeholder="Shop L'azurde"
+            onChange={handleSearch}
           ></Input>
         </div>
         <div
