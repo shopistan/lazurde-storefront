@@ -39,7 +39,7 @@
   width: 100%;
 
   .search-input-div {
-    // position: static;
+    display: flex;
     width: 971px;
     height: 40px;
     left: 0px;
@@ -57,8 +57,14 @@
     line-height: 120%;
     color: rgba(0, 0, 0, 0.4);
 
-    .search_input {
-      border: 0px;
+    .search-input {
+      border: 0px solid gray;
+      padding: 1.5px 20px 1.5px 0px;
+      width: 903px;
+    }
+
+    .search-icon {
+      margin: 2px 14px 2px 2px;
     }
   }
 }
@@ -66,6 +72,35 @@
 .category-section {
   display: flex;
   justify-content: flex-start;
-  padding: 20px;
   gap: 48px;
+  margin: 0;
+
+  .popular-search-terms-div {
+    margin-top: 30px;
+    margin-left: 80px;
+  }
+
+  .popular-search-terms-heading {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 120%;
+    text-transform: capitalize;
+    color: rgba(0, 0, 0, 0.8);
+    margin: 0;
+  }
+
+  .popular-search-products-div {
+    margin-top: 30px;
+  }
+
+  .popular-search-products-heading {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 120%;
+    color: #000000;
+    margin: 0;
+  }
 }

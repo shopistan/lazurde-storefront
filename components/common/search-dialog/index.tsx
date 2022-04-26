@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ImageType } from "lib/types/common";
 import Input from "../ui/Input";
 import CrossSmall from "components/icons/CrossSmall";
+import { Search } from "components/icons";
 
 interface SearchDialogProps {
   siteLogo: ImageType;
@@ -35,6 +36,9 @@ const SearchDialog: FC<SearchDialogProps> = ({
           </Link>
         </div>
         <div className={styles["search-input-div"]}>
+          <div className={styles["search-icon"]}>
+            <Search width="16" height="16" color="rgba(0, 0, 0, 0.4)" />
+          </div>
           <Input
             showLabel={false}
             className={styles["search-input"]}
@@ -49,15 +53,19 @@ const SearchDialog: FC<SearchDialogProps> = ({
         </div>
       </div>
       <div className={styles["category-section"]}>
-        <div>
-          <h5>Popular Search Terms</h5>
+        <div className={styles["popular-search-terms-div"]}>
+          <h5 className={styles["popular-search-terms-heading"]}>
+            Popular Search Terms
+          </h5>
           <h6>Jewelry</h6>
           <h6>Rings</h6>
           <h6>Gold</h6>
           <h6>Kenaz</h6>
         </div>
-        <div>
-          <h4>Popular Searched Products</h4>
+        <div className={styles["popular-search-products-div"]}>
+          <h4 className={styles["popular-search-products-heading"]}>
+            Popular Searched Products
+          </h4>
         </div>
       </div>
     </div>
