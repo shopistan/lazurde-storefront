@@ -14,7 +14,7 @@ interface RegisterModalProps {
 }
 
 
-const RegisterModel: FC<RegisterModalProps> = ({ modalImage, modalTitle = '', modalText = '', modalButton = '' }) => {
+const RegisterModal: FC<RegisterModalProps> = ({ modalImage, modalTitle = '', modalText = '', modalButton = '' }) => {
     return (
         <Modal className='register-modal' isOpened={true} onClose={() => { }}  >
             <div className={styles['register-container']}>
@@ -38,4 +38,4 @@ const RegisterModel: FC<RegisterModalProps> = ({ modalImage, modalTitle = '', mo
         </Modal>
     )
 }
-export default RegisterModel
+export default RegisterModal
