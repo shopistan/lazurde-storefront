@@ -9,21 +9,31 @@ import Slider from "components/common/ui/slider/slider";
 import Button from "components/common/ui/button";
 import { ImageType } from "lib/types/common";
 import { AppContext } from "lib/context";
+import { addProductToCart } from "lib/utils/cart";
+import { ATCPayload } from "lib/types/cart";
 interface ProductCardProps {
   index?: number;
   title?: string;
-  basePrice?: string;
+  basePrice?: number;
   discount?: string;
-  discountedPrice?: string;
+  discountAmount?: number | string;
   productCardImages?: ImageType[];
   onlineExclusiveTag?: boolean;
+  sku?: string;
+  itemId?: string;
+  priceListId?: string;
+  currency?: string;
 }
 
 const ProductCard = ({
+  sku = "",
+  itemId = "",
+  priceListId = "",
+  currency = "USD",
   title = "",
-  basePrice = "",
+  basePrice = 0,
   discount = "",
-  discountedPrice = "",
+  discountAmount = 0,
   productCardImages = [],
   onlineExclusiveTag = false,
   index = 0,
@@ -31,6 +41,28 @@ const ProductCard = ({
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const [fill, setFill] = useState(false);
+
+  const handleAddToCart = async () => {
+    const payload: ATCPayload = {
+      cartId: null,
+      items: [
+        {
+          sku: sku,
+          itemId: itemId,
+          quantity: 1,
+          priceListId: priceListId,
+          price: {
+            currency: currency,
+            amount: basePrice,
+            discount: {
+              discountAmount: discountAmount,
+            },
+          },
+        },
+      ],
+    };
+    const res = await addProductToCart(payload);
+  };
 
   return (
     <div
@@ -87,7 +119,9 @@ const ProductCard = ({
             buttonStyle="black"
             buttonText={"add to cart"}
             buttonSize={"sm"}
-            onClick={() => {}}
+            onClick={() => {
+              handleAddToCart();
+            }}
             type={"button"}
           />
         </div>
@@ -101,7 +135,7 @@ const ProductCard = ({
               discount ? styles["line-through"] : ""
             }`}
           >
-            {basePrice}
+            {`$${basePrice && basePrice.toLocaleString()}`}
           </Label>
         )}
         {discount && (
@@ -109,9 +143,9 @@ const ProductCard = ({
             {discount}
           </Label>
         )}
-        {discountedPrice && (
+        {discountAmount && (
           <Label className={styles["product-card__price__discounted-price"]}>
-            {discountedPrice}
+            {`$${discountAmount && discountAmount.toLocaleString()}`}
           </Label>
         )}
       </div>

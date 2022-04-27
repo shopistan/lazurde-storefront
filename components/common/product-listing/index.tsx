@@ -66,6 +66,10 @@ const ProductListing = (props: Props) => {
             productCardData.length > 0 &&
             productCardData?.map((data: any, index: number) => {
               const {
+                sku,
+                itemId,
+                priceListId,
+                currency,
                 title,
                 basePrice,
                 discount,
@@ -83,9 +87,13 @@ const ProductListing = (props: Props) => {
                           _arabicProductCardData.length > 0 &&
                           _arabicProductCardData[index]?.title
                     }
+                    sku={sku}
+                    itemId={itemId}
+                    priceListId={priceListId}
+                    currency={currency}
                     basePrice={basePrice}
                     discount={discount}
-                    discountedPrice={discountedPrice}
+                    discountAmount={discountedPrice}
                     productCardImages={images}
                     onlineExclusiveTag={onlineExclusiveTag}
                     index={index}
