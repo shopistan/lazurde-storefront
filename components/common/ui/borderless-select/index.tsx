@@ -6,7 +6,6 @@ import Accordion from "../accordion2/Accordion";
 import Modal from "../modal";
 import { AppContext } from "lib/context";
 
-
 import styles from "./style.module.scss";
 
 type optionProps = { label?: string; img?: string; value?: string };
@@ -77,7 +76,6 @@ const BorderlessSelect = ({
   const [position, setPosition] = useState<string>("bottom");
   const { appState } = useContext(AppContext);
 
-
   useEffect(() => {
     defaultValue &&
       options &&
@@ -121,6 +119,7 @@ const BorderlessSelect = ({
       </div>
       {showInModal ? (
         <Modal
+          className=""
           isOpened={isOpen}
           onClose={() => {
             setIsOpen(false);

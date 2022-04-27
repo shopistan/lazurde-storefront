@@ -12,10 +12,19 @@
   transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   padding: 24px;
   overflow-y: auto;
+  @media (min-width: $breakPoint-desktop) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .div-top-bar {
     display: flex;
     width: 100%;
+
+    @media (min-width: $breakPoint-desktop) {
+      display: none;
+    }
 
     .div-left {
       flex: 1;
@@ -32,7 +41,18 @@
     opacity: 0;
   }
 
-  .div-modal-body {
-    margin-top: 45px;
+  &[data-open="false"] {
+    transform: translateX(-100%);
+    opacity: 0;
   }
+}
+
+.register-modal {
+  @media (min-width: $breakPoint-desktop) {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.div-modal-body {
+  margin-top: 45px;
 }
