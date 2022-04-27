@@ -32,18 +32,18 @@
     opacity: 0;
   }
 
-    &[data-open="false"] {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
+  &[data-open="false"] {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
 }
 
 .register-modal {
-    @media (min-width: 1024px) {
-        background-color: rgba(0, 0, 0, 0.3);
-    }
-}
-  .div-modal-body {
-    margin-top: 45px;
+  @media (min-width: 1024px) {
+    background-color: rgba(0, 0, 0, 0.3);
   }
+}
+
+.div-modal-body {
+  margin-top: 45px;
 }
