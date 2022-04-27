@@ -124,6 +124,7 @@ const FilterBar: FC<siteNavBarProps> = ({
   filterList = fl,
   onApplyFilters,
 }): JSX.Element => {
+  const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
   const link: any = useRef(
     filterList && filterList.map(() => React.createRef())
@@ -133,15 +134,20 @@ const FilterBar: FC<siteNavBarProps> = ({
     {},
     { returnObjects: true }
   );
-  
+
+  const _arabicFilterBarData = t(
+    "arabicFilterList",
+    {},
+    { returnObjects: true }
+  );
+  const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
+
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
   const [selectedFilters, setSelectedFilters] = useState<{
     [key: string]: { [key: string]: string };
   }>();
-  const { appState } = useContext(AppContext);
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
-  console.log("test")
   useEffect(() => {
     let totalCount = 0;
     if (selectedFilters && Object.keys(selectedFilters).length > 0) {
@@ -161,6 +167,14 @@ const FilterBar: FC<siteNavBarProps> = ({
     }
   }, [selectedFilters]);
 
+  const [optionData, setOptionData] = useState<any>([]);
+  useEffect(() => {
+    setOptionData({
+      data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
+      defaultValue: "Best Sellers",
+    });
+  }, [appState]);
+
   return (
     <div className={styles["filter-bar-main"]} data-headerId={headerId}>
       <div className={styles["div-filter-bar"]}>
@@ -178,15 +192,25 @@ const FilterBar: FC<siteNavBarProps> = ({
                   key={index}
                   className={styles["links"]}
                   ref={link.current[index]}
-                  data-has-count={selectedFilterCount > 0 }
+                  data-has-count={selectedFilterCount > 0}
                   onMouseOver={(event) => {
                     event.stopPropagation();
 
                     if (hasCategories) {
                       setIsOpened({ opened: true, selected: index });
                       setDropdownData({
-                        filterName: data.filterName,
-                        dropdownData: data.filterOptions,
+                        filterName:
+                          appState?.lang === "en"
+                            ? data.filterName
+                            : Array.isArray(_arabicFilterBarData) &&
+                              _arabicFilterBarData.length > 0 &&
+                              _arabicFilterBarData[index]?.filterName,
+                        dropdownData:
+                          appState?.lang === "en"
+                            ? data.filterOptions
+                            : Array.isArray(_arabicFilterBarData) &&
+                              _arabicFilterBarData.length > 0 &&
+                              _arabicFilterBarData[index]?.filterOptions,
                         positionOffset:
                           link?.current[index].current.getBoundingClientRect()
                             .left,
@@ -208,7 +232,13 @@ const FilterBar: FC<siteNavBarProps> = ({
                       : isOpened.selected === index
                   }
                 >
-                  <span>{data.filterName}</span>
+                  <span>
+                    {appState?.lang === "en"
+                      ? data.filterName
+                      : Array.isArray(_arabicFilterBarData) &&
+                        _arabicFilterBarData.length > 0 &&
+                        _arabicFilterBarData[index]?.filterName}
+                  </span>
                   <div data-visible={selectedFilterCount > 0}>
                     <span>
                       {selectedFilterCount > 0 && selectedFilterCount}
@@ -224,12 +254,12 @@ const FilterBar: FC<siteNavBarProps> = ({
           data-has-count={totalSelectedFilterCount > 0}
         >
           <Button
-            buttonText={"Clear All Filters"}
+            buttonText={appState?.lang === "en" ? "Clear All Filters" : "مسح"}
             buttonStyle={"white"}
             buttonSize={"sm"}
             onClick={() => {
               setSelectedFilters({});
-              onApplyFilters({})
+              onApplyFilters({});
             }}
           />
         </div>
@@ -238,10 +268,10 @@ const FilterBar: FC<siteNavBarProps> = ({
           data-opened={isOpened.opened}
         >
           <BorderlessSelect
-            options={optionsData}
+            options={optionData?.data}
             onChange={() => {}}
-            defaultValue={"Best Sellers"}
-            selectedLabel={`${"Sort By: "}`}
+            defaultValue={optionData?.defaultValue}
+            selectedLabel={appState?.lang === "en" ? "Sort By: " : "بسح فنص:"}
           ></BorderlessSelect>
         </div>
       </div>

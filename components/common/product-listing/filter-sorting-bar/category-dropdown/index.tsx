@@ -32,8 +32,8 @@ interface DropDownProps {
 interface CategoryDropDownProps {
   categoryData: DropDownProps;
   setIsOpened: Function;
-  selectedFilters: { [key: string]: { [key: string]: string; }; };
-  setSelectedFilters: Function; 
+  selectedFilters: { [key: string]: { [key: string]: string } };
+  setSelectedFilters: Function;
   onApplyFilters: Function;
 }
 
@@ -45,7 +45,6 @@ const CategoryDropDown = ({
   onApplyFilters,
 }: CategoryDropDownProps): JSX.Element => {
   const { appState } = useContext(AppContext);
-  const [showTick, setShowTick] = useState("");
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const filterName = categoryData?.filterName || "";
 
@@ -108,12 +107,9 @@ const CategoryDropDown = ({
                   });
                 }
               }}
-              style={{marginLeft: categoryData?.positionOffset}}
+              style={{ marginLeft: categoryData?.positionOffset }}
             >
-              {/* {appState.lang === "en"
-                ? optionsNames
-                : currentCategoryArabic?.linkHeading} */}
-                {optionsNames}
+              {optionsNames}
               <div
                 className={styles["div-tick"]}
                 data-showTick={selectedFilters?.[filterName]?.[optionsNames]}
@@ -125,24 +121,29 @@ const CategoryDropDown = ({
         })}
       </div>
 
-      <div className={styles["div-filter-btns"]} data-has-count={totalSelectedFilterCount > 0}>
+      <div
+        className={styles["div-filter-btns"]}
+        data-has-count={totalSelectedFilterCount > 0}
+      >
         <Button
-          buttonText={"Clear All Filters"}
+          buttonText={appState?.lang === "en" ? "Clear All Filters" : "مسح"}
           buttonStyle={"white"}
           buttonSize={"sm"}
           onClick={() => {
             setSelectedFilters({});
-            onApplyFilters({})
+            onApplyFilters({});
           }}
         />
         <Button
-          buttonText={`Apply ${
-            totalSelectedFilterCount > 0 ? `(${totalSelectedFilterCount})` : "(1)"
+          buttonText={`${appState?.lang === "en" ? "Apply" : "يتقدم"} ${
+            totalSelectedFilterCount > 0
+              ? `(${totalSelectedFilterCount})`
+              : "(1)"
           }`}
           buttonStyle={"black"}
           buttonSize={"sm"}
           onClick={() => {
-            onApplyFilters && onApplyFilters(selectedFilters)
+            onApplyFilters && onApplyFilters(selectedFilters);
           }}
         />
       </div>

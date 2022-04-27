@@ -114,6 +114,7 @@ html[dir="rtl"] {
       justify-content: flex-end;
 
       @media (min-width: $breakPoint-desktop) {
+        direction: rtl;
         font-size: 14px;
       }
     }
