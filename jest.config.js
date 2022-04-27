@@ -9,9 +9,7 @@ module.exports = {
     "^.+\\.tsx?$": "esbuild-jest",
     "^.+\\.jsx?$": "esbuild-jest",
   },
-  modulePaths: [
-    "<rootDir>",
-  ],
+  modulePaths: ["<rootDir>"],
   moduleNameMapper: {
     "\\module\\.css$": "identity-obj-proxy",
     "\\.css$": require.resolve("./styles/mockcss.js"),
@@ -36,6 +34,15 @@ module.exports = {
     "!components/xm-component-library.ts",
     "!components/common/ui/**/*.{js,jsx,tsx,ts}",
     "!pages/cms/*.{js,jsx,tsx,ts}",
+    "!components/common/app-content-wrapper/*.{js,jsx,tsx,ts}",
+    "!components/common/bambuser-ended-sessions/*.{js,jsx,tsx,ts}",
+    "!components/common/bambuser-popup/*.{js,jsx,tsx,ts}",
+    "!components/common/header/index.tsx",
+    "!components/common/card-slider/*.{js,jsx,tsx,ts}",
+    "!components/common/brand-cards/*.{js,jsx,tsx,ts}",
+    "!components/common/collection-card/*.{js,jsx,tsx,ts}",
+    "!components/common/product-card/*.{js,jsx,tsx,ts}",
+    "!components/common/product-listing/index.tsx",
   ],
   setupFiles: ["./setup.js"],
 };
