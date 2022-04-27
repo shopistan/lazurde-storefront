@@ -12,10 +12,19 @@
   transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   padding: 24px;
   overflow-y: auto;
+  @media (min-width: $breakPoint-desktop) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .div-top-bar {
     display: flex;
     width: 100%;
+
+    @media (min-width: $breakPoint-desktop) {
+      display: none;
+    }
 
     .div-left {
       flex: 1;
@@ -39,8 +48,8 @@
 }
 
 .register-modal {
-  @media (min-width: 1024px) {
-    background-color: rgba(0, 0, 0, 0.3);
+  @media (min-width: $breakPoint-desktop) {
+    background-color: rgba(0, 0, 0, 0.4);
   }
 }
 
