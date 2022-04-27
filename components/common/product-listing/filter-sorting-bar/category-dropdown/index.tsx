@@ -34,6 +34,7 @@ interface CategoryDropDownProps {
   setIsOpened: Function;
   selectedFilters: { [key: string]: { [key: string]: string; }; };
   setSelectedFilters: Function; 
+  onApplyFilters: Function;
 }
 
 const CategoryDropDown = ({
@@ -41,6 +42,7 @@ const CategoryDropDown = ({
   setIsOpened,
   selectedFilters,
   setSelectedFilters,
+  onApplyFilters,
 }: CategoryDropDownProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const [showTick, setShowTick] = useState("");
@@ -130,6 +132,7 @@ const CategoryDropDown = ({
           buttonSize={"sm"}
           onClick={() => {
             setSelectedFilters({});
+            onApplyFilters({})
           }}
         />
         <Button
@@ -138,6 +141,9 @@ const CategoryDropDown = ({
           }`}
           buttonStyle={"black"}
           buttonSize={"sm"}
+          onClick={() => {
+            onApplyFilters && onApplyFilters(selectedFilters)
+          }}
         />
       </div>
     </div>

@@ -1,15 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./style.module.scss";
-import Link from "next/link";
-import { AppContext } from "lib/context";
 import Tick from "components/icons/Tick";
-import Button from "components/common/ui/button";
-
-type LinkProps = {
-  title: string;
-  url: string;
-  isBold: Boolean;
-};
 
 interface ArabicCategoryProps {
   linkHeading: string;
@@ -19,7 +10,6 @@ interface ArabicCategoryProps {
     }
   ];
 }
-
 interface DropDownProps {
   dropdownData: { [key: string]: string }[];
   filterName: string;
@@ -42,8 +32,6 @@ const CategoryDropDown = ({
   setSelectedFilters,
   setTotalSelectedFilterCount,
 }: CategoryDropDownProps): JSX.Element => {
-  const { appState } = useContext(AppContext);
-  const [showTick, setShowTick] = useState("");
   const filterName = categoryData?.filterName || "";
 
   useEffect(() => {
@@ -107,9 +95,6 @@ const CategoryDropDown = ({
               }}
               style={{ marginLeft: categoryData?.positionOffset }}
             >
-              {/* {appState.lang === "en"
-                ? optionsNames
-                : currentCategoryArabic?.linkHeading} */}
               {optionsNames}
               <div
                 className={styles["div-tick"]}
@@ -121,24 +106,6 @@ const CategoryDropDown = ({
           );
         })}
       </div>
-
-      {/* <div className={styles["div-filter-btns"]}>
-        <Button
-          buttonText={"Clear All Filters"}
-          buttonStyle={"white"}
-          buttonSize={"sm"}
-          onClick={() => {
-            setSelectedFilters({});
-          }}
-        />
-        <Button
-          buttonText={`Apply ${
-            totalSelectedFilterCount > 0 ? `(${totalSelectedFilterCount})` : ""
-          }`}
-          buttonStyle={"black"}
-          buttonSize={"sm"}
-        />
-      </div> */}
     </div>
   );
 };

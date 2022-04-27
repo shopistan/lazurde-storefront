@@ -1,8 +1,9 @@
+@import "/styles//variables.scss";
+
 .category-dropdown {
   display: flex;
   flex: 1;
-  background: white;
-  // justify-content: center;
+  background: $white-color;
   flex-direction: column;
   padding-block-start: 32px;
   column-gap: 24px;
@@ -10,18 +11,14 @@
   .div-titles {
     display: flex;
     flex-direction: column;
-    color: black;
+    color: $black-color;
     flex: 1;
-
-    @media (min-width: 1200px) {
-      width: 211px;
-    }
 
     .title {
       display: flex;
       align-items: center;
       font-weight: 500;
-      font-size: 16px;
+      font-size: 15px;
       line-height: 120%;
       text-transform: capitalize;
       color: rgba(0, 0, 0, 0.8);
@@ -39,7 +36,7 @@
         justify-content: center;
         margin-inline-start: 8px;
         transition: opacity 0.2s ease-in-out;
-        color: #000000;
+        color: $black-color;
 
         &[data-showTick="true"] {
           opacity: 1;

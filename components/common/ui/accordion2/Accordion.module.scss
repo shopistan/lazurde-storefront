@@ -30,7 +30,7 @@
 }
 
 .wrapper {
-  margin-bottom: 26px;
+  margin-bottom: 40px;
 
   input {
     min-height: auto !important;
@@ -41,19 +41,20 @@
     display: flex;
     align-items: center;
     padding: 0 !important;
-    min-height: 30px !important;
+    min-height: 35px !important;
     color: black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
     .heading-text {
       flex: 1;
     }
 
-    .heading-icons {
-    }
+    // .heading-icons {
+    // }
   }
 
   .custom-content {
-    padding-inline-start: 8px;
+    padding-inline-start: 0;
     padding-bottom: 0 !important;
     text-align: start;
     display: none;

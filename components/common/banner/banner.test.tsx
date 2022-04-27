@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react'
 import React from 'react'
 import Banner from './index'
 
+
 const renderComponent = () => {
     const imageProps = {
         url: '/',
@@ -16,13 +17,13 @@ describe('Banner ', () => {
     test('Banner title props', () => {
         renderComponent()
 
-        const title = screen.getByText(/banner title/i);
+        const title = screen.getByTestId('title');
         expect(title).toBeInTheDocument();
     });
     test('banner text props', () => {
         renderComponent()
 
-        const text = screen.getByText(/banner text/i);
+        const text = screen.getByTestId('text');
         expect(text).toBeInTheDocument();
     });
     test('banner image props', () => {
