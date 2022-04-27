@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from "react";
+import React, { FC, useState, useRef, useContext, useEffect } from "react";
 import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
 import BorderlessSelect from "components/common/ui/borderless-select";
@@ -6,6 +6,7 @@ import CategoryDropDown from "./category-dropdown";
 import Accordion from "components/common/ui/accordion2/Accordion";
 import Button from "components/common/ui/button";
 import SortingModal from "./sorting-modal";
+import { AppContext } from "lib/context";
 
 const optionsData = [
   {
@@ -127,6 +128,8 @@ const FilterBarMobile: FC<siteNavBarProps> = ({
   filterList = fl,
 }): JSX.Element => {
   const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
+
   const link = useRef(filterList && filterList.map(() => React.createRef()));
   const sideNavTitlesArray: [{ navTitle: string; navCategoryLinks: [] }] = t(
     "siteNavLinks",
@@ -142,16 +145,31 @@ const FilterBarMobile: FC<siteNavBarProps> = ({
   }>();
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
 
+  const _arabicFilterBarData = t(
+    "arabicFilterList",
+    {},
+    { returnObjects: true }
+  );
+  const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
+
+  const [optionData, setOptionData] = useState<any>([]);
+  useEffect(() => {
+    setOptionData({
+      data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
+      defaultValue: "Best Sellers",
+    });
+  }, [appState]);
+
   return (
     <div className={styles["filter-bar_wrapper"]} data-headerId={headerId}>
       <div className={styles["filter-bar_items"]}>
         <div className={styles["filter-bar_item"]}>
           <BorderlessSelect
             className={"filter-mobile-select"}
-            options={optionsData}
+            options={optionData?.data}
             onChange={() => {}}
-            defaultValue={""}
-            selectedLabel={`${"Filter: "}`}
+            defaultValue={optionData?.defaultValue}
+            selectedLabel={appState?.lang === "en" ? "Filter: " : "منقي:"}
             showInModal={true}
             modalChildren={
               <FilterAccordion
@@ -170,15 +188,15 @@ const FilterBarMobile: FC<siteNavBarProps> = ({
         >
           <BorderlessSelect
             className={styles["filter-mobile-select"]}
-            options={optionsData}
+            options={optionData?.data}
             onChange={() => {}}
-            defaultValue={sortingSelected}
-            selectedLabel={`${"Sort By: "}`}
+            defaultValue={optionData?.defaultValue}
+            selectedLabel={appState?.lang === "en" ? "Sort By: " : "بسح فنص:"}
             showInModal={true}
             modalChildren={
               <SortingModal
-                sortingDataArray={optionsData}
-                defaultValue={sortingSelected}
+                sortingDataArray={optionData?.data}
+                defaultValue={optionData?.defaultValue}
                 onChange={(value) => {
                   setSortingSelected(value);
                 }}
@@ -200,6 +218,14 @@ const FilterAccordion = ({
   setTotalSelectedFilterCount,
   totalSelectedFilterCount,
 }: FilterAccordionProps): JSX.Element => {
+  const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
+
+  const _arabicFilterBarData = t(
+    "arabicFilterList",
+    {},
+    { returnObjects: true }
+  );
   return (
     <>
       {fl.map((data, index) => {
@@ -211,7 +237,13 @@ const FilterAccordion = ({
             key={index}
             heading={
               <div className={styles["div-counter"]}>
-                <span className={styles["filter-name"]}>{data.filterName}</span>
+                <span className={styles["filter-name"]}>
+                  {appState?.lang === "en"
+                    ? data.filterName
+                    : Array.isArray(_arabicFilterBarData) &&
+                      _arabicFilterBarData.length > 0 &&
+                      _arabicFilterBarData[index]?.filterName}
+                </span>
                 <div data-visible={selectedFilterCount > 0}>
                   <span>{selectedFilterCount > 0 && selectedFilterCount}</span>
                 </div>
@@ -224,8 +256,18 @@ const FilterAccordion = ({
               key={index}
               setIsOpened={setIsOpened}
               categoryData={{
-                dropdownData: data.filterOptions,
-                filterName: data.filterName,
+                dropdownData:
+                  appState?.lang === "en"
+                    ? data.filterOptions
+                    : Array.isArray(_arabicFilterBarData) &&
+                      _arabicFilterBarData.length > 0 &&
+                      _arabicFilterBarData[index]?.filterOptions,
+                filterName:
+                  appState?.lang === "en"
+                    ? data.filterName
+                    : Array.isArray(_arabicFilterBarData) &&
+                      _arabicFilterBarData.length > 0 &&
+                      _arabicFilterBarData[index]?.filterName,
               }}
               selectedFilters={selectedFilters}
               setSelectedFilters={setSelectedFilters}
@@ -240,7 +282,7 @@ const FilterAccordion = ({
         data-has-count={totalSelectedFilterCount > 0}
       >
         <Button
-          buttonText={"Clear All Filters"}
+          buttonText={appState?.lang === "en" ? "Clear All Filters" : "مسح"}
           buttonStyle={"white"}
           buttonSize={"sm"}
           onClick={() => {
@@ -248,7 +290,7 @@ const FilterAccordion = ({
           }}
         />
         <Button
-          buttonText={`Apply ${
+          buttonText={`${appState?.lang === "en" ? "Apply" : "يتقدم"} ${
             totalSelectedFilterCount > 0 ? `(${totalSelectedFilterCount})` : ""
           }`}
           buttonStyle={"black"}

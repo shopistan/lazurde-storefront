@@ -54,6 +54,12 @@
   }
 }
 
+html[dir="rtl"] {
+  .div-filter-btns {
+    justify-content: flex-start;
+  }
+}
+
 .filter-bar {
   &_items {
     display: flex;
