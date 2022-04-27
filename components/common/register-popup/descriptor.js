@@ -1,8 +1,8 @@
 const { Types } = require("@teamfabric/xpm");
 
 exports.default = Types.Component({
-    id: "RegisterModel",
-    label: "RegisterModel",
+    id: "RegisterModal",
+    label: "RegisterModal",
     description: ``,
 
     attributes: {
