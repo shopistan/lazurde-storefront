@@ -1,58 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import ChevronDown from "components/icons/ChevronDown";
-import Image from "next/image";
 import React, { useState, useRef, useEffect, useContext } from "react";
-import Accordion from "../accordion2/Accordion";
 import Modal from "../modal";
-import { AppContext } from "lib/context";
 
 import styles from "./style.module.scss";
 
 type optionProps = { label?: string; img?: string; value?: string };
 
-const linksData = [
-  {
-    heading: "heading",
-    links: [
-      {
-        url: "/",
-        text: "Heading",
-      },
-    ],
-  },
-  {
-    heading: "heading",
-    links: [
-      {
-        url: "/",
-        text: "Heading",
-      },
-    ],
-  },
-  {
-    heading: "heading",
-    links: [
-      {
-        url: "/",
-        text: "Heading",
-      },
-    ],
-  },
-  {
-    heading: "heading",
-    links: [
-      {
-        url: "/",
-        text: "Heading",
-      },
-    ],
-  },
-];
-
 interface SelectProps {
   options?: optionProps[];
   onChange: Function;
-  defaultValue: string;
+  defaultValue?: string;
+  selectedValue?: string;
   className?: string;
   optionClassName?: string;
   selectedLabel?: string;
@@ -62,8 +21,9 @@ interface SelectProps {
 
 const BorderlessSelect = ({
   options = [{ label: "label", img: "", value: "value" }],
-  onChange,
-  defaultValue,
+  onChange = () => {},
+  defaultValue = "",
+  selectedValue = '',
   className = "",
   optionClassName = "",
   selectedLabel = "",
@@ -71,20 +31,29 @@ const BorderlessSelect = ({
   modalChildren = "",
 }: SelectProps): JSX.Element => {
   const dropdown = useRef(null);
-  const [selectedVal, setSelectedVal] = useState<optionProps>();
+  const [selectedVal, setSelectedVal] = useState<optionProps>({});
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [position, setPosition] = useState<string>("bottom");
-  const { appState } = useContext(AppContext);
 
   useEffect(() => {
     defaultValue &&
-      options &&
+      Array.isArray(options) &&
       options.length > 0 &&
       options.find((currentOption) => {
         defaultValue === currentOption.value &&
           setSelectedVal({ ...currentOption });
       });
-  }, [defaultValue, appState]);
+  }, [defaultValue]);
+
+  useEffect(() => {
+    selectedValue &&
+      Array.isArray(options) &&
+      options.length > 0 &&
+      options.find((currentOption) => {
+        selectedValue === currentOption.value &&
+          setSelectedVal({ ...currentOption });
+      });
+  }, [selectedValue]);
 
   return (
     <div
@@ -96,7 +65,7 @@ const BorderlessSelect = ({
       onBlur={() => !showInModal && setIsOpen(false)}
       onClick={() => {
         if (
-          window.innerHeight - dropdown.current.getBoundingClientRect().bottom <
+          window?.innerHeight - dropdown?.current?.getBoundingClientRect().bottom <
           100
         ) {
           setPosition("top");
@@ -129,14 +98,14 @@ const BorderlessSelect = ({
         </Modal>
       ) : (
         <ul className={`${styles["options-ul"]}`} data-position={position}>
-          {options &&
+          {Array.isArray(options) &&
             options.length > 0 &&
             options?.map((opData, index) => {
               return (
                 <li
                   key={`${selectedVal?.value}-${index}`}
                   className={`${styles["option"]}`}
-                  data-selected={selectedVal?.value === opData.value}
+                  data-selected={selectedVal?.value === opData?.value}
                   onClick={() => {
                     setSelectedVal(opData);
                     setIsOpen(false);
@@ -144,10 +113,10 @@ const BorderlessSelect = ({
                   }}
                 >
                   <a>
-                    {opData.label}
-                    {opData.img && (
+                    {opData?.label}
+                    {opData?.img && (
                       <img
-                        src={opData.img || "/flag-uae.svg"}
+                        src={opData?.img || "/flag-uae.svg"}
                         width={16}
                         alt="image"
                       />

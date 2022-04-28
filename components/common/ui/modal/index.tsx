@@ -3,10 +3,10 @@ import CrossSmall from "components/icons/CrossSmall";
 import styles from "./modal.module.scss";
 
 const Modal = ({
-  className = '',
+  className = " ",
   isOpened = false,
   children,
-  onClose = () => { },
+  onClose = () => {},
 }: {
   className: string;
   isOpened: Boolean;
@@ -20,7 +20,15 @@ const Modal = ({
   }, [isOpened]);
 
   return (
-    <div className={`${styles["div-modal-main"]} ${styles[className]}`} data-open={openState} onClick={(event) => { event.stopPropagation() }}>
+    <div
+      className={`${styles["div-modal-main"]} ${
+        className && styles[className]
+      }`}
+      data-open={openState}
+      onClick={(event) => {
+        event.stopPropagation();
+      }}
+    >
       <div className={styles["div-top-bar"]}>
         <div className={styles["div-left"]}></div>
         <div
