@@ -19,6 +19,8 @@
   "bookAnAppointmentText": "احجز موعدًا",
   "myAccountText": "حسابي",
   "storeLocatorText": "فروعنا",
+  "bannerTitle": "خواتم",
+  "bannerSubTitle": "الألم بحد ذاته هو حب الألم ، المشاكل البيئية الرئيسية ، لكني أعطي هذا النوع من الوقت للتراجع ، بحيث يكون هناك بعض الألم والألم العظيمين.",
   "plpCategoryTitle": "استكشف جميع الفئات",
   "plpCategoryText": "تعتمد مجوهراتنا على إرث يمتد لأكثر من 180 عامًا من الحرفية الخبيرة مع قلادات ودلايات وأساور وخواتم ومصممة بشكل جميل وغير ذلك.  تُظهر أحدث مجوهراتنا إبداع لازوردي وتصميمه الذي لا مثيل له في أفضل حالاته.",
   "plpCategoryCard": [
@@ -543,6 +545,96 @@
     {
       "title": "خاتم الفراشة المشعة",
       "onlineExclusiveTag": "حصريا على الانترنت"
+    }
+  ],
+  "sortingFilter": [
+    {
+      "label": "الجديد",
+      "img": "",
+      "value": "New"
+    },
+    {
+      "label": "أفضل البائعين",
+      "img": "",
+      "value": "Best Sellers"
+    },
+    {
+      "label": "أكبر توفير",
+      "img": "",
+      "value": "Biggest Saving"
+    },
+    {
+      "label": "الأكثر مشاهدة",
+      "img": "",
+      "value": "Most Viewed"
+    },
+    {
+      "label": "اسم المنتج",
+      "img": "",
+      "value": "Product Name"
+    }
+  ],
+  "arabicFilterList": [
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionsNames": "مجوهرات 1"
+        },
+        {
+          "optionsNames": "مجوهرات 2"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionsNames": "مجوهرات"
+        },
+        {
+          "optionsNames": "مجوهرات 1"
+        },
+        {
+          "optionsNames": "مجوهرات 2"
+        },
+        {
+          "optionsNames": "مجوهرات 3"
+        },
+        {
+          "optionsNames": "مجوهرات 4"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionsNames": "مجوهرات 1"
+        },
+        {
+          "optionsNames": "مجوهرات 2"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionsNames": "مجوهرات"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionsNames": "مجوهرات"
+        },
+        {
+          "optionsNames": "مجوهرات"
+        }
+      ]
     }
   ]
 }

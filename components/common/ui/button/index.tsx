@@ -14,7 +14,7 @@ interface ButtonProps {
 const Button = ({
   className = '',
   type = "button",
-  buttonText,
+  buttonText = '',
   buttonStyle = "black",
   buttonSize = "md",
   children,

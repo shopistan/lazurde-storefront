@@ -1,24 +1,32 @@
-@import "/styles/variables.scss";
-
+@import "/styles//variables.scss";
 .dropdown {
+  display: flex;
+  align-items: center;
   position: relative;
   width: 100%;
-  min-width: 137px;
-  outline: 0;
+  // min-width: 197px;
+  cursor: pointer;
+  height: 34px;
 
   .select {
     display: flex;
     align-items: center;
-    padding: 11px 16px 11px 20px;
-    background: $white-color;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 100px;
+    flex: 1;
+    background: #ffffff;
     cursor: pointer;
     font-weight: 400;
     font-size: 13px;
     line-height: 115%;
     color: #000;
-    outline: 0;
+
+    .selected-text {
+      margin-inline-start: 4px;
+      font-weight: 500;
+
+      @media (min-width: $breakPoint-desktop) {
+        margin-inline-start: 8px;
+      }
+    }
 
     @media (min-width: $breakPoint-desktop) {
       font-size: 14px;
@@ -32,8 +40,9 @@
   .options-ul {
     display: none;
     position: absolute;
+    top: 100%;
     list-style-type: none;
-    background: $white-color;
+    background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 12px 16px;
@@ -69,22 +78,19 @@
   }
 
   .select-arrow {
-    position: absolute;
-    top: 16px;
-    inset-inline-end: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     line-height: 0;
-    // transition: transform 0.2s ease-in-out;
     transform: rotateZ(0);
     transform-origin: center;
     pointer-events: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
   }
 
   &[data-open="true"] {
-    .select {
-      // background: rgba(0, 0, 0, 0.02);
-      border: 1px solid rgba(0, 0, 0, 0.8);
-    }
-
     & .options-ul {
       display: block;
       opacity: 1;
@@ -100,23 +106,15 @@
 
 html[dir="rtl"] {
   .dropdown {
-    outline: 0;
-
-    &:focus {
-      outline: 0;
-    }
     .select {
       font-weight: 400;
       font-size: 13px;
       line-height: 120%;
       direction: ltr;
       justify-content: flex-end;
-      outline: 0;
-      &:focus {
-        outline: 0;
-      }
 
       @media (min-width: $breakPoint-desktop) {
+        direction: rtl;
         font-size: 14px;
       }
     }

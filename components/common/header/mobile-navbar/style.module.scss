@@ -380,6 +380,7 @@
     }
 
     &-dropdown {
+      outline: 0;
       &[data-open="true"] {
         ul {
           display: block;
