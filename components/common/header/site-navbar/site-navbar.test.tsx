@@ -14,16 +14,8 @@ describe('', () => {
         render(<SiteNavBar headerId={id} siteLogoUrl={siteUrl} siteLogo={image} siteNavBar={[]} />)
         const altTextProps = screen.getByAltText('alt-image')
         expect(altTextProps).toBeInTheDocument()
-    })
-
-    test('site id', () => {
-        render(<SiteNavBar headerId={id} siteLogoUrl={siteUrl} siteLogo={image} siteNavBar={[]} />)
-
         const idProps = screen.getByTestId('id')
         expect(idProps).toBeInTheDocument()
-    })
-    test('logoUrl', () => {
-        render(<SiteNavBar headerId={id} siteLogoUrl={siteUrl} siteLogo={image} siteNavBar={[]} />)
         const logoUrl = document.querySelector('a').getAttribute('href')
         expect(logoUrl).toBe('/')
     })
