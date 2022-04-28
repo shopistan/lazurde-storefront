@@ -47,7 +47,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
   const { appState } = useContext(AppContext);
 
   return (
-    <div className={styles["site-navbar"]} data-headerId={headerId}>
+    <div data-testid="id" className={styles["site-navbar"]} data-headerId={headerId}>
       <div className={styles["back-btn"]}>
         <Link href={'/'}>
           <a>
@@ -60,7 +60,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
       </div>
       <div>
         <Link href={siteLogoUrl || ''}>
-          <a>
+          <a data-testid='link'>
             <Image src={siteLogo?.url} width={152} height={20} alt={siteLogo?.altText} />
           </a>
         </Link>
@@ -97,7 +97,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
                   hasCategories
                     ? ""
                     : data.titleUrl}>
-                  <a>{appState.lang === "en" ? data.navTitle : sideNavTitlesArray[index].navTitle}</a>
+                  <a>{appState?.lang === "en" ? data.navTitle : sideNavTitlesArray[index].navTitle}</a>
                 </Link>
               </div>
             );
