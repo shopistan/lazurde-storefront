@@ -2,7 +2,7 @@ import React, { FC, useContext, useState, useRef, useEffect } from "react";
 import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
-import CategoryDropDown from "./dropdown";
+import DropDown from "./dropdown";
 import BorderlessSelect from "components/common/ui/borderless-select";
 import Button from "components/common/ui/button";
 import useWindowSize from "lib/utils/useWindowSize";
@@ -35,10 +35,10 @@ const filterListData = [
     filterName: "Brand",
     filterOptions: [
       {
-        optionsNames: "Brand 1",
+        optionNames: "Brand 1",
       },
       {
-        optionsNames: "Brand 2",
+        optionNames: "Brand 2",
       },
     ],
   },
@@ -46,19 +46,19 @@ const filterListData = [
     filterName: "Type",
     filterOptions: [
       {
-        optionsNames: "Two headed",
+        optionNames: "Two headed",
       },
       {
-        optionsNames: "Solitaire",
+        optionNames: "Solitaire",
       },
       {
-        optionsNames: "Twins",
+        optionNames: "Twins",
       },
       {
-        optionsNames: "Bands",
+        optionNames: "Bands",
       },
       {
-        optionsNames: "Eternity",
+        optionNames: "Eternity",
       },
     ],
   },
@@ -66,10 +66,10 @@ const filterListData = [
     filterName: "Metal",
     filterOptions: [
       {
-        optionsNames: "Gold",
+        optionNames: "Gold",
       },
       {
-        optionsNames: "White Gold",
+        optionNames: "White Gold",
       },
     ],
   },
@@ -77,7 +77,7 @@ const filterListData = [
     filterName: "Gemstone",
     filterOptions: [
       {
-        optionsNames: "Diamond",
+        optionNames: "Diamond",
       },
     ],
   },
@@ -85,10 +85,10 @@ const filterListData = [
     filterName: "Price",
     filterOptions: [
       {
-        optionsNames: "100",
+        optionNames: "100",
       },
       {
-        optionsNames: "200",
+        optionNames: "200",
       },
     ],
   },
@@ -96,22 +96,20 @@ const filterListData = [
 
 interface FilterBarProps {
   filterList?:
-    | [
-        {
-          filterName: string;
-          filterOptions: [{ optionsNames: string }];
-        }
-      ]
+    | {
+        filterName: string;
+        filterOptions: { optionNames: string }[];
+      }[]
     | [];
   headerId?: string;
-  onApplyFilters: Function;
-  onSortingChange: Function;
+  onApplyFilters?: Function;
+  onSortingChange?: Function;
 }
 
 interface DropdownDataProps {
   filterName: string;
   dropdownData: {
-    optionsNames: string;
+    optionNames: string;
   }[];
   positionOffset: string;
 }
@@ -144,7 +142,10 @@ const FilterBar: FC<FilterBarProps> = ({
   }>();
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const [width] = useWindowSize();
-  const [optionData, setOptionData] = useState<any>([]);
+  const [optionData, setOptionData] = useState<{
+    data?: any;
+    defaultValue?: string;
+  }>();
 
   useEffect(() => {
     let totalCount = 0;
@@ -173,7 +174,7 @@ const FilterBar: FC<FilterBarProps> = ({
   }, [appState]);
 
   return (
-    <div className={styles["filter-bar-main"]} data-headerId={headerId}>
+    <div className={styles["filter-bar-main"]} data-headerid={headerId}>
       <div className={styles["div-filter-bar"]}>
         <div className={styles["filter-links"]}>
           {Array.isArray(filterList) &&
@@ -186,6 +187,7 @@ const FilterBar: FC<FilterBarProps> = ({
 
               return (
                 <div
+                  role={"links"}
                   key={index}
                   className={styles["links"]}
                   ref={link.current[index]}
@@ -285,15 +287,16 @@ const FilterBar: FC<FilterBarProps> = ({
         className={styles["category-dropdown"]}
         data-opened={isOpened?.opened}
       >
-        <CategoryDropDown
+        <DropDown
           setIsOpened={setIsOpened}
           categoryData={dropdownData}
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
           onApplyFilters={onApplyFilters}
-        ></CategoryDropDown>
+        ></DropDown>
       </div>
       <div
+        role={"overlay"}
         className={styles["overlay"]}
         data-opened={isOpened?.opened}
         onClick={() => setIsOpened({ ...isOpened, opened: false })}
