@@ -127,7 +127,10 @@ const SiteNavBar: FC<siteNavBarProps> = ({
             );
           })}
       </div>
-      <div onClick={() => setOpenSearchDialog(true)}>
+      <div
+        onClick={() => setOpenSearchDialog(true)}
+        className={styles["search-icon"]}
+      >
         <Search></Search>
       </div>
       <div

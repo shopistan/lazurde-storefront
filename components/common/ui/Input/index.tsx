@@ -2,6 +2,7 @@ import { Search } from "components/icons";
 import { InputType } from "lib/types/ui";
 import React from "react";
 import styles from "./Input.module.scss";
+import Router from "next/router";
 
 const Input = ({
   className,
@@ -26,6 +27,7 @@ const Input = ({
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e)}
+        // onMouseEnter={() => Router.push("/s")}
       ></input>
     </div>
   );
