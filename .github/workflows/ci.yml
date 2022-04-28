@@ -10,7 +10,7 @@ on:
 jobs:
   test:
     name: Running unit tests
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     # build:
     #   runs-on: self-hosted
     #   strategy:
