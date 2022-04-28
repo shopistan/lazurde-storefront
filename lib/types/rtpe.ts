@@ -1,5 +1,5 @@
 export type Price = {
   currency: string;
-  amount: number;
+  amount: number | string;
   discount?: object;
 };

@@ -17,18 +17,37 @@ module.exports = {
   },
   moduleDirectories: ["node_modules", path.join(__dirname, "src"), "shared"],
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
-  // coverageThreshold: {
-  //   global: {
-  //     branches: 80,
-  //     functions: 80,
-  //     lines: 80,
+  coverageThreshold: {
+    // global: {
+    //   branches: 80,
+    //   functions: 80,
+    //   lines: 80,
+    //   statements: -10,
+    // },
+    // "components/common/*/index.{js,jsx,tsx,ts}": {
+    //   branches: 100,
+    //   functions: 100,
+    //   lines: 100,
+    //   statements: -10,
+    // },
+    // "components/common/*/*/index.{js,jsx,tsx,ts}": {
+    //   branches: 100,
+    //   functions: 100,
+    //   lines: 100,
+    //   statements: -10,
+    // },
+  //   "components/**/*.{js,jsx,tsx,ts}": {
+  //     branches: 60,
+  //     functions: 60,
+  //     lines: 60,
   //     statements: -10,
   //   },
-  // },
+  },
   collectCoverage: true,
   collectCoverageFrom: [
     "components/**/*.{js,jsx,tsx,ts}",
-    // "components/common/*/index.{js,jsx,tsx,ts}",
+    // "components/common/*/*.{js,jsx,tsx,ts}",
+    // "components/common/*/*/*.{js,jsx,tsx,ts}",
     "!components/**/descriptor.js",
     "!components/icons/*.{js,jsx,tsx,ts}",
     "!components/xm-component-library.ts",
