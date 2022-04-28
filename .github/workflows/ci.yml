@@ -11,7 +11,8 @@ jobs:
   test:
     name: Running unit tests
     runs-on: ubuntu-latest
-     -run: npm test
+      steps:
+        -run: npm test
     # build:
     #   runs-on: self-hosted
     #   strategy:
