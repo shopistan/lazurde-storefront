@@ -8,6 +8,13 @@ on:
     branches: [test/ci-cd]
 
 jobs:
-  test: npm test
+   test: npm test
+  build:
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+ 
   build-descriptors: npm run descriptors
   build: next build
