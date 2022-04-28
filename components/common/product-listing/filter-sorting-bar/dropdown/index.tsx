@@ -16,7 +16,7 @@ interface ArabicCategoryProps {
 interface CategoryDataProps {
   filterName: string;
   dropdownData: {
-    optionsNames: string;
+    optionNames: string;
   }[];
   positionOffset: string;
   categoryLinks?: ArabicCategoryProps[];
@@ -80,15 +80,15 @@ const DropDown = ({
         {categoryData &&
           Object.keys(categoryData).length > 0 &&
           categoryData?.dropdownData?.map((data, index) => {
-            const { optionsNames } = data;
+            const { optionNames } = data;
             return (
               <div
                 key={index}
                 className={styles["title"]}
                 onClick={() => {
-                  if (selectedFilters?.[filterName]?.[optionsNames]) {
+                  if (selectedFilters?.[filterName]?.[optionNames]) {
                     const filterCopy = { ...selectedFilters };
-                    delete filterCopy?.[filterName]?.[optionsNames];
+                    delete filterCopy?.[filterName]?.[optionNames];
                     if (Object.keys(filterCopy?.[filterName]).length < 1) {
                       delete filterCopy?.[filterName];
                     }
@@ -99,17 +99,17 @@ const DropDown = ({
                         ...selectedFilters,
                         [filterName]: {
                           ...selectedFilters?.[filterName],
-                          [optionsNames]: true,
+                          [optionNames]: true,
                         },
                       });
                   }
                 }}
                 style={{ marginInlineStart: categoryData?.positionOffset }}
               >
-                {optionsNames}
+                {optionNames}
                 <div
                   className={styles["div-tick"]}
-                  data-showTick={selectedFilters?.[filterName]?.[optionsNames]}
+                  data-showTick={selectedFilters?.[filterName]?.[optionNames]}
                 >
                   <Tick />
                 </div>

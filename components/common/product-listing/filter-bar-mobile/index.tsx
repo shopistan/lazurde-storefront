@@ -36,7 +36,7 @@ const filterListData = [
     filterName: "Brand",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionNames: "SOmething",
       },
     ],
   },
@@ -44,19 +44,19 @@ const filterListData = [
     filterName: "Type",
     filterOptions: [
       {
-        optionsNames: "Two headed",
+        optionNames: "Two headed",
       },
       {
-        optionsNames: "Solitaire",
+        optionNames: "Solitaire",
       },
       {
-        optionsNames: "Twins",
+        optionNames: "Twins",
       },
       {
-        optionsNames: "Bands",
+        optionNames: "Bands",
       },
       {
-        optionsNames: "Eternity",
+        optionNames: "Eternity",
       },
     ],
   },
@@ -64,7 +64,7 @@ const filterListData = [
     filterName: "Metal",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionNames: "SOmething",
       },
     ],
   },
@@ -72,7 +72,7 @@ const filterListData = [
     filterName: "Gemstone",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionNames: "SOmething",
       },
     ],
   },
@@ -80,7 +80,7 @@ const filterListData = [
     filterName: "Price",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionNames: "SOmething",
       },
     ],
   },
@@ -89,7 +89,7 @@ const filterListData = [
 interface FilterBarMobileProps {
   filterList?: {
     filterName: string;
-    filterOptions: { optionsNames: string }[];
+    filterOptions: { optionNames: string }[];
   }[];
   headerId?: string;
   onApplyFilters: Function;
@@ -98,7 +98,7 @@ interface FilterBarMobileProps {
 interface FilterAccordionProps {
   filterList: {
     filterName: string;
-    filterOptions: { optionsNames: string }[];
+    filterOptions: { optionNames: string }[];
   }[];
   setIsOpened: Function;
   selectedFilters: {

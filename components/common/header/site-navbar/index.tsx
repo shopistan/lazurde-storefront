@@ -47,7 +47,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
   const { appState } = useContext(AppContext);
 
   return (
-    <div className={styles["site-navbar"]} data-headerId={headerId}>
+    <div className={styles["site-navbar"]} data-headerid={headerId}>
       <div className={styles["back-btn"]}>
         <Link href={'/'}>
           <a>
