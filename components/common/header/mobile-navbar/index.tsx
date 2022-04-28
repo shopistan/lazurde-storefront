@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./style.module.scss";
 import { Bag, Heart, MenuIcon, Search, LazurdeLogo } from "components/icons";
 import Link from "next/link";
-import MobileMenu from "./mobile-menu";
+import MobileMenu from "./mobile-menu/mobile-menu";
 import Image from "next/image";
 import { MobileHeaderProps } from "lib/types/mobile-header";
 
