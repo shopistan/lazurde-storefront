@@ -551,27 +551,27 @@
     {
       "label": "الجديد",
       "img": "",
-      "value": "New"
+      "value": "الجديد"
     },
     {
       "label": "أفضل البائعين",
       "img": "",
-      "value": "Best Sellers"
+      "value": "أفضل البائعين"
     },
     {
       "label": "أكبر توفير",
       "img": "",
-      "value": "Biggest Saving"
+      "value": "أكبر توفير"
     },
     {
       "label": "الأكثر مشاهدة",
       "img": "",
-      "value": "Most Viewed"
+      "value": "الأكثر مشاهدة"
     },
     {
       "label": "اسم المنتج",
       "img": "",
-      "value": "Product Name"
+      "value": "اسم المنتج"
     }
   ],
   "arabicFilterList": [

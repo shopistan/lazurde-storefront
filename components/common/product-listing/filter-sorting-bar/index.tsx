@@ -168,7 +168,7 @@ const FilterBar: FC<FilterBarProps> = ({
   useEffect(() => {
     setOptionData({
       data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
-      defaultValue: "Best Sellers",
+      defaultValue: appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين",
     });
   }, [appState]);
 

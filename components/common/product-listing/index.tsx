@@ -60,9 +60,8 @@ const ProductListing = ({
   }, []);
 
   const applyFilters = (selectedFilters: any = {}) => {
-    console.log("selectedFilters", selectedFilters);
     if (Object.keys(selectedFilters).length < 1) {
-      return setCurrentProductData(productDataArray);
+      return setCurrentProductData([...productDataArray, ...productCardData]);
     }
 
     const payload = [];
