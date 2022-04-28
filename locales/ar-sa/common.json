@@ -548,5 +548,95 @@
       "title": "خاتم الفراشة المشعة",
       "onlineExclusiveTag": "حصريا على الانترنت"
     }
+  ],
+  "sortingFilter": [
+    {
+      "label": "الجديد",
+      "img": "",
+      "value": "New"
+    },
+    {
+      "label": "أفضل البائعين",
+      "img": "",
+      "value": "Best Sellers"
+    },
+    {
+      "label": "أكبر توفير",
+      "img": "",
+      "value": "Biggest Saving"
+    },
+    {
+      "label": "الأكثر مشاهدة",
+      "img": "",
+      "value": "Most Viewed"
+    },
+    {
+      "label": "اسم المنتج",
+      "img": "",
+      "value": "Product Name"
+    }
+  ],
+  "arabicFilterList": [
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionsNames": "مجوهرات 1"
+        },
+        {
+          "optionsNames": "مجوهرات 2"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionsNames": "مجوهرات"
+        },
+        {
+          "optionsNames": "مجوهرات 1"
+        },
+        {
+          "optionsNames": "مجوهرات 2"
+        },
+        {
+          "optionsNames": "مجوهرات 3"
+        },
+        {
+          "optionsNames": "مجوهرات 4"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionsNames": "مجوهرات 1"
+        },
+        {
+          "optionsNames": "مجوهرات 2"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionsNames": "مجوهرات"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionsNames": "مجوهرات"
+        },
+        {
+          "optionsNames": "مجوهرات"
+        }
+      ]
+    }
   ]
 }

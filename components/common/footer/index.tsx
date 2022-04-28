@@ -92,19 +92,21 @@ const Footer = ({
               </Label>
               <FooterIcons iconsList={socialLinks} />
             </div>
-            <div className={styles["footer__maroof-logo"]}>
-              <Link href={footerLogoLink || "/"}>
-                <a target="_blank">
-                  <Image
-                    src={footerLogo?.url || "/maroof.svg"}
-                    alt={footerLogo?.altText}
-                    width={214}
-                    height={66}
-                    layout="fixed"
-                  />
-                </a>
-              </Link>
-            </div>
+            {appState?.region === "sa" && (
+              <div className={styles["footer__maroof-logo"]}>
+                <Link href={footerLogoLink || "/"}>
+                  <a target="_blank">
+                    <Image
+                      src={footerLogo?.url || "/maroof.svg"}
+                      alt={footerLogo?.altText}
+                      width={214}
+                      height={66}
+                      layout="fixed"
+                    />
+                  </a>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
         <div className={styles["footer__sub-footer"]}>
