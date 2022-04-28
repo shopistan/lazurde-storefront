@@ -2,7 +2,6 @@
 import ChevronDown from "components/icons/ChevronDown";
 import React, { useState, useRef, useEffect, useContext } from "react";
 import Modal from "../modal";
-import { AppContext } from "lib/context";
 
 import styles from "./style.module.scss";
 
@@ -12,6 +11,7 @@ interface SelectProps {
   options?: optionProps[];
   onChange: Function;
   defaultValue?: string;
+  selectedValue?: string;
   className?: string;
   optionClassName?: string;
   selectedLabel?: string;
@@ -23,6 +23,7 @@ const BorderlessSelect = ({
   options = [{ label: "label", img: "", value: "value" }],
   onChange = () => {},
   defaultValue = "",
+  selectedValue = '',
   className = "",
   optionClassName = "",
   selectedLabel = "",
@@ -33,17 +34,26 @@ const BorderlessSelect = ({
   const [selectedVal, setSelectedVal] = useState<optionProps>({});
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [position, setPosition] = useState<string>("bottom");
-  const { appState } = useContext(AppContext);
 
   useEffect(() => {
     defaultValue &&
-      options &&
+      Array.isArray(options) &&
       options.length > 0 &&
       options.find((currentOption) => {
         defaultValue === currentOption.value &&
           setSelectedVal({ ...currentOption });
       });
-  }, [defaultValue, appState]);
+  }, [defaultValue]);
+
+  useEffect(() => {
+    selectedValue &&
+      Array.isArray(options) &&
+      options.length > 0 &&
+      options.find((currentOption) => {
+        selectedValue === currentOption.value &&
+          setSelectedVal({ ...currentOption });
+      });
+  }, [selectedValue]);
 
   return (
     <div

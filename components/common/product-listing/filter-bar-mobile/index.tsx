@@ -128,9 +128,10 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
   const [optionData, setOptionData] = useState<any>([]);
 
   useEffect(() => {
+    setSortingSelected(appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين")
     setOptionData({
       data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
-      defaultValue: "Best Sellers",
+      defaultValue: appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين",
     });
   }, [appState]);
 
@@ -167,10 +168,12 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
             defaultValue={optionData?.defaultValue}
             selectedLabel={appState?.lang === "en" ? "Sort By: " : "بسح فنص:"}
             showInModal={true}
+            selectedValue={sortingSelected}
             modalChildren={
               <SortingModal
                 sortingDataArray={optionData?.data}
                 defaultValue={optionData?.defaultValue}
+                selectedVal={sortingSelected}
                 onChange={(value: string) => {
                   setSortingSelected(value);
                   onSortingChange(value);
@@ -208,9 +211,9 @@ const FilterAccordion = ({
       {Array.isArray(filterList) &&
         filterList.length > 0 &&
         filterList.map((data, index) => {
-          const selectedFilterCount =
-            selectedFilters?.[data.filterName] ?
-            Object.keys(selectedFilters?.[data.filterName]).length : 0;
+          const selectedFilterCount = selectedFilters?.[data.filterName]
+            ? Object.keys(selectedFilters?.[data.filterName]).length
+            : 0;
           return (
             <Accordion
               key={index}
@@ -241,8 +244,9 @@ const FilterAccordion = ({
                     appState?.lang === "en"
                       ? data?.filterOptions
                       : Array.isArray(_arabicFilterBarData) &&
-                        _arabicFilterBarData.length > 0 &&
-                        _arabicFilterBarData[index]?.filterOptions,
+                        _arabicFilterBarData.length > 0
+                      ? _arabicFilterBarData[index]?.filterOptions
+                      : [],
                   filterName:
                     appState?.lang === "en"
                       ? data?.filterName

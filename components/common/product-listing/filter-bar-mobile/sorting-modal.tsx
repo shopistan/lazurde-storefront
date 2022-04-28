@@ -9,16 +9,19 @@ type SortingDataProps = {
 interface SortingModalProps {
   sortingDataArray: SortingDataProps[];
   defaultValue?: string;
+  selectedVal?: string;
   onChange?: Function;
 }
 
 const SortingModal = ({
   sortingDataArray = [],
   defaultValue = "",
+  selectedVal = '',
   onChange = (value: string) => {},
 }: SortingModalProps): JSX.Element => {
   const { appState } = useContext(AppContext);
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
+  const [selectedValue, setSelectedValue] = useState(selectedVal || defaultValue);
+  
   return (
     <>
       <div className={styles["filter-heading"]}>
