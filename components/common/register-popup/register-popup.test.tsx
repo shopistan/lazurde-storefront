@@ -7,8 +7,8 @@ const renderComponent = () => {
     const text = 'Register Text';
     const buttonText = 'Register Button Text'
     const image = {
-        url : '/',
-        altText : 'Image'
+        url: '/',
+        altText: 'Image'
     }
     render(
         <>

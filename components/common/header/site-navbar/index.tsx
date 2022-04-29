@@ -15,14 +15,14 @@ type LinkProps = {
 };
 interface siteNavBarProps {
   siteNavBar:
-    | [
-        {
-          navTitle: string;
-          titleUrl: string;
-          navArr: [{ title: string; catArr: [LinkProps] }];
-        }
-      ]
-    | [];
+  | [
+    {
+      navTitle: string;
+      titleUrl: string;
+      navArr: [{ title: string; catArr: [LinkProps] }];
+    }
+  ]
+  | [];
   siteLogo: ImageType;
   siteLogoUrl: string;
   headerId: string;
@@ -118,7 +118,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
               >
                 <Link href={hasCategories ? "" : data.titleUrl}>
                   <a>
-                    {appState.lang === "en"
+                    {appState?.lang === "en"
                       ? data.navTitle
                       : sideNavTitlesArray[index].navTitle}
                   </a>
