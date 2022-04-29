@@ -8,6 +8,23 @@ on:
     branches: [test/ci-cd]
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+        - run: npm i
+        - run: npm run test
   build:
     runs-on: ubuntu-latest
 
@@ -27,11 +44,3 @@ jobs:
       # - run: npm run test
       # - run: npm run descriptors
       # - run: npm run build
-      - name: Checking-out to lazurde-api-tests
-        uses: actions/checkout@main
-        with:
-          repository: shopistan/lazurde-api-tests
-          ref: main
-      # - run: git clone https://safeerbaig22:Safeerbaig123@github.com/safeerbaig22/shopistan/lazurde-api-tests.git
-      # - run: git clone https://adilpeter@github.com/shopistan/lazurde-api-tests.git
-      # - run: cd lazurde-api-tests
