@@ -92,4 +92,3 @@ export async function getStaticProps(context: any) {
     revalidate: 5,
   };
 }
-// Just delete me
