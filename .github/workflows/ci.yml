@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: shopistan/lazurde-api-tests
-          branch: main
+          token: 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
 
       # - run: git clone https://safeerbaig22:Safeerbaig123@github.com/safeerbaig22/shopistan/lazurde-api-tests.git
       # - run: git clone https://adilpeter@github.com/shopistan/lazurde-api-tests.git
