@@ -15,14 +15,14 @@ type LinkProps = {
 };
 interface siteNavBarProps {
   siteNavBar:
-  | [
-    {
-      navTitle: string;
-      titleUrl: string;
-      navArr: [{ title: string; catArr: [LinkProps] }];
-    }
-  ]
-  | [];
+    | [
+        {
+          navTitle: string;
+          titleUrl: string;
+          navArr: [{ title: string; catArr: [LinkProps] }];
+        }
+      ]
+    | [];
   siteLogo: ImageType;
   siteLogoUrl: string;
   headerId: string;
@@ -58,7 +58,11 @@ const SiteNavBar: FC<siteNavBarProps> = ({
   const { appState } = useContext(AppContext);
 
   return (
-    <div data-testid="id" className={styles["site-navbar"]} data-headerId={headerId}>
+    <div
+      data-testid="id"
+      className={styles["site-navbar"]}
+      data-headerId={headerId}
+    >
       <div className={styles["back-btn"]}>
         <Link href={"/"}>
           <a>
@@ -91,6 +95,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
             return (
               <div
                 key={index}
+                role={"links"}
                 className={styles["links"]}
                 onMouseOver={() => {
                   if (hasCategories) {
@@ -128,6 +133,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
           })}
       </div>
       <div
+        role={"search"}
         onClick={() => setOpenSearchDialog(true)}
         className={styles["search-icon"]}
       >
@@ -143,6 +149,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
         ></CategoryDropDown>
       </div>
       <div
+        role={"overlay"}
         className={styles["overlay"]}
         data-opened={isOpened.opened}
         onClick={() => setIsOpened({ ...isOpened, opened: false })}

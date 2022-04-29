@@ -53,9 +53,10 @@ const MobileMenu = ({
         >
           {headerId !== "lazurdeHeader" && (
             <div
+              data-testid={"site-logo"}
               className={`opacity-60 ${styles["mobile-header__rotate-icon"]}`}
               onClick={() => {
-                router.push("/");
+                router?.push("/");
                 closeMenu();
               }}
             >
@@ -67,7 +68,11 @@ const MobileMenu = ({
               </span>
             </div>
           )}
-          <button className="" onClick={() => closeMenu()}>
+          <button
+            data-testid="cross-btn1"
+            className=""
+            onClick={() => closeMenu()}
+          >
             <Cross width={"20px"} height={"20px"} />
           </button>
         </div>

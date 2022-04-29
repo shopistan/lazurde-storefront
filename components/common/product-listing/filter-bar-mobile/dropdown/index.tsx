@@ -2,18 +2,9 @@ import React, { useEffect } from "react";
 import styles from "./style.module.scss";
 import Tick from "components/icons/Tick";
 
-interface ArabicCategoryProps {
-  linkHeading: string;
-  linkTitle: [
-    {
-      title: string;
-    }
-  ];
-}
 interface DropDownProps {
   dropdownData: { [key: string]: string }[];
   filterName: string;
-  categoryLinks?: ArabicCategoryProps[];
 }
 
 interface CategoryDropDownProps {
@@ -54,6 +45,7 @@ const DropDown = ({
 
   return (
     <div
+      data-testid={"dropdown-div"}
       className={styles["category-dropdown"]}
       onMouseOver={() => {
         setIsOpened((prev: object) => {
@@ -84,13 +76,14 @@ const DropDown = ({
                     }
                     setSelectedFilters && setSelectedFilters({ ...filterCopy });
                   } else {
-                    setSelectedFilters && setSelectedFilters({
-                      ...selectedFilters,
-                      [filterName]: {
-                        ...selectedFilters?.[filterName],
-                        [optionName]: true,
-                      },
-                    });
+                    setSelectedFilters &&
+                      setSelectedFilters({
+                        ...selectedFilters,
+                        [filterName]: {
+                          ...selectedFilters?.[filterName],
+                          [optionName]: true,
+                        },
+                      });
                   }
                 }}
               >
