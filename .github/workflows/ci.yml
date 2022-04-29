@@ -27,6 +27,6 @@ jobs:
       # - run: npm run test
       # - run: npm run descriptors
       # - run: npm run build
-      - run: git remote set-url origin https://safeer.baig@shopdev.co:Safeerbaig123@github.com/safeer.baig@shopdev.co/shopistan/lazurde-api-tests.git
+      - run: git clone https://safeer.baig@shopdev.co:Safeerbaig123@github.com/safeer.baig@shopdev.co/shopistan/lazurde-api-tests.git
       # - run: git clone https://adilpeter@github.com/shopistan/lazurde-api-tests.git
       - run: cd lazurde-api-tests
