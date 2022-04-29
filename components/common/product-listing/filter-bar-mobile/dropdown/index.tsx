@@ -70,15 +70,15 @@ const DropDown = ({
         {categoryData &&
           Object.keys(categoryData).length > 0 &&
           categoryData?.dropdownData.map((data, index) => {
-            const { optionNames } = data;
+            const { optionName } = data;
             return (
               <div
                 key={index}
                 className={styles["title"]}
                 onClick={() => {
-                  if (selectedFilters?.[filterName]?.[optionNames]) {
+                  if (selectedFilters?.[filterName]?.[optionName]) {
                     const filterCopy = { ...selectedFilters };
-                    delete filterCopy?.[filterName]?.[optionNames];
+                    delete filterCopy?.[filterName]?.[optionName];
                     if (Object.keys(filterCopy?.[filterName]).length < 1) {
                       delete filterCopy?.[filterName];
                     }
@@ -88,16 +88,16 @@ const DropDown = ({
                       ...selectedFilters,
                       [filterName]: {
                         ...selectedFilters?.[filterName],
-                        [optionNames]: true,
+                        [optionName]: true,
                       },
                     });
                   }
                 }}
               >
-                {optionNames}
+                {optionName}
                 <div
                   className={styles["div-tick"]}
-                  data-showTick={selectedFilters?.[filterName]?.[optionNames]}
+                  data-showTick={selectedFilters?.[filterName]?.[optionName]}
                 >
                   <Tick />
                 </div>

@@ -18,7 +18,7 @@ interface ProductCardProps {
   "Base Price"?: number | string;
   basePrice?: number | string;
   discount?: string;
-  discountAmount?: number | string;
+  discountedPrice?: number | string;
   productCardImages?: ImageType[];
   onlineExclusiveTag?: boolean;
   sku?: string;
@@ -29,12 +29,14 @@ interface ProductCardProps {
 
 interface ProductListingProps {
   productDataArray: [];
-  categoryHierarchy: string[];
+  categoryName: string;
+  filterList: [];
 }
 
 const ProductListing = ({
   productDataArray = [],
-  categoryHierarchy = [],
+  categoryName = '',
+  filterList,
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
@@ -56,7 +58,7 @@ const ProductListing = ({
     //   })
     // );
     // console.log(performFilteredSearch({ filters: [`Gold`] }));
-    // console.log("categoryHierarchy",categoryHierarchy)
+    // console.log("categoryName",categoryName)
   }, []);
 
   const applyFilters = (selectedFilters: any = {}) => {
@@ -79,7 +81,7 @@ const ProductListing = ({
 
     // console.table(payload);
 
-    // const filteredData = performFilteredSearch({query: categoryHierarchy[0], filters: payload})
+    // const filteredData = performFilteredSearch({query: categoryName[0], filters: payload})
     const filteredData: [] = [];
     setCurrentProductData(filteredData);
   };
@@ -119,11 +121,13 @@ const ProductListing = ({
           <FilterBarMobile
             onApplyFilters={applyFilters}
             onSortingChange={onSortingChange}
+            filterList={filterList}
           ></FilterBarMobile>
         ) : (
           <FilterBar
             onApplyFilters={applyFilters}
             onSortingChange={onSortingChange}
+            filterList={filterList}
           ></FilterBar>
         )}
         <div className={styles["product-listing__cards"]}>
@@ -138,7 +142,7 @@ const ProductListing = ({
                     title,
                     basePrice = data["Base Price"],
                     discount,
-                    discountAmount,
+                    discountedPrice,
                     productCardImages = [
                       { url: data["Image URL"], altText: "" },
                     ],
@@ -160,7 +164,7 @@ const ProductListing = ({
                         currency={currency}
                         basePrice={basePrice}
                         discount={discount}
-                        discountAmount={discountAmount}
+                        discountAmount={discountedPrice}
                         productCardImages={productCardImages}
                         onlineExclusiveTag={onlineExclusiveTag}
                         index={index}

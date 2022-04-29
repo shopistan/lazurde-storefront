@@ -32,7 +32,6 @@ const LazurdeProductListingPage: FC<ProductListingPageProps> = ({
   brandSidebarProps,
   pageComponents = [],
   algoliaSearchResults,
-  categoryHierarchy,
 }) => {
   console.log("Category Products: ", algoliaSearchResults);
   return (
@@ -52,7 +51,6 @@ const LazurdeProductListingPage: FC<ProductListingPageProps> = ({
                 <Component
                   {...component.params}
                   productDataArray={algoliaSearchResults.hits}
-                  categoryHierarchy={categoryHierarchy}
                   key={index}
                 />
               );
@@ -90,7 +88,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
   const { category_hierarchy = [] } = context.params || {};
-  const categoryHierarchy = category_hierarchy
   const pageUrl = category_hierarchy.join("/");
   const globalComponents = (await fetchGlobalComponents()) || [];
   const pageComponents = (await fetchXMComponents(12, `/${pageUrl}`)) || [];
@@ -111,11 +108,12 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
       ) || {}
     ).params || {};
 
-  const { categoryName = null } = (
-    pageComponents.find(
-      (component: XMComponent) => component.id === "ProductListing"
-    ) || {}
-  ).params;
+  const categoryName =
+    (
+      pageComponents.find(
+        (component: XMComponent) => component.id === "ProductListing"
+      ) || {}
+    )?.params?.categoryName || null;
 
   let searchResults;
 
@@ -124,7 +122,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
       categoryName,
     });
   }
-
+  
   const {
     hits = [],
     nbHits = 0,
@@ -139,7 +137,6 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
       footerProps,
       brandSidebarProps,
       pageComponents,
-      categoryHierarchy,
       algoliaSearchResults: {
         hits,
         nbHits,

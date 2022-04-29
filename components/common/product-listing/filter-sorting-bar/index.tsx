@@ -35,10 +35,10 @@ const filterListData = [
     filterName: "Brand",
     filterOptions: [
       {
-        optionNames: "Brand 1",
+        optionName: "Brand 1",
       },
       {
-        optionNames: "Brand 2",
+        optionName: "Brand 2",
       },
     ],
   },
@@ -46,19 +46,19 @@ const filterListData = [
     filterName: "Type",
     filterOptions: [
       {
-        optionNames: "Two headed",
+        optionName: "Two headed",
       },
       {
-        optionNames: "Solitaire",
+        optionName: "Solitaire",
       },
       {
-        optionNames: "Twins",
+        optionName: "Twins",
       },
       {
-        optionNames: "Bands",
+        optionName: "Bands",
       },
       {
-        optionNames: "Eternity",
+        optionName: "Eternity",
       },
     ],
   },
@@ -66,10 +66,10 @@ const filterListData = [
     filterName: "Metal",
     filterOptions: [
       {
-        optionNames: "Gold",
+        optionName: "Gold",
       },
       {
-        optionNames: "White Gold",
+        optionName: "White Gold",
       },
     ],
   },
@@ -77,7 +77,7 @@ const filterListData = [
     filterName: "Gemstone",
     filterOptions: [
       {
-        optionNames: "Diamond",
+        optionName: "Diamond",
       },
     ],
   },
@@ -85,10 +85,10 @@ const filterListData = [
     filterName: "Price",
     filterOptions: [
       {
-        optionNames: "100",
+        optionName: "100",
       },
       {
-        optionNames: "200",
+        optionName: "200",
       },
     ],
   },
@@ -98,7 +98,7 @@ interface FilterBarProps {
   filterList?:
     | {
         filterName: string;
-        filterOptions: { optionNames: string }[];
+        filterOptions: { optionName: string }[];
       }[]
     | [];
   headerId?: string;
@@ -109,7 +109,7 @@ interface FilterBarProps {
 interface DropdownDataProps {
   filterName: string;
   dropdownData: {
-    optionNames: string;
+    optionName: string;
   }[];
   positionOffset: string;
 }
