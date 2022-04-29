@@ -40,8 +40,8 @@ test("Footer testing", () => {
     </ContextProvider>
   );
 
-  expect(screen.getByText(heading1)).toBeInTheDocument();
-  expect(screen.getByText(subHeading2)).toBeInTheDocument();
+  expect(screen.getByText(heading)).toBeInTheDocument();
+  expect(screen.getByText(subHeading)).toBeInTheDocument();
   expect(screen.getByText(subscriptionText)).toBeInTheDocument();
   expect(screen.getByText(socialIconText)).toBeInTheDocument();
 });
