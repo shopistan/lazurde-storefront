@@ -10,62 +10,78 @@ type LinkProps = {
 };
 
 interface ArabicCategoryProps {
-  linkHeading: string,
+  linkHeading: string;
   linkTitle: [
     {
-      title: string
+      title: string;
     }
-  ]
+  ];
 }
 
 interface DropDownProps {
-  dropdownData: [{
-    title: string;
-    catArr: [LinkProps];
-  }],
-  categoryLinks: ArabicCategoryProps[],
+  dropdownData: [
+    {
+      title: string;
+      catArr: [LinkProps];
+    }
+  ];
+  categoryLinks: ArabicCategoryProps[];
 }
 
 interface CategoryDropDownProps {
   categoryData: DropDownProps;
-  setIsOpened: Function
+  setIsOpened: Function;
 }
 
-
-
-const CategoryDropDown = ({ categoryData, setIsOpened }: CategoryDropDownProps): JSX.Element => {
+const CategoryDropDown = ({
+  categoryData,
+  setIsOpened,
+}: CategoryDropDownProps): JSX.Element => {
   const { appState } = useContext(AppContext);
 
   return (
-    <div className={styles['category-dropdown']}
+    <div
+      data-testid={"dropdown-div"}
+      className={styles["category-dropdown"]}
       onMouseOver={() => {
-        setIsOpened((prev: object) => { return { ...prev, opened: true } })
+        setIsOpened((prev: object) => {
+          return { ...prev, opened: true };
+        });
       }}
       onMouseLeave={() => {
-        setIsOpened((prev: object) => { return { ...prev, opened: false } })
+        setIsOpened((prev: object) => {
+          return { ...prev, opened: false };
+        });
       }}
     >
       {categoryData?.dropdownData?.map((data, index) => {
         const { title, catArr } = data;
-        const currentCategoryArabic = categoryData?.categoryLinks?.[index]
+        const currentCategoryArabic = categoryData?.categoryLinks?.[index];
         return (
           <div key={index}>
-            <div className={styles['title']}>
-              {appState.lang === "en" ? title : currentCategoryArabic?.linkHeading}
+            <div className={styles["title"]}>
+              {appState?.lang === "en"
+                ? title
+                : currentCategoryArabic?.linkHeading}
             </div>
-            <div className={styles['links']}>
+            <div className={styles["links"]}>
               {catArr?.map((data, index) => {
-                const categoryLinkArabic = currentCategoryArabic?.linkTitle[index]
+                const categoryLinkArabic =
+                  currentCategoryArabic?.linkTitle[index];
 
                 return (
-                  <Link key={index} href={data.url || ""} >
-                    <a data-isBold={data.isBold}>{appState.lang === "en" ? data.title : categoryLinkArabic?.title}</a>
+                  <Link key={index} href={data.url || ""}>
+                    <a data-isBold={data.isBold}>
+                      {appState?.lang === "en"
+                        ? data.title
+                        : categoryLinkArabic?.title}
+                    </a>
                   </Link>
-                )
+                );
               })}
             </div>
           </div>
-        )
+        );
       })}
     </div>
   );

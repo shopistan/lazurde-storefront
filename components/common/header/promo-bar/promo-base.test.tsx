@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import PromoBar from "./index";
-import ContextProvider from "lib/context";
+import ContextProvider, { AppContext } from "lib/context";
 import { screen } from "@testing-library/dom";
 import { act } from "react-dom/test-utils";
 
@@ -16,6 +16,20 @@ const renderComponent = () => {
         bgColor={"#fff"}
       />
     </ContextProvider>
+  );
+};
+
+const renderComponentAR = () => {
+  render(
+    <AppContext.Provider value={{ appState: { lang: "ar" } }}>
+      <PromoBar
+        title={"Promo Bar Title"}
+        linkText={"Promo Link Text"}
+        link={"/page-change"}
+        mobileLinkText={"mobile text"}
+        bgColor={"#fff"}
+      />
+    </AppContext.Provider>
   );
 };
 
@@ -66,5 +80,8 @@ describe("Promo Bar Tests", () => {
       const title = screen.getByText(/mobile text/i);
       expect(title).toBeInTheDocument();
     });
+  });
+  test("render arabic version", () => {
+    renderComponentAR();
   });
 });

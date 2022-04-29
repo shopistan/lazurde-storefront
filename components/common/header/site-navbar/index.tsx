@@ -58,7 +58,11 @@ const SiteNavBar: FC<siteNavBarProps> = ({
   const { appState } = useContext(AppContext);
 
   return (
-    <div className={styles["site-navbar"]} data-headerid={headerId}>
+    <div
+      data-testid="id"
+      className={styles["site-navbar"]}
+      data-headerId={headerId}
+    >
       <div className={styles["back-btn"]}>
         <Link href={"/"}>
           <a>
@@ -91,6 +95,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
             return (
               <div
                 key={index}
+                role={"links"}
                 className={styles["links"]}
                 onMouseOver={() => {
                   if (hasCategories) {
@@ -118,7 +123,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
               >
                 <Link href={hasCategories ? "" : data.titleUrl}>
                   <a>
-                    {appState.lang === "en"
+                    {appState?.lang === "en"
                       ? data.navTitle
                       : sideNavTitlesArray[index].navTitle}
                   </a>
@@ -128,6 +133,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
           })}
       </div>
       <div
+        role={"search"}
         onClick={() => setOpenSearchDialog(true)}
         className={styles["search-icon"]}
       >
@@ -143,6 +149,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
         ></CategoryDropDown>
       </div>
       <div
+        role={"overlay"}
         className={styles["overlay"]}
         data-opened={isOpened.opened}
         onClick={() => setIsOpened({ ...isOpened, opened: false })}
