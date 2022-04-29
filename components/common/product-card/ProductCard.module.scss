@@ -15,12 +15,6 @@
           display: block;
         }
       }
-
-      .product-card__wishlist-icon {
-        @media (min-width: $breakPoint-desktop) {
-          display: block;
-        }
-      }
     }
   }
 
@@ -34,12 +28,8 @@
     top: 13px;
     inset-inline-end: 11.83px;
     inset-inline-start: auto;
-    z-index: 2;
+    z-index: 10;
     cursor: pointer;
-
-    @media (min-width: $breakPoint-desktop) {
-      display: none;
-    }
   }
 
   &__title {
@@ -101,7 +91,7 @@
   }
 
   &__tag {
-    z-index: 1;
+    z-index: 9;
     position: absolute;
     top: auto;
     bottom: 0;

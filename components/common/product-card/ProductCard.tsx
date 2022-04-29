@@ -23,6 +23,8 @@ interface ProductCardProps {
   itemId?: string;
   priceListId?: string;
   currency?: string;
+  wrapperClassName?: string;
+  swipperClassName?: string;
 }
 
 const ProductCard = ({
@@ -37,6 +39,8 @@ const ProductCard = ({
   productCardImages = [],
   onlineExclusiveTag = false,
   index = 0,
+  wrapperClassName,
+  swipperClassName,
 }: ProductCardProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
@@ -66,7 +70,7 @@ const ProductCard = ({
 
   return (
     <div
-      className={`show-arrow-on-hover ${styles["product-card__wrapper"]}`}
+      className={`show-arrow-on-hover ${styles["product-card__wrapper"]} ${wrapperClassName}`}
       key={index}
     >
       <div className={styles["product-card__img-wrapper"]}>
@@ -83,7 +87,7 @@ const ProductCard = ({
           scrollbar={false}
           navigation={true}
           pagination={true}
-          className={`product-slider ${
+          className={`product-slider ${swipperClassName} ${
             onlineExclusiveTag
               ? "slider-navigation-up"
               : "slider-navigation-down"

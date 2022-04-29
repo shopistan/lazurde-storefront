@@ -43,6 +43,8 @@ module.exports = {
     "!components/common/collection-card/*.{js,jsx,tsx,ts}",
     "!components/common/product-card/*.{js,jsx,tsx,ts}",
     "!components/common/product-listing/index.tsx",
+    "!components/common/search-dialog/index.tsx",
+
   ],
   setupFiles: ["./setup.js"],
 };

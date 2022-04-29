@@ -50,6 +50,7 @@ const Header = ({
           brandSideBar={brandSidebarProps}
           siteLogo={siteLogo}
           siteLogoUrl={siteLogoUrl}
+          setOpenSearchDialog={setOpenSearchDialog}
         />
       ) : (
         <UserNavBar brandSideBar={brandSidebarProps} />
