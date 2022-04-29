@@ -8,10 +8,10 @@ const filterListData = [
     filterName: "Brand",
     filterOptions: [
       {
-        optionNames: "Brand 1",
+        optionName: "Brand 1",
       },
       {
-        optionNames: "Brand 2",
+        optionName: "Brand 2",
       },
     ],
   },
