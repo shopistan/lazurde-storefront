@@ -8,11 +8,6 @@ on:
     branches: [test/ci-cd]
 
 jobs:
-  unit_testing:
-    name: Running unit tests
-  steps:
-    run: npm run test
-
   build:
     runs-on: ubuntu-latest
 
@@ -29,4 +24,3 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm run test
-      # - run: npm test
