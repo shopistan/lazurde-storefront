@@ -14,7 +14,7 @@ import { ATCPayload } from "lib/types/cart";
 interface ProductCardProps {
   index?: number;
   title?: string;
-  basePrice?: number;
+  basePrice?: number | string;
   discount?: string;
   discountAmount?: number | string;
   productCardImages?: ImageType[];
@@ -99,13 +99,15 @@ const ProductCard = ({
               productCardImages?.map((data, index) => {
                 return (
                   <SwiperSlide key={index}>
-                    <Image
-                      src={data?.url}
-                      alt={data?.altText}
-                      width={width > 1023 ? 314 : 167.5}
-                      height={width > 1023 ? 322 : 190.67}
-                      layout="responsive"
-                    />
+                    {data?.url && (
+                      <Image
+                        src={data?.url}
+                        alt={data?.altText}
+                        width={width > 1023 ? 314 : 167.5}
+                        height={width > 1023 ? 322 : 190.67}
+                        layout="responsive"
+                      />
+                    )}
                   </SwiperSlide>
                 );
               })}
@@ -133,7 +135,7 @@ const ProductCard = ({
 
       <Label className={styles["product-card__title"]}>{title}</Label>
       <div className={styles["product-card__price-wrapper"]}>
-        {basePrice && (
+        {basePrice ? (
           <Label
             className={`${styles["product-card__price__base-price"]} ${
               discount ? styles["line-through"] : ""
@@ -141,16 +143,22 @@ const ProductCard = ({
           >
             {`$${basePrice && basePrice.toLocaleString()}`}
           </Label>
+        ) : (
+          ""
         )}
-        {discount && (
+        {discount ? (
           <Label className={styles["product-card__price-discount"]}>
             {discount}
           </Label>
+        ) : (
+          ""
         )}
-        {discountAmount && (
+        {discountAmount ? (
           <Label className={styles["product-card__price__discounted-price"]}>
             {`$${discountAmount && discountAmount.toLocaleString()}`}
           </Label>
+        ) : (
+          ""
         )}
       </div>
     </div>

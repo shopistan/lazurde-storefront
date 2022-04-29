@@ -2,9 +2,10 @@ import React, { FC, useContext, useState, useRef, useEffect } from "react";
 import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
-import CategoryDropDown from "./category-dropdown";
+import DropDown from "./dropdown";
 import BorderlessSelect from "components/common/ui/borderless-select";
 import Button from "components/common/ui/button";
+import useWindowSize from "lib/utils/useWindowSize";
 
 const optionsData = [
   {
@@ -29,41 +30,15 @@ const optionsData = [
   },
 ];
 
-type LinkProps = {
-  title: string;
-  url: string;
-  isBold: Boolean;
-};
-interface siteNavBarProps {
-  filterList?:
-    | [
-        {
-          filterName: string;
-          filterOptions: [{ optionsNames: string }];
-        }
-      ]
-    | [];
-  headerId?: string;
-  onApplyFilters: Function;
-}
-
-interface DropdownDataProps {
-  filterName: string;
-  dropdownData: {
-    optionsNames: string;
-  }[];
-  positionOffset: string;
-}
-
-const fl = [
+const filterListData = [
   {
     filterName: "Brand",
     filterOptions: [
       {
-        optionsNames: "Brand 1",
+        optionNames: "Brand 1",
       },
       {
-        optionsNames: "Brand 2",
+        optionNames: "Brand 2",
       },
     ],
   },
@@ -71,19 +46,19 @@ const fl = [
     filterName: "Type",
     filterOptions: [
       {
-        optionsNames: "Two headed",
+        optionNames: "Two headed",
       },
       {
-        optionsNames: "Solitaire",
+        optionNames: "Solitaire",
       },
       {
-        optionsNames: "Twins",
+        optionNames: "Twins",
       },
       {
-        optionsNames: "Bands",
+        optionNames: "Bands",
       },
       {
-        optionsNames: "Eternity",
+        optionNames: "Eternity",
       },
     ],
   },
@@ -91,10 +66,10 @@ const fl = [
     filterName: "Metal",
     filterOptions: [
       {
-        optionsNames: "Gold",
+        optionNames: "Gold",
       },
       {
-        optionsNames: "White Gold",
+        optionNames: "White Gold",
       },
     ],
   },
@@ -102,7 +77,7 @@ const fl = [
     filterName: "Gemstone",
     filterOptions: [
       {
-        optionsNames: "Diamond",
+        optionNames: "Diamond",
       },
     ],
   },
@@ -110,29 +85,47 @@ const fl = [
     filterName: "Price",
     filterOptions: [
       {
-        optionsNames: "100",
+        optionNames: "100",
       },
       {
-        optionsNames: "200",
+        optionNames: "200",
       },
     ],
   },
 ];
 
-const FilterBar: FC<siteNavBarProps> = ({
+interface FilterBarProps {
+  filterList?:
+    | {
+        filterName: string;
+        filterOptions: { optionNames: string }[];
+      }[]
+    | [];
+  headerId?: string;
+  onApplyFilters?: Function;
+  onSortingChange?: Function;
+}
+
+interface DropdownDataProps {
+  filterName: string;
+  dropdownData: {
+    optionNames: string;
+  }[];
+  positionOffset: string;
+}
+
+const FilterBar: FC<FilterBarProps> = ({
   headerId = "",
-  filterList = fl,
-  onApplyFilters,
+  filterList = filterListData,
+  onApplyFilters = () => {},
+  onSortingChange = () => {},
 }): JSX.Element => {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
   const link: any = useRef(
-    filterList && filterList.map(() => React.createRef())
-  );
-  const sideNavTitlesArray: [{ navTitle: string; navCategoryLinks: [] }] = t(
-    "siteNavLinks",
-    {},
-    { returnObjects: true }
+    Array.isArray(filterList) &&
+      filterList.length > 0 &&
+      filterList.map(() => React.createRef())
   );
 
   const _arabicFilterBarData = t(
@@ -148,6 +141,12 @@ const FilterBar: FC<siteNavBarProps> = ({
     [key: string]: { [key: string]: string };
   }>();
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  const [width] = useWindowSize();
+  const [optionData, setOptionData] = useState<{
+    data?: any;
+    defaultValue?: string;
+  }>();
+
   useEffect(() => {
     let totalCount = 0;
     if (selectedFilters && Object.keys(selectedFilters).length > 0) {
@@ -167,28 +166,28 @@ const FilterBar: FC<siteNavBarProps> = ({
     }
   }, [selectedFilters]);
 
-  const [optionData, setOptionData] = useState<any>([]);
   useEffect(() => {
     setOptionData({
       data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
-      defaultValue: "Best Sellers",
+      defaultValue: appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين",
     });
   }, [appState]);
 
   return (
-    <div className={styles["filter-bar-main"]} data-headerId={headerId}>
+    <div className={styles["filter-bar-main"]} data-headerid={headerId}>
       <div className={styles["div-filter-bar"]}>
         <div className={styles["filter-links"]}>
-          {filterList &&
+          {Array.isArray(filterList) &&
             filterList.length > 0 &&
             filterList.map((data, index) => {
               const hasCategories = true;
-              const selectedFilterCount =
-                selectedFilters?.[data.filterName] &&
-                Object.keys(selectedFilters?.[data.filterName]).length;
+              const selectedFilterCount = selectedFilters?.[data?.filterName]
+                ? Object.keys(selectedFilters?.[data?.filterName]).length
+                : 0;
 
               return (
                 <div
+                  role={"links"}
                   key={index}
                   className={styles["links"]}
                   ref={link.current[index]}
@@ -201,19 +200,26 @@ const FilterBar: FC<siteNavBarProps> = ({
                       setDropdownData({
                         filterName:
                           appState?.lang === "en"
-                            ? data.filterName
+                            ? data?.filterName
                             : Array.isArray(_arabicFilterBarData) &&
                               _arabicFilterBarData.length > 0 &&
                               _arabicFilterBarData[index]?.filterName,
                         dropdownData:
                           appState?.lang === "en"
-                            ? data.filterOptions
+                            ? data?.filterOptions
                             : Array.isArray(_arabicFilterBarData) &&
                               _arabicFilterBarData.length > 0 &&
                               _arabicFilterBarData[index]?.filterOptions,
                         positionOffset:
-                          link?.current[index].current.getBoundingClientRect()
-                            .left,
+                          appState?.lang === "en"
+                            ? link?.current[
+                                index
+                              ].current.getBoundingClientRect().left
+                            : width -
+                              link?.current[
+                                index
+                              ].current.getBoundingClientRect().right -
+                              17.4,
                       });
                     } else {
                       setIsOpened({ opened: false, selected: index });
@@ -228,13 +234,14 @@ const FilterBar: FC<siteNavBarProps> = ({
                   }}
                   data-selected={
                     hasCategories
-                      ? isOpened.opened === true && isOpened.selected === index
-                      : isOpened.selected === index
+                      ? isOpened?.opened === true &&
+                        isOpened?.selected === index
+                      : isOpened?.selected === index
                   }
                 >
                   <span>
                     {appState?.lang === "en"
-                      ? data.filterName
+                      ? data?.filterName
                       : Array.isArray(_arabicFilterBarData) &&
                         _arabicFilterBarData.length > 0 &&
                         _arabicFilterBarData[index]?.filterName}
@@ -250,7 +257,7 @@ const FilterBar: FC<siteNavBarProps> = ({
         </div>
         <div
           className={styles["div-clear-btn"]}
-          data-opened={isOpened.opened}
+          data-opened={isOpened?.opened}
           data-has-count={totalSelectedFilterCount > 0}
         >
           <Button
@@ -258,39 +265,40 @@ const FilterBar: FC<siteNavBarProps> = ({
             buttonStyle={"white"}
             buttonSize={"sm"}
             onClick={() => {
-              setSelectedFilters({});
-              onApplyFilters({});
+              setSelectedFilters && setSelectedFilters({});
+              onApplyFilters && onApplyFilters({});
             }}
           />
         </div>
         <div
           className={styles["div-order-dropdown"]}
-          data-opened={isOpened.opened}
+          data-opened={isOpened?.opened}
         >
           <BorderlessSelect
             options={optionData?.data}
-            onChange={() => {}}
             defaultValue={optionData?.defaultValue}
             selectedLabel={appState?.lang === "en" ? "Sort By: " : "بسح فنص:"}
+            onChange={onSortingChange}
           ></BorderlessSelect>
         </div>
       </div>
 
       <div
         className={styles["category-dropdown"]}
-        data-opened={isOpened.opened}
+        data-opened={isOpened?.opened}
       >
-        <CategoryDropDown
+        <DropDown
           setIsOpened={setIsOpened}
           categoryData={dropdownData}
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
           onApplyFilters={onApplyFilters}
-        ></CategoryDropDown>
+        ></DropDown>
       </div>
       <div
+        role={"overlay"}
         className={styles["overlay"]}
-        data-opened={isOpened.opened}
+        data-opened={isOpened?.opened}
         onClick={() => setIsOpened({ ...isOpened, opened: false })}
       ></div>
     </div>

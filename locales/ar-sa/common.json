@@ -553,27 +553,27 @@
     {
       "label": "الجديد",
       "img": "",
-      "value": "New"
+      "value": "الجديد"
     },
     {
       "label": "أفضل البائعين",
       "img": "",
-      "value": "Best Sellers"
+      "value": "أفضل البائعين"
     },
     {
       "label": "أكبر توفير",
       "img": "",
-      "value": "Biggest Saving"
+      "value": "أكبر توفير"
     },
     {
       "label": "الأكثر مشاهدة",
       "img": "",
-      "value": "Most Viewed"
+      "value": "الأكثر مشاهدة"
     },
     {
       "label": "اسم المنتج",
       "img": "",
-      "value": "Product Name"
+      "value": "اسم المنتج"
     }
   ],
   "arabicFilterList": [
@@ -581,10 +581,10 @@
       "filterName": "مجوهرات",
       "filterOptions": [
         {
-          "optionsNames": "مجوهرات 1"
+          "optionNames": "مجوهرات 1"
         },
         {
-          "optionsNames": "مجوهرات 2"
+          "optionNames": "مجوهرات 2"
         }
       ]
     },
@@ -592,19 +592,19 @@
       "filterName": "مجوهرات",
       "filterOptions": [
         {
-          "optionsNames": "مجوهرات"
+          "optionNames": "مجوهرات"
         },
         {
-          "optionsNames": "مجوهرات 1"
+          "optionNames": "مجوهرات 1"
         },
         {
-          "optionsNames": "مجوهرات 2"
+          "optionNames": "مجوهرات 2"
         },
         {
-          "optionsNames": "مجوهرات 3"
+          "optionNames": "مجوهرات 3"
         },
         {
-          "optionsNames": "مجوهرات 4"
+          "optionNames": "مجوهرات 4"
         }
       ]
     },
@@ -612,10 +612,10 @@
       "filterName": "مجوهرات",
       "filterOptions": [
         {
-          "optionsNames": "مجوهرات 1"
+          "optionNames": "مجوهرات 1"
         },
         {
-          "optionsNames": "مجوهرات 2"
+          "optionNames": "مجوهرات 2"
         }
       ]
     },
@@ -623,7 +623,7 @@
       "filterName": "مجوهرات",
       "filterOptions": [
         {
-          "optionsNames": "مجوهرات"
+          "optionNames": "مجوهرات"
         }
       ]
     },
@@ -631,10 +631,10 @@
       "filterName": "مجوهرات",
       "filterOptions": [
         {
-          "optionsNames": "مجوهرات"
+          "optionNames": "مجوهرات"
         },
         {
-          "optionsNames": "مجوهرات"
+          "optionNames": "مجوهرات"
         }
       ]
     }

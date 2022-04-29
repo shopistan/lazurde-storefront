@@ -1,15 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import styles from "./style.module.scss";
-import Link from "next/link";
 import { AppContext } from "lib/context";
 import Tick from "components/icons/Tick";
 import Button from "components/common/ui/button";
-
-type LinkProps = {
-  title: string;
-  url: string;
-  isBold: Boolean;
-};
 
 interface ArabicCategoryProps {
   linkHeading: string;
@@ -20,30 +13,30 @@ interface ArabicCategoryProps {
   ];
 }
 
-interface DropDownProps {
+interface CategoryDataProps {
   filterName: string;
   dropdownData: {
-    optionsNames: string;
+    optionNames: string;
   }[];
   positionOffset: string;
   categoryLinks?: ArabicCategoryProps[];
 }
 
-interface CategoryDropDownProps {
-  categoryData: DropDownProps;
+interface DropDownProps {
+  categoryData: CategoryDataProps;
   setIsOpened: Function;
   selectedFilters: { [key: string]: { [key: string]: string } };
   setSelectedFilters: Function;
   onApplyFilters: Function;
 }
 
-const CategoryDropDown = ({
+const DropDown = ({
   categoryData,
-  setIsOpened,
-  selectedFilters,
-  setSelectedFilters,
-  onApplyFilters,
-}: CategoryDropDownProps): JSX.Element => {
+  setIsOpened = () => {},
+  selectedFilters = {},
+  setSelectedFilters = () => {},
+  onApplyFilters = () => {},
+}: DropDownProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const filterName = categoryData?.filterName || "";
@@ -71,54 +64,58 @@ const CategoryDropDown = ({
     <div
       className={styles["category-dropdown"]}
       onMouseOver={() => {
-        setIsOpened((prev: object) => {
-          return { ...prev, opened: true };
-        });
+        setIsOpened &&
+          setIsOpened((prev: object) => {
+            return { ...prev, opened: true };
+          });
       }}
       onMouseLeave={() => {
-        setIsOpened((prev: object) => {
-          return { ...prev, opened: false };
-        });
+        setIsOpened &&
+          setIsOpened((prev: object) => {
+            return { ...prev, opened: false };
+          });
       }}
     >
       <div className={styles["div-titles"]}>
-        {categoryData?.dropdownData?.map((data, index) => {
-          const { optionsNames } = data;
-          const currentCategoryArabic = categoryData?.categoryLinks?.[index];
-          return (
-            <div
-              key={index}
-              className={styles["title"]}
-              onClick={() => {
-                if (selectedFilters?.[filterName]?.[optionsNames]) {
-                  const filterCopy = { ...selectedFilters };
-                  delete filterCopy?.[filterName]?.[optionsNames];
-                  if (Object.keys(filterCopy?.[filterName]).length < 1) {
-                    delete filterCopy?.[filterName];
-                  }
-                  setSelectedFilters({ ...filterCopy });
-                } else {
-                  setSelectedFilters({
-                    ...selectedFilters,
-                    [filterName]: {
-                      ...selectedFilters?.[filterName],
-                      [optionsNames]: true,
-                    },
-                  });
-                }
-              }}
-              style={{ marginLeft: categoryData?.positionOffset }}
-            >
-              {optionsNames}
+        {categoryData &&
+          Object.keys(categoryData).length > 0 &&
+          categoryData?.dropdownData?.map((data, index) => {
+            const { optionNames } = data;
+            return (
               <div
-                className={styles["div-tick"]}
-                data-showTick={selectedFilters?.[filterName]?.[optionsNames]}
+                key={index}
+                className={styles["title"]}
+                onClick={() => {
+                  if (selectedFilters?.[filterName]?.[optionNames]) {
+                    const filterCopy = { ...selectedFilters };
+                    delete filterCopy?.[filterName]?.[optionNames];
+                    if (Object.keys(filterCopy?.[filterName]).length < 1) {
+                      delete filterCopy?.[filterName];
+                    }
+                    setSelectedFilters && setSelectedFilters({ ...filterCopy });
+                  } else {
+                    setSelectedFilters &&
+                      setSelectedFilters({
+                        ...selectedFilters,
+                        [filterName]: {
+                          ...selectedFilters?.[filterName],
+                          [optionNames]: true,
+                        },
+                      });
+                  }
+                }}
+                style={{ marginInlineStart: categoryData?.positionOffset }}
               >
-                <Tick />
+                {optionNames}
+                <div
+                  className={styles["div-tick"]}
+                  data-showTick={selectedFilters?.[filterName]?.[optionNames]}
+                >
+                  <Tick />
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
 
       <div
@@ -130,8 +127,8 @@ const CategoryDropDown = ({
           buttonStyle={"white"}
           buttonSize={"sm"}
           onClick={() => {
-            setSelectedFilters({});
-            onApplyFilters({});
+            setSelectedFilters && setSelectedFilters({});
+            onApplyFilters && onApplyFilters({});
           }}
         />
         <Button
@@ -151,4 +148,4 @@ const CategoryDropDown = ({
   );
 };
 
-export default CategoryDropDown;
+export default DropDown;
