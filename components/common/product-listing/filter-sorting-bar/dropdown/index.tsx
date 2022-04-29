@@ -4,22 +4,12 @@ import { AppContext } from "lib/context";
 import Tick from "components/icons/Tick";
 import Button from "components/common/ui/button";
 
-interface ArabicCategoryProps {
-  linkHeading: string;
-  linkTitle: [
-    {
-      title: string;
-    }
-  ];
-}
-
 interface CategoryDataProps {
   filterName: string;
   dropdownData: {
     optionName: string;
   }[];
   positionOffset: string;
-  categoryLinks?: ArabicCategoryProps[];
 }
 
 interface DropDownProps {
@@ -62,6 +52,7 @@ const DropDown = ({
 
   return (
     <div
+    data-testid={"dropdown-div"}
       className={styles["category-dropdown"]}
       onMouseOver={() => {
         setIsOpened &&

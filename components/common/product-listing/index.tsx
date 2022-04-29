@@ -41,8 +41,9 @@ const ProductListing = ({
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
+  const dummyProductData = productCardData || []
   const [currentProductData, setCurrentProductData] = useState(
-    [...productDataArray, ...productCardData] || []
+    [...productDataArray, ...dummyProductData] || []
   );
 
   const _arabicProductCardData = t(
@@ -63,7 +64,7 @@ const ProductListing = ({
 
   const applyFilters = (selectedFilters: any = {}) => {
     if (Object.keys(selectedFilters).length < 1) {
-      return setCurrentProductData([...productDataArray, ...productCardData]);
+      return setCurrentProductData([...productDataArray, ...dummyProductData]);
     }
 
     const payload = [];
