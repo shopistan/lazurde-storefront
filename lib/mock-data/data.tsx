@@ -248,12 +248,13 @@ export const productCardData = [
     itemId: "123",
     priceListId: "190",
     currency: "usd",
-    basePrice: 1250,
+    "Base Price": 1250,
     discountedPrice: 625,
     discount: "-50%",
     title: "Love Ring with Diamond",
     onlineExclusiveTag: true,
-    images: [
+    "Image URL": "/product-card-one.png",
+    Image: [
       {
         url: "/product-card-one.png",
         altText: "alt text",
@@ -270,10 +271,12 @@ export const productCardData = [
     priceListId: "3190",
     currency: "usd",
     title: "Love Ring with Diamond",
+    "Base Price": 1900,
     basePrice: 1900,
     discount: "",
     discountedPrice: "",
     onlineExclusiveTag: false,
+    "Image URL": "/product-card-one.png",
     images: [
       {
         url: "/product-card-one.png",
@@ -287,10 +290,12 @@ export const productCardData = [
     priceListId: "1900",
     currency: "usd",
     title: "Love Ring with Diamond",
+    "Base Price": 1250,
     basePrice: 1250,
     discount: "-50%",
     discountedPrice: 625,
     onlineExclusiveTag: false,
+    "Image URL": "/product-card-one.png",
     images: [
       {
         url: "/product-card-one.png",
@@ -308,10 +313,12 @@ export const productCardData = [
     priceListId: "1950",
     currency: "usd",
     title: "Love Ring with Diamond",
+    "Base Price": 1450,
     basePrice: 1450,
     discount: "-60%",
     discountedPrice: 525,
     onlineExclusiveTag: true,
+    "Image URL": "/product-card-one.png",
     images: [
       {
         url: "/product-card-one.png",
@@ -325,10 +332,12 @@ export const productCardData = [
     priceListId: "1920",
     currency: "usd",
     title: "Love Ring with Diamond",
+    "Base Price": 1300,
     basePrice: 1300,
     discount: "",
     discountedPrice: "",
     onlineExclusiveTag: false,
+    "Image URL": "/product-card-one.png",
     images: [
       {
         url: "/product-card-one.png",
@@ -346,10 +355,12 @@ export const productCardData = [
     priceListId: "1940",
     currency: "usd",
     title: "Love Ring with Diamond",
+    "Base Price": 1450,
     basePrice: 1450,
     discount: "-60%",
     discountedPrice: 525,
     onlineExclusiveTag: true,
+    "Image URL": "/product-card-one.png",
     images: [
       {
         url: "/product-card-one.png",
@@ -363,10 +374,12 @@ export const productCardData = [
     priceListId: "1490",
     currency: "usd",
     title: "Love Ring with Diamond",
+    "Base Price": 1250,
     basePrice: 1250,
     discount: "-50%",
     discountedPrice: 625,
     onlineExclusiveTag: true,
+    "Image URL": "/product-card-one.png",
     images: [
       {
         url: "/product-card-one.png",
@@ -378,6 +391,103 @@ export const productCardData = [
       },
       {
         url: "/product-card-one.png",
+        altText: "alt text",
+      },
+    ],
+  },
+];
+
+export const popularProductCardData = [
+  {
+    sku: "11",
+    itemId: "123",
+    priceListId: "190",
+    currency: "usd",
+    basePrice: 1250,
+    discountedPrice: 625,
+    discount: "-50%",
+    title: "Love Ring with Diamond",
+    titleArabic: "خاتم حب مرصع بالماس",
+    onlineExclusiveTag: false,
+    images: [
+      {
+        url: "/blue-ring.png",
+        altText: "alt text",
+      },
+      {
+        url: "/blue-ring.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    sku: "12",
+    itemId: "1253",
+    priceListId: "3190",
+    currency: "usd",
+    title: "Love Ring with Diamond",
+    titleArabic: "خاتم حب مرصع بالماس",
+    basePrice: 1900,
+    discount: "",
+    discountedPrice: "",
+    onlineExclusiveTag: true,
+    images: [
+      {
+        url: "/small-ring.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    sku: "13",
+    itemId: "1283",
+    priceListId: "1900",
+    currency: "usd",
+    title: "Love Ring with Diamond",
+    titleArabic: "خاتم حب مرصع بالماس",
+    basePrice: 1250,
+    discount: "-50%",
+    discountedPrice: 625,
+    onlineExclusiveTag: false,
+    images: [
+      {
+        url: "/golden-ring.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    sku: "14",
+    itemId: "1233",
+    priceListId: "1950",
+    currency: "usd",
+    title: "Love Ring with Diamond",
+    titleArabic: "خاتم حب مرصع بالماس",
+    basePrice: 1450,
+    discount: "-60%",
+    discountedPrice: 525,
+    onlineExclusiveTag: true,
+    images: [
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    sku: "15",
+    itemId: "0123",
+    priceListId: "1920",
+    currency: "usd",
+    title: "Love Ring with Diamond",
+    titleArabic: "خاتم حب مرصع بالماس",
+    basePrice: 1300,
+    discount: "",
+    discountedPrice: "",
+    onlineExclusiveTag: false,
+    images: [
+      {
+        url: "/new-ring.png",
         altText: "alt text",
       },
     ],

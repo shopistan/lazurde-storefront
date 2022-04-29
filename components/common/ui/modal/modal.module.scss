@@ -40,11 +40,6 @@
     transform: translateX(-100%);
     opacity: 0;
   }
-
-  &[data-open="false"] {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
 }
 
 .register-modal {
@@ -55,4 +50,18 @@
 
 .div-modal-body {
   margin-top: 45px;
+}
+
+html[dir="rtl"] {
+  .div-modal-main {
+    &[data-open="true"] {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  
+    &[data-open="false"] {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
 }

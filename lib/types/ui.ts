@@ -8,4 +8,6 @@ export type InputType = {
   label?: string;
   labelClassName?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  showLabel: boolean;
+  handleSubmit: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };

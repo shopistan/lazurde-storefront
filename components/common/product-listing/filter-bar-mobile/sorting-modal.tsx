@@ -1,16 +1,27 @@
 import React, { useState, useContext } from "react";
 import styles from "./style.module.scss";
-import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
+
+type SortingDataProps = {
+  label: string;
+  value: string;
+}
+interface SortingModalProps {
+  sortingDataArray: SortingDataProps[];
+  defaultValue?: string;
+  selectedVal?: string;
+  onChange?: Function;
+}
 
 const SortingModal = ({
   sortingDataArray = [],
   defaultValue = "",
+  selectedVal = '',
   onChange = (value: string) => {},
-}): JSX.Element => {
-  const { t } = useTranslation("common");
+}: SortingModalProps): JSX.Element => {
   const { appState } = useContext(AppContext);
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
+  const [selectedValue, setSelectedValue] = useState(selectedVal || defaultValue);
+  
   return (
     <>
       <div className={styles["filter-heading"]}>
@@ -18,21 +29,23 @@ const SortingModal = ({
         {selectedValue}
       </div>
       <div className={styles["sorting-filter-wrapper"]}>
-        {sortingDataArray.map((data, index) => {
-          return (
-            <div
-              className={styles["sorting-filter-item"]}
-              key={index}
-              onClick={() => {
-                setSelectedValue(data.value);
-                onChange && onChange(data.value);
-              }}
-              data-selected={data.value === selectedValue}
-            >
-              <span>{data.label}</span>
-            </div>
-          );
-        })}
+        {Array.isArray(sortingDataArray) &&
+          sortingDataArray.length > 0 &&
+          sortingDataArray?.map((data, index) => {
+            return (
+              <div
+                className={styles["sorting-filter-item"]}
+                key={index}
+                onClick={() => {
+                  setSelectedValue(data?.value);
+                  onChange && onChange(data?.value);
+                }}
+                data-selected={data?.value === selectedValue}
+              >
+                <span>{data?.label}</span>
+              </div>
+            );
+          })}
       </div>
     </>
   );

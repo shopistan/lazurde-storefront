@@ -11,7 +11,7 @@ describe('', () => {
     }
 
     test('image', () => {
-        render(<SiteNavBar headerId={id} siteLogoUrl={siteUrl} siteLogo={image} siteNavBar={[]} />)
+        render(<SiteNavBar headerId={id} siteLogoUrl={siteUrl} siteLogo={image} siteNavBar={[]} setOpenSearchDialog={() => { }} />)
         const altTextProps = screen.getByAltText('alt-image')
         expect(altTextProps).toBeInTheDocument()
         const idProps = screen.getByTestId('id')
