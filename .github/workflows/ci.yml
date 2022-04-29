@@ -10,6 +10,9 @@ on:
 jobs:
   unit_testing:
     name: Running unit tests
+  steps:
+    run: npm run test
+
   build:
     runs-on: ubuntu-latest
 
