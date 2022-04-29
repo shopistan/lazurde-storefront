@@ -4,9 +4,12 @@
   align-items: center;
   position: relative;
   width: 100%;
-  // min-width: 197px;
   cursor: pointer;
   height: 34px;
+
+  @media (min-width: $breakPoint-desktop) {
+    min-width: 197px;
+  }
 
   .select {
     display: flex;
@@ -110,8 +113,6 @@ html[dir="rtl"] {
       font-weight: 400;
       font-size: 13px;
       line-height: 120%;
-      direction: ltr;
-      justify-content: flex-end;
 
       @media (min-width: $breakPoint-desktop) {
         font-size: 14px;

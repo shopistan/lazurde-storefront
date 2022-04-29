@@ -1,11 +1,12 @@
-import React, { FC, useState, useRef } from "react";
+import React, { FC, useState, useContext, useEffect } from "react";
 import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
 import BorderlessSelect from "components/common/ui/borderless-select";
-import CategoryDropDown from "./category-dropdown";
 import Accordion from "components/common/ui/accordion2/Accordion";
 import Button from "components/common/ui/button";
 import SortingModal from "./sorting-modal";
+import { AppContext } from "lib/context";
+import DropDown from "./dropdown";
 
 const optionsData = [
   {
@@ -30,49 +31,12 @@ const optionsData = [
   },
 ];
 
-type LinkProps = {
-  title: string;
-  url: string;
-  isBold: Boolean;
-};
-interface siteNavBarProps {
-  filterList?:
-    | [
-        {
-          filterName: string;
-          filterOptions: { optionsNames: string }[];
-        }
-      ]
-    | [];
-  headerId?: string;
-}
-
-interface DropdownDataProps {
-  dropdownData: [
-    {
-      title: string;
-      catArr: [LinkProps];
-    }
-  ];
-  categoryLinks: [];
-}
-
-interface FilterAccordionProps {
-  setIsOpened: Function;
-  selectedFilters: {
-    [key: string]: { [key: string]: string };
-  };
-  setSelectedFilters: Function;
-  setTotalSelectedFilterCount: Function;
-  totalSelectedFilterCount: number;
-}
-
-const fl = [
+const filterListData = [
   {
     filterName: "Brand",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionName: "SOmething",
       },
     ],
   },
@@ -80,19 +44,19 @@ const fl = [
     filterName: "Type",
     filterOptions: [
       {
-        optionsNames: "Two headed",
+        optionName: "Two headed",
       },
       {
-        optionsNames: "Solitaire",
+        optionName: "Solitaire",
       },
       {
-        optionsNames: "Twins",
+        optionName: "Twins",
       },
       {
-        optionsNames: "Bands",
+        optionName: "Bands",
       },
       {
-        optionsNames: "Eternity",
+        optionName: "Eternity",
       },
     ],
   },
@@ -100,7 +64,7 @@ const fl = [
     filterName: "Metal",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionName: "SOmething",
       },
     ],
   },
@@ -108,7 +72,7 @@ const fl = [
     filterName: "Gemstone",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionName: "SOmething",
       },
     ],
   },
@@ -116,71 +80,103 @@ const fl = [
     filterName: "Price",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionName: "SOmething",
       },
     ],
   },
 ];
 
-const FilterBarMobile: FC<siteNavBarProps> = ({
-  headerId = "",
-  filterList = fl,
+interface FilterBarMobileProps {
+  filterList?: {
+    filterName: string;
+    filterOptions: { optionName: string }[];
+  }[];
+  headerId?: string;
+  onApplyFilters: Function;
+  onSortingChange: Function;
+}
+interface FilterAccordionProps {
+  filterList: {
+    filterName: string;
+    filterOptions: { optionName: string }[];
+  }[];
+  setIsOpened: Function;
+  selectedFilters: {
+    [key: string]: { [key: string]: string };
+  };
+  setSelectedFilters: Function;
+  setTotalSelectedFilterCount: Function;
+  totalSelectedFilterCount: number;
+  onApplyFilters: Function;
+}
+
+const FilterBarMobile: FC<FilterBarMobileProps> = ({
+  filterList = filterListData,
+  onApplyFilters = () => {},
+  onSortingChange = () => {},
 }): JSX.Element => {
   const { t } = useTranslation("common");
-  const link = useRef(filterList && filterList.map(() => React.createRef()));
-  const sideNavTitlesArray: [{ navTitle: string; navCategoryLinks: [] }] = t(
-    "siteNavLinks",
-    {},
-    { returnObjects: true }
-  );
+  const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
 
+  const { appState } = useContext(AppContext);
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [sortingSelected, setSortingSelected] = useState("Best Sellers");
-  const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
   const [selectedFilters, setSelectedFilters] = useState<{
     [key: string]: { [key: string]: string };
-  }>();
+  }>({});
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  const [optionData, setOptionData] = useState<any>([]);
+
+  useEffect(() => {
+    setSortingSelected(appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين")
+    setOptionData({
+      data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
+      defaultValue: appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين",
+    });
+  }, [appState]);
 
   return (
-    <div className={styles["filter-bar_wrapper"]} data-headerId={headerId}>
+    <div className={styles["filter-bar_wrapper"]}>
       <div className={styles["filter-bar_items"]}>
         <div className={styles["filter-bar_item"]}>
           <BorderlessSelect
             className={"filter-mobile-select"}
-            options={optionsData}
             onChange={() => {}}
-            defaultValue={""}
-            selectedLabel={`${"Filter: "}`}
+            selectedLabel={appState?.lang === "en" ? "Filter: " : "منقي:"}
             showInModal={true}
             modalChildren={
               <FilterAccordion
+                filterList={filterList}
                 setIsOpened={setIsOpened}
                 selectedFilters={selectedFilters}
                 setSelectedFilters={setSelectedFilters}
                 setTotalSelectedFilterCount={setTotalSelectedFilterCount}
                 totalSelectedFilterCount={totalSelectedFilterCount}
+                onApplyFilters={onApplyFilters}
               ></FilterAccordion>
             }
           ></BorderlessSelect>
         </div>
         <div
           className={styles["filter-bar_item"]}
-          data-opened={isOpened.opened}
+          data-opened={isOpened?.opened}
         >
           <BorderlessSelect
             className={styles["filter-mobile-select"]}
-            options={optionsData}
+            options={optionData?.data}
             onChange={() => {}}
-            defaultValue={sortingSelected}
-            selectedLabel={`${"Sort By: "}`}
+            defaultValue={optionData?.defaultValue}
+            selectedLabel={appState?.lang === "en" ? "Sort By: " : "بسح فنص:"}
             showInModal={true}
+            selectedValue={sortingSelected}
             modalChildren={
               <SortingModal
-                sortingDataArray={optionsData}
-                defaultValue={sortingSelected}
-                onChange={(value) => {
+                sortingDataArray={optionData?.data}
+                defaultValue={optionData?.defaultValue}
+                selectedVal={sortingSelected}
+                onChange={(value: string) => {
                   setSortingSelected(value);
+                  onSortingChange(value);
                 }}
               ></SortingModal>
             }
@@ -194,65 +190,100 @@ const FilterBarMobile: FC<siteNavBarProps> = ({
 export default FilterBarMobile;
 
 const FilterAccordion = ({
+  filterList,
   setIsOpened,
   selectedFilters,
   setSelectedFilters,
   setTotalSelectedFilterCount,
   totalSelectedFilterCount,
+  onApplyFilters,
 }: FilterAccordionProps): JSX.Element => {
+  const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
+
+  const _arabicFilterBarData = t(
+    "arabicFilterList",
+    {},
+    { returnObjects: true }
+  );
   return (
     <>
-      {fl.map((data, index) => {
-        const selectedFilterCount =
-          selectedFilters?.[data.filterName] &&
-          Object.keys(selectedFilters?.[data.filterName]).length;
-        return (
-          <Accordion
-            key={index}
-            heading={
-              <div className={styles["div-counter"]}>
-                <span className={styles["filter-name"]}>{data.filterName}</span>
-                <div data-visible={selectedFilterCount > 0}>
-                  <span>{selectedFilterCount > 0 && selectedFilterCount}</span>
-                </div>
-              </div>
-            }
-            links={data.filterOptions}
-            arrowIcon={false}
-          >
-            <CategoryDropDown
+      {Array.isArray(filterList) &&
+        filterList.length > 0 &&
+        filterList.map((data, index) => {
+          const selectedFilterCount = selectedFilters?.[data.filterName]
+            ? Object.keys(selectedFilters?.[data.filterName]).length
+            : 0;
+          return (
+            <Accordion
               key={index}
-              setIsOpened={setIsOpened}
-              categoryData={{
-                dropdownData: data.filterOptions,
-                filterName: data.filterName,
-              }}
-              selectedFilters={selectedFilters}
-              setSelectedFilters={setSelectedFilters}
-              setTotalSelectedFilterCount={setTotalSelectedFilterCount}
-            ></CategoryDropDown>
-          </Accordion>
-        );
-      })}
+              heading={
+                <div className={styles["div-counter"]}>
+                  <span className={styles["filter-name"]}>
+                    {appState?.lang === "en"
+                      ? data.filterName
+                      : Array.isArray(_arabicFilterBarData) &&
+                        _arabicFilterBarData.length > 0 &&
+                        _arabicFilterBarData[index]?.filterName}
+                  </span>
+                  <div data-visible={selectedFilterCount > 0}>
+                    <span>
+                      {selectedFilterCount > 0 && selectedFilterCount}
+                    </span>
+                  </div>
+                </div>
+              }
+              links={data?.filterOptions}
+              arrowIcon={false}
+            >
+              <DropDown
+                key={index}
+                setIsOpened={setIsOpened}
+                categoryData={{
+                  dropdownData:
+                    appState?.lang === "en"
+                      ? data?.filterOptions
+                      : Array.isArray(_arabicFilterBarData) &&
+                        _arabicFilterBarData.length > 0
+                      ? _arabicFilterBarData[index]?.filterOptions
+                      : [],
+                  filterName:
+                    appState?.lang === "en"
+                      ? data?.filterName
+                      : Array.isArray(_arabicFilterBarData) &&
+                        _arabicFilterBarData.length > 0 &&
+                        _arabicFilterBarData[index]?.filterName,
+                }}
+                selectedFilters={selectedFilters}
+                setSelectedFilters={setSelectedFilters}
+                setTotalSelectedFilterCount={setTotalSelectedFilterCount}
+              ></DropDown>
+            </Accordion>
+          );
+        })}
 
       <div
         className={styles["div-filter-btns"]}
         data-has-count={totalSelectedFilterCount > 0}
       >
         <Button
-          buttonText={"Clear All Filters"}
+          buttonText={appState?.lang === "en" ? "Clear All Filters" : "مسح"}
           buttonStyle={"white"}
           buttonSize={"sm"}
           onClick={() => {
             setSelectedFilters({});
+            onApplyFilters && onApplyFilters({});
           }}
         />
         <Button
-          buttonText={`Apply ${
+          buttonText={`${appState?.lang === "en" ? "Apply" : "يتقدم"} ${
             totalSelectedFilterCount > 0 ? `(${totalSelectedFilterCount})` : ""
           }`}
           buttonStyle={"black"}
           buttonSize={"sm"}
+          onClick={() => {
+            onApplyFilters && onApplyFilters(selectedFilters);
+          }}
         />
       </div>
     </>

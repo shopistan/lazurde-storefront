@@ -9,32 +9,68 @@ import Slider from "components/common/ui/slider/slider";
 import Button from "components/common/ui/button";
 import { ImageType } from "lib/types/common";
 import { AppContext } from "lib/context";
+import { addProductToCart } from "lib/utils/cart";
+import { ATCPayload } from "lib/types/cart";
 interface ProductCardProps {
   index?: number;
   title?: string;
-  basePrice?: string;
+  basePrice?: number | string;
   discount?: string;
-  discountedPrice?: string;
+  discountAmount?: number | string;
   productCardImages?: ImageType[];
   onlineExclusiveTag?: boolean;
+  sku?: string;
+  itemId?: string;
+  priceListId?: string;
+  currency?: string;
+  wrapperClassName?: string;
+  swipperClassName?: string;
 }
 
 const ProductCard = ({
+  sku = "",
+  itemId = "",
+  priceListId = "",
+  currency = "USD",
   title = "",
-  basePrice = "",
+  basePrice = 0,
   discount = "",
-  discountedPrice = "",
+  discountAmount = 0,
   productCardImages = [],
   onlineExclusiveTag = false,
   index = 0,
+  wrapperClassName,
+  swipperClassName,
 }: ProductCardProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const [fill, setFill] = useState(false);
 
+  const handleAddToCart = async () => {
+    const payload: ATCPayload = {
+      cartId: null,
+      items: [
+        {
+          sku: sku,
+          itemId: itemId,
+          quantity: 1,
+          priceListId: priceListId,
+          price: {
+            currency: currency,
+            amount: basePrice,
+            discount: {
+              discountAmount: discountAmount,
+            },
+          },
+        },
+      ],
+    };
+    const res = await addProductToCart(payload);
+  };
+
   return (
     <div
-      className={`show-arrow-on-hover ${styles["product-card__wrapper"]}`}
+      className={`show-arrow-on-hover ${styles["product-card__wrapper"]} ${wrapperClassName}`}
       key={index}
     >
       <div className={styles["product-card__img-wrapper"]}>
@@ -51,7 +87,7 @@ const ProductCard = ({
           scrollbar={false}
           navigation={true}
           pagination={true}
-          className={`product-slider ${
+          className={`product-slider ${swipperClassName} ${
             onlineExclusiveTag
               ? "slider-navigation-up"
               : "slider-navigation-down"
@@ -63,13 +99,15 @@ const ProductCard = ({
               productCardImages?.map((data, index) => {
                 return (
                   <SwiperSlide key={index}>
-                    <Image
-                      src={data?.url}
-                      alt={data?.altText}
-                      width={width > 1023 ? 314 : 167.5}
-                      height={width > 1023 ? 322 : 190.67}
-                      layout="responsive"
-                    />
+                    {data?.url && (
+                      <Image
+                        src={data?.url}
+                        alt={data?.altText}
+                        width={width > 1023 ? 314 : 167.5}
+                        height={width > 1023 ? 322 : 190.67}
+                        layout="responsive"
+                      />
+                    )}
                   </SwiperSlide>
                 );
               })}
@@ -87,7 +125,9 @@ const ProductCard = ({
             buttonStyle="black"
             buttonText={"add to cart"}
             buttonSize={"sm"}
-            onClick={() => {}}
+            onClick={() => {
+              handleAddToCart();
+            }}
             type={"button"}
           />
         </div>
@@ -95,24 +135,30 @@ const ProductCard = ({
 
       <Label className={styles["product-card__title"]}>{title}</Label>
       <div className={styles["product-card__price-wrapper"]}>
-        {basePrice && (
+        {basePrice ? (
           <Label
             className={`${styles["product-card__price__base-price"]} ${
               discount ? styles["line-through"] : ""
             }`}
           >
-            {basePrice}
+            {`$${basePrice && basePrice.toLocaleString()}`}
           </Label>
+        ) : (
+          ""
         )}
-        {discount && (
+        {discount ? (
           <Label className={styles["product-card__price-discount"]}>
             {discount}
           </Label>
+        ) : (
+          ""
         )}
-        {discountedPrice && (
+        {discountAmount ? (
           <Label className={styles["product-card__price__discounted-price"]}>
-            {discountedPrice}
+            {`$${discountAmount && discountAmount.toLocaleString()}`}
           </Label>
+        ) : (
+          ""
         )}
       </div>
     </div>

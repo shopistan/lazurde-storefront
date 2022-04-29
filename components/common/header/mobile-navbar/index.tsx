@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./style.module.scss";
 import { Bag, Heart, MenuIcon, Search, LazurdeLogo } from "components/icons";
 import Link from "next/link";
-import MobileMenu from "./mobile-menu";
+import MobileMenu from "./mobile-menu/mobile-menu";
 import Image from "next/image";
 import { MobileHeaderProps } from "lib/types/mobile-header";
 
@@ -12,6 +12,7 @@ const MobileNavBar = ({
   brandSideBar,
   siteLogo,
   siteLogoUrl,
+  setOpenSearchDialog,
 }: MobileHeaderProps): JSX.Element => {
   const [menu, setMenu] = useState<Boolean>(false);
   const handleMenu = () => {
@@ -47,7 +48,7 @@ const MobileNavBar = ({
           <button onClick={handleMenu}>
             <MenuIcon color="#000000" />
           </button>
-          <button>
+          <button onClick={() => setOpenSearchDialog(true)}>
             <Search />
           </button>
         </div>

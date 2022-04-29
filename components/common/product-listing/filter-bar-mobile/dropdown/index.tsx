@@ -14,7 +14,6 @@ interface DropDownProps {
   dropdownData: { [key: string]: string }[];
   filterName: string;
   categoryLinks?: ArabicCategoryProps[];
-  positionOffset?: number;
 }
 
 interface CategoryDropDownProps {
@@ -25,12 +24,12 @@ interface CategoryDropDownProps {
   setTotalSelectedFilterCount: Function;
 }
 
-const CategoryDropDown = ({
+const DropDown = ({
   categoryData,
-  setIsOpened,
-  selectedFilters,
-  setSelectedFilters,
-  setTotalSelectedFilterCount,
+  setIsOpened = () => {},
+  selectedFilters = {},
+  setSelectedFilters = () => {},
+  setTotalSelectedFilterCount = () => {},
 }: CategoryDropDownProps): JSX.Element => {
   const filterName = categoryData?.filterName || "";
 
@@ -68,46 +67,46 @@ const CategoryDropDown = ({
       }}
     >
       <div className={styles["div-titles"]}>
-        {categoryData?.dropdownData?.map((data, index) => {
-          const { optionsNames } = data;
-          const currentCategoryArabic = categoryData?.categoryLinks?.[index];
-          return (
-            <div
-              key={index}
-              className={styles["title"]}
-              onClick={() => {
-                if (selectedFilters?.[filterName]?.[optionsNames]) {
-                  const filterCopy = { ...selectedFilters };
-                  delete filterCopy?.[filterName]?.[optionsNames];
-                  if (Object.keys(filterCopy?.[filterName]).length < 1) {
-                    delete filterCopy?.[filterName];
-                  }
-                  setSelectedFilters({ ...filterCopy });
-                } else {
-                  setSelectedFilters({
-                    ...selectedFilters,
-                    [filterName]: {
-                      ...selectedFilters?.[filterName],
-                      [optionsNames]: true,
-                    },
-                  });
-                }
-              }}
-              style={{ marginLeft: categoryData?.positionOffset }}
-            >
-              {optionsNames}
+        {categoryData &&
+          Object.keys(categoryData).length > 0 &&
+          categoryData?.dropdownData.map((data, index) => {
+            const { optionName } = data;
+            return (
               <div
-                className={styles["div-tick"]}
-                data-showTick={selectedFilters?.[filterName]?.[optionsNames]}
+                key={index}
+                className={styles["title"]}
+                onClick={() => {
+                  if (selectedFilters?.[filterName]?.[optionName]) {
+                    const filterCopy = { ...selectedFilters };
+                    delete filterCopy?.[filterName]?.[optionName];
+                    if (Object.keys(filterCopy?.[filterName]).length < 1) {
+                      delete filterCopy?.[filterName];
+                    }
+                    setSelectedFilters && setSelectedFilters({ ...filterCopy });
+                  } else {
+                    setSelectedFilters && setSelectedFilters({
+                      ...selectedFilters,
+                      [filterName]: {
+                        ...selectedFilters?.[filterName],
+                        [optionName]: true,
+                      },
+                    });
+                  }
+                }}
               >
-                <Tick />
+                {optionName}
+                <div
+                  className={styles["div-tick"]}
+                  data-showTick={selectedFilters?.[filterName]?.[optionName]}
+                >
+                  <Tick />
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </div>
   );
 };
 
-export default CategoryDropDown;
+export default DropDown;

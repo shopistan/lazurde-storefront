@@ -110,7 +110,10 @@ const LanguageSelector = ({
   };
 
   return (
-    <div className={`${styles["language-selector"]} ${mainWrapperClass}`}>
+    <div
+      data-testid={"main-wrapper"}
+      className={`${styles["language-selector"]} ${mainWrapperClass}`}
+    >
       <Select
         options={countryArr}
         onChange={onCountryChange}

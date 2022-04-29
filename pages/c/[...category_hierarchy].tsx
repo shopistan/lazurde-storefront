@@ -23,6 +23,7 @@ interface ProductListingPageProps extends PageProps {
     nbPages: number;
     hitsPerPage: number;
   };
+  categoryHierarchy: string[];
 }
 
 const LazurdeProductListingPage: FC<ProductListingPageProps> = ({
@@ -45,6 +46,15 @@ const LazurdeProductListingPage: FC<ProductListingPageProps> = ({
         {pageComponents.map((component: XMComponent, index) => {
           const Component = componentsById[component.id];
           if (Component) {
+            if (component.id === "ProductListing") {
+              return (
+                <Component
+                  {...component.params}
+                  productDataArray={algoliaSearchResults.hits}
+                  key={index}
+                />
+              );
+            }
             return <Component {...component.params} key={index} />;
           }
           return null;
@@ -98,11 +108,12 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
       ) || {}
     ).params || {};
 
-  const { categoryName = null } = (
-    pageComponents.find(
-      (component: XMComponent) => component.id === "ProductListing"
-    ) || {}
-  ).params;
+  const categoryName =
+    (
+      pageComponents.find(
+        (component: XMComponent) => component.id === "ProductListing"
+      ) || {}
+    )?.params?.categoryName || null;
 
   let searchResults;
 
@@ -111,7 +122,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
       categoryName,
     });
   }
-
+  
   const {
     hits = [],
     nbHits = 0,

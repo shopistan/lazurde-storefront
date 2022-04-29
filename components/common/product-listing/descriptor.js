@@ -6,7 +6,7 @@ exports.default = Types.Component({
   description: ``,
 
   attributes: {
-    filtersList: Types.Array({
+    filterList: Types.Array({
       label: "Filters",
       children: Types.Shape({
         children: {

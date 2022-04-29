@@ -2,9 +2,10 @@ import React, { FC, useContext, useState, useRef, useEffect } from "react";
 import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
-import CategoryDropDown from "./category-dropdown";
+import DropDown from "./dropdown";
 import BorderlessSelect from "components/common/ui/borderless-select";
 import Button from "components/common/ui/button";
+import useWindowSize from "lib/utils/useWindowSize";
 
 const optionsData = [
   {
@@ -29,37 +30,15 @@ const optionsData = [
   },
 ];
 
-type LinkProps = {
-  title: string;
-  url: string;
-  isBold: Boolean;
-};
-interface siteNavBarProps {
-  filterList?:
-    | [
-        {
-          filterName: string;
-          filterOptions: [{ optionsNames: string }];
-        }
-      ]
-    | [];
-  headerId?: string;
-}
-
-interface DropdownDataProps {
-  filterName: string;
-  dropdownData: {
-    optionsNames: string;
-  }[];
-  positionOffset: string;
-}
-
-const fl = [
+const filterListData = [
   {
     filterName: "Brand",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionName: "Brand 1",
+      },
+      {
+        optionName: "Brand 2",
       },
     ],
   },
@@ -67,19 +46,19 @@ const fl = [
     filterName: "Type",
     filterOptions: [
       {
-        optionsNames: "Two headed",
+        optionName: "Two headed",
       },
       {
-        optionsNames: "Solitaire",
+        optionName: "Solitaire",
       },
       {
-        optionsNames: "Twins",
+        optionName: "Twins",
       },
       {
-        optionsNames: "Bands",
+        optionName: "Bands",
       },
       {
-        optionsNames: "Eternity",
+        optionName: "Eternity",
       },
     ],
   },
@@ -87,7 +66,10 @@ const fl = [
     filterName: "Metal",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionName: "Gold",
+      },
+      {
+        optionName: "White Gold",
       },
     ],
   },
@@ -95,7 +77,7 @@ const fl = [
     filterName: "Gemstone",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionName: "Diamond",
       },
     ],
   },
@@ -103,33 +85,67 @@ const fl = [
     filterName: "Price",
     filterOptions: [
       {
-        optionsNames: "SOmething",
+        optionName: "100",
+      },
+      {
+        optionName: "200",
       },
     ],
   },
 ];
 
-const FilterBar: FC<siteNavBarProps> = ({
+interface FilterBarProps {
+  filterList?:
+    | {
+        filterName: string;
+        filterOptions: { optionName: string }[];
+      }[]
+    | [];
+  headerId?: string;
+  onApplyFilters?: Function;
+  onSortingChange?: Function;
+}
+
+interface DropdownDataProps {
+  filterName: string;
+  dropdownData: {
+    optionName: string;
+  }[];
+  positionOffset: string;
+}
+
+const FilterBar: FC<FilterBarProps> = ({
   headerId = "",
-  filterList = fl,
+  filterList = filterListData,
+  onApplyFilters = () => {},
+  onSortingChange = () => {},
 }): JSX.Element => {
+  const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
   const link: any = useRef(
-    filterList && filterList.map(() => React.createRef())
+    Array.isArray(filterList) &&
+      filterList.length > 0 &&
+      filterList.map(() => React.createRef())
   );
-  const sideNavTitlesArray: [{ navTitle: string; navCategoryLinks: [] }] = t(
-    "siteNavLinks",
+
+  const _arabicFilterBarData = t(
+    "arabicFilterList",
     {},
     { returnObjects: true }
   );
+  const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
 
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
   const [selectedFilters, setSelectedFilters] = useState<{
     [key: string]: { [key: string]: string };
   }>();
-  const { appState } = useContext(AppContext);
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  const [width] = useWindowSize();
+  const [optionData, setOptionData] = useState<{
+    data?: any;
+    defaultValue?: string;
+  }>();
 
   useEffect(() => {
     let totalCount = 0;
@@ -150,34 +166,60 @@ const FilterBar: FC<siteNavBarProps> = ({
     }
   }, [selectedFilters]);
 
+  useEffect(() => {
+    setOptionData({
+      data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
+      defaultValue: appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين",
+    });
+  }, [appState]);
+
   return (
-    <div className={styles["filter-bar-main"]} data-headerId={headerId}>
+    <div className={styles["filter-bar-main"]} data-headerid={headerId}>
       <div className={styles["div-filter-bar"]}>
         <div className={styles["filter-links"]}>
-          {filterList &&
+          {Array.isArray(filterList) &&
             filterList.length > 0 &&
             filterList.map((data, index) => {
               const hasCategories = true;
-              const selectedFilterCount =
-                selectedFilters?.[data.filterName] &&
-                Object.keys(selectedFilters?.[data.filterName]).length;
+              const selectedFilterCount = selectedFilters?.[data?.filterName]
+                ? Object.keys(selectedFilters?.[data?.filterName]).length
+                : 0;
 
               return (
                 <div
+                  role={"links"}
                   key={index}
                   className={styles["links"]}
                   ref={link.current[index]}
+                  data-has-count={selectedFilterCount > 0}
                   onMouseOver={(event) => {
                     event.stopPropagation();
 
                     if (hasCategories) {
                       setIsOpened({ opened: true, selected: index });
                       setDropdownData({
-                        filterName: data.filterName,
-                        dropdownData: data.filterOptions,
+                        filterName:
+                          appState?.lang === "en"
+                            ? data?.filterName
+                            : Array.isArray(_arabicFilterBarData) &&
+                              _arabicFilterBarData.length > 0 &&
+                              _arabicFilterBarData[index]?.filterName,
+                        dropdownData:
+                          appState?.lang === "en"
+                            ? data?.filterOptions
+                            : Array.isArray(_arabicFilterBarData) &&
+                              _arabicFilterBarData.length > 0 &&
+                              _arabicFilterBarData[index]?.filterOptions,
                         positionOffset:
-                          link?.current[index].current.getBoundingClientRect()
-                            .left,
+                          appState?.lang === "en"
+                            ? link?.current[
+                                index
+                              ].current.getBoundingClientRect().left
+                            : width -
+                              link?.current[
+                                index
+                              ].current.getBoundingClientRect().right -
+                              17.4,
                       });
                     } else {
                       setIsOpened({ opened: false, selected: index });
@@ -192,11 +234,18 @@ const FilterBar: FC<siteNavBarProps> = ({
                   }}
                   data-selected={
                     hasCategories
-                      ? isOpened.opened === true && isOpened.selected === index
-                      : isOpened.selected === index
+                      ? isOpened?.opened === true &&
+                        isOpened?.selected === index
+                      : isOpened?.selected === index
                   }
                 >
-                  <span>{data.filterName}</span>
+                  <span>
+                    {appState?.lang === "en"
+                      ? data?.filterName
+                      : Array.isArray(_arabicFilterBarData) &&
+                        _arabicFilterBarData.length > 0 &&
+                        _arabicFilterBarData[index]?.filterName}
+                  </span>
                   <div data-visible={selectedFilterCount > 0}>
                     <span>
                       {selectedFilterCount > 0 && selectedFilterCount}
@@ -208,45 +257,48 @@ const FilterBar: FC<siteNavBarProps> = ({
         </div>
         <div
           className={styles["div-clear-btn"]}
-          data-opened={isOpened.opened}
+          data-opened={isOpened?.opened}
           data-has-count={totalSelectedFilterCount > 0}
         >
           <Button
-            buttonText={"Clear All Filters"}
+            buttonText={appState?.lang === "en" ? "Clear All Filters" : "مسح"}
             buttonStyle={"white"}
             buttonSize={"sm"}
             onClick={() => {
-              setSelectedFilters({});
+              setSelectedFilters && setSelectedFilters({});
+              onApplyFilters && onApplyFilters({});
             }}
           />
         </div>
         <div
           className={styles["div-order-dropdown"]}
-          data-opened={isOpened.opened}
+          data-opened={isOpened?.opened}
         >
           <BorderlessSelect
-            options={optionsData}
-            onChange={() => {}}
-            defaultValue={"Best Sellers"}
-            selectedLabel={`${"Sort By: "}`}
+            options={optionData?.data}
+            defaultValue={optionData?.defaultValue}
+            selectedLabel={appState?.lang === "en" ? "Sort By: " : "بسح فنص:"}
+            onChange={onSortingChange}
           ></BorderlessSelect>
         </div>
       </div>
 
       <div
         className={styles["category-dropdown"]}
-        data-opened={isOpened.opened}
+        data-opened={isOpened?.opened}
       >
-        <CategoryDropDown
+        <DropDown
           setIsOpened={setIsOpened}
           categoryData={dropdownData}
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
-        ></CategoryDropDown>
+          onApplyFilters={onApplyFilters}
+        ></DropDown>
       </div>
       <div
+        role={"overlay"}
         className={styles["overlay"]}
-        data-opened={isOpened.opened}
+        data-opened={isOpened?.opened}
         onClick={() => setIsOpened({ ...isOpened, opened: false })}
       ></div>
     </div>

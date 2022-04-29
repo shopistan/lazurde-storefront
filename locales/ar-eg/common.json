@@ -548,5 +548,95 @@
       "title": "خاتم الفراشة المشعة",
       "onlineExclusiveTag": "حصريا على الانترنت"
     }
+  ],
+  "sortingFilter": [
+    {
+      "label": "الجديد",
+      "img": "",
+      "value": "الجديد"
+    },
+    {
+      "label": "أفضل البائعين",
+      "img": "",
+      "value": "أفضل البائعين"
+    },
+    {
+      "label": "أكبر توفير",
+      "img": "",
+      "value": "أكبر توفير"
+    },
+    {
+      "label": "الأكثر مشاهدة",
+      "img": "",
+      "value": "الأكثر مشاهدة"
+    },
+    {
+      "label": "اسم المنتج",
+      "img": "",
+      "value": "اسم المنتج"
+    }
+  ],
+  "arabicFilterList": [
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionNames": "مجوهرات 1"
+        },
+        {
+          "optionNames": "مجوهرات 2"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionNames": "مجوهرات"
+        },
+        {
+          "optionNames": "مجوهرات 1"
+        },
+        {
+          "optionNames": "مجوهرات 2"
+        },
+        {
+          "optionNames": "مجوهرات 3"
+        },
+        {
+          "optionNames": "مجوهرات 4"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionNames": "مجوهرات 1"
+        },
+        {
+          "optionNames": "مجوهرات 2"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionNames": "مجوهرات"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionNames": "مجوهرات"
+        },
+        {
+          "optionNames": "مجوهرات"
+        }
+      ]
+    }
   ]
 }

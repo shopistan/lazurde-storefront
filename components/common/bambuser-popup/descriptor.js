@@ -8,5 +8,6 @@ exports.default = Types.Component({
     attributes: {
         bId: Types.String({ label: 'Bambuser Id' }),
         btnText: Types.String({ label: 'Button text' }),
+        scriptId: Types.String({ label: 'Unique Id' }),
     },
 });
