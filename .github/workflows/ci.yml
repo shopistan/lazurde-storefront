@@ -24,17 +24,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm i
-      # - run: npm run test
-      # - run: npm run descriptors
-      # - run: npm run build
-test:
-  runs-on: ubuntu-latest
-  strategy:
-    matrix:
-      node-version: [16.x]
-      # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-  steps:
-    - uses: actions/checkout@v3
-    with:
-          ref: main
+      - run: npm run test
+      - run: npm run descriptors
+      - run: npm run build
