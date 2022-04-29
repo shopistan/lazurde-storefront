@@ -11,6 +11,7 @@ export interface MobileHeaderProps {
   siteLogoUrl?: string;
   headerId?: string;
   brandSideBar?: BrandSidebarProps;
+  setOpenSearchDialog: (val: boolean) => void;
 }
 export interface MenuProps {
   active?: Boolean;

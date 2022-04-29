@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useWindowSize from "lib/utils/useWindowSize";
 import { HeaderProps, BrandSidebarProps } from "lib/types/common";
 import styles from "./Header.module.css";
@@ -7,6 +7,7 @@ import UserNavBar from "./user-navbar";
 import LangSelector from "./navbar-lang-selector/index";
 import SiteNavBar from "./site-navbar";
 import MobileNavBar from "./mobile-navbar";
+import SearchDialog from "../search-dialog";
 
 type AllHeaderProps = HeaderProps & {
   brandSidebarProps: BrandSidebarProps;
@@ -25,6 +26,8 @@ const Header = ({
   brandSidebarProps,
 }: AllHeaderProps): JSX.Element => {
   const [width] = useWindowSize();
+  const [openSearchDailog, setOpenSearchDialog] = useState(false);
+
   return (
     <div className={styles["header-container"]}>
       <PromoBar
@@ -34,6 +37,12 @@ const Header = ({
         link={promoLink || "/"}
         bgColor={promoBackground}
       />
+      <SearchDialog
+        siteLogo={siteLogo}
+        siteLogoUrl={siteLogoUrl}
+        setOpenSearchDialog={setOpenSearchDialog}
+        openSearchDialog={openSearchDailog}
+      />
       {width < 1024 ? (
         <MobileNavBar
           menuData={siteNavBar}
@@ -41,6 +50,7 @@ const Header = ({
           brandSideBar={brandSidebarProps}
           siteLogo={siteLogo}
           siteLogoUrl={siteLogoUrl}
+          setOpenSearchDialog={setOpenSearchDialog}
         />
       ) : (
         <UserNavBar brandSideBar={brandSidebarProps} />
@@ -52,6 +62,7 @@ const Header = ({
           siteLogo={siteLogo}
           siteLogoUrl={siteLogoUrl}
           headerId={headerId}
+          setOpenSearchDialog={setOpenSearchDialog}
         />
       )}
     </div>

@@ -12,6 +12,7 @@ const MobileNavBar = ({
   brandSideBar,
   siteLogo,
   siteLogoUrl,
+  setOpenSearchDialog,
 }: MobileHeaderProps): JSX.Element => {
   const [menu, setMenu] = useState<Boolean>(false);
   const handleMenu = () => {
@@ -47,7 +48,7 @@ const MobileNavBar = ({
           <button onClick={handleMenu}>
             <MenuIcon color="#000000" />
           </button>
-          <button>
+          <button onClick={() => setOpenSearchDialog(true)}>
             <Search />
           </button>
         </div>

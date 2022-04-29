@@ -21,6 +21,7 @@ test("Mobile Header testing", () => {
         siteLogo={siteLogo}
         brandSideBar={brandSideBarForTesting}
         menuData={menuDataForTesting}
+        setOpenSearchDialog={() => {}}
       />
     </ContextProvider>
   );
