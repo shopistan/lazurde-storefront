@@ -4,13 +4,15 @@ import { ImageType } from "lib/types/common";
 import styles from "./card.module.scss";
 import Label from "components/common/ui/label";
 
-interface ExploreBrandProps {
+interface CardProps {
   cardImage?: ImageType;
   cardTitle?: string;
   className?: string;
   onClick?: Function;
   width?: number | string;
   height?: number | string;
+  color?: string;
+  favIconSrc ?: ImageType;
 }
 
 const Cards = ({
@@ -20,7 +22,9 @@ const Cards = ({
   className = "",
   width = 10,
   height = 10,
-}: ExploreBrandProps): JSX.Element => {
+  color = "#000000",
+  favIconSrc,
+}: CardProps): JSX.Element => {
   return (
     <>
       <div
@@ -30,17 +34,25 @@ const Cards = ({
         }}
       >
         {cardImage?.url && (
-          <Image
-            className={`${styles["card-image"]}`}
-            src={cardImage?.url}
-            alt={cardImage?.altText}
-            width={width}
-            height={height}
-            layout="responsive"
-          />
+          <div className={styles["image-section"]}>
+            {
+              favIconSrc &&
+            <img className={styles["fav-icon"]} src={favIconSrc.url} alt={favIconSrc.altText}/>
+            }
+            <Image
+              className={`${styles["card-image"]}`}
+              src={cardImage?.url}
+              alt={cardImage?.altText}
+              width={width}
+              height={height}
+              layout="responsive"
+            />
+          </div>
         )}
         {cardTitle && (
-          <Label className={styles["card-title"]}>{cardTitle}</Label>
+          <Label style={{ color: color }} className={styles["card-title"]}>
+            {cardTitle}
+          </Label>
         )}
       </div>
     </>

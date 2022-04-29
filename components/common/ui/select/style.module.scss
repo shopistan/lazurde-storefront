@@ -12,9 +12,13 @@
     border-radius: 100px;
     cursor: pointer;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 115%;
     color: #000;
+
+    @media (min-width: 1024px) {
+      font-size: 14px;
+    }
   }
 
   img {
@@ -94,16 +98,21 @@ html[dir="rtl"] {
   .dropdown {
     .select {
       font-weight: 400;
-      font-size: 15px;
-      line-height: 19.5px;
+      font-size: 13px;
+      line-height: 120%;
+      direction: ltr;
+      justify-content: flex-end;
+
+      @media (min-width: 1024px) {
+        font-size: 14px;
+      }
     }
 
-    &:first-child {
-      .select {
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 18px;
-      }
+    .option {
+      display: flex;
+      direction: ltr;
+      justify-content: flex-end;
+      margin-inline-end: 0 !important;
     }
   }
 }

@@ -1,6 +1,6 @@
 export type XMComponent = {
   id: string;
-  params: object;
+  params: { headerId: string };
 };
 
 export type ErrorObject = {
@@ -18,62 +18,68 @@ export type NavLinks = {
   linkText: string;
 };
 
-export type BrandProps = {
-  url: string;
-  altText: string;
-  label: string;
-  labelUrl: string;
-  brandImg: ImageType;
-}
+export type BrandArrType = {
+  url?: string;
+  altText?: string;
+  label?: string;
+  labelUrl?: string;
+  brandImg?: ImageType;
+};
 
 export type HeaderProps = {
+  headerId: string;
+  siteNavBar: [];
+  siteLogo: ImageType;
+  siteLogoUrl: string;
   navLinks: NavLinks[];
   brandImage: ImageType;
   promoTitle: string;
   promoLinkText: string;
   mobilePromoLinkText: string;
   promoLink: string;
+  promoBackground: string;
 };
 
 export type BrandSidebarProps = {
   mainImg: ImageType;
   mainTitle: string;
-  logoArr: [{logoImg: ImageType}];
-  brandArr: BrandProps[];
+  logoArr: { logoImg: ImageType }[];
+  brandArr: BrandArrType[];
 };
 
-interface footerLinks {
+export type FooterLinksType = {
   linkHeading: string;
-  links: [];
-}
-interface iconsObj {
+  links: { url: string; text: string }[];
+};
+
+export type iconsObjType = {
   link: string;
   icon: ImageType;
-}
+};
 interface footerLogoProp {
   url: string;
   altText: string;
 }
 
 export type FooterProps = {
-  footerLinks: footerLinks[];
-  heading: string;
-  subHeading: string;
-  linkLabel: string;
-  linkUrl: string;
-  subscriptionText: string;
-  socialIconText: string;
-  socialLinks: iconsObj[];
-  footerLogo: footerLogoProp;
-  paymentLinks: iconsObj[];
+  footerLinks?: FooterLinksType[] | [];
+  heading?: string;
+  subHeading?: string;
+  linkLabel?: string;
+  linkUrl?: string;
+  subscriptionText?: string;
+  socialIconText?: string;
+  socialLinks?: iconsObjType[];
+  footerLogo?: footerLogoProp;
+  paymentLinks?: iconsObjType[];
 };
 
-export type PageProps = {
+export interface PageProps {
   headerProps: HeaderProps;
   footerProps: FooterProps;
   brandSidebarProps: BrandSidebarProps;
   pageComponents?: XMComponent[];
-};
+}
 
 export type BrandType = "lazurde" | "missl" | "kenaz";
 export type LangType = "en" | "ar";

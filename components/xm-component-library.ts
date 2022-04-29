@@ -1,19 +1,23 @@
-import LazurdeHeroBanner from "./lazurde/hero-banner";
-import ProductCard from "./lazurde/product-card";
+import LazurdeHeroBanner from "./common/hero-banner";
 import Header from "./common/header";
 import Footer from "./common/footer";
 import BambuserPopup from "./common/bambuser-popup/index";
 import BrandSideBar from "./common/header/user-navbar/brand-sidebar/index";
-import BrandsCard from "./lazurde/brands-card/index";
+import BrandCards from "./common/brand-cards/index";
 import CardSlider from "./common/card-slider";
+import CollectionCard from "./common/collection-card";
+import ProductListing from "./common/product-listing";
+import PLPCategory from "./common/plp-category";
 
 export const componentsById: any = {
   LazurdeHeroBanner,
-  BrandsCard,
+  BrandCards,
   BambuserPopup,
   BrandSideBar,
-  ProductCard,
   Header,
   Footer,
   CardSlider,
+  CollectionCard,
+  ProductListing,
+  PLPCategory
 };

@@ -1,41 +1,53 @@
 .button {
+  background: black;
+  font-family: Roboto;
+  border: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19.2px;
+  text-align: center;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &[data-style="black"] {
     background: black;
-    font-family: Roboto;
-    border: none;
-    border-radius: 100px;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 19.2px;
-    text-align: center;
-    cursor: pointer;
-
-    &[data-style= 'black'] {
-      background: black;
-      color: white;
-    }
-
-    &[data-style= 'white'] {
-      background: white;
-      color: black;
-    }
-
-    &[data-size= 'sm'] {
-      width: 138px;
-      height: 40px;
-    }
-
-    &[data-size= 'md'] {
-      width: 140px;
-      height: 40px;
-    }
-
-    &[data-size= 'lr'] {
-      width: 200px;
-      height: 51px;
-    }
-
-    &[data-size= 'xl'] {
-      width: 279px;
-      height: 51px;
-    }
+    color: white;
   }
+
+  &[data-style="white"] {
+    background: white;
+    color: black;
+  }
+
+  &[data-size="sm"] {
+    width: 138px;
+    height: 40px;
+  }
+
+  &[data-size="md"] {
+    width: 140px;
+    height: 40px;
+  }
+
+  &[data-size="lr"] {
+    width: 200px;
+    height: 51px;
+  }
+
+  &[data-size="xl"] {
+    width: 279px;
+    height: 51px;
+  }
+
+  &[data-size="xxl"] {
+    width: 327px;
+    height: 51px;
+  }
+}
+
+html[dir="rtl"] {
+  .button {
+    font-family: "Cairo", sans-serif;
+  }
+}

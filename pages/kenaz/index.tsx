@@ -3,6 +3,7 @@ import Header from "components/common/header";
 import { componentsById } from "components/xm-component-library";
 import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
+import Head from "next/head";
 import React, { FC } from "react";
 import AppContentWrapper from "../../components/common/app-content-wrapper";
 import styles from "../../styles/Home.module.css";
@@ -15,6 +16,9 @@ const KenazHome: FC<PageProps> = ({
 }) => {
   return (
     <>
+      <Head>
+        <title>{"Kenaz | L'azurde"}</title>
+      </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       {/* <Header {...headerProps}></Header> */}
       <AppContentWrapper>
@@ -60,15 +64,19 @@ export async function getStaticProps() {
   const globalComponents = (await fetchGlobalComponents()) || [];
   const pageComponents = (await fetchXMComponents(12, "/kenaz")) || [];
   const headerProps =
-    (globalComponents.find((item: XMComponent) => item.id === "Header") || {})
+    (globalComponents.find((item: XMComponent) => item.id === "Header" && item.params.headerId === 'kenazHeader') || {})
       .params || {};
   const footerProps =
     (globalComponents.find((item: XMComponent) => item.id === "Footer") || {})
+      .params || {};
+  const brandSidebarProps =
+    (globalComponents.find((item: XMComponent) => item.id === "BrandSideBar") || {})
       .params || {};
   return {
     props: {
       headerProps,
       footerProps,
+      brandSidebarProps,
       pageComponents,
     },
     revalidate: 5,
