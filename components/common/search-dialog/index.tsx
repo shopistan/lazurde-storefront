@@ -137,6 +137,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
                 })}
             </div>
           </div>
+          <div></div>
         </div>
       </div>
     </>

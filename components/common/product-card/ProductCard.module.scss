@@ -34,9 +34,9 @@
 
   &__title {
     margin: 16px 0 8px 0;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
-    line-height: 16.8px;
+    line-height: 120%;
     letter-spacing: 0em;
     text-align: start;
     color: $black-color;
@@ -52,9 +52,9 @@
     &__base-price {
       margin: 0;
       margin-inline-end: 4px;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 500;
-      line-height: 16.8px;
+      line-height: 120%;
       letter-spacing: 0em;
       color: $black-color;
     }
