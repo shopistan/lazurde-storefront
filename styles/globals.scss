@@ -13,10 +13,6 @@ html[dir="rtl"] body {
   font-family: "Cairo", sans-serif;
 }
 
-h1 {
-  text-align: center;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -26,46 +22,11 @@ ul {
   padding: 0;
 }
 
-.collapse-arrow {
-  .collapse-title {
-    &:after {
-      top: 10px !important;
-    }
-
-    &.plus-minus-icon {
-      &:after {
-        content: "+";
-        transform: rotateX(0);
-        width: 0;
-        height: 0;
-      }
-    }
-  }
-
-  &:not(.collapse-close) {
-    input[type="checkbox"] {
-      &:checked ~ .collapse-title {
-        &.plus-minus-icon {
-          &:after {
-            content: "_";
-            top: -5px !important;
-            transform: rotate(0) !important;
-          }
-        }
-      }
-    }
-  }
-}
-
-html[dir="rtl"] {
-  .collapse-arrow {
-    .collapse-title {
-      &:after {
-        inset-inline-end: 0;
-        inset-inline-start: auto;
-      }
-    }
-  }
+.component-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 @tailwind base;
