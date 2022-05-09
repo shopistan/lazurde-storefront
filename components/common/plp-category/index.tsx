@@ -50,7 +50,7 @@ const PLPCategory: FC<PLPCategoryProps> = ({ backgroundColor = '#fafafa', title 
                     cards.length > 0 && cards.map((card, index) => {
                         const { cardImage, cardTitle, cardLink } = card
                         return (
-                            <div key={index} onClick={() => { router?.push(`/c/${cardLink}`) }}>
+                            <div key={index} onClick={() => { router?.push(`${cardLink}`) }}>
                                 <Cards width={width > 1023 ? 314 : 167.5} height={width > 1024 ? 331 : 180.5} className={`plp-card`} cardImage={cardImage} cardTitle={appState?.lang == 'en' ? cardTitle : _plpCategoryCard[index]?.cardTitle} key={index} />
                             </div>
 
