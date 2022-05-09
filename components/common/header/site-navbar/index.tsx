@@ -7,6 +7,7 @@ import { BackArrow, Search } from "components/icons";
 import { ImageType } from "lib/types/common";
 import CategoryDropDown from "./category-dropdown";
 import Image from "next/image";
+import { updateBrand } from "lib/utils/common";
 
 type LinkProps = {
   title: string;
@@ -55,7 +56,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
 
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
-  const { appState } = useContext(AppContext);
+  const { appState, saveAppState } = useContext(AppContext);
 
   return (
     <div
@@ -63,7 +64,12 @@ const SiteNavBar: FC<siteNavBarProps> = ({
       className={styles["site-navbar"]}
       data-headerId={headerId}
     >
-      <div className={styles["back-btn"]}>
+      <div
+        className={styles["back-btn"]}
+        onClick={() => {
+          updateBrand("Lazurde", saveAppState, appState);
+        }}
+      >
         <Link href={"/"}>
           <a>
             <div>
