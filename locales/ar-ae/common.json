@@ -581,10 +581,10 @@
       "filterName": "مجوهرات",
       "filterOptions": [
         {
-          "optionNames": "مجوهرات 1"
+          "optionName": "مجوهرات 1"
         },
         {
-          "optionNames": "مجوهرات 2"
+          "optionName": "مجوهرات 2"
         }
       ]
     },
@@ -592,19 +592,19 @@
       "filterName": "مجوهرات",
       "filterOptions": [
         {
-          "optionNames": "مجوهرات"
+          "optionName": "مجوهرات"
         },
         {
-          "optionNames": "مجوهرات 1"
+          "optionName": "مجوهرات 1"
         },
         {
-          "optionNames": "مجوهرات 2"
+          "optionName": "مجوهرات 2"
         },
         {
-          "optionNames": "مجوهرات 3"
+          "optionName": "مجوهرات 3"
         },
         {
-          "optionNames": "مجوهرات 4"
+          "optionName": "مجوهرات 4"
         }
       ]
     },
@@ -612,10 +612,10 @@
       "filterName": "مجوهرات",
       "filterOptions": [
         {
-          "optionNames": "مجوهرات 1"
+          "optionName": "مجوهرات 1"
         },
         {
-          "optionNames": "مجوهرات 2"
+          "optionName": "مجوهرات 2"
         }
       ]
     },
@@ -623,7 +623,7 @@
       "filterName": "مجوهرات",
       "filterOptions": [
         {
-          "optionNames": "مجوهرات"
+          "optionName": "مجوهرات"
         }
       ]
     },
@@ -631,10 +631,10 @@
       "filterName": "مجوهرات",
       "filterOptions": [
         {
-          "optionNames": "مجوهرات"
+          "optionName": "مجوهرات"
         },
         {
-          "optionNames": "مجوهرات"
+          "optionName": "مجوهرات"
         }
       ]
     }
