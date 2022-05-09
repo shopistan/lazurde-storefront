@@ -221,8 +221,9 @@
       margin-top: 24px;
 
       @media (max-width: 500px) {
-        min-width: 360px;
-        max-width: 500px;
+        width: 360px;
+        // min-width: 360px;
+        // max-width: 500px;
         margin-right: 0px;
         overflow-x: scroll;
         gap: 8px;
