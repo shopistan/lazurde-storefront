@@ -14,7 +14,7 @@ interface SelectProps {
   selectedValue?: string;
   className?: string;
   optionClassName?: string;
-  selectedLabel?: string;
+  selectedLabel?: string | JSX.Element;
   showInModal?: Boolean;
   modalChildren?: string | JSX.Element;
 }
