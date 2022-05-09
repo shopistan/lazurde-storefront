@@ -45,7 +45,7 @@ const ProductCard = ({
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const [fill, setFill] = useState(false);
-  const [showWishListIcon, setShowWishListIcon] = useState(false);
+  // const [showWishListIcon, setShowWishListIcon] = useState(false);
 
   const handleAddToCart = async () => {
     const payload: ATCPayload = {
@@ -76,14 +76,14 @@ const ProductCard = ({
     >
       <div
         className={styles["product-card__img-wrapper"]}
-        onMouseOver={() => setShowWishListIcon(true)}
-        onMouseLeave={() => setShowWishListIcon(false)}
+        // onMouseOver={() => setShowWishListIcon(true)}
+        // onMouseLeave={() => setShowWishListIcon(false)}
       >
         <div
           className={styles["product-card__wishlist-icon"]}
           onClick={() => setFill(!fill)}
         >
-          {showWishListIcon ? <Heart fill={fill ? "red" : "#000"} /> : null}
+          <Heart fill={fill ? "red" : "#000"} />
         </div>
         <Slider
           productSlider={true}
