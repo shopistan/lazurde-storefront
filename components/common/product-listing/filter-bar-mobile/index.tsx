@@ -2,7 +2,7 @@ import React, { FC, useState, useContext, useEffect } from "react";
 import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
 import BorderlessSelect from "components/common/ui/borderless-select";
-import Accordion from "components/common/ui/accordion2/Accordion";
+import Accordion from "components/common/ui/accordion/Accordion";
 import Button from "components/common/ui/button";
 import SortingModal from "./sorting-modal";
 import { AppContext } from "lib/context";

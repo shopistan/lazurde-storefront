@@ -21,5 +21,6 @@ export { default as SignOut } from './SignOut'
 export { default as CHevronDown } from './ChevronDown'
 export { default as PlusIcon } from './PlusIcon'
 export { default as MinusIcon } from './MinusIcon'
+export { default as ChevronDown } from './ChevronDown'
 
 
