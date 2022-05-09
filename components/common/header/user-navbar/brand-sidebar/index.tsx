@@ -71,7 +71,6 @@ const BrandSideBar: FC<SidebarProps> = ({
 }): JSX.Element => {
   const { appState, saveAppState } = useContext(AppContext);
   const router = useRouter();
-  console.log("brand", appState.brand);
 
   return (
     <div

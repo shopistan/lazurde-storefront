@@ -39,7 +39,6 @@ const PLPCategory: FC<PLPCategoryProps> = ({ backgroundColor = '#fafafa', title 
         { returnObjects: true }
     );
     const [width] = useWindowSize();
-    console.log('component rendering')
     return (
         <div className={styles['plpCategory-container']} style={{backgroundColor: backgroundColor}}>
             <Label className={` ${styles["plpCategory-title"]}`}>{appState.lang == 'en' ? title : t('plpCategoryTitle')}</Label>

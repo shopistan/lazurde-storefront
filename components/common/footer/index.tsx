@@ -75,9 +75,11 @@ const Footer = ({
                     />
                   ) : (
                     <Accordion
+                      className={"footer-accordion"}
                       index={index}
-                      heading={footerLink.linkHeading}
-                      links={footerLink.links}
+                      heading={footerLink?.linkHeading}
+                      links={footerLink?.links}
+                      arrowIcon={true}
                     />
                   )
                 )}
