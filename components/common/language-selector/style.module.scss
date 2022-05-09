@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .language-selector {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -15,7 +17,7 @@
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     display: flex;
 
     & > div:nth-child(2) {

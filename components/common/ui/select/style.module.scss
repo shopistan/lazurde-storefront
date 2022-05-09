@@ -1,13 +1,16 @@
+@import "/styles/variables.scss";
+
 .dropdown {
   position: relative;
   width: 100%;
   min-width: 137px;
+  outline: 0;
 
   .select {
     display: flex;
     align-items: center;
     padding: 11px 16px 11px 20px;
-    background: #ffffff;
+    background: $white-color;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 100px;
     cursor: pointer;
@@ -15,8 +18,9 @@
     font-size: 13px;
     line-height: 115%;
     color: #000;
+    outline: 0;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       font-size: 14px;
     }
   }
@@ -29,7 +33,7 @@
     display: none;
     position: absolute;
     list-style-type: none;
-    background: #ffffff;
+    background: $white-color;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 12px 16px;
@@ -96,14 +100,23 @@
 
 html[dir="rtl"] {
   .dropdown {
+    outline: 0;
+
+    &:focus {
+      outline: 0;
+    }
     .select {
       font-weight: 400;
       font-size: 13px;
       line-height: 120%;
       direction: ltr;
       justify-content: flex-end;
+      outline: 0;
+      &:focus {
+        outline: 0;
+      }
 
-      @media (min-width: 1024px) {
+      @media (min-width: $breakPoint-desktop) {
         font-size: 14px;
       }
     }

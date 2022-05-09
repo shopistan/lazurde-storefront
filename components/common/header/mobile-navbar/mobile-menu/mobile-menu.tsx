@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
 import { useRouter } from "next/router";
 
-import styles from "./style.module.scss";
+import styles from "../style.module.scss";
 import { Cross } from "components/icons";
 import Link from "next/link";
 import { ArrowRight, BackArrow } from "components/icons";
-import MobileSubMenu from "./mobile-sub-menu";
-import UserLinks from "./user-links";
-import BrandSideBar from "../user-navbar/brand-sidebar/index";
+import MobileSubMenu from "../mobile-sub-menu/mobile-sub-menu";
+import UserLinks from "../user-links";
+import BrandSideBar from "../../user-navbar/brand-sidebar/index";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 import {
@@ -53,9 +53,10 @@ const MobileMenu = ({
         >
           {headerId !== "lazurdeHeader" && (
             <div
+              data-testid={"site-logo"}
               className={`opacity-60 ${styles["mobile-header__rotate-icon"]}`}
               onClick={() => {
-                router.push("/");
+                router?.push("/");
                 closeMenu();
               }}
             >
@@ -67,7 +68,11 @@ const MobileMenu = ({
               </span>
             </div>
           )}
-          <button className="" onClick={() => closeMenu()}>
+          <button
+            data-testid="cross-btn1"
+            className=""
+            onClick={() => closeMenu()}
+          >
             <Cross width={"20px"} height={"20px"} />
           </button>
         </div>

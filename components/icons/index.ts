@@ -18,5 +18,8 @@ export { default as Calendar } from './Calendar'
 export { default as Account } from './Account'
 export { default as Location } from './Location'
 export { default as SignOut } from './SignOut'
+export { default as CHevronDown } from './ChevronDown'
+export { default as PlusIcon } from './PlusIcon'
+export { default as MinusIcon } from './MinusIcon'
 
 

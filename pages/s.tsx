@@ -57,10 +57,10 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { query = {} } = context;
   const {
     hits = [],
-    nbHits,
-    page,
-    nbPages,
-    hitsPerPage,
+    nbHits = 0,
+    page = 0,
+    nbPages = 0,
+    hitsPerPage = 0,
   } = await performKeywordSearch({
     query: query.keyword || "",
   });

@@ -1,0 +1,73 @@
+@import "/styles/variables.scss";
+
+.register-container {
+    position: relative;
+
+    @media (min-width: $breakPoint-desktop) {
+        display: flex;
+        width: 600px;
+        height: 400px;
+        background-color: white;
+    }
+}
+
+.register-text-section {
+    padding-block-start: 126px;
+    padding-inline-start: 24px;
+}
+
+.modal-title {
+    @media (min-width: $breakPoint-desktop) {
+        color: black;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 38px;
+        letter-spacing: 0em;
+        text-align: start;
+    }
+
+}
+
+.modal-text {
+    @media (min-width: $breakPoint-desktop) {
+        padding-inline-end: 24px;
+        color: black;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0em;
+        text-align: start;
+    }
+}
+
+.cross-icon {
+    display: none;
+    @media (min-width: $breakPoint-desktop) {
+        display: block;
+        position: absolute;
+        right: 14px;
+        top: 14px;
+
+        svg {
+            width: 12px;
+            height: 12px;
+        }
+    }
+}
+
+.modal-button {
+    @media (min-width: $breakPoint-desktop) {
+        margin-top: 24px;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19px;
+        letter-spacing: 0em;
+        text-align: center;
+        width: 200px !important;
+        height: 51px !important;
+    }
+}

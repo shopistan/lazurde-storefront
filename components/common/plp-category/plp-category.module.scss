@@ -1,0 +1,70 @@
+@import "/styles/variables.scss";
+
+.plpCategory-container {
+  padding-inline: 16px;
+  padding-block: 32px;
+
+  @media (min-width: $breakPoint-desktop) {
+    padding: 80px;
+  }
+}
+
+.plpCategory-title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  color: $black-color;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 8px;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 24px;
+    line-height: 29px;
+  }
+}
+
+.plpCategory-text {
+  color: $black-color;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  margin-top: 0;
+  margin-bottom: 32px;
+
+  @media (min-width: $breakPoint-desktop) {
+    padding-inline: 175px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+.plpCategory-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 8px;
+
+  @media (min-width: $breakPoint-desktop) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    @media (min-width: $breakPoint-desktop) {
+      font-size: 15px;
+      line-height: 18px;
+      margin-top: 16px;
+      margin-bottom: 0;
+    }
+  }
+}

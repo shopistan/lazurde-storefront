@@ -19,6 +19,7 @@ const Footer = ({
   subscriptionText = "",
   socialIconText = "",
   footerLogo,
+  footerLogoLink = "/",
   footerLinks = [],
   socialLinks = [],
   paymentLinks = [],
@@ -91,25 +92,19 @@ const Footer = ({
               </Label>
               <FooterIcons iconsList={socialLinks} />
             </div>
-            {footerLogo?.url ? (
+            {appState?.region === "sa" && (
               <div className={styles["footer__maroof-logo"]}>
-                <Image
-                  src={footerLogo.url}
-                  alt={footerLogo.altText}
-                  width={214}
-                  height={66}
-                  layout="fixed"
-                />
-              </div>
-            ) : (
-              <div className={styles["footer__maroof-logo"]}>
-                <Image
-                  src={"/images/maroof.svg"}
-                  alt={"maroof logo"}
-                  width={214}
-                  height={66}
-                  layout="fixed"
-                />
+                <Link href={footerLogoLink || "/"}>
+                  <a target="_blank">
+                    <Image
+                      src={footerLogo?.url || "/maroof.svg"}
+                      alt={footerLogo?.altText}
+                      width={214}
+                      height={66}
+                      layout="fixed"
+                    />
+                  </a>
+                </Link>
               </div>
             )}
           </div>

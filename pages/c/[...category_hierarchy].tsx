@@ -12,13 +12,28 @@ import AppContentWrapper from "components/common/app-content-wrapper";
 import { componentsById } from "components/xm-component-library";
 import Footer from "components/common/footer";
 import { PageRouteType } from "lib/types/xm";
+import { fetchCategoryProducts } from "lib/algolia";
+import { AlgoliaProductType } from "lib/types/algolia";
 
-const LazurdeProductListingPage: FC<PageProps> = ({
+interface ProductListingPageProps extends PageProps {
+  algoliaSearchResults: {
+    hits: AlgoliaProductType[];
+    nbHits: number;
+    page: number;
+    nbPages: number;
+    hitsPerPage: number;
+  };
+  categoryHierarchy: string[];
+}
+
+const LazurdeProductListingPage: FC<ProductListingPageProps> = ({
   headerProps,
   footerProps,
   brandSidebarProps,
   pageComponents = [],
+  algoliaSearchResults,
 }) => {
+  console.log("Category Products: ", algoliaSearchResults);
   return (
     <>
       <Head>
@@ -31,6 +46,15 @@ const LazurdeProductListingPage: FC<PageProps> = ({
         {pageComponents.map((component: XMComponent, index) => {
           const Component = componentsById[component.id];
           if (Component) {
+            if (component.id === "ProductListing") {
+              return (
+                <Component
+                  {...component.params}
+                  productDataArray={algoliaSearchResults.hits}
+                  key={index}
+                />
+              );
+            }
             return <Component {...component.params} key={index} />;
           }
           return null;
@@ -83,12 +107,43 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         (item: XMComponent) => item.id === "BrandSideBar"
       ) || {}
     ).params || {};
+
+  const categoryName =
+    (
+      pageComponents.find(
+        (component: XMComponent) => component.id === "ProductListing"
+      ) || {}
+    )?.params?.categoryName || null;
+
+  let searchResults;
+
+  if (categoryName) {
+    searchResults = await fetchCategoryProducts({
+      categoryName,
+    });
+  }
+  
+  const {
+    hits = [],
+    nbHits = 0,
+    page = 0,
+    nbPages = 0,
+    hitsPerPage = 0,
+  } = searchResults || {};
+
   return {
     props: {
       headerProps,
       footerProps,
       brandSidebarProps,
       pageComponents,
+      algoliaSearchResults: {
+        hits,
+        nbHits,
+        page,
+        nbPages,
+        hitsPerPage,
+      },
     },
     revalidate: 5,
   };

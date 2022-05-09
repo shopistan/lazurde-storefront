@@ -12,17 +12,21 @@ interface SliderProps {
   children?: JSX.Element | string;
   desktopSlidePerView?: number;
   mobileSlidePerView?: number;
+  pagination?: boolean;
   navigation?: boolean;
   scrollbar?: boolean;
   className?: string;
+  productSlider?: boolean;
 }
 
 const Slider = ({
   children,
   desktopSlidePerView = 4,
   mobileSlidePerView = 1.1,
-  navigation = true,
-  scrollbar = true,
+  navigation = false,
+  scrollbar = false,
+  pagination = false,
+  productSlider = false,
   className = "",
 }: SliderProps): JSX.Element => {
   const [width] = useWindowSize();
@@ -30,21 +34,34 @@ const Slider = ({
   const [renderSlider, setRendeSlider] = useState(false);
 
   useEffect(() => {
-    setRendeSlider(true)
+    setRendeSlider(true);
   }, [appState]);
+
+  const sliderSetting = {
+    modules: [Navigation, Pagination, Scrollbar, A11y],
+    spaceBetween: 8,
+    slidesPerView: width > 1023 ? desktopSlidePerView : mobileSlidePerView,
+    navigation: navigation,
+    scrollbar: { draggable: scrollbar },
+    className: className,
+    key: appState?.lang,
+    dir: appState?.lang === "en" ? "ltr" : "rtl",
+  };
+
+  const productSliderSetting = {
+    modules: [Navigation, Pagination, Scrollbar, A11y],
+    spaceBetween: 0,
+    slidesPerView: width > 1023 ? desktopSlidePerView : mobileSlidePerView,
+    pagination: { clickable: pagination },
+    navigation: navigation,
+    className: className,
+    key: appState?.lang,
+    dir: appState?.lang === "en" ? "ltr" : "rtl",
+  };
 
   return (
     renderSlider && (
-      <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={8}
-        slidesPerView={width > 1023 ? desktopSlidePerView : mobileSlidePerView}
-        navigation={navigation}
-        scrollbar={{ draggable: scrollbar }}
-        className={className}
-        key={appState?.lang}
-        dir={appState?.lang === "en" ? "ltr" : "rtl"}
-      >
+      <Swiper {...(!productSlider ? sliderSetting : productSliderSetting)}>
         {children}
       </Swiper>
     )
