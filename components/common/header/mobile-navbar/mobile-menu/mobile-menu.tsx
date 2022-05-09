@@ -15,6 +15,7 @@ import {
   DropdownDataProps,
   LinksProps,
 } from "lib/types/mobile-header";
+import { updateBrand } from "lib/utils/common";
 
 const MobileMenu = ({
   active = false,
@@ -24,7 +25,7 @@ const MobileMenu = ({
   brandSideBar,
 }: MenuProps): JSX.Element => {
   const router = useRouter();
-  const { appState } = useContext(AppContext);
+  const { appState, saveAppState } = useContext(AppContext);
   const [isSubMenuOpen, setIsSubMenuOpen] = useState<Boolean>(false);
   const [subMenuData, setSubMenuData] = useState<DropdownDataProps>();
   const [isOpened, setIsOpened] = useState(false);
@@ -56,8 +57,9 @@ const MobileMenu = ({
               data-testid={"site-logo"}
               className={`opacity-60 ${styles["mobile-header__rotate-icon"]}`}
               onClick={() => {
-                router?.push("/");
                 closeMenu();
+                updateBrand("Lazurde", saveAppState, appState);
+                router?.push("/");
               }}
             >
               <BackArrow fill="#000000" opacity="0.6" />
