@@ -34,3 +34,6 @@ jobs:
   #   path: main
   # with:
   # repository: 'https://github.com/shopistan/lazurde-api-tests'
+template:
+  name: hello-world
+  repo: abc
