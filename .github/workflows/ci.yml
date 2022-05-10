@@ -23,10 +23,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm i
-      - run: npm run test
-      - run: npm run descriptors
-      - run: npm run build
-      - uses: actions/checkout@v3
+      # - run: npm i
+      # - run: npm run test
+      # - run: npm run descriptors
+      # - run: npm run build
+     - name: Checkout tools repo
+  uses: actions/checkout@v3
+  with:
+    repository: shopistan/lazurde-api-tests
+    path: main
         # with:
         # repository: 'https://github.com/shopistan/lazurde-api-tests'
