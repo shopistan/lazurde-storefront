@@ -17,13 +17,15 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Checkout
-        uses: actions/setup-node@v3
+     - name: Checkout
+        uses: actions/checkout@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          path: main
+    - name: Checkout private tools
+        uses: actions/checkout@v3
+        with:
           repository: shopistan/lazurde-api-tests
-          ref: main
+          path: main
       # - uses: actions/checkout@v3
       # - name: Use Node.js ${{ matrix.node-version }}
       #   uses: actions/setup-node@v3
