@@ -8,10 +8,12 @@ import useTranslation from "next-translate/useTranslation";
 import Label from "components/common/ui/label";
 import Slider from "components/common/ui/slider/slider";
 import { desktopScreenSize } from 'lib/utils/common'
+import Link from "next/link";
 
 type CardsArrType = {
   image?: { url: string; altText: string };
   heading?: string;
+  slideLink?: string;
 };
 interface CardSliderProps {
   className?: string;
@@ -59,7 +61,7 @@ const CardSlider = ({
           {Array.isArray(cards) &&
             cards.length > 0 &&
             cards.map((content, index) => {
-              const { image, heading } = content;
+              const { image, heading, slideLink } = content;
               return (
                 <SwiperSlide key={index}>
                   <Cards

@@ -26,14 +26,13 @@ interface ProductListingPageProps extends PageProps {
   categoryHierarchy: string[];
 }
 
-const LazurdeProductListingPage: FC<ProductListingPageProps> = ({
+const MisslProductListingPage: FC<ProductListingPageProps> = ({
   headerProps,
   footerProps,
   brandSidebarProps,
   pageComponents = [],
   algoliaSearchResults,
 }) => {
-  console.log("Category Products: ", algoliaSearchResults);
   return (
     <>
       <Head>
@@ -65,15 +64,18 @@ const LazurdeProductListingPage: FC<ProductListingPageProps> = ({
   );
 };
 
-export default LazurdeProductListingPage;
+export default MisslProductListingPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const livePageRoutes = (await fetchAllLivePageRoutes()) || [];
-  const listingPageRoutes = livePageRoutes.filter(
-    (pageRoute: PageRouteType) => pageRoute.typeUrl === "/c"
+  //console.log("livePageRoutes", livePageRoutes);
+  const misslListingPageRoutes = livePageRoutes.filter(
+    (pageRoute: PageRouteType) =>
+      pageRoute.typeUrl === "/c" && pageRoute.pageUrl.includes("missl")
   );
-  const paths = listingPageRoutes.map((listingPage: PageRouteType) => {
-    const cSlug = listingPage.pageUrl.replace("/", "");
+  //console.log("missl Listing", misslListingPageRoutes);
+  const paths = misslListingPageRoutes.map((listingPage: PageRouteType) => {
+    const cSlug = listingPage.pageUrl.replace("/missl/c/", "");
     return {
       params: {
         category_hierarchy: [cSlug],
@@ -92,12 +94,13 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
   const { category_hierarchy = [] } = context.params || {};
   const pageUrl = category_hierarchy.join("/");
   const globalComponents = (await fetchGlobalComponents()) || [];
-  const pageComponents = (await fetchXMComponents(12, `/${pageUrl}`)) || [];
+  const pageComponents =
+    (await fetchXMComponents(12, `/missl/c/${pageUrl}`)) || [];
   const headerProps =
     (
       globalComponents.find(
         (item: XMComponent) =>
-          item.id === "Header" && item.params.headerId === "missLHeader"
+          item.id === "Header" && item.params.headerId === "lazurdeHeader"
       ) || {}
     ).params || {};
   const footerProps =
@@ -124,7 +127,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
       categoryName,
     });
   }
-  
+
   const {
     hits = [],
     nbHits = 0,

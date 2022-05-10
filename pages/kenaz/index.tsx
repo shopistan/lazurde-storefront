@@ -1,12 +1,13 @@
 import Footer from "components/common/footer";
 import Header from "components/common/header";
 import { componentsById } from "components/xm-component-library";
+import { AppContext } from "lib/context";
 import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import Head from "next/head";
-import React, { FC } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import AppContentWrapper from "../../components/common/app-content-wrapper";
-import styles from "../../styles/Home.module.css";
+import { useRouter } from "next/router";
 
 const KenazHome: FC<PageProps> = ({
   headerProps,
@@ -14,6 +15,30 @@ const KenazHome: FC<PageProps> = ({
   footerProps,
   pageComponents,
 }) => {
+  const router = useRouter();
+  const { appState, saveAppState } = useContext(AppContext);
+
+  const { pathname, query, asPath } = router || {
+    pathname: "",
+    query: "",
+    asPath: "",
+  };
+  const { push } = useRouter() || { push: () => {} };
+  const navigateToLocale = (locale: string) => {
+    push({ pathname, query }, asPath, { locale: locale });
+  };
+
+  useEffect(() => {
+    if (appState?.brand === "kenaz") {
+      saveAppState({
+        ...appState,
+        region: "sa",
+        locale: `${appState?.lang}-${"sa"}`,
+      });
+      navigateToLocale(`${appState?.lang}-${"sa"}`);
+    }
+  }, [appState?.brand]);
+
   return (
     <>
       <Head>
@@ -22,28 +47,7 @@ const KenazHome: FC<PageProps> = ({
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       {/* <Header {...headerProps}></Header> */}
       <AppContentWrapper>
-        <div className={styles.container}>
-          {/* <h1>This is Kenaz HomePage</h1>
-          <div className={styles.links}>
-            <Link href={"/kenaz"} locale="en-sa">
-              <a>Kenaz sa-en</a>
-            </Link>
-            <Link href={"/kenaz"} locale="ar-sa">
-              <a>Kenaz sa-ar</a>
-            </Link>
-            <Link href={"/kenaz"} locale="en-ae">
-              <a>Kenaz ae-en</a>
-            </Link>
-            <Link href={"/kenaz"} locale="ar-ae">
-              <a>Kenaz ae-ar</a>
-            </Link>
-            <Link href={"/kenaz"} locale="en-eg">
-              <a>Kenaz eg-en</a>
-            </Link>
-            <Link href={"/kenaz"} locale="ar-eg">
-              <a>Kenaz eg-ar</a>
-            </Link>
-          </div> */}
+        <div className={"component-container"}>
           {pageComponents.map((component: XMComponent, index) => {
             const Component = componentsById[component.id];
             if (Component) {
@@ -64,14 +68,21 @@ export async function getStaticProps() {
   const globalComponents = (await fetchGlobalComponents()) || [];
   const pageComponents = (await fetchXMComponents(12, "/kenaz")) || [];
   const headerProps =
-    (globalComponents.find((item: XMComponent) => item.id === "Header" && item.params.headerId === 'kenazHeader') || {})
-      .params || {};
+    (
+      globalComponents.find(
+        (item: XMComponent) =>
+          item.id === "Header" && item.params.headerId === "kenazHeader"
+      ) || {}
+    ).params || {};
   const footerProps =
     (globalComponents.find((item: XMComponent) => item.id === "Footer") || {})
       .params || {};
   const brandSidebarProps =
-    (globalComponents.find((item: XMComponent) => item.id === "BrandSideBar") || {})
-      .params || {};
+    (
+      globalComponents.find(
+        (item: XMComponent) => item.id === "BrandSideBar"
+      ) || {}
+    ).params || {};
   return {
     props: {
       headerProps,
