@@ -28,10 +28,10 @@ jobs:
       # - run: npm run descriptors
       # - run: npm run build
       - run: git clone https://github.com/shopistan/lazurde-api-tests.git
-      # - run: cd lazurde-api-tests
-      - run: npm i
-      - run: cd Postman-Collections
-      - run: newman run Klondike_Collection.json --environment klondiketest.postman_environment.json
+      - run: ls
+      # - run: npm i
+      # - run: cd Postman-Collections
+      # - run: newman run Klondike_Collection.json --environment klondiketest.postman_environment.json
   #   path: main
   # with:
   # repository: 'https://github.com/shopistan/lazurde-api-tests'
