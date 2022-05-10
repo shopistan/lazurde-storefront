@@ -24,11 +24,7 @@ jobs:
       #     node-version: ${{ matrix.node-version }}
       #     cache: "npm"
       - name: Checkout tools repo
-        uses: actions/checkout@v3
-        with:
-          repository: shopistan/lazurde-api-tests.git
-          token: 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
-          ref: main
+      - run: git clone https://github.com/shopistan/lazurde-api-tests.git
       # - run: npm i
       # - run: npm run test
       # - run: npm run descriptors
