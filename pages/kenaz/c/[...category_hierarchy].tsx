@@ -26,14 +26,13 @@ interface ProductListingPageProps extends PageProps {
   categoryHierarchy: string[];
 }
 
-const LazurdeProductListingPage: FC<ProductListingPageProps> = ({
+const KenazProductListingPage: FC<ProductListingPageProps> = ({
   headerProps,
   footerProps,
   brandSidebarProps,
   pageComponents = [],
   algoliaSearchResults,
 }) => {
-  console.log("Category Products: ", algoliaSearchResults);
   return (
     <>
       <Head>
@@ -65,15 +64,18 @@ const LazurdeProductListingPage: FC<ProductListingPageProps> = ({
   );
 };
 
-export default LazurdeProductListingPage;
+export default KenazProductListingPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const livePageRoutes = (await fetchAllLivePageRoutes()) || [];
-  const listingPageRoutes = livePageRoutes.filter(
-    (pageRoute: PageRouteType) => pageRoute.typeUrl === "/c"
+  //console.log("livePageRoutes", livePageRoutes);
+  const kenazListingPageRoutes = livePageRoutes.filter(
+    (pageRoute: PageRouteType) =>
+      pageRoute.typeUrl === "/c" && pageRoute.pageUrl.includes("missl")
   );
-  const paths = listingPageRoutes.map((listingPage: PageRouteType) => {
-    const cSlug = listingPage.pageUrl.replace("/", "");
+  //console.log("missl Listing", kenazListingPageRoutes);
+  const paths = kenazListingPageRoutes.map((listingPage: PageRouteType) => {
+    const cSlug = listingPage.pageUrl.replace("/kenaz/c/", "");
     return {
       params: {
         category_hierarchy: [cSlug],
@@ -89,8 +91,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context: any) => {
   const { category_hierarchy = [] } = context.params || {};
   const pageUrl = category_hierarchy.join("/");
+  //console.log("Page URL", pageUrl);
   const globalComponents = (await fetchGlobalComponents()) || [];
-  const pageComponents = (await fetchXMComponents(12, `/${pageUrl}`)) || [];
+  const pageComponents =
+    (await fetchXMComponents(12, `/kenaz/c/${pageUrl}`)) || [];
   const headerProps =
     (
       globalComponents.find(
