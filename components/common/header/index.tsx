@@ -8,6 +8,7 @@ import LangSelector from "./navbar-lang-selector/index";
 import SiteNavBar from "./site-navbar";
 import MobileNavBar from "./mobile-navbar";
 import SearchDialog from "../search-dialog";
+import { desktopScreenSize } from 'lib/utils/common'
 
 type AllHeaderProps = HeaderProps & {
   brandSidebarProps: BrandSidebarProps;
@@ -43,7 +44,7 @@ const Header = ({
         setOpenSearchDialog={setOpenSearchDialog}
         openSearchDialog={openSearchDailog}
       />
-      {width < 1024 ? (
+      {width <= desktopScreenSize ? (
         <MobileNavBar
           menuData={siteNavBar}
           headerId={headerId}
@@ -56,7 +57,7 @@ const Header = ({
         <UserNavBar brandSideBar={brandSidebarProps} />
       )}
       <LangSelector />
-      {width < 1024 ? null : (
+      {width <= desktopScreenSize ? null : (
         <SiteNavBar
           siteNavBar={siteNavBar}
           siteLogo={siteLogo}

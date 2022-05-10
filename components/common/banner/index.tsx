@@ -6,6 +6,7 @@ import { ImageType } from 'lib/types/common'
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context/index";
 import useTranslation from "next-translate/useTranslation";
+import { desktopScreenSize, mobileScreenSize } from 'lib/utils/common'
 
 interface BannerProps {
     bgColor: string;
@@ -23,7 +24,7 @@ const Banner: FC<BannerProps> = ({ bgColor = '#FEFBF4', title = '', text = '', b
             {
                 backgroundImage && backgroundImage.url &&
                 <div className={`${styles['banner-image-section']} ${appState?.lang == 'ar' && styles['arabic-layout']}`}>
-                    <Image className={`${styles['banner-image']}`} src={backgroundImage?.url} width={width > 1023 ? 903 : 329} height={width > 1023 ? 297 : 108} layout={width > 767 ? 'responsive' : 'fixed'} alt={backgroundImage?.altText || ''} />
+                    <Image className={`${styles['banner-image']}`} src={backgroundImage?.url} width={width > desktopScreenSize ? 903 : 329} height={width > desktopScreenSize ? 297 : 108} layout={width > mobileScreenSize ? 'responsive' : 'fixed'} alt={backgroundImage?.altText || ''} />
                 </div>
             }
             <div className={styles['banner-text-section']}>

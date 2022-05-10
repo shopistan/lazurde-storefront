@@ -93,7 +93,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     (
       globalComponents.find(
         (item: XMComponent) =>
-          item.id === "Header" && item.params.headerId === "lazurdeHeader"
+          item.id === "Header" && item.params.headerId === "missLHeader"
       ) || {}
     ).params || {};
   const footerProps =

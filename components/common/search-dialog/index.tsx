@@ -11,6 +11,7 @@ import { popularProductCardData } from "lib/mock-data/data";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
+import {desktopScreenSize} from 'lib/utils/common'
 
 interface SearchDialogProps {
   siteLogo: ImageType;
@@ -44,7 +45,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
 
   return (
     <>
-      {width > 1023 && (
+      {width > desktopScreenSize && (
         <div
           className={styles["overlay"]}
           data-opened={openSearchDialog}
@@ -132,6 +133,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
                         wrapperClassName={styles["product-card"]}
                         swipperClassName={styles["swipper-card"]}
                         data-testid="card"
+                        showATC={false}
                       />
                     );
                 })}

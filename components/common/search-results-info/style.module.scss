@@ -1,0 +1,26 @@
+@import '/styles/variables.scss';
+
+.search-results-info-wrapper {
+  margin: 16px 80px 17px 80px;
+  font-family: 'Roboto';
+  font-style: normal;
+
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+  }
+
+  .need-help {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 120%;
+    margin-top: 33px;
+  }
+
+  .contact-us {
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 120%;
+  }
+}

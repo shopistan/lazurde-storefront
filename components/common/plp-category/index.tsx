@@ -3,10 +3,10 @@ import React, { FC, useContext } from 'react'
 import Cards from '../card/index'
 import Label from '../ui/label'
 import styles from './plp-category.module.scss'
-import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context/index";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from 'next/router'
+import { desktopScreenSize } from 'lib/utils/common'
 
 type PLPCategoryTypes = {
     cardTitle?: string | '';
@@ -38,7 +38,6 @@ const PLPCategory: FC<PLPCategoryProps> = ({ backgroundColor = '#fafafa', title 
         {},
         { returnObjects: true }
     );
-    const [width] = useWindowSize();
     return (
         <div className={styles['plpCategory-container']} style={{ backgroundColor: backgroundColor }}>
             <Label className={` ${styles["plpCategory-title"]}`}>{appState.lang == 'en' ? title : t('plpCategoryTitle')}</Label>
@@ -48,8 +47,8 @@ const PLPCategory: FC<PLPCategoryProps> = ({ backgroundColor = '#fafafa', title 
                     cards.length > 0 && cards.map((card, index) => {
                         const { cardImage, cardTitle, cardLink } = card
                         return (
-                            <div key={index} onClick={() => { router?.push(`${cardLink}`) }}>
-                                <Cards width={width > 1023 ? 314 : 167.5} height={width > 1024 ? 331 : 180.5} className={`plp-card`} cardImage={cardImage} cardTitle={appState?.lang == 'en' ? cardTitle : _plpCategoryCard[index]?.cardTitle} key={index} />
+                            <div key={index} onClick={() => { router?.push(`/c/${cardLink}`) }}>
+                                <Cards width={desktopScreenSize ? 314 : 167.5} height={desktopScreenSize ? 331 : 180.5} className={`plp-card`} cardImage={cardImage} cardTitle={appState?.lang == 'en' ? cardTitle : _plpCategoryCard[index]?.cardTitle} key={index} />
                             </div>
 
                         )
