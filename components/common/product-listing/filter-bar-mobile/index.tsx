@@ -86,24 +86,28 @@ const filterListData = [
   },
 ];
 
+type FilterListProps = {
+  filterName: string;
+  filterOptions: { optionName: string }[];
+};
+
+type SelectedFilterProps = {
+  [key: string]: {
+    name: string;
+    selectedOptions: { [key: string]: { selected: boolean; name: string } };
+  };
+};
+
 interface FilterBarMobileProps {
-  filterList?: {
-    filterName: string;
-    filterOptions: { optionName: string }[];
-  }[];
+  filterList?: FilterListProps[];
   headerId?: string;
   onApplyFilters: Function;
   onSortingChange: Function;
 }
 interface FilterAccordionProps {
-  filterList: {
-    filterName: string;
-    filterOptions: { optionName: string }[];
-  }[];
+  filterList: FilterListProps[] | string;
   setIsOpened: Function;
-  selectedFilters: {
-    [key: string]: { [key: string]: string };
-  };
+  selectedFilters: SelectedFilterProps;
   setSelectedFilters: Function;
   setTotalSelectedFilterCount: Function;
   totalSelectedFilterCount: number;
@@ -117,16 +121,22 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
 }): JSX.Element => {
   const { t } = useTranslation("common");
   const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
-
+  const _arabicFilterBarData = t(
+    "arabicFilterList",
+    {},
+    { returnObjects: true }
+  );
   const { appState } = useContext(AppContext);
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [sortingSelected, setSortingSelected] = useState("Best Sellers");
-  const [selectedFilters, setSelectedFilters] = useState<{
-    [key: string]: { [key: string]: string };
-  }>({});
+  const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>(
+    {}
+  );
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const [optionData, setOptionData] = useState<any>([]);
-
+  const [currentFilterList, setCurrentFilterList] = useState<
+    string | FilterListProps[]
+  >(filterList);
   useEffect(() => {
     setSortingSelected(
       appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين"
@@ -135,7 +145,17 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
       data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
       defaultValue: appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين",
     });
+
+    if (appState.lang === "en") {
+      setCurrentFilterList(filterList);
+    } else {
+      setCurrentFilterList(_arabicFilterBarData);
+    }
   }, [appState]);
+
+  useEffect(() => {
+    setCurrentFilterList(filterList);
+  }, [filterList]);
 
   return (
     <div className={styles["filter-bar_wrapper"]}>
@@ -144,11 +164,16 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
           <BorderlessSelect
             className={"filter-mobile-select"}
             onChange={() => {}}
-            selectedLabel={<FilterCounter appState={appState} count={totalSelectedFilterCount} />}
+            selectedLabel={
+              <FilterCounter
+                appState={appState}
+                count={totalSelectedFilterCount}
+              />
+            }
             showInModal={true}
             modalChildren={
               <FilterAccordion
-                filterList={filterList}
+                filterList={currentFilterList}
                 setIsOpened={setIsOpened}
                 selectedFilters={selectedFilters}
                 setSelectedFilters={setSelectedFilters}
@@ -200,21 +225,15 @@ const FilterAccordion = ({
   totalSelectedFilterCount,
   onApplyFilters,
 }: FilterAccordionProps): JSX.Element => {
-  const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
 
-  const _arabicFilterBarData = t(
-    "arabicFilterList",
-    {},
-    { returnObjects: true }
-  );
   return (
     <>
       {Array.isArray(filterList) &&
         filterList.length > 0 &&
         filterList.map((data, index) => {
-          const selectedFilterCount = selectedFilters?.[data.filterName]
-            ? Object.keys(selectedFilters?.[data.filterName]).length
+          const selectedFilterCount = selectedFilters?.[index]
+            ? Object.keys(selectedFilters?.[index]?.selectedOptions).length
             : 0;
           return (
             <Accordion
@@ -222,11 +241,7 @@ const FilterAccordion = ({
               heading={
                 <div className={styles["div-counter"]}>
                   <span className={styles["filter-name"]}>
-                    {appState?.lang === "en"
-                      ? data.filterName
-                      : Array.isArray(_arabicFilterBarData) &&
-                        _arabicFilterBarData.length > 0 &&
-                        _arabicFilterBarData[index]?.filterName}
+                    {data?.filterName}
                   </span>
                   <div data-visible={selectedFilterCount > 0}>
                     <span>
@@ -242,19 +257,9 @@ const FilterAccordion = ({
                 key={index}
                 setIsOpened={setIsOpened}
                 categoryData={{
-                  dropdownData:
-                    appState?.lang === "en"
-                      ? data?.filterOptions
-                      : Array.isArray(_arabicFilterBarData) &&
-                        _arabicFilterBarData.length > 0
-                      ? _arabicFilterBarData[index]?.filterOptions
-                      : [],
-                  filterName:
-                    appState?.lang === "en"
-                      ? data?.filterName
-                      : Array.isArray(_arabicFilterBarData) &&
-                        _arabicFilterBarData.length > 0 &&
-                        _arabicFilterBarData[index]?.filterName,
+                  dropdownData: data?.filterOptions,
+                  filterName: data?.filterName,
+                  filterIndex: index,
                 }}
                 selectedFilters={selectedFilters}
                 setSelectedFilters={setSelectedFilters}
@@ -292,7 +297,13 @@ const FilterAccordion = ({
   );
 };
 
-const FilterCounter = ({appState, count = 0 }: { appState: {lang: String}, count: Number }): JSX.Element => {
+const FilterCounter = ({
+  appState,
+  count = 0,
+}: {
+  appState: { lang: String };
+  count: Number;
+}): JSX.Element => {
   return (
     <div className={styles["div-counter"]}>
       <span>{appState?.lang === "en" ? "Filter: " : "منقي:"}</span>

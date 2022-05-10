@@ -10,7 +10,7 @@ import useTranslation from "next-translate/useTranslation";
 import { fetchCategoryProducts, performFilteredSearch } from "lib/algolia";
 import BreadCrumbs from "components/common/ui/bread-crumbs";
 import { ImageType } from "lib/types/common";
-import {desktopScreenSize} from 'lib/utils/common'
+import { desktopScreenSize } from 'lib/utils/common'
 
 interface ProductCardProps {
   index?: number;
@@ -36,13 +36,13 @@ interface ProductListingProps {
 
 const ProductListing = ({
   productDataArray = [],
-  categoryName = '',
+  categoryName = "",
   filterList,
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const dummyProductData = productCardData || []
+  const dummyProductData = productCardData || [];
   const [currentProductData, setCurrentProductData] = useState(
     [...productDataArray, ...dummyProductData] || []
   );
@@ -68,22 +68,22 @@ const ProductListing = ({
       return setCurrentProductData([...productDataArray, ...dummyProductData]);
     }
 
-    const payload = [];
+    let payload = [];
 
     Object.keys(selectedFilters).forEach((filterType, index) => {
       const orFilters: any[] = [];
 
-      Object.keys(selectedFilters[filterType]).forEach((filterOption) => {
-        const facet = `${filterType}: ${filterOption}`;
+      Object.keys(selectedFilters[filterType]?.selectedOptions).forEach((filterOption) => {
+        const facet = `${selectedFilters[filterType]?.name}: ${selectedFilters[filterType]?.selectedOptions[filterOption]?.name}`;
         orFilters.push(facet);
       });
 
       payload.push(orFilters);
     });
 
-    // console.table(payload);
-
-    // const filteredData = performFilteredSearch({query: categoryName[0], filters: payload})
+    // console.log("categoryName", categoryName);
+    // payload = ["isMain: true"];
+    // const filteredData = performFilteredSearch({ query: "", filters: payload });
     const filteredData: [] = [];
     setCurrentProductData(filteredData);
   };
