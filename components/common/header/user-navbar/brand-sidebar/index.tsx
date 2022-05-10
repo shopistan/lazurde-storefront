@@ -24,9 +24,8 @@ const BrandContainer: FC<BrandArrType> = ({
   label,
   labelUrl,
 }): JSX.Element => {
-  const [width] = useWindowSize();
-  console.log("brandLodo", label);
   const { appState, saveAppState } = useContext(AppContext);
+  const [width] = useWindowSize();
 
   return (
     <div className={styles["brands-list"]}>
@@ -45,7 +44,7 @@ const BrandContainer: FC<BrandArrType> = ({
           onClick={() =>
             saveAppState({
               ...appState,
-              brand: label,
+              brand: label ? label : "",
             })
           }
         >
@@ -66,7 +65,7 @@ const BrandSideBar: FC<SidebarProps> = ({
   closeIcon,
   closeMenu,
 }): JSX.Element => {
-  const { appState } = useContext(AppContext);
+  const { appState, saveAppState } = useContext(AppContext);
   const router = useRouter();
 
   return (
@@ -89,6 +88,10 @@ const BrandSideBar: FC<SidebarProps> = ({
               onClick={() => {
                 setIsOpened(false);
                 closeMenu();
+                saveAppState({
+                  ...appState,
+                  brand: `L'azurde`,
+                });
                 router.push("/");
               }}
             >

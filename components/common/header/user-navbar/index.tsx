@@ -19,10 +19,10 @@ import { AppContext } from "lib/context";
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
 }): JSX.Element => {
+  const { appState, saveAppState } = useContext(AppContext);
   const { t } = useTranslation("common");
   const [isOpened, setIsOpened] = useState(false);
   const [width] = useWindowSize();
-  const { appState, saveAppState } = useContext(AppContext);
 
   useEffect(() => {
     if (isOpened) {

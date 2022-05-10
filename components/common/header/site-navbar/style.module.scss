@@ -116,10 +116,6 @@
         transition: width ease-in-out 0.15s, left ease-in-out 0.15s;
       }
 
-      // &:hover::after {
-      //   width: 100%;
-      //   left: 0;
-      // }
       &[data-selected='true']::after {
         width: 100%;
         left: 0;

@@ -18,7 +18,7 @@ const MobileSubMenu = ({
   subMenuData,
   menuTitle = "",
 }: MobileSubMenuProps): JSX.Element => {
-  const { appState } = useContext(AppContext);
+  const { appState } = useContext(AppContext);  
 
   return (
     <div
@@ -90,7 +90,7 @@ const MobileSubMenu = ({
                               closeSubMenu();
                             }}
                           >
-                            <Link href={data?.url || ""}>
+                            <Link href={data?.url || "/"}>
                               <a data-isBold={data?.isBold}>
                                 {appState?.lang === "en"
                                   ? data?.title

@@ -14,7 +14,7 @@ interface SelectProps {
   selectedValue?: string;
   className?: string;
   optionClassName?: string;
-  selectedLabel?: string;
+  selectedLabel?: string | JSX.Element;
   showInModal?: Boolean;
   modalChildren?: string | JSX.Element;
 }
@@ -23,7 +23,7 @@ const BorderlessSelect = ({
   options = [{ label: "label", img: "", value: "value" }],
   onChange = () => {},
   defaultValue = "",
-  selectedValue = '',
+  selectedValue = "",
   className = "",
   optionClassName = "",
   selectedLabel = "",
@@ -65,7 +65,8 @@ const BorderlessSelect = ({
       onBlur={() => !showInModal && setIsOpen(false)}
       onClick={() => {
         if (
-          window?.innerHeight - dropdown?.current?.getBoundingClientRect().bottom <
+          window?.innerHeight -
+            dropdown?.current?.getBoundingClientRect().bottom <
           100
         ) {
           setPosition("top");
@@ -129,7 +130,7 @@ const BorderlessSelect = ({
       )}
 
       <div className={styles["select-arrow"]}>
-        <ChevronDown />
+        <ChevronDown color="#000000" width="10px" height="7px" />
       </div>
     </div>
   );

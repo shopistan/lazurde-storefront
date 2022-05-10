@@ -214,11 +214,11 @@ const FilterBar: FC<FilterBarProps> = ({
                           appState?.lang === "en"
                             ? link?.current[
                                 index
-                              ].current.getBoundingClientRect().left
+                              ]?.current?.getBoundingClientRect().left
                             : width -
                               link?.current[
                                 index
-                              ].current.getBoundingClientRect().right -
+                              ]?.current?.getBoundingClientRect().right -
                               17.4,
                       });
                     } else {

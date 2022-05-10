@@ -2,7 +2,7 @@ import React, { FC, useState, useContext, useEffect } from "react";
 import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
 import BorderlessSelect from "components/common/ui/borderless-select";
-import Accordion from "components/common/ui/accordion2/Accordion";
+import Accordion from "components/common/ui/accordion/Accordion";
 import Button from "components/common/ui/button";
 import SortingModal from "./sorting-modal";
 import { AppContext } from "lib/context";
@@ -128,7 +128,9 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
   const [optionData, setOptionData] = useState<any>([]);
 
   useEffect(() => {
-    setSortingSelected(appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين")
+    setSortingSelected(
+      appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين"
+    );
     setOptionData({
       data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
       defaultValue: appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين",
@@ -142,7 +144,7 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
           <BorderlessSelect
             className={"filter-mobile-select"}
             onChange={() => {}}
-            selectedLabel={appState?.lang === "en" ? "Filter: " : "منقي:"}
+            selectedLabel={<FilterCounter appState={appState} count={totalSelectedFilterCount} />}
             showInModal={true}
             modalChildren={
               <FilterAccordion
@@ -287,5 +289,16 @@ const FilterAccordion = ({
         />
       </div>
     </>
+  );
+};
+
+const FilterCounter = ({appState, count = 0 }: { appState: {lang: String}, count: Number }): JSX.Element => {
+  return (
+    <div className={styles["div-counter"]}>
+      <span>{appState?.lang === "en" ? "Filter: " : "منقي:"}</span>
+      <div data-visible={count > 0}>
+        <span>{count > 0 && count}</span>
+      </div>
+    </div>
   );
 };

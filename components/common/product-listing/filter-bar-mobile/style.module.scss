@@ -1,5 +1,8 @@
 @import "/styles/variables.scss";
 .div-counter {
+  display: flex;
+  align-items: center;
+
   div {
     height: 19px;
     display: inline-flex;
@@ -70,7 +73,7 @@ html[dir="rtl"] {
 
   &_item {
     flex: 1;
-    padding: 0 16px;
+    padding: 0 10px;
   }
 }
 
@@ -121,6 +124,7 @@ html[dir="rtl"] {
 
     &[data-selected="true"] {
       font-weight: 500;
+      font-size: 15px;
       color: $black-color;
     }
   }
