@@ -28,7 +28,7 @@ jobs:
       # - run: npm run descriptors
       # - run: npm run build
      - name: Checkout tools repo
-  uses: actions/checkout@v3
+  # uses: actions/checkout@v3
   # with:
   #   repository: shopistan/lazurde-api-tests
   #   path: main
