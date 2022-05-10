@@ -1,9 +1,7 @@
 .filter-bar-main {
   display: flex;
   align-items: center;
-  // justify-content: center;
   position: relative;
-  // padding-inline: 24px;
   background-color: #fff;
   padding-inline: 80px;
 
@@ -36,7 +34,6 @@
     .filter-links {
       display: flex;
       align-items: center;
-      // justify-content: center;
       flex: 1;
       height: 35px;
       column-gap: 60px;
@@ -86,7 +83,6 @@
             background: #c4c4c4;
             font-weight: 400;
             font-size: 9px;
-            // line-height: 100%;
             text-align: center;
             letter-spacing: 0.05em;
           }
