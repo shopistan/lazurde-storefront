@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import styles from "../style.module.scss";
-import { langSelectData } from "lib/mock-data/data";
+import { langSelectData, kenazLangSelectData } from "lib/mock-data/data";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
 import { OptionProps } from "lib/types/mobile-header";
@@ -60,7 +60,9 @@ const MobileLanguageSelector = (): JSX.Element => {
   return (
     <div className={styles["mobile-header__lang-wrapper"]}>
       <LanguageSelector
-        options={langSelectData}
+        options={
+          appState?.brand === "kenaz" ? kenazLangSelectData : langSelectData
+        }
         onChange={handleSelect}
         defaultValue={appState.locale}
         iconWidth={20}
