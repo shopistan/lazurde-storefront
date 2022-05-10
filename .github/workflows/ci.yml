@@ -29,8 +29,8 @@ jobs:
       # - run: npm run build
      - name: Checkout tools repo
   uses: actions/checkout@v3
-  with:
-    repository: shopistan/lazurde-api-tests
-    path: main
+  # with:
+  #   repository: shopistan/lazurde-api-tests
+  #   path: main
         # with:
         # repository: 'https://github.com/shopistan/lazurde-api-tests'
