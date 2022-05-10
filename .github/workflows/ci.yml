@@ -29,7 +29,7 @@ jobs:
       # - run: npm run test
       # - run: npm run descriptors
       # - run: npm run build
-      git clone https://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@github.com/safeerbaig22/shopistan/lazurde-api-tests.git
+      # git clone https://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@github.com/safeerbaig22/shopistan/lazurde-api-tests.git
 
     #  - name: Checkout tools repo
   # uses: actions/checkout@v3
