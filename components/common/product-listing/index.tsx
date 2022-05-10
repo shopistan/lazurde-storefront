@@ -35,13 +35,13 @@ interface ProductListingProps {
 
 const ProductListing = ({
   productDataArray = [],
-  categoryName = '',
+  categoryName = "",
   filterList,
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const dummyProductData = productCardData || []
+  const dummyProductData = productCardData || [];
   const [currentProductData, setCurrentProductData] = useState(
     [...productDataArray, ...dummyProductData] || []
   );
@@ -67,29 +67,28 @@ const ProductListing = ({
       return setCurrentProductData([...productDataArray, ...dummyProductData]);
     }
 
-    const payload = [];
+    let payload = [];
 
     Object.keys(selectedFilters).forEach((filterType, index) => {
       const orFilters: any[] = [];
 
-      Object.keys(selectedFilters[filterType]).forEach((filterOption) => {
-        const facet = `${filterType}: ${filterOption}`;
+      Object.keys(selectedFilters[filterType]?.selectedOptions).forEach((filterOption) => {
+        const facet = `${selectedFilters[filterType]?.name}: ${selectedFilters[filterType]?.selectedOptions[filterOption]?.name}`;
         orFilters.push(facet);
       });
 
       payload.push(orFilters);
     });
 
-    // console.table(payload);
-
-    // const filteredData = performFilteredSearch({query: categoryName[0], filters: payload})
+    // console.log("categoryName", categoryName);
+    // payload = ["isMain: true"];
+    // const filteredData = performFilteredSearch({ query: "", filters: payload });
     const filteredData: [] = [];
     setCurrentProductData(filteredData);
   };
 
   const onSortingChange = (sortedValue: any = {}) => {
     console.log("sortedValue", sortedValue);
-    
 
     // if (sortedValue.length < 1) {
     //   return setCurrentProductData(productDataArray);

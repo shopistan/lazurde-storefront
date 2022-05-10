@@ -35,8 +35,14 @@ const renderComponent = (list: any = filterListData) => {
         categoryData={list}
         setIsOpened={isOpenedFunc}
         selectedFilters={{
-          "title one": { option: "true" },
-          "title two": { option: "true" },
+          0: {
+            name: "title one",
+            selectedOptions: { 0: { selected: true, name: "option 1" } },
+          },
+          1: {
+            name: "title two",
+            selectedOptions: { 0: { selected: true, name: "option 2" } },
+          },
         }}
         setSelectedFilters={selectedFunc}
         setTotalSelectedFilterCount={countFunc}
@@ -52,8 +58,14 @@ const renderComponentAR = (list: any = filterListData) => {
         categoryData={list}
         setIsOpened={isOpenedFunc}
         selectedFilters={{
-          "title one": { option: "true" },
-          "title two": { option: "true" },
+          0: {
+            name: "title one",
+            selectedOptions: { 0: { selected: true, name: "option 1" } },
+          },
+          1: {
+            name: "title two",
+            selectedOptions: { 0: { selected: true, name: "option 2" } },
+          },
         }}
         setSelectedFilters={selectedFunc}
         setTotalSelectedFilterCount={countFunc}
