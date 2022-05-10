@@ -1,41 +1,40 @@
 import React from 'react'
 import RegisterModal from 'components/common/register-popup/index'
-import { screen, render } from '@testing-library/react'
+import { screen, render, fireEvent } from '@testing-library/react'
+import ContextProvider, { AppContext } from "lib/context";
+
+const title = 'Register Title';
+const text = 'Register Text';
+const buttonText = 'Register Button Text'
+const image = {
+    url: '/',
+    altText: 'Image'
+}
 
 const renderComponent = () => {
-    const title = 'Register Title';
-    const text = 'Register Text';
-    const buttonText = 'Register Button Text'
-    const image = {
-        url: '/',
-        altText: 'Image'
-    }
     render(
-        <>
+        <ContextProvider>
             <RegisterModal modalTitle={title} modalText={text} modalButton={buttonText} isOpen={true} modalImage={image} />
-        </>
+        </ContextProvider>
     )
 }
 
-describe('Register modal testing', () => {
-    test('title', () => {
-        renderComponent()
-        const titleProps = screen.getByText(/Register Title/i)
-        expect(titleProps).toBeInTheDocument()
-    });
-    test('text', () => {
-        renderComponent()
-        const textProps = screen.getByText(/Register text/i)
-        expect(textProps).toBeInTheDocument()
-    });
-    test('button', () => {
-        renderComponent()
-        const buttonProps = screen.getByText(/Register Button Text/i)
-        expect(buttonProps).toBeInTheDocument()
-    });
-    test('image', () => {
-        renderComponent()
-        const imageProps = screen.getByAltText(/image/i)
-        expect(imageProps).toBeInTheDocument()
-    });
+const renderComponentAR = () => {
+    render(
+        <AppContext.Provider value={{ appState: { lang: "ar" } }}>
+            <RegisterModal modalTitle={title} modalText={text} modalButton={buttonText} isOpen={true} modalImage={image} />
+        </AppContext.Provider>
+    )
+}
+
+test('Register modal testing', () => {
+    renderComponent()
+    expect(screen.getByText('Register Title')).toBeInTheDocument()
+    expect(screen.getByText('Register Text')).toBeInTheDocument()
+    expect(screen.getByText('Register Button Text')).toBeInTheDocument()
+    expect(screen.getByAltText('Image')).toBeInTheDocument()
 })
+
+test("render arabic version", () => {
+    renderComponentAR();
+});

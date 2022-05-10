@@ -1,4 +1,4 @@
-@import "/styles//variables.scss";
+@import "/styles/variables.scss";
 .dropdown {
   display: flex;
   align-items: center;
@@ -51,7 +51,6 @@
     padding: 12px 0px;
     opacity: 0;
     pointer-events: none;
-    // visibility: hidden;
     transition: opacity 0.2s;
     z-index: 20;
     width: 100%;
