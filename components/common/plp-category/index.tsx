@@ -9,9 +9,9 @@ import useTranslation from "next-translate/useTranslation";
 import { useRouter } from 'next/router'
 
 type PLPCategoryTypes = {
-    cardTitle?: string;
+    cardTitle?: string | '';
     cardImage?: ImageType;
-    cardLink?: string;
+    cardLink?: string | '';
 }
 
 type _PLPCategoryTypes = {
@@ -40,11 +40,10 @@ const PLPCategory: FC<PLPCategoryProps> = ({ backgroundColor = '#fafafa', title 
     );
     const [width] = useWindowSize();
     return (
-        <div className={styles['plpCategory-container']} style={{backgroundColor: backgroundColor}}>
+        <div className={styles['plpCategory-container']} style={{ backgroundColor: backgroundColor }}>
             <Label className={` ${styles["plpCategory-title"]}`}>{appState.lang == 'en' ? title : t('plpCategoryTitle')}</Label>
             <Label className={` ${styles["plpCategory-text"]}`}>{appState.lang == 'en' ? text : t('plpCategoryText')}</Label>
             <div className={` ${isLeft && 'text-left'} ${isCentre && 'text-center'} ${isRight && 'text-right'} ${styles['plpCategory-card']}`}>
-
                 {
                     cards.length > 0 && cards.map((card, index) => {
                         const { cardImage, cardTitle, cardLink } = card

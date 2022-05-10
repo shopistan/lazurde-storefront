@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 import Banner from './index'
+import ContextProvider, { AppContext } from "lib/context";
 
 
 const renderComponent = () => {
@@ -9,7 +10,21 @@ const renderComponent = () => {
         altText: 'image',
     }
     render(
-        <Banner title={'banner title'} text={'banner text'} bgColor={'#ffff'} backgroundImage={imageProps} />
+        <ContextProvider>
+            <Banner title={'banner title'} text={'banner text'} bgColor={'#ffff'} backgroundImage={imageProps} />
+        </ContextProvider>
+    )
+}
+
+const renderComponentAR = () => {
+    const imageProps = {
+        url: '/',
+        altText: 'image',
+    }
+    render(
+        <AppContext.Provider value={{ appState: { lang: "ar" } }}>
+            <Banner title={'banner title'} text={'banner text'} bgColor={'#ffff'} backgroundImage={imageProps} />
+        </AppContext.Provider>
     )
 }
 
@@ -31,5 +46,9 @@ describe('Banner ', () => {
 
         const image = screen.getByAltText('image');
         expect(image).toBeInTheDocument();
+    });
+
+    test("render arabic version", () => {
+        renderComponentAR();
     });
 })
