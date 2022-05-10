@@ -96,6 +96,21 @@ export const langSelectData = [
   },
 ];
 
+export const kenazLangSelectData = [
+  {
+    label: "KSA",
+    img: "/icons/flag-sa.png",
+    value: "en-sa",
+    langTitle: "english",
+  },
+  {
+    label: "KSA",
+    img: "/icons/flag-sa.png",
+    value: "ar-sa",
+    langTitle: "العربية",
+  },
+];
+
 export const brandSideBarForTesting = {
   mainTitle: "main title",
   mainImg: {
