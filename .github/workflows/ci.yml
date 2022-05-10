@@ -17,12 +17,17 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      # - uses: actions/checkout@v3
+      # - name: Use Node.js ${{ matrix.node-version }}
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+      #     cache: "npm"
+      - name: Checkout tools repo
+        uses: actions/checkout@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          repository: my-org/my-tools
+          path: my-tools
       # - run: npm i
       # - run: npm run test
       # - run: npm run descriptors
@@ -34,6 +39,3 @@ jobs:
   #   path: main
   # with:
   # repository: 'https://github.com/shopistan/lazurde-api-tests'
-template:
-  name: hello-world
-  repo: abc
