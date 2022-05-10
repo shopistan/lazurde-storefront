@@ -27,6 +27,7 @@ jobs:
       - run: npm run test
       - run: npm run descriptors
       - run: npm run build
-      - uses: actions/checkout@v3
-      with:
-      repository: 'https://github.com/shopistan/lazurde-api-tests'
+      steps:
+        - uses: actions/checkout@v3
+        with:
+        repository: 'https://github.com/shopistan/lazurde-api-tests'
