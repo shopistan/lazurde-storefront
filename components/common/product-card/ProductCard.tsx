@@ -26,6 +26,7 @@ interface ProductCardProps {
   currency?: string;
   wrapperClassName?: string;
   swipperClassName?: string;
+  showATC?: boolean;
 }
 
 const ProductCard = ({
@@ -42,6 +43,7 @@ const ProductCard = ({
   index = 0,
   wrapperClassName,
   swipperClassName,
+  showATC = true,
 }: ProductCardProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
@@ -126,17 +128,19 @@ const ProductCard = ({
               : "حصريا على الانترنت"}
           </Label>
         )}
-        <div className={styles["product-card__addtocart-btn"]}>
-          <Button
-            buttonStyle="black"
-            buttonText={"add to cart"}
-            buttonSize={"sm"}
-            onClick={() => {
-              handleAddToCart();
-            }}
-            type={"button"}
-          />
-        </div>
+        {showATC && (
+          <div className={styles["product-card__addtocart-btn"]}>
+            <Button
+              buttonStyle="black"
+              buttonText={"add to cart"}
+              buttonSize={"sm"}
+              onClick={() => {
+                handleAddToCart();
+              }}
+              type={"button"}
+            />
+          </div>
+        )}
       </div>
 
       <Label className={styles["product-card__title"]}>{title}</Label>

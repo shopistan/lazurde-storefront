@@ -133,6 +133,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
                         wrapperClassName={styles["product-card"]}
                         swipperClassName={styles["swipper-card"]}
                         data-testid="card"
+                        showATC={false}
                       />
                     );
                 })}

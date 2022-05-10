@@ -31,8 +31,6 @@ const BrandContainer: FC<BrandArrType> = ({
   const { appState, saveAppState } = useContext(AppContext);
   const [width] = useWindowSize();
 
-  const brandValue = labelUrl && labelUrl.split("/")[1];
-
   return (
     <div className={styles["brands-list"]}>
       {width > desktopScreenSize && (
@@ -47,13 +45,12 @@ const BrandContainer: FC<BrandArrType> = ({
 
       <Link href={labelUrl}>
         <a
-          onClick={() => {
-            if (brandValue && brandValue?.length > 0) {
-              updateBrand(brandValue, saveAppState, appState);
-            } else {
-              updateBrand("Lazurde", saveAppState, appState);
-            }
-          }}
+          onClick={() =>
+            saveAppState({
+              ...appState,
+              brand: label ? label : "",
+            })
+          }
         >
           {label}
         </a>
@@ -95,7 +92,10 @@ const BrandSideBar: FC<SidebarProps> = ({
               onClick={() => {
                 setIsOpened(false);
                 closeMenu();
-                updateBrand("Lazurde", saveAppState, appState);
+                saveAppState({
+                  ...appState,
+                  brand: `L'azurde`,
+                });
                 router.push("/");
               }}
             >
