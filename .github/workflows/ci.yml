@@ -5,7 +5,7 @@ name: Lazurde storefront CI
 
 on:
   push:
-    branches: [main, qa-testing, stage, develop,LW-272-api-test-in-ci/cd]
+    branches: [main, qa-testing, stage, develop, LW-272-api-test-in-ci/cd]
 
 jobs:
   build:
@@ -27,7 +27,6 @@ jobs:
       - run: npm run test
       - run: npm run descriptors
       - run: npm run build
-      steps:
-        - uses: actions/checkout@v3
-        with:
-        repository: 'https://github.com/shopistan/lazurde-api-tests'
+      - uses: actions/checkout@v3
+        # with:
+        # repository: 'https://github.com/shopistan/lazurde-api-tests'
