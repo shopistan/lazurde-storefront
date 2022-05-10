@@ -23,7 +23,7 @@ jobs:
       #   with:
       #     node-version: ${{ matrix.node-version }}
       #     cache: "npm"
-      - name: Checkout tools repo
+      # - name: Checkout tools repo
       - run: git clone https://github.com/shopistan/lazurde-api-tests.git
       # - run: npm i
       # - run: npm run test
