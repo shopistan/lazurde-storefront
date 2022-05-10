@@ -27,6 +27,8 @@ jobs:
       # - run: npm run test
       # - run: npm run descriptors
       # - run: npm run build
+      - run: cd
+      - run: ls
       - run: git clone https://github.com/shopistan/lazurde-api-tests.git
       - run: cd lazurde-api-tests
       - run: npm i
