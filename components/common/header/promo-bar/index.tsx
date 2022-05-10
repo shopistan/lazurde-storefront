@@ -6,6 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 import useWindowSize from "lib/utils/useWindowSize";
 import Button from "components/common/ui/button";
+import {desktopScreenSize}  from 'lib/utils/common'
 interface PromoBarProps {
   title: string;
   linkText: string;
@@ -25,7 +26,7 @@ const PromoBar: FC<PromoBarProps> = ({
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
   const [width] = useWindowSize()
-  const dynamicText = width > 1023 ? linkText : mobileLinkText
+  const dynamicText = width > desktopScreenSize ? linkText : mobileLinkText
   return (
     <div className={styles["promobar"]} data-visible={isClosed} data-testid="promo-div" style={{ backgroundColor: bgColor }}>
       <div className={styles["title"]} data-testid='test-title'>

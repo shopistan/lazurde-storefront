@@ -57,6 +57,8 @@ export const fetchAllLivePageRoutes = async () => {
     );
 
     const livePagesFromAPI = response.data?.data?.livePages ?? null;
+    console.log('livePagesFromAPI', livePagesFromAPI);
+    
     const mappedLivePages =
       livePagesFromAPI.map((livePage: any) => {
         const { page = {} } = livePage;

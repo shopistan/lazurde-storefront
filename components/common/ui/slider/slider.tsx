@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { desktopScreenSize } from 'lib/utils/common'
 
 interface SliderProps {
   children?: JSX.Element | string;
@@ -40,7 +41,7 @@ const Slider = ({
   const sliderSetting = {
     modules: [Navigation, Pagination, Scrollbar, A11y],
     spaceBetween: 8,
-    slidesPerView: width > 1023 ? desktopSlidePerView : mobileSlidePerView,
+    slidesPerView: width > desktopScreenSize ? desktopSlidePerView : mobileSlidePerView,
     navigation: navigation,
     scrollbar: { draggable: scrollbar },
     className: className,
@@ -51,7 +52,7 @@ const Slider = ({
   const productSliderSetting = {
     modules: [Navigation, Pagination, Scrollbar, A11y],
     spaceBetween: 0,
-    slidesPerView: width > 1023 ? desktopSlidePerView : mobileSlidePerView,
+    slidesPerView: width > desktopScreenSize ? desktopSlidePerView : mobileSlidePerView,
     pagination: { clickable: pagination },
     navigation: navigation,
     className: className,

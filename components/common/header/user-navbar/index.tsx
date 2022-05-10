@@ -15,6 +15,7 @@ import BrandSidebar from "./brand-sidebar";
 import { BrandSidebarProps } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
+import {desktopScreenSize} from 'lib/utils/common'
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
@@ -134,7 +135,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
           </a>
         </Link>
       </div>
-      {width > 1023 && (
+      {width > desktopScreenSize && (
         <div
           className={styles["overlay"]}
           data-opened={isOpened}
