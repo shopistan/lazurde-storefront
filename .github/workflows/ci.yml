@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          repository: shopistan/lazurde-api-tests.git
+          repository: shopistan/lazurde-api-tests
           ref: main
       # - uses: actions/checkout@v3
       # - name: Use Node.js ${{ matrix.node-version }}
