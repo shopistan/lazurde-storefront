@@ -3,7 +3,7 @@ const ENDPOINTS = {
     FETCH_PAGE_BY_URL: (channel: number, url: string) =>
       `/api-xpm/v2/page/live?channel=${channel}&url=${url}`,
     FETCH_GLOBAL_COMPONENTS: "/api-xpm/global-component/live",
-    FETCH_ALL_LIVE_PAGES: "/api-xpm/pages/live",
+    FETCH_ALL_LIVE_PAGES: "/api-xpm/v2/pages/live?channel=12",
   },
 
   RTPE: {

@@ -14,7 +14,6 @@ import {
 import BrandSidebar from "./brand-sidebar";
 import { BrandSidebarProps } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
-import { updateBrand } from "lib/utils/common";
 import { AppContext } from "lib/context";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
@@ -57,29 +56,49 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
             <li className="item-1">
               <Link href="/">
                 <a
-                  onClick={() => updateBrand("Lazurde", saveAppState, appState)}
-                >{`Lazurde`}</a>
+                  onClick={() =>
+                    saveAppState({
+                      ...appState,
+                      brand: `L'azurde`,
+                    })
+                  }
+                >{`L'azurde`}</a>
               </Link>
             </li>
             <li className="item-2">
               <Link href="/missl">
                 <a
-                  onClick={() => updateBrand("MissL", saveAppState, appState)}
-                >{`Miss'L`}</a>
+                  onClick={() =>
+                    saveAppState({
+                      ...appState,
+                      brand: `Miss L'`,
+                    })
+                  }
+                >{`Miss L'`}</a>
               </Link>
             </li>
             <li className="item-3">
               <Link href="/kenaz">
                 <a
-                  onClick={() => updateBrand("Kenaz", saveAppState, appState)}
+                  onClick={() =>
+                    saveAppState({
+                      ...appState,
+                      brand: `Kenaz`,
+                    })
+                  }
                 >{`Kenaz`}</a>
               </Link>
             </li>
             <li className="item-4">
               <Link href="/">
                 <a
-                  onClick={() => updateBrand("Lazurde", saveAppState, appState)}
-                >{`Lazurde`}</a>
+                  onClick={() =>
+                    saveAppState({
+                      ...appState,
+                      brand: `L'azurde`,
+                    })
+                  }
+                >{`L'azurde`}</a>
               </Link>
             </li>
           </ul>

@@ -88,17 +88,17 @@
     .search-input {
       border: 0px solid gray;
       padding: 0px;
-      width: 300%;
-      font-family: "Roboto";
+      width: 100%;
+      font-family: 'Roboto';
       font-style: normal;
       font-weight: 400;
       font-size: 14px;
       line-height: 120%;
       border-radius: 0px;
 
-      @media (max-width: $breakPoint-tablet) {
-        width: 110%;
-      }
+      // @media (max-width: $breakPoint-tablet) {
+      //   width: 110%;
+      // }
     }
 
     .search-icon {
@@ -179,7 +179,9 @@
     }
 
     @media (min-width: $breakPoint-tablet) and (max-width: 1200px) {
-      width: auto;
+      width: 100vw;
+      overflow-x: scroll;
+      height: 300px;
     }
 
     .popular-search-products-heading {

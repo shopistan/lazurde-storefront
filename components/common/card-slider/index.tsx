@@ -7,10 +7,12 @@ import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
 import Label from "components/common/ui/label";
 import Slider from "components/common/ui/slider/slider";
+import Link from "next/link";
 
 type CardsArrType = {
   image?: { url: string; altText: string };
   heading?: string;
+  slideLink?: string;
 };
 interface CardSliderProps {
   className?: string;
@@ -58,22 +60,26 @@ const CardSlider = ({
           {Array.isArray(cards) &&
             cards.length > 0 &&
             cards.map((content, index) => {
-              const { image, heading } = content;
+              const { image, heading, slideLink } = content;
               return (
                 <SwiperSlide key={index}>
-                  <Cards
-                    cardImage={image}
-                    cardTitle={
-                      appState?.lang === "en"
-                        ? heading
-                        : Array.isArray(_arabicCardData) &&
-                          _arabicCardData.length > 0 &&
-                          _arabicCardData[index].heading
-                    }
-                    width={width > 1023 ? 314 : 332}
-                    height={width > 1023 ? 429 : 352}
-                    className="category-slider-card"
-                  />
+                  <Link href={slideLink || "/"}>
+                    <a className={styles["card-slider__navigation"]}>
+                      <Cards
+                        cardImage={image}
+                        cardTitle={
+                          appState?.lang === "en"
+                            ? heading
+                            : Array.isArray(_arabicCardData) &&
+                              _arabicCardData.length > 0 &&
+                              _arabicCardData[index].heading
+                        }
+                        width={width > 1023 ? 314 : 332}
+                        height={width > 1023 ? 429 : 352}
+                        className="category-slider-card"
+                      />
+                    </a>
+                  </Link>
                 </SwiperSlide>
               );
             })}
