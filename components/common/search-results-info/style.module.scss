@@ -1,0 +1,11 @@
+@import '/styles/variables.scss';
+
+.search-results-info-wrapper {
+  margin: 16px 80px 17px 80px;
+
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+  }
+}
