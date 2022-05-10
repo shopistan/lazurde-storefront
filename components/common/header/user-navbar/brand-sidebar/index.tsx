@@ -9,6 +9,9 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
 import { updateBrand } from "lib/utils/common";
+import {desktopScreenSize} from 'lib/utils/common'
+
+
 interface SidebarProps {
   mainImg?: ImageType;
   mainTitle?: string;
@@ -32,7 +35,7 @@ const BrandContainer: FC<BrandArrType> = ({
 
   return (
     <div className={styles["brands-list"]}>
-      {width > 1023 && (
+      {width > desktopScreenSize && (
         <Image
           src={brandImg.url}
           alt={brandImg.altText}

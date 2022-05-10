@@ -7,6 +7,7 @@ import { SwiperSlide } from "swiper/react";
 import { AppContext } from "lib/context/index";
 import useTranslation from "next-translate/useTranslation";
 import Slider from "components/common/ui/slider/slider";
+import {desktopScreenSize} from 'lib/utils/common'
 
 type BrandCardsType = {
   cardTitle: string;
@@ -36,7 +37,7 @@ const BrandCards: FC<BrandCardsProps> = ({
       <Slider
         desktopSlidePerView={3}
         mobileSlidePerView={1.1}
-        navigation={width > 1023 ? true : false}
+        navigation={width > desktopScreenSize ? true : false}
         scrollbar={true}
         className={`card-brands`}
       >

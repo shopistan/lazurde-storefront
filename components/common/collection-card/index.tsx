@@ -9,6 +9,7 @@ import { AppContext } from "lib/context/index";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import Slider from "components/common/ui/slider/slider";
+import {desktopScreenSize} from 'lib/utils/common'
 
 interface CollectionCardTypes {
   collectionbutton?: string;
@@ -42,6 +43,7 @@ const CollectionCard: FC<CollectionCardProps> = ({
     {},
     { returnObjects: true }
   );
+  
   return (
     <div
       className={`${styles["collection-container"]} ${appState.lang === "ar" && styles["arabic-card"]
@@ -50,7 +52,7 @@ const CollectionCard: FC<CollectionCardProps> = ({
       <Slider
         desktopSlidePerView={2}
         mobileSlidePerView={1.1}
-        navigation={width > 1023 ? true : false}
+        navigation={width > desktopScreenSize ? true : false}
         scrollbar={true}
         className={`collection-swiper`}
       >
@@ -75,8 +77,8 @@ const CollectionCard: FC<CollectionCardProps> = ({
                           className={styles["collection-image"]}
                           src={collectionImageKenaz?.url}
                           alt={collectionImage?.altText}
-                          width={width > 1023 ? 642 : 332}
-                          height={width > 1023 ? 409 : 400}
+                          width={desktopScreenSize ? 642 : 332}
+                          height={desktopScreenSize ? 409 : 400}
                           layout="responsive"
                         />
                       )}
@@ -86,8 +88,8 @@ const CollectionCard: FC<CollectionCardProps> = ({
                           className={styles["collection-image"]}
                           src={collectionImageMissl?.url}
                           alt={collectionImage?.altText}
-                          width={width > 1023 ? 642 : 332}
-                          height={width > 1023 ? 409 : 400}
+                          width={width > desktopScreenSize ? 642 : 332}
+                          height={width > desktopScreenSize ? 409 : 400}
                           layout="responsive"
                         />
                       )}
@@ -97,8 +99,8 @@ const CollectionCard: FC<CollectionCardProps> = ({
                           className={styles["collection-image"]}
                           src={collectionImage?.url}
                           alt={collectionImage?.altText}
-                          width={width > 1023 ? 642 : 332}
-                          height={width > 1023 ? 409 : 400}
+                          width={width > desktopScreenSize ? 642 : 332}
+                          height={width > desktopScreenSize ? 409 : 400}
                           layout="responsive"
                         />
                       )}

@@ -83,6 +83,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // for (let i = 0; i < paths.length; i++) {
   //   console.log("CPATH", paths[i].params.category_hierarchy);
   // }
+  console.log("livepage", livePageRoutes);
+  
   return { paths, fallback: "blocking" };
 };
 
