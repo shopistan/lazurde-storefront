@@ -17,7 +17,10 @@ const SearchResultsInfo: FC<SearchResultsInfoProps> = ({
         <strong>{`"${searchTerm}"`}</strong>
       </p>
       <div>
-        <p>Need Help?</p>
+        <p className={styles["need-help"]}>Need Help?</p>
+        <p>
+          <strong>Contact Us </strong> or call Customer Service at 800 843 3269
+        </p>
       </div>
     </div>
   );
