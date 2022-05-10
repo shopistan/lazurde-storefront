@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, useContext } from "react";
 import styles from "./user-navbar.module.scss";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
@@ -14,6 +14,7 @@ import {
 import BrandSidebar from "./brand-sidebar";
 import { BrandSidebarProps } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
+import { AppContext } from "lib/context";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
@@ -21,6 +22,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   const { t } = useTranslation("common");
   const [isOpened, setIsOpened] = useState(false);
   const [width] = useWindowSize();
+  const { appState, saveAppState } = useContext(AppContext);
 
   useEffect(() => {
     if (isOpened) {
@@ -53,22 +55,50 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
           <ul>
             <li className="item-1">
               <Link href="/">
-                <a>{`Lazurde`}</a>
+                <a
+                  onClick={() =>
+                    saveAppState({
+                      ...appState,
+                      brand: `L'azurde`,
+                    })
+                  }
+                >{`L'azurde`}</a>
               </Link>
             </li>
             <li className="item-2">
               <Link href="/missl">
-                <a>{`Miss'L`}</a>
+                <a
+                  onClick={() =>
+                    saveAppState({
+                      ...appState,
+                      brand: `Miss L'`,
+                    })
+                  }
+                >{`Miss L'`}</a>
               </Link>
             </li>
             <li className="item-3">
-              <Link href='/kenaz'>
-                <a>{`Kenaz`}</a>
+              <Link href="/kenaz">
+                <a
+                  onClick={() =>
+                    saveAppState({
+                      ...appState,
+                      brand: `Kenaz`,
+                    })
+                  }
+                >{`Kenaz`}</a>
               </Link>
             </li>
             <li className="item-4">
               <Link href="/">
-                <a>{`Lazurde`}</a>
+                <a
+                  onClick={() =>
+                    saveAppState({
+                      ...appState,
+                      brand: `L'azurde`,
+                    })
+                  }
+                >{`L'azurde`}</a>
               </Link>
             </li>
           </ul>

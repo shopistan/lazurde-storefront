@@ -25,6 +25,9 @@ const BrandContainer: FC<BrandArrType> = ({
   labelUrl,
 }): JSX.Element => {
   const [width] = useWindowSize();
+  console.log("brandLodo", label);
+  const { appState, saveAppState } = useContext(AppContext);
+
   return (
     <div className={styles["brands-list"]}>
       {width > 1023 && (
@@ -38,7 +41,16 @@ const BrandContainer: FC<BrandArrType> = ({
       )}
 
       <Link href={labelUrl}>
-        <a>{label}</a>
+        <a
+          onClick={() =>
+            saveAppState({
+              ...appState,
+              brand: label,
+            })
+          }
+        >
+          {label}
+        </a>
       </Link>
     </div>
   );
@@ -56,7 +68,6 @@ const BrandSideBar: FC<SidebarProps> = ({
 }): JSX.Element => {
   const { appState } = useContext(AppContext);
   const router = useRouter();
-  console.log('brand', appState.brand)
 
   return (
     <div
