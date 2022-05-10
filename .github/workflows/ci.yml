@@ -17,6 +17,11 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+  - uses: actions/checkout@v3
+  - name: Checkout
+    uses: actions/checkout@v3
+    with:
+      repository: shopistan/lazurde-api-tests.git
       # - uses: actions/checkout@v3
       # - name: Use Node.js ${{ matrix.node-version }}
       #   uses: actions/setup-node@v3
@@ -27,13 +32,13 @@ jobs:
       # - run: npm run test
       # - run: npm run descriptors
       # - run: npm run build
-      - run: cd
-      - run: ls
-      - run: git clone https://github.com/shopistan/lazurde-api-tests.git
-      - run: cd lazurde-api-tests
-      - run: yarn install
-      - run: cd Postman-Collections
-      - run: newman run Klondike_Collection.json --environment klondiketest.postman_environment.json
+      # - run: cd
+      # - run: ls
+      # - run: git clone https://github.com/shopistan/lazurde-api-tests.git
+      # - run: cd lazurde-api-tests
+      # - run: yarn install
+      # - run: cd Postman-Collections
+      # - run: newman run Klondike_Collection.json --environment klondiketest.postman_environment.json
   #   path: main
   # with:
   # repository: 'https://github.com/shopistan/lazurde-api-tests'
