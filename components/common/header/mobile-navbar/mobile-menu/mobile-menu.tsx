@@ -58,7 +58,7 @@ const MobileMenu = ({
               className={`opacity-60 ${styles["mobile-header__rotate-icon"]}`}
               onClick={() => {
                 closeMenu();
-                updateBrand("Lazurde", saveAppState, appState);
+                updateBrand(`L'azurde`, saveAppState, appState);
                 router?.push("/");
               }}
             >
