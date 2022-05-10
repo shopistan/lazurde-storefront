@@ -67,7 +67,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
       <div
         className={styles["back-btn"]}
         onClick={() => {
-          updateBrand("Lazurde", saveAppState, appState);
+          updateBrand(`L'azurde`, saveAppState, appState);
         }}
       >
         <Link href={"/"}>

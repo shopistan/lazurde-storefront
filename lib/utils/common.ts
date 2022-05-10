@@ -47,6 +47,6 @@ export const updateBrand = (
 ) => {
   saveAppState({
     ...appState,
-    brand: brandVal && brandVal?.toLowerCase(),
+    brand: brandVal ? brandVal : `L'azurde`,
   });
 };
