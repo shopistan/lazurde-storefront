@@ -10,33 +10,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
       - uses: actions/checkout@v3
-      - name: Checkout tools repo
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm i
+      - run: npm run test
+      - run: npm run descriptors
+      - run: npm run build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Checking out to api tests repo
         uses: actions/checkout@v3
         with:
           repository: shopistan/lazurde-api-tests
           path: "./lazurde-api-tests"
-      - run: ls
       - run: cd lazurde-api-tests && ls && npm i && cd Postman-Collections && newman run Klondike_Collection.json --environment klondiketest.postman_environment.json
-      # - uses: actions/checkout@v3
-      # - name: Use Node.js ${{ matrix.node-version }}
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: ${{ matrix.node-version }}
-      #     cache: "npm"
-      # - run: npm i
-      # - run: npm run test
-      # - run: npm run descriptors
-      # - run: npm run build
-      # - run: cd
-      # - run: ls
-      # - run: git clone https://github.com/shopistan/lazurde-api-tests.git
-      # - run: cd lazurde-api-tests
-      # - run: yarn install
-      # - run: cd Postman-Collections
-      # - run: newman run Klondike_Collection.json --environment klondiketest.postman_environment.json
