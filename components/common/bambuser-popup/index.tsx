@@ -1,20 +1,33 @@
-
 import React from "react";
-import Script from 'next/script';
+import Script from "next/script";
+import { ArrowRight } from "components/icons";
 
 interface PopupProps {
   bId?: string;
   btnText?: string;
   scriptId?: string;
+  className?: string;
+  videoPlayBtn?: boolean;
 }
 
-const BambuserPopup = ({ bId = '34vfkSGTIydQauc1U8Xq', btnText = 'Join show now', scriptId = '1'}: PopupProps): JSX.Element => {
-
+const BambuserPopup = ({
+  bId = "34vfkSGTIydQauc1U8Xq",
+  btnText = "see live products",
+  scriptId = "0",
+  className = "",
+  videoPlayBtn = false,
+}: PopupProps): JSX.Element => {
   return (
     <>
-      <button id={`liveshopping-${bId}`}>{btnText}</button>
+      <div className={className} id={`liveshopping-${scriptId}`}>
+        {videoPlayBtn ? (
+          <ArrowRight fill="#ffffff" width="20" height="35" />
+        ) : (
+          <>{btnText}</>
+        )}
+      </div>
 
-      <Script id={scriptId} >
+      <Script id={scriptId}>
         {`   (function() {
             if (!window.initBambuserLiveShopping){
               window.initBambuserLiveShopping = function(item) { window.initBambuserLiveShopping.queue.push(item) }; window.initBambuserLiveShopping.queue = [];
@@ -25,14 +38,13 @@ const BambuserPopup = ({ bId = '34vfkSGTIydQauc1U8Xq', btnText = 'Join show now'
 
             window.initBambuserLiveShopping({
               showId: '${bId}',
-              node: document.getElementById('liveshopping-${bId}'),
+              node: document.getElementById('liveshopping-${scriptId}'),
               type: "overlay",
             });
-          })();`
-      } </Script>
+          })();`}
+      </Script>
     </>
+  );
+};
 
-  )
-}
-
-export default BambuserPopup
+export default BambuserPopup;
