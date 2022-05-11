@@ -1,7 +1,7 @@
 import React, { FC, useContext } from "react";
 import styles from "./style.module.scss";
 import { AppContext } from "lib/context";
-import useTranslation from "next-translate/useTranslation";
+// import useTranslation from "next-translate/useTranslation";
 interface SearchResultsInfoProps {
   searchTerm: string;
   totalItems: Number;
@@ -11,7 +11,7 @@ const SearchResultsInfo: FC<SearchResultsInfoProps> = ({
   totalItems,
 }) => {
   const { appState } = useContext(AppContext);
-  const { t } = useTranslation("common");
+  // const { t } = useTranslation("common");
 
   return (
     <div className={styles["search-results-info-wrapper"]}>
