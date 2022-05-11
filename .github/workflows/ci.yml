@@ -8,6 +8,11 @@ on:
     branches: [main, qa-testing, stage, develop, LW-272-api-test-in-ci/cd]
 
 jobs:
+  test:
+    steps:
+      - run: npm i
+      - run: npm run test
+      - run: npm run descriptors
   build:
     runs-on: ubuntu-latest
 
@@ -23,7 +28,7 @@ jobs:
           repository: shopistan/lazurde-api-tests
           path: "./lazurde-api-tests"
       - run: ls
-      - run: cd /public
+      - run: cd public
       - run: ls
       # - uses: actions/checkout@v3
       # - name: Use Node.js ${{ matrix.node-version }}
