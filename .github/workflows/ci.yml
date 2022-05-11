@@ -29,7 +29,7 @@ jobs:
           repository: shopistan/lazurde-api-tests
           path: "./lazurde-api-tests"
       - run: ls
-      - run: cd public
+      - run: /bin/bash cd public
       - run: ls
       # - uses: actions/checkout@v3
       # - name: Use Node.js ${{ matrix.node-version }}
