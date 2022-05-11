@@ -2,7 +2,7 @@ const { Types } = require("@teamfabric/xpm");
 
 exports.default = Types.Component({
     id: "HelpCategory",
-    label: "HelpCategory",
+    label: "Help Category",
     description: ``,
 
     attributes: {
