@@ -9,6 +9,7 @@ on:
 
 jobs:
   test:
+    runs-on: ubuntu-latest
     steps:
       - run: npm i
       - run: npm run test
