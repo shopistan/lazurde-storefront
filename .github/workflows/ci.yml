@@ -10,17 +10,23 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
+     - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
       - run: npm i
       - run: npm run test
       - run: npm run descriptors
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
       - uses: actions/checkout@v3
       - name: Checkout tools repo
@@ -29,7 +35,7 @@ jobs:
           repository: shopistan/lazurde-api-tests
           path: "./lazurde-api-tests"
       - run: ls
-      - run: /bin/bash cd public
+      - run: cd public
       - run: ls
       # - uses: actions/checkout@v3
       # - name: Use Node.js ${{ matrix.node-version }}
