@@ -33,12 +33,14 @@ interface ProductListingProps {
   productDataArray: [];
   categoryName: string;
   filterList: [];
+  showBreadcrumb: boolean;
 }
 
 const ProductListing = ({
   productDataArray = [],
   categoryName = "",
   filterList,
+  showBreadcrumb = true,
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
@@ -119,7 +121,7 @@ const ProductListing = ({
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
-        <BreadCrumbs />
+        {showBreadcrumb && <BreadCrumbs />}
 
         <Pagination
           paginationClass={styles["div-pagination"]}
