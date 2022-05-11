@@ -50,6 +50,6 @@ export const updateBrand = (
 ) => {
   saveAppState({
     ...appState,
-    brand: brandVal ? brandVal : `L'azurde`,
+    brand: brandVal ? brandVal : "Lazurde",
   });
 };
