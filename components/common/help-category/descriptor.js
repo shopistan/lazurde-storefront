@@ -1,8 +1,8 @@
 const { Types } = require("@teamfabric/xpm");
 
 exports.default = Types.Component({
-    id: "CollectionCard",
-    label: "Explore our collection",
+    id: "HelpCategory",
+    label: "HelpCategory",
     description: ``,
 
     attributes: {
