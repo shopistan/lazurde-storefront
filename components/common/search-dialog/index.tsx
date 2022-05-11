@@ -11,6 +11,7 @@ import { popularProductCardData } from "lib/mock-data/data";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
+import useTranslation from "next-translate/useTranslation";
 
 interface SearchDialogProps {
   siteLogo: ImageType;
@@ -29,6 +30,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
   const { appState } = useContext(AppContext);
   const [searchTerm, setSearchTerm] = useState(null);
   const router = useRouter();
+  const { t } = useTranslation("common");
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -41,6 +43,8 @@ const SearchDialog: FC<SearchDialogProps> = ({
       router.push(`/s?keyword=${joinTerm}`, undefined, { shallow: true });
     }
   };
+
+  const placeholderText = appState?.lang === "en" ? "Shop" : "متجر";
 
   return (
     <>
@@ -69,12 +73,14 @@ const SearchDialog: FC<SearchDialogProps> = ({
             <div className={styles["search-icon"]}>
               <Search width="16" height="16" color="rgba(0, 0, 0, 0.4)" />
             </div>
+            {console.log("placeholder", appState.brand)}
             <Input
               showLabel={false}
               className={styles["search-input"]}
-              placeholder={`${appState.lang === "en" ? "Shop" : "تسوق"} ${
-                appState.brand
-              }`}
+              placeHolder={`${placeholderText} ${appState?.brand}`}
+              // placeHolder={`${appState?.lang === "en" ? "Shop" : t("Shop")} ${
+              //   appState?.brand
+              // }`}
               onChange={handleSearch}
               handleSubmit={handleSubmit}
             ></Input>

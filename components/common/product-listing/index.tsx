@@ -31,12 +31,14 @@ interface ProductListingProps {
   productDataArray: [];
   categoryName: string;
   filterList: [];
+  showBreadcrumb: boolean;
 }
 
 const ProductListing = ({
   productDataArray = [],
   categoryName = "",
   filterList,
+  showBreadcrumb = true,
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
@@ -72,10 +74,12 @@ const ProductListing = ({
     Object.keys(selectedFilters).forEach((filterType, index) => {
       const orFilters: any[] = [];
 
-      Object.keys(selectedFilters[filterType]?.selectedOptions).forEach((filterOption) => {
-        const facet = `${selectedFilters[filterType]?.name}: ${selectedFilters[filterType]?.selectedOptions[filterOption]?.name}`;
-        orFilters.push(facet);
-      });
+      Object.keys(selectedFilters[filterType]?.selectedOptions).forEach(
+        (filterOption) => {
+          const facet = `${selectedFilters[filterType]?.name}: ${selectedFilters[filterType]?.selectedOptions[filterOption]?.name}`;
+          orFilters.push(facet);
+        }
+      );
 
       payload.push(orFilters);
     });
@@ -115,7 +119,7 @@ const ProductListing = ({
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
-        <BreadCrumbs />
+        {showBreadcrumb && <BreadCrumbs />}
 
         {width < 1024 ? (
           <FilterBarMobile

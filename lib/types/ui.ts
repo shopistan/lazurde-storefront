@@ -2,7 +2,7 @@ import { ChangeEventHandler } from "react";
 
 export type InputType = {
   value?: string;
-  placeholder?: string;
+  placeHolder: string;
   className?: string;
   style?: object;
   label?: string;

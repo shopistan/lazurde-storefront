@@ -47,13 +47,16 @@ const SearchPage: FC<SearchPageProps> = ({
           const Component = componentsById[component.id];
           if (Component) {
             if (component.id === "ProductListing") {
-              return (
-                <Component
-                  {...component.params}
-                  productDataArray={algoliaSearchResults?.hits || []}
-                  key={index}
-                />
-              );
+              if (algoliaSearchResults?.hits?.length) {
+                return (
+                  <Component
+                    {...component.params}
+                    productDataArray={algoliaSearchResults?.hits || []}
+                    key={index}
+                    showBreadcrumb={false}
+                  />
+                );
+              } else return null;
             }
             return <Component {...component.params} key={index} />;
           }
