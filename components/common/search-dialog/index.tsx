@@ -12,7 +12,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
-
+import {desktopScreenSize} from 'lib/utils/common'
 interface SearchDialogProps {
   siteLogo: ImageType;
   siteLogoUrl: string;
@@ -48,7 +48,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
 
   return (
     <>
-      {width > 1023 && (
+      {width > desktopScreenSize && (
         <div
           className={styles["overlay"]}
           data-opened={openSearchDialog}
@@ -73,7 +73,6 @@ const SearchDialog: FC<SearchDialogProps> = ({
             <div className={styles["search-icon"]}>
               <Search width="16" height="16" color="rgba(0, 0, 0, 0.4)" />
             </div>
-            {console.log("placeholder", appState.brand)}
             <Input
               showLabel={false}
               className={styles["search-input"]}

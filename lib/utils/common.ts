@@ -11,6 +11,9 @@ import {
   RegionType,
 } from "lib/types/common";
 
+export const desktopScreenSize = 1023
+export const mobileScreenSize = 767
+
 export const getAppStateFromLocalStorage = () => {
   const appState =
     typeof window !== "undefined" &&

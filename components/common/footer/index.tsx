@@ -12,6 +12,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 import Accordion from "components/common/ui/accordion/Accordion";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
+import {desktopScreenSize} from 'lib/utils/common'
 
 const Footer = ({
   heading = "",
@@ -67,7 +68,7 @@ const Footer = ({
               {Array.isArray(_footerLinks) &&
                 _footerLinks.length > 0 &&
                 _footerLinks.map((footerLink, index) =>
-                  width > 1023 ? (
+                  width > desktopScreenSize ? (
                     <FooterLinks
                       heading={footerLink.linkHeading}
                       links={footerLink.links}

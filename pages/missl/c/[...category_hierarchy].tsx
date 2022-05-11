@@ -68,12 +68,10 @@ export default MisslProductListingPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const livePageRoutes = (await fetchAllLivePageRoutes()) || [];
-  //console.log("livePageRoutes", livePageRoutes);
   const misslListingPageRoutes = livePageRoutes.filter(
     (pageRoute: PageRouteType) =>
       pageRoute.typeUrl === "/c" && pageRoute.pageUrl.includes("missl")
   );
-  //console.log("missl Listing", misslListingPageRoutes);
   const paths = misslListingPageRoutes.map((listingPage: PageRouteType) => {
     const cSlug = listingPage.pageUrl.replace("/missl/c/", "");
     return {
@@ -82,9 +80,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
       },
     };
   });
-  // for (let i = 0; i < paths.length; i++) {
-  //   console.log("CPATH", paths[i].params.category_hierarchy);
-  // }
   return { paths, fallback: "blocking" };
 };
 
@@ -98,7 +93,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     (
       globalComponents.find(
         (item: XMComponent) =>
-          item.id === "Header" && item.params.headerId === "lazurdeHeader"
+          item.id === "Header" && item.params.headerId === "missLHeader"
       ) || {}
     ).params || {};
   const footerProps =

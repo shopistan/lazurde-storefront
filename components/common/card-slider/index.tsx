@@ -7,6 +7,7 @@ import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
 import Label from "components/common/ui/label";
 import Slider from "components/common/ui/slider/slider";
+import { desktopScreenSize } from 'lib/utils/common'
 import Link from "next/link";
 
 type CardsArrType = {
@@ -52,7 +53,7 @@ const CardSlider = ({
       <Slider
         desktopSlidePerView={4}
         mobileSlidePerView={1.1}
-        navigation={width > 1023 ? true : false}
+        navigation={width > desktopScreenSize ? true : false}
         scrollbar={true}
         className={`card-slider`}
       >
@@ -63,23 +64,19 @@ const CardSlider = ({
               const { image, heading, slideLink } = content;
               return (
                 <SwiperSlide key={index}>
-                  <Link href={slideLink || "/"}>
-                    <a className={styles["card-slider__navigation"]}>
-                      <Cards
-                        cardImage={image}
-                        cardTitle={
-                          appState?.lang === "en"
-                            ? heading
-                            : Array.isArray(_arabicCardData) &&
-                              _arabicCardData.length > 0 &&
-                              _arabicCardData[index].heading
-                        }
-                        width={width > 1023 ? 314 : 332}
-                        height={width > 1023 ? 429 : 352}
-                        className="category-slider-card"
-                      />
-                    </a>
-                  </Link>
+                  <Cards
+                    cardImage={image}
+                    cardTitle={
+                      appState?.lang === "en"
+                        ? heading
+                        : Array.isArray(_arabicCardData) &&
+                        _arabicCardData.length > 0 &&
+                        _arabicCardData[index].heading
+                    }
+                    width={width > desktopScreenSize ? 314 : 332}
+                    height={width > desktopScreenSize ? 429 : 352}
+                    className="category-slider-card"
+                  />
                 </SwiperSlide>
               );
             })}

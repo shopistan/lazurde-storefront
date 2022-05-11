@@ -129,7 +129,7 @@ const FilterBar: FC<FilterBarProps> = ({
 }): JSX.Element => {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const link: any = useRef(
+  let link: any = useRef(
     Array.isArray(filterList) &&
       filterList.length > 0 &&
       filterList.map(() => React.createRef())
@@ -149,6 +149,7 @@ const FilterBar: FC<FilterBarProps> = ({
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  const [linkRefs, setLinkRefs] = useState(link);
   const [width] = useWindowSize();
   const [optionData, setOptionData] = useState<{
     data?: any;
@@ -190,6 +191,7 @@ const FilterBar: FC<FilterBarProps> = ({
 
   useEffect(() => {
     setCurrentFilterList(filterList);
+    setLinkRefs(link);
   }, [filterList]);
 
   return (
@@ -209,7 +211,7 @@ const FilterBar: FC<FilterBarProps> = ({
                   role={"links"}
                   key={index}
                   className={styles["links"]}
-                  ref={link.current[index]}
+                  ref={linkRefs?.current && linkRefs?.current[index]}
                   data-has-count={selectedFilterCount > 0}
                   onMouseOver={(event) => {
                     event.stopPropagation();
@@ -222,11 +224,11 @@ const FilterBar: FC<FilterBarProps> = ({
                         dropdownData: data?.filterOptions,
                         positionOffset:
                           appState?.lang === "en"
-                            ? link?.current[
+                            ? linkRefs?.current[
                                 index
                               ]?.current?.getBoundingClientRect().left
                             : width -
-                              link?.current[
+                              linkRefs?.current[
                                 index
                               ]?.current?.getBoundingClientRect().right -
                               17.4,

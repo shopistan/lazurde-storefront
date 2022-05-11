@@ -11,6 +11,7 @@ import { ImageType } from "lib/types/common";
 import { AppContext } from "lib/context";
 import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
+import {desktopScreenSize} from 'lib/utils/common'
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -110,8 +111,8 @@ const ProductCard = ({
                       <Image
                         src={data?.url}
                         alt={data?.altText}
-                        width={width > 1023 ? 314 : 167.5}
-                        height={width > 1023 ? 322 : 190.67}
+                        width={width > desktopScreenSize ? 314 : 167.5}
+                        height={width > desktopScreenSize ? 322 : 190.67}
                         layout="responsive"
                       />
                     )}
