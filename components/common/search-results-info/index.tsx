@@ -1,6 +1,7 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import styles from "./style.module.scss";
-
+import { AppContext } from "lib/context";
+// import useTranslation from "next-translate/useTranslation";
 interface SearchResultsInfoProps {
   searchTerm: string;
   totalItems: Number;
@@ -9,19 +10,38 @@ const SearchResultsInfo: FC<SearchResultsInfoProps> = ({
   searchTerm,
   totalItems,
 }) => {
-  console.log("searchterm", searchTerm);
+  const { appState } = useContext(AppContext);
+  // const { t } = useTranslation("common");
+
   return (
     <div className={styles["search-results-info-wrapper"]}>
-      <p>
-        {`We have found ${totalItems} results for `}
-        <strong>{`"${searchTerm}"`}</strong>
-      </p>
-      <div>
-        <p className={styles["need-help"]}>Need Help?</p>
+      {appState?.lang === "en" ? (
         <p>
-          <strong>Contact Us </strong> or call Customer Service at 800 843 3269
+          {`We have found ${totalItems} results for `}
+          <strong>{`"${searchTerm}"`}</strong>
         </p>
-      </div>
+      ) : (
+        <p>
+          {`لقد وجدنا ${totalItems} نتيجة ل`}{" "}
+          <strong>{`"${searchTerm}"`}</strong>
+        </p>
+      )}
+
+      {totalItems > 0 ? null : (
+        <div>
+          <p className={styles["need-help"]}>
+            {appState?.lang === "en" ? "Need Help?" : "تحتاج مساعدة ؟"}
+          </p>
+          <p className={styles["contact-us"]}>
+            <strong>
+              {appState?.lang === "en" ? "Contact Us " : "اتصل بنا "}
+            </strong>{" "}
+            {appState?.lang === "en"
+              ? "or call Customer Service at 800 843 3269"
+              : "أو اتصل بخدمة العملاء على800 843 3269"}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

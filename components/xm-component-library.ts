@@ -9,6 +9,7 @@ import CollectionCard from "./common/collection-card";
 import ProductListing from "./common/product-listing";
 import PLPCategory from "./common/plp-category";
 import Banner from "./common/banner";
+import BambuserCardSlider from "./common/bambuser-card-slider";
 import HelpCategory from "./common/help-category";
 
 export const componentsById: any = {
@@ -23,5 +24,6 @@ export const componentsById: any = {
   ProductListing,
   PLPCategory,
   Banner,
+  BambuserCardSlider,
   HelpCategory
 };

@@ -12,18 +12,24 @@ interface CardProps {
   width?: number | string;
   height?: number | string;
   color?: string;
-  favIconSrc ?: ImageType;
+  favIconSrc?: ImageType;
+  description?: string;
+  bambuserBtn?: boolean;
+  bambuserBtnBody?: JSX.Element | string;
 }
 
 const Cards = ({
   cardImage,
   cardTitle,
+  description = "",
   onClick,
   className = "",
   width = 10,
   height = 10,
   color = "#000000",
   favIconSrc,
+  bambuserBtn = false,
+  bambuserBtnBody = null,
 }: CardProps): JSX.Element => {
   return (
     <>
@@ -35,25 +41,44 @@ const Cards = ({
       >
         {cardImage?.url && (
           <div className={styles["image-section"]}>
-            {
-              favIconSrc &&
-            <img className={styles["fav-icon"]} src={favIconSrc.url} alt={favIconSrc.altText}/>
-            }
-            <Image
-              className={`${styles["card-image"]}`}
-              src={cardImage?.url}
-              alt={cardImage?.altText}
-              width={width}
-              height={height}
-              layout="responsive"
-            />
+            {favIconSrc && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                className={styles["fav-icon"]}
+                src={favIconSrc.url}
+                alt={favIconSrc.altText}
+              />
+            )}
+            <div className={styles["img-wrapper"]}>
+              <Image
+                className={`${styles["card-image"]}`}
+                src={cardImage?.url}
+                alt={cardImage?.altText}
+                width={width}
+                height={height}
+                layout="responsive"
+              />
+              {bambuserBtn ? (
+                <div className={styles["img-btn"]}>{bambuserBtnBody}</div>
+              ) : null}
+            </div>
           </div>
         )}
-        {cardTitle && (
-          <Label style={{ color: color }} className={styles["card-title"]}>
-            {cardTitle}
-          </Label>
-        )}
+        <div className={styles["card-content"]}>
+          {cardTitle ? (
+            <Label style={{ color: color }} className={styles["card-title"]}>
+              {cardTitle}
+            </Label>
+          ) : null}
+          {description ? (
+            <Label
+              style={{ color: color }}
+              className={styles["card-description"]}
+            >
+              {description}
+            </Label>
+          ) : null}
+        </div>
       </div>
     </>
   );

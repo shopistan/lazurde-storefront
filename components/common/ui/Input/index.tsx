@@ -7,7 +7,7 @@ const Input = ({
   className,
   style,
   value,
-  placeholder = "This is placeholder text",
+  placeHolder = "This is placeholder text",
   label = "Placeholder",
   labelClassName,
   onChange = (e) => {},
@@ -25,7 +25,7 @@ const Input = ({
         className={`${styles["input-c"]} ${className}`}
         style={style}
         value={value}
-        placeholder={placeholder}
+        placeholder={placeHolder}
         onChange={(e) => onChange(e)}
         onKeyDown={(e) => handleSubmit(e)}
       ></input>
