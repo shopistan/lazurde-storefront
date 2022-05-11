@@ -172,3 +172,82 @@
     }
   }
 }
+
+/*------------Bambuser-Card-Slider----------------*/
+
+.bambuser-card-slider {
+  .swiper-slide {
+    min-height: 314px;
+    background-color: $white-color;
+    padding-bottom: 24px;
+
+    @media (min-width: $breakPoint-desktop) {
+      min-height: 314px;
+    }
+
+    img {
+      width: 100% !important;
+
+      @media (max-width: 1023px) {
+        object-fit: cover;
+      }
+    }
+  }
+
+  &.swiper {
+    padding-top: 65px;
+    padding-bottom: 56px;
+
+    @media (min-width: $breakPoint-desktop) {
+      padding-bottom: 48px;
+    }
+
+    .swiper-scrollbar {
+      inset-inline-end: 0;
+      bottom: 0;
+      inset-inline-start: 0;
+      width: 96%;
+      height: 2px;
+      background-color: rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+
+      @media (min-width: $breakPoint-desktop) {
+        width: 100%;
+      }
+    }
+
+    .swiper-scrollbar-drag {
+      background-color: $black-color;
+    }
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 0;
+    width: auto;
+    align-items: flex-end;
+    color: $black-color;
+
+    &:after {
+      font-size: 8px;
+
+      @media (min-width: $breakPoint-desktop) {
+        font-size: 12px;
+      }
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.2;
+    }
+  }
+
+  .swiper-button-prev {
+    inset-inline-start: auto !important;
+    inset-inline-end: 46.29px !important;
+  }
+
+  .swiper-button-next {
+    inset-inline-start: auto !important;
+    inset-inline-end: 16px !important;
+  }
+}
