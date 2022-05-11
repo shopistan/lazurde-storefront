@@ -24,9 +24,9 @@ jobs:
       - run: npm i
       - run: npm run test
       - run: npm run descriptors
+      
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
       - name: Checkout tools repo
