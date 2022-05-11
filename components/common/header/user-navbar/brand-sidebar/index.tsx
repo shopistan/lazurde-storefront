@@ -9,6 +9,9 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
 import { updateBrand } from "lib/utils/common";
+import {desktopScreenSize} from 'lib/utils/common'
+
+
 interface SidebarProps {
   mainImg?: ImageType;
   mainTitle?: string;
@@ -28,11 +31,9 @@ const BrandContainer: FC<BrandArrType> = ({
   const { appState, saveAppState } = useContext(AppContext);
   const [width] = useWindowSize();
 
-  const brandValue = labelUrl && labelUrl.split("/")[1];
-
   return (
     <div className={styles["brands-list"]}>
-      {width > 1023 && (
+      {width > desktopScreenSize && (
         <Image
           src={brandImg.url}
           alt={brandImg.altText}
@@ -44,13 +45,12 @@ const BrandContainer: FC<BrandArrType> = ({
 
       <Link href={labelUrl}>
         <a
-          onClick={() => {
-            if (brandValue && brandValue?.length > 0) {
-              updateBrand(brandValue, saveAppState, appState);
-            } else {
-              updateBrand("Lazurde", saveAppState, appState);
-            }
-          }}
+          onClick={() =>
+            saveAppState({
+              ...appState,
+              brand: label ? label : "",
+            })
+          }
         >
           {label}
         </a>
@@ -92,7 +92,10 @@ const BrandSideBar: FC<SidebarProps> = ({
               onClick={() => {
                 setIsOpened(false);
                 closeMenu();
-                updateBrand("Lazurde", saveAppState, appState);
+                saveAppState({
+                  ...appState,
+                  brand: `L'azurde`,
+                });
                 router.push("/");
               }}
             >

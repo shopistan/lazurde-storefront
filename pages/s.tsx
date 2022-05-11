@@ -1,6 +1,7 @@
 import AppContentWrapper from "components/common/app-content-wrapper";
 import Footer from "components/common/footer";
 import Header from "components/common/header";
+import SearchResultsInfo from "components/common/search-results-info";
 import { componentsById } from "components/xm-component-library";
 import { performKeywordSearch } from "lib/algolia";
 import { AlgoliaProductType } from "lib/types/algolia";
@@ -38,9 +39,25 @@ const SearchPage: FC<SearchPageProps> = ({
       </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
-        {pageComponents.map((component: XMComponent, index) => {
+        <SearchResultsInfo
+          searchTerm={algoliaSearchResults?.query}
+          totalItems={algoliaSearchResults?.hits?.length}
+        />
+        {pageComponents?.map((component: XMComponent, index) => {
           const Component = componentsById[component.id];
           if (Component) {
+            if (component.id === "ProductListing") {
+              if (algoliaSearchResults?.hits?.length) {
+                return (
+                  <Component
+                    {...component.params}
+                    productDataArray={algoliaSearchResults?.hits || []}
+                    key={index}
+                    showBreadcrumb={false}
+                  />
+                );
+              } else return null;
+            }
             return <Component {...component.params} key={index} />;
           }
           return null;
