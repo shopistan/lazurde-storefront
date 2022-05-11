@@ -23,7 +23,7 @@ jobs:
           repository: shopistan/lazurde-api-tests
           path: "./lazurde-api-tests"
       - run: ls
-      - run: cd lazurde-api-tests && ls && npm i && newman run Klondike_Collection.json --environment klondiketest.postman_environment.json
+      - run: cd lazurde-api-tests && ls && npm i && cd Postman-Collections && newman run Klondike_Collection.json --environment klondiketest.postman_environment.json
       # - uses: actions/checkout@v3
       # - name: Use Node.js ${{ matrix.node-version }}
       #   uses: actions/setup-node@v3
