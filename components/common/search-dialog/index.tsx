@@ -12,7 +12,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
-import {desktopScreenSize} from 'lib/utils/common'
+import { desktopScreenSize } from "lib/utils/common";
 interface SearchDialogProps {
   siteLogo: ImageType;
   siteLogoUrl: string;
@@ -40,7 +40,14 @@ const SearchDialog: FC<SearchDialogProps> = ({
     if (searchTerm && e.key == "Enter") {
       var splitTerm = searchTerm.split(" ");
       var joinTerm = splitTerm.join("-");
-      router.push(`/s?keyword=${joinTerm}`, undefined, { shallow: true });
+      // router.push(`/s?keyword=${joinTerm}`, undefined, { shallow: true });
+      router.push({
+        pathname: "/s",
+        query: {
+          keyword: joinTerm,
+        },
+      });
+      setOpenSearchDialog(false);
     }
   };
 
