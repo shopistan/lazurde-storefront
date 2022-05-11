@@ -10,7 +10,8 @@ import useTranslation from "next-translate/useTranslation";
 import { fetchCategoryProducts, performFilteredSearch } from "lib/algolia";
 import BreadCrumbs from "components/common/ui/bread-crumbs";
 import { ImageType } from "lib/types/common";
-import { desktopScreenSize } from 'lib/utils/common'
+import { desktopScreenSize } from "lib/utils/common";
+import Pagination from "../ui/pagination";
 
 interface ProductCardProps {
   index?: number;
@@ -95,7 +96,6 @@ const ProductListing = ({
   const onSortingChange = (sortedValue: any = {}) => {
     console.log("sortedValue", sortedValue);
 
-
     // if (sortedValue.length < 1) {
     //   return setCurrentProductData(productDataArray);
     // }
@@ -123,64 +123,84 @@ const ProductListing = ({
       <div className={styles["product-listing__wrapper"]}>
         {showBreadcrumb && <BreadCrumbs />}
 
-        {width <= desktopScreenSize ? (
-          <FilterBarMobile
-            onApplyFilters={applyFilters}
-            onSortingChange={onSortingChange}
-            filterList={filterList}
-          ></FilterBarMobile>
-        ) : (
-          <FilterBar
-            onApplyFilters={applyFilters}
-            onSortingChange={onSortingChange}
-            filterList={filterList}
-          ></FilterBar>
-        )}
-        <div className={styles["product-listing__cards"]}>
-          {currentProductData && currentProductData.length > 0
-            ? currentProductData?.map(
-              (data: ProductCardProps, index: number) => {
-                const {
-                  sku,
-                  itemId,
-                  priceListId,
-                  currency,
-                  title,
-                  basePrice = data["Base Price"],
-                  discount,
-                  discountedPrice,
-                  productCardImages = [
-                    { url: data["Image URL"], altText: "" },
-                  ],
-                  onlineExclusiveTag,
-                } = data;
-                return (
-                  <>
-                    <ProductCard
-                      title={
-                        appState?.lang === "en"
-                          ? title
-                          : Array.isArray(_arabicProductCardData) &&
-                          _arabicProductCardData.length > 0 &&
-                          _arabicProductCardData[index]?.title
-                      }
-                      sku={sku}
-                      itemId={itemId}
-                      priceListId={priceListId}
-                      currency={currency}
-                      basePrice={basePrice}
-                      discount={discount}
-                      discountAmount={discountedPrice}
-                      productCardImages={productCardImages}
-                      onlineExclusiveTag={onlineExclusiveTag}
-                      index={index}
-                    />
-                  </>
-                );
-              }
-            )
-            : ""}
-        </div>
+        <Pagination
+          paginationClass={styles["div-pagination"]}
+          defaultPageNumber={1}
+          pageSize={5}
+          totalSize={productDataArray.length}
+          dataArray={productDataArray}
+          onInitialize={(slicedArray: []) => {
+            setCurrentProductData(slicedArray);
+          }}
+          onPageUp={(slicedArray: []) => {
+            setCurrentProductData(slicedArray);
+          }}
+          onPageDown={(slicedArray: []) => {
+            setCurrentProductData(slicedArray);
+          }}
+        >
+          <>
+          {width <= desktopScreenSize ? (
+            <FilterBarMobile
+              onApplyFilters={applyFilters}
+              onSortingChange={onSortingChange}
+              filterList={filterList}
+            ></FilterBarMobile>
+          ) : (
+            <FilterBar
+              onApplyFilters={applyFilters}
+              onSortingChange={onSortingChange}
+              filterList={filterList}
+            ></FilterBar>
+          )}
+          <div className={styles["product-listing__cards"]}>
+            {currentProductData && currentProductData.length > 0
+              ? currentProductData?.map(
+                  (data: ProductCardProps, index: number) => {
+                    const {
+                      sku,
+                      itemId,
+                      priceListId,
+                      currency,
+                      title,
+                      basePrice = data["Base Price"],
+                      discount,
+                      discountedPrice,
+                      productCardImages = [
+                        { url: data["Image URL"], altText: "" },
+                      ],
+                      onlineExclusiveTag,
+                    } = data;
+                    return (
+                      <>
+                        <ProductCard
+                          title={
+                            appState?.lang === "en"
+                              ? title
+                              : Array.isArray(_arabicProductCardData) &&
+                                _arabicProductCardData.length > 0 &&
+                                _arabicProductCardData[index]?.title
+                          }
+                          sku={sku}
+                          itemId={itemId}
+                          priceListId={priceListId}
+                          currency={currency}
+                          basePrice={basePrice}
+                          discount={discount}
+                          discountAmount={discountedPrice}
+                          productCardImages={productCardImages}
+                          onlineExclusiveTag={onlineExclusiveTag}
+                          index={index}
+                        />
+                      </>
+                    );
+                  }
+                )
+              : ""}
+          </div>
+          </>
+
+        </Pagination>
       </div>
     </>
   );
