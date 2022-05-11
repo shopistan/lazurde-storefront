@@ -9,6 +9,7 @@ import CollectionCard from "./common/collection-card";
 import ProductListing from "./common/product-listing";
 import PLPCategory from "./common/plp-category";
 import Banner from "./common/banner";
+import BambuserCardSlider from "./common/bambuser-card-slider";
 
 export const componentsById: any = {
   LazurdeHeroBanner,
@@ -21,5 +22,6 @@ export const componentsById: any = {
   CollectionCard,
   ProductListing,
   PLPCategory,
-  Banner
+  Banner,
+  BambuserCardSlider,
 };
