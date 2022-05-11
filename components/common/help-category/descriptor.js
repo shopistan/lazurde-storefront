@@ -18,9 +18,9 @@ exports.default = Types.Component({
                 children: {
                     title: Types.String({ label: 'Title' }),
                     text: Types.String({ label: 'Text' }),
-                    contact: Types.String({ label: 'Text' }),
+                    details: Types.String({ label: 'Details' }),
                     image: Types.Image({
-                        label: 'Text',
+                        label: 'Image',
                         url: Types.String({ label: 'URL' }),
                         altText: Types.String({ label: 'Alt Text' }),
                     }),
