@@ -29,7 +29,7 @@ const KenazHome: FC<PageProps> = ({
   };
 
   useEffect(() => {
-    if (appState?.brand === "kenaz") {
+    if (appState?.brand === "Kenaz") {
       saveAppState({
         ...appState,
         region: "sa",
