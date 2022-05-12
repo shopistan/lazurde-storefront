@@ -86,6 +86,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     if (query?.brand === `L'azurde`) return "lazurdeHeader";
     else if (query?.brand === `Miss L'`) return "missLHeader";
     else if (query?.brand === "Kenaz") return "kenazHeader";
+    else return "lazurdeHeader";
   };
   const globalComponents = (await fetchGlobalComponents()) || [];
   const pageComponents = (await fetchXMComponents(12, "/search")) || [];
