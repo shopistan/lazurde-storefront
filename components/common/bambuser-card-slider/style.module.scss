@@ -76,4 +76,14 @@ html[dir="rtl"] {
       padding-inline-end: 5px;
     }
   }
+
+  .bambuser-card-slider {
+    &__section-heading {
+      font-weight: 600;
+
+      @media (min-width: $breakPoint-desktop) {
+        font-weight: 500;
+      }
+    }
+  }
 }
