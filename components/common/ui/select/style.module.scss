@@ -95,6 +95,11 @@
   }
 }
 
+.selected-img,
+.dropdown-flag {
+  margin-inline-start: 5px !important;
+}
+
 html[dir="rtl"] {
   .dropdown {
     outline: 0;

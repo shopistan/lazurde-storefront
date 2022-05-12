@@ -12,7 +12,8 @@ import useWindowSize from "lib/utils/useWindowSize";
 import Accordion from "components/common/ui/accordion/Accordion";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
-import {desktopScreenSize} from 'lib/utils/common'
+import { desktopScreenSize } from "lib/utils/common";
+import { socialIconSize, paymentIconSize } from "lib/mock-data/data";
 
 const Footer = ({
   heading = "",
@@ -93,7 +94,11 @@ const Footer = ({
               >
                 {appState?.lang === "en" ? socialIconText : t("socialIconText")}
               </Label>
-              <FooterIcons iconsList={socialLinks} />
+              <FooterIcons
+                iconsList={socialLinks}
+                iconSize={socialIconSize}
+                isFooterIcons={false}
+              />
             </div>
             {appState?.region === "sa" && (
               <div className={styles["footer__maroof-logo"]}>
@@ -124,6 +129,8 @@ const Footer = ({
           <FooterIcons
             className={styles["footer__footer-icons"]}
             iconsList={paymentLinks}
+            iconSize={paymentIconSize}
+            isFooterIcons={true}
           />
         </div>
       </div>

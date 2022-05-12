@@ -9,13 +9,19 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
 import { updateBrand } from "lib/utils/common";
-import {desktopScreenSize} from 'lib/utils/common'
-
+import { desktopScreenSize } from "lib/utils/common";
 
 interface SidebarProps {
   mainImg?: ImageType;
   mainTitle?: string;
-  logoArr?: { logoImg: ImageType }[];
+  logoArr?: {
+    logoImg: {
+      url?: string;
+      altText?: string;
+      width?: string | number;
+      mobileWidth?: string | number;
+    };
+  }[];
   brandArr?: BrandArrType[];
   isOpened?: boolean;
   setIsOpened?: Function;
@@ -71,6 +77,7 @@ const BrandSideBar: FC<SidebarProps> = ({
 }): JSX.Element => {
   const { appState, saveAppState } = useContext(AppContext);
   const router = useRouter();
+  const [size] = useWindowSize();
 
   return (
     <div
@@ -113,7 +120,13 @@ const BrandSideBar: FC<SidebarProps> = ({
         )}
         <div className={styles["text_div"]}>
           <div>
-            <img src={mainImg?.url} alt={mainImg?.altText} />
+            <Image
+              src={mainImg?.url || ""}
+              alt={mainImg?.altText || ""}
+              layout="fixed"
+              width={184}
+              height={24}
+            />
           </div>
           <div className={styles["slogan_div"]}>
             <span>
@@ -123,10 +136,21 @@ const BrandSideBar: FC<SidebarProps> = ({
           <div className={`flex gap-x-[8px] ${styles["brands-logo"]}`}>
             {logoArr?.length > 0 &&
               logoArr.map((data, index) => {
-                const { url, altText } = data.logoImg;
+                const { url, altText, width, mobileWidth } = data?.logoImg;
                 return (
                   <div key={index}>
-                    <img key={index} src={url} alt={altText} />
+                    <Image
+                      key={index}
+                      src={url || ""}
+                      alt={altText || ""}
+                      layout="fixed"
+                      width={
+                        size > desktopScreenSize
+                          ? width || 89
+                          : mobileWidth || 80
+                      }
+                      height={15}
+                    />
                   </div>
                 );
               })}

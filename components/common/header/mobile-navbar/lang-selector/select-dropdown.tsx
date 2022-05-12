@@ -4,6 +4,7 @@ import { ArrowRight } from "components/icons";
 import { SelectProps, OptionProps } from "lib/types/mobile-header";
 import styles from "../style.module.scss";
 import { AppContext } from "lib/context";
+import Image from "next/image";
 
 const LanguageSelector = ({
   options = [{ label: "label", img: "", value: "value", langTitle: "" }],
@@ -40,10 +41,12 @@ const LanguageSelector = ({
       >
         <div className={styles["mobile-header__lang-left-side"]}>
           {selectedVal?.img && (
-            <img
+            <Image
               src={selectedVal?.img || "/flag-uae.svg"}
-              width={iconWidth}
+              width={iconWidth || 16}
+              height={16}
               alt="image"
+              layout="fixed"
             />
           )}
           <span>
@@ -85,11 +88,13 @@ const LanguageSelector = ({
             >
               <a>
                 <span>
-                  {opData.img && (
-                    <img
+                  {opData?.img && (
+                    <Image
                       src={opData?.img || "/flag-uae.svg"}
-                      width={iconWidth}
+                      width={iconWidth || 16}
+                      height={16}
                       alt="image"
+                      layout="fixed"
                     />
                   )}
                   <span>{opData?.label}</span>

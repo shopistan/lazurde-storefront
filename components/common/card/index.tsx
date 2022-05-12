@@ -41,14 +41,17 @@ const Cards = ({
       >
         {cardImage?.url && (
           <div className={styles["image-section"]}>
-            {favIconSrc && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                className={styles["fav-icon"]}
-                src={favIconSrc.url}
-                alt={favIconSrc.altText}
-              />
-            )}
+            <div className={styles["fav-icon"]}>
+              {favIconSrc && (
+                <Image
+                  src={favIconSrc?.url || ""}
+                  alt={favIconSrc.altText || "fav-icon"}
+                  layout="fixed"
+                  width={20}
+                  height={20}
+                />
+              )}
+            </div>
             <div className={styles["img-wrapper"]}>
               <Image
                 className={`${styles["card-image"]}`}
