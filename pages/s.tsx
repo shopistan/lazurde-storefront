@@ -72,6 +72,7 @@ export default SearchPage;
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { query = {} } = context;
+  var facetFilters = [`Brand:${query?.brand}`];
   const {
     hits = [],
     nbHits = 0,
@@ -80,6 +81,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     hitsPerPage = 0,
   } = await performKeywordSearch({
     query: query.keyword || "",
+    facetFilters: facetFilters || [],
   });
 
   const getCurrentBrandId = () => {
