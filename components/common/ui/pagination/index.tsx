@@ -38,7 +38,7 @@ const Pagination = ({
   const { appState } = useContext(AppContext);
 
   const populateOnFirstLoad = (callBackFn: Function) => {
-    const firstPageIndex = (currentPage - 1) * pageSize;
+    const firstPageIndex = (defaultPageNumber - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
     const paginatedArray = dataArray.slice(firstPageIndex, lastPageIndex);
     callBackFn(paginatedArray);
@@ -50,9 +50,10 @@ const Pagination = ({
   }
 
   useEffect(() => {
+    setCurrentPage(defaultPageNumber)
     populateOnFirstLoad(onInitialize);
     setHidePagination(isPaginationRequired())
-  }, []);
+  }, [dataArray]);
 
   const pageDown = (callBackFn: Function) => {
     const pageNum = currentPage - 1;
