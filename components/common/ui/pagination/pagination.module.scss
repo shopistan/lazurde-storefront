@@ -1,8 +1,8 @@
 @import "/styles/variables.scss";
 
 .main-pagination {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
   .div-view-count {
     display: flex;
@@ -13,14 +13,11 @@
     line-height: 120%;
     height: 33px;
 
-    .div-show-count {
-    }
-
     .div-view-all {
-      margin-left: 16px;
+      margin-inline-start: 16px;
 
       &[data-visible="false"] {
-          display: none;
+        display: none;
       }
 
       button {
@@ -31,7 +28,12 @@
         font-size: 14px;
         background: $white-color;
         color: $black-color;
+        cursor: pointer;
       }
+    }
+
+    &[data-hide="true"] {
+      display: none;
     }
   }
 
@@ -44,7 +46,11 @@
     margin-top: 40px;
 
     &[data-visible="false"] {
-        display: none;
+      display: none;
+    }
+
+    &[data-hide="true"] {
+      display: none;
     }
 
     .div-page-count {
@@ -82,6 +88,19 @@
         border: none;
         cursor: pointer;
       }
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .div-controls {
+    .div-page-count {
+      display: flex;
+      direction: rtl;
+    }
+    .div-left-arrow,
+    .div-right-arrow {
+      transform: rotate(180deg);
     }
   }
 }

@@ -11,7 +11,8 @@
   "arabicfooterLinks": "",
   "langSelectorBtnTxt" : "Continue",
   "navbarBackBtn": "Back to L’azurde",
-  "NavbarLangSelectorTitle" : "Select your preferred language and location"
-  
-
+  "NavbarLangSelectorTitle" : "Select your preferred language and location",
+  "textShow": "Showing",
+  "textOf": "of",
+  "textViewAll": "View All"
 }
