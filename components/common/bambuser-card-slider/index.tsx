@@ -97,7 +97,7 @@ const BambuserCardSlider = ({
                         <BambuserPopup
                           key={appState?.lang}
                           className={styles["bambuser-btn-arrow"]}
-                          scriptId={Math.random() * index + "1"}
+                          scriptId={Math.random() + "1"}
                           videoPlayBtn={true}
                           bId={bambuserId}
                         />
@@ -108,7 +108,7 @@ const BambuserCardSlider = ({
                     <BambuserPopup
                       key={appState?.lang}
                       className={styles["bambuser-btn"]}
-                      scriptId={Math.random() * index + "2"}
+                      scriptId={Math.random() + "2"}
                       bId={bambuserId}
                       btnText={
                         appState?.lang === "en"
