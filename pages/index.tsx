@@ -4,8 +4,9 @@ import { componentsById } from "components/xm-component-library";
 import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import Head from "next/head";
-import React, { FC } from "react";
+import React, { FC, useEffect, useContext } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
+import { AppContext } from "lib/context";
 
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
@@ -13,6 +14,14 @@ const LazurdeHome: FC<PageProps> = ({
   footerProps,
   pageComponents,
 }) => {
+  const { appState, saveAppState } = useContext(AppContext);
+
+  useEffect(() => {
+    saveAppState({
+      ...appState,
+      brand: `L'azurde`,
+    });
+  }, []);
   return (
     <>
       <Head>

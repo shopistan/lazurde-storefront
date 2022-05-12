@@ -6,7 +6,7 @@ import React, { FC, useState } from "react";
 export const AppContext = React.createContext<any>({});
 
 const ContextProvider: FC = ({ children }) => {
-  let defaultState: AppStateType | string = "";
+  var defaultState: AppStateType | string = "";
   if (getAppStateFromLocalStorage()) {
     defaultState = getAppStateFromLocalStorage();
   } else {
