@@ -1,61 +1,48 @@
-export const sliderData = [
-  {
-    image: {
-      url: "/Bracelets.svg",
-      altText: "Bracelets",
+export const sliderData = {
+  sectionHeading: "section heading",
+  cards: [
+    {
+      image: {
+        url: "/Picture1.svg",
+        altText: "Bracelets",
+      },
+      heading: "Bracelets",
+      description: "lorem ipsum lorem ipsum",
     },
-    heading: "Bracelets",
-  },
-  {
-    image: {
-      url: "/Rings.svg",
-      altText: "Rings",
+    {
+      image: {
+        url: "/Picture2.svg",
+        altText: "Rings",
+      },
+      heading: "Rings",
+      description: "lorem ipsum lorem ipsum",
     },
-    heading: "Rings",
-  },
-  {
-    image: {
-      url: "/Earrings.svg",
-      altText: "Earrings",
+    {
+      image: {
+        url: "/Picture3.svg",
+        altText: "Earrings",
+      },
+      heading: "Earrings",
+      description: "lorem ipsum lorem ipsum",
     },
-    heading: "Earrings",
-  },
-  {
-    image: {
-      url: "/Necklaces.svg",
-      altText: "Necklaces",
+    {
+      image: {
+        url: "/Picture4.svg",
+        altText: "Necklaces",
+      },
+      heading: "Necklaces",
+      description: "lorem ipsum lorem ipsum",
     },
-    heading: "Necklaces",
-  },
-  {
-    image: {
-      url: "/Bracelets.svg",
-      altText: "Bracelets",
+    {
+      image: {
+        url: "/Picture1.svg",
+        altText: "Bracelets",
+      },
+      heading: "Bracelets",
+      description: "lorem ipsum lorem ipsum",
     },
-    heading: "Bracelets",
-  },
-  {
-    image: {
-      url: "/Rings.svg",
-      altText: "Rings",
-    },
-    heading: "Rings",
-  },
-  {
-    image: {
-      url: "/Earrings.svg",
-      altText: "Earrings",
-    },
-    heading: "Earrings",
-  },
-  {
-    image: {
-      url: "/Necklaces.svg",
-      altText: "Necklaces",
-    },
-    heading: "Necklaces",
-  },
-];
+  ],
+};
 
 export const langSelectData = [
   {
