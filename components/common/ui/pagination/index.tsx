@@ -1,6 +1,8 @@
-import { ArrowLeft, ArrowRight } from "components/icons";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./pagination.module.scss";
+import { ArrowLeft, ArrowRight } from "components/icons";
+import useTranslation from "next-translate/useTranslation";
+import { AppContext } from "lib/context";
 
 interface PaginationProps {
   paginationClass?: string;
@@ -25,21 +27,31 @@ const Pagination = ({
   onInitialize,
   children,
 }: PaginationProps): JSX.Element => {
+
   const [currentPage, setCurrentPage] = useState(defaultPageNumber);
   const [showAll, setShowAll] = useState(false);
+  const [hidePagination, setHidePagination] = useState(false);
   const firstPageIndex = (currentPage - 1) * pageSize;
   const lastPageIndex = firstPageIndex + pageSize;
-  const totalPages = Math.round(totalSize / pageSize);
+  const totalPages = Math.ceil(totalSize / pageSize);
+  const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
 
-  const onFirstLoad = (callBackFn: Function) => {
+  const populateOnFirstLoad = (callBackFn: Function) => {
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
     const paginatedArray = dataArray.slice(firstPageIndex, lastPageIndex);
     callBackFn(paginatedArray);
   };
 
+  const isPaginationRequired = () => {
+    const numOfPages = totalSize / pageSize
+    return numOfPages < 1
+  }
+
   useEffect(() => {
-    onFirstLoad(onInitialize);
+    populateOnFirstLoad(onInitialize);
+    setHidePagination(isPaginationRequired())
   }, []);
 
   const pageDown = (callBackFn: Function) => {
@@ -65,13 +77,15 @@ const Pagination = ({
     callBackFn(dataArray);
   };
 
+  const pageCount = appState.lang === 'en' ? `${firstPageIndex + 1}-${lastPageIndex}` : `${lastPageIndex}-${firstPageIndex + 1}`
+
   return (
     <div className={`${styles["main-pagination"]} ${paginationClass}`}>
-      <div className={styles["div-view-count"]}>
+      <div className={styles["div-view-count"]} data-hide={hidePagination}>
         <div className={styles["div-show-count"]}>
           {showAll
-            ? `Showing ${totalSize} of ${totalSize}`
-            : `Showing ${firstPageIndex + 1}-${lastPageIndex} of ${totalSize}`}
+            ? `${t("textShow")} ${totalSize} ${t("textOf")} ${totalSize}`
+            : `${t("textShow")} ${pageCount} ${t("textOf")} ${totalSize}`}
         </div>
         <div className={styles["div-view-all"]} data-visible={!showAll}>
           <button
@@ -79,14 +93,14 @@ const Pagination = ({
               viewAllData(onInitialize);
             }}
           >
-            View All
+            {t('textViewAll')}
           </button>
         </div>
       </div>
 
       {children}
-      
-      <div className={styles["div-controls"]} data-visible={!showAll}>
+
+      <div className={styles["div-controls"]} data-visible={!showAll} data-hide={hidePagination}>
         <div className={styles["div-left-arrow"]}>
           <button
             disabled={currentPage === 1}
