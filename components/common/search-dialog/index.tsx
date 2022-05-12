@@ -44,6 +44,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
       router.push({
         pathname: "/s",
         query: {
+          brand: appState?.brand,
           keyword: joinTerm,
         },
       });

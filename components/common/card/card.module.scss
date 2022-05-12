@@ -23,13 +23,18 @@
 .card-description {
   margin: 0;
   margin-block-start: 8px;
-  margin-block-end: 16px;
   padding: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
-  line-height: 16.8px;
+  line-height: 15.6px;
   letter-spacing: 0em;
   text-align: start;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-block-end: 16px;
+    font-size: 14px;
+    line-height: 16.8px;
+  }
 }
 
 .image-section {
@@ -76,9 +81,9 @@
   .card-title {
     margin: 0;
     padding: 0;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
-    line-height: 18px;
+    line-height: 16.8px;
     letter-spacing: 0em;
     text-transform: capitalize;
 
@@ -86,6 +91,14 @@
       font-size: 15px;
       font-weight: 500;
       line-height: 18px;
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .card-description {
+    @media (min-width: $breakPoint-desktop) {
+      line-height: 18.2px;
     }
   }
 }
