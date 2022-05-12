@@ -61,7 +61,7 @@ const MobileLanguageSelector = (): JSX.Element => {
     <div className={styles["mobile-header__lang-wrapper"]}>
       <LanguageSelector
         options={
-          appState?.brand === "kenaz" ? kenazLangSelectData : langSelectData
+          appState?.brand === "Kenaz" ? kenazLangSelectData : langSelectData
         }
         onChange={handleSelect}
         defaultValue={appState.locale}

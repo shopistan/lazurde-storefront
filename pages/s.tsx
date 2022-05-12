@@ -81,13 +81,20 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   } = await performKeywordSearch({
     query: query.keyword || "",
   });
+
+  const getCurrentBrandId = () => {
+    if (query?.brand === `L'azurde`) return "lazurdeHeader";
+    else if (query?.brand === `Miss L'`) return "missLHeader";
+    else if (query?.brand === "Kenaz") return "kenazHeader";
+    else return "lazurdeHeader";
+  };
   const globalComponents = (await fetchGlobalComponents()) || [];
   const pageComponents = (await fetchXMComponents(12, "/search")) || [];
   const headerProps =
     (
       globalComponents.find(
         (item: XMComponent) =>
-          item.id === "Header" && item.params.headerId === "lazurdeHeader"
+          item.id === "Header" && item.params.headerId === getCurrentBrandId()
       ) || {}
     ).params || {};
   const footerProps =

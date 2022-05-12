@@ -1,4 +1,3 @@
-import { Search } from "components/icons";
 import { InputType } from "lib/types/ui";
 import React from "react";
 import styles from "./Input.module.scss";
@@ -14,6 +13,7 @@ const Input = ({
   showLabel = true,
   handleSubmit = (e) => {},
 }: InputType): JSX.Element => {
+  console.log("placeholderr", placeHolder);
   return (
     <div className={styles["input-container"]}>
       {showLabel && (
