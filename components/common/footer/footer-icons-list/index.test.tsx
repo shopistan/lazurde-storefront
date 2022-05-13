@@ -10,6 +10,8 @@ test("footer icons unit testing", () => {
         altText: "alt",
       },
       link: "/",
+      width: 90,
+      mobileWidth: 24,
     },
     {
       icon: {
@@ -17,6 +19,8 @@ test("footer icons unit testing", () => {
         altText: "alt",
       },
       link: "/",
+      width: 90,
+      mobileWidth: 24,
     },
   ];
   render(<FooterIcons iconsList={testingData} />);
