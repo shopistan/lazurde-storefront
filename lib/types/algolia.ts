@@ -1,5 +1,6 @@
 export type FetchCategoryProductsArgs = {
   categoryName: string;
+  pageSize?: number;
   page?: number;
   filterParents?: boolean;
 };

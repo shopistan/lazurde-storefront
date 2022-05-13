@@ -117,15 +117,13 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
       pageComponents.find(
         (component: XMComponent) => component.id === "ProductListing"
       ) || {}
-    )?.params?.categoryName || null;
+    )?.params?.categoryName || "";
 
   let searchResults;
 
-  if (categoryName) {
-    searchResults = await fetchCategoryProducts({
-      categoryName,
-    });
-  }
+  searchResults = await fetchCategoryProducts({
+    categoryName,
+  });
 
   const {
     hits = [],

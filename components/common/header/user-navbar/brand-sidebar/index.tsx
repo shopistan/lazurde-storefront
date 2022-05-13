@@ -41,7 +41,7 @@ const BrandContainer: FC<BrandArrType> = ({
     <div className={styles["brands-list"]}>
       {width > desktopScreenSize && (
         <Image
-          src={brandImg.url}
+          src={brandImg.url || '/'}
           alt={brandImg.altText}
           width={"186px"}
           height={"183px"}
@@ -123,7 +123,7 @@ const BrandSideBar: FC<SidebarProps> = ({
         <div className={styles["text_div"]}>
           <div>
             <Image
-              src={mainImg?.url || ""}
+              src={mainImg?.url || "/"}
               alt={mainImg?.altText || ""}
               layout="fixed"
               width={184}
@@ -143,7 +143,7 @@ const BrandSideBar: FC<SidebarProps> = ({
                   <div key={index}>
                     <Image
                       key={index}
-                      src={url || ""}
+                      src={url || "/"}
                       alt={altText || ""}
                       layout="fixed"
                       width={
