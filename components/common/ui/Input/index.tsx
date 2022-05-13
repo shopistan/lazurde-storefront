@@ -13,7 +13,6 @@ const Input = ({
   showLabel = true,
   handleSubmit = (e) => {},
 }: InputType): JSX.Element => {
-  console.log("placeholderr", placeHolder);
   return (
     <div className={styles["input-container"]}>
       {showLabel && (

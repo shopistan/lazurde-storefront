@@ -2,12 +2,20 @@ import React, { useContext, useState, useEffect } from "react";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import { Swiper } from "swiper/react";
+//import { Swiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { desktopScreenSize } from 'lib/utils/common'
+import dynamic from "next/dynamic";
+
+const DynamicSwiper = dynamic(
+  //@ts-ignore
+  () => import("swiper/react").then((mod) => mod.Swiper),
+  { ssr: false }
+);
+
 
 interface SliderProps {
   children?: JSX.Element | string;
@@ -62,9 +70,9 @@ const Slider = ({
 
   return (
     renderSlider && (
-      <Swiper {...(!productSlider ? sliderSetting : productSliderSetting)}>
+      <DynamicSwiper {...(!productSlider ? sliderSetting : productSliderSetting)}>
         {children}
-      </Swiper>
+      </DynamicSwiper>
     )
   );
 };

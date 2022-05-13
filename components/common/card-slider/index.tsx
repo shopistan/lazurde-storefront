@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { SwiperSlide } from "swiper/react";
+//import { SwiperSlide } from "swiper/react";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import Cards from "../card";
@@ -8,7 +8,13 @@ import useTranslation from "next-translate/useTranslation";
 import Label from "components/common/ui/label";
 import Slider from "components/common/ui/slider/slider";
 import { desktopScreenSize } from 'lib/utils/common'
-import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const DynamicSwiperSlide = dynamic(
+  //@ts-ignore
+  () => import("swiper/react").then((mod) => mod.SwiperSlide),
+  { ssr: false }
+);
 
 type CardsArrType = {
   image?: { url: string; altText: string };
@@ -63,7 +69,7 @@ const CardSlider = ({
             cards.map((content, index) => {
               const { image, heading, slideLink } = content;
               return (
-                <SwiperSlide key={index}>
+                <DynamicSwiperSlide key={index}>
                   <Cards
                     cardImage={image}
                     cardTitle={
@@ -77,7 +83,7 @@ const CardSlider = ({
                     height={width > desktopScreenSize ? 429 : 352}
                     className="category-slider-card"
                   />
-                </SwiperSlide>
+                </DynamicSwiperSlide>
               );
             })}
         </>

@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextTranslate = require("next-translate");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
 const nextConfig = {
   reactStrictMode: true,
   ...nextTranslate(),
@@ -9,8 +12,12 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['cdn.lazurde.com', 'greatwall-sandbox-sandbox-image.imgix.net', 'www.google.com']
-  }
+    domains: [
+      "cdn.lazurde.com",
+      "greatwall-sandbox-sandbox-image.imgix.net",
+      "www.google.com",
+    ],
+  },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

@@ -1,13 +1,20 @@
+//@ts-nocheck
 import React, { FC, useContext } from "react";
 import Cards from "components/common/card";
 import { ImageType } from "lib/types/common";
 import styles from "./Brand-cards.module.scss";
 import useWindowSize from "lib/utils/useWindowSize";
-import { SwiperSlide } from "swiper/react";
+//import { SwiperSlide } from "swiper/react";
 import { AppContext } from "lib/context/index";
 import useTranslation from "next-translate/useTranslation";
 import Slider from "components/common/ui/slider/slider";
-import {desktopScreenSize} from 'lib/utils/common'
+import { desktopScreenSize } from "lib/utils/common";
+import dynamic from "next/dynamic";
+
+const DynamicSwiperSlide = dynamic(
+  () => import("swiper/react").then((mod) => mod.SwiperSlide),
+  { ssr: false }
+);
 
 type BrandCardsType = {
   cardTitle: string;
@@ -27,7 +34,7 @@ const BrandCards: FC<BrandCardsProps> = ({
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const onClick = () => { };
+  const onClick = () => {};
 
   return (
     <div className={styles["cards-container"]}>
@@ -46,8 +53,13 @@ const BrandCards: FC<BrandCardsProps> = ({
             brandCards.map((data, index) => {
               const { cardTitle, cardImage, favIconSrc } = data;
               return (
-                <SwiperSlide key={index}>
-                  <div className={`${styles["cards"]} ${appState.lang == 'ar' && styles["arabic-card"]}`} key={index}>
+                <DynamicSwiperSlide key={index}>
+                  <div
+                    className={`${styles["cards"]} ${
+                      appState.lang == "ar" && styles["arabic-card"]
+                    }`}
+                    key={index}
+                  >
                     <Cards
                       onClick={onClick}
                       className={styles["brand-card"]}
@@ -58,7 +70,7 @@ const BrandCards: FC<BrandCardsProps> = ({
                       favIconSrc={favIconSrc}
                     />
                   </div>
-                </SwiperSlide>
+                </DynamicSwiperSlide>
               );
             })}
         </div>
