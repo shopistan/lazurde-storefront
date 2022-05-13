@@ -57,6 +57,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
             <li className="item-1">
               <Link href="/">
                 <a
+                  data-testid="item1"
                   onClick={() =>
                     saveAppState({
                       ...appState,
@@ -137,6 +138,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
       </div>
       {width > desktopScreenSize && (
         <div
+          role={"overlay"}
           className={styles["overlay"]}
           data-opened={isOpened}
           onClick={() => setIsOpened(!isOpened)}

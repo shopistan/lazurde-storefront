@@ -22,7 +22,7 @@ describe("", () => {
       {
         url: "/",
         altText: "altText",
-        label: "",
+        label: "main label",
         labelUrl: "",
         brandImg: {
           url: "/",
@@ -31,7 +31,6 @@ describe("", () => {
       },
     ],
   };
-
 
   const renderComponentAR = () => {
     render(
@@ -43,17 +42,37 @@ describe("", () => {
 
   test("links", () => {
     render(
-        <ContextProvider>
-          <UserNavBar brandSideBar={object} />
-        </ContextProvider>
-      );
+      <ContextProvider>
+        <UserNavBar brandSideBar={object} />
+      </ContextProvider>
+    );
     const links = document.querySelector("a").getAttribute("href");
     expect(links).toBe("/");
-    const button = screen.getByRole('button')
-    fireEvent.click(button)
+    const button = screen.getByRole("button");
+    fireEvent.click(button);
+    expect(screen.getByRole("overlay")).toBeInTheDocument();
+    const overlay = screen.getByRole("overlay");
+    fireEvent.click(overlay);
+    expect(screen.getByRole("brandSideBarDiv")).toBeInTheDocument();
+    const brandSideBarDiv = screen.getByRole("brandSideBarDiv");
+    fireEvent.click(brandSideBarDiv);
+    expect(screen.getByRole("brandSideBarMain")).toBeInTheDocument();
+    const brandSideBarMain = screen.getByRole("brandSideBarMain");
+    fireEvent.click(brandSideBarMain);
   });
 
   test("links", () => {
-    renderComponentAR()
+    render(
+      <ContextProvider>
+        <UserNavBar brandSideBar={object} />
+      </ContextProvider>
+    );
+    const clickableLink = screen.getByTestId("item1");
+    // fireEvent.click(clickableLink);
+  });
+
+  test("links", () => {
+    renderComponentAR();
+    screen.debug();
   });
 });

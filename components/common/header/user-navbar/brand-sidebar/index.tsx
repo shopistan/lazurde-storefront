@@ -81,6 +81,7 @@ const BrandSideBar: FC<SidebarProps> = ({
 
   return (
     <div
+      role={"brandSideBarMain"}
       className={styles["brand_sidebar_div"]}
       data-opened={isOpened}
       onClick={() => {
@@ -88,6 +89,7 @@ const BrandSideBar: FC<SidebarProps> = ({
       }}
     >
       <div
+        role={"brandSideBarDiv"}
         className={styles["brand_sidebar"]}
         data-opened={isOpened}
         onClick={(event) => event.stopPropagation()}
