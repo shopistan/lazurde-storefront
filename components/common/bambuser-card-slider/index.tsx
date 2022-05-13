@@ -8,6 +8,9 @@ import useTranslation from "next-translate/useTranslation";
 import Label from "components/common/ui/label";
 import Slider from "components/common/ui/slider/slider";
 import BambuserPopup from "../bambuser-popup";
+import dynamic from "next/dynamic";
+
+const DynamicBambuserPopup = dynamic(() => import("../bambuser-popup"));
 
 type CardsArrType = {
   image?: { url: string; altText: string };
@@ -94,7 +97,7 @@ const BambuserCardSlider = ({
                     bambuserBtn={true}
                     bambuserBtnBody={
                       <div className={styles["bambuser-btn-wrapper"]}>
-                        <BambuserPopup
+                        <DynamicBambuserPopup
                           key={appState?.lang}
                           className={styles["bambuser-btn-arrow"]}
                           scriptId={Math.random() + "1"}
@@ -105,7 +108,7 @@ const BambuserCardSlider = ({
                     }
                   />
                   <div className={styles["bambuser-btn-wrapper"]}>
-                    <BambuserPopup
+                    <DynamicBambuserPopup
                       key={appState?.lang}
                       className={styles["bambuser-btn"]}
                       scriptId={Math.random() + "2"}
