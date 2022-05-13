@@ -18,7 +18,7 @@ const FeedbackPopUp: FC<FeedbackPopUpProps> = ({ heading = '', open = false, onC
     const { t } = useTranslation("common");
     const { appState } = useContext(AppContext);
     return (
-        <Modal isOpened={open} onClose={() => {}} className={'feedback-modal'}>
+        <Modal isOpened={open} onClose={() => {onClose()}} className={'feedback-modal'}>
             <div className={styles['feedback-container']}>
                 <div className={styles['cross-icon']} onClick={() => {onClose()}}>
                     <CrossSmall />
