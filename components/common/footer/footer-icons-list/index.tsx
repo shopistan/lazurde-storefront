@@ -8,11 +8,11 @@ import { desktopScreenSize } from "lib/utils/common";
 
 type IconsType = {
   link?: string;
+  width?: string | number;
+  mobileWidth?: string | number;
   icon?: {
     url?: string;
     altText?: string;
-    width?: number;
-    mobileWidth?: number;
   };
 };
 
@@ -33,22 +33,22 @@ const FooterIcons = ({
   className = "",
   isFooterIcons = false,
 }: IconsListProps): JSX.Element => {
-  const [width] = useWindowSize();
+  const [size] = useWindowSize();
   return (
     <>
       <ul className={`${className} ${styles["icons__container"]}`}>
         {iconsList?.length > 0 &&
           iconsList.map((socialIcon, index) => {
-            const { link, icon } = socialIcon;
+            const { link, icon, width, mobileWidth } = socialIcon;
             return (
               <li
                 className="icons__item"
                 key={index}
                 style={{
                   width:
-                    width > desktopScreenSize
-                      ? iconSize[index]?.width
-                      : iconSize[index]?.mobileWidth,
+                    size > desktopScreenSize
+                      ? width || iconSize[index]?.width
+                      : mobileWidth || iconSize[index]?.mobileWidth,
                 }}
               >
                 <Link href={link}>
@@ -62,9 +62,9 @@ const FooterIcons = ({
                       src={icon?.url || ""}
                       alt={icon?.altText || "icon"}
                       width={
-                        width > desktopScreenSize
-                          ? icon?.width || iconSize[index]?.width
-                          : icon?.mobileWidth || iconSize[index]?.mobileWidth
+                        size > desktopScreenSize
+                          ? width || iconSize[index]?.width
+                          : mobileWidth || iconSize[index]?.mobileWidth
                       }
                       height={isFooterIcons ? 24 : 20}
                       layout="responsive"

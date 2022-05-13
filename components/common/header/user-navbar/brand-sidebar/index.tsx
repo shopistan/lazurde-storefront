@@ -15,11 +15,11 @@ interface SidebarProps {
   mainImg?: ImageType;
   mainTitle?: string;
   logoArr?: {
+    width?: string | number;
+    mobileWidth?: string | number;
     logoImg: {
       url?: string;
       altText?: string;
-      width?: string | number;
-      mobileWidth?: string | number;
     };
   }[];
   brandArr?: BrandArrType[];
@@ -136,7 +136,7 @@ const BrandSideBar: FC<SidebarProps> = ({
           <div className={`flex gap-x-[8px] ${styles["brands-logo"]}`}>
             {logoArr?.length > 0 &&
               logoArr.map((data, index) => {
-                const { url, altText, width, mobileWidth } = data?.logoImg;
+                const { url, altText } = data?.logoImg;
                 return (
                   <div key={index}>
                     <Image
@@ -146,8 +146,8 @@ const BrandSideBar: FC<SidebarProps> = ({
                       layout="fixed"
                       width={
                         size > desktopScreenSize
-                          ? width || 89
-                          : mobileWidth || 80
+                          ? data?.width || 89
+                          : data?.mobileWidth || 80
                       }
                       height={15}
                     />
