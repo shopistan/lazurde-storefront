@@ -13,6 +13,7 @@ import { AppContext } from 'lib/context'
 
 type CategoryProps = {
     bgColor?: string | ''
+    mobileBgColor?: string | ''
     title?: string | ''
     text?: string | ''
     details?: string | ''
@@ -77,9 +78,9 @@ const HelpCategory: FC<HelpCategoryProps> = ({ mainImage = {}, heading = '', cat
                 }
                 <div className={styles['category-block']} >
                     {categories && categories.length > 0 && categories.map((category, index) => {
-                        const { title, text, details, imageText, button, tNumber, vNumber, crNumber, bgColor } = category
+                        const { title, text, details, imageText, button, tNumber, vNumber, crNumber, bgColor , mobileBgColor } = category
                         return (
-                            <div className={styles['category-section']} style={{ backgroundColor: bgColor }}>
+                            <div className={styles['category-section']} style={{ backgroundColor: width > desktopScreenSize ? bgColor : mobileBgColor }}>
                                 <Label className={styles['category-title']}>{appState.lang == 'en' ? title : _categories[index].title}</Label>
                                 <Label className={styles['category-text']}>{appState.lang == 'en' ? text : _categories[index].text}</Label>
                                 {
