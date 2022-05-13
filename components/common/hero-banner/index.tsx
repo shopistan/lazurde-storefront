@@ -34,7 +34,6 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({ heroBannerArray }): JSX
             object;
           return (
             <div
-            style={{backgroundImage: `url(${backgroundImage.url}) `}}
               className={`${styles["hero-banner-container"]} ${
                 heroBannerArray?.length > 1 && styles["block-divison"]
               } ${router?.asPath == "/kenaz" ? styles["kenaz-block"] : ""} ${
@@ -42,6 +41,13 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({ heroBannerArray }): JSX
               }`}
               key={index}
             >
+              <Image
+                src={(backgroundImage || {}).url || "/placeholder.jpg"}
+                layout="fill"
+                objectFit="cover"
+                quality={100}
+                className={`${styles["bg-image"]}`}
+              />
               <div className={styles["banner-text-section"]}>
                 <h3 className={styles["banner-text"]} data-testid="banner-text">
                   {appState?.lang == "en" ? bannerText || "" : t("bannerText")}
