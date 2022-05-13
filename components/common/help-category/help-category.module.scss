@@ -54,6 +54,7 @@
     text-align: start;
     margin-block-start: 8px;
     margin-block-end: 8px;
+    color: rgba($color: #000000, $alpha: 0.6);
 
     @media (min-width: $breakPoint-desktop) {
         font-size: 14px;
