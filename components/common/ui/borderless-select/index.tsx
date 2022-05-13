@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import ChevronDown from "components/icons/ChevronDown";
+import Image from "next/image";
 import React, { useState, useRef, useEffect, useContext } from "react";
 import Modal from "../modal";
 
@@ -80,10 +81,12 @@ const BorderlessSelect = ({
         <span>{selectedLabel}</span>
         <span className={styles["selected-text"]}>{selectedVal?.label}</span>
         {selectedVal?.img && (
-          <img
+          <Image
             src={selectedVal?.img || "/flag-uae.svg"}
             width={16}
+            height={16}
             alt="image"
+            layout="fixed"
           />
         )}
       </div>
@@ -116,10 +119,12 @@ const BorderlessSelect = ({
                   <a>
                     {opData?.label}
                     {opData?.img && (
-                      <img
+                      <Image
                         src={opData?.img || "/flag-uae.svg"}
                         width={16}
+                        height={16}
                         alt="image"
+                        layout="fixed"
                       />
                     )}
                   </a>
