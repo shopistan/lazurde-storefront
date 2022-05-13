@@ -41,12 +41,12 @@ exports.default = Types.Component({
       children: Types.Shape({
         children: {
           link: Types.String({ label: "Url" }),
+          width: Types.String({ label: "Icon Width" }),
+          mobileWidth: Types.String({ label: "Icon Mobile Width" }),
           icon: Types.Image({
             label: "logo",
             url: Types.String({ label: "URL" }),
             altText: Types.String({ label: "Alt text" }),
-            width: Types.String({ label: "Icon Width" }),
-            mobileWidth: Types.String({ label: "Icon Mobile Width" }),
           }),
         },
       }),
@@ -56,12 +56,12 @@ exports.default = Types.Component({
       children: Types.Shape({
         children: {
           link: Types.String({ label: "Url" }),
+          width: Types.String({ label: "Icon Width" }),
+          mobileWidth: Types.String({ label: "Icon Mobile Width" }),
           icon: Types.Image({
             label: "logo",
             url: Types.String({ label: "URL" }),
             altText: Types.String({ label: "Alt text" }),
-            width: Types.String({ label: "Icon Width" }),
-            mobileWidth: Types.String({ label: "Icon Mobile Width" }),
           }),
         },
       }),
