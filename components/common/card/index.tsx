@@ -36,21 +36,26 @@ const Cards = ({
       <div
         className={styles[className]}
         onClick={() => {
-          onClick;
+          onClick();
         }}
+        data-testid="click-div"
       >
         {cardImage?.url && (
           <div className={styles["image-section"]}>
-            {favIconSrc && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                className={styles["fav-icon"]}
-                src={favIconSrc.url}
-                alt={favIconSrc.altText}
-              />
-            )}
+            <div className={styles["fav-icon"]}>
+              {favIconSrc && (
+                <Image
+                  src={favIconSrc?.url || ""}
+                  alt={favIconSrc.altText || "fav-icon"}
+                  layout="fixed"
+                  width={20}
+                  height={20}
+                />
+              )}
+            </div>
             <div className={styles["img-wrapper"]}>
               <Image
+                data-testid={"card-img"}
                 className={`${styles["card-image"]}`}
                 src={cardImage?.url}
                 alt={cardImage?.altText}
@@ -59,7 +64,9 @@ const Cards = ({
                 layout="responsive"
               />
               {bambuserBtn ? (
-                <div className={styles["img-btn"]}>{bambuserBtnBody}</div>
+                <div data-testid="bambuser-body" className={styles["img-btn"]}>
+                  {bambuserBtnBody}
+                </div>
               ) : null}
             </div>
           </div>

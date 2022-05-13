@@ -41,6 +41,13 @@
   position: relative;
 }
 
+body {
+  .fav-icon {
+    span {
+      height: 20px !important;
+    }
+  }
+}
 .fav-icon {
   position: absolute;
   top: 13px;
