@@ -14,6 +14,7 @@ export type KeywordSearchArgs = {
   pageSize?: number;
   page?: number;
   filterParents?: boolean;
+  facetFilters?: string[];
 };
 
 export type AlgoliaProductType = {

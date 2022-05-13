@@ -11,8 +11,8 @@ import {
   RegionType,
 } from "lib/types/common";
 
-export const desktopScreenSize = 1023
-export const mobileScreenSize = 767
+export const desktopScreenSize = 1023;
+export const mobileScreenSize = 767;
 
 export const getAppStateFromLocalStorage = () => {
   const appState =
@@ -50,6 +50,6 @@ export const updateBrand = (
 ) => {
   saveAppState({
     ...appState,
-    brand: brandVal ? brandVal : "Lazurde",
+    brand: brandVal ? brandVal : "L'azurde",
   });
 };

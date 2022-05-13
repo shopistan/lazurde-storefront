@@ -12,6 +12,7 @@
   transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   padding: 24px;
   overflow-y: auto;
+
   @media (min-width: $breakPoint-desktop) {
     display: flex;
     align-items: center;
@@ -58,10 +59,29 @@ html[dir="rtl"] {
       transform: translateX(0);
       opacity: 1;
     }
-  
+
     &[data-open="false"] {
       transform: translateX(100%);
       opacity: 0;
+    }
+  }
+}
+
+.feedback-modal {
+  @media (min-width: 1024px) {
+    display: block;
+    padding-block-start: 100px;
+    padding-block-end: 178px;
+    display: flex;
+    background-color: #E5E5E5;
+  }
+
+  .div-modal-body {
+    @media (min-width: 1024px) {
+      background-color: white;
+      width: 562px;
+      margin-top: 60px;
+
     }
   }
 }

@@ -495,3 +495,53 @@ export const popularProductCardData = [
     ],
   },
 ];
+
+export const paymentIconSize = [
+  {
+    width: 72,
+    mobileWidth: 50,
+  },
+  {
+    width: 101,
+    mobileWidth: 70,
+  },
+  {
+    width: 61,
+    mobileWidth: 42,
+  },
+  {
+    width: 61,
+    mobileWidth: 43,
+  },
+  {
+    width: 38,
+    mobileWidth: 26,
+  },
+  {
+    width: 69,
+    mobileWidth: 48,
+  },
+];
+
+export const socialIconSize = [
+  {
+    width: 20,
+    mobileWidth: 20,
+  },
+  {
+    width: 20,
+    mobileWidth: 20,
+  },
+  {
+    width: 20,
+    mobileWidth: 20,
+  },
+  {
+    width: 20,
+    mobileWidth: 20,
+  },
+  {
+    width: 20,
+    mobileWidth: 20,
+  },
+];

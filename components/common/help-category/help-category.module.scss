@@ -1,6 +1,7 @@
 @import "/styles/variables.scss";
 
 .category-container {
+    width: 100%;
     @media (min-width: $breakPoint-desktop) {
         padding-inline: 80px;
         padding-block-end: 80px;
@@ -150,3 +151,15 @@
 
     }
 }
+
+html[dir="rtl"] {
+    .category-mainImage {
+      transform: scaleX(-1);
+    }
+
+    .category-imageBlock {
+        p {
+            margin-right: 10px !important;
+        }
+    }
+  }
