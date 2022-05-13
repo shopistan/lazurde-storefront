@@ -10,14 +10,13 @@ const BambuserEndedSessions = ({
 }: PopupProps): JSX.Element => {
   return (
     <>
-     
-     <div
+      <div
         data-bambuser-liveshopping-widget="channel"
         data-channel-id={channelId}
         data-channel-locale=""
       ></div>
 
-      <Script id={"123"}>
+      <Script id={"123"} strategy="lazyOnload">
         {`  (function(d, t, i) {
             if (d.getElementById(i)) return;
             var s, ss = d.getElementsByTagName(t)[0];
@@ -27,7 +26,6 @@ const BambuserEndedSessions = ({
           })(document, 'script', "bambuser-liveshopping-widget");
         `}
       </Script>
-
     </>
   );
 };
