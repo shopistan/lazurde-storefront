@@ -4,7 +4,6 @@ import Footer from "./index";
 import ContextProvider, { AppContext } from "lib/context";
 import { footerLinks, socialLinks } from "lib/mock-data/data";
 
-
 const heading = "main heading";
 const subHeading = "sub heading";
 const subscriptionText = "subscription Text";
@@ -12,6 +11,49 @@ const socialIconText = "social Icon Text";
 const footerLogo = {
   url: "/img",
   altText: "alt",
+};
+
+const footerLinksTest = [
+  {
+    linkHeading: "link heading",
+    links: [
+      {
+        url: "/",
+        text: "text 1",
+      },
+      {
+        url: "/",
+        text: "text 2",
+      },
+      {
+        url: "/",
+        text: "text 3",
+      },
+    ],
+  },
+  {
+    linkHeading: "link heading",
+    links: [
+      {
+        url: "/",
+        text: "text 1",
+      },
+      {
+        url: "/",
+        text: "text 2",
+      },
+      {
+        url: "/",
+        text: "text 3",
+      },
+    ],
+  },
+];
+
+const resizeWindow = (x: number, y: number) => {
+  window.innerWidth = x;
+  window.innerHeight = y;
+  window.dispatchEvent(new Event("resize"));
 };
 
 const renderComponentAR = () => {
@@ -26,8 +68,8 @@ const renderComponentAR = () => {
       socialLinks={socialLinks}
       paymentLinks={socialLinks}
     />
-  </AppContext.Provider>
-}
+  </AppContext.Provider>;
+};
 
 test("Footer testing", () => {
   jest.mock("next/router", () => ({
@@ -49,7 +91,7 @@ test("Footer testing", () => {
         subscriptionText={subscriptionText}
         socialIconText={socialIconText}
         footerLogo={footerLogo}
-        footerLinks={footerLinks}
+        footerLinks={footerLinksTest}
         socialLinks={socialLinks}
         paymentLinks={socialLinks}
       />
@@ -60,6 +102,12 @@ test("Footer testing", () => {
   expect(screen.getByText(subHeading)).toBeInTheDocument();
   expect(screen.getByText(subscriptionText)).toBeInTheDocument();
   expect(screen.getByText(socialIconText)).toBeInTheDocument();
+
+  const footerLink = screen.getAllByRole("footerLinks");
+  expect(footerLink[0]).toBeInTheDocument();
+  const icons = screen.getAllByRole("socialicons");
+  expect(icons[0]).toBeInTheDocument();
+  resizeWindow(375, 600);
 });
 
 test("render arabic version", () => {

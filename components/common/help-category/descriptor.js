@@ -30,6 +30,7 @@ exports.default = Types.Component({
                     vNumber: Types.String({ label: 'VAT Number' }),
                     crNumber: Types.String({ label: 'CR Number' }),
                     bgColor: Types.String({ label: 'Background Color' }),
+                    mobileBgColor: Types.String({ label: 'Mobile Background Color' })
                 }
             })
         })

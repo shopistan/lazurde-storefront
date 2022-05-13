@@ -25,6 +25,7 @@ interface IconsListProps {
   className?: string;
   iconSize?: sizeType[];
   isFooterIcons?: boolean;
+  role?: string;
 }
 
 const FooterIcons = ({
@@ -32,11 +33,12 @@ const FooterIcons = ({
   iconSize = [],
   className = "",
   isFooterIcons = false,
+  role = "",
 }: IconsListProps): JSX.Element => {
   const [size] = useWindowSize();
   return (
     <>
-      <ul className={`${className} ${styles["icons__container"]}`}>
+      <ul role={role} className={`${className} ${styles["icons__container"]}`}>
         {iconsList?.length > 0 &&
           iconsList.map((socialIcon, index) => {
             const { link, icon, width, mobileWidth } = socialIcon;
@@ -53,6 +55,8 @@ const FooterIcons = ({
               >
                 <Link href={link}>
                   <a
+                    data-testid="footer-icon"
+                    role={"icons"}
                     className={
                       styles[`${isFooterIcons ? "footer-payment-icon" : ""}`]
                     }

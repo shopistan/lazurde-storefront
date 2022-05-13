@@ -74,6 +74,7 @@ const Footer = ({
                       heading={footerLink.linkHeading}
                       links={footerLink.links}
                       index={index}
+                      role={"footerLinks"}
                     />
                   ) : (
                     <Accordion
@@ -98,6 +99,7 @@ const Footer = ({
                 iconsList={socialLinks}
                 iconSize={socialIconSize}
                 isFooterIcons={false}
+                role={"socialicons"}
               />
             </div>
             {appState?.region === "sa" && (
