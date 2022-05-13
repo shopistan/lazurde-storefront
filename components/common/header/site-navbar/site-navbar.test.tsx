@@ -25,6 +25,16 @@ describe("", () => {
               isBold: false,
             },
           ],
+          categoryLinks: [
+            {
+              linkHeading: "heading",
+              linkTitle: [
+                {
+                  title: "heading",
+                },
+              ],
+            },
+          ],
         },
       ],
     },
@@ -39,6 +49,16 @@ describe("", () => {
               title: "title",
               url: "/",
               isBold: false,
+            },
+          ],
+          categoryLinks: [
+            {
+              linkHeading: "heading",
+              linkTitle: [
+                {
+                  title: "heading",
+                },
+              ],
             },
           ],
         },
