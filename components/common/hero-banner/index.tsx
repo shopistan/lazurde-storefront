@@ -18,7 +18,9 @@ interface LazurdeHeroBannerProps {
   heroBannerArray: LazurdeHeroBannerTypes[];
 }
 
-const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({ heroBannerArray }): JSX.Element => {
+const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({
+  heroBannerArray,
+}): JSX.Element => {
   const router = useRouter();
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
@@ -26,7 +28,7 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({ heroBannerArray }): JSX
     <div
       className={`${styles["hero-banner-block"]}  ${
         heroBannerArray && heroBannerArray.length > 1 && styles["block-spacing"]
-      } ${router?.asPath === '/missl' && styles["missl-spacing"]}`}
+      } ${router?.asPath === "/missl" && styles["missl-spacing"]}`}
     >
       {heroBannerArray &&
         heroBannerArray?.map((object: any, index: any) => {
@@ -47,6 +49,7 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({ heroBannerArray }): JSX
                 objectFit="cover"
                 quality={100}
                 className={`${styles["bg-image"]}`}
+                priority
               />
               <div className={styles["banner-text-section"]}>
                 <h3 className={styles["banner-text"]} data-testid="banner-text">
@@ -65,9 +68,9 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({ heroBannerArray }): JSX
                   buttonText={
                     appState?.lang == "en" ? buttonText : t("buttonText")
                   }
-                  buttonSize={'lr'}
+                  buttonSize={"lr"}
                   onClick={() => {}}
-                  type={'button'}
+                  type={"button"}
                 />
               </div>
             </div>
