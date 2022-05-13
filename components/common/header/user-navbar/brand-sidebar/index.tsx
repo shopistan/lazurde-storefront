@@ -9,8 +9,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
 import { updateBrand } from "lib/utils/common";
-import {desktopScreenSize} from 'lib/utils/common'
-
+import { desktopScreenSize } from "lib/utils/common";
 
 interface SidebarProps {
   mainImg?: ImageType;
@@ -74,6 +73,7 @@ const BrandSideBar: FC<SidebarProps> = ({
 
   return (
     <div
+      role={"brandSideBarMain"}
       className={styles["brand_sidebar_div"]}
       data-opened={isOpened}
       onClick={() => {
@@ -81,6 +81,7 @@ const BrandSideBar: FC<SidebarProps> = ({
       }}
     >
       <div
+        role={"brandSideBarDiv"}
         className={styles["brand_sidebar"]}
         data-opened={isOpened}
         onClick={(event) => event.stopPropagation()}

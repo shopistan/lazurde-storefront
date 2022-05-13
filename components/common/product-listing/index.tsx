@@ -16,7 +16,7 @@ import Pagination from "../ui/pagination";
 interface ProductCardProps {
   index?: number;
   title?: string;
-  "Image URL"?: string;
+  "Image 1 URL"?: string;
   "Base Price"?: number | string;
   basePrice?: number | string;
   discount?: string;
@@ -167,7 +167,7 @@ const ProductListing = ({
                       discount,
                       discountedPrice,
                       productCardImages = [
-                        { url: data["Image URL"], altText: "" },
+                        { url: data["Image 1 URL"], altText: "" },
                       ],
                       onlineExclusiveTag,
                     } = data;
