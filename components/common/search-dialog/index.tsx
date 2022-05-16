@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,7 +12,10 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
-import { desktopScreenSize } from "lib/utils/common";
+import {
+  desktopScreenSize,
+  getAppStateFromLocalStorage,
+} from "lib/utils/common";
 interface SearchDialogProps {
   siteLogo: ImageType;
   siteLogoUrl: string;
@@ -27,10 +30,20 @@ const SearchDialog: FC<SearchDialogProps> = ({
   openSearchDialog,
 }): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState } = useContext(AppContext);
+  const { appState, saveAppState } = useContext(AppContext);
+  const [placeHolderBrand, setPlaceHolderBrand] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
   const router = useRouter();
   const { t } = useTranslation("common");
+
+  useEffect(() => {
+    try {
+      let newState = getAppStateFromLocalStorage();
+      setPlaceHolderBrand(newState?.brand);
+    } catch {
+      console.log("error");
+    }
+  }, []);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -84,7 +97,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
             <Input
               showLabel={false}
               className={styles["search-input"]}
-              placeHolder={`${placeholderText} ${appState?.brand}`}
+              placeHolder={`${placeholderText} ${placeHolderBrand}`}
               // placeHolder={`${appState?.lang === "en" ? "Shop" : t("Shop")} ${
               //   appState?.brand
               // }`}
