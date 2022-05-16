@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState, useRef } from "react";
 import styles from "./style.module.scss";
 import Link from "next/link";
 import Image from "next/image";
@@ -35,6 +35,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
   const [searchTerm, setSearchTerm] = useState(null);
   const router = useRouter();
   const { t } = useTranslation("common");
+  const inputRef = useRef<null | HTMLElement>(null);
 
   useEffect(() => {
     try {
@@ -44,6 +45,12 @@ const SearchDialog: FC<SearchDialogProps> = ({
       console.log("error");
     }
   }, []);
+
+  useEffect(() => {
+    if (openSearchDialog) {
+      inputRef.current.focus();
+    }
+  }, [openSearchDialog]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -103,6 +110,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
               // }`}
               onChange={handleSearch}
               handleSubmit={handleSubmit}
+              inputRef={inputRef}
             ></Input>
           </div>
           <div

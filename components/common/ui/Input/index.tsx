@@ -1,5 +1,5 @@
 import { InputType } from "lib/types/ui";
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styles from "./Input.module.scss";
 
 const Input = ({
@@ -12,8 +12,8 @@ const Input = ({
   onChange = (e) => {},
   showLabel = true,
   handleSubmit = (e) => {},
+  inputRef,
 }: InputType): JSX.Element => {
-  console.log("placeholderr", placeHolder);
   return (
     <div className={styles["input-container"]}>
       {showLabel && (
@@ -28,6 +28,7 @@ const Input = ({
         placeholder={placeHolder}
         onChange={(e) => onChange(e)}
         onKeyDown={(e) => handleSubmit(e)}
+        ref={inputRef as any}
       ></input>
     </div>
   );
