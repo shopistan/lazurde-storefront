@@ -72,7 +72,15 @@ export default SearchPage;
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { query = {} } = context;
-  var facetFilters = [`Brand:${query?.brand}`];
+  const getFaceFilters = () => {
+    if (query?.brand === `L'azurde`)
+      return [`Brand:L'azurde`, `Brand:L'azurde,Miss L'`];
+    else if (query?.brand === `Miss L'`)
+      return [`Brand:Miss L'`, `Brand:L'azurde,Miss L'`];
+    else if (query?.brand === "Kenaz")
+      return [`Brand:Kenaz`, `Brand:L'azurde,Kenaz`];
+    else return [`Brand:L'azurde`, `Brand:L'azurde,Miss L'`];
+  };
   const {
     hits = [],
     nbHits = 0,
@@ -81,7 +89,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     hitsPerPage = 0,
   } = await performKeywordSearch({
     query: query.keyword || "",
-    facetFilters: facetFilters || [],
+    facetFilters: getFaceFilters() || [],
   });
 
   const getCurrentBrandId = () => {
