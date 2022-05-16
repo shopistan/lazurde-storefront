@@ -10,16 +10,16 @@ const image = {
 }
 
 const array = [{
-    title: '',
-    text: '',
+    title: '' || 'title',
+    text: '' || 'text',
     details: false,
-    link: '',
-    buttonText: '',
-    tnumber: '',
-    crnumber: '',
-    vnumber: '',
-    imageText: '',
-    bgcolor: '',
+    link: '' || 'link',
+    buttonText: '' || 'buttonText',
+    tnumber: '' || 'tnumber',
+    crnumber: '' || 'crnumber',
+    vnumber: '' || 'vnumber',
+    imageText: '' || 'imageText',
+    bgcolor: '' || '#0000',
 }]
 
 const renderComponent = () => {
@@ -45,9 +45,18 @@ test('Help Category Test', () => {
     expect(array).toHaveLength(1)
     expect(array).toEqual(
         expect.arrayContaining([
-          expect.objectContaining({ title: "" }),
+            expect.objectContaining({
+                title: "title", text: 'text', details: false,
+                link: 'link',
+                buttonText: 'buttonText',
+                tnumber: 'tnumber',
+                crnumber: 'crnumber',
+                vnumber: 'vnumber',
+                imageText: 'imageText',
+                bgcolor: '#0000',
+            }),
         ])
-      );
+    );
 })
 test("render arabic version", () => {
     renderComponentAR();
