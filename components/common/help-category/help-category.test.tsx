@@ -12,7 +12,7 @@ const image = {
 const array = [{
     title: '',
     text: '',
-    details: '',
+    details: false,
     link: '',
     buttonText: '',
     tnumber: '',
