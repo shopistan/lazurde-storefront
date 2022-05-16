@@ -12,13 +12,17 @@ exports.default = Types.Component({
             altText: Types.String({ label: 'Alt Text' }),
         }),
         heading: Types.String({ label: 'Heading' }),
+        whatsappSa: Types.String({ label: 'Heading' }),
+        whatsappEg: Types.String({ label: 'Heading' }),
+        whatsappAe: Types.String({ label: 'Heading' }),
         categories: Types.Array({
             label: 'Category',
             children: Types.Shape({
                 children: {
                     title: Types.String({ label: 'Title' }),
                     text: Types.String({ label: 'Text' }),
-                    details: Types.String({ label: 'Details' }),
+                    email : Types.String({ label: 'Email' }),
+                    details: Types.Boolean({ label: 'Details : Yes/No' }),
                     image: Types.Image({
                         label: 'Image',
                         url: Types.String({ label: 'URL' }),
@@ -30,7 +34,7 @@ exports.default = Types.Component({
                     vNumber: Types.String({ label: 'VAT Number' }),
                     crNumber: Types.String({ label: 'CR Number' }),
                     bgColor: Types.String({ label: 'Background Color' }),
-                    mobileBgColor: Types.String({ label: 'Mobile Background Color' })
+                    mobileBgColor: Types.String({ label: 'Mobile Background Color' }),
                 }
             })
         })
