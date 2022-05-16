@@ -72,11 +72,11 @@ const HelpCategory: FC<HelpCategoryProps> = ({ mainImage = {}, heading = '', cat
     );
 
     const handleLinks = () => {
-        if (appState.region == 'sa') {
+        if (appState?.region == 'sa') {
             router.push(`https://web.whatsapp.com/send?phone=${whatsappSa}&text=Hello!%20I%20am%20interested%20in%20your%20product`)
         }
 
-        else if (appState.region == 'ae') {
+        else if (appState?.region == 'ae') {
             router.push(`https://web.whatsapp.com/send?phone=${whatsappAe}&text=Hello!%20I%20am%20interested%20in%20your%20product`)
         }
         else {
@@ -85,16 +85,16 @@ const HelpCategory: FC<HelpCategoryProps> = ({ mainImage = {}, heading = '', cat
     }
 
     useEffect(() => {
-        if (appState.region == 'sa') {
+        if (appState?.region == 'sa') {
             setRegionDetails(whatsappSa)
         }
-        else if (appState.region == 'ae') {
+        else if (appState?.region == 'ae') {
             setRegionDetails(whatsappAe)
         }
         else {
             setRegionDetails(whatsappEg)
         }
-    }, [appState])
+    }, [appState?.region])
 
 
     return (
@@ -106,15 +106,15 @@ const HelpCategory: FC<HelpCategoryProps> = ({ mainImage = {}, heading = '', cat
                 }
                 {
                     heading &&
-                    <Label className={styles['contact-heading']}>{appState.lang === 'en' ? heading : t('helpHeading')}</Label>
+                    <Label className={styles['contact-heading']}>{appState?.lang === 'en' ? heading : t('helpHeading')}</Label>
                 }
                 <div className={styles['category-block']} >
                     {categories && categories.length > 0 && categories.map((category, index) => {
                         const { title, text, details, imageText, button, tNumber, vNumber, crNumber, bgColor, mobileBgColor ,email } = category
                         return (
                             <div className={styles['category-section']} style={{ backgroundColor: width > desktopScreenSize ? bgColor : mobileBgColor }}>
-                                <Label className={styles['category-title']}>{appState.lang == 'en' ? title : _categories[index].title}</Label>
-                                <Label className={styles['category-text']}>{appState.lang == 'en' ? text : _categories[index].text}</Label>
+                                <Label className={styles['category-title']}>{appState?.lang == 'en' ? title : _categories[index].title}</Label>
+                                <Label className={styles['category-text']}>{appState?.lang == 'en' ? text : _categories[index].text}</Label>
                                 {
                                     email &&
                                     <Label className={styles['category-details']}>{email}</Label>
@@ -132,14 +132,14 @@ const HelpCategory: FC<HelpCategoryProps> = ({ mainImage = {}, heading = '', cat
                                 }
                                 {
                                     button &&
-                                    <Button onClick={handleClick} className={styles['category-button']}>{appState.lang == 'en' ? button : _categories[index].button}</Button>
+                                    <Button onClick={handleClick} className={styles['category-button']}>{appState?.lang == 'en' ? button : _categories[index].button}</Button>
                                 }
                                 {
                                     tNumber && vNumber && crNumber &&
                                     <div className={styles['category-number']}>
-                                        <Label className={styles['category-number']}>{appState.lang == 'en' ? tNumber : _categories[index].tNumber}</Label>
-                                        <Label className={styles['category-number']}>{appState.lang == 'en' ? vNumber : _categories[index].vNumber}</Label>
-                                        <Label className={styles['category-number']}>{appState.lang == 'en' ? crNumber : _categories[index].crNumber}</Label>
+                                        <Label className={styles['category-number']}>{appState?.lang == 'en' ? tNumber : _categories[index].tNumber}</Label>
+                                        <Label className={styles['category-number']}>{appState?.lang == 'en' ? vNumber : _categories[index].vNumber}</Label>
+                                        <Label className={styles['category-number']}>{appState?.lang == 'en' ? crNumber : _categories[index].crNumber}</Label>
                                     </div>
                                 }
                             </div>
