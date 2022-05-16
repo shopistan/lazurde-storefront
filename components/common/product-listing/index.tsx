@@ -82,13 +82,16 @@ const ProductListing = ({
     // console.log("something",arr)
     // console.log(performFilteredSearch({ filters: [`Gold`] }));
     // console.log("categoryName",categoryName)
-    
-    const filteredArray = productDataArray.filter((item: {Brand: string}) => {
+
+    const filteredArray = productDataArray.filter((item: { Brand: string }) => {
       if (appState.brand === `L'azurde`) {
         return item;
       }
       if (appState.brand === `Miss L'`) {
-        return item?.Brand?.toLowerCase().includes(`miss'l`);
+        return (
+          item?.Brand?.toLowerCase().includes(`miss'l`) ||
+          item?.Brand?.toLowerCase().includes(`miss l'`)
+        );
       }
       if (appState.brand === "Kenaz") {
         return item?.Brand?.toLowerCase().includes("kenaz");
