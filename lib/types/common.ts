@@ -82,7 +82,7 @@ export interface PageProps {
   pageComponents?: XMComponent[];
 }
 
-export type BrandType = `L'azurde` | `Miss L'` | `Kenaz` | `No Brand`;
+export type BrandType = `L'azurde` | `Miss L'` | `Kenaz`;
 export type LangType = "en" | "ar";
 export type RegionType = "sa" | "ae" | "eg";
 export type LocaleType =
