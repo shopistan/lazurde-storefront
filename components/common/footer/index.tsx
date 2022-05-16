@@ -39,7 +39,7 @@ const Footer = ({
     <>
       <div className={styles["footer__container"]}>
         <div className={styles["footer__content-wrapper"]}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
+          <div data-testid="wrapper" className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
             <div className={`${styles["footer__sub-container"]}`}>
               <Heading element="h3" className={styles["footer__heading"]}>
                 {appState?.lang === "en" ? heading : t("footerHeading")}
@@ -83,6 +83,7 @@ const Footer = ({
                       heading={footerLink?.linkHeading}
                       links={footerLink?.links}
                       arrowIcon={true}
+                      role={"footerLinks-accordion"}
                     />
                   )
                 )}
