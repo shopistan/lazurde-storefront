@@ -18,6 +18,7 @@ interface ProductCardProps {
   title?: string;
   "Image 1 URL"?: string;
   "Base Price"?: number | string;
+  "Online Exclusive"?: boolean;
   basePrice?: number | string;
   discount?: string;
   discountedPrice?: number | string;
@@ -206,7 +207,7 @@ const ProductListing = ({
                         productCardImages = [
                           { url: data["Image 1 URL"], altText: "" },
                         ],
-                        onlineExclusiveTag,
+                        onlineExclusiveTag = data['Online Exclusive'],
                       } = data;
                       return (
                         <>
