@@ -89,6 +89,7 @@ const ProductListing = ({
       }
       if (appState.brand === `Miss L'`) {
         return (
+          item?.Brand?.toLowerCase().includes(`miss`) ||
           item?.Brand?.toLowerCase().includes(`miss'l`) ||
           item?.Brand?.toLowerCase().includes(`miss l'`)
         );

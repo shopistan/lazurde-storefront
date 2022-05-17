@@ -11,6 +11,7 @@ interface AccordionProps {
   isPlusMinusIcon?: boolean;
   children?: string | JSX.Element;
   arrowIcon: Boolean;
+  role?: string;
 }
 
 const Accordion = ({
@@ -20,6 +21,7 @@ const Accordion = ({
   links = [],
   children,
   arrowIcon = false,
+  role = "",
 }: AccordionProps): JSX.Element => {
   const [isOpened, setIsOpened] = useState(false);
 
@@ -27,6 +29,7 @@ const Accordion = ({
     <div
       tabIndex={index}
       className={`${styles["wrapper"]} ${styles[className]}`}
+      role={role}
     >
       <div
         className={`${styles["div-heading"]}`}
