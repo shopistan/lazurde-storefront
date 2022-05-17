@@ -1,0 +1,41 @@
+.term-comtainer {
+    padding-inline: 185px;
+}
+
+.term-heading {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 38px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin-top: 88px;
+    margin-bottom: 32px;
+
+}
+
+.term-section {
+    display: flex;
+}
+
+.term-left {
+    margin-inline-end: 60px;
+
+    b {
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 29px;
+        letter-spacing: 0em;
+        text-align: start;
+    }
+}
+
+.term-block {
+    display: flex;
+    align-items: center;
+}
+
+.term-right {
+    width: 650px;
+    padding-top: 46px;
+    padding-inline: 47px 40px;
+}
