@@ -16,6 +16,12 @@ const LangSelector = (): JSX.Element => {
     );
   }, []);
 
+  const hideSelector = () => {
+    setIsClosed("true");
+    typeof window !== "undefined" &&
+      window.localStorage.setItem("lang-selector-visible", "true");
+  };
+
   return (
     <div
       className={styles["navbar-lang"]}
@@ -27,7 +33,7 @@ const LangSelector = (): JSX.Element => {
           <span>{t("NavbarLangSelectorTitle")} </span>
         </div>
         <div className={styles["selector"]}>
-          <LanguageSelector showButton={true} />
+          <LanguageSelector showButton={true} onSubmit={hideSelector} />
         </div>
       </div>
       <button
