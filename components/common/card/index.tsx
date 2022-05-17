@@ -36,7 +36,7 @@ const Cards = ({
       <div
         className={styles[className]}
         onClick={() => {
-          onClick();
+          onClick && onClick();
         }}
         data-testid="click-div"
       >
