@@ -21,4 +21,8 @@
     text-transform: capitalize;
     color: $black-color;
   }
+
+  &__navigation {
+    text-decoration: none;
+  }
 }

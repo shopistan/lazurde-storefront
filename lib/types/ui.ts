@@ -1,8 +1,8 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, RefObject } from "react";
 
 export type InputType = {
   value?: string;
-  placeholder?: string;
+  placeHolder: string;
   className?: string;
   style?: object;
   label?: string;
@@ -10,4 +10,5 @@ export type InputType = {
   onChange?: ChangeEventHandler<HTMLInputElement>;
   showLabel: boolean;
   handleSubmit: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  inputRef: any;
 };

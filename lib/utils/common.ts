@@ -11,8 +11,13 @@ import {
   RegionType,
 } from "lib/types/common";
 
+export const desktopScreenSize = 1023;
+export const mobileScreenSize = 767;
+
 export const getAppStateFromLocalStorage = () => {
-  const appState = typeof window !== "undefined" && JSON.parse(window.localStorage.getItem("app-state"));
+  const appState =
+    typeof window !== "undefined" &&
+    JSON.parse(window.localStorage.getItem("app-state"));
   return appState;
 };
 
@@ -36,4 +41,15 @@ export const getChannelFromLocale = (locale: LocaleType) => {
   else if (processedLocale.includes("ae")) return NEXT_PUBLIC_CHANNEL_UAE;
   else if (processedLocale.includes("eg")) return NEXT_PUBLIC_CHANNEL_EG;
   else return 0;
+};
+
+export const updateBrand = (
+  brandVal: string,
+  saveAppState: any,
+  appState: object
+) => {
+  saveAppState({
+    ...appState,
+    brand: brandVal ? brandVal : "L'azurde",
+  });
 };

@@ -28,6 +28,14 @@ const countryArr = [
   },
 ];
 
+const kenazCountryArr = [
+  {
+    label: "KSA",
+    img: "/flag-sa.png",
+    value: "sa",
+  },
+];
+
 const languageArr = [
   {
     label: "English",
@@ -115,7 +123,7 @@ const LanguageSelector = ({
       className={`${styles["language-selector"]} ${mainWrapperClass}`}
     >
       <Select
-        options={countryArr}
+        options={appState?.brand === "Kenaz" ? kenazCountryArr : countryArr}
         onChange={onCountryChange}
         defaultValue={appState.region}
         className={className}

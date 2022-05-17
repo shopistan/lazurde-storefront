@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import ChevronDown from "components/icons/ChevronDown";
+import Image from "next/image";
 import React, { useState, useRef, useEffect, useContext } from "react";
 import Modal from "../modal";
 
@@ -14,7 +15,7 @@ interface SelectProps {
   selectedValue?: string;
   className?: string;
   optionClassName?: string;
-  selectedLabel?: string;
+  selectedLabel?: string | JSX.Element;
   showInModal?: Boolean;
   modalChildren?: string | JSX.Element;
 }
@@ -23,7 +24,7 @@ const BorderlessSelect = ({
   options = [{ label: "label", img: "", value: "value" }],
   onChange = () => {},
   defaultValue = "",
-  selectedValue = '',
+  selectedValue = "",
   className = "",
   optionClassName = "",
   selectedLabel = "",
@@ -65,7 +66,8 @@ const BorderlessSelect = ({
       onBlur={() => !showInModal && setIsOpen(false)}
       onClick={() => {
         if (
-          window?.innerHeight - dropdown?.current?.getBoundingClientRect().bottom <
+          window?.innerHeight -
+            dropdown?.current?.getBoundingClientRect().bottom <
           100
         ) {
           setPosition("top");
@@ -79,10 +81,12 @@ const BorderlessSelect = ({
         <span>{selectedLabel}</span>
         <span className={styles["selected-text"]}>{selectedVal?.label}</span>
         {selectedVal?.img && (
-          <img
+          <Image
             src={selectedVal?.img || "/flag-uae.svg"}
             width={16}
+            height={16}
             alt="image"
+            layout="fixed"
           />
         )}
       </div>
@@ -115,10 +119,12 @@ const BorderlessSelect = ({
                   <a>
                     {opData?.label}
                     {opData?.img && (
-                      <img
+                      <Image
                         src={opData?.img || "/flag-uae.svg"}
                         width={16}
+                        height={16}
                         alt="image"
+                        layout="fixed"
                       />
                     )}
                   </a>
@@ -129,7 +135,7 @@ const BorderlessSelect = ({
       )}
 
       <div className={styles["select-arrow"]}>
-        <ChevronDown />
+        <ChevronDown color="#000000" width="10px" height="7px" />
       </div>
     </div>
   );

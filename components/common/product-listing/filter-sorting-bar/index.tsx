@@ -94,13 +94,19 @@ const filterListData = [
   },
 ];
 
+type FilterListProps = {
+  filterName: string;
+  filterOptions: { optionName: string }[];
+};
+
+type SelectedFilterProps = {
+  [key: string]: {
+    name: string;
+    selectedOptions: { [key: string]: { selected: boolean; name: string } };
+  };
+};
 interface FilterBarProps {
-  filterList?:
-    | {
-        filterName: string;
-        filterOptions: { optionName: string }[];
-      }[]
-    | [];
+  filterList?: FilterListProps[] | [];
   headerId?: string;
   onApplyFilters?: Function;
   onSortingChange?: Function;
@@ -108,6 +114,7 @@ interface FilterBarProps {
 
 interface DropdownDataProps {
   filterName: string;
+  filterIndex: number;
   dropdownData: {
     optionName: string;
   }[];
@@ -122,7 +129,7 @@ const FilterBar: FC<FilterBarProps> = ({
 }): JSX.Element => {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const link: any = useRef(
+  let link: any = useRef(
     Array.isArray(filterList) &&
       filterList.length > 0 &&
       filterList.map(() => React.createRef())
@@ -135,12 +142,14 @@ const FilterBar: FC<FilterBarProps> = ({
   );
   const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
 
+  const [currentFilterList, setCurrentFilterList] = useState<string | object>(
+    filterList
+  );
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
-  const [selectedFilters, setSelectedFilters] = useState<{
-    [key: string]: { [key: string]: string };
-  }>();
+  const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  const [linkRefs, setLinkRefs] = useState(link);
   const [width] = useWindowSize();
   const [optionData, setOptionData] = useState<{
     data?: any;
@@ -157,7 +166,8 @@ const FilterBar: FC<FilterBarProps> = ({
       ) {
         const filterTitle = Object.keys(selectedFilters)[index];
         const count =
-          filterTitle && Object.keys(selectedFilters[filterTitle]).length;
+          filterTitle &&
+          Object.keys(selectedFilters[filterTitle]?.selectedOptions).length;
         totalCount = Number(totalCount) + Number(count);
         setTotalSelectedFilterCount(totalCount);
       }
@@ -171,18 +181,29 @@ const FilterBar: FC<FilterBarProps> = ({
       data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
       defaultValue: appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين",
     });
+
+    if (appState.lang === "en") {
+      setCurrentFilterList(filterList);
+    } else {
+      setCurrentFilterList(_arabicFilterBarData);
+    }
   }, [appState]);
+
+  useEffect(() => {
+    setCurrentFilterList(filterList);
+    setLinkRefs(link);
+  }, [filterList]);
 
   return (
     <div className={styles["filter-bar-main"]} data-headerid={headerId}>
       <div className={styles["div-filter-bar"]}>
         <div className={styles["filter-links"]}>
-          {Array.isArray(filterList) &&
-            filterList.length > 0 &&
-            filterList.map((data, index) => {
+          {Array.isArray(currentFilterList) &&
+            currentFilterList.length > 0 &&
+            currentFilterList.map((data, index) => {
               const hasCategories = true;
-              const selectedFilterCount = selectedFilters?.[data?.filterName]
-                ? Object.keys(selectedFilters?.[data?.filterName]).length
+              const selectedFilterCount = selectedFilters?.[index]
+                ? Object.keys(selectedFilters?.[index]?.selectedOptions).length
                 : 0;
 
               return (
@@ -190,7 +211,7 @@ const FilterBar: FC<FilterBarProps> = ({
                   role={"links"}
                   key={index}
                   className={styles["links"]}
-                  ref={link.current[index]}
+                  ref={linkRefs?.current && linkRefs?.current[index]}
                   data-has-count={selectedFilterCount > 0}
                   onMouseOver={(event) => {
                     event.stopPropagation();
@@ -198,27 +219,18 @@ const FilterBar: FC<FilterBarProps> = ({
                     if (hasCategories) {
                       setIsOpened({ opened: true, selected: index });
                       setDropdownData({
-                        filterName:
-                          appState?.lang === "en"
-                            ? data?.filterName
-                            : Array.isArray(_arabicFilterBarData) &&
-                              _arabicFilterBarData.length > 0 &&
-                              _arabicFilterBarData[index]?.filterName,
-                        dropdownData:
-                          appState?.lang === "en"
-                            ? data?.filterOptions
-                            : Array.isArray(_arabicFilterBarData) &&
-                              _arabicFilterBarData.length > 0 &&
-                              _arabicFilterBarData[index]?.filterOptions,
+                        filterName: data?.filterName,
+                        filterIndex: index,
+                        dropdownData: data?.filterOptions,
                         positionOffset:
                           appState?.lang === "en"
-                            ? link?.current[
+                            ? linkRefs?.current[
                                 index
-                              ].current.getBoundingClientRect().left
+                              ]?.current?.getBoundingClientRect().left
                             : width -
-                              link?.current[
+                              linkRefs?.current[
                                 index
-                              ].current.getBoundingClientRect().right -
+                              ]?.current?.getBoundingClientRect().right -
                               17.4,
                       });
                     } else {
@@ -239,13 +251,7 @@ const FilterBar: FC<FilterBarProps> = ({
                       : isOpened?.selected === index
                   }
                 >
-                  <span>
-                    {appState?.lang === "en"
-                      ? data?.filterName
-                      : Array.isArray(_arabicFilterBarData) &&
-                        _arabicFilterBarData.length > 0 &&
-                        _arabicFilterBarData[index]?.filterName}
-                  </span>
+                  <span>{data?.filterName}</span>
                   <div data-visible={selectedFilterCount > 0}>
                     <span>
                       {selectedFilterCount > 0 && selectedFilterCount}

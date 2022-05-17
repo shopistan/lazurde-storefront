@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import useWindowSize from "lib/utils/useWindowSize";
 import { HeaderProps, BrandSidebarProps } from "lib/types/common";
 import styles from "./Header.module.css";
@@ -8,6 +8,8 @@ import LangSelector from "./navbar-lang-selector/index";
 import SiteNavBar from "./site-navbar";
 import MobileNavBar from "./mobile-navbar";
 import SearchDialog from "../search-dialog";
+import { desktopScreenSize } from "lib/utils/common";
+import { AppContext } from "lib/context";
 
 type AllHeaderProps = HeaderProps & {
   brandSidebarProps: BrandSidebarProps;
@@ -27,6 +29,9 @@ const Header = ({
 }: AllHeaderProps): JSX.Element => {
   const [width] = useWindowSize();
   const [openSearchDailog, setOpenSearchDialog] = useState(false);
+  const { appState } = useContext(AppContext);
+
+  console.log("appState", appState);
 
   return (
     <div className={styles["header-container"]}>
@@ -43,7 +48,7 @@ const Header = ({
         setOpenSearchDialog={setOpenSearchDialog}
         openSearchDialog={openSearchDailog}
       />
-      {width < 1024 ? (
+      {width <= desktopScreenSize ? (
         <MobileNavBar
           menuData={siteNavBar}
           headerId={headerId}
@@ -56,7 +61,7 @@ const Header = ({
         <UserNavBar brandSideBar={brandSidebarProps} />
       )}
       <LangSelector />
-      {width < 1024 ? null : (
+      {width <= desktopScreenSize ? null : (
         <SiteNavBar
           siteNavBar={siteNavBar}
           siteLogo={siteLogo}

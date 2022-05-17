@@ -5,12 +5,18 @@ import Tick from "components/icons/Tick";
 interface DropDownProps {
   dropdownData: { [key: string]: string }[];
   filterName: string;
+  filterIndex: number;
 }
 
 interface CategoryDropDownProps {
   categoryData: DropDownProps;
   setIsOpened: Function;
-  selectedFilters: { [key: string]: { [key: string]: string } };
+  selectedFilters: {
+    [key: string]: {
+      name: string;
+      selectedOptions: { [key: string]: { selected: boolean; name: string } };
+    };
+  };
   setSelectedFilters: Function;
   setTotalSelectedFilterCount: Function;
 }
@@ -23,6 +29,7 @@ const DropDown = ({
   setTotalSelectedFilterCount = () => {},
 }: CategoryDropDownProps): JSX.Element => {
   const filterName = categoryData?.filterName || "";
+  const filterIndex = categoryData?.filterIndex || 0;
 
   useEffect(() => {
     let totalCount = 0;
@@ -34,7 +41,9 @@ const DropDown = ({
       ) {
         const filterTitle = Object.keys(selectedFilters)[index];
         const count =
-          filterTitle && Object.keys(selectedFilters[filterTitle]).length;
+          filterTitle &&
+          Object.keys(selectedFilters[filterTitle]?.selectedOptions).length;
+
         totalCount = Number(totalCount) + Number(count);
         setTotalSelectedFilterCount(totalCount);
       }
@@ -68,20 +77,32 @@ const DropDown = ({
                 key={index}
                 className={styles["title"]}
                 onClick={() => {
-                  if (selectedFilters?.[filterName]?.[optionName]) {
+                  if (
+                    selectedFilters?.[filterIndex]?.selectedOptions?.[index]
+                      ?.selected
+                  ) {
                     const filterCopy = { ...selectedFilters };
-                    delete filterCopy?.[filterName]?.[optionName];
-                    if (Object.keys(filterCopy?.[filterName]).length < 1) {
-                      delete filterCopy?.[filterName];
+                    delete filterCopy?.[filterIndex]?.selectedOptions?.[index];
+                    if (
+                      Object.keys(filterCopy?.[filterIndex]?.selectedOptions)
+                        .length < 1
+                    ) {
+                      delete filterCopy?.[filterIndex];
                     }
                     setSelectedFilters && setSelectedFilters({ ...filterCopy });
                   } else {
                     setSelectedFilters &&
                       setSelectedFilters({
                         ...selectedFilters,
-                        [filterName]: {
-                          ...selectedFilters?.[filterName],
-                          [optionName]: true,
+                        [filterIndex]: {
+                          name: filterName,
+                          selectedOptions: {
+                            ...selectedFilters?.[filterIndex]?.selectedOptions,
+                            [index]: {
+                              selected: true,
+                              name: optionName,
+                            },
+                          },
                         },
                       });
                   }
@@ -90,7 +111,10 @@ const DropDown = ({
                 {optionName}
                 <div
                   className={styles["div-tick"]}
-                  data-showTick={selectedFilters?.[filterName]?.[optionName]}
+                  data-showTick={
+                    selectedFilters?.[filterIndex]?.selectedOptions?.[index]
+                      ?.selected
+                  }
                 >
                   <Tick />
                 </div>

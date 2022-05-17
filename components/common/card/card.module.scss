@@ -16,10 +16,38 @@
   }
 }
 
+.card-content {
+  padding: 16px;
+}
+
+.card-description {
+  margin: 0;
+  margin-block-start: 8px;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 15.6px;
+  letter-spacing: 0em;
+  text-align: start;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-block-end: 16px;
+    font-size: 14px;
+    line-height: 16.8px;
+  }
+}
+
 .image-section {
   position: relative;
 }
 
+body {
+  .fav-icon {
+    span {
+      height: 20px !important;
+    }
+  }
+}
 .fav-icon {
   position: absolute;
   top: 13px;
@@ -36,4 +64,48 @@
 .plp-card {
   width: 100%;
   height: 100%;
+}
+
+.img-wrapper {
+  position: relative;
+
+  .img-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.bambuser-slider-card {
+  .card-title {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: 0em;
+    text-transform: capitalize;
+
+    @media (min-width: $breakPoint-desktop) {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .card-description {
+    @media (min-width: $breakPoint-desktop) {
+      line-height: 18.2px;
+    }
+  }
 }

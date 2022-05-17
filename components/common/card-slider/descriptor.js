@@ -15,6 +15,7 @@ exports.default = Types.Component({
       children: Types.Shape({
         children: {
           heading: Types.String({ label: "Slide Heading" }),
+          slideLink: Types.String({ label: "Slide Link" }),
           image: Types.Image({
             label: "Slide Image",
             url: Types.String({ label: "URL" }),

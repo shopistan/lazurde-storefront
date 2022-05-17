@@ -6,7 +6,7 @@ const Modal = ({
   className = " ",
   isOpened = false,
   children,
-  onClose = () => {},
+  onClose = () => { },
 }: {
   className: string;
   isOpened: Boolean;
@@ -21,9 +21,8 @@ const Modal = ({
 
   return (
     <div
-      className={`${styles["div-modal-main"]} ${
-        className && styles[className]
-      }`}
+      className={`${styles["div-modal-main"]} ${className && styles[className]
+        }`}
       data-open={openState}
       onClick={(event) => {
         event.stopPropagation();

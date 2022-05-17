@@ -7,10 +7,13 @@ import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
 import Label from "components/common/ui/label";
 import Slider from "components/common/ui/slider/slider";
+import { desktopScreenSize } from 'lib/utils/common'
+import Link from "next/link";
 
 type CardsArrType = {
   image?: { url: string; altText: string };
   heading?: string;
+  slideLink?: string;
 };
 interface CardSliderProps {
   className?: string;
@@ -50,7 +53,7 @@ const CardSlider = ({
       <Slider
         desktopSlidePerView={4}
         mobileSlidePerView={1.1}
-        navigation={width > 1023 ? true : false}
+        navigation={width > desktopScreenSize ? true : false}
         scrollbar={true}
         className={`card-slider`}
       >
@@ -58,7 +61,7 @@ const CardSlider = ({
           {Array.isArray(cards) &&
             cards.length > 0 &&
             cards.map((content, index) => {
-              const { image, heading } = content;
+              const { image, heading, slideLink } = content;
               return (
                 <SwiperSlide key={index}>
                   <Cards
@@ -67,11 +70,11 @@ const CardSlider = ({
                       appState?.lang === "en"
                         ? heading
                         : Array.isArray(_arabicCardData) &&
-                          _arabicCardData.length > 0 &&
-                          _arabicCardData[index].heading
+                        _arabicCardData.length > 0 &&
+                        _arabicCardData[index].heading
                     }
-                    width={width > 1023 ? 314 : 332}
-                    height={width > 1023 ? 429 : 352}
+                    width={width > desktopScreenSize ? 314 : 332}
+                    height={width > desktopScreenSize ? 429 : 352}
                     className="category-slider-card"
                   />
                 </SwiperSlide>

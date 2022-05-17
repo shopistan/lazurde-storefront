@@ -15,13 +15,14 @@ const INDEX = ALGOLIA_CLIENT.initIndex(ALGOLIA_SEARCH_INDEX);
 
 export const fetchCategoryProducts = async ({
   categoryName,
+  pageSize = 500,
   page = 0,
   filterParents = false,
 }: FetchCategoryProductsArgs) => {
   try {
     let response = await INDEX.search(categoryName, {
       restrictSearchableAttributes: ["Category"],
-      //hitsPerPage: 20,
+      hitsPerPage: pageSize,
       facetFilters: filterParents ? [["isVariant:false"]] : [],
       page,
     });
@@ -59,12 +60,13 @@ export const performKeywordSearch = async ({
   pageSize = 500,
   page = 0,
   filterParents = false,
+  facetFilters = [],
 }: KeywordSearchArgs) => {
   try {
     let response = await INDEX.search(query, {
       // restrictSearchableAttributes: ['title', 'description'],
       hitsPerPage: pageSize,
-      facetFilters: filterParents ? [["isVariant:false"]] : [],
+      facetFilters: [facetFilters],
       page,
     });
     return response;

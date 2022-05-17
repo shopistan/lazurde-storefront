@@ -1,6 +1,7 @@
 import AppContentWrapper from "components/common/app-content-wrapper";
 import Footer from "components/common/footer";
 import Header from "components/common/header";
+import SearchResultsInfo from "components/common/search-results-info";
 import { componentsById } from "components/xm-component-library";
 import { performKeywordSearch } from "lib/algolia";
 import { AlgoliaProductType } from "lib/types/algolia";
@@ -38,9 +39,25 @@ const SearchPage: FC<SearchPageProps> = ({
       </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
-        {pageComponents.map((component: XMComponent, index) => {
+        <SearchResultsInfo
+          searchTerm={algoliaSearchResults?.query}
+          totalItems={algoliaSearchResults?.hits?.length}
+        />
+        {pageComponents?.map((component: XMComponent, index) => {
           const Component = componentsById[component.id];
           if (Component) {
+            if (component.id === "ProductListing") {
+              if (algoliaSearchResults?.hits?.length) {
+                return (
+                  <Component
+                    {...component.params}
+                    productDataArray={algoliaSearchResults?.hits || []}
+                    key={index}
+                    showBreadcrumb={false}
+                  />
+                );
+              } else return null;
+            }
             return <Component {...component.params} key={index} />;
           }
           return null;
@@ -55,6 +72,26 @@ export default SearchPage;
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { query = {} } = context;
+  const getFaceFilters = () => {
+    if (query?.brand === `L'azurde`)
+      return [
+        `Brand:L'azurde`,
+        `Brand:L'azurde,Miss L'`,
+        `Brand:L'azurde,Kenaz`,
+      ];
+    else if (query?.brand === `Miss L'`)
+      return [`Brand:Miss L'`, `Brand:L'azurde,Miss L'`];
+    else if (query?.brand === "Kenaz")
+      return [`Brand:Kenaz`, `Brand:L'azurde,Kenaz`];
+    else
+      return [
+        `Brand:L'azurde`,
+        `Brand:L'azurde,Miss L'`,
+        `Brand:L'azurde,Kenaz`,
+      ];
+  };
+
+  console.log("facetFiltter", getFaceFilters());
   const {
     hits = [],
     nbHits = 0,
@@ -63,14 +100,22 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     hitsPerPage = 0,
   } = await performKeywordSearch({
     query: query.keyword || "",
+    facetFilters: getFaceFilters() || [],
   });
+
+  const getCurrentBrandId = () => {
+    if (query?.brand === `L'azurde`) return "lazurdeHeader";
+    else if (query?.brand === `Miss L'`) return "missLHeader";
+    else if (query?.brand === "Kenaz") return "kenazHeader";
+    else return "lazurdeHeader";
+  };
   const globalComponents = (await fetchGlobalComponents()) || [];
   const pageComponents = (await fetchXMComponents(12, "/search")) || [];
   const headerProps =
     (
       globalComponents.find(
         (item: XMComponent) =>
-          item.id === "Header" && item.params.headerId === "lazurdeHeader"
+          item.id === "Header" && item.params.headerId === getCurrentBrandId()
       ) || {}
     ).params || {};
   const footerProps =

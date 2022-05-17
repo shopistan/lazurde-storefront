@@ -1,5 +1,6 @@
 export type FetchCategoryProductsArgs = {
   categoryName: string;
+  pageSize?: number;
   page?: number;
   filterParents?: boolean;
 };
@@ -14,6 +15,7 @@ export type KeywordSearchArgs = {
   pageSize?: number;
   page?: number;
   filterParents?: boolean;
+  facetFilters?: string[];
 };
 
 export type AlgoliaProductType = {

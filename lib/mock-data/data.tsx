@@ -1,61 +1,48 @@
-export const sliderData = [
-  {
-    image: {
-      url: "/Bracelets.svg",
-      altText: "Bracelets",
+export const sliderData = {
+  sectionHeading: "section heading",
+  cards: [
+    {
+      image: {
+        url: "/Picture1.svg",
+        altText: "Bracelets",
+      },
+      heading: "Bracelets",
+      description: "lorem ipsum lorem ipsum",
     },
-    heading: "Bracelets",
-  },
-  {
-    image: {
-      url: "/Rings.svg",
-      altText: "Rings",
+    {
+      image: {
+        url: "/Picture2.svg",
+        altText: "Rings",
+      },
+      heading: "Rings",
+      description: "lorem ipsum lorem ipsum",
     },
-    heading: "Rings",
-  },
-  {
-    image: {
-      url: "/Earrings.svg",
-      altText: "Earrings",
+    {
+      image: {
+        url: "/Picture3.svg",
+        altText: "Earrings",
+      },
+      heading: "Earrings",
+      description: "lorem ipsum lorem ipsum",
     },
-    heading: "Earrings",
-  },
-  {
-    image: {
-      url: "/Necklaces.svg",
-      altText: "Necklaces",
+    {
+      image: {
+        url: "/Picture4.svg",
+        altText: "Necklaces",
+      },
+      heading: "Necklaces",
+      description: "lorem ipsum lorem ipsum",
     },
-    heading: "Necklaces",
-  },
-  {
-    image: {
-      url: "/Bracelets.svg",
-      altText: "Bracelets",
+    {
+      image: {
+        url: "/Picture1.svg",
+        altText: "Bracelets",
+      },
+      heading: "Bracelets",
+      description: "lorem ipsum lorem ipsum",
     },
-    heading: "Bracelets",
-  },
-  {
-    image: {
-      url: "/Rings.svg",
-      altText: "Rings",
-    },
-    heading: "Rings",
-  },
-  {
-    image: {
-      url: "/Earrings.svg",
-      altText: "Earrings",
-    },
-    heading: "Earrings",
-  },
-  {
-    image: {
-      url: "/Necklaces.svg",
-      altText: "Necklaces",
-    },
-    heading: "Necklaces",
-  },
-];
+  ],
+};
 
 export const langSelectData = [
   {
@@ -92,6 +79,21 @@ export const langSelectData = [
     label: "u.a.e",
     img: "/icons/flag-uae.png",
     value: "ar-ae",
+    langTitle: "العربية",
+  },
+];
+
+export const kenazLangSelectData = [
+  {
+    label: "KSA",
+    img: "/icons/flag-sa.png",
+    value: "en-sa",
+    langTitle: "english",
+  },
+  {
+    label: "KSA",
+    img: "/icons/flag-sa.png",
+    value: "ar-sa",
     langTitle: "العربية",
   },
 ];
@@ -491,5 +493,55 @@ export const popularProductCardData = [
         altText: "alt text",
       },
     ],
+  },
+];
+
+export const paymentIconSize = [
+  {
+    width: 72,
+    mobileWidth: 50,
+  },
+  {
+    width: 101,
+    mobileWidth: 70,
+  },
+  {
+    width: 61,
+    mobileWidth: 42,
+  },
+  {
+    width: 61,
+    mobileWidth: 43,
+  },
+  {
+    width: 38,
+    mobileWidth: 26,
+  },
+  {
+    width: 69,
+    mobileWidth: 48,
+  },
+];
+
+export const socialIconSize = [
+  {
+    width: 20,
+    mobileWidth: 20,
+  },
+  {
+    width: 20,
+    mobileWidth: 20,
+  },
+  {
+    width: 20,
+    mobileWidth: 20,
+  },
+  {
+    width: 20,
+    mobileWidth: 20,
+  },
+  {
+    width: 20,
+    mobileWidth: 20,
   },
 ];

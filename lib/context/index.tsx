@@ -6,12 +6,13 @@ import React, { FC, useState } from "react";
 export const AppContext = React.createContext<any>({});
 
 const ContextProvider: FC = ({ children }) => {
-  let defaultState: AppStateType | string = ''
-  if(getAppStateFromLocalStorage()) {
-    defaultState = getAppStateFromLocalStorage()
+  var defaultState: AppStateType | string = "";
+  if (getAppStateFromLocalStorage()) {
+    defaultState = getAppStateFromLocalStorage();
   } else {
-    defaultState = DEFAULT_APP_STATE
+    defaultState = DEFAULT_APP_STATE;
   }
+
   const [appState, setAppState] = useState<AppStateType | string>(defaultState);
 
   const saveAppState = ({

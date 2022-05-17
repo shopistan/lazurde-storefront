@@ -10,11 +10,13 @@ import useTranslation from "next-translate/useTranslation";
 import { fetchCategoryProducts, performFilteredSearch } from "lib/algolia";
 import BreadCrumbs from "components/common/ui/bread-crumbs";
 import { ImageType } from "lib/types/common";
+import { desktopScreenSize } from "lib/utils/common";
+import Pagination from "../ui/pagination";
 
 interface ProductCardProps {
   index?: number;
   title?: string;
-  "Image URL"?: string;
+  "Image 1 URL"?: string;
   "Base Price"?: number | string;
   basePrice?: number | string;
   discount?: string;
@@ -31,19 +33,23 @@ interface ProductListingProps {
   productDataArray: [];
   categoryName: string;
   filterList: [];
+  showBreadcrumb: boolean;
 }
 
 const ProductListing = ({
   productDataArray = [],
-  categoryName = '',
+  categoryName = "",
   filterList,
+  showBreadcrumb = true,
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const dummyProductData = productCardData || []
+  const dummyProductData = productCardData || [];
+  const [initialProductData, setInitialProductData] = useState<any>([]);
+
   const [currentProductData, setCurrentProductData] = useState(
-    [...productDataArray, ...dummyProductData] || []
+    [...initialProductData, ...dummyProductData] || []
   );
 
   const _arabicProductCardData = t(
@@ -54,42 +60,80 @@ const ProductListing = ({
 
   useEffect(() => {
     // console.log(
+    //   "something",
     //   fetchCategoryProducts({
-    //     categoryName: "L'azurde > Earrings",
+    //     categoryName: "",
     //   })
     // );
+    // const str = `Lazurde,Miss'l`
+    // console.log("something", str.toLowerCase().includes(`miss'l`), productDataArray)
+    // const arr = productDataArray.filter((item) => {
+    //   if(appState.brand === `L'azurde`) {
+    //     return item
+    //   }
+    //   if(appState.brand === `Miss L'`) {
+    //     return item?.Brand?.toLowerCase().includes(`miss'l`)
+    //   }
+    //   if(appState.brand === "Kenaz") {
+    //     return item?.Brand?.toLowerCase().includes("kenaz")
+    //   }
+    //   return false
+    // })
+    // console.log("something",arr)
     // console.log(performFilteredSearch({ filters: [`Gold`] }));
     // console.log("categoryName",categoryName)
-  }, []);
+
+    const filteredArray = productDataArray.filter((item: { Brand: string }) => {
+      if (appState.brand === `L'azurde`) {
+        return item;
+      }
+      if (appState.brand === `Miss L'`) {
+        return (
+          item?.Brand?.toLowerCase().includes(`miss`) ||
+          item?.Brand?.toLowerCase().includes(`miss'l`) ||
+          item?.Brand?.toLowerCase().includes(`miss l'`)
+        );
+      }
+      if (appState.brand === "Kenaz") {
+        return item?.Brand?.toLowerCase().includes("kenaz");
+      }
+      return false;
+    });
+    setInitialProductData(filteredArray);
+  }, [productDataArray]);
 
   const applyFilters = (selectedFilters: any = {}) => {
     if (Object.keys(selectedFilters).length < 1) {
-      return setCurrentProductData([...productDataArray, ...dummyProductData]);
+      return setCurrentProductData([
+        ...initialProductData,
+        ...dummyProductData,
+      ]);
     }
 
-    const payload = [];
+    let payload = [];
 
     Object.keys(selectedFilters).forEach((filterType, index) => {
       const orFilters: any[] = [];
 
-      Object.keys(selectedFilters[filterType]).forEach((filterOption) => {
-        const facet = `${filterType}: ${filterOption}`;
-        orFilters.push(facet);
-      });
+      Object.keys(selectedFilters[filterType]?.selectedOptions).forEach(
+        (filterOption) => {
+          const facet = `${selectedFilters[filterType]?.name}: ${selectedFilters[filterType]?.selectedOptions[filterOption]?.name}`;
+          orFilters.push(facet);
+        }
+      );
 
       payload.push(orFilters);
     });
 
-    // console.table(payload);
-
-    // const filteredData = performFilteredSearch({query: categoryName[0], filters: payload})
+    // console.log("categoryName", categoryName);
+    // payload = ["isMain: true"];
+    // const filteredData = performFilteredSearch({ query: "", filters: payload });
     const filteredData: [] = [];
     setCurrentProductData(filteredData);
   };
 
   const onSortingChange = (sortedValue: any = {}) => {
     console.log("sortedValue", sortedValue);
-    
 
     // if (sortedValue.length < 1) {
     //   return setCurrentProductData(productDataArray);
@@ -116,66 +160,85 @@ const ProductListing = ({
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
-        <BreadCrumbs />
+        {showBreadcrumb && <BreadCrumbs />}
 
-        {width < 1024 ? (
-          <FilterBarMobile
-            onApplyFilters={applyFilters}
-            onSortingChange={onSortingChange}
-            filterList={filterList}
-          ></FilterBarMobile>
-        ) : (
-          <FilterBar
-            onApplyFilters={applyFilters}
-            onSortingChange={onSortingChange}
-            filterList={filterList}
-          ></FilterBar>
-        )}
-        <div className={styles["product-listing__cards"]}>
-          {currentProductData && currentProductData.length > 0
-            ? currentProductData?.map(
-                (data: ProductCardProps, index: number) => {
-                  const {
-                    sku,
-                    itemId,
-                    priceListId,
-                    currency,
-                    title,
-                    basePrice = data["Base Price"],
-                    discount,
-                    discountedPrice,
-                    productCardImages = [
-                      { url: data["Image URL"], altText: "" },
-                    ],
-                    onlineExclusiveTag,
-                  } = data;
-                  return (
-                    <>
-                      <ProductCard
-                        title={
-                          appState?.lang === "en"
-                            ? title
-                            : Array.isArray(_arabicProductCardData) &&
-                              _arabicProductCardData.length > 0 &&
-                              _arabicProductCardData[index]?.title
-                        }
-                        sku={sku}
-                        itemId={itemId}
-                        priceListId={priceListId}
-                        currency={currency}
-                        basePrice={basePrice}
-                        discount={discount}
-                        discountAmount={discountedPrice}
-                        productCardImages={productCardImages}
-                        onlineExclusiveTag={onlineExclusiveTag}
-                        index={index}
-                      />
-                    </>
-                  );
-                }
-              )
-            : ""}
-        </div>
+        <Pagination
+          paginationClass={styles["div-pagination"]}
+          defaultPageNumber={1}
+          pageSize={5}
+          totalSize={initialProductData.length}
+          dataArray={initialProductData}
+          onInitialize={(slicedArray: []) => {
+            setCurrentProductData(slicedArray);
+          }}
+          onPageUp={(slicedArray: []) => {
+            setCurrentProductData(slicedArray);
+          }}
+          onPageDown={(slicedArray: []) => {
+            setCurrentProductData(slicedArray);
+          }}
+        >
+          <>
+            {width <= desktopScreenSize ? (
+              <FilterBarMobile
+                onApplyFilters={applyFilters}
+                onSortingChange={onSortingChange}
+                filterList={filterList}
+              ></FilterBarMobile>
+            ) : (
+              <FilterBar
+                onApplyFilters={applyFilters}
+                onSortingChange={onSortingChange}
+                filterList={filterList}
+              ></FilterBar>
+            )}
+            <div className={styles["product-listing__cards"]}>
+              {currentProductData && currentProductData.length > 0
+                ? currentProductData?.map(
+                    (data: ProductCardProps, index: number) => {
+                      const {
+                        sku,
+                        itemId,
+                        priceListId,
+                        currency,
+                        title,
+                        basePrice = data["Base Price"],
+                        discount,
+                        discountedPrice,
+                        productCardImages = [
+                          { url: data["Image 1 URL"], altText: "" },
+                        ],
+                        onlineExclusiveTag,
+                      } = data;
+                      return (
+                        <>
+                          <ProductCard
+                            title={
+                              appState?.lang === "en"
+                                ? title
+                                : Array.isArray(_arabicProductCardData) &&
+                                  _arabicProductCardData.length > 0 &&
+                                  _arabicProductCardData[index]?.title
+                            }
+                            sku={sku}
+                            itemId={itemId}
+                            priceListId={priceListId}
+                            currency={currency}
+                            basePrice={basePrice}
+                            discount={discount}
+                            discountAmount={discountedPrice}
+                            productCardImages={productCardImages}
+                            onlineExclusiveTag={onlineExclusiveTag}
+                            index={index}
+                          />
+                        </>
+                      );
+                    }
+                  )
+                : ""}
+            </div>
+          </>
+        </Pagination>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from "react";
+import React, { FC, useContext, useEffect, useState, useRef } from "react";
 import styles from "./style.module.scss";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,7 +11,11 @@ import { popularProductCardData } from "lib/mock-data/data";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
-
+import useTranslation from "next-translate/useTranslation";
+import {
+  desktopScreenSize,
+  getAppStateFromLocalStorage,
+} from "lib/utils/common";
 interface SearchDialogProps {
   siteLogo: ImageType;
   siteLogoUrl: string;
@@ -26,9 +30,27 @@ const SearchDialog: FC<SearchDialogProps> = ({
   openSearchDialog,
 }): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState } = useContext(AppContext);
+  const { appState, saveAppState } = useContext(AppContext);
+  const [placeHolderBrand, setPlaceHolderBrand] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
   const router = useRouter();
+  const { t } = useTranslation("common");
+  const inputRef = useRef<null | HTMLElement>(null);
+
+  useEffect(() => {
+    try {
+      let newState = getAppStateFromLocalStorage();
+      setPlaceHolderBrand(newState?.brand);
+    } catch {
+      console.log("error");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (openSearchDialog) {
+      inputRef.current.focus();
+    }
+  }, [openSearchDialog]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -38,13 +60,23 @@ const SearchDialog: FC<SearchDialogProps> = ({
     if (searchTerm && e.key == "Enter") {
       var splitTerm = searchTerm.split(" ");
       var joinTerm = splitTerm.join("-");
-      router.push(`/s?keyword=${joinTerm}`, undefined, { shallow: true });
+      // router.push(`/s?keyword=${joinTerm}`, undefined, { shallow: true });
+      router.push({
+        pathname: "/s",
+        query: {
+          brand: appState?.brand,
+          keyword: joinTerm,
+        },
+      });
+      setOpenSearchDialog(false);
     }
   };
 
+  const placeholderText = appState?.lang === "en" ? "Shop" : "متجر";
+
   return (
     <>
-      {width > 1023 && (
+      {width > desktopScreenSize && (
         <div
           className={styles["overlay"]}
           data-opened={openSearchDialog}
@@ -72,11 +104,13 @@ const SearchDialog: FC<SearchDialogProps> = ({
             <Input
               showLabel={false}
               className={styles["search-input"]}
-              placeholder={`${appState.lang === "en" ? "Shop" : "تسوق"} ${
-                appState.brand
-              }`}
+              placeHolder={`${placeholderText} ${placeHolderBrand}`}
+              // placeHolder={`${appState?.lang === "en" ? "Shop" : t("Shop")} ${
+              //   appState?.brand
+              // }`}
               onChange={handleSearch}
               handleSubmit={handleSubmit}
+              inputRef={inputRef}
             ></Input>
           </div>
           <div
@@ -132,6 +166,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
                         wrapperClassName={styles["product-card"]}
                         swipperClassName={styles["swipper-card"]}
                         data-testid="card"
+                        showATC={false}
                       />
                     );
                 })}
