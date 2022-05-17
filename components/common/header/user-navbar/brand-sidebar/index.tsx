@@ -36,9 +36,10 @@ const BrandContainer: FC<BrandArrType> = ({
 }): JSX.Element => {
   const { appState, saveAppState } = useContext(AppContext);
   const [width] = useWindowSize();
+  const router = useRouter();
 
   return (
-    <div className={styles["brands-list"]}>
+    <div className={styles["brands-list"]} onClick={() => {router.push(labelUrl)}}>
       {width > desktopScreenSize && (
         <Image
           src={brandImg.url || '/'}
