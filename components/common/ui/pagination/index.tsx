@@ -53,6 +53,7 @@ const Pagination = ({
     setCurrentPage(defaultPageNumber)
     populateOnFirstLoad(onInitialize);
     setHidePagination(isPaginationRequired())
+    setShowAll(false)
   }, [dataArray]);
 
   const pageDown = (callBackFn: Function) => {
