@@ -17,7 +17,7 @@ exports.default = Types.Component({
           }),
           bannerText: Types.String({ label: "Hero Banner Text" }),
           buttonText: Types.String({ label: "Button Text" }),
-          // buttonLink: Types.String({ label: "Button Link" }),
+          buttonLink: Types.String({ label: "Button Link" }),
           bannerBodyText: Types.String({ label: "Hero Banner Body Text" }),
         },
       }),
