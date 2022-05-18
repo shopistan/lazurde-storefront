@@ -6,6 +6,7 @@ exports.default = Types.Component({
   description: ``,
 
   attributes: {
+    pageName: Types.String({ label: 'Page Name' }),
     filterList: Types.Array({
       label: "Filters",
       children: Types.Shape({

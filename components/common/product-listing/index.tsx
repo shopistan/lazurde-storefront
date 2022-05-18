@@ -31,6 +31,7 @@ interface ProductCardProps {
 }
 
 interface ProductListingProps {
+  pageName?: string | '';
   productDataArray: [];
   categoryName: string;
   filterList: [];
@@ -38,6 +39,7 @@ interface ProductListingProps {
 }
 
 const ProductListing = ({
+  pageName = '',
   productDataArray = [],
   categoryName = "",
   filterList,
@@ -159,7 +161,7 @@ const ProductListing = ({
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
-        {showBreadcrumb && <BreadCrumbs />}
+        {showBreadcrumb && <BreadCrumbs pageName= {pageName} />}
 
         <Pagination
           paginationClass={styles["div-pagination"]}
@@ -194,46 +196,46 @@ const ProductListing = ({
             <div className={styles["product-listing__cards"]}>
               {currentProductData && currentProductData.length > 0
                 ? currentProductData?.map(
-                    (data: ProductCardProps, index: number) => {
-                      const {
-                        sku,
-                        itemId,
-                        priceListId,
-                        currency,
-                        title,
-                        basePrice = data["Base Price"],
-                        discount,
-                        discountedPrice,
-                        productCardImages = [
-                          { url: data["Image 1 URL"], altText: "" },
-                        ],
-                        onlineExclusiveTag = data['Online Exclusive'],
-                      } = data;
-                      return (
-                        <>
-                          <ProductCard
-                            title={
-                              appState?.lang === "en"
-                                ? title
-                                : Array.isArray(_arabicProductCardData) &&
-                                  _arabicProductCardData.length > 0 &&
-                                  _arabicProductCardData[index]?.title
-                            }
-                            sku={sku}
-                            itemId={itemId}
-                            priceListId={priceListId}
-                            currency={currency}
-                            basePrice={basePrice}
-                            discount={discount}
-                            discountAmount={discountedPrice}
-                            productCardImages={productCardImages}
-                            onlineExclusiveTag={onlineExclusiveTag}
-                            index={index}
-                          />
-                        </>
-                      );
-                    }
-                  )
+                  (data: ProductCardProps, index: number) => {
+                    const {
+                      sku,
+                      itemId,
+                      priceListId,
+                      currency,
+                      title,
+                      basePrice = data["Base Price"],
+                      discount,
+                      discountedPrice,
+                      productCardImages = [
+                        { url: data["Image 1 URL"], altText: "" },
+                      ],
+                      onlineExclusiveTag = data['Online Exclusive'],
+                    } = data;
+                    return (
+                      <>
+                        <ProductCard
+                          title={
+                            appState?.lang === "en"
+                              ? title
+                              : Array.isArray(_arabicProductCardData) &&
+                              _arabicProductCardData.length > 0 &&
+                              _arabicProductCardData[index]?.title
+                          }
+                          sku={sku}
+                          itemId={itemId}
+                          priceListId={priceListId}
+                          currency={currency}
+                          basePrice={basePrice}
+                          discount={discount}
+                          discountAmount={discountedPrice}
+                          productCardImages={productCardImages}
+                          onlineExclusiveTag={onlineExclusiveTag}
+                          index={index}
+                        />
+                      </>
+                    );
+                  }
+                )
                 : ""}
             </div>
           </>
