@@ -31,10 +31,10 @@ const CardSlider = ({
   bgColor = "#fff",
   testId = "",
 }: CardSliderProps): JSX.Element => {
+  const router = useRouter()
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const router = useRouter();
 
   const _arabicCardData = t(
     "cardSliderData.cards",

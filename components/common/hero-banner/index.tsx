@@ -6,7 +6,7 @@ import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 import Button from "components/common/ui/button/index";
 import { useRouter } from "next/router";
-interface LazurdeHeroBannerTypes {
+type LazurdeHeroBannerTypes = {
   backgroundImage: ImageType;
   bannerText: string;
   buttonText: string;
@@ -24,21 +24,18 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({ heroBannerArray }): JSX
   const { appState } = useContext(AppContext);
   return (
     <div
-      className={`${styles["hero-banner-block"]}  ${
-        heroBannerArray && heroBannerArray.length > 1 && styles["block-spacing"]
-      } ${router?.asPath === '/missl' && styles["missl-spacing"]}`}
+      className={`${styles["hero-banner-block"]}  ${heroBannerArray && heroBannerArray.length > 1 && styles["block-spacing"]
+        } ${router?.asPath === '/missl' && styles["missl-spacing"]}`}
     >
       {heroBannerArray &&
         heroBannerArray?.map((object: any, index: any) => {
-          const { backgroundImage, bannerBodyText, bannerText, buttonText } =
+          const { backgroundImage, bannerBodyText, bannerText, buttonText, buttonLink } =
             object;
           return (
             <div
-              className={`${styles["hero-banner-container"]} ${
-                heroBannerArray?.length > 1 && styles["block-divison"]
-              } ${router?.asPath == "/kenaz" ? styles["kenaz-block"] : ""} ${
-                router?.asPath == "/missl" ? styles["missl-block"] : ""
-              }`}
+              className={`${styles["hero-banner-container"]} ${heroBannerArray?.length > 1 && styles["block-divison"]
+                } ${router?.asPath == "/kenaz" ? styles["kenaz-block"] : ""} ${router?.asPath == "/missl" ? styles["missl-block"] : ""
+                }`}
               key={index}
             >
               <Image
@@ -66,7 +63,7 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({ heroBannerArray }): JSX
                     appState?.lang == "en" ? buttonText : t("buttonText")
                   }
                   buttonSize={'lr'}
-                  onClick={() => {}}
+                  onClick={() => { router.push(buttonLink) }}
                   type={'button'}
                 />
               </div>
