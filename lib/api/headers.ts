@@ -1,5 +1,12 @@
-import { ACCOUNT, CHANNEL, STAGE } from "general-config";
+import {
+  ACCOUNT,
+  CHANNEL,
+  STAGE,
+  STAMPED_USERNAME,
+  STAMPED_PASSWORD,
+} from "general-config";
 
+const token = `${STAMPED_USERNAME}:${STAMPED_PASSWORD}`;
 const HEADERS = {
   common: {
     "Content-Type": "application/json",
@@ -9,6 +16,11 @@ const HEADERS = {
       channel: CHANNEL,
       date: new Date().toISOString(),
     }),
+  },
+
+  reviews: {
+    "Content-Type": "application/x-www-form-urlencoded",
+    Authorization: `Basic ${Buffer.from(token)?.toString("base64")}`,
   },
 };
 
