@@ -18,6 +18,8 @@ interface CustomerServiceProps {
 }
 
 const CustomerService: FC<CustomerServiceProps> = ({ bannerImage, heading, services ,inputIcon }) => {
+    console.log('props' , services);
+    
     return (
         <>
             <div>
