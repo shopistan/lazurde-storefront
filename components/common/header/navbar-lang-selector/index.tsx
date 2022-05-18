@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./navbar-lang-selector.module.scss";
 import Cross from "../../../icons/Cross";
 import useTranslation from "next-translate/useTranslation";
 import LanguageSelector from "./../../language-selector/index";
+import { AppContext } from "lib/context";
 
 const LangSelector = (): JSX.Element => {
   const [isClosed, setIsClosed] = useState("true");
   const { t } = useTranslation("common");
+  const { setSearchWrapperPosition } = useContext(AppContext);
 
   useEffect(() => {
     setIsClosed(
@@ -14,12 +16,14 @@ const LangSelector = (): JSX.Element => {
         ? JSON.parse(window.localStorage.getItem("lang-selector-visible"))
         : "false"
     );
+    setSearchWrapperPosition(false);
   }, []);
 
   const hideSelector = () => {
     setIsClosed("true");
     typeof window !== "undefined" &&
       window.localStorage.setItem("lang-selector-visible", "true");
+    setSearchWrapperPosition(true);
   };
 
   return (
@@ -43,6 +47,7 @@ const LangSelector = (): JSX.Element => {
           setIsClosed("true");
           typeof window !== "undefined" &&
             window.localStorage.setItem("lang-selector-visible", "true");
+          setSearchWrapperPosition(true);
         }}
       >
         <Cross width={"20px"} height={"20px"} />

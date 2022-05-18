@@ -14,6 +14,7 @@ const ContextProvider: FC = ({ children }) => {
   }
 
   const [appState, setAppState] = useState<AppStateType | string>(defaultState);
+  const [searchWrapperPosition, setSearchWrapperPosition] = useState(false);
 
   const saveAppState = ({
     lang,
@@ -30,7 +31,14 @@ const ContextProvider: FC = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ appState, saveAppState }}>
+    <AppContext.Provider
+      value={{
+        appState,
+        saveAppState,
+        searchWrapperPosition,
+        setSearchWrapperPosition,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
