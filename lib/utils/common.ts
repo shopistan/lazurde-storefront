@@ -53,3 +53,11 @@ export const updateBrand = (
     brand: brandVal ? brandVal : "L'azurde",
   });
 };
+
+const dateOptions: any = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+export const formateDate = (date: string) =>
+  new Date(date).toLocaleDateString("en-US", dateOptions);
