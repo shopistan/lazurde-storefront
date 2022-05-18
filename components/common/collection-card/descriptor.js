@@ -29,6 +29,7 @@ exports.default = Types.Component({
           collectiontitle : Types.String({label : "Title"}),
           collectiontext : Types.String({label : "Text"}),
           collectionButtonLink : Types.String({ label : 'Button Link'}),
+          
         },
       }),
     }),
