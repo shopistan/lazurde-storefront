@@ -18,6 +18,7 @@ interface ProductCardProps {
   title?: string;
   "Image 1 URL"?: string;
   "Base Price"?: number | string;
+  "Online Exclusive"?: boolean;
   basePrice?: number | string;
   discount?: string;
   discountedPrice?: number | string;
@@ -47,10 +48,9 @@ const ProductListing = ({
   const { t } = useTranslation("common");
   const dummyProductData = productCardData || [];
   const [initialProductData, setInitialProductData] = useState<any>([]);
+  const [filteredProductData, setFilteredProductData] = useState<any>([]);
 
-  const [currentProductData, setCurrentProductData] = useState(
-    [...initialProductData, ...dummyProductData] || []
-  );
+  const [currentProductData, setCurrentProductData] = useState([]);
 
   const _arabicProductCardData = t(
     "arabicProductCardData",
@@ -99,18 +99,16 @@ const ProductListing = ({
       }
       return false;
     });
-    setInitialProductData(filteredArray);
+    setInitialProductData([...filteredArray]);
+    setCurrentProductData([...filteredArray]);
   }, [productDataArray]);
 
-  const applyFilters = (selectedFilters: any = {}) => {
+  const applyFilters = async (selectedFilters: any = {}) => {
     if (Object.keys(selectedFilters).length < 1) {
-      return setCurrentProductData([
-        ...initialProductData,
-        ...dummyProductData,
-      ]);
+      return setFilteredProductData([]);
     }
 
-    let payload = [];
+    let payload: any[] = [];
 
     Object.keys(selectedFilters).forEach((filterType, index) => {
       const orFilters: any[] = [];
@@ -127,9 +125,10 @@ const ProductListing = ({
 
     // console.log("categoryName", categoryName);
     // payload = ["isMain: true"];
-    // const filteredData = performFilteredSearch({ query: "", filters: payload });
-    const filteredData: [] = [];
-    setCurrentProductData(filteredData);
+    const filteredData = await performFilteredSearch({ query: "", filters: payload });
+    // const filteredData: [] = [];
+    setFilteredProductData(filteredData);
+
   };
 
   const onSortingChange = (sortedValue: any = {}) => {
@@ -166,8 +165,8 @@ const ProductListing = ({
           paginationClass={styles["div-pagination"]}
           defaultPageNumber={1}
           pageSize={5}
-          totalSize={initialProductData.length}
-          dataArray={initialProductData}
+          totalSize={filteredProductData.length > 0 ? filteredProductData.length : initialProductData.length}
+          dataArray={filteredProductData.length > 0 ? filteredProductData : initialProductData}
           onInitialize={(slicedArray: []) => {
             setCurrentProductData(slicedArray);
           }}
@@ -208,7 +207,7 @@ const ProductListing = ({
                         productCardImages = [
                           { url: data["Image 1 URL"], altText: "" },
                         ],
-                        onlineExclusiveTag,
+                        onlineExclusiveTag = data['Online Exclusive'],
                       } = data;
                       return (
                         <>
