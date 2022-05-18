@@ -4,7 +4,7 @@ exports.default = Types.Component({
     id: "CustomerService",
     label: "Customer Service",
     description: ``,
-    isGlobal: true,
+    isGlobal: false,
 
     attributes: {
         bannerImage: Types.Image({ label: 'Banner Image', url: Types.String({ label: 'URL' }), altText: Types.String({ label: 'Alt Text' }) }),

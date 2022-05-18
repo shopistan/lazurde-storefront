@@ -6,7 +6,6 @@ exports.default = Types.Component({
   description: ``,
 
   attributes: {
-    pageName: Types.String({ label: 'Page Name' }),
     filterList: Types.Array({
       label: "Filters",
       children: Types.Shape({
@@ -34,5 +33,6 @@ exports.default = Types.Component({
     }),
     applyAttributeFilters: Types.Boolean({ label: "Apply Attribute Filters?" }),
     categoryName: Types.String({ label: "Category Name" }),
+    pageName: Types.String({ label: 'Page Name' }),
   },
 });
