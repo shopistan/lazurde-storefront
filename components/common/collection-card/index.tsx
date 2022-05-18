@@ -18,6 +18,7 @@ interface CollectionCardTypes {
   collectionImage?: ImageType;
   collectionImageKenaz?: ImageType;
   collectionImageMissl?: ImageType;
+  collectionButtonLink ?: string;
 }
 
 interface _CollectionCardTypes {
@@ -66,6 +67,7 @@ const CollectionCard: FC<CollectionCardProps> = ({
                 collectiontitle,
                 collectionImageKenaz,
                 collectiontext,
+                collectionButtonLink = '/'
               } = data;
               return (
                 <SwiperSlide key={index}>
@@ -106,6 +108,7 @@ const CollectionCard: FC<CollectionCardProps> = ({
                       )}
 
                       <Button
+                      onClick={() => {router.push(collectionButtonLink)}}
                         className={styles["collection-button"]}
                         buttonText={
                           appState.lang === "en"
