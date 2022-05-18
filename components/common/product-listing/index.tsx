@@ -31,7 +31,7 @@ interface ProductCardProps {
 }
 
 interface ProductListingProps {
-  pageName?: string | '';
+  pageName?: string | '' | [];
   productDataArray: [];
   categoryName: string;
   filterList: [];
@@ -39,10 +39,11 @@ interface ProductListingProps {
 }
 
 const ProductListing = ({
-  pageName = '',
+  pageName,
   productDataArray = [],
   categoryName = "",
   filterList,
+  attributeFilters,
   showBreadcrumb = true,
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
@@ -161,7 +162,7 @@ const ProductListing = ({
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
-        {showBreadcrumb && <BreadCrumbs pageName= {pageName} />}
+        {showBreadcrumb && <BreadCrumbs pageName= {attributeFilters} />}
 
         <Pagination
           paginationClass={styles["div-pagination"]}

@@ -5,7 +5,7 @@ import styles from "./style.module.scss";
 import Label from "../label";
 
 
-const BreadCrumbs = ({pageName="explore all category"}: {pageName?: string}) => {
+const BreadCrumbs = ({pageName=[{attributeName: "explore all category"}]}: {pageName?: {attributeName: string}[]}) => {
   const { appState } = useContext(AppContext);
   return (
     <div className={styles["bread-crumb_wrapper"]}>
@@ -18,7 +18,7 @@ const BreadCrumbs = ({pageName="explore all category"}: {pageName?: string}) => 
           </a>
         </Link>
         <Label>{appState?.lang === "en"
-              ? pageName
+              ? pageName[0].attributeName
               : " ةيسيئرلا ةحفصلا"}</Label>
       </div>
     </div>
