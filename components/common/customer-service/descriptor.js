@@ -1,8 +1,8 @@
 const { Types } = require("@teamfabric/xpm");
 
 exports.default = Types.Component({
-    id: "Footer",
-    label: "Footer",
+    id: "CustomerService",
+    label: "Customer Service",
     description: ``,
     isGlobal: true,
 
