@@ -22,6 +22,7 @@ exports.default = Types.Component({
             altText : Types.String({label : 'Alt Text'}),
           }),
           cardTitle: Types.String({ label: "Card Title" }),
+          cardLinks: Types.String({label : "Card Links"}),
         },
       }),
     }),

@@ -1,20 +1,33 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "lib/context";
 import Link from "next/link";
 import styles from "./style.module.scss";
+import Label from "../label";
 
-const BreadCrumbs = () => {
+const BreadCrumbs = ({pageName = 'Explore All Categories'}) => {
   const { appState } = useContext(AppContext);
+  const [link, setLink] = useState('');
+
+  useEffect(() => {
+    const redriectBreadCrumbs =
+      appState?.brand === `Miss L'`
+        ? "/missl"
+        : appState?.brand === `Kenaz`
+          ? "/kenaz"
+          : "/";
+    redriectBreadCrumbs && setLink(redriectBreadCrumbs);
+  }, [appState?.brand]);
   return (
     <div className={styles["bread-crumb_wrapper"]}>
       <div className={styles["bread-crumb_item"]}>
-        <Link href="/">
-          <a>
-            {appState?.lang === "en"
-              ? "home / Explore All Category"
-              : "تائفلا عيمج فشتكا / ةيسيئرلا ةحفصلا"}
-          </a>
+        <Link href={link}>
+          <a>{appState?.lang === "en" ? `home /` : "/ تائفلا عيمج فشتكاا"}</a>
         </Link>
+        <Label>
+          {appState?.lang === "en"
+            ? pageName
+            : " ةيسيئرلا ةحفصلا"}
+        </Label>
       </div>
     </div>
   );
