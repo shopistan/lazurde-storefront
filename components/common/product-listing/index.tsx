@@ -31,16 +31,20 @@ interface ProductCardProps {
 }
 
 interface ProductListingProps {
+  pageName?: string | "" | [];
   productDataArray: [];
   categoryName: string;
   filterList: [];
   showBreadcrumb: boolean;
+  attributeFilters: [];
 }
 
 const ProductListing = ({
+  pageName,
   productDataArray = [],
   categoryName = "",
   filterList,
+  attributeFilters,
   showBreadcrumb = true,
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
@@ -125,10 +129,12 @@ const ProductListing = ({
 
     // console.log("categoryName", categoryName);
     // payload = ["isMain: true"];
-    const filteredData = await performFilteredSearch({ query: "", filters: payload });
+    const filteredData = await performFilteredSearch({
+      query: "",
+      filters: payload,
+    });
     // const filteredData: [] = [];
     setFilteredProductData(filteredData);
-
   };
 
   const onSortingChange = (sortedValue: any = {}) => {
@@ -159,14 +165,22 @@ const ProductListing = ({
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
-        {showBreadcrumb && <BreadCrumbs />}
+        {showBreadcrumb && <BreadCrumbs pageName={attributeFilters} />}
 
         <Pagination
           paginationClass={styles["div-pagination"]}
           defaultPageNumber={1}
           pageSize={5}
-          totalSize={filteredProductData.length > 0 ? filteredProductData.length : initialProductData.length}
-          dataArray={filteredProductData.length > 0 ? filteredProductData : initialProductData}
+          totalSize={
+            filteredProductData.length > 0
+              ? filteredProductData.length
+              : initialProductData.length
+          }
+          dataArray={
+            filteredProductData.length > 0
+              ? filteredProductData
+              : initialProductData
+          }
           onInitialize={(slicedArray: []) => {
             setCurrentProductData(slicedArray);
           }}
@@ -207,7 +221,7 @@ const ProductListing = ({
                         productCardImages = [
                           { url: data["Image 1 URL"], altText: "" },
                         ],
-                        onlineExclusiveTag = data['Online Exclusive'],
+                        onlineExclusiveTag = data["Online Exclusive"],
                       } = data;
                       return (
                         <>

@@ -7,12 +7,14 @@ import { SwiperSlide } from "swiper/react";
 import { AppContext } from "lib/context/index";
 import useTranslation from "next-translate/useTranslation";
 import Slider from "components/common/ui/slider/slider";
-import {desktopScreenSize} from 'lib/utils/common'
+import { desktopScreenSize } from 'lib/utils/common'
+import { useRouter } from "next/router";
 
 type BrandCardsType = {
-  cardTitle: string;
+  cardTitle: string | '';
   cardImage: ImageType;
   favIconSrc: ImageType;
+  cardLink: string | ''
 };
 
 interface BrandCardsProps {
@@ -27,7 +29,7 @@ const BrandCards: FC<BrandCardsProps> = ({
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const onClick = () => { };
+  const router = useRouter()
 
   return (
     <div className={styles["cards-container"]}>
@@ -44,12 +46,12 @@ const BrandCards: FC<BrandCardsProps> = ({
         <div className={`flex justify-between`}>
           {brandCards &&
             brandCards.map((data, index) => {
-              const { cardTitle, cardImage, favIconSrc } = data;
+              const { cardTitle, cardImage, favIconSrc, cardLink = '/' } = data;
               return (
                 <SwiperSlide key={index}>
                   <div className={`${styles["cards"]} ${appState.lang == 'ar' && styles["arabic-card"]}`} key={index}>
                     <Cards
-                      onClick={onClick}
+                      onClick={() => { router?.push(cardLink) }}
                       className={styles["brand-card"]}
                       height="100%"
                       width="100%"

@@ -1,5 +1,9 @@
 @import "/styles/variables.scss";
 
+.card {
+  cursor: pointer;
+}
+
 .category-slider-card {
   .card-title {
     font-size: 15px;
@@ -14,10 +18,6 @@
       line-height: 19.2px;
     }
   }
-}
-
-.card-content {
-  padding: 16px;
 }
 
 .card-description {
@@ -85,6 +85,10 @@ body {
 }
 
 .bambuser-slider-card {
+  .card-content {
+    padding: 16px;
+  }
+
   .card-title {
     margin: 0;
     padding: 0;

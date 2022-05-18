@@ -7,8 +7,9 @@ import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
 import Label from "components/common/ui/label";
 import Slider from "components/common/ui/slider/slider";
-import { desktopScreenSize } from 'lib/utils/common'
+import { desktopScreenSize } from "lib/utils/common";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 type CardsArrType = {
   image?: { url: string; altText: string };
@@ -30,6 +31,7 @@ const CardSlider = ({
   bgColor = "#fff",
   testId = "",
 }: CardSliderProps): JSX.Element => {
+  const router = useRouter()
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
@@ -65,13 +67,16 @@ const CardSlider = ({
               return (
                 <SwiperSlide key={index}>
                   <Cards
+                    onClick={() => {
+                      router?.push(slideLink && slideLink);
+                    }}
                     cardImage={image}
                     cardTitle={
                       appState?.lang === "en"
                         ? heading
                         : Array.isArray(_arabicCardData) &&
-                        _arabicCardData.length > 0 &&
-                        _arabicCardData[index].heading
+                          _arabicCardData.length > 0 &&
+                          _arabicCardData[index].heading
                     }
                     width={width > desktopScreenSize ? 314 : 332}
                     height={width > desktopScreenSize ? 429 : 352}

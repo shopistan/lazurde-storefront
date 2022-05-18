@@ -31,6 +31,11 @@ const ENDPOINTS = {
   OMS: {
     CREATE_ORDER: "/api-order/orders",
   },
+
+  GET: {
+    REVIEWS: (storeHash: string | number) =>
+      `https://stamped.io/api/v2/${storeHash}/dashboard/reviews`,
+  },
 };
 
 export default ENDPOINTS;
