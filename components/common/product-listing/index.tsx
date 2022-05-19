@@ -16,7 +16,11 @@ import Pagination from "../ui/pagination";
 interface ProductCardProps {
   index?: number;
   title?: string;
-  "Image 1 URL"?: string;
+  "Image url"?: string;
+  "Image URL"?: string;
+  "Image URL 2"?: string;
+  "Image URL 3"?: string;
+  "Image URL 4"?: string;
   "Base Price"?: number | string;
   "Online Exclusive"?: boolean;
   basePrice?: number | string;
@@ -31,12 +35,11 @@ interface ProductCardProps {
 }
 
 interface ProductListingProps {
-  pageName?: string | "" | [];
+  pageName?: string | "";
   productDataArray: [];
   categoryName: string;
   filterList: [];
   showBreadcrumb: boolean;
-  attributeFilters: [];
 }
 
 const ProductListing = ({
@@ -44,7 +47,6 @@ const ProductListing = ({
   productDataArray = [],
   categoryName = "",
   filterList,
-  attributeFilters,
   showBreadcrumb = true,
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
@@ -52,7 +54,7 @@ const ProductListing = ({
   const { t } = useTranslation("common");
   const dummyProductData = productCardData || [];
   const [initialProductData, setInitialProductData] = useState<any>([]);
-  const [filteredProductData, setFilteredProductData] = useState<any>([]);
+  const [filteredProductData, setFilteredProductData] = useState<any>("");
 
   const [currentProductData, setCurrentProductData] = useState([]);
 
@@ -109,7 +111,7 @@ const ProductListing = ({
 
   const applyFilters = async (selectedFilters: any = {}) => {
     if (Object.keys(selectedFilters).length < 1) {
-      return setFilteredProductData([]);
+      return setFilteredProductData("");
     }
 
     let payload: any[] = [];
@@ -138,7 +140,26 @@ const ProductListing = ({
   };
 
   const onSortingChange = (sortedValue: any = {}) => {
-    console.log("sortedValue", sortedValue);
+    const pData =
+      filteredProductData.length > 0 ? filteredProductData : initialProductData;
+    const sortedArray: any[] = [];
+    if (sortedValue.value !== "most viewed")
+      setFilteredProductData(filteredProductData);
+
+    if (sortedValue.value === "most viewed") {
+      pData.map((item: any) => {
+        if (item.IsMostViewed === true) {
+          sortedArray.unshift(item);
+        } else {
+          sortedArray.push(item);
+        }
+      });
+      if (sortedArray.length > 0) {
+        setFilteredProductData(sortedArray);
+      } else {
+        setFilteredProductData(pData);
+      }
+    }
 
     // if (sortedValue.length < 1) {
     //   return setCurrentProductData(productDataArray);
@@ -158,26 +179,26 @@ const ProductListing = ({
     // console.table(payload);
 
     //const filteredData = performFilteredSearch({filters: payload})
-    const filteredData: [] = [];
-    setCurrentProductData(filteredData);
+    // const filteredData: [] = [];
+    // setCurrentProductData(filteredData);
   };
 
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
-        {showBreadcrumb && <BreadCrumbs pageName={attributeFilters} />}
+        {showBreadcrumb && <BreadCrumbs pageName={pageName} />}
 
         <Pagination
           paginationClass={styles["div-pagination"]}
           defaultPageNumber={1}
           pageSize={5}
           totalSize={
-            filteredProductData.length > 0
+            Array.isArray(filteredProductData)
               ? filteredProductData.length
               : initialProductData.length
           }
           dataArray={
-            filteredProductData.length > 0
+            Array.isArray(filteredProductData)
               ? filteredProductData
               : initialProductData
           }
@@ -206,49 +227,75 @@ const ProductListing = ({
               ></FilterBar>
             )}
             <div className={styles["product-listing__cards"]}>
-              {currentProductData && currentProductData.length > 0
-                ? currentProductData?.map(
-                    (data: ProductCardProps, index: number) => {
-                      const {
-                        sku,
-                        itemId,
-                        priceListId,
-                        currency,
-                        title,
-                        basePrice = data["Base Price"],
-                        discount,
-                        discountedPrice,
-                        productCardImages = [
-                          { url: data["Image 1 URL"], altText: "" },
-                        ],
-                        onlineExclusiveTag = data["Online Exclusive"],
-                      } = data;
-                      return (
-                        <>
-                          <ProductCard
-                            title={
-                              appState?.lang === "en"
-                                ? title
-                                : Array.isArray(_arabicProductCardData) &&
-                                  _arabicProductCardData.length > 0 &&
-                                  _arabicProductCardData[index]?.title
-                            }
-                            sku={sku}
-                            itemId={itemId}
-                            priceListId={priceListId}
-                            currency={currency}
-                            basePrice={basePrice}
-                            discount={discount}
-                            discountAmount={discountedPrice}
-                            productCardImages={productCardImages}
-                            onlineExclusiveTag={onlineExclusiveTag}
-                            index={index}
-                          />
-                        </>
-                      );
+              {currentProductData && currentProductData.length > 0 ? (
+                currentProductData?.map(
+                  (data: ProductCardProps, index: number) => {
+                    const {
+                      sku,
+                      itemId,
+                      priceListId,
+                      currency,
+                      title,
+                      basePrice = data["Base Price"],
+                      discount,
+                      discountedPrice,
+                      productCardImages = [
+                        {
+                          url: data["Image URL"] || data["Image url"],
+                          altText: "",
+                        },
+                      ],
+                      onlineExclusiveTag = data["Online Exclusive"],
+                    } = data;
+
+                    if (data["Image URL 2"]) {
+                      productCardImages?.push({
+                        url: data["Image URL 2"] || "",
+                        altText: "",
+                      });
                     }
-                  )
-                : ""}
+                    if (data["Image URL 3"]) {
+                      productCardImages?.push({
+                        url: data["Image URL 3"] || "",
+                        altText: "",
+                      });
+                    }
+                    if (data["Image URL 4"]) {
+                      productCardImages?.push({
+                        url: data["Image URL 4"] || "",
+                        altText: "",
+                      });
+                    }
+                    return (
+                      <>
+                        <ProductCard
+                          title={
+                            appState?.lang === "en"
+                              ? title
+                              : Array.isArray(_arabicProductCardData) &&
+                                _arabicProductCardData.length > 0 &&
+                                _arabicProductCardData[index]?.title
+                          }
+                          sku={sku}
+                          itemId={itemId}
+                          priceListId={priceListId}
+                          currency={currency}
+                          basePrice={basePrice}
+                          discount={discount}
+                          discountAmount={discountedPrice}
+                          productCardImages={productCardImages}
+                          onlineExclusiveTag={onlineExclusiveTag}
+                          index={index}
+                        />
+                      </>
+                    );
+                  }
+                )
+              ) : (
+                <div className={styles['div-no-items']}>
+                  <span>no items found</span>
+                </div>
+              )}
             </div>
           </>
         </Pagination>

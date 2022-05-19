@@ -39,10 +39,20 @@ const BrandContainer: FC<BrandArrType> = ({
   const router = useRouter();
 
   return (
-    <div className={styles["brands-list"]} onClick={() => {router.push(labelUrl)}}>
+    <div
+      className={styles["brands-list"]}
+      onClick={() => {
+        router.push(labelUrl);
+
+        saveAppState({
+          ...appState,
+          brand: label ? label : "",
+        });
+      }}
+    >
       {width > desktopScreenSize && (
         <Image
-          src={brandImg.url || '/'}
+          src={brandImg.url || "/"}
           alt={brandImg.altText}
           width={"186px"}
           height={"183px"}

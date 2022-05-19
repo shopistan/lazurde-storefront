@@ -9,24 +9,28 @@ import useWindowSize from "lib/utils/useWindowSize";
 
 const optionsData = [
   {
-    label: "New",
-    value: "New",
-  },
-  {
-    label: "Best Sellers",
-    value: "Best Sellers",
-  },
-  {
-    label: "Biggest Saving",
-    value: "Biggest Saving",
+    label: "Our Recommendation",
+    value: "Our Recommendation",
   },
   {
     label: "Most Viewed",
-    value: "Most Viewed",
+    value: "most viewed",
   },
   {
-    label: "Product Name",
-    value: "Product Name",
+    label: "Best Sellers Online",
+    value: "Best Sellers Online",
+  },
+  {
+    label: "Best Sellers Store",
+    value: "Best Sellers Store",
+  },
+  {
+    label: "Price - Low to High",
+    value: "Price - Low to High",
+  },
+  {
+    label: "Price - High to Low",
+    value: "Price - High to Low",
   },
 ];
 
@@ -179,7 +183,7 @@ const FilterBar: FC<FilterBarProps> = ({
   useEffect(() => {
     setOptionData({
       data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
-      defaultValue: appState?.lang === "en" ? "Best Sellers" : "أفضل البائعين",
+      defaultValue: appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين",
     });
 
     if (appState.lang === "en") {

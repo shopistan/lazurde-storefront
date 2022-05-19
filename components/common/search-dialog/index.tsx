@@ -30,14 +30,21 @@ const SearchDialog: FC<SearchDialogProps> = ({
   openSearchDialog,
 }): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState, saveAppState } = useContext(AppContext);
+  const { appState, searchWrapperPosition } = useContext(AppContext);
   const [placeHolderBrand, setPlaceHolderBrand] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
   const router = useRouter();
   const { t } = useTranslation("common");
   const inputRef = useRef<null | HTMLElement>(null);
+  const [isPromoBarHide, setIsPromoBarHide] = useState(false);
+  const [isLangSelectorHide, setIsLangSelectorHide] = useState(false);
 
   useEffect(() => {
+    // setPromobar(
+    //   typeof window !== "undefined"
+    //     ? JSON.parse(window.localStorage.getItem("promo-bar-visible"))
+    //     : "false"
+    // );
     try {
       let newState = getAppStateFromLocalStorage();
       setPlaceHolderBrand(newState?.brand);
@@ -74,6 +81,13 @@ const SearchDialog: FC<SearchDialogProps> = ({
 
   const placeholderText = appState?.lang === "en" ? "Shop" : "متجر";
 
+  useEffect(() => {
+    const promobar = localStorage.getItem("promo-bar-visible");
+    promobar && setIsPromoBarHide(true);
+    const langSelector = localStorage.getItem("lang-selector-visible");
+    langSelector && setIsLangSelectorHide(true);
+  }, [searchWrapperPosition]);
+
   return (
     <>
       {width > desktopScreenSize && (
@@ -83,7 +97,24 @@ const SearchDialog: FC<SearchDialogProps> = ({
           onClick={() => setOpenSearchDialog(!openSearchDialog)}
         ></div>
       )}
-      <div className={styles["search-dialog"]} data-opened={openSearchDialog}>
+      <div
+        className={`${styles["search-dialog"]} ${
+          appState?.brand === `Miss L'`
+            ? styles["missl-search"]
+            : appState?.brand === `Kenaz`
+            ? styles["kenaz-search"]
+            : ""
+        } ${
+          isPromoBarHide && isLangSelectorHide
+            ? styles["without-promo-langselector"]
+            : isPromoBarHide
+            ? styles["without-promobar"]
+            : isLangSelectorHide
+            ? styles["without-langselector"]
+            : styles["default"]
+        }`}
+        data-opened={openSearchDialog}
+      >
         <div className={styles["search-bar"]}>
           <div className={styles["brand-icon"]}>
             <Link href={siteLogoUrl || ""}>

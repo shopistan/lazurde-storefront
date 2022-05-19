@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 80px;
+  // top: 80px;
   z-index: 1;
   inset-inline-end: 0;
   inset-inline-start: 0;
@@ -13,12 +13,65 @@
   overflow: hidden;
   background: $white-color;
   padding: 16px 24px 80px 24px;
-
   width: 100%;
   opacity: 1;
   display: none;
   overflow-y: auto;
   pointer-events: all;
+
+  @media (min-width: $breakPoint-desktop) {
+    &.without-promo-langselector {
+      top: 60px;
+    }
+
+    &.without-promobar {
+      top: 112px;
+    }
+
+    &.without-langselector {
+      top: 80px;
+    }
+
+    &.default {
+      top: 152px;
+    }
+
+    &.missl-search {
+      &.without-promo-langselector {
+        top: 40px;
+      }
+
+      &.without-promobar {
+        top: 112px;
+      }
+
+      &.without-langselector {
+        top: 80px;
+      }
+
+      &.default {
+        top: 152px;
+      }
+    }
+
+    &.kenaz-search {
+      &.without-promo-langselector {
+        top: 40px;
+      }
+
+      &.without-promobar {
+        top: 112px;
+      }
+
+      &.without-langselector {
+        top: 80px;
+      }
+
+      &.default {
+        top: 152px;
+      }
+    }
+  }
 
   &[data-opened="true"] {
     height: 545px;
@@ -89,7 +142,7 @@
       border: 0px solid gray;
       padding: 0px;
       width: 100%;
-      font-family: 'Roboto';
+      font-family: "Roboto";
       font-style: normal;
       font-weight: 400;
       font-size: 14px;
