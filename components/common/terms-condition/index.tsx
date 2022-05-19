@@ -15,11 +15,11 @@ interface TermCondtionProps {
     hyperLinks: HyperLinksProps[]
     sideBarBgcolor: string | ''
     contentBgcolor: string | ''
-    icon : ImageType
+    icon: ImageType
 }
 
-const TermCondtion: FC<TermCondtionProps> = ({ hyperLinks, sideBarBgcolor, contentBgcolor , icon }) => {
-    const [objects, setObjects] = useState({ name: '', content: '' })
+const TermCondtion: FC<TermCondtionProps> = ({ hyperLinks, sideBarBgcolor, contentBgcolor, icon }) => {
+    const [objects, setObjects] = useState({ name: '', content: '', linkUrl: {} })
 
     return (
         <div className={styles['term-comtainer']}>
@@ -35,6 +35,10 @@ const TermCondtion: FC<TermCondtionProps> = ({ hyperLinks, sideBarBgcolor, conte
                                     setObjects({
                                         content: content,
                                         name: name,
+                                        linkUrl: {
+                                            url: icon.url,
+                                            altText: icon.altText
+                                        }
                                     })
                                 }}>
                                     <img src={linkUrl.url} alt={linkUrl.altText} />
