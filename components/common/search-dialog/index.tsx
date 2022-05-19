@@ -38,7 +38,6 @@ const SearchDialog: FC<SearchDialogProps> = ({
   const inputRef = useRef<null | HTMLElement>(null);
   const [isPromoBarHide, setIsPromoBarHide] = useState(false);
   const [isLangSelectorHide, setIsLangSelectorHide] = useState(false);
-  
 
   useEffect(() => {
     // setPromobar(
@@ -100,6 +99,12 @@ const SearchDialog: FC<SearchDialogProps> = ({
       )}
       <div
         className={`${styles["search-dialog"]} ${
+          appState?.brand === `Miss L'`
+            ? styles["missl-search"]
+            : appState?.brand === `Kenaz`
+            ? styles["kenaz-search"]
+            : ""
+        } ${
           isPromoBarHide && isLangSelectorHide
             ? styles["without-promo-langselector"]
             : isPromoBarHide

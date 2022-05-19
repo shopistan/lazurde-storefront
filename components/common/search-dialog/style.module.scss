@@ -35,6 +35,42 @@
     &.default {
       top: 152px;
     }
+
+    &.missl-search {
+      &.without-promo-langselector {
+        top: 40px;
+      }
+
+      &.without-promobar {
+        top: 112px;
+      }
+
+      &.without-langselector {
+        top: 80px;
+      }
+
+      &.default {
+        top: 152px;
+      }
+    }
+
+    &.kenaz-search {
+      &.without-promo-langselector {
+        top: 40px;
+      }
+
+      &.without-promobar {
+        top: 112px;
+      }
+
+      &.without-langselector {
+        top: 80px;
+      }
+
+      &.default {
+        top: 152px;
+      }
+    }
   }
 
   &[data-opened="true"] {
