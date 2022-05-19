@@ -7,7 +7,6 @@ import Head from "next/head";
 import React, { FC, useEffect, useContext } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
 import { AppContext } from "lib/context";
-import CustomerService from "components/common/customer-service";
 
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
@@ -16,100 +15,6 @@ const LazurdeHome: FC<PageProps> = ({
   pageComponents,
 }) => {
   const { appState, saveAppState } = useContext(AppContext);
-  const image = {
-    url: '/contact.png',
-    altText: 'image1'
-  }
-  const icon = {
-    url: '/search.png',
-    altText: 'icon1'
-  }
-
-  const array = [{
-    icon: {
-      url: '/notepad.png',
-      altText : '',
-    },
-    iconTitle: 'Orders',
-    iconText: 'Know more about the order and delivery process.'
-  },{
-    icon: {
-      url: '/notepad.png',
-      altText : '',
-    },
-    iconTitle: 'Orders',
-    iconText: 'Know more about the order and delivery process.'
-  },{
-    icon: {
-      url: '/notepad.png',
-      altText : '',
-    },
-    iconTitle: 'Orders',
-    iconText: 'Know more about the order and delivery process.'
-  },{
-    icon: {
-      url: '/notepad.png',
-      altText : '',
-    },
-    iconTitle: 'Orders',
-    iconText: 'Know more about the order and delivery process.'
-  },{
-    icon: {
-      url: '/notepad.png',
-      altText : '',
-    },
-    iconTitle: 'Orders',
-    iconText: 'Know more about the order and delivery process.'
-  },{
-    icon: {
-      url: '/notepad.png',
-      altText : '',
-    },
-    iconTitle: 'Orders',
-    iconText: 'Know more about the order and delivery process.'
-  },{
-    icon: {
-      url: '/notepad.png',
-      altText : '',
-    },
-    iconTitle: 'Orders',
-    iconText: 'Know more about the order and delivery process.'
-  },{
-    icon: {
-      url: '/notepad.png',
-      altText : '',
-    },
-    iconTitle: 'Orders',
-    iconText: 'Know more about the order and delivery process.'
-  },{
-    icon: {
-      url: '/notepad.png',
-      altText : '',
-    },
-    iconTitle: 'Orders',
-    iconText: 'Know more about the order and delivery process.'
-  },{
-    icon: {
-      url: '/notepad.png',
-      altText : '',
-    },
-    iconTitle: 'Orders',
-    iconText: 'Know more about the order and delivery process.'
-  },{
-    icon: {
-      url: '/notepad.png',
-      altText : '',
-    },
-    iconTitle: 'Orders',
-    iconText: 'Know more about the order and delivery process.'
-  },{
-    icon: {
-      url: '/notepad.png',
-      altText : '',
-    },
-    iconTitle: 'Orders',
-    iconText: 'Know more about the order and delivery process.'
-  }]
 
   useEffect(() => {
     saveAppState({
@@ -137,7 +42,6 @@ const LazurdeHome: FC<PageProps> = ({
           })}
         </div>
       </AppContentWrapper>
-      <CustomerService title={'Help Centre'} heading={'How can we help you?'} inputIcon={icon} services={array} bannerImage={image} />
       <Footer {...footerProps}></Footer>
     </>
   );
