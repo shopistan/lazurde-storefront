@@ -14,7 +14,7 @@ type BrandCardsType = {
   cardTitle: string | '';
   cardImage: ImageType;
   favIconSrc: ImageType;
-  cardLink: string | ''
+  cardLinks: string | ''
 };
 
 interface BrandCardsProps {
@@ -46,12 +46,12 @@ const BrandCards: FC<BrandCardsProps> = ({
         <div className={`flex justify-between`}>
           {brandCards &&
             brandCards.map((data, index) => {
-              const { cardTitle, cardImage, favIconSrc, cardLink = '/' } = data;
+              const { cardTitle, cardImage, favIconSrc, cardLinks = '/' } = data;
               return (
                 <SwiperSlide key={index}>
                   <div className={`${styles["cards"]} ${appState.lang == 'ar' && styles["arabic-card"]}`} key={index}>
                     <Cards
-                      onClick={() => { router?.push(cardLink) }}
+                      onClick={() => { router?.push(cardLinks) }}
                       className={styles["brand-card"]}
                       height="100%"
                       width="100%"
