@@ -34,7 +34,10 @@ const PromoBar: FC<PromoBarProps> = ({
         ? JSON.parse(window.localStorage.getItem("promo-bar-visible"))
         : "false"
     );
-    setSearchWrapperPosition(false)
+    setSearchWrapperPosition({
+      promo: false,
+      langSelector: false,
+    });
   }, []);
 
   return (
@@ -60,8 +63,11 @@ const PromoBar: FC<PromoBarProps> = ({
         onClick={() => {
           setIsClosed(true);
           typeof window !== "undefined" &&
-          window.localStorage.setItem("promo-bar-visible", "true");
-          setSearchWrapperPosition(true)
+            window.localStorage.setItem("promo-bar-visible", "true");
+          setSearchWrapperPosition({
+            promo: true,
+            langSelector: false,
+          });
         }}
       >
         <Cross width={"20px"} height={"20px"} />

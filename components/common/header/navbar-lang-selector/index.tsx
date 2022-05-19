@@ -16,14 +16,20 @@ const LangSelector = (): JSX.Element => {
         ? JSON.parse(window.localStorage.getItem("lang-selector-visible"))
         : "false"
     );
-    setSearchWrapperPosition(false);
+    setSearchWrapperPosition({
+      promo: false,
+      langSelector: false,
+    });
   }, []);
 
   const hideSelector = () => {
     setIsClosed("true");
     typeof window !== "undefined" &&
       window.localStorage.setItem("lang-selector-visible", "true");
-    setSearchWrapperPosition(true);
+    setSearchWrapperPosition({
+      promo: false,
+      langSelector: true,
+    });
   };
 
   return (
@@ -47,7 +53,10 @@ const LangSelector = (): JSX.Element => {
           setIsClosed("true");
           typeof window !== "undefined" &&
             window.localStorage.setItem("lang-selector-visible", "true");
-          setSearchWrapperPosition(true);
+          setSearchWrapperPosition({
+            promo: false,
+            langSelector: true,
+          });
         }}
       >
         <Cross width={"20px"} height={"20px"} />
