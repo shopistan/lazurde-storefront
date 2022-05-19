@@ -11,7 +11,7 @@ import { ImageType } from "lib/types/common";
 import { AppContext } from "lib/context";
 import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
-import {desktopScreenSize} from 'lib/utils/common'
+import { desktopScreenSize } from "lib/utils/common";
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -122,7 +122,19 @@ const ProductCard = ({
           </>
         </Slider>
         {onlineExclusiveTag && (
-          <Label className={styles["product-card__tag"]}>
+          <Label
+            className={`${styles["product-card__tag"]} ${
+              styles[
+                `${
+                  appState?.brand === `Miss L'`
+                    ? "bg_missl"
+                    : appState?.brand === "Kenaz"
+                    ? "bg_kenaz"
+                    : "bg_lazurde"
+                }`
+              ]
+            }`}
+          >
             {appState?.lang === "en"
               ? "online exclusive"
               : "حصريا على الانترنت"}

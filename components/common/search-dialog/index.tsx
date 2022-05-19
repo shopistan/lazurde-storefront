@@ -30,13 +30,15 @@ const SearchDialog: FC<SearchDialogProps> = ({
   openSearchDialog,
 }): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState, promoBarClosed } = useContext(AppContext);
+  const { appState, searchWrapperPosition } = useContext(AppContext);
   const [placeHolderBrand, setPlaceHolderBrand] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
   const router = useRouter();
   const { t } = useTranslation("common");
   const inputRef = useRef<null | HTMLElement>(null);
-  const [promoBar, setPromobar] = useState(false);
+  const [isPromoBarHide, setIsPromoBarHide] = useState(false);
+  const [isLangSelectorHide, setIsLangSelectorHide] = useState(false);
+  
 
   useEffect(() => {
     // setPromobar(
@@ -79,7 +81,13 @@ const SearchDialog: FC<SearchDialogProps> = ({
   };
 
   const placeholderText = appState?.lang === "en" ? "Shop" : "متجر";
-  console.log("promobarclosed", promoBarClosed);
+
+  useEffect(() => {
+    const promobar = localStorage.getItem("promo-bar-visible");
+    promobar && setIsPromoBarHide(true);
+    const langSelector = localStorage.getItem("lang-selector-visible");
+    langSelector && setIsLangSelectorHide(true);
+  }, [searchWrapperPosition]);
 
   return (
     <>
@@ -91,8 +99,15 @@ const SearchDialog: FC<SearchDialogProps> = ({
         ></div>
       )}
       <div
-        className={styles["search-dialog"]}
-        style={{ top: promoBarClosed ? "40px" : "80px" }}
+        className={`${styles["search-dialog"]} ${
+          isPromoBarHide && isLangSelectorHide
+            ? styles["without-promo-langselector"]
+            : isPromoBarHide
+            ? styles["without-promobar"]
+            : isLangSelectorHide
+            ? styles["without-langselector"]
+            : styles["default"]
+        }`}
         data-opened={openSearchDialog}
       >
         <div className={styles["search-bar"]}>

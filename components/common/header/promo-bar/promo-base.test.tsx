@@ -21,7 +21,9 @@ const renderComponent = () => {
 
 const renderComponentAR = () => {
   render(
-    <AppContext.Provider value={{ appState: { lang: "ar" } }}>
+    <AppContext.Provider
+      value={{ appState: { lang: "ar" }, setSearchWrapperPosition: jest.fn() }}
+    >
       <PromoBar
         title={"Promo Bar Title"}
         linkText={"Promo Link Text"}

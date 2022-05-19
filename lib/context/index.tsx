@@ -23,15 +23,10 @@ const ContextProvider: FC = ({ children }) => {
   };
 
   const [appState, setAppState] = useState<AppStateType | string>(defaultState);
-  const [promoBarClosed, setPromoBarClosed] = useState<boolean>(
-    getPromoBarStatus()
-  );
-
-  const savePromoBarStatus = () => {
-    typeof window !== "undefined" &&
-      window.localStorage.setItem("promo-bar-visible", "true");
-    setPromoBarClosed(true);
-  };
+  const [searchWrapperPosition, setSearchWrapperPosition] = useState({
+    promo: false,
+    langSelector: false,
+  });
 
   const saveAppState = ({
     lang,
@@ -49,7 +44,12 @@ const ContextProvider: FC = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ appState, saveAppState, promoBarClosed, savePromoBarStatus }}
+      value={{
+        appState,
+        saveAppState,
+        searchWrapperPosition,
+        setSearchWrapperPosition,
+      }}
     >
       {children}
     </AppContext.Provider>
