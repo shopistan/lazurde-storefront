@@ -24,7 +24,8 @@ const PromoBar: FC<PromoBarProps> = ({
 }): JSX.Element => {
   const [isClosed, setIsClosed] = useState(true);
   const { t } = useTranslation("common");
-  const { appState } = useContext(AppContext);
+  const { appState, promoBarClosed, savePromoBarStatus } =
+    useContext(AppContext);
   const [width] = useWindowSize();
   const dynamicText = width > desktopScreenSize ? linkText : mobileLinkText;
 
@@ -58,8 +59,9 @@ const PromoBar: FC<PromoBarProps> = ({
         type="button"
         onClick={() => {
           setIsClosed(true);
-          typeof window !== "undefined" &&
-          window.localStorage.setItem("promo-bar-visible", "true");
+          savePromoBarStatus();
+          // typeof window !== "undefined" &&
+          //   window.localStorage.setItem("promo-bar-visible", "true");
         }}
       >
         <Cross width={"20px"} height={"20px"} />
