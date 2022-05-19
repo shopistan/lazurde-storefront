@@ -30,14 +30,20 @@ const SearchDialog: FC<SearchDialogProps> = ({
   openSearchDialog,
 }): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState, saveAppState } = useContext(AppContext);
+  const { appState, promoBarClosed } = useContext(AppContext);
   const [placeHolderBrand, setPlaceHolderBrand] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
   const router = useRouter();
   const { t } = useTranslation("common");
   const inputRef = useRef<null | HTMLElement>(null);
+  const [promoBar, setPromobar] = useState(false);
 
   useEffect(() => {
+    // setPromobar(
+    //   typeof window !== "undefined"
+    //     ? JSON.parse(window.localStorage.getItem("promo-bar-visible"))
+    //     : "false"
+    // );
     try {
       let newState = getAppStateFromLocalStorage();
       setPlaceHolderBrand(newState?.brand);
@@ -73,6 +79,7 @@ const SearchDialog: FC<SearchDialogProps> = ({
   };
 
   const placeholderText = appState?.lang === "en" ? "Shop" : "متجر";
+  console.log("promobarclosed", promoBarClosed);
 
   return (
     <>
@@ -83,7 +90,11 @@ const SearchDialog: FC<SearchDialogProps> = ({
           onClick={() => setOpenSearchDialog(!openSearchDialog)}
         ></div>
       )}
-      <div className={styles["search-dialog"]} data-opened={openSearchDialog}>
+      <div
+        className={styles["search-dialog"]}
+        style={{ top: promoBarClosed ? "40px" : "80px" }}
+        data-opened={openSearchDialog}
+      >
         <div className={styles["search-bar"]}>
           <div className={styles["brand-icon"]}>
             <Link href={siteLogoUrl || ""}>
