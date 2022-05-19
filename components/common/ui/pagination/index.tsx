@@ -5,6 +5,7 @@ import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 
 interface PaginationProps {
+  pKey?: any;
   paginationClass?: string;
   defaultPageNumber?: number;
   pageSize: number;
@@ -17,6 +18,7 @@ interface PaginationProps {
 }
 
 const Pagination = ({
+  pKey = "",
   paginationClass = "",
   defaultPageNumber,
   pageSize,
@@ -27,7 +29,6 @@ const Pagination = ({
   onInitialize,
   children,
 }: PaginationProps): JSX.Element => {
-
   const [currentPage, setCurrentPage] = useState(defaultPageNumber);
   const [showAll, setShowAll] = useState(false);
   const [hidePagination, setHidePagination] = useState(false);
@@ -45,15 +46,15 @@ const Pagination = ({
   };
 
   const isPaginationRequired = () => {
-    const numOfPages = totalSize / pageSize
-    return numOfPages < 1
-  }
+    const numOfPages = totalSize / pageSize;
+    return numOfPages < 1;
+  };
 
   useEffect(() => {
-    setCurrentPage(defaultPageNumber)
+    setCurrentPage(defaultPageNumber);
     populateOnFirstLoad(onInitialize);
-    setHidePagination(isPaginationRequired())
-    setShowAll(false)
+    setHidePagination(isPaginationRequired());
+    setShowAll(false);
   }, [dataArray]);
 
   const pageDown = (callBackFn: Function) => {
@@ -79,10 +80,16 @@ const Pagination = ({
     callBackFn(dataArray);
   };
 
-  const pageCount = appState.lang === 'en' ? `${firstPageIndex + 1}-${lastPageIndex}` : `${lastPageIndex}-${firstPageIndex + 1}`
+  const pageCount =
+    appState.lang === "en"
+      ? `${firstPageIndex + 1}-${lastPageIndex}`
+      : `${lastPageIndex}-${firstPageIndex + 1}`;
 
   return (
-    <div className={`${styles["main-pagination"]} ${paginationClass}`}>
+    <div
+      key={pKey}
+      className={`${styles["main-pagination"]} ${paginationClass}`}
+    >
       <div className={styles["div-view-count"]} data-hide={hidePagination}>
         <div className={styles["div-show-count"]}>
           {showAll
@@ -95,14 +102,18 @@ const Pagination = ({
               viewAllData(onInitialize);
             }}
           >
-            {t('textViewAll')}
+            {t("textViewAll")}
           </button>
         </div>
       </div>
 
       {children}
 
-      <div className={styles["div-controls"]} data-visible={!showAll} data-hide={hidePagination}>
+      <div
+        className={styles["div-controls"]}
+        data-visible={!showAll}
+        data-hide={hidePagination}
+      >
         <div className={styles["div-left-arrow"]}>
           <button
             disabled={currentPage === 1}

@@ -36,7 +36,7 @@ interface ProductCardProps {
 
 interface ProductListingProps {
   pageName?: string | "";
-  productDataArray: [];
+  productDataArray: [] | number;
   categoryName: string;
   filterList: [];
   showBreadcrumb: boolean;
@@ -65,6 +65,7 @@ const ProductListing = ({
   );
 
   useEffect(() => {
+    setFilteredProductData("");
     // console.log(
     //   "something",
     //   fetchCategoryProducts({
@@ -143,8 +144,9 @@ const ProductListing = ({
     const pData =
       filteredProductData.length > 0 ? filteredProductData : initialProductData;
     const sortedArray: any[] = [];
-    if (sortedValue.value !== "most viewed")
+    if (sortedValue.value !== "most viewed") {
       setFilteredProductData(filteredProductData);
+    }
 
     if (sortedValue.value === "most viewed") {
       pData.map((item: any) => {
@@ -189,6 +191,7 @@ const ProductListing = ({
         {showBreadcrumb && <BreadCrumbs pageName={pageName} />}
 
         <Pagination
+          pKey={productDataArray}
           paginationClass={styles["div-pagination"]}
           defaultPageNumber={1}
           pageSize={5}
@@ -292,7 +295,7 @@ const ProductListing = ({
                   }
                 )
               ) : (
-                <div className={styles['div-no-items']}>
+                <div className={styles["div-no-items"]}>
                   <span>no items found</span>
                 </div>
               )}
