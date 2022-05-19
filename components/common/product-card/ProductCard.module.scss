@@ -125,6 +125,20 @@
   }
 }
 
+.bg {
+  &_missl {
+    background-color: #dde8db;
+  }
+
+  &_lazurde {
+    background-color: $primary-color;
+  }
+
+  &_kenaz {
+    background-color: #cde9f2;
+  }
+}
+
 .line-through {
   position: relative;
 
