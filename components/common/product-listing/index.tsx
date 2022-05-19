@@ -36,7 +36,7 @@ interface ProductCardProps {
 
 interface ProductListingProps {
   pageName?: string | "";
-  productDataArray: [] | number;
+  productDataArray: [];
   categoryName: string;
   filterList: [];
   showBreadcrumb: boolean;
