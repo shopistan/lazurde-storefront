@@ -8,26 +8,30 @@ import Button from "components/common/ui/button";
 import useWindowSize from "lib/utils/useWindowSize";
 
 const optionsData = [
-  {
-    label: "New",
-    value: "New",
-  },
+  // {
+  //   label: "New",
+  //   value: "New",
+  // },
   {
     label: "Best Sellers",
     value: "Best Sellers",
   },
-  {
-    label: "Biggest Saving",
-    value: "Biggest Saving",
-  },
+  // {
+  //   label: "Biggest Saving",
+  //   value: "Biggest Saving",
+  // },
+  // {
+  //   label: "Most Viewed",
+  //   value: "Most Viewed",
+  // },
+  // {
+  //   label: "Product Name",
+  //   value: "Product Name",
+  // },
   {
     label: "Most Viewed",
-    value: "Most Viewed",
-  },
-  {
-    label: "Product Name",
-    value: "Product Name",
-  },
+    value: "most viewed",
+  }
 ];
 
 const filterListData = [
