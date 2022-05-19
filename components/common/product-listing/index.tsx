@@ -16,7 +16,11 @@ import Pagination from "../ui/pagination";
 interface ProductCardProps {
   index?: number;
   title?: string;
-  "Image 1 URL"?: string;
+  "Image url"?: string;
+  "Image URL"?: string;
+  "Image URL 2"?: string;
+  "Image URL 3"?: string;
+  "Image URL 4"?: string;
   "Base Price"?: number | string;
   "Online Exclusive"?: boolean;
   basePrice?: number | string;
@@ -236,10 +240,32 @@ const ProductListing = ({
                       discount,
                       discountedPrice,
                       productCardImages = [
-                        { url: data["Image 1 URL"], altText: "" },
+                        {
+                          url: data["Image URL"] || data["Image url"],
+                          altText: "",
+                        },
                       ],
                       onlineExclusiveTag = data["Online Exclusive"],
                     } = data;
+
+                    if (data["Image URL 2"]) {
+                      productCardImages?.push({
+                        url: data["Image URL 2"] || "",
+                        altText: "",
+                      });
+                    }
+                    if (data["Image URL 3"]) {
+                      productCardImages?.push({
+                        url: data["Image URL 3"] || "",
+                        altText: "",
+                      });
+                    }
+                    if (data["Image URL 4"]) {
+                      productCardImages?.push({
+                        url: data["Image URL 4"] || "",
+                        altText: "",
+                      });
+                    }
                     return (
                       <>
                         <ProductCard
