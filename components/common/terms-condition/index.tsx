@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Label from '../ui/label'
 import { ImageType } from 'lib/types/common'
 import styles from './term-condition.module.scss'
+import Accordion from "components/common/ui/accordion/Accordion";
 
 type HyperLinksProps = {
     linkUrl: ImageType
@@ -11,19 +12,26 @@ type HyperLinksProps = {
     content: string | ''
 }
 
+type AccordionProps = {
+    heading: string | ''
+    text: string | ''
+}
+
 interface TermCondtionProps {
     hyperLinks: HyperLinksProps[]
     sideBarBgcolor: string | ''
     contentBgcolor: string | ''
     icon: ImageType
+    accordion: AccordionProps[]
+    title : string | ''
 }
 
-const TermCondtion: FC<TermCondtionProps> = ({ hyperLinks, sideBarBgcolor, contentBgcolor, icon }) => {
+const TermCondtion: FC<TermCondtionProps> = ({ hyperLinks, sideBarBgcolor, contentBgcolor, icon, accordion ,title }) => {
     const [objects, setObjects] = useState({ name: '', content: '', linkUrl: {} })
 
     return (
         <div className={styles['term-comtainer']}>
-            <Label className={styles['term-heading']}>Lazurde Policies</Label>
+            <Label className={styles['term-heading']}>{title}</Label>
             <div className={styles['term-section']}>
                 <div className={styles['term-left']} style={{ backgroundColor: sideBarBgcolor }}>
 
@@ -55,6 +63,21 @@ const TermCondtion: FC<TermCondtionProps> = ({ hyperLinks, sideBarBgcolor, conte
                     <ContentBlock imgUrl={icon} content={objects} />
 
                 </div>
+                {
+                    accordion && accordion.length > 0 &&
+                    <div>
+                        {
+
+                            accordion && accordion.length > 0 && accordion.map((object, index) => {
+                                const { heading, text } = object
+                                return (
+                                    < Accordion key={index} className={'accordion-help'} heading={heading} children={text} arrowIcon={true} />
+
+                                )
+                            })
+                        }
+                    </div>
+                }
             </div>
 
         </div>
