@@ -54,6 +54,7 @@
     input {
         border: none;
         margin-inline-start: 14px;
+        outline: none;
     }
 }
 
@@ -133,6 +134,7 @@
 }
 
 .services-container {
+    width: 100%;
     padding: 0;
 
     @media (min-width: 1024px) {

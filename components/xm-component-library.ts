@@ -12,6 +12,7 @@ import Banner from "./common/banner";
 import BambuserCardSlider from "./common/bambuser-card-slider";
 import HelpCategory from "./common/help-category";
 import CustomerService from "./common/customer-service";
+import TermCondtion from 'components/common/terms-condition'
 
 export const componentsById: any = {
   LazurdeHeroBanner,
@@ -27,5 +28,6 @@ export const componentsById: any = {
   Banner,
   BambuserCardSlider,
   HelpCategory,
-  CustomerService
+  CustomerService,
+  TermCondtion
 };

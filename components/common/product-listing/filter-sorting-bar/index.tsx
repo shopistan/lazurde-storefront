@@ -114,6 +114,7 @@ interface FilterBarProps {
   headerId?: string;
   onApplyFilters?: Function;
   onSortingChange?: Function;
+  onClear?: Function;
 }
 
 interface DropdownDataProps {
@@ -130,9 +131,22 @@ const FilterBar: FC<FilterBarProps> = ({
   filterList = filterListData,
   onApplyFilters = () => {},
   onSortingChange = () => {},
+  onClear = () => {},
 }): JSX.Element => {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
+  const [currentSortingValue, setCurrentSortingValue] = useState<any>("");
+
+  useEffect(() => {
+    currentSortingValue &&
+      onSortingChange &&
+      onSortingChange(selectedFilters, currentSortingValue);
+  }, [currentSortingValue]);
+
+  const onApplyButtonClick = (selectedFilter: SelectedFilterProps) => {
+    onApplyFilters(selectedFilter, currentSortingValue)
+  }
+
   let link: any = useRef(
     Array.isArray(filterList) &&
       filterList.length > 0 &&
@@ -183,7 +197,8 @@ const FilterBar: FC<FilterBarProps> = ({
   useEffect(() => {
     setOptionData({
       data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
-      defaultValue: appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين",
+      defaultValue:
+        appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين",
     });
 
     if (appState.lang === "en") {
@@ -276,7 +291,7 @@ const FilterBar: FC<FilterBarProps> = ({
             buttonSize={"sm"}
             onClick={() => {
               setSelectedFilters && setSelectedFilters({});
-              onApplyFilters && onApplyFilters({});
+              onClear && onClear({}, currentSortingValue)
             }}
           />
         </div>
@@ -288,7 +303,9 @@ const FilterBar: FC<FilterBarProps> = ({
             options={optionData?.data}
             defaultValue={optionData?.defaultValue}
             selectedLabel={appState?.lang === "en" ? "Sort By: " : "بسح فنص:"}
-            onChange={onSortingChange}
+            onChange={(value: { label: string; value: string }) => {
+              setCurrentSortingValue(value);
+            }}
           ></BorderlessSelect>
         </div>
       </div>
@@ -302,7 +319,7 @@ const FilterBar: FC<FilterBarProps> = ({
           categoryData={dropdownData}
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
-          onApplyFilters={onApplyFilters}
+          onApplyFilters={onApplyButtonClick}
         ></DropDown>
       </div>
       <div

@@ -1,0 +1,179 @@
+@import "/styles/variables.scss";
+
+.review-modal {
+  &_wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background-color: white;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    z-index: 100;
+    padding: 24px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+    &[data-open="true"] {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  &_body {
+    width: 100%;
+    height: 622px;
+    overflow-y: hidden;
+    margin: 0 auto;
+    background-color: $white-color;
+    border-radius: 8px;
+
+    @media (min-width: $breakPoint-desktop) {
+      width: 40.374%;
+      padding: 16px 20px 20px 40px;
+    }
+  }
+
+  &_content {
+    width: 100%;
+    height: 590px;
+    overflow-y: auto;
+
+    @media (min-width: $breakPoint-desktop) {
+      padding-top: 16px;
+      padding-inline-end: 20px;
+    }
+
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: $white-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2);
+      outline: 0;
+    }
+  }
+}
+
+.close-btn {
+  margin-bottom: 8px;
+  cursor: pointer;
+  text-align: end;
+}
+
+.heading {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: center;
+  text-transform: capitalize;
+  color: $black-color;
+}
+
+.review-sec {
+  margin-top: 32px;
+  margin-bottom: 24px;
+  text-align: center;
+
+  .rating-label {
+    margin: 0;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.form-wrapper {
+  margin-top: 24px;
+}
+
+.field {
+  width: 100%;
+  margin-bottom: 24px;
+
+  input,
+  textarea {
+    width: 100%;
+    height: 40px;
+    padding: 20px;
+    outline: 0;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.field-label {
+  margin: 0;
+  padding-inline-start: 20px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: start;
+  color: rgba(0, 0, 0, 0.6);
+  text-transform: capitalize;
+}
+
+.review-field {
+  margin-bottom: 24px;
+
+  textarea {
+    height: 141px;
+    border-radius: 8px;
+  }
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .field {
+    text-align: start;
+    width: 49%;
+  }
+}
+
+.error-msg {
+  min-height: 20px;
+  padding-inline-start: 20px;
+  text-align: start;
+  font-size: 12px;
+  color: red;
+}
+
+.submit-btn {
+  position: sticky;
+  bottom: 0;
+  text-align: end;
+
+  button {
+    cursor: pointer;
+    width: 200px;
+    height: 51px;
+    border: 0;
+    border-radius: 100px;
+    background-color: $black-color;
+    color: $white-color;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+    text-transform: capitalize;
+  }
+}
