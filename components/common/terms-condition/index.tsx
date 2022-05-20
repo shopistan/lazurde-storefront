@@ -7,9 +7,9 @@ import styles from './term-condition.module.scss'
 import Accordion from "components/common/ui/accordion/Accordion";
 
 type HyperLinksProps = {
-    linkUrl: ImageType
     name: string | ''
     content: string | ''
+    icon: ImageType
 }
 
 type AccordionProps = {
@@ -21,13 +21,12 @@ interface TermCondtionProps {
     hyperLinks: HyperLinksProps[]
     sideBarBgcolor: string | ''
     contentBgcolor: string | ''
-    icon: ImageType
     accordion: AccordionProps[]
-    title : string | ''
+    title: string | ''
 }
 
-const TermCondtion: FC<TermCondtionProps> = ({ hyperLinks, sideBarBgcolor, contentBgcolor, icon, accordion ,title }) => {
-    const [objects, setObjects] = useState({ name: '', content: '', linkUrl: {} })
+const TermCondtion: FC<TermCondtionProps> = ({ hyperLinks, sideBarBgcolor, contentBgcolor, accordion, title }) => {
+    const [objects, setObjects] = useState({ name: hyperLinks[0].name, content: hyperLinks[0].content, icon: { url: '', altText: '' } })
 
     return (
         <div className={styles['term-comtainer']}>
@@ -37,19 +36,21 @@ const TermCondtion: FC<TermCondtionProps> = ({ hyperLinks, sideBarBgcolor, conte
 
                     {
                         hyperLinks && hyperLinks.map((object, index) => {
-                            const { linkUrl, name, content } = object
+                            const { icon, name, content } = object
                             return (
                                 <div className={styles['term-block']} key={index} onClick={() => {
                                     setObjects({
                                         content: content,
                                         name: name,
-                                        linkUrl: {
-                                            url: icon.url,
-                                            altText: icon.altText
+                                        icon: {
+                                            url: icon?.url,
+                                            altText: icon?.altText
                                         }
                                     })
                                 }}>
-                                    <img src={linkUrl.url} alt={linkUrl.altText} />
+                                    {
+                                        <img src={icon?.url} alt={icon?.altText} />
+                                    }
                                     <Label>{name}</Label>
                                 </div>
 
@@ -60,7 +61,7 @@ const TermCondtion: FC<TermCondtionProps> = ({ hyperLinks, sideBarBgcolor, conte
                     }
                 </div>
                 <div className={styles['term-right']} style={{ backgroundColor: contentBgcolor }}>
-                    <ContentBlock imgUrl={icon} content={objects} />
+                    <ContentBlock content={objects} />
 
                 </div>
                 {

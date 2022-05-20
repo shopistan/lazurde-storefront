@@ -11,7 +11,7 @@ exports.default = Types.Component({
             children: Types.Shape({
                 children: {
                     name: Types.String({ label: 'Hyperlink Name' }),
-                    content: Types.String({ label: 'Hyperlink Content' }),
+                    content: Types.RichText({ label: 'Hyperlink Content' }),
                 }
             })
         }),

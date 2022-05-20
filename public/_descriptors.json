@@ -1205,7 +1205,7 @@
                             "default": ""
                         },
                         "content": {
-                            "type": "String",
+                            "type": "RichText",
                             "label": "Hyperlink Content",
                             "default": ""
                         }
