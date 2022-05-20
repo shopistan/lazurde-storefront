@@ -5,7 +5,7 @@ import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import Head from "next/head";
 import React, { FC } from "react";
-import AppContentWrapper from "../components/common/app-content-wrapper";
+import AppContentWrapper from "../../components/common/app-content-wrapper";
 
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
