@@ -64,7 +64,7 @@ const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading
                     filterBlock && filterBlock && filterBlock.length > 0 ? filterBlock.map((object, index) => {
                         const { icon, iconTitle, iconText, url = '/' } = object
                         return (
-                            <div onClick={() => { router?.push(url) }} key={index} className={styles['service-block']}>
+                            <div onClick={() => { router?.push(url && url) }} key={index} className={styles['service-block']}>
                                 <div>
                                     <div className={styles['icon-block']}>
                                         {
