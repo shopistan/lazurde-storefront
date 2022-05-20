@@ -12,6 +12,8 @@ type ServicesProps = {
     iconTitle: string | ''
     iconText: string | ''
     url: string | ''
+    width: string | number
+    height: string | number
 }
 
 interface CustomerServiceProps {
@@ -23,7 +25,7 @@ interface CustomerServiceProps {
 }
 
 const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading, services, inputIcon }) => {
-    const [width] = useWindowSize();
+    const [size] = useWindowSize();
     const [filterBlock, setFilterBlock] = useState(services)
     const router = useRouter();
     const handleFilter = (event: any) => {
@@ -40,7 +42,7 @@ const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading
                 <div>
                     {
                         bannerImage?.url &&
-                        <Image className={styles['services_banner-image']} src={bannerImage?.url} alt={bannerImage?.altText} width={width > desktopScreenSize ? 1280 : 375} height={width > desktopScreenSize ? 308 : 120} layout='responsive' />
+                        <Image className={styles['services_banner-image']} src={bannerImage?.url} alt={bannerImage?.altText} width={size > desktopScreenSize ? 1280 : 375} height={size > desktopScreenSize ? 308 : 120} layout='responsive' />
                     }
                 </div>
                 <div className={styles['text-section']}>
@@ -49,7 +51,7 @@ const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading
                         <Label className={styles['heading']}>{heading}</Label>
                     }
                     <div className={styles['search-bar']}>
-                        <Image src={inputIcon.url} alt={inputIcon.altText} width={width > desktopScreenSize ? 20 : 16} height={width > desktopScreenSize ? 20 : 16} />
+                        <Image src={inputIcon.url} alt={inputIcon.altText} width={size > desktopScreenSize ? 20 : 16} height={size > desktopScreenSize ? 20 : 16} />
                         <input placeholder='Search' onChange={(e) => { handleFilter(e) }} />
                     </div>
 
@@ -62,14 +64,14 @@ const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading
             <div className={styles['service-section']}>
                 {
                     filterBlock && filterBlock && filterBlock.length > 0 ? filterBlock.map((object, index) => {
-                        const { icon, iconTitle, iconText, url = '/' } = object
+                        const { icon, iconTitle, iconText, url = '/', width, height } = object
                         return (
                             <div onClick={() => { router?.push(url && url) }} key={index} className={styles['service-block']}>
                                 <div>
                                     <div className={styles['icon-block']}>
                                         {
                                             icon?.url &&
-                                            <Image src={icon.url} alt={icon.altText} width={27} height={31} />
+                                            <Image src={icon.url} alt={icon.altText} width={width || 14} height={height || 15} />
                                         }
                                         {
                                             iconTitle &&

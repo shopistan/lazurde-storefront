@@ -13,7 +13,9 @@ const ContentBlock: FC<ContentBlockProps> = ({ content = {} }) => {
             <div>
                 {
                     content.icon?.url &&
-                    <img src={content.icon.url} alt={content.icon.altText} />
+                    <div className={styles['image']}>
+                        <Image src={content.icon.url} alt={content.icon.altText} width={16} height={16} />
+                    </div>
                 }
                 <p className={styles['heading']}>{content?.name}</p>
                 <p className={styles['content']} dangerouslySetInnerHTML={{ __html: content?.content }}></p>
