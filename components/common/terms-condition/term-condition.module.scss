@@ -20,12 +20,13 @@
 .term-left {
     margin-inline-end: 60px;
 
-    b {
+    p {
         font-size: 24px;
         font-weight: 500;
         line-height: 29px;
         letter-spacing: 0em;
         text-align: start;
+        margin-inline-start: 19px;
     }
 }
 
@@ -38,4 +39,13 @@
     width: 650px;
     padding-top: 46px;
     padding-inline: 47px 40px;
+}
+
+.term-image {
+    width: 20px;
+    height: 20px;
+
+    img {
+        width: auto;
+    }
 }
