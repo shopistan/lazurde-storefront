@@ -7,7 +7,7 @@ import Head from "next/head";
 import React, { FC } from "react";
 import AppContentWrapper from "../../components/common/app-content-wrapper";
 
-const LazurdeHome: FC<PageProps> = ({
+const HelpCentre: FC<PageProps> = ({
   headerProps,
   brandSidebarProps,
   footerProps,
@@ -38,7 +38,7 @@ const LazurdeHome: FC<PageProps> = ({
   );
 };
 
-export default LazurdeHome;
+export default HelpCentre;
 
 export async function getStaticProps(context: any) {
   const globalComponents = (await fetchGlobalComponents()) || [];
