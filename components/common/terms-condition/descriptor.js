@@ -12,16 +12,16 @@ exports.default = Types.Component({
                 children: {
                     name: Types.String({ label: 'Hyperlink Name' }),
                     content: Types.RichText({ label: 'Hyperlink Content' }),
+                    icon: Types.Image({
+                        label: 'Icon',
+                        url: Types.String({ label: 'URL' }),
+                        altText: Types.String({ label: 'Alt Text' }),
+                    }),
                 }
             })
         }),
         sideBarBgcolor: Types.String({ label: 'Content Block Background Color' }),
         contentBgcolor: Types.String({ label: 'Content Block Background Color' }),
-        icon: Types.Image({
-            label: 'Icon',
-            url: Types.String({ label: 'URL' }),
-            altText: Types.String({ label: 'Alt Text' }),
-        }),
         accordion: Types.Array({
             label: 'Accordion Array',
             children: Types.Shape({

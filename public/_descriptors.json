@@ -1208,6 +1208,20 @@
                             "type": "RichText",
                             "label": "Hyperlink Content",
                             "default": ""
+                        },
+                        "icon": {
+                            "type": "Image",
+                            "label": "Icon",
+                            "url": {
+                                "type": "String",
+                                "label": "URL",
+                                "default": ""
+                            },
+                            "altText": {
+                                "type": "String",
+                                "label": "Alt Text",
+                                "default": ""
+                            }
                         }
                     }
                 }
@@ -1221,20 +1235,6 @@
                 "type": "String",
                 "label": "Content Block Background Color",
                 "default": ""
-            },
-            "icon": {
-                "type": "Image",
-                "label": "Icon",
-                "url": {
-                    "type": "String",
-                    "label": "URL",
-                    "default": ""
-                },
-                "altText": {
-                    "type": "String",
-                    "label": "Alt Text",
-                    "default": ""
-                }
             },
             "accordion": {
                 "type": "Array",
