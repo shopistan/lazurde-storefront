@@ -5,11 +5,13 @@ import { ImageType } from 'lib/types/common'
 import styles from './customer-service.module.scss'
 import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from 'lib/utils/common'
+import { useRouter } from "next/router";
 
 type ServicesProps = {
     icon: ImageType | { url: '', altText: '' }
     iconTitle: string | ''
     iconText: string | ''
+    url: string | ''
 }
 
 interface CustomerServiceProps {
@@ -23,6 +25,7 @@ interface CustomerServiceProps {
 const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading, services, inputIcon }) => {
     const [width] = useWindowSize();
     const [filterBlock, setFilterBlock] = useState(services)
+    const router = useRouter();
     const handleFilter = (event: any) => {
         const inputValue = event.target.value.toLowerCase();
         const nameFilter = services.filter(
@@ -59,9 +62,9 @@ const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading
             <div className={styles['service-section']}>
                 {
                     filterBlock && filterBlock && filterBlock.length > 0 ? filterBlock.map((object, index) => {
-                        const { icon, iconTitle, iconText } = object
+                        const { icon, iconTitle, iconText, url = '/' } = object
                         return (
-                            <div key={index} className={styles['service-block']}>
+                            <div onClick={() => { router?.push(url) }} key={index} className={styles['service-block']}>
                                 <div>
                                     <div className={styles['icon-block']}>
                                         {
@@ -84,7 +87,7 @@ const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading
                     })
                         : (
                             <>
-                                <p>nothing</p>
+                                <p>No matching found</p>
                             </>
                         )}
             </div>
