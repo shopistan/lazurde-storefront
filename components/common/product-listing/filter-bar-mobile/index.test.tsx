@@ -17,7 +17,8 @@ const filterListData = [
   },
 ];
 const applyFunc = jest.fn();
-const sortingFunc = jest.fn();
+const sortingFunc = jest.fn(); 
+const onClear = jest.fn(); 
 
 const renderComponent = (list = filterListData) => {
   render(
@@ -26,6 +27,7 @@ const renderComponent = (list = filterListData) => {
         filterList={list}
         onApplyFilters={applyFunc}
         onSortingChange={sortingFunc}
+        onClear={onClear}
       />
     </ContextProvider>
   );
@@ -39,6 +41,7 @@ const renderComponentAR = () => {
         filterList={filterListData}
         onApplyFilters={applyFunc}
         onSortingChange={sortingFunc}
+        onClear={onClear}
       />
     </AppContext.Provider>
   );
