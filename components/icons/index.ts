@@ -25,5 +25,6 @@ export { default as MinusIcon } from './MinusIcon'
 export { default as ChevronDown } from './ChevronDown'
 export { default as Star } from './Star'
 export { default as FilledStar } from './FilledStar'
+export { default as CrossSmall } from './CrossSmall'
 
 
