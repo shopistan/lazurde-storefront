@@ -1,8 +1,9 @@
 const FilledStar = ({ ...props }) => {
   return (
     <svg
-      width="20"
-      height="20"
+      width={props?.width || "20"}
+      height={props?.height || "20"}
+      onClick={props?.onClick}
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

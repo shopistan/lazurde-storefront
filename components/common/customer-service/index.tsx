@@ -1,15 +1,17 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import Label from 'components/common/ui/label'
 import Image from 'next/image'
 import { ImageType } from 'lib/types/common'
 import styles from './customer-service.module.scss'
 import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from 'lib/utils/common'
+import { useRouter } from "next/router";
 
 type ServicesProps = {
     icon: ImageType | { url: '', altText: '' }
     iconTitle: string | ''
     iconText: string | ''
+    url: string | ''
 }
 
 interface CustomerServiceProps {
@@ -22,6 +24,15 @@ interface CustomerServiceProps {
 
 const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading, services, inputIcon }) => {
     const [width] = useWindowSize();
+    const [filterBlock, setFilterBlock] = useState(services)
+    const router = useRouter();
+    const handleFilter = (event: any) => {
+        const inputValue = event.target.value.toLowerCase();
+        const nameFilter = services.filter(
+            (val) => val?.iconTitle?.toString().toLowerCase().indexOf(inputValue) === 0
+        );
+        setFilterBlock(nameFilter);
+    }
 
     return (
         <div className={styles['services-container']}>
@@ -29,7 +40,7 @@ const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading
                 <div>
                     {
                         bannerImage?.url &&
-                        <Image className={styles['services_banner-image']} src={bannerImage?.url} alt={bannerImage?.altText} width={desktopScreenSize > 1023 ? 1280 : 375} height={desktopScreenSize > 1023 ? 308 : 120} layout='responsive' />
+                        <Image className={styles['services_banner-image']} src={bannerImage?.url} alt={bannerImage?.altText} width={width > desktopScreenSize ? 1280 : 375} height={width > desktopScreenSize ? 308 : 120} layout='responsive' />
                     }
                 </div>
                 <div className={styles['text-section']}>
@@ -38,8 +49,8 @@ const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading
                         <Label className={styles['heading']}>{heading}</Label>
                     }
                     <div className={styles['search-bar']}>
-                        <Image src={inputIcon.url} alt={inputIcon.altText} width={desktopScreenSize > 1023 ? 20 : 16} height={desktopScreenSize > 1023 ? 20 : 16} />
-                        <input placeholder='Search' />
+                        <Image src={inputIcon.url} alt={inputIcon.altText} width={width > desktopScreenSize ? 20 : 16} height={width > desktopScreenSize ? 20 : 16} />
+                        <input placeholder='Search' onChange={(e) => { handleFilter(e) }} />
                     </div>
 
                 </div>
@@ -50,10 +61,10 @@ const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading
             }
             <div className={styles['service-section']}>
                 {
-                    services && services?.map((object, index) => {
-                        const { icon, iconTitle, iconText } = object
+                    filterBlock && filterBlock && filterBlock.length > 0 ? filterBlock.map((object, index) => {
+                        const { icon, iconTitle, iconText, url = '/' } = object
                         return (
-                            <div key={index} className={styles['service-block']}>
+                            <div onClick={() => { router?.push(url && url) }} key={index} className={styles['service-block']}>
                                 <div>
                                     <div className={styles['icon-block']}>
                                         {
@@ -74,7 +85,11 @@ const CustomerService: FC<CustomerServiceProps> = ({ title, bannerImage, heading
 
                         )
                     })
-                }
+                        : (
+                            <>
+                                <p>No matching found</p>
+                            </>
+                        )}
             </div>
             <button className={styles['button']}><Image src={'/question.png'} width={20} height={20} /><p>{'Have a question?'}</p></button>
         </div>

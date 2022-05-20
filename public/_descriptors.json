@@ -411,6 +411,11 @@
                             "type": "String",
                             "label": "Icon Text",
                             "default": ""
+                        },
+                        "url": {
+                            "type": "String",
+                            "label": "Redirect URL",
+                            "default": ""
                         }
                     }
                 }
@@ -421,8 +426,6 @@
         "type": "Component",
         "id": "Footer",
         "label": "Footer",
-        "internal": false,
-        "isGlobal": true,
         "allowNestedComponents": false,
         "attributes": {
             "heading": {
@@ -591,8 +594,6 @@
         "type": "Component",
         "id": "Header",
         "label": "Header",
-        "internal": false,
-        "isGlobal": true,
         "allowNestedComponents": false,
         "attributes": {
             "headerId": {
@@ -716,8 +717,6 @@
         "type": "Component",
         "id": "BrandSideBar",
         "label": "Brand Sidebar",
-        "internal": false,
-        "isGlobal": true,
         "allowNestedComponents": false,
         "attributes": {
             "mainImg": {
@@ -1181,6 +1180,87 @@
             "modalButton": {
                 "type": "String",
                 "label": "Button Text",
+                "default": ""
+            }
+        }
+    },
+    {
+        "type": "Component",
+        "id": "TermCondtion",
+        "label": "TermCondtion",
+        "allowNestedComponents": false,
+        "attributes": {
+            "hyperLinks": {
+                "type": "Array",
+                "label": "HyperLink Array",
+                "default": [],
+                "allowNestedComponents": false,
+                "children": {
+                    "type": "Shape",
+                    "default": {},
+                    "children": {
+                        "name": {
+                            "type": "String",
+                            "label": "Hyperlink Name",
+                            "default": ""
+                        },
+                        "content": {
+                            "type": "RichText",
+                            "label": "Hyperlink Content",
+                            "default": ""
+                        },
+                        "icon": {
+                            "type": "Image",
+                            "label": "Icon",
+                            "url": {
+                                "type": "String",
+                                "label": "URL",
+                                "default": ""
+                            },
+                            "altText": {
+                                "type": "String",
+                                "label": "Alt Text",
+                                "default": ""
+                            }
+                        }
+                    }
+                }
+            },
+            "sideBarBgcolor": {
+                "type": "String",
+                "label": "Content Block Background Color",
+                "default": ""
+            },
+            "contentBgcolor": {
+                "type": "String",
+                "label": "Content Block Background Color",
+                "default": ""
+            },
+            "accordion": {
+                "type": "Array",
+                "label": "Accordion Array",
+                "default": [],
+                "allowNestedComponents": false,
+                "children": {
+                    "type": "Shape",
+                    "default": {},
+                    "children": {
+                        "heading": {
+                            "type": "String",
+                            "label": "Question ",
+                            "default": ""
+                        },
+                        "text": {
+                            "type": "RichText",
+                            "label": "Answer",
+                            "default": ""
+                        }
+                    }
+                }
+            },
+            "title": {
+                "type": "String",
+                "label": "Title",
                 "default": ""
             }
         }

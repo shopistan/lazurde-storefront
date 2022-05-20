@@ -9,7 +9,9 @@
 
   .review {
     @media (min-width: $breakPoint-desktop) {
-      margin-bottom: 76px;
+      margin-bottom: 38px;
+      padding-bottom: 38px;
+      border-bottom: 1px solid #f2f2f2;
     }
   }
 }
