@@ -13,7 +13,6 @@ import { useRouter } from "next/router";
 type BrandCardsType = {
   cardTitle: string | "";
   cardImage: ImageType;
-  favIconSrc: ImageType;
   cardLinks: string | "";
 };
 
@@ -49,7 +48,6 @@ const BrandCards: FC<BrandCardsProps> = ({
               const {
                 cardTitle,
                 cardImage,
-                favIconSrc,
                 cardLinks = "/",
               } = data;
 
@@ -82,7 +80,6 @@ const BrandCards: FC<BrandCardsProps> = ({
                       width="100%"
                       cardTitle={cardTitle}
                       cardImage={cardImage}
-                      favIconSrc={favIconSrc}
                     />
                   </div>
                 </SwiperSlide>
