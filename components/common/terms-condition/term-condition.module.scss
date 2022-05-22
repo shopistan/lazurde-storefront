@@ -1,5 +1,6 @@
 .term-comtainer {
   padding: 0;
+  width: 100%;
   background-color: #f2f2f2;
   @media (min-width: 1023px) {
     padding-inline: 185px;
@@ -29,8 +30,8 @@
 .term-left {
   display: none;
   background-color: white;
-  width: 360px;
   padding-block: 45px;
+  width: 360px;
   padding-inline-start: 18px;
   @media (min-width: 1023px) {
     height: fit-content;
@@ -83,16 +84,16 @@
 }
 
 .back-button {
-    background-color: white;
-    margin-bottom: 8px;
-    padding-inline: 16px;
-    padding-block: 16px;
-    display: flex;
-    align-items: center;
+  background-color: white;
+  margin-bottom: 8px;
+  padding-inline: 16px;
+  padding-block: 16px;
+  display: flex;
+  align-items: center;
 
-    @media (min-width: 1024px) {
-        display: none;
-    }
+  @media (min-width: 1024px) {
+    display: none;
+  }
 }
 
 .back-content {
