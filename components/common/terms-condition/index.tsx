@@ -1,10 +1,12 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import ContentBlock from "../content-block";
 import Image from "next/image";
 import Label from "../ui/label";
 import { ImageType } from "lib/types/common";
 import styles from "./term-condition.module.scss";
 import Accordion from "components/common/ui/accordion/Accordion";
+import BackArrow from 'components/icons/BackArrow'
+import { useRouter } from "next/router";
 
 type HyperLinksProps = {
   name: string | "";
@@ -34,10 +36,14 @@ const TermCondtion: FC<TermCondtionProps> = ({
   accordion,
   title,
 }) => {
+    const router = useRouter();
   const [objects, setObjects] = useState({
     name: hyperLinks[0].name,
     content: hyperLinks[0].content,
-    icon: { url: hyperLinks[0].icon.url, altText: hyperLinks[0].icon.altText },
+    icon: {
+      url: hyperLinks[0]?.icon?.url,
+      altText: hyperLinks[0]?.icon?.altText,
+    },
   });
 
   return (
@@ -51,6 +57,8 @@ const TermCondtion: FC<TermCondtionProps> = ({
           {hyperLinks &&
             hyperLinks.map((object, index) => {
               const { icon, name, content, width, height } = object;
+              console.log("object", object);
+
               return (
                 <div
                   className={styles["term-block"]}
@@ -81,30 +89,47 @@ const TermCondtion: FC<TermCondtionProps> = ({
               );
             })}
         </div>
-        <div
-          className={styles["term-right"]}
-          style={{ backgroundColor: contentBgcolor }}
-        >
-          <ContentBlock content={objects} />
-        </div>
-        {accordion && accordion.length > 0 && (
-          <div>
-            {accordion &&
-              accordion.length > 0 &&
-              accordion.map((object, index) => {
-                const { heading, text } = object;
-                return (
-                  <Accordion
-                    key={index}
-                    className={"accordion-help"}
-                    heading={heading}
-                    children={text}
-                    arrowIcon={true}
-                  />
-                );
-              })}
+        <div className={styles["term-right-container"]}>
+          <div
+            className={styles["back-button"]}
+            style={{ backgroundColor: contentBgcolor }}
+            onClick={()=>{router.push('/help-centre')}}
+          >
+            <div>
+              <BackArrow />
+            </div>
+            <button className={styles['back-content']}>Back To Help centre</button>
           </div>
-        )}
+          <div
+            className={styles["term-right"]}
+            style={{ backgroundColor: contentBgcolor }}
+          >
+            <ContentBlock content={objects} />
+          </div>
+          <div
+            className={styles["term-right"]}
+            style={{ backgroundColor: contentBgcolor }}
+          >
+            {accordion && accordion.length > 0 && (
+              <div className={styles["accordion-block"]}>
+                {accordion &&
+                  accordion.length > 0 &&
+                  accordion.map((object, index) => {
+                    const { heading, text } = object;
+                    return (
+                      <Accordion
+                        key={index}
+                        className={"accordion-help"}
+                        heading={heading}
+                        children={text}
+                        arrowIcon={false}
+                      />
+                    );
+                  })}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

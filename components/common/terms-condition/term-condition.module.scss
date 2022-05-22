@@ -1,51 +1,106 @@
 .term-comtainer {
+  padding: 0;
+  background-color: #f2f2f2;
+  @media (min-width: 1023px) {
     padding-inline: 185px;
+  }
 }
 
 .term-heading {
+  display: none;
+  @media (min-width: 1023px) {
+    display: block;
     font-size: 32px;
     font-weight: 500;
     line-height: 38px;
     letter-spacing: 0em;
-    text-align: center;
+    margin-inline-start: 420px;
     margin-top: 88px;
     margin-bottom: 32px;
-
+  }
 }
 
 .term-section {
+  @media (min-width: 1023px) {
     display: flex;
+  }
 }
 
 .term-left {
+  display: none;
+  background-color: white;
+  width: 360px;
+  padding-block: 45px;
+  padding-inline-start: 18px;
+  @media (min-width: 1023px) {
+    height: fit-content;
+    display: block;
     margin-inline-end: 60px;
+  }
 
-    p {
-        font-size: 24px;
-        font-weight: 500;
-        line-height: 29px;
-        letter-spacing: 0em;
-        text-align: start;
-        margin-inline-start: 19px;
-    }
+  p {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: start;
+    margin-inline-start: 19px;
+  }
 }
 
 .term-block {
+  display: none;
+  @media (min-width: 1023px) {
     display: flex;
     align-items: center;
+  }
 }
 
 .term-right {
+  background-color: white;
+  padding-top: 24px;
+  padding-inline: 24px;
+  @media (min-width: 1023px) {
     width: 650px;
     padding-top: 46px;
     padding-inline: 47px 40px;
+  }
 }
 
 .term-image {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 
-    img {
-        width: auto;
+  img {
+    width: auto;
+  }
+}
+
+.accordion-block {
+  margin-top: 8px;
+  background-color: white;
+  padding-bottom: 40px;
+}
+
+.back-button {
+    background-color: white;
+    margin-bottom: 8px;
+    padding-inline: 16px;
+    padding-block: 16px;
+    display: flex;
+    align-items: center;
+
+    @media (min-width: 1024px) {
+        display: none;
     }
+}
+
+.back-content {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: start;
+  border: none;
+  background-color: white;
 }

@@ -108,3 +108,27 @@
     padding-inline-start: 8px;
   }
 }
+
+.accordion-help {
+  .div-heading {
+    border: none;
+
+    .heading-text {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
+  }
+
+  .custom-content {
+    padding-inline: 24px;
+    padding-block-end: 24px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+}
