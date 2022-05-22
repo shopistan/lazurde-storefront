@@ -54,6 +54,26 @@
       "iconText": "فافزلا L’azurde فاشكتسا"
     }
   ],
+  "accordionProps": [
+    {
+      "heading": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "heading": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "heading": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "heading": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    }
+  ],
+
+  "termTitle": "ىكل رخدي",
   "sampleTranslationText": "يوضح هذا النص ترجمة اللغة عند تغيير اللغة. هذا ليس نصًا تم إنشاؤه بواسطة XM ، لا يدعم XM الصفحات متعددة اللغات حتى الآن.",
   "promoBarTitle": "ىكل رخدي",
   "promoBarLinkTitle": "ىانيدل تاضيفختلا عيمج قوست",

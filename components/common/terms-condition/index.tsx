@@ -1,12 +1,14 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState, useContext } from "react";
 import ContentBlock from "../content-block";
 import Image from "next/image";
 import Label from "../ui/label";
 import { ImageType } from "lib/types/common";
 import styles from "./term-condition.module.scss";
 import Accordion from "components/common/ui/accordion/Accordion";
-import BackArrow from 'components/icons/BackArrow'
+import BackArrow from "components/icons/BackArrow";
 import { useRouter } from "next/router";
+import { AppContext } from "lib/context";
+import useTranslation from "next-translate/useTranslation";
 
 type HyperLinksProps = {
   name: string | "";
@@ -16,7 +18,17 @@ type HyperLinksProps = {
   height: string | "";
 };
 
+type _HyperLinksProps = {
+  name: string | "";
+  content: string | "";
+};
+
 type AccordionProps = {
+  heading: string | "";
+  text: string | "";
+};
+
+type _AccordionProps = {
   heading: string | "";
   text: string | "";
 };
@@ -36,7 +48,21 @@ const TermCondtion: FC<TermCondtionProps> = ({
   accordion,
   title,
 }) => {
-    const router = useRouter();
+  const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
+
+  const _hyperlinks: _HyperLinksProps[] = t(
+    "hyperlinksProps",
+    {},
+    { returnObjects: true }
+  );
+
+  const _accordion: _AccordionProps[] = t(
+    "accordionProps",
+    {},
+    { returnObjects: true }
+  );
+  const router = useRouter();
   const [objects, setObjects] = useState({
     name: hyperLinks[0].name,
     content: hyperLinks[0].content,
@@ -48,7 +74,9 @@ const TermCondtion: FC<TermCondtionProps> = ({
 
   return (
     <div className={styles["term-comtainer"]}>
-      <Label className={styles["term-heading"]}>{title}</Label>
+      <Label className={styles["term-heading"]}>
+        {appState.lang == "en" ? title : t("termTitle")}
+      </Label>
       <div className={styles["term-section"]}>
         <div
           className={styles["term-left"]}
@@ -93,12 +121,16 @@ const TermCondtion: FC<TermCondtionProps> = ({
           <div
             className={styles["back-button"]}
             style={{ backgroundColor: contentBgcolor }}
-            onClick={()=>{router.push('/help-centre')}}
+            onClick={() => {
+              router.push("/help-centre");
+            }}
           >
             <div>
               <BackArrow />
             </div>
-            <button className={styles['back-content']}>Back To Help centre</button>
+            <button className={styles["back-content"]}>
+              Back To Help centre
+            </button>
           </div>
           <div
             className={styles["term-right"]}
@@ -120,8 +152,14 @@ const TermCondtion: FC<TermCondtionProps> = ({
                       <Accordion
                         key={index}
                         className={"accordion-help"}
-                        heading={heading}
-                        children={text}
+                        heading={
+                          appState.lang == "en"
+                            ? heading
+                            : _accordion[index].heading
+                        }
+                        children={
+                          appState.lang == "en" ? text : _accordion[index].text
+                        }
                         arrowIcon={false}
                       />
                     );
