@@ -158,9 +158,7 @@ const ProductListing = ({
     const pData =
       filterdArray && filterdArray.length > 0
         ? filterdArray
-        : initialProductData && initialProductData.length > 0
-        ? initialProductData
-        : productDataArray;
+        : initialProductData 
     const sortedArray: any[] = [];
     if (sortedValue.value !== "most viewed") {
       // setFilteredProductData(checkFilteredData);
@@ -252,7 +250,7 @@ const ProductListing = ({
         {showBreadcrumb && <BreadCrumbs pageName={pageName} />}
 
         <Pagination
-          pKey={initialProductData}
+          pKey={currentProductData}
           paginationClass={styles["div-pagination"]}
           defaultPageNumber={1}
           pageSize={5}
