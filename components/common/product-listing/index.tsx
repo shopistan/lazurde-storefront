@@ -121,6 +121,7 @@ const ProductListing = ({
     });
     setInitialProductData([...filteredArray]);
     setCurrentProductData([...filteredArray]);
+    setFilteredProductData([...filteredArray]);
   }, [productDataArray]);
 
   const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
