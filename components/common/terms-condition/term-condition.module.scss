@@ -100,6 +100,7 @@
   padding-block: 16px;
   display: flex;
   align-items: center;
+  margin-top: 8px;
 
   @media (min-width: 1024px) {
     display: none;
@@ -117,6 +118,7 @@
 }
 
 .button {
+
   padding-block: 16px;
   padding-inline: 40px;
   background-color: #922840;
