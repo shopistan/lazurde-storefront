@@ -9,6 +9,7 @@ import BackArrow from "components/icons/BackArrow";
 import { useRouter } from "next/router";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
+import Link from "next/link";
 
 type HyperLinksProps = {
   name: string | "";
@@ -77,6 +78,20 @@ const TermCondtion: FC<TermCondtionProps> = ({
       <Label className={styles["term-heading"]}>
         {appState.lang == "en" ? title : t("termTitle")}
       </Label>
+      {objects?.name && (
+        <div className={styles["bread-crumb_item"]}>
+          <Link href={`/help-centre`}>
+            <a>
+              {appState?.lang === "en"
+                ? `Help Centre /`
+                : "/ تائفلا عيمج فشتكاا"}
+            </a>
+          </Link>
+          <Label>
+            {appState?.lang === "en" ? objects.name : " ةيسيئرلا ةحفصلا"}
+          </Label>
+        </div>
+      )}
       <div className={styles["term-section"]}>
         <div
           className={styles["term-left"]}
