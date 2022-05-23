@@ -157,9 +157,9 @@ const ProductListing = ({
     return filteredData;
   };
 
-  const onSortingChange = (sortedValue: any = {}, filterdArray: [] = []) => {
+  const onSortingChange = (sortedValue: any = {}, filterdArray: []) => {
     const pData =
-      filterdArray && filterdArray.length > 0
+      filterdArray && Array.isArray(filterdArray)
         ? filterdArray
         : initialProductData;
     const sortedArray: any[] = [];
