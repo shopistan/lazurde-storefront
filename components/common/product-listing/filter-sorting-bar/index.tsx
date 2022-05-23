@@ -137,12 +137,6 @@ const FilterBar: FC<FilterBarProps> = ({
   const { t } = useTranslation("common");
   const [currentSortingValue, setCurrentSortingValue] = useState<any>("");
 
-  useEffect(() => {
-    currentSortingValue &&
-      onSortingChange &&
-      onSortingChange(selectedFilters, currentSortingValue);
-  }, [currentSortingValue]);
-
   const onApplyButtonClick = (selectedFilter: SelectedFilterProps) => {
     onApplyFilters(selectedFilter, currentSortingValue)
   }
@@ -305,6 +299,7 @@ const FilterBar: FC<FilterBarProps> = ({
             selectedLabel={appState?.lang === "en" ? "Sort By: " : "بسح فنص:"}
             onChange={(value: { label: string; value: string }) => {
               setCurrentSortingValue(value);
+              onSortingChange && onSortingChange(selectedFilters, value);
             }}
           ></BorderlessSelect>
         </div>

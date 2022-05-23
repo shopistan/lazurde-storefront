@@ -67,7 +67,6 @@ const ProductListing = ({
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [filteredProductData, setFilteredProductData] = useState<any>("");
   const [filteredListData, setFilteredListData] = useState<any>([]);
-
   const [currentProductData, setCurrentProductData] = useState([]);
 
   const _arabicProductCardData = t(
@@ -159,7 +158,7 @@ const ProductListing = ({
     const pData =
       filterdArray && filterdArray.length > 0
         ? filterdArray
-        : initialProductData;
+        : initialProductData 
     const sortedArray: any[] = [];
     if (sortedValue.value !== "most viewed") {
       // setFilteredProductData(checkFilteredData);
@@ -219,8 +218,8 @@ const ProductListing = ({
       filterName: string;
       filterOptions: { optionName: string }[];
     }[] = [];
-    filterList.length > 0 &&
-      filterList.map((filterItem: { filterName: string }) => {
+    filterList && Array.isArray(filterList) && filterList?.length > 0 &&
+      filterList?.map((filterItem: { filterName: string }) => {
         const name = filterItem.filterName;
         const filterOptions: { optionName: string }[] = [];
         productDataArray.map((itemData: { [key: string]: string }) => {
@@ -251,7 +250,7 @@ const ProductListing = ({
         {showBreadcrumb && <BreadCrumbs pageName={pageName} />}
 
         <Pagination
-          pKey={productDataArray}
+          pKey={currentProductData}
           paginationClass={styles["div-pagination"]}
           defaultPageNumber={1}
           pageSize={5}
