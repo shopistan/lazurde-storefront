@@ -67,7 +67,6 @@ const ProductListing = ({
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [filteredProductData, setFilteredProductData] = useState<any>("");
   const [filteredListData, setFilteredListData] = useState<any>([]);
-
   const [currentProductData, setCurrentProductData] = useState([]);
 
   const _arabicProductCardData = t(
@@ -78,7 +77,7 @@ const ProductListing = ({
 
   useEffect(() => {
     createFilterBarList();
-    // setFilteredProductData("");
+    setFilteredProductData("");
     // console.log(
     //   "something",
     //   fetchCategoryProducts({
@@ -121,7 +120,6 @@ const ProductListing = ({
     });
     setInitialProductData([...filteredArray]);
     setCurrentProductData([...filteredArray]);
-    setFilteredProductData([...filteredArray]);
   }, [productDataArray]);
 
   const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
@@ -160,7 +158,9 @@ const ProductListing = ({
     const pData =
       filterdArray && filterdArray.length > 0
         ? filterdArray
-        : initialProductData;
+        : initialProductData && initialProductData.length > 0
+        ? initialProductData
+        : productDataArray;
     const sortedArray: any[] = [];
     if (sortedValue.value !== "most viewed") {
       // setFilteredProductData(checkFilteredData);
@@ -252,7 +252,7 @@ const ProductListing = ({
         {showBreadcrumb && <BreadCrumbs pageName={pageName} />}
 
         <Pagination
-          pKey={productDataArray}
+          pKey={initialProductData}
           paginationClass={styles["div-pagination"]}
           defaultPageNumber={1}
           pageSize={5}

@@ -1,10 +1,14 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useContext } from "react";
 import ContentBlock from "../content-block";
 import Image from "next/image";
 import Label from "../ui/label";
 import { ImageType } from "lib/types/common";
 import styles from "./term-condition.module.scss";
 import Accordion from "components/common/ui/accordion/Accordion";
+import BackArrow from "components/icons/BackArrow";
+import { useRouter } from "next/router";
+import { AppContext } from "lib/context";
+import useTranslation from "next-translate/useTranslation";
 
 type HyperLinksProps = {
   name: string | "";
@@ -14,7 +18,17 @@ type HyperLinksProps = {
   height: string | "";
 };
 
+type _HyperLinksProps = {
+  name: string | "";
+  content: string | "";
+};
+
 type AccordionProps = {
+  heading: string | "";
+  text: string | "";
+};
+
+type _AccordionProps = {
   heading: string | "";
   text: string | "";
 };
@@ -34,15 +48,35 @@ const TermCondtion: FC<TermCondtionProps> = ({
   accordion,
   title,
 }) => {
+  const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
+
+  const _hyperlinks: _HyperLinksProps[] = t(
+    "hyperlinksProps",
+    {},
+    { returnObjects: true }
+  );
+
+  const _accordion: _AccordionProps[] = t(
+    "accordionProps",
+    {},
+    { returnObjects: true }
+  );
+  const router = useRouter();
   const [objects, setObjects] = useState({
     name: hyperLinks[0].name,
     content: hyperLinks[0].content,
-    icon: { url: hyperLinks[0].icon.url, altText: hyperLinks[0].icon.altText },
+    icon: {
+      url: hyperLinks[0]?.icon?.url,
+      altText: hyperLinks[0]?.icon?.altText,
+    },
   });
 
   return (
     <div className={styles["term-comtainer"]}>
-      <Label className={styles["term-heading"]}>{title}</Label>
+      <Label className={styles["term-heading"]}>
+        {appState.lang == "en" ? title : t("termTitle")}
+      </Label>
       <div className={styles["term-section"]}>
         <div
           className={styles["term-left"]}
@@ -51,6 +85,8 @@ const TermCondtion: FC<TermCondtionProps> = ({
           {hyperLinks &&
             hyperLinks.map((object, index) => {
               const { icon, name, content, width, height } = object;
+              console.log("object", object);
+
               return (
                 <div
                   className={styles["term-block"]}
@@ -81,30 +117,71 @@ const TermCondtion: FC<TermCondtionProps> = ({
               );
             })}
         </div>
-        <div
-          className={styles["term-right"]}
-          style={{ backgroundColor: contentBgcolor }}
-        >
-          <ContentBlock content={objects} />
-        </div>
-        {accordion && accordion.length > 0 && (
-          <div>
-            {accordion &&
-              accordion.length > 0 &&
-              accordion.map((object, index) => {
-                const { heading, text } = object;
-                return (
-                  <Accordion
-                    key={index}
-                    className={"accordion-help"}
-                    heading={heading}
-                    children={text}
-                    arrowIcon={true}
-                  />
-                );
-              })}
+        <div className={styles["term-right-container"]}>
+          <div
+            className={styles["back-button"]}
+            style={{ backgroundColor: contentBgcolor }}
+            onClick={() => {
+              router.push("/help-centre");
+            }}
+          >
+            <div>
+              <BackArrow />
+            </div>
+            <button className={styles["back-content"]}>
+              Back To Help centre
+            </button>
           </div>
-        )}
+          <div
+            className={styles["term-right"]}
+            style={{ backgroundColor: contentBgcolor }}
+          >
+            <ContentBlock content={objects} />
+          </div>
+          <div
+            className={styles["term-right"]}
+            style={{ backgroundColor: contentBgcolor }}
+          >
+            {accordion && accordion.length > 0 && (
+              <div className={styles["accordion-block"]}>
+                {accordion &&
+                  accordion.length > 0 &&
+                  accordion.map((object, index) => {
+                    const { heading, text } = object;
+                    return (
+                      <Accordion
+                        key={index}
+                        className={"accordion-help"}
+                        heading={
+                          appState.lang == "en"
+                            ? heading
+                            : _accordion[index].heading
+                        }
+                        children={
+                          appState.lang == "en" ? (
+                            <p dangerouslySetInnerHTML={{ __html: text }}></p>
+                          ) : (
+                            _accordion[index].text
+                          )
+                        }
+                        arrowDown={true}
+                      />
+                    );
+                  })}
+              </div>
+            )}
+          </div>
+          <div className={styles["back-block"]}>
+            <button className={styles["button"]}>
+              <Image src={"/question.png"} width={20} height={20} />
+              <p>
+                {appState.lang == "en"
+                  ? "Have a question?"
+                  : t("customerButton")}
+              </p>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
