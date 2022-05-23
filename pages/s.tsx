@@ -75,19 +75,19 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const getFaceFilters = () => {
     if (query?.brand === `L'azurde`)
       return [
-        `Brand:L'azurde`,
-        `Brand:L'azurde,Miss L'`,
-        `Brand:L'azurde,Kenaz`,
+        `Brand: L'azurde`,
+        `Brand: Miss L'`,
+        `Brand: Kenaz`,
       ];
     else if (query?.brand === `Miss L'`)
-      return [`Brand:Miss L'`, `Brand:L'azurde,Miss L'`];
+      return [`Brand: Miss L'`, `Brand: L'azurde,Miss L'`];
     else if (query?.brand === "Kenaz")
-      return [`Brand:Kenaz`, `Brand:L'azurde,Kenaz`];
+      return [`Brand: Kenaz`, `Brand: L'azurde,Kenaz`];
     else
       return [
-        `Brand:L'azurde`,
-        `Brand:L'azurde,Miss L'`,
-        `Brand:L'azurde,Kenaz`,
+        `Brand: L'azurde`,
+        `Brand: Miss L'`,
+        `Brand: Kenaz`,
       ];
   };
 
