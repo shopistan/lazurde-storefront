@@ -78,7 +78,7 @@ const ProductListing = ({
 
   useEffect(() => {
     createFilterBarList();
-    setFilteredProductData("");
+    // setFilteredProductData("");
     // console.log(
     //   "something",
     //   fetchCategoryProducts({
