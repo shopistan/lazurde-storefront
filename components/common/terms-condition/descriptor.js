@@ -17,6 +17,8 @@ exports.default = Types.Component({
                         url: Types.String({ label: 'URL' }),
                         altText: Types.String({ label: 'Alt Text' }),
                     }),
+                    width : Types.Number({ label : 'Icon Width'}),
+                    height : Types.Number({ label : 'Icon Height'}),
                 }
             })
         }),
