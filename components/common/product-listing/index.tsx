@@ -101,25 +101,28 @@ const ProductListing = ({
     // console.log("something",arr)
     // console.log(performFilteredSearch({ filters: [`Gold`] }));
     // console.log("categoryName",categoryName)
-
-    const filteredArray = productDataArray.filter((item: { Brand: string }) => {
-      if (appState.brand === `L'azurde`) {
-        return item;
-      }
-      if (appState.brand === `Miss L'`) {
-        return (
-          item?.Brand?.toLowerCase().includes(`miss`) ||
-          item?.Brand?.toLowerCase().includes(`miss'l`) ||
-          item?.Brand?.toLowerCase().includes(`miss l'`)
-        );
-      }
-      if (appState.brand === "Kenaz") {
-        return item?.Brand?.toLowerCase().includes("kenaz");
-      }
-      return false;
-    });
-    setInitialProductData([...filteredArray]);
-    setCurrentProductData([...filteredArray]);
+    if (productDataArray && productDataArray.length > 0) {
+      const filteredArray = productDataArray.filter(
+        (item: { Brand: string }) => {
+          if (appState.brand === `L'azurde`) {
+            return item;
+          }
+          if (appState.brand === `Miss L'`) {
+            return (
+              item?.Brand?.toLowerCase().includes(`miss`) ||
+              item?.Brand?.toLowerCase().includes(`miss'l`) ||
+              item?.Brand?.toLowerCase().includes(`miss l'`)
+            );
+          }
+          if (appState.brand === "Kenaz") {
+            return item?.Brand?.toLowerCase().includes("kenaz");
+          }
+          return false;
+        }
+      );
+      setInitialProductData([...filteredArray]);
+      setCurrentProductData([...filteredArray]);
+    }
   }, [productDataArray]);
 
   const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
@@ -158,7 +161,7 @@ const ProductListing = ({
     const pData =
       filterdArray && filterdArray.length > 0
         ? filterdArray
-        : initialProductData 
+        : initialProductData;
     const sortedArray: any[] = [];
     if (sortedValue.value !== "most viewed") {
       // setFilteredProductData(checkFilteredData);
@@ -218,7 +221,9 @@ const ProductListing = ({
       filterName: string;
       filterOptions: { optionName: string }[];
     }[] = [];
-    filterList && Array.isArray(filterList) && filterList?.length > 0 &&
+    filterList &&
+      Array.isArray(filterList) &&
+      filterList?.length > 0 &&
       filterList?.map((filterItem: { filterName: string }) => {
         const name = filterItem.filterName;
         const filterOptions: { optionName: string }[] = [];
@@ -243,14 +248,15 @@ const ProductListing = ({
       });
     setFilteredListData(newFilterList);
   };
-
+  console.log("slicedArray2", filteredProductData, initialProductData);
+  
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
         {showBreadcrumb && <BreadCrumbs pageName={pageName} />}
 
         <Pagination
-          pKey={currentProductData}
+          pKey={productDataArray}
           paginationClass={styles["div-pagination"]}
           defaultPageNumber={1}
           pageSize={5}
@@ -265,6 +271,8 @@ const ProductListing = ({
               : initialProductData
           }
           onInitialize={(slicedArray: []) => {
+            console.log('slicedArray', slicedArray);
+            
             setCurrentProductData(slicedArray);
           }}
           onPageUp={(slicedArray: []) => {
