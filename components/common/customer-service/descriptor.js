@@ -18,7 +18,9 @@ exports.default = Types.Component({
                     icon: Types.Image({ label: 'Icon', url: Types.String({ label: 'URL' }), altText: Types.String({ label: 'Alt Text' }) }),
                     iconTitle: Types.String({ label: 'Icon Title' }),
                     iconText: Types.String({ label: 'Icon Text' }),
-                    url: Types.String({ label: 'Redirect URL' })
+                    url: Types.String({ label: 'Redirect URL' }),
+                    width: Types.String({ label: 'Icon Width' }),
+                    height: Types.String({ label: 'Icon Height' })
                 }
             }),
         })

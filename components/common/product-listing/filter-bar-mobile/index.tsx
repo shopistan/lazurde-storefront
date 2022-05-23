@@ -107,6 +107,7 @@ interface FilterBarMobileProps {
   headerId?: string;
   onApplyFilters: Function;
   onSortingChange: Function;
+  onClear: Function;
 }
 interface FilterAccordionProps {
   filterList: FilterListProps[] | string;
@@ -115,13 +116,16 @@ interface FilterAccordionProps {
   setSelectedFilters: Function;
   setTotalSelectedFilterCount: Function;
   totalSelectedFilterCount: number;
-  onApplyFilters: Function;
+  onApplyButtonClick: Function;
+  onClear: Function;
+  sortingSelected: string;
 }
 
 const FilterBarMobile: FC<FilterBarMobileProps> = ({
   filterList = filterListData,
   onApplyFilters = () => {},
   onSortingChange = () => {},
+  onClear = () => {},
 }): JSX.Element => {
   const { t } = useTranslation("common");
   const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
@@ -141,13 +145,25 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
   const [currentFilterList, setCurrentFilterList] = useState<
     string | FilterListProps[]
   >(filterList);
+
+  // useEffect(() => {
+  //   sortingSelected &&
+  //     onSortingChange &&
+  //     onSortingChange(selectedFilters, { value: sortingSelected });
+  // }, [sortingSelected]);
+
+  const onApplyButtonClick = (selectedFilter: SelectedFilterProps) => {
+    onApplyFilters(selectedFilter, { value: sortingSelected });
+  };
+
   useEffect(() => {
     setSortingSelected(
       appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين"
     );
     setOptionData({
       data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
-      defaultValue: appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين",
+      defaultValue:
+        appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين",
     });
 
     if (appState.lang === "en") {
@@ -183,7 +199,9 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
                 setSelectedFilters={setSelectedFilters}
                 setTotalSelectedFilterCount={setTotalSelectedFilterCount}
                 totalSelectedFilterCount={totalSelectedFilterCount}
-                onApplyFilters={onApplyFilters}
+                onApplyButtonClick={onApplyButtonClick}
+                onClear={onClear}
+                sortingSelected={sortingSelected}
               ></FilterAccordion>
             }
           ></BorderlessSelect>
@@ -207,7 +225,7 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
                 selectedVal={sortingSelected}
                 onChange={(value: string) => {
                   setSortingSelected(value);
-                  onSortingChange(value);
+                  onSortingChange(selectedFilters, { value: value });
                 }}
               ></SortingModal>
             }
@@ -227,7 +245,9 @@ const FilterAccordion = ({
   setSelectedFilters,
   setTotalSelectedFilterCount,
   totalSelectedFilterCount,
-  onApplyFilters,
+  onApplyButtonClick,
+  onClear,
+  sortingSelected,
 }: FilterAccordionProps): JSX.Element => {
   const { appState } = useContext(AppContext);
 
@@ -282,8 +302,8 @@ const FilterAccordion = ({
           buttonStyle={"white"}
           buttonSize={"sm"}
           onClick={() => {
-            setSelectedFilters({});
-            onApplyFilters && onApplyFilters({});
+            setSelectedFilters && setSelectedFilters({});
+            onClear && onClear({}, { value: sortingSelected });
           }}
         />
         <Button
@@ -293,7 +313,7 @@ const FilterAccordion = ({
           buttonStyle={"black"}
           buttonSize={"sm"}
           onClick={() => {
-            onApplyFilters && onApplyFilters(selectedFilters);
+            onApplyButtonClick(selectedFilters);
           }}
         />
       </div>

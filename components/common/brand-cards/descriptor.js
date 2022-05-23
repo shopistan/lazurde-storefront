@@ -16,11 +16,6 @@ exports.default = Types.Component({
             url: Types.String({ label: "URL" }),
             altText: Types.String({ label: "Alt text" }),
           }),
-          favIconSrc : Types.Image({
-            label : 'Fav Icon',
-            url : Types.String({label : 'Fav Icon URL'}),
-            altText : Types.String({label : 'Alt Text'}),
-          }),
           cardTitle: Types.String({ label: "Card Title" }),
           cardLinks: Types.String({label : "Card Links"}),
         },

@@ -34,6 +34,17 @@ interface ProductCardProps {
   currency?: string;
 }
 
+type SelectedFilterProps = {
+  [key: string]: {
+    name: string;
+    selectedOptions: { [key: string]: { selected: boolean; name: string } };
+  };
+};
+type SortingFilterProps = {
+  label: string;
+  value: string;
+};
+
 interface ProductListingProps {
   pageName?: string | "";
   productDataArray: [];
@@ -55,7 +66,7 @@ const ProductListing = ({
   const dummyProductData = productCardData || [];
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [filteredProductData, setFilteredProductData] = useState<any>("");
-
+  const [filteredListData, setFilteredListData] = useState<any>([]);
   const [currentProductData, setCurrentProductData] = useState([]);
 
   const _arabicProductCardData = t(
@@ -65,6 +76,7 @@ const ProductListing = ({
   );
 
   useEffect(() => {
+    createFilterBarList();
     setFilteredProductData("");
     // console.log(
     //   "something",
@@ -89,30 +101,34 @@ const ProductListing = ({
     // console.log("something",arr)
     // console.log(performFilteredSearch({ filters: [`Gold`] }));
     // console.log("categoryName",categoryName)
-
-    const filteredArray = productDataArray.filter((item: { Brand: string }) => {
-      if (appState.brand === `L'azurde`) {
-        return item;
-      }
-      if (appState.brand === `Miss L'`) {
-        return (
-          item?.Brand?.toLowerCase().includes(`miss`) ||
-          item?.Brand?.toLowerCase().includes(`miss'l`) ||
-          item?.Brand?.toLowerCase().includes(`miss l'`)
-        );
-      }
-      if (appState.brand === "Kenaz") {
-        return item?.Brand?.toLowerCase().includes("kenaz");
-      }
-      return false;
-    });
-    setInitialProductData([...filteredArray]);
-    setCurrentProductData([...filteredArray]);
+    if (productDataArray && productDataArray.length > 0) {
+      const filteredArray = productDataArray.filter(
+        (item: { Brand: string }) => {
+          if (appState.brand === `L'azurde`) {
+            return item;
+          }
+          if (appState.brand === `Miss L'`) {
+            return (
+              item?.Brand?.toLowerCase().includes(`miss`) ||
+              item?.Brand?.toLowerCase().includes(`miss'l`) ||
+              item?.Brand?.toLowerCase().includes(`miss l'`)
+            );
+          }
+          if (appState.brand === "Kenaz") {
+            return item?.Brand?.toLowerCase().includes("kenaz");
+          }
+          return false;
+        }
+      );
+      setInitialProductData([...filteredArray]);
+      setCurrentProductData([...filteredArray]);
+    }
   }, [productDataArray]);
 
-  const applyFilters = async (selectedFilters: any = {}) => {
+  const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
     if (Object.keys(selectedFilters).length < 1) {
-      return setFilteredProductData("");
+      // setFilteredProductData("");
+      return null;
     }
 
     let payload: any[] = [];
@@ -133,19 +149,23 @@ const ProductListing = ({
     // console.log("categoryName", categoryName);
     // payload = ["isMain: true"];
     const filteredData = await performFilteredSearch({
-      query: "",
+      query: categoryName,
       filters: payload,
     });
     // const filteredData: [] = [];
-    setFilteredProductData(filteredData);
+    // setFilteredProductData(filteredData);
+    return filteredData;
   };
 
-  const onSortingChange = (sortedValue: any = {}) => {
+  const onSortingChange = (sortedValue: any = {}, filterdArray: [] = []) => {
     const pData =
-      filteredProductData.length > 0 ? filteredProductData : initialProductData;
+      filterdArray && filterdArray.length > 0
+        ? filterdArray
+        : initialProductData;
     const sortedArray: any[] = [];
     if (sortedValue.value !== "most viewed") {
-      setFilteredProductData(filteredProductData);
+      // setFilteredProductData(checkFilteredData);
+      return pData;
     }
 
     if (sortedValue.value === "most viewed") {
@@ -157,9 +177,11 @@ const ProductListing = ({
         }
       });
       if (sortedArray.length > 0) {
-        setFilteredProductData(sortedArray);
+        // setFilteredProductData(sortedArray);
+        return sortedArray;
       } else {
-        setFilteredProductData(pData);
+        // setFilteredProductData(pData);
+        return pData;
       }
     }
 
@@ -185,6 +207,49 @@ const ProductListing = ({
     // setCurrentProductData(filteredData);
   };
 
+  const updateProductArray = async (
+    selectedFilters: SelectedFilterProps,
+    sortingValue: SortingFilterProps
+  ) => {
+    const filteredArray: any = await applyFilters(selectedFilters);
+    const sortedArray = await onSortingChange(sortingValue, filteredArray);
+    setFilteredProductData(sortedArray);
+  };
+
+  const createFilterBarList = () => {
+    const newFilterList: {
+      filterName: string;
+      filterOptions: { optionName: string }[];
+    }[] = [];
+    filterList &&
+      Array.isArray(filterList) &&
+      filterList?.length > 0 &&
+      filterList?.map((filterItem: { filterName: string }) => {
+        const name = filterItem.filterName;
+        const filterOptions: { optionName: string }[] = [];
+        productDataArray.map((itemData: { [key: string]: string }) => {
+          if (itemData.hasOwnProperty(name)) {
+            const nameExists = filterOptions.find(
+              (option: { optionName: string }) => {
+                return option.optionName === itemData[name];
+              }
+            );
+            nameExists === undefined &&
+              itemData[name] &&
+              filterOptions.push({ optionName: itemData[name] });
+          }
+        });
+        if (filterOptions.length > 0) {
+          newFilterList.push({
+            filterName: name,
+            filterOptions: filterOptions,
+          });
+        }
+      });
+    setFilteredListData(newFilterList);
+  };
+  console.log("slicedArray2", filteredProductData, initialProductData);
+  
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
@@ -206,6 +271,8 @@ const ProductListing = ({
               : initialProductData
           }
           onInitialize={(slicedArray: []) => {
+            console.log('slicedArray', slicedArray);
+            
             setCurrentProductData(slicedArray);
           }}
           onPageUp={(slicedArray: []) => {
@@ -218,15 +285,17 @@ const ProductListing = ({
           <>
             {width <= desktopScreenSize ? (
               <FilterBarMobile
-                onApplyFilters={applyFilters}
-                onSortingChange={onSortingChange}
-                filterList={filterList}
+                onApplyFilters={updateProductArray}
+                onSortingChange={updateProductArray}
+                onClear={updateProductArray}
+                filterList={filteredListData}
               ></FilterBarMobile>
             ) : (
               <FilterBar
-                onApplyFilters={applyFilters}
-                onSortingChange={onSortingChange}
-                filterList={filterList}
+                onApplyFilters={updateProductArray}
+                onSortingChange={updateProductArray}
+                onClear={updateProductArray}
+                filterList={filteredListData}
               ></FilterBar>
             )}
             <div className={styles["product-listing__cards"]}>
