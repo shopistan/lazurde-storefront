@@ -16,7 +16,7 @@
     font-weight: 500;
     line-height: 38px;
     letter-spacing: 0em;
-    margin-inline-start: 420px;
+    margin-inline-start: 39.5%;
     margin-top: 88px;
     margin-bottom: 5.5px;
   }
@@ -162,7 +162,7 @@
   &_item {
     display: none;
     @media (min-width: 1024px) {
-      margin-inline-start: 420px;
+      margin-inline-start: 39.5%;
       margin-bottom: 32px;
       display: flex;
       align-items: center;

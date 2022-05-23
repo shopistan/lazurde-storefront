@@ -125,8 +125,8 @@ const CustomerService: FC<CustomerServiceProps> = ({
                       <Image
                         src={icon.url}
                         alt={icon.altText}
-                        width={width || 14}
-                        height={height || 15}
+                        width={width || 27.5}
+                        height={height || 30.56}
                       />
                     )}
                     {iconTitle && (
