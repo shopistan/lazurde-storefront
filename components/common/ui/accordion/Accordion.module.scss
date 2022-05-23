@@ -110,14 +110,16 @@
 }
 
 .accordion-help {
-  padding-inline: 24px;
+  padding-inline: 0px;
   background-color: white;
   padding-block: 24px;
   margin-bottom: 8px;
+  padding-inline: 24px;
 
   @media (min-width: 1024px) {
     margin-bottom: 0;
     padding-block: 0;
+    padding-inline: 0;
   }
   .div-heading {
     border: none;
@@ -136,7 +138,7 @@
     padding-block-end: 12px;
   }
   .custom-content {
-    padding-inline: 24px;
+    padding-inline: 16px;
     padding-block-end: 24px;
     font-size: 12px;
     font-weight: 400;
