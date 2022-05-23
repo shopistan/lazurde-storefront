@@ -5,6 +5,11 @@
   letter-spacing: 0em;
   text-align: start;
   padding-bottom: 24px;
+  margin: 0;
+
+  p {
+    margin-bottom: 0;
+  }
 
   @media (min-width: 1024px) {
     padding-bottom: 40px;

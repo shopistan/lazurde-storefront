@@ -110,6 +110,15 @@
 }
 
 .accordion-help {
+  padding-inline: 24px;
+  background-color: white;
+  padding-block: 24px;
+  margin-bottom: 8px;
+
+  @media (min-width: 1024px) {
+    margin-bottom: 0;
+    padding-block: 0;
+  }
   .div-heading {
     border: none;
 
@@ -122,6 +131,10 @@
     }
   }
 
+
+  .menu__links {
+    padding-block-end: 12px;
+  }
   .custom-content {
     padding-inline: 24px;
     padding-block-end: 24px;
@@ -130,5 +143,10 @@
     line-height: 16px;
     letter-spacing: 0em;
     text-align: left;
+
   }
+}
+
+.arrowDown-open {
+  transform: rotate(180deg);
 }

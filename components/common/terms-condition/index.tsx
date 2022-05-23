@@ -158,14 +158,28 @@ const TermCondtion: FC<TermCondtionProps> = ({
                             : _accordion[index].heading
                         }
                         children={
-                          appState.lang == "en" ? text : _accordion[index].text
+                          appState.lang == "en" ? (
+                            <p dangerouslySetInnerHTML={{ __html: text }}></p>
+                          ) : (
+                            _accordion[index].text
+                          )
                         }
-                        arrowIcon={false}
+                        arrowDown={true}
                       />
                     );
                   })}
               </div>
             )}
+          </div>
+          <div className={styles["back-block"]}>
+            <button className={styles["button"]}>
+              <Image src={"/question.png"} width={20} height={20} />
+              <p>
+                {appState.lang == "en"
+                  ? "Have a question?"
+                  : t("customerButton")}
+              </p>
+            </button>
           </div>
         </div>
       </div>
