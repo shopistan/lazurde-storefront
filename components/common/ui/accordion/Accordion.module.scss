@@ -114,10 +114,12 @@
   background-color: white;
   padding-block: 24px;
   margin-bottom: 8px;
+  padding-inline: 24px;
 
   @media (min-width: 1024px) {
     margin-bottom: 0;
     padding-block: 0;
+    padding-inline: 0;
   }
   .div-heading {
     border: none;
