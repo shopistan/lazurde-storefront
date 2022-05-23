@@ -220,8 +220,8 @@ const ProductListing = ({
       filterName: string;
       filterOptions: { optionName: string }[];
     }[] = [];
-    filterList.length > 0 &&
-      filterList.map((filterItem: { filterName: string }) => {
+    filterList && Array.isArray(filterList) && filterList?.length > 0 &&
+      filterList?.map((filterItem: { filterName: string }) => {
         const name = filterItem.filterName;
         const filterOptions: { optionName: string }[] = [];
         productDataArray.map((itemData: { [key: string]: string }) => {
