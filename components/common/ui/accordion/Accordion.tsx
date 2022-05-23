@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import styles from "./Accordion.module.scss";
-import { MinusIcon, PlusIcon, ChevronDown } from "components/icons";
+import { MinusIcon, PlusIcon, ChevronDown, ArrowDown } from "components/icons";
 interface AccordionProps {
   className?: string;
   index?: number;
@@ -10,8 +10,10 @@ interface AccordionProps {
   links?: { [key: string]: string }[] | [];
   isPlusMinusIcon?: boolean;
   children?: string | JSX.Element;
-  arrowIcon: Boolean;
+  arrowIcon?: Boolean;
   role?: string;
+  arrowColor?: string;
+  arrowDown?: Boolean;
 }
 
 const Accordion = ({
@@ -22,6 +24,8 @@ const Accordion = ({
   children,
   arrowIcon = false,
   role = "",
+  arrowColor,
+  arrowDown = false,
 }: AccordionProps): JSX.Element => {
   const [isOpened, setIsOpened] = useState(false);
 
@@ -39,9 +43,17 @@ const Accordion = ({
       >
         <div className={`${styles["heading-text"]}`}>{heading}</div>
         <div className={`${styles["heading-icons"]}`} data-opened={isOpened}>
-          {arrowIcon ? (
+          {arrowDown ? (
+            <div className={`${isOpened && styles['arrowDown-open']}`}>
+              <ArrowDown />
+            </div>
+          ) : arrowIcon ? (
             <div className={styles["angle-down"]}>
-              <ChevronDown color="#ffffff" width="10px" height="7px" />
+              <ChevronDown
+                color={arrowColor || "#ffffff"}
+                width="10px"
+                height="7px"
+              />
             </div>
           ) : (
             <div className={`${styles["plus-icon"]}`}>

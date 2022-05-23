@@ -4,8 +4,11 @@ import { componentsById } from "components/xm-component-library";
 import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import Head from "next/head";
-import React, { FC } from "react";
+import React, { FC , useContext } from "react";
 import AppContentWrapper from "../../../components/common/app-content-wrapper";
+import Image from 'next/image'
+import { AppContext } from "lib/context";
+import useTranslation from "next-translate/useTranslation";
 
 const ReturnRefund: FC<PageProps> = ({
     headerProps,
@@ -13,6 +16,8 @@ const ReturnRefund: FC<PageProps> = ({
     footerProps,
     pageComponents,
 }) => {
+    const { appState } = useContext(AppContext);
+    const { t } = useTranslation("common");
     return (
         <>
             <Head>
@@ -34,6 +39,16 @@ const ReturnRefund: FC<PageProps> = ({
                 </div>
             </AppContentWrapper>
             <Footer {...footerProps}></Footer>
+            <div className={'back-block'}>
+            <button className={"button"}>
+              <Image src={"/question.png"} width={20} height={20} />
+              <p>
+                {appState.lang == "en"
+                  ? "Have a question?"
+                  : t("customerButton")}
+              </p>
+            </button>
+          </div>
         </>
     );
 };
