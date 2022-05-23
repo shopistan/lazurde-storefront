@@ -256,7 +256,7 @@ const ProductListing = ({
         {showBreadcrumb && <BreadCrumbs pageName={pageName} />}
 
         <Pagination
-          pKey={currentProductData}
+          pKey={productDataArray}
           paginationClass={styles["div-pagination"]}
           defaultPageNumber={1}
           pageSize={5}
