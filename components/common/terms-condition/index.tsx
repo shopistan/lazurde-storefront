@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext } from "react";
+import React, { FC, useState, useContext, useEffect } from "react";
 import ContentBlock from "../content-block";
 import Image from "next/image";
 import Label from "../ui/label";
@@ -65,8 +65,8 @@ const TermCondtion: FC<TermCondtionProps> = ({
   );
   const router = useRouter();
   const [objects, setObjects] = useState({
-    name: hyperLinks[0].name,
-    content: hyperLinks[0].content,
+    name: hyperLinks[0]?.name,
+    content: hyperLinks[0]?.content,
     icon: {
       url: hyperLinks[0]?.icon?.url,
       altText: hyperLinks[0]?.icon?.altText,
@@ -76,7 +76,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
   return (
     <div className={styles["term-comtainer"]}>
       <Label className={styles["term-heading"]}>
-        {appState.lang == "en" ? title : t("termTitle")}
+        {appState?.lang == "en" ? title : t("termTitle")}
       </Label>
       {objects?.name && (
         <div className={styles["bread-crumb_item"]}>
@@ -108,6 +108,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
                   key={index}
                   onClick={() => {
                     setObjects({
+                      ...objects,
                       content: content,
                       name: name,
                       icon: {
@@ -151,7 +152,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
             className={styles["term-right"]}
             style={{ backgroundColor: contentBgcolor }}
           >
-            <ContentBlock content={objects} />
+            <ContentBlock key={Math.random()} content={objects} />
           </div>
           <div
             className={styles["term-right"]}
@@ -174,7 +175,10 @@ const TermCondtion: FC<TermCondtionProps> = ({
                         }
                         children={
                           appState.lang == "en" ? (
-                            <p dangerouslySetInnerHTML={{ __html: text }}></p>
+                            <p
+                              key={Math.random()}
+                              dangerouslySetInnerHTML={{ __html: text }}
+                            ></p>
                           ) : (
                             _accordion[index].text
                           )
