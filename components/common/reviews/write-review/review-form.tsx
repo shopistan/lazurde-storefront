@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./style.module.scss";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Label from "components/common/ui/label";
+import { writeReview } from "lib/utils/reviews";
+import ImageUploader from "./image-uploader";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -16,7 +18,30 @@ const SignupSchema = Yup.object().shape({
     .matches(phoneRegExp, "Phone number is not valid"),
 });
 
-const ReviewForm = () => {
+const ReviewForm = ({ rating }: any): JSX.Element => {
+  const [fileUpload, setFileUpload] = useState<any>([{ fileArray: {} }]);
+
+  const renderReviewApi = async (values: any) => {
+    const payload: any = {
+      productId: 123123,
+      author: `${values?.firstName} ${values?.lastName}`,
+      email: values?.email,
+      location: "KSA",
+      reviewRating: rating ? rating : null,
+      reviewTitle: values?.review,
+      reviewMessage: values?.review,
+      reviewRecommendProduct: false,
+      productName: "Product's Title",
+      productSKU: "45634",
+      productImageUrl: "https://example.com/image/product-image.png",
+      productUrl: "https://example.com/products/product-image.png",
+      reviewSource: "api",
+      photo0: null,
+      video0: null,
+    };
+    const response = await writeReview(payload);
+  };
+
   return (
     <div className={styles["form-wrapper"]}>
       <Formik
@@ -29,10 +54,8 @@ const ReviewForm = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          renderReviewApi(values);
+          setSubmitting(false);
         }}
       >
         {({
@@ -113,6 +136,11 @@ const ReviewForm = () => {
                   errors.phoneNumber}
               </div>
             </div>
+
+            <ImageUploader
+              file={fileUpload?.fileArray}
+              setFileUpload={setFileUpload}
+            />
             <div className={styles["submit-btn"]}>
               <button type="submit" disabled={isSubmitting}>
                 post review

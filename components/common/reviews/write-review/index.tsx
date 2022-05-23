@@ -43,7 +43,7 @@ const WriteAReview = ({
                 setRatingIndex(rate);
               }}
             />
-            <ReviewForm />
+            <ReviewForm rating={ratingIndex + 1} />
           </div>
         </div>
       </div>
