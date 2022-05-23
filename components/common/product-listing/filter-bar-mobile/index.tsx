@@ -118,7 +118,7 @@ interface FilterAccordionProps {
   totalSelectedFilterCount: number;
   onApplyButtonClick: Function;
   onClear: Function;
-  sortingSelected: string,
+  sortingSelected: string;
 }
 
 const FilterBarMobile: FC<FilterBarMobileProps> = ({
@@ -146,15 +146,15 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
     string | FilterListProps[]
   >(filterList);
 
-  useEffect(() => {
-    sortingSelected &&
-      onSortingChange &&
-      onSortingChange(selectedFilters, {value: sortingSelected});
-  }, [sortingSelected]);
+  // useEffect(() => {
+  //   sortingSelected &&
+  //     onSortingChange &&
+  //     onSortingChange(selectedFilters, { value: sortingSelected });
+  // }, [sortingSelected]);
 
-  const onApplyButtonClick = (selectedFilter: SelectedFilterProps ) => {
-    onApplyFilters(selectedFilter, {value: sortingSelected})
-  }
+  const onApplyButtonClick = (selectedFilter: SelectedFilterProps) => {
+    onApplyFilters(selectedFilter, { value: sortingSelected });
+  };
 
   useEffect(() => {
     setSortingSelected(
@@ -162,7 +162,8 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
     );
     setOptionData({
       data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
-      defaultValue: appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين",
+      defaultValue:
+        appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين",
     });
 
     if (appState.lang === "en") {
@@ -224,7 +225,7 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
                 selectedVal={sortingSelected}
                 onChange={(value: string) => {
                   setSortingSelected(value);
-                  // onSortingChange(selectedFilters, value);
+                  onSortingChange(selectedFilters, { value: value });
                 }}
               ></SortingModal>
             }
@@ -302,7 +303,7 @@ const FilterAccordion = ({
           buttonSize={"sm"}
           onClick={() => {
             setSelectedFilters && setSelectedFilters({});
-            onClear && onClear({}, {value: sortingSelected})
+            onClear && onClear({}, { value: sortingSelected });
           }}
         />
         <Button
