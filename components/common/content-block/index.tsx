@@ -10,7 +10,7 @@ interface ContentBlockProps {
 const ContentBlock: FC<ContentBlockProps> = ({ content = {} }) => {
     return (
         <>
-            <div>
+            <div className={styles['content-container']}>
                 {
                     content.icon?.url &&
                     <div className={styles['image']}>

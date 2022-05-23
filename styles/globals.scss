@@ -41,6 +41,40 @@ ul {
   flex-direction: column;
 }
 
+.button {
+  padding-block: 16px;
+  padding-inline: 40px;
+  background-color: #922840;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  border: none;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  color: white;
+  margin-bottom: 24px;
+  margin-left: auto;
+
+  p {
+    margin-left: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.back-block {
+  display: none;
+  @media (min-width: 1024px) {
+    display: block;
+    padding-top: 4px;
+    padding-inline-end: 24px;
+    background-color: white;
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
