@@ -18,7 +18,7 @@
     letter-spacing: 0em;
     margin-inline-start: 420px;
     margin-top: 88px;
-    margin-bottom: 32px;
+    margin-bottom: 5.5px;
   }
 }
 
@@ -153,5 +153,43 @@
 .term-right-container {
   @media (min-width: 1024px) {
     width: 71%;
+  }
+}
+
+@import "/styles/variables.scss";
+
+.bread-crumb {
+  &_item {
+    display: none;
+    @media (min-width: 1024px) {
+      margin-inline-start: 420px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: 0em;
+      text-align: start;
+      text-decoration: none;
+      text-transform: capitalize;
+
+      p {
+        margin: 0;
+        margin-inline-start: 5px;
+      }
+
+      a {
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+        letter-spacing: 0em;
+        text-align: start;
+        text-decoration: none;
+        text-transform: capitalize;
+      }
+    }
   }
 }
