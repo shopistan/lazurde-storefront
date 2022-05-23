@@ -41,12 +41,13 @@
   }
 
   p {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 500;
-    line-height: 29px;
+    line-height: 19px;
     letter-spacing: 0em;
     text-align: start;
     margin-inline-start: 19px;
+    margin-block: 11px;
   }
 }
 
@@ -88,7 +89,8 @@
   background-color: #f2f2f2;
 
   @media (min-width: 1024px) {
-    padding-block: 24px;
+    padding-block: 40px;
+    padding-inline: 48px;
     background-color: white;
   }
 }
@@ -118,7 +120,6 @@
 }
 
 .button {
-
   padding-block: 16px;
   padding-inline: 40px;
   background-color: #922840;
