@@ -91,7 +91,6 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
       ];
   };
 
-  console.log("facetFiltter", getFaceFilters());
   const {
     hits = [],
     nbHits = 0,
