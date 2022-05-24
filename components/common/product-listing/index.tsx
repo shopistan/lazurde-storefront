@@ -68,6 +68,7 @@ const ProductListing = ({
   const [filteredProductData, setFilteredProductData] = useState<any>("");
   const [filteredListData, setFilteredListData] = useState<any>([]);
   const [currentProductData, setCurrentProductData] = useState([]);
+  const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
 
   const _arabicProductCardData = t(
     "arabicProductCardData",
@@ -249,7 +250,7 @@ const ProductListing = ({
     setFilteredListData(newFilterList);
   };
   console.log("slicedArray2", filteredProductData, initialProductData);
-  
+
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
@@ -271,8 +272,8 @@ const ProductListing = ({
               : initialProductData
           }
           onInitialize={(slicedArray: []) => {
-            console.log('slicedArray', slicedArray);
-            
+            console.log("slicedArray", slicedArray);
+
             setCurrentProductData(slicedArray);
           }}
           onPageUp={(slicedArray: []) => {
@@ -289,6 +290,8 @@ const ProductListing = ({
                 onSortingChange={updateProductArray}
                 onClear={updateProductArray}
                 filterList={filteredListData}
+                totalSelectedFilterCount={totalSelectedFilterCount}
+                setTotalSelectedFilterCount={setTotalSelectedFilterCount}
               ></FilterBarMobile>
             ) : (
               <FilterBar
@@ -296,6 +299,8 @@ const ProductListing = ({
                 onSortingChange={updateProductArray}
                 onClear={updateProductArray}
                 filterList={filteredListData}
+                totalSelectedFilterCount={totalSelectedFilterCount}
+                setTotalSelectedFilterCount={setTotalSelectedFilterCount}
               ></FilterBar>
             )}
             <div className={styles["product-listing__cards"]}>

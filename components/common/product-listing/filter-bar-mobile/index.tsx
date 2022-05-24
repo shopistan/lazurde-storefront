@@ -108,6 +108,8 @@ interface FilterBarMobileProps {
   onApplyFilters: Function;
   onSortingChange: Function;
   onClear: Function;
+  totalSelectedFilterCount?: number;
+  setTotalSelectedFilterCount?: Function;
 }
 interface FilterAccordionProps {
   filterList: FilterListProps[] | string;
@@ -126,6 +128,8 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
   onApplyFilters = () => {},
   onSortingChange = () => {},
   onClear = () => {},
+  totalSelectedFilterCount = 0,
+  setTotalSelectedFilterCount = () => {},
 }): JSX.Element => {
   const { t } = useTranslation("common");
   const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
@@ -140,7 +144,7 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>(
     {}
   );
-  const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const [optionData, setOptionData] = useState<any>([]);
   const [currentFilterList, setCurrentFilterList] = useState<
     string | FilterListProps[]

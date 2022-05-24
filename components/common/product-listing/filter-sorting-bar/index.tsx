@@ -115,6 +115,8 @@ interface FilterBarProps {
   onApplyFilters?: Function;
   onSortingChange?: Function;
   onClear?: Function;
+  totalSelectedFilterCount?: number;
+  setTotalSelectedFilterCount?: Function;
 }
 
 interface DropdownDataProps {
@@ -132,14 +134,16 @@ const FilterBar: FC<FilterBarProps> = ({
   onApplyFilters = () => {},
   onSortingChange = () => {},
   onClear = () => {},
+  totalSelectedFilterCount = 0,
+  setTotalSelectedFilterCount = () => {},
 }): JSX.Element => {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
   const [currentSortingValue, setCurrentSortingValue] = useState<any>("");
 
   const onApplyButtonClick = (selectedFilter: SelectedFilterProps) => {
-    onApplyFilters(selectedFilter, currentSortingValue)
-  }
+    onApplyFilters(selectedFilter, currentSortingValue);
+  };
 
   let link: any = useRef(
     Array.isArray(filterList) &&
@@ -160,7 +164,7 @@ const FilterBar: FC<FilterBarProps> = ({
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
-  const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const [linkRefs, setLinkRefs] = useState(link);
   const [width] = useWindowSize();
   const [optionData, setOptionData] = useState<{
@@ -285,7 +289,7 @@ const FilterBar: FC<FilterBarProps> = ({
             buttonSize={"sm"}
             onClick={() => {
               setSelectedFilters && setSelectedFilters({});
-              onClear && onClear({}, currentSortingValue)
+              onClear && onClear({}, currentSortingValue);
             }}
           />
         </div>
