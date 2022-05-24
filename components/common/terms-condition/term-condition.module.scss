@@ -202,3 +202,13 @@
     }
   }
 }
+
+html[dir="rtl"] {
+  .bread-crumb {
+    &_item {
+      a {
+        direction: ltr;
+      }
+    }
+  }
+}
