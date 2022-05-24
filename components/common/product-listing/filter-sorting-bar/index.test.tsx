@@ -18,6 +18,7 @@ const filterListData = [
 ];
 const applyFunc = jest.fn();
 const sortingFunc = jest.fn();
+const setTotalSelectedFilterCount = jest.fn()
 
 const renderComponent = (list = filterListData) => {
   render(
@@ -32,9 +33,10 @@ const renderComponent = (list = filterListData) => {
 };
 
 const renderComponentAR = () => {
-
   render(
-    <AppContext.Provider value={{ appState: { lang: "ar" } }}>
+    <AppContext.Provider
+      value={{ appState: { lang: "ar" }, setTotalSelectedFilterCount }}
+    >
       <FilterBar
         filterList={filterListData}
         onApplyFilters={applyFunc}
@@ -82,7 +84,6 @@ describe("filter sortin bar tests", () => {
     // const list = screen.getAllByRole("listitem");
     // expect(list[0]).toBeInTheDocument();
     // fireEvent.click(list[0]);
-
   });
 
   test("render empty props", async () => {

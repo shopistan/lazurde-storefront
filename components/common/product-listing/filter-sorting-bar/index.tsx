@@ -115,8 +115,6 @@ interface FilterBarProps {
   onApplyFilters?: Function;
   onSortingChange?: Function;
   onClear?: Function;
-  totalSelectedFilterCount?: number;
-  setTotalSelectedFilterCount?: Function;
 }
 
 interface DropdownDataProps {
@@ -134,10 +132,9 @@ const FilterBar: FC<FilterBarProps> = ({
   onApplyFilters = () => {},
   onSortingChange = () => {},
   onClear = () => {},
-  totalSelectedFilterCount = 0,
-  setTotalSelectedFilterCount = () => {},
 }): JSX.Element => {
-  const { appState } = useContext(AppContext);
+  const { appState, totalSelectedFilterCount, setTotalSelectedFilterCount } =
+    useContext(AppContext);
   const { t } = useTranslation("common");
   const [currentSortingValue, setCurrentSortingValue] = useState<any>("");
 
@@ -210,7 +207,7 @@ const FilterBar: FC<FilterBarProps> = ({
     setCurrentFilterList(filterList);
     setLinkRefs(link);
   }, [filterList]);
- 
+
   return (
     <div className={styles["filter-bar-main"]} data-headerid={headerId}>
       <div className={styles["div-filter-bar"]}>
@@ -228,7 +225,11 @@ const FilterBar: FC<FilterBarProps> = ({
                   role={"links"}
                   key={index}
                   className={styles["links"]}
-                  ref={linkRefs && linkRefs?.current ? linkRefs?.current[index] : null}
+                  ref={
+                    linkRefs && linkRefs?.current
+                      ? linkRefs?.current[index]
+                      : null
+                  }
                   data-has-count={selectedFilterCount > 0}
                   onMouseOver={(event) => {
                     event.stopPropagation();
