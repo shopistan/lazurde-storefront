@@ -8,6 +8,8 @@ export type FetchCategoryProductsArgs = {
 export type FilteredSearchArgs = {
   query: string;
   filters: string[];
+  pageSize?: number;
+  page?: number;
 };
 
 export type KeywordSearchArgs = {
