@@ -927,6 +927,28 @@
           "type": "Shape",
           "default": {},
           "children": {
+            "accordion": {
+              "type": "Array",
+              "label": "Accordion Array",
+              "default": [],
+              "allowNestedComponents": false,
+              "children": {
+                "type": "Shape",
+                "default": {},
+                "children": {
+                  "heading": {
+                    "type": "String",
+                    "label": "Question ",
+                    "default": ""
+                  },
+                  "text": {
+                    "type": "RichText",
+                    "label": "Answer",
+                    "default": ""
+                  }
+                }
+              }
+            },
             "name": {
               "type": "String",
               "label": "Hyperlink Name",
@@ -969,24 +991,6 @@
         "type": "String",
         "label": "Content Block Background Color",
         "default": ""
-      },
-      "accordion": {
-        "type": "Array",
-        "label": "Accordion Array",
-        "default": [],
-        "allowNestedComponents": false,
-        "children": {
-          "type": "Shape",
-          "default": {},
-          "children": {
-            "heading": {
-              "type": "String",
-              "label": "Question ",
-              "default": ""
-            },
-            "text": { "type": "RichText", "label": "Answer", "default": "" }
-          }
-        }
       },
       "title": { "type": "String", "label": "Title", "default": "" }
     }

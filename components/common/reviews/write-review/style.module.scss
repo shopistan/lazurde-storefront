@@ -182,8 +182,32 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
 
   .img-item {
+    position: relative;
     margin-inline-end: 8px;
   }
+}
+
+.img-label {
+  cursor: pointer;
+  border: 1px dotted $black-color;
+  background-color: rgba(0, 0, 0, 0.02);
+  width: 89px;
+  height: 88px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  input {
+    display: none;
+  }
+}
+
+.cross-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 10px;
 }

@@ -3,19 +3,18 @@ import TermCondtion from "./index";
 import { render, screen } from "@testing-library/react";
 import ContextProvider, { AppContext } from "lib/context";
 
-const accordionArray = [
-  {
-    heading: "heading",
-    text: "text",
-  },
-  {
-    heading: "heading",
-    text: "text",
-  },
-];
-
 const hyperLinkArray = [
   {
+    accordion: [
+      {
+        heading: "heading",
+        text: "text",
+      },
+      {
+        heading: "heading",
+        text: "text",
+      },
+    ],
     name: "name" || "",
     content: "content" || "",
     icon: {
@@ -45,7 +44,6 @@ const renderComponent = () => {
     <ContextProvider>
       <TermCondtion
         hyperLinks={hyperLinkArray || []}
-        accordion={accordionArray || []}
         sideBarBgcolor={sideBarBgcolor || ""}
         title={title || ""}
         contentBgcolor={contentBgcolor || ""}
@@ -59,7 +57,6 @@ const renderComponentAR = () => {
     <AppContext.Provider value={{ appState: { lang: "ar" } }}>
       <TermCondtion
         hyperLinks={hyperLinkArray}
-        accordion={accordionArray}
         sideBarBgcolor={sideBarBgcolor}
         title={title}
         contentBgcolor={contentBgcolor}
@@ -96,13 +93,6 @@ test("term condition testing", () => {
         width: "20",
         height: "20",
       }),
-    ])
-  );
-  expect(accordionArray).toHaveLength(2);
-  expect(accordionArray).toEqual(
-    expect.arrayContaining([
-      expect.objectContaining({ heading: "heading", text: "text" }),
-      expect.objectContaining({ heading: "heading", text: "text" }),
     ])
   );
 });
