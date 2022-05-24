@@ -110,6 +110,10 @@
   margin-top: 8px;
   color: black;
 
+  button {
+    color: black;
+  }
+
   @media (min-width: 1024px) {
     display: none;
   }
