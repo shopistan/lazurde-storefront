@@ -10,8 +10,7 @@ const SearchResultsInfo: FC<SearchResultsInfoProps> = ({
   searchTerm,
   totalItems,
 }) => {
-  const { appState } = useContext(AppContext);
-  // const { t } = useTranslation("common");
+  const { appState, totalSelectedFilterCount } = useContext(AppContext); // const { t } = useTranslation("common");
 
   return (
     <div className={styles["search-results-info-wrapper"]}>

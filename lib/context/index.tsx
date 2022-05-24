@@ -42,6 +42,8 @@ const ContextProvider: FC = ({ children }) => {
     setAppState({ lang, region, channel, locale, brand });
   };
 
+  const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+
   return (
     <AppContext.Provider
       value={{
@@ -49,6 +51,8 @@ const ContextProvider: FC = ({ children }) => {
         saveAppState,
         searchWrapperPosition,
         setSearchWrapperPosition,
+        totalSelectedFilterCount,
+        setTotalSelectedFilterCount,
       }}
     >
       {children}

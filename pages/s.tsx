@@ -9,7 +9,8 @@ import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
+import { AppContext } from "lib/context";
 
 interface SearchPageProps extends PageProps {
   algoliaSearchResults: {
@@ -29,6 +30,7 @@ const SearchPage: FC<SearchPageProps> = ({
   pageComponents,
   algoliaSearchResults,
 }) => {
+  const { appState, totalSelectedFilterCount } = useContext(AppContext);
   console.log("Search Page Props: ", algoliaSearchResults);
   return (
     <>
@@ -39,10 +41,12 @@ const SearchPage: FC<SearchPageProps> = ({
       </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
-        <SearchResultsInfo
-          searchTerm={algoliaSearchResults?.query}
-          totalItems={algoliaSearchResults?.hits?.length}
-        />
+        {totalSelectedFilterCount === 0 && (
+          <SearchResultsInfo
+            searchTerm={algoliaSearchResults?.query}
+            totalItems={algoliaSearchResults?.hits?.length}
+          />
+        )}
         {pageComponents?.map((component: XMComponent, index) => {
           const Component = componentsById[component.id];
           if (Component) {
@@ -74,21 +78,12 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { query = {} } = context;
   const getFaceFilters = () => {
     if (query?.brand === `L'azurde`)
-      return [
-        `Brand: L'azurde`,
-        `Brand: Miss L'`,
-        `Brand: Kenaz`,
-      ];
+      return [`Brand: L'azurde`, `Brand: Miss L'`, `Brand: Kenaz`];
     else if (query?.brand === `Miss L'`)
       return [`Brand: Miss L'`, `Brand: L'azurde,Miss L'`];
     else if (query?.brand === "Kenaz")
       return [`Brand: Kenaz`, `Brand: L'azurde,Kenaz`];
-    else
-      return [
-        `Brand: L'azurde`,
-        `Brand: Miss L'`,
-        `Brand: Kenaz`,
-      ];
+    else return [`Brand: L'azurde`, `Brand: Miss L'`, `Brand: Kenaz`];
   };
 
   const {
