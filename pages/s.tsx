@@ -58,6 +58,7 @@ const SearchPage: FC<SearchPageProps> = ({
                     productDataArray={algoliaSearchResults?.hits || []}
                     key={index}
                     showBreadcrumb={false}
+                    searchTerm={algoliaSearchResults?.query || ""}
                   />
                 );
               } else return null;
