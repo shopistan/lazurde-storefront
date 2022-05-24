@@ -151,11 +151,30 @@ const ProductListing = ({
       payload.push(orFilters);
     });
 
-    const filteredData = await performFilteredSearch({
+    const filteredData: any = await performFilteredSearch({
       query: categoryName,
       filters: payload,
     });
-    return filteredData;
+    const filteredArray = filteredData?.filter(
+      (item: {
+        Brand: string;
+        isLazurde: string;
+        isMissL: string;
+        isKenaz: string;
+      }) => {
+        if (appState.brand === `L'azurde`) {
+          return item;
+        }
+        if (appState.brand === `Miss L'`) {
+          return item?.isMissL;
+        }
+        if (appState.brand === "Kenaz") {
+          return item?.isKenaz;
+        }
+        return false;
+      }
+    );
+    return filteredArray;
   };
 
   const onSortingChange = (sortedValue: any = {}, filterdArray: []) => {
