@@ -29,6 +29,11 @@ html[dir="rtl"] * {
 
 * {
   box-sizing: border-box;
+  outline: 0;
+
+  &:focus {
+    outline: 0;
+  }
 }
 
 ul {
