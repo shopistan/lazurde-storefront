@@ -35,11 +35,40 @@ export const fetchCategoryProducts = async ({
 
 export const performFilteredSearch = async ({
   query = "",
+  pageSize = 500,
+  page = 0,
   filters,
 }: FilteredSearchArgs) => {
   try {
     return new Promise((resolve, reject) => {
       INDEX.search(query, {
+        hitsPerPage: pageSize,
+        facetFilters: filters,
+        page,
+      })
+        .then(({ hits }) => {
+          return resolve(hits);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  } catch (err) {
+    console.log(`Error fetching items for query: ${query}`, err);
+    return null;
+  }
+};
+
+export const performMultiFilteredSearch = async ({
+  query = "",
+  pageSize = 500,
+  filters,
+}: FilteredSearchArgs) => {
+  try {
+    return new Promise((resolve, reject) => {
+      INDEX.search(query, {
+        hitsPerPage: pageSize,
+
         facetFilters: filters,
       })
         .then(({ hits }) => {
