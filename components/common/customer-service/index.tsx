@@ -10,25 +10,25 @@ import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 
 type ServicesProps = {
-  icon: ImageType | { url: ""; altText: "" };
-  iconTitle: string | "";
-  iconText: string | "";
-  url: string | "";
-  width: string | number;
-  height: string | number;
+  icon?: ImageType | { url: ""; altText: "" };
+  iconTitle?: string | "";
+  iconText?: string | "";
+  url?: string | "";
+  width?: string | number;
+  height?: string | number;
 };
 
 type _ServicesProps = {
-  iconTitle: string | "";
-  iconText: string | "";
+  iconTitle?: string | "";
+  iconText?: string | "";
 };
 
 interface CustomerServiceProps {
-  bannerImage: ImageType | { url: ""; altText: "" };
-  heading: string | "";
-  services: ServicesProps[] | [];
-  inputIcon: ImageType | { url: ""; altText: "" };
-  title: string | "";
+  bannerImage?: ImageType | { url: ""; altText: "" };
+  heading?: string | "";
+  services?: ServicesProps[] | [];
+  inputIcon?: ImageType | { url: ""; altText: "" };
+  title?: string | "";
 }
 
 const CustomerService: FC<CustomerServiceProps> = ({

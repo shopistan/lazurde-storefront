@@ -100,8 +100,8 @@ const ProductListing = ({
     // console.log("something",arr)
     // console.log(performFilteredSearch({ filters: [`Gold`] }));
     // console.log("categoryName",categoryName)
-    if (productDataArray && productDataArray.length > 0) {
-      const filteredArray = productDataArray.filter(
+    if (productDataArray && productDataArray?.length > 0) {
+      const filteredArray = productDataArray?.filter(
         (item: {
           Brand: string;
           isLazurde: string;
@@ -132,16 +132,16 @@ const ProductListing = ({
   }, [initialProductData]);
 
   const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
-    if (Object.keys(selectedFilters).length < 1) {
+    if (Object.keys(selectedFilters)?.length < 1) {
       return null;
     }
 
     let payload: any[] = [];
 
-    Object.keys(selectedFilters).forEach((filterType, index) => {
+    Object.keys(selectedFilters)?.forEach((filterType, index) => {
       const orFilters: any[] = [];
 
-      Object.keys(selectedFilters[filterType]?.selectedOptions).forEach(
+      Object.keys(selectedFilters[filterType]?.selectedOptions)?.forEach(
         (filterOption) => {
           const facet = `${selectedFilters[filterType]?.name}: ${selectedFilters[filterType]?.selectedOptions[filterOption]?.name}`;
           orFilters.push(facet);
@@ -151,11 +151,30 @@ const ProductListing = ({
       payload.push(orFilters);
     });
 
-    const filteredData = await performFilteredSearch({
+    const filteredData: any = await performFilteredSearch({
       query: categoryName,
       filters: payload,
     });
-    return filteredData;
+    const filteredArray = filteredData?.filter(
+      (item: {
+        Brand: string;
+        isLazurde: string;
+        isMissL: string;
+        isKenaz: string;
+      }) => {
+        if (appState.brand === `L'azurde`) {
+          return item;
+        }
+        if (appState.brand === `Miss L'`) {
+          return item?.isMissL;
+        }
+        if (appState.brand === "Kenaz") {
+          return item?.isKenaz;
+        }
+        return false;
+      }
+    );
+    return filteredArray;
   };
 
   const onSortingChange = (sortedValue: any = {}, filterdArray: []) => {
@@ -164,19 +183,19 @@ const ProductListing = ({
         ? filterdArray
         : initialProductData;
     const sortedArray: any[] = [];
-    if (sortedValue.value !== "most viewed") {
+    if (sortedValue?.value !== "most viewed") {
       return pData;
     }
 
-    if (sortedValue.value === "most viewed") {
+    if (sortedValue?.value === "most viewed") {
       pData.map((item: any) => {
-        if (item.IsMostViewed === true) {
-          sortedArray.unshift(item);
+        if (item?.IsMostViewed === true) {
+          sortedArray?.unshift(item);
         } else {
-          sortedArray.push(item);
+          sortedArray?.push(item);
         }
       });
-      if (sortedArray.length > 0) {
+      if (sortedArray?.length > 0) {
         return sortedArray;
       } else {
         return pData;
@@ -202,21 +221,21 @@ const ProductListing = ({
       Array.isArray(filterList) &&
       filterList?.length > 0 &&
       filterList?.map((filterItem: { filterName: string }) => {
-        const name = filterItem.filterName;
+        const name = filterItem?.filterName;
         const filterOptions: { optionName: string }[] = [];
 
-        dataArray.map((itemData: { [key: string]: string }) => {
-          if (itemData.hasOwnProperty(name)) {
-            let itemToAdd = itemData[name];
+        dataArray?.map((itemData: { [key: string]: string }) => {
+          if (itemData?.hasOwnProperty(name)) {
+            let itemToAdd = itemData?.[name];
             let nameSplit: string[] = [];
-            if (name === "Category") nameSplit = itemData[name].split(">");
+            if (name === "Category") nameSplit = itemData?.[name].split(">");
 
-            const nameExists = filterOptions.find(
+            const nameExists = filterOptions?.find(
               (option: { optionName: string }) => {
                 if (name === "Category") {
-                  return option.optionName === nameSplit[nameSplit.length - 1];
+                  return option?.optionName === nameSplit[nameSplit.length - 1];
                 }
-                return option.optionName === itemToAdd;
+                return option?.optionName === itemToAdd;
               }
             );
             if (nameExists === undefined && name === "Category") {
@@ -251,8 +270,8 @@ const ProductListing = ({
           pageSize={5}
           totalSize={
             Array.isArray(filteredProductData)
-              ? filteredProductData.length
-              : initialProductData.length
+              ? filteredProductData?.length
+              : initialProductData?.length
           }
           dataArray={
             Array.isArray(filteredProductData)
@@ -286,7 +305,7 @@ const ProductListing = ({
               ></FilterBar>
             )}
             <div className={styles["product-listing__cards"]}>
-              {currentProductData && currentProductData.length > 0 ? (
+              {currentProductData && currentProductData?.length > 0 ? (
                 currentProductData?.map(
                   (data: ProductCardProps, index: number) => {
                     const {

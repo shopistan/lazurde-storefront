@@ -33,8 +33,13 @@ const ENDPOINTS = {
   },
 
   GET: {
-    REVIEWS: (storeHash: string | number) =>
-      `https://stamped.io/api/v2/${storeHash}/dashboard/reviews`,
+    REVIEWS: (storeHash: string | number, productId: string | number) =>
+      `https://stamped.io/api/v2/${storeHash}/dashboard/reviews?search=${productId}`,
+  },
+
+  POST: {
+    CREATE_REVIEW: (apikey: string | number, storeHash: string | number) =>
+      `https://stamped.io/api/reviews3?apiKey=${apikey}&sId=${storeHash}`,
   },
 };
 

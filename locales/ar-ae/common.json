@@ -54,6 +54,19 @@
       "iconText": "فافزلا L’azurde فاشكتسا"
     }
   ],
+  "linksProps": [
+    {
+      "name": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "name": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    }
+  ],
+
+  "back-button": "ءيش لك قوست",
+
   "accordionProps": [
     {
       "heading": "ءيش لك قوست",
