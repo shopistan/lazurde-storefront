@@ -12,41 +12,41 @@ import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 
 type HyperLinksProps = {
-  name: string | "";
-  content: string | "";
-  icon: ImageType;
-  width: string | "";
-  height: string | "";
+  name?: string | "";
+  content?: string | "";
+  icon?: ImageType;
+  width?: string | "";
+  height?: string | "";
+  accordion?: AccordionProps[];
 };
 
 type _HyperLinksProps = {
-  name: string | "";
-  content: string | "";
+  name?: string | "";
+  content?: string | "";
+  accordion?: _AccordionProps[];
 };
 
 type AccordionProps = {
-  heading: string | "";
-  text: string | "";
+  heading?: string | "";
+  text?: string | "";
 };
 
 type _AccordionProps = {
-  heading: string | "";
-  text: string | "";
+  heading?: string | "";
+  text?: string | "";
 };
 
 interface TermCondtionProps {
-  hyperLinks: HyperLinksProps[];
-  sideBarBgcolor: string | "";
-  contentBgcolor: string | "";
-  accordion: AccordionProps[];
-  title: string | "";
+  hyperLinks?: HyperLinksProps[];
+  sideBarBgcolor?: string | "";
+  contentBgcolor?: string | "";
+  title?: string | "";
 }
 
 const TermCondtion: FC<TermCondtionProps> = ({
   hyperLinks,
   sideBarBgcolor,
   contentBgcolor,
-  accordion,
   title,
 }) => {
   const { t } = useTranslation("common");
@@ -65,13 +65,29 @@ const TermCondtion: FC<TermCondtionProps> = ({
   );
   const router = useRouter();
   const [objects, setObjects] = useState({
-    name: hyperLinks[0]?.name,
-    content: hyperLinks[0]?.content,
+    accordion: hyperLinks[0].accordion || [],
+    name: hyperLinks[0]?.name || "",
+    content: hyperLinks[0]?.content || "",
     icon: {
-      url: hyperLinks[0]?.icon?.url,
-      altText: hyperLinks[0]?.icon?.altText,
+      url: hyperLinks[0]?.icon?.url || "",
+      altText: hyperLinks[0]?.icon?.altText || "",
     },
   });
+
+  useEffect(() => {
+    setObjects({
+      accordion: hyperLinks[0].accordion || [],
+      name: appState.lang == "en" ? hyperLinks[0]?.name : _links[0].name,
+      content:
+        appState.lang == "en" ? hyperLinks[0]?.content : _links[0].content,
+      icon: {
+        url: hyperLinks[0]?.icon?.url,
+        altText: hyperLinks[0]?.icon?.altText,
+      },
+    });
+  }, [appState.lang]);
+
+  console.log("object", objects);
 
   return (
     <div className={styles["term-comtainer"]}>
@@ -99,7 +115,14 @@ const TermCondtion: FC<TermCondtionProps> = ({
         >
           {hyperLinks &&
             hyperLinks.map((object, index) => {
-              const { icon, name, content, width, height } = object;
+              const {
+                icon,
+                name,
+                content,
+                width,
+                height,
+                accordion = [],
+              } = object;
 
               return (
                 <div
@@ -107,14 +130,10 @@ const TermCondtion: FC<TermCondtionProps> = ({
                   key={index}
                   onClick={() => {
                     setObjects({
+                      accordion: accordion,
                       content:
-                        appState.lang == "en"
-                          ? content
-                          : _accordion[index].text,
-                      name:
-                        appState.lang == "en"
-                          ? name
-                          : _accordion[index].heading,
+                        appState.lang == "en" ? content : _links[index].content,
+                      name: appState.lang == "en" ? name : _links[index].name,
                       icon: {
                         url: icon?.url,
                         altText: icon?.altText,
@@ -133,7 +152,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
                     </div>
                   )}
                   <Label>
-                    {appState?.lang === "en" ? name : _accordion[index].heading}
+                    {appState?.lang === "en" ? name : _links[index].name}
                   </Label>
                 </div>
               );
@@ -164,11 +183,11 @@ const TermCondtion: FC<TermCondtionProps> = ({
             className={styles["term-right"]}
             style={{ backgroundColor: contentBgcolor }}
           >
-            {accordion && accordion.length > 0 && (
+            {objects?.accordion && objects?.accordion?.length > 0 && (
               <div className={styles["accordion-block"]}>
-                {accordion &&
-                  accordion.length > 0 &&
-                  accordion.map((object, index) => {
+                {objects?.accordion &&
+                  objects?.accordion.length > 0 &&
+                  objects?.accordion.map((object, index) => {
                     const { heading, text } = object;
                     return (
                       <Accordion
@@ -176,14 +195,16 @@ const TermCondtion: FC<TermCondtionProps> = ({
                         className={`accordion-help`}
                         heading={
                           appState.lang == "en"
-                            ? heading
+                            ? objects.accordion[index]?.heading
                             : _accordion[index].heading
                         }
                         children={
                           appState.lang == "en" ? (
                             <p
                               key={Math.random()}
-                              dangerouslySetInnerHTML={{ __html: text }}
+                              dangerouslySetInnerHTML={{
+                                __html: objects.accordion[index]?.text,
+                              }}
                             ></p>
                           ) : (
                             _accordion[index].text

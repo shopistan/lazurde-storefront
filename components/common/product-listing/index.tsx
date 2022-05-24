@@ -49,6 +49,7 @@ interface ProductListingProps {
   categoryName: string;
   filterList: [];
   showBreadcrumb: boolean;
+  searchTerm: string;
 }
 
 const ProductListing = ({
@@ -57,6 +58,7 @@ const ProductListing = ({
   categoryName = "",
   filterList,
   showBreadcrumb = true,
+  searchTerm = "",
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState, totalSelectedFilterCount, setTotalSelectedFilterCount } =
@@ -151,11 +153,30 @@ const ProductListing = ({
       payload.push(orFilters);
     });
 
-    const filteredData = await performFilteredSearch({
-      query: categoryName,
+    const filteredData: any = await performFilteredSearch({
+      query: showBreadcrumb ? categoryName : searchTerm,
       filters: payload,
     });
-    return filteredData;
+    const filteredArray = filteredData?.filter(
+      (item: {
+        Brand: string;
+        isLazurde: string;
+        isMissL: string;
+        isKenaz: string;
+      }) => {
+        if (appState.brand === `L'azurde`) {
+          return item;
+        }
+        if (appState.brand === `Miss L'`) {
+          return item?.isMissL;
+        }
+        if (appState.brand === "Kenaz") {
+          return item?.isKenaz;
+        }
+        return false;
+      }
+    );
+    return filteredArray;
   };
 
   const onSortingChange = (sortedValue: any = {}, filterdArray: []) => {
