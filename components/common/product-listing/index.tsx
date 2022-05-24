@@ -11,7 +11,6 @@ import BreadCrumbs from "components/common/ui/bread-crumbs";
 import { ImageType } from "lib/types/common";
 import { desktopScreenSize } from "lib/utils/common";
 import Pagination from "../ui/pagination";
-
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -60,12 +59,14 @@ const ProductListing = ({
   showBreadcrumb = true,
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState } = useContext(AppContext);
+  const { appState, totalSelectedFilterCount, setTotalSelectedFilterCount } =
+    useContext(AppContext);
   const { t } = useTranslation("common");
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [filteredProductData, setFilteredProductData] = useState<any>("");
   const [filteredListData, setFilteredListData] = useState<any>([]);
   const [currentProductData, setCurrentProductData] = useState([]);
+  // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
 
   const _arabicProductCardData = t(
     "arabicProductCardData",
@@ -114,7 +115,7 @@ const ProductListing = ({
             return item?.isMissL;
           }
           if (appState.brand === "Kenaz") {
-            return item?.isKenaz
+            return item?.isKenaz;
           }
           return false;
         }
@@ -181,7 +182,6 @@ const ProductListing = ({
         return pData;
       }
     }
-
   };
 
   const updateProductArray = async (
@@ -240,7 +240,9 @@ const ProductListing = ({
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
-        {showBreadcrumb && <BreadCrumbs pageName={pageName} />}
+        {(showBreadcrumb || totalSelectedFilterCount > 0) && (
+          <BreadCrumbs pageName={pageName} />
+        )}
 
         <Pagination
           pKey={productDataArray}
