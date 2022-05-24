@@ -29,9 +29,8 @@ export const writeReview = async (payload?: any) => {
 
     const writeReview = await Axios.post(
       `${ENDPOINTS.POST.CREATE_REVIEW(apiKey, storeHash)}`,
-      JSON.stringify(payload),
+      payload,
       {
-        // body: payload,
         headers: HEADERS.reviews,
       }
     );
