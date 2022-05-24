@@ -195,7 +195,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
                         className={`accordion-help`}
                         heading={
                           appState.lang == "en"
-                            ? objects.accordion[index]?.heading
+                            ? object?.heading
                             : _accordion[index].heading
                         }
                         children={
@@ -203,7 +203,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
                             <p
                               key={Math.random()}
                               dangerouslySetInnerHTML={{
-                                __html: objects.accordion[index]?.text,
+                                __html: object?.text,
                               }}
                             ></p>
                           ) : (

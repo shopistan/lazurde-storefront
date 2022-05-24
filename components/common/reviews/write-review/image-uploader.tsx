@@ -1,54 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import Image from "next/image";
+import { CrossSmall, PlusIcon } from "components/icons";
 
 interface ImageUploaderProps {
   setFileUpload?: Function;
   file?: [];
 }
+let fileObj: any = [];
 
 const ImageUploader = ({
   setFileUpload,
   file,
 }: ImageUploaderProps): JSX.Element => {
-  let fileObj: any = [];
   let fileArray: any = [];
 
-  const uploadMultipleFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-    fileObj.push(e.target?.files);
-    for (let i = 0; i < fileObj[0].length; i++) {
-      fileArray.push(URL.createObjectURL(fileObj[0][i]));
+  const uploadMultipleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
+    fileObj.push(event.target.files);
+
+    for (let i = 0; i < fileObj.length; i++) {
+      fileObj[i][0] && fileArray.push(URL?.createObjectURL(fileObj[i][0]));
     }
     setFileUpload({ fileArray });
   };
+
+  // const [test, setTest] = useState(false);
+  // const onInputClick = (event) => {
+  //   if (test) {
+  //     event.currentTarget.value = "";
+  //   }
+  // };
 
   return (
     <>
       <div className={styles["uploaded-imgs"]}>
         {((file && file.length > 0 && file) || []).map(
-          (url: string, index: number) => {
+          (url: string, index: number, arr) => {
             return (
               <div className={styles["img-item"]} key={index}>
                 <Image
-                  src={url}
+                  src={url || ""}
                   alt="img"
                   layout="fixed"
                   width={89}
                   height={88}
                 />
+
+                <div
+                  className={styles["cross-btn"]}
+                  onClick={() => {
+                    // setTest(true);
+                    file.splice(index, 1);
+                    fileObj.splice(index, 1);
+                    setFileUpload({ fileArray: file });
+                  }}
+                >
+                  <CrossSmall />
+                </div>
               </div>
             );
           }
         )}
-      </div>
 
-      <div className={styles["img-upload-input"]}>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={uploadMultipleFiles}
-          multiple
-        />
+        <div className={styles["img-upload-input"]}>
+          <label htmlFor="imgUploader" className={styles["img-label"]}>
+            <input
+              type="file"
+              accept="image/*"
+              name="imgUploader"
+              id="imgUploader"
+              onChange={uploadMultipleFiles}
+              // onClick={onInputClick}
+              multiple
+            />
+            <PlusIcon />
+          </label>
+        </div>
       </div>
     </>
   );
