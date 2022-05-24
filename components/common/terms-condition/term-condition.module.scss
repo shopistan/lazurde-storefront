@@ -29,6 +29,7 @@
 }
 
 .term-left {
+  cursor: pointer;
   display: none;
   background-color: white;
   padding-block: 45px;
@@ -41,6 +42,7 @@
   }
 
   p {
+    cursor: pointer;
     font-size: 16px;
     font-weight: 500;
     line-height: 19px;
@@ -54,6 +56,7 @@
 .term-block {
   display: none;
   @media (min-width: 1023px) {
+    cursor: pointer;
     display: flex;
     align-items: center;
   }
@@ -76,6 +79,7 @@
 }
 
 .term-image {
+  cursor: pointer;
   width: 20px;
   height: 20px;
 
@@ -87,6 +91,7 @@
 .accordion-block {
   margin-top: 8px;
   background-color: #f2f2f2;
+  cursor: pointer;
 
   @media (min-width: 1024px) {
     padding-block: 40px;
@@ -162,6 +167,7 @@
 @import "/styles/variables.scss";
 
 .bread-crumb {
+  cursor: pointer;
   &_item {
     display: none;
     @media (min-width: 1024px) {
