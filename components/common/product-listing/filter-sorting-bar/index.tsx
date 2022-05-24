@@ -133,13 +133,14 @@ const FilterBar: FC<FilterBarProps> = ({
   onSortingChange = () => {},
   onClear = () => {},
 }): JSX.Element => {
-  const { appState } = useContext(AppContext);
+  const { appState, totalSelectedFilterCount, setTotalSelectedFilterCount } =
+    useContext(AppContext);
   const { t } = useTranslation("common");
   const [currentSortingValue, setCurrentSortingValue] = useState<any>("");
 
   const onApplyButtonClick = (selectedFilter: SelectedFilterProps) => {
-    onApplyFilters(selectedFilter, currentSortingValue)
-  }
+    onApplyFilters(selectedFilter, currentSortingValue);
+  };
 
   let link: any = useRef(
     Array.isArray(filterList) &&
@@ -160,7 +161,7 @@ const FilterBar: FC<FilterBarProps> = ({
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
-  const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const [linkRefs, setLinkRefs] = useState(link);
   const [width] = useWindowSize();
   const [optionData, setOptionData] = useState<{
@@ -224,7 +225,11 @@ const FilterBar: FC<FilterBarProps> = ({
                   role={"links"}
                   key={index}
                   className={styles["links"]}
-                  ref={linkRefs?.current && linkRefs?.current[index]}
+                  ref={
+                    linkRefs && linkRefs?.current
+                      ? linkRefs?.current[index]
+                      : null
+                  }
                   data-has-count={selectedFilterCount > 0}
                   onMouseOver={(event) => {
                     event.stopPropagation();
@@ -285,7 +290,7 @@ const FilterBar: FC<FilterBarProps> = ({
             buttonSize={"sm"}
             onClick={() => {
               setSelectedFilters && setSelectedFilters({});
-              onClear && onClear({}, currentSortingValue)
+              onClear && onClear({}, currentSortingValue);
             }}
           />
         </div>

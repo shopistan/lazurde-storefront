@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProductCard from "components/common/product-card/ProductCard";
-import { productCardData } from "lib/mock-data/data";
 import FilterBar from "./filter-sorting-bar";
 import useWindowSize from "lib/utils/useWindowSize";
 import FilterBarMobile from "./filter-bar-mobile";
@@ -12,7 +11,6 @@ import BreadCrumbs from "components/common/ui/bread-crumbs";
 import { ImageType } from "lib/types/common";
 import { desktopScreenSize } from "lib/utils/common";
 import Pagination from "../ui/pagination";
-
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -61,13 +59,14 @@ const ProductListing = ({
   showBreadcrumb = true,
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState } = useContext(AppContext);
+  const { appState, totalSelectedFilterCount, setTotalSelectedFilterCount } =
+    useContext(AppContext);
   const { t } = useTranslation("common");
-  const dummyProductData = productCardData || [];
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [filteredProductData, setFilteredProductData] = useState<any>("");
   const [filteredListData, setFilteredListData] = useState<any>([]);
   const [currentProductData, setCurrentProductData] = useState([]);
+  // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
 
   const _arabicProductCardData = t(
     "arabicProductCardData",
@@ -76,7 +75,7 @@ const ProductListing = ({
   );
 
   useEffect(() => {
-    createFilterBarList();
+    createFilterBarList(productDataArray);
     setFilteredProductData("");
     // console.log(
     //   "something",
@@ -103,19 +102,20 @@ const ProductListing = ({
     // console.log("categoryName",categoryName)
     if (productDataArray && productDataArray.length > 0) {
       const filteredArray = productDataArray.filter(
-        (item: { Brand: string }) => {
+        (item: {
+          Brand: string;
+          isLazurde: string;
+          isMissL: string;
+          isKenaz: string;
+        }) => {
           if (appState.brand === `L'azurde`) {
             return item;
           }
           if (appState.brand === `Miss L'`) {
-            return (
-              item?.Brand?.toLowerCase().includes(`miss`) ||
-              item?.Brand?.toLowerCase().includes(`miss'l`) ||
-              item?.Brand?.toLowerCase().includes(`miss l'`)
-            );
+            return item?.isMissL;
           }
           if (appState.brand === "Kenaz") {
-            return item?.Brand?.toLowerCase().includes("kenaz");
+            return item?.isKenaz;
           }
           return false;
         }
@@ -125,9 +125,14 @@ const ProductListing = ({
     }
   }, [productDataArray]);
 
+  useEffect(() => {
+    initialProductData &&
+      initialProductData?.length > 0 &&
+      createFilterBarList(initialProductData);
+  }, [initialProductData]);
+
   const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
     if (Object.keys(selectedFilters).length < 1) {
-      // setFilteredProductData("");
       return null;
     }
 
@@ -146,25 +151,20 @@ const ProductListing = ({
       payload.push(orFilters);
     });
 
-    // console.log("categoryName", categoryName);
-    // payload = ["isMain: true"];
     const filteredData = await performFilteredSearch({
       query: categoryName,
       filters: payload,
     });
-    // const filteredData: [] = [];
-    // setFilteredProductData(filteredData);
     return filteredData;
   };
 
-  const onSortingChange = (sortedValue: any = {}, filterdArray: [] = []) => {
+  const onSortingChange = (sortedValue: any = {}, filterdArray: []) => {
     const pData =
-      filterdArray && filterdArray.length > 0
+      filterdArray && Array.isArray(filterdArray)
         ? filterdArray
         : initialProductData;
     const sortedArray: any[] = [];
     if (sortedValue.value !== "most viewed") {
-      // setFilteredProductData(checkFilteredData);
       return pData;
     }
 
@@ -177,34 +177,11 @@ const ProductListing = ({
         }
       });
       if (sortedArray.length > 0) {
-        // setFilteredProductData(sortedArray);
         return sortedArray;
       } else {
-        // setFilteredProductData(pData);
         return pData;
       }
     }
-
-    // if (sortedValue.length < 1) {
-    //   return setCurrentProductData(productDataArray);
-    // }
-
-    // const payload = [];
-
-    // Object.keys(sortedValue).forEach((filterType, index) => {
-    //   const orFilters: any[] = [];
-    //   Object.keys(sortedValue[filterType]).forEach((filterOption) => {
-    //     const facet = `${filterType}: ${filterOption}`;
-    //     orFilters.push(facet);
-    //   });
-    //   payload.push(orFilters);
-    // });
-
-    // console.table(payload);
-
-    //const filteredData = performFilteredSearch({filters: payload})
-    // const filteredData: [] = [];
-    // setCurrentProductData(filteredData);
   };
 
   const updateProductArray = async (
@@ -216,7 +193,7 @@ const ProductListing = ({
     setFilteredProductData(sortedArray);
   };
 
-  const createFilterBarList = () => {
+  const createFilterBarList = (dataArray: any[]) => {
     const newFilterList: {
       filterName: string;
       filterOptions: { optionName: string }[];
@@ -227,16 +204,27 @@ const ProductListing = ({
       filterList?.map((filterItem: { filterName: string }) => {
         const name = filterItem.filterName;
         const filterOptions: { optionName: string }[] = [];
-        productDataArray.map((itemData: { [key: string]: string }) => {
+
+        dataArray.map((itemData: { [key: string]: string }) => {
           if (itemData.hasOwnProperty(name)) {
+            let itemToAdd = itemData[name];
+            let nameSplit: string[] = [];
+            if (name === "Category") nameSplit = itemData[name].split(">");
+
             const nameExists = filterOptions.find(
               (option: { optionName: string }) => {
-                return option.optionName === itemData[name];
+                if (name === "Category") {
+                  return option.optionName === nameSplit[nameSplit.length - 1];
+                }
+                return option.optionName === itemToAdd;
               }
             );
+            if (nameExists === undefined && name === "Category") {
+              itemToAdd = nameSplit[nameSplit.length - 1];
+            }
             nameExists === undefined &&
-              itemData[name] &&
-              filterOptions.push({ optionName: itemData[name] });
+              itemToAdd &&
+              filterOptions.push({ optionName: itemToAdd });
           }
         });
         if (filterOptions.length > 0) {
@@ -248,12 +236,13 @@ const ProductListing = ({
       });
     setFilteredListData(newFilterList);
   };
-  console.log("slicedArray2", filteredProductData, initialProductData);
-  
+
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
-        {showBreadcrumb && <BreadCrumbs pageName={pageName} />}
+        {(showBreadcrumb || totalSelectedFilterCount > 0) && (
+          <BreadCrumbs pageName={pageName} />
+        )}
 
         <Pagination
           pKey={productDataArray}
@@ -271,8 +260,6 @@ const ProductListing = ({
               : initialProductData
           }
           onInitialize={(slicedArray: []) => {
-            console.log('slicedArray', slicedArray);
-            
             setCurrentProductData(slicedArray);
           }}
           onPageUp={(slicedArray: []) => {
