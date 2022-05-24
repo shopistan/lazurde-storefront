@@ -65,13 +65,25 @@ const TermCondtion: FC<TermCondtionProps> = ({
   );
   const router = useRouter();
   const [objects, setObjects] = useState({
-    name: hyperLinks[0]?.name,
-    content: hyperLinks[0]?.content,
+    name: hyperLinks[0]?.name || "",
+    content: hyperLinks[0]?.content || "",
     icon: {
-      url: hyperLinks[0]?.icon?.url,
-      altText: hyperLinks[0]?.icon?.altText,
+      url: hyperLinks[0]?.icon?.url || "",
+      altText: hyperLinks[0]?.icon?.altText || "",
     },
   });
+
+  useEffect(() => {
+    setObjects({
+      name: appState.lang == "en" ? hyperLinks[0]?.name : _accordion[0].heading,
+      content:
+        appState.lang == "en" ? hyperLinks[0]?.content : _accordion[0].text,
+      icon: {
+        url: hyperLinks[0]?.icon?.url,
+        altText: hyperLinks[0]?.icon?.altText,
+      },
+    });
+  },[appState.lang]);
 
   return (
     <div className={styles["term-comtainer"]}>
