@@ -49,6 +49,7 @@ interface ProductListingProps {
   categoryName: string;
   filterList: [];
   showBreadcrumb: boolean;
+  searchTerm: string;
 }
 
 const ProductListing = ({
@@ -57,6 +58,7 @@ const ProductListing = ({
   categoryName = "",
   filterList,
   showBreadcrumb = true,
+  searchTerm = "",
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState, totalSelectedFilterCount, setTotalSelectedFilterCount } =
@@ -152,7 +154,7 @@ const ProductListing = ({
     });
 
     const filteredData: any = await performFilteredSearch({
-      query: categoryName,
+      query: showBreadcrumb ? categoryName : searchTerm,
       filters: payload,
     });
     const filteredArray = filteredData?.filter(
