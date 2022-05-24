@@ -210,7 +210,7 @@ const FilterBar: FC<FilterBarProps> = ({
     setCurrentFilterList(filterList);
     setLinkRefs(link);
   }, [filterList]);
-
+ 
   return (
     <div className={styles["filter-bar-main"]} data-headerid={headerId}>
       <div className={styles["div-filter-bar"]}>
@@ -228,7 +228,7 @@ const FilterBar: FC<FilterBarProps> = ({
                   role={"links"}
                   key={index}
                   className={styles["links"]}
-                  ref={linkRefs?.current && linkRefs?.current[index]}
+                  ref={linkRefs && linkRefs?.current ? linkRefs?.current[index] : null}
                   data-has-count={selectedFilterCount > 0}
                   onMouseOver={(event) => {
                     event.stopPropagation();
