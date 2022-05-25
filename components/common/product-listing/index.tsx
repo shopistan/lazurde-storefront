@@ -82,15 +82,6 @@ const ProductListing = ({
   );
 
   useEffect(() => {
-    if (searchTerm) {
-      updateProductArray(
-        {},
-        {
-          label: "",
-          value: "",
-        }
-      );
-    }
     setTotalSelectedFilterCount(0);
     setSelectedFilters({});
   }, [searchTerm]);
