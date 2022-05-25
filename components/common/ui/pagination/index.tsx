@@ -41,10 +41,10 @@ const Pagination = ({
   const populateOnFirstLoad = (callBackFn: Function) => {
     const firstPageIndex = (defaultPageNumber - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
-    const paginatedArray = dataArray.slice(firstPageIndex, lastPageIndex);
+    const paginatedArray = dataArray?.slice(firstPageIndex, lastPageIndex);
     console.log('slicedArray1', dataArray);
     
-    callBackFn(paginatedArray);
+    paginatedArray && callBackFn(paginatedArray);
   };
 
   const isPaginationRequired = () => {
@@ -63,18 +63,18 @@ const Pagination = ({
     const pageNum = currentPage - 1;
     const firstPageIndex = (pageNum - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
-    const paginatedArray = dataArray.slice(firstPageIndex, lastPageIndex);
+    const paginatedArray = dataArray?.slice(firstPageIndex, lastPageIndex);
     setCurrentPage(pageNum);
-    callBackFn(paginatedArray);
+    paginatedArray && callBackFn(paginatedArray);
   };
 
   const pageUp = (callBackFn: Function) => {
     const pageNum = currentPage + 1;
     const firstPageIndex = (pageNum - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
-    const paginatedArray = dataArray.slice(firstPageIndex, lastPageIndex);
+    const paginatedArray = dataArray?.slice(firstPageIndex, lastPageIndex);
     setCurrentPage(pageNum);
-    callBackFn(paginatedArray);
+    paginatedArray && callBackFn(paginatedArray);
   };
 
   const viewAllData = (callBackFn: Function) => {

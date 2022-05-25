@@ -61,3 +61,9 @@ const dateOptions: any = {
 };
 export const formateDate = (date: string) =>
   new Date(date).toLocaleDateString("en-US", dateOptions);
+
+export const reviewStarAvg = (arr: any) => {
+  const sum = arr?.reduce((acc: never, cur: never) => acc + cur);
+  const average = sum / arr.length;
+  return average;
+};
