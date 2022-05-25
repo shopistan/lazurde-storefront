@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProductCard from "components/common/product-card/ProductCard";
-import { productCardData } from "lib/mock-data/data";
 import FilterBar from "./filter-sorting-bar";
 import useWindowSize from "lib/utils/useWindowSize";
 import FilterBarMobile from "./filter-bar-mobile";
@@ -12,7 +11,6 @@ import BreadCrumbs from "components/common/ui/bread-crumbs";
 import { ImageType } from "lib/types/common";
 import { desktopScreenSize } from "lib/utils/common";
 import Pagination from "../ui/pagination";
-
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -34,12 +32,24 @@ interface ProductCardProps {
   currency?: string;
 }
 
+type SelectedFilterProps = {
+  [key: string]: {
+    name: string;
+    selectedOptions: { [key: string]: { selected: boolean; name: string } };
+  };
+};
+type SortingFilterProps = {
+  label: string;
+  value: string;
+};
+
 interface ProductListingProps {
   pageName?: string | "";
   productDataArray: [];
   categoryName: string;
   filterList: [];
   showBreadcrumb: boolean;
+  searchTerm: string;
 }
 
 const ProductListing = ({
@@ -48,15 +58,22 @@ const ProductListing = ({
   categoryName = "",
   filterList,
   showBreadcrumb = true,
+  searchTerm = "",
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState } = useContext(AppContext);
+  const {
+    appState,
+    totalSelectedFilterCount,
+    setTotalSelectedFilterCount,
+    selectedFilters,
+    setSelectedFilters,
+  } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const dummyProductData = productCardData || [];
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [filteredProductData, setFilteredProductData] = useState<any>("");
-
+  const [filteredListData, setFilteredListData] = useState<any>([]);
   const [currentProductData, setCurrentProductData] = useState([]);
+  // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
 
   const _arabicProductCardData = t(
     "arabicProductCardData",
@@ -65,6 +82,13 @@ const ProductListing = ({
   );
 
   useEffect(() => {
+    setTotalSelectedFilterCount(0);
+    setSelectedFilters({});
+  }, [searchTerm]);
+
+  useEffect(() => {
+    createFilterBarList(productDataArray);
+    setFilteredProductData("");
     // console.log(
     //   "something",
     //   fetchCategoryProducts({
@@ -88,38 +112,48 @@ const ProductListing = ({
     // console.log("something",arr)
     // console.log(performFilteredSearch({ filters: [`Gold`] }));
     // console.log("categoryName",categoryName)
-
-    const filteredArray = productDataArray.filter((item: { Brand: string }) => {
-      if (appState.brand === `L'azurde`) {
-        return item;
-      }
-      if (appState.brand === `Miss L'`) {
-        return (
-          item?.Brand?.toLowerCase().includes(`miss`) ||
-          item?.Brand?.toLowerCase().includes(`miss'l`) ||
-          item?.Brand?.toLowerCase().includes(`miss l'`)
-        );
-      }
-      if (appState.brand === "Kenaz") {
-        return item?.Brand?.toLowerCase().includes("kenaz");
-      }
-      return false;
-    });
-    setInitialProductData([...filteredArray]);
-    setCurrentProductData([...filteredArray]);
+    if (productDataArray && productDataArray?.length > 0) {
+      const filteredArray = productDataArray?.filter(
+        (item: {
+          Brand: string;
+          isLazurde: string;
+          isMissL: string;
+          isKenaz: string;
+        }) => {
+          if (appState.brand === `L'azurde`) {
+            return item;
+          }
+          if (appState.brand === `Miss L'`) {
+            return item?.isMissL;
+          }
+          if (appState.brand === "Kenaz") {
+            return item?.isKenaz;
+          }
+          return false;
+        }
+      );
+      setInitialProductData([...filteredArray]);
+      setCurrentProductData([...filteredArray]);
+    }
   }, [productDataArray]);
 
-  const applyFilters = async (selectedFilters: any = {}) => {
-    if (Object.keys(selectedFilters).length < 1) {
-      return setFilteredProductData("");
+  useEffect(() => {
+    initialProductData &&
+      initialProductData?.length > 0 &&
+      createFilterBarList(initialProductData);
+  }, [initialProductData]);
+
+  const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
+    if (Object.keys(selectedFilters)?.length < 1) {
+      return null;
     }
 
     let payload: any[] = [];
 
-    Object.keys(selectedFilters).forEach((filterType, index) => {
+    Object.keys(selectedFilters)?.forEach((filterType, index) => {
       const orFilters: any[] = [];
 
-      Object.keys(selectedFilters[filterType]?.selectedOptions).forEach(
+      Object.keys(selectedFilters[filterType]?.selectedOptions)?.forEach(
         (filterOption) => {
           const facet = `${selectedFilters[filterType]?.name}: ${selectedFilters[filterType]?.selectedOptions[filterOption]?.name}`;
           orFilters.push(facet);
@@ -129,73 +163,127 @@ const ProductListing = ({
       payload.push(orFilters);
     });
 
-    // console.log("categoryName", categoryName);
-    // payload = ["isMain: true"];
-    const filteredData = await performFilteredSearch({
-      query: "",
+    const filteredData: any = await performFilteredSearch({
+      query: showBreadcrumb ? categoryName : searchTerm,
       filters: payload,
     });
-    // const filteredData: [] = [];
-    setFilteredProductData(filteredData);
+    const filteredArray = filteredData?.filter(
+      (item: {
+        Brand: string;
+        isLazurde: string;
+        isMissL: string;
+        isKenaz: string;
+      }) => {
+        if (appState.brand === `L'azurde`) {
+          return item;
+        }
+        if (appState.brand === `Miss L'`) {
+          return item?.isMissL;
+        }
+        if (appState.brand === "Kenaz") {
+          return item?.isKenaz;
+        }
+        return false;
+      }
+    );
+    return filteredArray;
   };
 
-  const onSortingChange = (sortedValue: any = {}) => {
+  const onSortingChange = (sortedValue: any = {}, filterdArray: []) => {
     const pData =
-      filteredProductData.length > 0 ? filteredProductData : initialProductData;
+      filterdArray && Array.isArray(filterdArray)
+        ? filterdArray
+        : initialProductData;
     const sortedArray: any[] = [];
-    if (sortedValue.value !== "most viewed")
-      setFilteredProductData(filteredProductData);
-
-    if (sortedValue.value === "most viewed") {
-      pData.map((item: any) => {
-        if (item.IsMostViewed === true) {
-          sortedArray.unshift(item);
-        } else {
-          sortedArray.push(item);
-        }
-      });
-      if (sortedArray.length > 0) {
-        setFilteredProductData(sortedArray);
-      } else {
-        setFilteredProductData(pData);
-      }
+    if (sortedValue?.value !== "most viewed") {
+      return pData;
     }
 
-    // if (sortedValue.length < 1) {
-    //   return setCurrentProductData(productDataArray);
-    // }
+    if (sortedValue?.value === "most viewed") {
+      pData.map((item: any) => {
+        if (item?.IsMostViewed === true) {
+          sortedArray?.unshift(item);
+        } else {
+          sortedArray?.push(item);
+        }
+      });
+      if (sortedArray?.length > 0) {
+        return sortedArray;
+      } else {
+        return pData;
+      }
+    }
+  };
 
-    // const payload = [];
+  const updateProductArray = async (
+    selectedFilters: SelectedFilterProps,
+    sortingValue: SortingFilterProps
+  ) => {
+    const filteredArray: any = await applyFilters(selectedFilters);
+    const sortedArray = await onSortingChange(sortingValue, filteredArray);
+    setFilteredProductData(sortedArray);
+  };
 
-    // Object.keys(sortedValue).forEach((filterType, index) => {
-    //   const orFilters: any[] = [];
-    //   Object.keys(sortedValue[filterType]).forEach((filterOption) => {
-    //     const facet = `${filterType}: ${filterOption}`;
-    //     orFilters.push(facet);
-    //   });
-    //   payload.push(orFilters);
-    // });
+  const createFilterBarList = (dataArray: any[]) => {
+    const newFilterList: {
+      filterName: string;
+      filterOptions: { optionName: string }[];
+    }[] = [];
+    filterList &&
+      Array.isArray(filterList) &&
+      filterList?.length > 0 &&
+      filterList?.map((filterItem: { filterName: string }) => {
+        const name = filterItem?.filterName;
+        const filterOptions: { optionName: string }[] = [];
 
-    // console.table(payload);
+        dataArray?.map((itemData: { [key: string]: string }) => {
+          if (itemData?.hasOwnProperty(name)) {
+            let itemToAdd = itemData?.[name];
+            let nameSplit: string[] = [];
+            if (name === "Category") nameSplit = itemData?.[name].split(">");
 
-    //const filteredData = performFilteredSearch({filters: payload})
-    // const filteredData: [] = [];
-    // setCurrentProductData(filteredData);
+            const nameExists = filterOptions?.find(
+              (option: { optionName: string }) => {
+                if (name === "Category") {
+                  return option?.optionName === nameSplit[nameSplit.length - 1];
+                }
+                return option?.optionName === itemToAdd;
+              }
+            );
+            if (nameExists === undefined && name === "Category") {
+              itemToAdd = nameSplit[nameSplit.length - 1];
+            }
+            nameExists === undefined &&
+              itemToAdd &&
+              filterOptions.push({ optionName: itemToAdd });
+          }
+        });
+        if (filterOptions.length > 0) {
+          newFilterList.push({
+            filterName: name,
+            filterOptions: filterOptions,
+          });
+        }
+      });
+    setFilteredListData(newFilterList);
   };
 
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
-        {showBreadcrumb && <BreadCrumbs pageName={pageName} />}
+        {(showBreadcrumb || totalSelectedFilterCount > 0) && (
+          <BreadCrumbs pageName={pageName} />
+        )}
 
         <Pagination
+          pKey={productDataArray}
           paginationClass={styles["div-pagination"]}
           defaultPageNumber={1}
           pageSize={5}
           totalSize={
             Array.isArray(filteredProductData)
-              ? filteredProductData.length
-              : initialProductData.length
+              ? filteredProductData?.length
+              : initialProductData?.length
           }
           dataArray={
             Array.isArray(filteredProductData)
@@ -215,19 +303,21 @@ const ProductListing = ({
           <>
             {width <= desktopScreenSize ? (
               <FilterBarMobile
-                onApplyFilters={applyFilters}
-                onSortingChange={onSortingChange}
-                filterList={filterList}
+                onApplyFilters={updateProductArray}
+                onSortingChange={updateProductArray}
+                onClear={updateProductArray}
+                filterList={filteredListData}
               ></FilterBarMobile>
             ) : (
               <FilterBar
-                onApplyFilters={applyFilters}
-                onSortingChange={onSortingChange}
-                filterList={filterList}
+                onApplyFilters={updateProductArray}
+                onSortingChange={updateProductArray}
+                onClear={updateProductArray}
+                filterList={filteredListData}
               ></FilterBar>
             )}
             <div className={styles["product-listing__cards"]}>
-              {currentProductData && currentProductData.length > 0 ? (
+              {currentProductData && currentProductData?.length > 0 ? (
                 currentProductData?.map(
                   (data: ProductCardProps, index: number) => {
                     const {
@@ -292,7 +382,7 @@ const ProductListing = ({
                   }
                 )
               ) : (
-                <div className={styles['div-no-items']}>
+                <div className={styles["div-no-items"]}>
                   <span>no items found</span>
                 </div>
               )}

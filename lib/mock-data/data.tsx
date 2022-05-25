@@ -545,3 +545,18 @@ export const socialIconSize = [
     mobileWidth: 20,
   },
 ];
+
+export const reviewFilters = [
+  {
+    label: "recent",
+  },
+  {
+    label: "feature",
+  },
+  {
+    label: "highest",
+  },
+  {
+    label: "lowest",
+  },
+];

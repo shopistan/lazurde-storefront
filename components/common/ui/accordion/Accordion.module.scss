@@ -108,3 +108,45 @@
     padding-inline-start: 8px;
   }
 }
+
+.accordion-help {
+  padding-inline: 0px;
+  background-color: white;
+  padding-block: 24px;
+  margin-bottom: 8px;
+  padding-inline: 24px;
+
+  @media (min-width: 1024px) {
+    margin-bottom: 0;
+    padding-block: 0;
+    padding-inline: 0;
+  }
+  .div-heading {
+    border: none;
+
+    .heading-text {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
+  }
+
+  .menu__links {
+    padding-top: 16px !important;
+  }
+  .custom-content {
+    padding-inline: 16px;
+    padding-block-start: 25px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+}
+
+.arrowDown-open {
+  transform: rotate(180deg);
+}

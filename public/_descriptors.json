@@ -130,20 +130,6 @@
                 "default": ""
               }
             },
-            "favIconSrc": {
-              "type": "Image",
-              "label": "Fav Icon",
-              "url": {
-                "type": "String",
-                "label": "Fav Icon URL",
-                "default": ""
-              },
-              "altText": {
-                "type": "String",
-                "label": "Alt Text",
-                "default": ""
-              }
-            },
             "cardTitle": {
               "type": "String",
               "label": "Card Title",
@@ -298,6 +284,7 @@
         "url": { "type": "String", "label": "URL", "default": "" },
         "altText": { "type": "String", "label": "Alt Text", "default": "" }
       },
+      "title": { "type": "String", "label": "Title", "default": "" },
       "services": {
         "type": "Array",
         "label": "Services",
@@ -307,7 +294,6 @@
           "type": "Shape",
           "default": {},
           "children": {
-            "title": { "type": "String", "label": "Title", "default": "" },
             "icon": {
               "type": "Image",
               "label": "Icon",
@@ -326,6 +312,13 @@
             "iconText": {
               "type": "String",
               "label": "Icon Text",
+              "default": ""
+            },
+            "url": { "type": "String", "label": "Redirect URL", "default": "" },
+            "width": { "type": "String", "label": "Icon Width", "default": "" },
+            "height": {
+              "type": "String",
+              "label": "Icon Height",
               "default": ""
             }
           }
@@ -917,6 +910,146 @@
       "modalTitle": { "type": "String", "label": "Title", "default": "" },
       "modalText": { "type": "String", "label": "Text", "default": "" },
       "modalButton": { "type": "String", "label": "Button Text", "default": "" }
+    }
+  },
+  {
+    "type": "Component",
+    "id": "TermCondtion",
+    "label": "TermCondtion",
+    "allowNestedComponents": false,
+    "attributes": {
+      "hyperLinks": {
+        "type": "Array",
+        "label": "HyperLink Array",
+        "default": [],
+        "allowNestedComponents": false,
+        "children": {
+          "type": "Shape",
+          "default": {},
+          "children": {
+            "accordion": {
+              "type": "Array",
+              "label": "Accordion Array",
+              "default": [],
+              "allowNestedComponents": false,
+              "children": {
+                "type": "Shape",
+                "default": {},
+                "children": {
+                  "heading": {
+                    "type": "String",
+                    "label": "Question ",
+                    "default": ""
+                  },
+                  "text": {
+                    "type": "RichText",
+                    "label": "Answer",
+                    "default": ""
+                  }
+                }
+              }
+            },
+            "name": {
+              "type": "String",
+              "label": "Hyperlink Name",
+              "default": ""
+            },
+            "content": {
+              "type": "RichText",
+              "label": "Hyperlink Content",
+              "default": ""
+            },
+            "icon": {
+              "type": "Image",
+              "label": "Icon",
+              "url": { "type": "String", "label": "URL", "default": "" },
+              "altText": {
+                "type": "String",
+                "label": "Alt Text",
+                "default": ""
+              }
+            },
+            "width": {
+              "type": "Number",
+              "label": "Icon Width",
+              "default": null
+            },
+            "height": {
+              "type": "Number",
+              "label": "Icon Height",
+              "default": null
+            }
+          }
+        }
+      },
+      "sideBarBgcolor": {
+        "type": "String",
+        "label": "Content Block Background Color",
+        "default": ""
+      },
+      "contentBgcolor": {
+        "type": "String",
+        "label": "Content Block Background Color",
+        "default": ""
+      },
+      "title": { "type": "String", "label": "Title", "default": "" }
+    }
+  },
+  {
+    "type": "Component",
+    "id": "CelebrityChoice",
+    "label": "Celebrity Choice",
+    "allowNestedComponents": false,
+    "attributes": {
+      "bannerImage": {
+        "type": "Image",
+        "label": "Banner Image",
+        "url": { "type": "String", "label": "URL", "default": "" },
+        "altText": { "type": "String", "label": "Alt Text", "default": "" }
+      },
+      "heading": { "type": "String", "label": "Heading", "default": "" },
+      "celebrities": {
+        "type": "Array",
+        "label": "Celebrities",
+        "default": [],
+        "allowNestedComponents": false,
+        "children": {
+          "type": "Shape",
+          "default": {},
+          "children": {
+            "celebrityImage": {
+              "type": "Image",
+              "label": "Celebrity Image",
+              "url": { "type": "String", "label": "URL", "default": "" },
+              "altText": {
+                "type": "String",
+                "label": "Alt Text",
+                "default": ""
+              }
+            },
+            "celebritySign": {
+              "type": "Image",
+              "label": "Celebrity Sign",
+              "url": { "type": "String", "label": "URL", "default": "" },
+              "altText": {
+                "type": "String",
+                "label": "Alt Text",
+                "default": ""
+              }
+            }
+          }
+        }
+      },
+      "detailsHeading": {
+        "type": "String",
+        "label": "Details Heading",
+        "default": ""
+      },
+      "detailsDescription": {
+        "type": "RichText",
+        "label": "Details Description",
+        "default": ""
+      }
     }
   }
 ]

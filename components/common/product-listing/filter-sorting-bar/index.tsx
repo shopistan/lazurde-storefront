@@ -98,6 +98,8 @@ const filterListData = [
   },
 ];
 
+type optionProps = { label?: string; img?: string; value?: string };
+
 type FilterListProps = {
   filterName: string;
   filterOptions: { optionName: string }[];
@@ -114,6 +116,7 @@ interface FilterBarProps {
   headerId?: string;
   onApplyFilters?: Function;
   onSortingChange?: Function;
+  onClear?: Function;
 }
 
 interface DropdownDataProps {
@@ -130,29 +133,42 @@ const FilterBar: FC<FilterBarProps> = ({
   filterList = filterListData,
   onApplyFilters = () => {},
   onSortingChange = () => {},
+  onClear = () => {},
 }): JSX.Element => {
-  const { appState } = useContext(AppContext);
+  const {
+    appState,
+    totalSelectedFilterCount,
+    setTotalSelectedFilterCount,
+    selectedFilters,
+    setSelectedFilters,
+  } = useContext(AppContext);
   const { t } = useTranslation("common");
-  let link: any = useRef(
-    Array.isArray(filterList) &&
-      filterList.length > 0 &&
-      filterList.map(() => React.createRef())
-  );
+  const [currentSortingValue, setCurrentSortingValue] = useState<any>("");
+
+  const onApplyButtonClick = (selectedFilter: SelectedFilterProps) => {
+    onApplyFilters(selectedFilter, currentSortingValue);
+  };
+
+  let link: any = useRef([1, 2, 3, 4, 5, 6, 7].map(() => React.createRef()));
 
   const _arabicFilterBarData = t(
     "arabicFilterList",
     {},
     { returnObjects: true }
   );
-  const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
+  const _arabicSortingFilter: optionProps[] = t(
+    "sortingFilter",
+    {},
+    { returnObjects: true }
+  );
 
   const [currentFilterList, setCurrentFilterList] = useState<string | object>(
     filterList
   );
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
-  const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
-  const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  // const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
+  // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const [linkRefs, setLinkRefs] = useState(link);
   const [width] = useWindowSize();
   const [optionData, setOptionData] = useState<{
@@ -181,15 +197,18 @@ const FilterBar: FC<FilterBarProps> = ({
   }, [selectedFilters]);
 
   useEffect(() => {
+    setCurrentSortingValue("");
+    setSelectedFilters({});
     setOptionData({
-      data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
-      defaultValue: appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين",
+      data: _arabicSortingFilter,
+      defaultValue:
+        appState?.lang === "en" ? "Our Recommendation" : "our recommendation",
     });
 
     if (appState.lang === "en") {
       setCurrentFilterList(filterList);
     } else {
-      setCurrentFilterList(_arabicFilterBarData);
+      // setCurrentFilterList(_arabicFilterBarData);
     }
   }, [appState]);
 
@@ -215,7 +234,11 @@ const FilterBar: FC<FilterBarProps> = ({
                   role={"links"}
                   key={index}
                   className={styles["links"]}
-                  ref={linkRefs?.current && linkRefs?.current[index]}
+                  ref={
+                    linkRefs && linkRefs?.current
+                      ? linkRefs?.current[index]
+                      : null
+                  }
                   data-has-count={selectedFilterCount > 0}
                   onMouseOver={(event) => {
                     event.stopPropagation();
@@ -276,7 +299,7 @@ const FilterBar: FC<FilterBarProps> = ({
             buttonSize={"sm"}
             onClick={() => {
               setSelectedFilters && setSelectedFilters({});
-              onApplyFilters && onApplyFilters({});
+              onClear && onClear({}, currentSortingValue);
             }}
           />
         </div>
@@ -285,10 +308,13 @@ const FilterBar: FC<FilterBarProps> = ({
           data-opened={isOpened?.opened}
         >
           <BorderlessSelect
-            options={optionData?.data}
+            options={_arabicSortingFilter}
             defaultValue={optionData?.defaultValue}
             selectedLabel={appState?.lang === "en" ? "Sort By: " : "بسح فنص:"}
-            onChange={onSortingChange}
+            onChange={(value: { label: string; value: string }) => {
+              setCurrentSortingValue(value);
+              onSortingChange && onSortingChange(selectedFilters, value);
+            }}
           ></BorderlessSelect>
         </div>
       </div>
@@ -302,7 +328,7 @@ const FilterBar: FC<FilterBarProps> = ({
           categoryData={dropdownData}
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
-          onApplyFilters={onApplyFilters}
+          onApplyFilters={onApplyButtonClick}
         ></DropDown>
       </div>
       <div

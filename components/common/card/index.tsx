@@ -42,17 +42,6 @@ const Cards = ({
       >
         {cardImage?.url && (
           <div className={styles["image-section"]}>
-            <div className={styles["fav-icon"]}>
-              {favIconSrc && (
-                <Image
-                  src={favIconSrc?.url || ""}
-                  alt={favIconSrc.altText || "fav-icon"}
-                  layout="fixed"
-                  width={20}
-                  height={20}
-                />
-              )}
-            </div>
             <div className={styles["img-wrapper"]}>
               <Image
                 data-testid={"card-img"}
