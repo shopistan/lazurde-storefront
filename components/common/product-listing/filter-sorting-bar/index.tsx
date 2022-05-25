@@ -135,8 +135,13 @@ const FilterBar: FC<FilterBarProps> = ({
   onSortingChange = () => {},
   onClear = () => {},
 }): JSX.Element => {
-  const { appState, totalSelectedFilterCount, setTotalSelectedFilterCount } =
-    useContext(AppContext);
+  const {
+    appState,
+    totalSelectedFilterCount,
+    setTotalSelectedFilterCount,
+    selectedFilters,
+    setSelectedFilters,
+  } = useContext(AppContext);
   const { t } = useTranslation("common");
   const [currentSortingValue, setCurrentSortingValue] = useState<any>("");
 
@@ -162,7 +167,7 @@ const FilterBar: FC<FilterBarProps> = ({
   );
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
-  const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
+  // const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
   // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const [linkRefs, setLinkRefs] = useState(link);
   const [width] = useWindowSize();

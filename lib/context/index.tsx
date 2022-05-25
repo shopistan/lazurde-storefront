@@ -42,7 +42,15 @@ const ContextProvider: FC = ({ children }) => {
     setAppState({ lang, region, channel, locale, brand });
   };
 
+  type SelectedFilterProps = {
+    [key: string]: {
+      name: string;
+      selectedOptions: { [key: string]: { selected: boolean; name: string } };
+    };
+  };
+
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
 
   return (
     <AppContext.Provider
@@ -53,6 +61,8 @@ const ContextProvider: FC = ({ children }) => {
         setSearchWrapperPosition,
         totalSelectedFilterCount,
         setTotalSelectedFilterCount,
+        selectedFilters,
+        setSelectedFilters,
       }}
     >
       {children}
