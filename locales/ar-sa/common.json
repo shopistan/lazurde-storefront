@@ -751,27 +751,22 @@
   "sortingFilter": [
     {
       "label": "الجديد",
-      "img": "",
-      "value": "الجديد"
+      "value": "our recommendation"
     },
     {
       "label": "أفضل البائعين",
-      "img": "",
-      "value": "أفضل البائعين"
+      "value": "most viewed"
     },
     {
       "label": "أكبر توفير",
-      "img": "",
       "value": "أكبر توفير"
     },
     {
       "label": "الأكثر مشاهدة",
-      "img": "",
       "value": "الأكثر مشاهدة"
     },
     {
       "label": "اسم المنتج",
-      "img": "",
       "value": "اسم المنتج"
     }
   ],
