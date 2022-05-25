@@ -98,6 +98,8 @@ const filterListData = [
   },
 ];
 
+type optionProps = { label?: string; img?: string; value?: string };
+
 type FilterListProps = {
   filterName: string;
   filterOptions: { optionName: string }[];
@@ -158,7 +160,7 @@ const FilterBar: FC<FilterBarProps> = ({
     {},
     { returnObjects: true }
   );
-  const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
+  const _arabicSortingFilter: optionProps[] = t("sortingFilter", {}, { returnObjects: true });
 
   const [currentFilterList, setCurrentFilterList] = useState<string | object>(
     filterList
@@ -195,16 +197,18 @@ const FilterBar: FC<FilterBarProps> = ({
   }, [selectedFilters]);
 
   useEffect(() => {
+    setCurrentSortingValue("")
+    setSelectedFilters({})
     setOptionData({
-      data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
+      data: _arabicSortingFilter,
       defaultValue:
-        appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين",
+        appState?.lang === "en" ? "Our Recommendation" : "our recommendation",
     });
 
     if (appState.lang === "en") {
       setCurrentFilterList(filterList);
     } else {
-      setCurrentFilterList(_arabicFilterBarData);
+      // setCurrentFilterList(_arabicFilterBarData);
     }
   }, [appState]);
 
@@ -304,7 +308,7 @@ const FilterBar: FC<FilterBarProps> = ({
           data-opened={isOpened?.opened}
         >
           <BorderlessSelect
-            options={optionData?.data}
+            options={_arabicSortingFilter}
             defaultValue={optionData?.defaultValue}
             selectedLabel={appState?.lang === "en" ? "Sort By: " : "بسح فنص:"}
             onChange={(value: { label: string; value: string }) => {

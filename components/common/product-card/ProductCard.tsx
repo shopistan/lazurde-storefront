@@ -12,6 +12,8 @@ import { AppContext } from "lib/context";
 import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
 import { desktopScreenSize } from "lib/utils/common";
+import useTranslation from "next-translate/useTranslation";
+
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -48,6 +50,7 @@ const ProductCard = ({
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const [fill, setFill] = useState(false);
+  const { t } = useTranslation("common");
   // const [showWishListIcon, setShowWishListIcon] = useState(false);
 
   const handleAddToCart = async () => {
@@ -137,14 +140,16 @@ const ProductCard = ({
           >
             {appState?.lang === "en"
               ? "online exclusive"
-              : "حصريا على الانترنت"}
+              : t("onlineExclusiveTag")}
           </Label>
         )}
         {showATC && (
           <div className={styles["product-card__addtocart-btn"]}>
             <Button
               buttonStyle="black"
-              buttonText={"add to cart"}
+              buttonText={
+                appState?.lang === "en" ? "add to cart" : t("addToCartBtnText")
+              }
               buttonSize={"sm"}
               onClick={() => {
                 handleAddToCart();

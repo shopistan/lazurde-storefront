@@ -4,14 +4,15 @@ import styles from "./style.module.scss";
 import { getReviews } from "lib/utils/reviews";
 import Label from "components/common/ui/label";
 import StarRating from "components/common/ui/star-ratings";
-import { formateDate } from "lib/utils/common";
+import { formateDate, reviewStarAvg } from "lib/utils/common";
 import WriteAReview from "./write-review";
 import ReviewTabs from "./review-tabs";
 
-const Reviews = () => {
+const Reviews = (): JSX.Element => {
   const [reviewsData, setReviewsData] = useState<any>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [filterData, setFilterData] = useState(reviewsData);
+  const [totalRating, setTotalRating] = useState(0);
 
   useEffect(() => {
     const _review = async () => {
@@ -65,9 +66,38 @@ const Reviews = () => {
     }
   };
 
+  useEffect(() => {
+    let ratings: any = [];
+    reviewsData &&
+      reviewsData.length > 0 &&
+      reviewsData.forEach((element: any) => {
+        return ratings.push(element?.review?.rating);
+      });
+    const ratingAvg = ratings && ratings.length > 0 && reviewStarAvg(ratings);
+    ratingAvg && setTotalRating(ratingAvg);
+  }, [reviewsData]);
+
   return (
     <>
       <div id="google_translate_element" className={styles["reviews-wrapper"]}>
+        <div className={styles["review-summary"]}>
+          {reviewsData && reviewsData.length > 0 && (
+            <Label className={styles["total-review-label"]}>
+              {`${reviewsData?.length} customer reviews`}
+            </Label>
+          )}
+          <div className={styles["review-summary-stars"]}>
+            <StarRating
+              count={5}
+              rating={totalRating}
+              starWidth={16.67}
+              starHeight={16.67}
+            />
+            <Label
+              className={styles["total-rating"]}
+            >{`${totalRating} rating`}</Label>
+          </div>
+        </div>
         <div className={styles["write-review-btn"]}>
           <button
             onClick={() => {

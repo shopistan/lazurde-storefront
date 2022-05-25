@@ -108,8 +108,6 @@ interface FilterBarMobileProps {
   onApplyFilters: Function;
   onSortingChange: Function;
   onClear: Function;
-  // totalSelectedFilterCount?: number;
-  // setTotalSelectedFilterCount?: Function;
 }
 interface FilterAccordionProps {
   filterList: FilterListProps[] | string;
@@ -128,8 +126,6 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
   onApplyFilters = () => {},
   onSortingChange = () => {},
   onClear = () => {},
-  // totalSelectedFilterCount = 0,
-  // setTotalSelectedFilterCount = () => {},
 }): JSX.Element => {
   const { t } = useTranslation("common");
   const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
@@ -156,30 +152,25 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
     string | FilterListProps[]
   >(filterList);
 
-  // useEffect(() => {
-  //   sortingSelected &&
-  //     onSortingChange &&
-  //     onSortingChange(selectedFilters, { value: sortingSelected });
-  // }, [sortingSelected]);
-
   const onApplyButtonClick = (selectedFilter: SelectedFilterProps) => {
     onApplyFilters(selectedFilter, { value: sortingSelected });
   };
 
   useEffect(() => {
+    setSelectedFilters({})
     setSortingSelected(
-      appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين"
+      appState?.lang === "en" ? "Our Recommendation" : "our recommendation"
     );
     setOptionData({
-      data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
+      data:_arabicSortingFilter,
       defaultValue:
-        appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين",
+        appState?.lang === "en" ? "Our Recommendation" : "our recommendation",
     });
 
     if (appState.lang === "en") {
       setCurrentFilterList(filterList);
     } else {
-      setCurrentFilterList(_arabicFilterBarData);
+      // setCurrentFilterList(_arabicFilterBarData);
     }
   }, [appState]);
 
