@@ -18,28 +18,34 @@ const SignupSchema = Yup.object().shape({
     .matches(phoneRegExp, "Phone number is not valid"),
 });
 
-const ReviewForm = ({ rating }: any): JSX.Element => {
+const ReviewForm = ({ rating, productId = 5151231 }: any): JSX.Element => {
   const [fileUpload, setFileUpload] = useState<any>([{ fileArray: {} }]);
 
   const renderReviewApi = async (values: any) => {
-    const payload: any = {
-      productId: 123123,
-      author: `${values?.firstName} ${values?.lastName}`,
-      email: values?.email,
-      location: "KSA",
-      reviewRating: rating ? rating : null,
-      reviewTitle: values?.review,
-      reviewMessage: values?.review,
-      reviewRecommendProduct: false,
-      productName: "Product's Title",
-      productSKU: "45634",
-      productImageUrl: "https://example.com/image/product-image.png",
-      productUrl: "https://example.com/products/product-image.png",
-      reviewSource: "api",
-      photo0: null,
-      video0: null,
-    };
-    const response = await writeReview(payload);
+    let formData: any = new FormData();
+    formData.append("productId", productId);
+    formData.append("author", `${values?.firstName} ${values?.lastName}`);
+    formData.append("email", values?.email);
+    formData.append("location", "KSA");
+    formData.append("reviewRating", rating ? rating : null);
+    formData.append("reviewTitle", values?.review);
+    formData.append("reviewMessage", values?.review);
+    formData.append("reviewRecommendProduct", false);
+    formData.append("productName", "Product's Title");
+    formData.append("productSKU", "45634");
+    formData.append(
+      "productImageUrl",
+      "https://example.com/image/product-image.png"
+    );
+    formData.append(
+      "productUrl",
+      "https://example.com/products/product-image.png"
+    );
+    formData.append("reviewSource", "api");
+    formData.append("photo0", null);
+    formData.append("video0", null);
+
+    const response = await writeReview(formData);
   };
 
   return (

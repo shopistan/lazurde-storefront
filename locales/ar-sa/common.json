@@ -57,15 +57,51 @@
   "linksProps": [
     {
       "name": "ءيش لك قوست",
-      "text": "فافزلا L’azurde فاشكتسا"
+      "content": "فافزلا L’azurde فاشكتسا",
+
+      "accordionProps": [
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        }
+      ]
     },
     {
       "name": "ءيش لك قوست",
-      "text": "فافزلا L’azurde فاشكتسا"
+      "content": "فافزلا L’azurde فاشكتسا",
+
+      "accordionProps": [
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        }
+      ]
     }
   ],
-
-  "back-button": "ءيش لك قوست",
 
   "accordionProps": [
     {
@@ -85,6 +121,8 @@
       "text": "فافزلا L’azurde فاشكتسا"
     }
   ],
+
+  "back-button": "ءيش لك قوست",
 
   "termTitle": "ىكل رخدي",
   "sampleTranslationText": "يوضح هذا النص ترجمة اللغة عند تغيير اللغة. هذا ليس نصًا تم إنشاؤه بواسطة XM ، لا يدعم XM الصفحات متعددة اللغات حتى الآن.",

@@ -92,7 +92,7 @@ const Reviews = () => {
               return (
                 <div className={styles["review"]} key={index}>
                   <Label className={styles["customer-name"]}>
-                    {customer?.name?.replace(/"/g, "")}
+                    {review?.author?.replace(/"/g, "")}
                   </Label>
                   <div className={styles["review-rating"]}>
                     <StarRating count={5} rating={review?.rating} />
