@@ -82,14 +82,15 @@ const ProductListing = ({
   );
 
   useEffect(() => {
-    console.log("component mounted");
-    updateProductArray(
-      {},
-      {
-        label: "",
-        value: "",
-      }
-    );
+    if (searchTerm) {
+      updateProductArray(
+        {},
+        {
+          label: "",
+          value: "",
+        }
+      );
+    }
     setTotalSelectedFilterCount(0);
     setSelectedFilters({});
   }, [searchTerm]);

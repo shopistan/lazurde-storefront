@@ -40,8 +40,7 @@ const Pagination = ({
   const totalPages = Math.ceil(totalSize / pageSize);
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
-  console.log('isSingleItem', isSingleItem);
-  
+
   const populateOnFirstLoad = (callBackFn: Function) => {
     const firstPageIndex = (defaultPageNumber - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
@@ -102,6 +101,8 @@ const Pagination = ({
             ? `${t("textShow")} ${totalSize} ${t("textOf")} ${totalSize}`
             : showAll
             ? `${t("textShow")} ${totalSize} ${t("textOf")} ${totalSize}`
+            : lastPageIndex < 1
+            ? ""
             : `${t("textShow")} ${pageCount} ${t("textOf")} ${totalSize}`}
         </div>
         <div className={styles["div-view-all"]} data-visible={!showAll}>
