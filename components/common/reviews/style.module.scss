@@ -78,3 +78,46 @@
     text-transform: capitalize;
   }
 }
+
+.review-summary {
+  margin-bottom: 33px;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-bottom: 52px;
+  }
+
+  .total-review-label {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28.8px;
+    letter-spacing: 0em;
+    text-align: start;
+    text-transform: capitalize;
+  }
+
+  .review-summary-stars {
+    display: flex;
+    align-items: center;
+    margin-top: 25.67px;
+
+    .total-rating {
+      margin: 0;
+      margin-inline-start: 10.67px;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0em;
+      text-align: start;
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    svg {
+      margin-inline-end: 3.33px;
+
+      &:last-child {
+        margin-inline-end: 0;
+      }
+    }
+  }
+}

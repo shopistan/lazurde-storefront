@@ -1,3 +1,4 @@
+import React from "react";
 const FilledStar = ({ ...props }) => {
   return (
     <svg
