@@ -149,18 +149,18 @@ const FilterBar: FC<FilterBarProps> = ({
     onApplyFilters(selectedFilter, currentSortingValue);
   };
 
-  let link: any = useRef(
-    Array.isArray(filterList) &&
-      filterList.length > 0 &&
-      filterList.map(() => React.createRef())
-  );
+  let link: any = useRef([1, 2, 3, 4, 5, 6, 7].map(() => React.createRef()));
 
   const _arabicFilterBarData = t(
     "arabicFilterList",
     {},
     { returnObjects: true }
   );
-  const _arabicSortingFilter: optionProps[] = t("sortingFilter", {}, { returnObjects: true });
+  const _arabicSortingFilter: optionProps[] = t(
+    "sortingFilter",
+    {},
+    { returnObjects: true }
+  );
 
   const [currentFilterList, setCurrentFilterList] = useState<string | object>(
     filterList
@@ -197,8 +197,8 @@ const FilterBar: FC<FilterBarProps> = ({
   }, [selectedFilters]);
 
   useEffect(() => {
-    setCurrentSortingValue("")
-    setSelectedFilters({})
+    setCurrentSortingValue("");
+    setSelectedFilters({});
     setOptionData({
       data: _arabicSortingFilter,
       defaultValue:
