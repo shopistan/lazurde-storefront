@@ -45,8 +45,6 @@ const Pagination = ({
     const firstPageIndex = (defaultPageNumber - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
     const paginatedArray = dataArray.slice(firstPageIndex, lastPageIndex);
-    console.log("slicedArray1", dataArray);
-
     callBackFn(paginatedArray);
   };
 
