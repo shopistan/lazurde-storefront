@@ -1051,5 +1051,57 @@
         "default": ""
       }
     }
+  },
+  {
+    "type": "Component",
+    "id": "InThePress",
+    "label": "In The Press",
+    "allowNestedComponents": false,
+    "attributes": {
+      "bannerImage": {
+        "type": "Image",
+        "label": "Banner Image",
+        "url": { "type": "String", "label": "URL", "default": "" },
+        "altText": { "type": "String", "label": "Alt Text", "default": "" }
+      },
+      "heading": { "type": "String", "label": "Heading", "default": "" },
+      "stories": {
+        "type": "Array",
+        "label": "Stories",
+        "default": [],
+        "allowNestedComponents": false,
+        "children": {
+          "type": "Shape",
+          "default": {},
+          "children": {
+            "storyImage": {
+              "type": "Image",
+              "label": "Story Image",
+              "url": { "type": "String", "label": "URL", "default": "" },
+              "altText": {
+                "type": "String",
+                "label": "Alt Text",
+                "default": ""
+              }
+            },
+            "storyTitle": {
+              "type": "String",
+              "label": "Story Title",
+              "default": ""
+            },
+            "storyHeading": {
+              "type": "String",
+              "label": "Story Heading",
+              "default": ""
+            },
+            "storyDescriptin": {
+              "type": "RichText",
+              "label": "Story Description",
+              "default": ""
+            }
+          }
+        }
+      }
+    }
   }
 ]
