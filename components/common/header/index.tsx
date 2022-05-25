@@ -31,8 +31,6 @@ const Header = ({
   const [openSearchDailog, setOpenSearchDialog] = useState(false);
   const { appState } = useContext(AppContext);
 
-  console.log("appState", appState);
-
   return (
     <div className={styles["header-container"]}>
       <PromoBar
