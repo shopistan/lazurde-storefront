@@ -19,6 +19,7 @@ const filterListData = [
 const applyFunc = jest.fn();
 const sortingFunc = jest.fn();
 const setTotalSelectedFilterCount = jest.fn()
+const setSelectedFilters = jest.fn()
 
 const renderComponent = (list = filterListData) => {
   render(
@@ -35,7 +36,7 @@ const renderComponent = (list = filterListData) => {
 const renderComponentAR = () => {
   render(
     <AppContext.Provider
-      value={{ appState: { lang: "ar" }, setTotalSelectedFilterCount }}
+      value={{ appState: { lang: "ar" }, setTotalSelectedFilterCount, setSelectedFilters }}
     >
       <FilterBar
         filterList={filterListData}

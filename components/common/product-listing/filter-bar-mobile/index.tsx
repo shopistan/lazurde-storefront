@@ -134,13 +134,19 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
     {},
     { returnObjects: true }
   );
-  const { appState, totalSelectedFilterCount, setTotalSelectedFilterCount } =
-    useContext(AppContext);
+  const {
+    appState,
+    totalSelectedFilterCount,
+    setTotalSelectedFilterCount,
+    selectedFilters,
+    setSelectedFilters,
+  } = useContext(AppContext);
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [sortingSelected, setSortingSelected] = useState("Our Recommendation");
-  const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>(
-    {}
-  );
+  // const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>(
+  //   {}
+  // );
+  // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const [optionData, setOptionData] = useState<any>([]);
   const [currentFilterList, setCurrentFilterList] = useState<
     string | FilterListProps[]

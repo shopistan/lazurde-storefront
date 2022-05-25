@@ -61,8 +61,13 @@ const ProductListing = ({
   searchTerm = "",
 }: ProductListingProps): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState, totalSelectedFilterCount, setTotalSelectedFilterCount } =
-    useContext(AppContext);
+  const {
+    appState,
+    totalSelectedFilterCount,
+    setTotalSelectedFilterCount,
+    selectedFilters,
+    setSelectedFilters,
+  } = useContext(AppContext);
   const { t } = useTranslation("common");
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [filteredProductData, setFilteredProductData] = useState<any>("");
@@ -75,6 +80,19 @@ const ProductListing = ({
     {},
     { returnObjects: true }
   );
+
+  useEffect(() => {
+    console.log("component mounted");
+    updateProductArray(
+      {},
+      {
+        label: "",
+        value: "",
+      }
+    );
+    setTotalSelectedFilterCount(0);
+    setSelectedFilters({});
+  }, [searchTerm]);
 
   useEffect(() => {
     createFilterBarList(productDataArray);
