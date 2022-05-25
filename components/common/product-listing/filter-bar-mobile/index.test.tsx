@@ -56,8 +56,8 @@ describe("filter bar mobile tests", () => {
     expect(sortBy[0]).toBeInTheDocument();
     expect(sortBy[1]).toBeInTheDocument();
 
-    expect(screen.getAllByText(/Best Sellers/i)[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/Best Sellers/i)[1]).toBeInTheDocument();
+    // expect(screen.getAllByText(/Best Sellers/i)[0]).toBeInTheDocument();
+    // expect(screen.getAllByText(/Best Sellers/i)[1]).toBeInTheDocument();
     expect(filterListData).toHaveLength(1);
 
   });
