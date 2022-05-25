@@ -15,6 +15,7 @@ interface PaginationProps {
   dataArray: [];
   onInitialize?: Function;
   children?: JSX.Element;
+  showPaginationCount?: boolean;
 }
 
 const Pagination = ({
@@ -28,6 +29,7 @@ const Pagination = ({
   dataArray,
   onInitialize,
   children,
+  showPaginationCount = true,
 }: PaginationProps): JSX.Element => {
   const ifLessThanPageSize = totalSize < pageSize;
   const [currentPage, setCurrentPage] = useState(defaultPageNumber);
@@ -40,15 +42,16 @@ const Pagination = ({
   const totalPages = Math.ceil(totalSize / pageSize);
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
-  console.log('isSingleItem', isSingleItem);
-  
+
   const populateOnFirstLoad = (callBackFn: Function) => {
     const firstPageIndex = (defaultPageNumber - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
-    const paginatedArray = dataArray.slice(firstPageIndex, lastPageIndex);
-    console.log("slicedArray1", dataArray);
+    const paginatedArray =
+      dataArray &&
+      dataArray.length > 0 &&
+      dataArray?.slice(firstPageIndex, lastPageIndex);
 
-    callBackFn(paginatedArray);
+    paginatedArray && callBackFn(paginatedArray);
   };
 
   const isPaginationRequired = () => {
@@ -67,7 +70,10 @@ const Pagination = ({
     const pageNum = currentPage - 1;
     const firstPageIndex = (pageNum - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
-    const paginatedArray = dataArray?.slice(firstPageIndex, lastPageIndex);
+    const paginatedArray =
+      dataArray &&
+      dataArray.length > 0 &&
+      dataArray?.slice(firstPageIndex, lastPageIndex);
     setCurrentPage(pageNum);
     paginatedArray && callBackFn(paginatedArray);
   };
@@ -76,7 +82,10 @@ const Pagination = ({
     const pageNum = currentPage + 1;
     const firstPageIndex = (pageNum - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
-    const paginatedArray = dataArray?.slice(firstPageIndex, lastPageIndex);
+    const paginatedArray =
+      dataArray &&
+      dataArray.length > 0 &&
+      dataArray?.slice(firstPageIndex, lastPageIndex);
     setCurrentPage(pageNum);
     paginatedArray && callBackFn(paginatedArray);
   };
@@ -96,24 +105,26 @@ const Pagination = ({
       key={pKey}
       className={`${styles["main-pagination"]} ${paginationClass}`}
     >
-      <div className={styles["div-view-count"]} data-hide={hidePagination}>
-        <div className={styles["div-show-count"]}>
-          {isSingleItem
-            ? `${t("textShow")} ${totalSize} ${t("textOf")} ${totalSize}`
-            : showAll
-            ? `${t("textShow")} ${totalSize} ${t("textOf")} ${totalSize}`
-            : `${t("textShow")} ${pageCount} ${t("textOf")} ${totalSize}`}
+      {showPaginationCount && (
+        <div className={styles["div-view-count"]} data-hide={hidePagination}>
+          <div className={styles["div-show-count"]}>
+            {isSingleItem
+              ? `${t("textShow")} ${totalSize} ${t("textOf")} ${totalSize}`
+              : showAll
+              ? `${t("textShow")} ${totalSize} ${t("textOf")} ${totalSize}`
+              : `${t("textShow")} ${pageCount} ${t("textOf")} ${totalSize}`}
+          </div>
+          <div className={styles["div-view-all"]} data-visible={!showAll}>
+            <button
+              onClick={() => {
+                viewAllData(onInitialize);
+              }}
+            >
+              {t("textViewAll")}
+            </button>
+          </div>
         </div>
-        <div className={styles["div-view-all"]} data-visible={!showAll}>
-          <button
-            onClick={() => {
-              viewAllData(onInitialize);
-            }}
-          >
-            {t("textViewAll")}
-          </button>
-        </div>
-      </div>
+      )}
 
       {children}
 
