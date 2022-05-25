@@ -72,17 +72,6 @@ const renderComponentAR = () => {
 };
 
 test("Footer testing", () => {
-  jest.mock("next/router", () => ({
-    useRouter() {
-      return {
-        route: "/",
-        pathname: "/",
-        query: "/",
-        asPath: "/",
-      };
-    },
-  }));
-
   render(
     <ContextProvider>
       <Footer

@@ -8,7 +8,7 @@ import { formateDate, reviewStarAvg } from "lib/utils/common";
 import WriteAReview from "./write-review";
 import ReviewTabs from "./review-tabs";
 
-const Reviews = () => {
+const Reviews = (): JSX.Element => {
   const [reviewsData, setReviewsData] = useState<any>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [filterData, setFilterData] = useState(reviewsData);
@@ -93,7 +93,9 @@ const Reviews = () => {
               starWidth={16.67}
               starHeight={16.67}
             />
-            <Label className={styles["total-rating"]}>{`${totalRating} rating`}</Label>
+            <Label
+              className={styles["total-rating"]}
+            >{`${totalRating} rating`}</Label>
           </div>
         </div>
         <div className={styles["write-review-btn"]}>
