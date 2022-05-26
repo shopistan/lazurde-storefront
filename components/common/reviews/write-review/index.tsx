@@ -29,17 +29,19 @@ const WriteAReview = ({
         onClick={(event) => event.stopPropagation()}
       >
         <div className={styles["review-modal_content"]}>
-          <div
-            className={styles["close-btn"]}
-            onClick={() => {
-              onClose && onClose();
-            }}
-          >
-            <CrossSmall />
+          <div className={styles["review-modal_header"]}>
+            <div
+              className={styles["close-btn"]}
+              onClick={() => {
+                onClose && onClose();
+              }}
+            >
+              <CrossSmall />
+            </div>
+            <Heading element="h3" className={styles["heading"]}>
+              write a review
+            </Heading>
           </div>
-          <Heading element="h3" className={styles["heading"]}>
-            write a review
-          </Heading>
           <div className={styles["review-sec"]}>
             <Label className={styles["rating-label"]}>Overall rating</Label>
 
