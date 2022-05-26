@@ -108,6 +108,7 @@ interface FilterBarMobileProps {
   onApplyFilters: Function;
   onSortingChange: Function;
   onClear: Function;
+  hasFilteredData: Boolean;
 }
 interface FilterAccordionProps {
   filterList: FilterListProps[] | string;
@@ -119,6 +120,7 @@ interface FilterAccordionProps {
   onApplyButtonClick: Function;
   onClear: Function;
   sortingSelected: string;
+  hasFilteredData: Boolean;
 }
 
 const FilterBarMobile: FC<FilterBarMobileProps> = ({
@@ -126,6 +128,7 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
   onApplyFilters = () => {},
   onSortingChange = () => {},
   onClear = () => {},
+  hasFilteredData,
 }): JSX.Element => {
   const { t } = useTranslation("common");
   const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
@@ -157,12 +160,12 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
   };
 
   useEffect(() => {
-    setSelectedFilters({})
+    setSelectedFilters({});
     setSortingSelected(
       appState?.lang === "en" ? "Our Recommendation" : "our recommendation"
     );
     setOptionData({
-      data:_arabicSortingFilter,
+      data: _arabicSortingFilter,
       defaultValue:
         appState?.lang === "en" ? "Our Recommendation" : "our recommendation",
     });
@@ -203,6 +206,7 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
                 onApplyButtonClick={onApplyButtonClick}
                 onClear={onClear}
                 sortingSelected={sortingSelected}
+                hasFilteredData={hasFilteredData}
               ></FilterAccordion>
             }
           ></BorderlessSelect>
@@ -249,6 +253,7 @@ const FilterAccordion = ({
   onApplyButtonClick,
   onClear,
   sortingSelected,
+  hasFilteredData,
 }: FilterAccordionProps): JSX.Element => {
   const { appState } = useContext(AppContext);
 
@@ -296,7 +301,7 @@ const FilterAccordion = ({
 
       <div
         className={styles["div-filter-btns"]}
-        data-has-count={totalSelectedFilterCount > 0}
+        data-has-count={hasFilteredData || totalSelectedFilterCount > 0}
       >
         <Button
           buttonText={appState?.lang === "en" ? "Clear All Filters" : "مسح"}
