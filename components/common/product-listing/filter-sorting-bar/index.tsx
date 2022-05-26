@@ -117,6 +117,7 @@ interface FilterBarProps {
   onApplyFilters?: Function;
   onSortingChange?: Function;
   onClear?: Function;
+  hasFilteredData: Boolean;
 }
 
 interface DropdownDataProps {
@@ -134,6 +135,7 @@ const FilterBar: FC<FilterBarProps> = ({
   onApplyFilters = () => {},
   onSortingChange = () => {},
   onClear = () => {},
+  hasFilteredData = false,
 }): JSX.Element => {
   const {
     appState,
@@ -156,6 +158,7 @@ const FilterBar: FC<FilterBarProps> = ({
     {},
     { returnObjects: true }
   );
+
   const _arabicSortingFilter: optionProps[] = t(
     "sortingFilter",
     {},
@@ -291,7 +294,7 @@ const FilterBar: FC<FilterBarProps> = ({
         <div
           className={styles["div-clear-btn"]}
           data-opened={isOpened?.opened}
-          data-has-count={totalSelectedFilterCount > 0}
+          data-has-count={hasFilteredData || totalSelectedFilterCount > 0}
         >
           <Button
             buttonText={appState?.lang === "en" ? "Clear All Filters" : "مسح"}
@@ -329,6 +332,7 @@ const FilterBar: FC<FilterBarProps> = ({
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
           onApplyFilters={onApplyButtonClick}
+          hasFilteredData={hasFilteredData}
         ></DropDown>
       </div>
       <div

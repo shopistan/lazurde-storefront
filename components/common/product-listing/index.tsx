@@ -74,6 +74,7 @@ const ProductListing = ({
   const [filteredListData, setFilteredListData] = useState<any>([]);
   const [currentProductData, setCurrentProductData] = useState([]);
   // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  const [hasFilteredData, setHasFilteredData] = useState(false);
 
   const _arabicProductCardData = t(
     "arabicProductCardData",
@@ -145,9 +146,10 @@ const ProductListing = ({
 
   const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
     if (Object.keys(selectedFilters)?.length < 1) {
+      setHasFilteredData(false)
       return null;
     }
-
+    setHasFilteredData(true)
     let payload: any[] = [];
 
     Object.keys(selectedFilters)?.forEach((filterType, index) => {
@@ -307,13 +309,15 @@ const ProductListing = ({
                 onSortingChange={updateProductArray}
                 onClear={updateProductArray}
                 filterList={filteredListData}
-              ></FilterBarMobile>
+                hasFilteredData={hasFilteredData}
+                ></FilterBarMobile>
             ) : (
               <FilterBar
                 onApplyFilters={updateProductArray}
                 onSortingChange={updateProductArray}
                 onClear={updateProductArray}
                 filterList={filteredListData}
+                hasFilteredData={hasFilteredData}
               ></FilterBar>
             )}
             <div className={styles["product-listing__cards"]}>
