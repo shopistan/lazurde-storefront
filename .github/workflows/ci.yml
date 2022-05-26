@@ -39,4 +39,4 @@ jobs:
         with:
           repository: shopistan/lazurde-ui-ux-automation-tests
           path: "./lazurde-ui-ux-automation-tests"
-      - run: cd lazurde-ui-ux-automation-tests && ls && yarn install && npx cypress open
+      - run: cd lazurde-ui-ux-automation-tests && ls && yarn install && npx cypress run --headless
