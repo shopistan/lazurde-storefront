@@ -17,8 +17,17 @@ const WriteAReview = ({
 }: WriteAReviewProps): JSX.Element => {
   const [ratingIndex, setRatingIndex] = useState(-1);
   return (
-    <div className={styles["review-modal_wrapper"]} data-open={modalOpen}>
-      <div className={styles["review-modal_body"]}>
+    <div
+      className={styles["review-modal_wrapper"]}
+      data-open={modalOpen}
+      onClick={() => {
+        onClose();
+      }}
+    >
+      <div
+        className={styles["review-modal_body"]}
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className={styles["review-modal_content"]}>
           <div
             className={styles["close-btn"]}
