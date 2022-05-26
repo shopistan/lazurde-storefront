@@ -48,7 +48,7 @@ const Pagination = ({
     const lastPageIndex = firstPageIndex + pageSize;
     const paginatedArray =
       dataArray &&
-      dataArray.length > 0 &&
+      Array.isArray(dataArray) &&
       dataArray?.slice(firstPageIndex, lastPageIndex);
 
     paginatedArray && callBackFn(paginatedArray);
@@ -110,6 +110,8 @@ const Pagination = ({
           <div className={styles["div-show-count"]}>
             {isSingleItem
               ? `${t("textShow")} ${totalSize} ${t("textOf")} ${totalSize}`
+              : lastPageIndex === 0
+              ? ""
               : showAll
               ? `${t("textShow")} ${totalSize} ${t("textOf")} ${totalSize}`
               : `${t("textShow")} ${pageCount} ${t("textOf")} ${totalSize}`}
