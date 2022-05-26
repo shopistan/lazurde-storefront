@@ -48,7 +48,7 @@ const Reviews = (): JSX.Element => {
     }
     if (filtername === "recent") {
       setFilterData(reviewsData);
-      fetchingReviews();
+      // fetchingReviews();
     }
 
     if (filtername === "highest") {
@@ -85,7 +85,7 @@ const Reviews = (): JSX.Element => {
 
   return (
     <>
-      <div id="google_translate_element" className={styles["reviews-wrapper"]}>
+      <div className={styles["reviews-wrapper"]}>
         <div className={styles["review-summary"]}>
           {reviewsData && reviewsData.length > 0 && (
             <Label className={styles["total-review-label"]}>
