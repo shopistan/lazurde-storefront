@@ -153,10 +153,10 @@ const ProductListing = ({
 
   const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
     if (Object.keys(selectedFilters)?.length < 1) {
-      setHasFilteredData(false)
+      setHasFilteredData(false);
       return null;
     }
-    setHasFilteredData(true)
+    setHasFilteredData(true);
     let payload: any[] = [];
     const categoryArray: string[] = [];
 
@@ -205,9 +205,9 @@ const ProductListing = ({
         filters: payload,
       });
     }
-    const filteredArray =
-      filteredData.length > 0 &&
-      filteredData?.filter(
+    let filteredArray = [];
+    if (filteredData.length > 0) {
+      filteredArray = filteredData?.filter(
         (item: {
           Brand: string;
           isLazurde: string;
@@ -226,6 +226,8 @@ const ProductListing = ({
           return false;
         }
       );
+    }
+
     return filteredArray;
   };
 
@@ -348,7 +350,7 @@ const ProductListing = ({
                 onClear={updateProductArray}
                 filterList={filteredListData}
                 hasFilteredData={hasFilteredData}
-                ></FilterBarMobile>
+              ></FilterBarMobile>
             ) : (
               <FilterBar
                 onApplyFilters={updateProductArray}

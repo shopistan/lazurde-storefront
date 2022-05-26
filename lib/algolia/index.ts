@@ -73,6 +73,8 @@ export const performMultiFilteredSearch = async ({
         query: query,
         params: {
           facetFilters: filters,
+          hitsPerPage: 500,
+          page: 0,
         },
       };
       queryArray.push(obj);
