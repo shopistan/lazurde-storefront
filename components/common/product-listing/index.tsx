@@ -189,7 +189,7 @@ const ProductListing = ({
       let hitsArray: any[] = [];
       const result: any = await performMultiFilteredSearch({
         categoryArray: categoryArray,
-        filters: [["Type: Two Heads"]],
+        filters: payload,
       });
 
       for (let index = 0; index < result.length; index++) {
