@@ -60,26 +60,38 @@ export const performFilteredSearch = async ({
 };
 
 export const performMultiFilteredSearch = async ({
-  query = "",
-  pageSize = 500,
+  categoryArray,
   filters,
 }: FilteredSearchArgs) => {
+  const queryArray: any[] = [];
+
+  categoryArray &&
+    categoryArray.length > 0 &&
+    categoryArray.forEach((query) => {
+      const obj = {
+        indexName: ALGOLIA_SEARCH_INDEX,
+        query: query,
+        params: {
+          facetFilters: filters,
+          hitsPerPage: 500,
+          page: 0,
+        },
+      };
+      queryArray.push(obj);
+    });
+
   try {
     return new Promise((resolve, reject) => {
-      INDEX.search(query, {
-        hitsPerPage: pageSize,
-
-        facetFilters: filters,
-      })
-        .then(({ hits }) => {
-          return resolve(hits);
+      ALGOLIA_CLIENT.multipleQueries(queryArray.sort(() => Math.random() - 0.5))
+        .then(({ results }) => {
+          return resolve(results);
         })
         .catch((err) => {
           reject(err);
         });
     });
   } catch (err) {
-    console.log(`Error fetching items for query: ${query}`, err);
+    // console.log(`Error fetching items for query: ${query}`, err);
     return null;
   }
 };
