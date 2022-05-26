@@ -1,0 +1,9 @@
+.main-image-section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    div {
+        width: max-content;
+    }
+}
