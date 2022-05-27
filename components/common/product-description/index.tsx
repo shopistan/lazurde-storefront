@@ -1,6 +1,6 @@
 // import { fetchItemBySku, fetchItemBySkus } from 'lib/xm'
 import React, { useContext, useEffect } from 'react'
-// import ImageSection from './image-section'
+import ImageSection from './image-section'
 
 const ProductDescription = () => {
 
@@ -18,7 +18,7 @@ const ProductDescription = () => {
   return (
     <>
     <div>ProductDescription</div>
-    {/* <ImageSection></ImageSection> */}
+    <ImageSection></ImageSection>
     </>
 
   )
