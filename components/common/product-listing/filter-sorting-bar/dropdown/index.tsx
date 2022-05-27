@@ -24,6 +24,7 @@ interface DropDownProps {
   };
   setSelectedFilters: Function;
   onApplyFilters: Function;
+  hasFilteredData: Boolean;
 }
 
 const DropDown = ({
@@ -32,6 +33,7 @@ const DropDown = ({
   selectedFilters = {},
   setSelectedFilters = () => {},
   onApplyFilters = () => {},
+  hasFilteredData = false,
 }: DropDownProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
@@ -135,7 +137,7 @@ const DropDown = ({
 
       <div
         className={styles["div-filter-btns"]}
-        data-has-count={totalSelectedFilterCount > 0}
+        data-has-count={hasFilteredData || totalSelectedFilterCount > 0}
       >
         <Button
           buttonText={appState?.lang === "en" ? "Clear All Filters" : "مسح"}
@@ -148,9 +150,7 @@ const DropDown = ({
         />
         <Button
           buttonText={`${appState?.lang === "en" ? "Apply" : "يتقدم"} ${
-            totalSelectedFilterCount > 0
-              ? `(${totalSelectedFilterCount})`
-              : "(1)"
+            totalSelectedFilterCount > 0 ? `(${totalSelectedFilterCount})` : " "
           }`}
           buttonStyle={"black"}
           buttonSize={"sm"}

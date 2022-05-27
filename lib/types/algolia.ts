@@ -6,8 +6,9 @@ export type FetchCategoryProductsArgs = {
 };
 
 export type FilteredSearchArgs = {
-  query: string;
-  filters: string[];
+  categoryArray?: string[];
+  query?: string;
+  filters: string[] | string[][];
   pageSize?: number;
   page?: number;
 };
