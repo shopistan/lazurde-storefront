@@ -2,7 +2,7 @@
 import React, { FC, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Cross, BackArrow } from "components/icons";
+import { BackArrow, CrossSmall } from "components/icons";
 import styles from "./brand-sidebar.module.scss";
 import { BrandArrType, ImageType } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
@@ -126,8 +126,13 @@ const BrandSideBar: FC<SidebarProps> = ({
                   : "ىلا عجرا L’azurde"}
               </span>
             </div>
-            <button onClick={() => setIsOpened(false)}>
-              <Cross width={"20px"} height={"20px"} />
+            <button
+              onClick={() => setIsOpened(false)}
+              style={{
+                padding: "0",
+              }}
+            >
+              <CrossSmall width={"12px"} height={"12px"} />
             </button>
           </div>
         )}
