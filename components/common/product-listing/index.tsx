@@ -313,9 +313,7 @@ const ProductListing = ({
   return (
     <>
       <div className={styles["product-listing__wrapper"]}>
-        {(showBreadcrumb || totalSelectedFilterCount > 0) && (
-          <BreadCrumbs pageName={pageName} />
-        )}
+        {showBreadcrumb && <BreadCrumbs pageName={pageName} />}
 
         <Pagination
           pKey={productDataArray}

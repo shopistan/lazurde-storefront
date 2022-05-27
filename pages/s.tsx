@@ -41,11 +41,17 @@ const SearchPage: FC<SearchPageProps> = ({
       </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
-        {totalSelectedFilterCount === 0 && (
+        {totalSelectedFilterCount === 0 ? (
           <SearchResultsInfo
             searchTerm={algoliaSearchResults?.query}
             totalItems={algoliaSearchResults?.hits?.length}
           />
+        ) : (
+          <div
+            style={{
+              height: "39px",
+            }}
+          ></div>
         )}
         {pageComponents?.map((component: XMComponent, index) => {
           const Component = componentsById[component.id];
