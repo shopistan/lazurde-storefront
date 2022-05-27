@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useRouter } from "next/router";
 
 import styles from "../style.module.scss";
-import { Cross } from "components/icons";
+import { CrossSmall } from "components/icons";
 import Link from "next/link";
 import { ArrowRight, BackArrow } from "components/icons";
 import MobileSubMenu from "../mobile-sub-menu/mobile-sub-menu";
@@ -75,7 +75,7 @@ const MobileMenu = ({
             className=""
             onClick={() => closeMenu()}
           >
-            <Cross width={"20px"} height={"20px"} />
+            <CrossSmall width={"12px"} height={"12px"} />
           </button>
         </div>
         <div className={styles["mobile-header__brand-name"]}>

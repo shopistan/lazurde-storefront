@@ -6,11 +6,16 @@ import FilterBarMobile from "./filter-bar-mobile";
 import styles from "./style.module.scss";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
-import { fetchCategoryProducts, performFilteredSearch } from "lib/algolia";
+import {
+  fetchCategoryProducts,
+  performFilteredSearch,
+  performMultiFilteredSearch,
+} from "lib/algolia";
 import BreadCrumbs from "components/common/ui/bread-crumbs";
 import { ImageType } from "lib/types/common";
 import { desktopScreenSize } from "lib/utils/common";
 import Pagination from "../ui/pagination";
+import { array } from "yup";
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -74,6 +79,7 @@ const ProductListing = ({
   const [filteredListData, setFilteredListData] = useState<any>([]);
   const [currentProductData, setCurrentProductData] = useState([]);
   // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  const [hasFilteredData, setHasFilteredData] = useState(false);
 
   const _arabicProductCardData = t(
     "arabicProductCardData",
@@ -112,6 +118,8 @@ const ProductListing = ({
     // console.log("something",arr)
     // console.log(performFilteredSearch({ filters: [`Gold`] }));
     // console.log("categoryName",categoryName)
+    // console.log(performMultiFilteredSearch());
+
     if (productDataArray && productDataArray?.length > 0) {
       const filteredArray = productDataArray?.filter(
         (item: {
@@ -145,47 +153,81 @@ const ProductListing = ({
 
   const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
     if (Object.keys(selectedFilters)?.length < 1) {
+      setHasFilteredData(false);
       return null;
     }
-
+    setHasFilteredData(true);
     let payload: any[] = [];
+    const categoryArray: string[] = [];
 
-    Object.keys(selectedFilters)?.forEach((filterType, index) => {
+    for (let index = 0; index < Object.keys(selectedFilters).length; index++) {
+      const filterType = Object.keys(selectedFilters)[index];
+
       const orFilters: any[] = [];
 
       Object.keys(selectedFilters[filterType]?.selectedOptions)?.forEach(
         (filterOption) => {
+          if (selectedFilters[filterType]?.name === "Category") {
+            categoryArray.push(
+              selectedFilters[filterType]?.selectedOptions[filterOption]?.name
+            );
+            return;
+          }
           const facet = `${selectedFilters[filterType]?.name}: ${selectedFilters[filterType]?.selectedOptions[filterOption]?.name}`;
           orFilters.push(facet);
         }
       );
 
-      payload.push(orFilters);
-    });
+      console.log("orFilters", orFilters, categoryArray);
 
-    const filteredData: any = await performFilteredSearch({
-      query: showBreadcrumb ? categoryName : searchTerm,
-      filters: payload,
-    });
-    const filteredArray = filteredData?.filter(
-      (item: {
-        Brand: string;
-        isLazurde: string;
-        isMissL: string;
-        isKenaz: string;
-      }) => {
-        if (appState.brand === `L'azurde`) {
-          return item;
-        }
-        if (appState.brand === `Miss L'`) {
-          return item?.isMissL;
-        }
-        if (appState.brand === "Kenaz") {
-          return item?.isKenaz;
-        }
-        return false;
+      payload.push(orFilters);
+    }
+
+    let filteredData: any = [];
+
+    if (categoryArray && categoryArray.length > 0) {
+      let hitsArray: any[] = [];
+      const result: any = await performMultiFilteredSearch({
+        categoryArray: categoryArray,
+        filters: payload,
+      });
+
+      for (let index = 0; index < result.length; index++) {
+        const obj = result[index];
+
+        hitsArray = hitsArray.concat(obj.hits);
+        console.log("hitsArray", hitsArray, obj.hits);
       }
-    );
+      filteredData = hitsArray;
+    } else {
+      filteredData = await performFilteredSearch({
+        query: showBreadcrumb ? categoryName : searchTerm,
+        filters: payload,
+      });
+    }
+    let filteredArray = [];
+    if (filteredData.length > 0) {
+      filteredArray = filteredData?.filter(
+        (item: {
+          Brand: string;
+          isLazurde: string;
+          isMissL: string;
+          isKenaz: string;
+        }) => {
+          if (appState.brand === `L'azurde`) {
+            return item;
+          }
+          if (appState.brand === `Miss L'`) {
+            return item?.isMissL;
+          }
+          if (appState.brand === "Kenaz") {
+            return item?.isKenaz;
+          }
+          return false;
+        }
+      );
+    }
+
     return filteredArray;
   };
 
@@ -307,6 +349,7 @@ const ProductListing = ({
                 onSortingChange={updateProductArray}
                 onClear={updateProductArray}
                 filterList={filteredListData}
+                hasFilteredData={hasFilteredData}
               ></FilterBarMobile>
             ) : (
               <FilterBar
@@ -314,6 +357,7 @@ const ProductListing = ({
                 onSortingChange={updateProductArray}
                 onClear={updateProductArray}
                 filterList={filteredListData}
+                hasFilteredData={hasFilteredData}
               ></FilterBar>
             )}
             <div className={styles["product-listing__cards"]}>

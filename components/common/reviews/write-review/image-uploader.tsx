@@ -17,19 +17,17 @@ const ImageUploader = ({
 
   const uploadMultipleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
     fileObj.push(event.target.files);
-
     for (let i = 0; i < fileObj.length; i++) {
       fileObj[i][0] && fileArray.push(URL?.createObjectURL(fileObj[i][0]));
     }
     setFileUpload({ fileArray });
   };
 
-  // const [test, setTest] = useState(false);
-  // const onInputClick = (event) => {
-  //   if (test) {
-  //     event.currentTarget.value = "";
-  //   }
-  // };
+  const deleteImage = (event: any, index: number) => {
+    file.splice(index, 1);
+    fileObj.splice(index, 1);
+    setFileUpload({ fileArray: file });
+  };
 
   return (
     <>
@@ -48,11 +46,8 @@ const ImageUploader = ({
 
                 <div
                   className={styles["cross-btn"]}
-                  onClick={() => {
-                    // setTest(true);
-                    file.splice(index, 1);
-                    fileObj.splice(index, 1);
-                    setFileUpload({ fileArray: file });
+                  onClick={(event) => {
+                    deleteImage(event, index);
                   }}
                 >
                   <CrossSmall />
@@ -65,6 +60,7 @@ const ImageUploader = ({
         <div className={styles["img-upload-input"]}>
           <label htmlFor="imgUploader" className={styles["img-label"]}>
             <input
+              key={Math.random()}
               type="file"
               accept="image/*"
               name="imgUploader"
