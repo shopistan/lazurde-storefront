@@ -20,6 +20,7 @@ const AuthLinks = (): JSX.Element => {
         {!isLoggedIn ? (
           <>
             <Button
+              className={styles["signup-btn"]}
               buttonStyle="black"
               buttonText={
                 appState.lang === "en" ? "sign up" : t("signUpBtnText")
@@ -29,6 +30,7 @@ const AuthLinks = (): JSX.Element => {
               type={"button"}
             />
             <Button
+              className={styles["signin-btn"]}
               buttonStyle="white"
               buttonText={
                 appState.lang === "en" ? "sign in" : t("signInBtnText")

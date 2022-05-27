@@ -34,7 +34,9 @@ const LanguageSelector = ({
       onBlur={() => setIsOpen(false)}
     >
       <span
-        className={styles["mobile-header__lang-selected"]}
+        className={`${styles["mobile-header__lang-selected"]} ${
+          isOpen === true ? styles["margin"] : ""
+        }`}
         onClick={() => {
           setIsOpen(!isOpen);
         }}
@@ -44,7 +46,7 @@ const LanguageSelector = ({
             <Image
               src={selectedVal?.img || "/flag-uae.svg"}
               width={iconWidth || 16}
-              height={16}
+              height={iconWidth || 16}
               alt="image"
               layout="fixed"
             />
@@ -89,13 +91,15 @@ const LanguageSelector = ({
               <a>
                 <span>
                   {opData?.img && (
-                    <Image
-                      src={opData?.img || "/flag-uae.svg"}
-                      width={iconWidth || 16}
-                      height={16}
-                      alt="image"
-                      layout="fixed"
-                    />
+                    <span className={styles["country-icon"]}>
+                      <Image
+                        src={opData?.img || "/flag-uae.svg"}
+                        width={iconWidth || 16}
+                        height={iconWidth || 16}
+                        alt="image"
+                        layout="fixed"
+                      />
+                    </span>
                   )}
                   <span>{opData?.label}</span>
                 </span>
