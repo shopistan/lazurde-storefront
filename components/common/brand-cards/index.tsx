@@ -3,14 +3,17 @@ import Cards from "components/common/card";
 import { ImageType } from "lib/types/common";
 import styles from "./Brand-cards.module.scss";
 import useWindowSize from "lib/utils/useWindowSize";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 import { AppContext } from "lib/context/index";
 import useTranslation from "next-translate/useTranslation";
+import Slider from "components/common/ui/slider/slider";
+import { desktopScreenSize } from "lib/utils/common";
+import { useRouter } from "next/router";
 
 type BrandCardsType = {
-  cardTitle: string;
+  cardTitle: string | "";
   cardImage: ImageType;
+  cardLinks: string | "";
 };
 
 interface BrandCardsProps {
@@ -18,39 +21,60 @@ interface BrandCardsProps {
   brandCards: BrandCardsType[];
 }
 
-const BrandsCard: FC<BrandCardsProps> = ({
+const BrandCards: FC<BrandCardsProps> = ({
   heading,
   brandCards,
 }): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState } = useContext(AppContext);
+  const { appState, saveAppState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const onClick = () => {};
+  const router = useRouter();
 
   return (
     <div className={styles["cards-container"]}>
       <h3 data-testid="heading" className={styles["cards-heading"]}>
         {appState?.lang === "en" ? heading : t("cardHeading")}
       </h3>
-      <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={8}
-        slidesPerView={width > 1023 ? 3 : 1.29}
-        navigation={width > 1023 ? true : false}
-        scrollbar={{ draggable: true }}
+      <Slider
+        desktopSlidePerView={3}
+        mobileSlidePerView={1.1}
+        navigation={width > desktopScreenSize ? true : false}
+        scrollbar={true}
         className={`card-brands`}
-        key={appState?.lang}
-        dir={appState?.lang === "en" ? "ltr" : "rtl"}
       >
         <div className={`flex justify-between`}>
           {brandCards &&
             brandCards.map((data, index) => {
-              const { cardTitle, cardImage } = data;
+              const {
+                cardTitle,
+                cardImage,
+                cardLinks = "/",
+              } = data;
+
               return (
                 <SwiperSlide key={index}>
-                  <div className={styles["cards"]} key={index}>
+                  <div
+                    className={`${styles["cards"]} ${
+                      appState.lang == "ar" && styles["arabic-card"]
+                    }`}
+                    key={index}
+                  >
                     <Cards
-                      onClick={onClick}
+                      onClick={() => {
+                        router?.push(cardLinks);
+                        if (cardLinks === "/missl") {
+                          saveAppState({
+                            ...appState,
+                            brand: `Miss L'`,
+                          });
+                        }
+                        if (cardLinks === "/kenaz") {
+                          saveAppState({
+                            ...appState,
+                            brand: `Kenaz`,
+                          });
+                        }
+                      }}
                       className={styles["brand-card"]}
                       height="100%"
                       width="100%"
@@ -62,8 +86,8 @@ const BrandsCard: FC<BrandCardsProps> = ({
               );
             })}
         </div>
-      </Swiper>
+      </Slider>
     </div>
   );
 };
-export default BrandsCard;
+export default BrandCards;

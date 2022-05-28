@@ -1,15 +1,20 @@
 import React, { useState, useContext, useEffect } from "react";
 import styles from "../style.module.scss";
-import { langSelectData } from "lib/mock-data/data";
+import { langSelectData, kenazLangSelectData } from "lib/mock-data/data";
 import { AppContext } from "lib/context";
 import { useRouter } from "next/router";
-import { optionProps } from "../types";
+import { OptionProps } from "lib/types/mobile-header";
 
 import LanguageSelector from "./select-dropdown";
 
-const MobileLanguageSelector = () => {
+const MobileLanguageSelector = (): JSX.Element => {
   const router = useRouter();
-  const { pathname, query, asPath } = router;
+  const { pathname, query, asPath } = router || {
+    pathname: "",
+    query: "",
+    asPath: "",
+  };
+  const { locale, push } = useRouter() || { locale: "", push: () => {} };
   const { appState, saveAppState } = useContext(AppContext);
   const [region, setRegion] = useState({
     lang: appState.lang,
@@ -21,7 +26,7 @@ const MobileLanguageSelector = () => {
   }, [region]);
 
   useEffect(() => {
-    if (appState.lang === "en") {
+    if (appState?.lang === "en") {
       document.documentElement.dir = "ltr";
     } else {
       document.documentElement.dir = "rtl";
@@ -29,8 +34,8 @@ const MobileLanguageSelector = () => {
   }, [appState]);
 
   useEffect(() => {
-    if (router.locale.search("-") !== -1) {
-      const route = (router.locale || "").split("-");
+    if (locale?.search("-") !== -1) {
+      const route = (locale || "").split("-");
       saveAppState({
         ...appState,
         region: route[1],
@@ -38,9 +43,9 @@ const MobileLanguageSelector = () => {
         locale: `${route[0]}-${route[1]}`,
       });
     }
-  }, [router.locale]);
+  }, [locale]);
 
-  const handleSelect = (selectedData: optionProps) => {
+  const handleSelect = (selectedData: OptionProps) => {
     const _selectedData = selectedData?.value.split("-");
     setRegion({
       region: _selectedData[1],
@@ -49,13 +54,15 @@ const MobileLanguageSelector = () => {
   };
 
   const navigateToLocale = (locale: string) => {
-    router.push({ pathname, query }, asPath, { locale: locale });
+    push({ pathname, query }, asPath, { locale: locale });
   };
 
   return (
     <div className={styles["mobile-header__lang-wrapper"]}>
       <LanguageSelector
-        options={langSelectData}
+        options={
+          appState?.brand === "Kenaz" ? kenazLangSelectData : langSelectData
+        }
         onChange={handleSelect}
         defaultValue={appState.locale}
         iconWidth={20}

@@ -1,0 +1,152 @@
+@import "/styles/variables.scss";
+
+.menu {
+  &__heading {
+    margin: 0 0 24px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0em;
+  }
+
+  &__links {
+    li {
+      margin-bottom: 16px;
+      list-style: none;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      a {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19px;
+        letter-spacing: 0em;
+        color: $white-color;
+        text-decoration: none;
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+
+.wrapper {
+  margin-bottom: 40px;
+
+  input {
+    min-height: auto !important;
+    padding: 0 !important;
+  }
+
+  .div-heading {
+    display: flex;
+    align-items: center;
+    padding: 0 !important;
+    min-height: 35px !important;
+    color: $black-color;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+    .heading-text {
+      flex: 1;
+    }
+  }
+
+  .heading-icons {
+    &[data-opened="true"] {
+      .angle-down {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .custom-content {
+    padding-inline-start: 0;
+    padding-bottom: 0 !important;
+    text-align: start;
+    display: none;
+
+    ul {
+      padding-top: 25px;
+      text-decoration: none;
+    }
+
+    &[data-opened="true"] {
+      display: block;
+    }
+  }
+}
+
+.footer-accordion {
+  padding: 1px;
+
+  &.wrapper {
+    margin-bottom: 25px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .div-heading {
+    justify-content: space-between;
+    color: $white-color;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0em;
+
+    .heading-text {
+      flex: unset;
+    }
+  }
+
+  .custom-content {
+    padding-inline-start: 8px;
+  }
+}
+
+.accordion-help {
+  padding-inline: 0px;
+  background-color: white;
+  padding-block: 24px;
+  margin-bottom: 8px;
+  padding-inline: 24px;
+
+  @media (min-width: 1024px) {
+    margin-bottom: 0;
+    padding-block: 0;
+    padding-inline: 0;
+  }
+  .div-heading {
+    border: none;
+
+    .heading-text {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
+  }
+
+  .menu__links {
+    padding-top: 16px !important;
+  }
+  .custom-content {
+    padding-inline: 16px;
+    padding-block-start: 25px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+}
+
+.arrowDown-open {
+  transform: rotate(180deg);
+}

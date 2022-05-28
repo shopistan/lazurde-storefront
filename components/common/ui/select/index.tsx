@@ -12,6 +12,7 @@ interface SelectProps {
   onChange: Function;
   defaultValue: string;
   className?: string;
+  optionClassName?: string;
 }
 
 const Select = ({
@@ -19,6 +20,7 @@ const Select = ({
   onChange,
   defaultValue,
   className = "",
+  optionClassName = "",
 }: SelectProps): JSX.Element => {
   const dropdown = useRef(null);
   const [selectedVal, setSelectedVal] = useState<optionProps>();
@@ -41,7 +43,7 @@ const Select = ({
       onBlur={() => setIsOpen(false)}
     >
       <span
-        className={styles["select"]}
+        className={`${styles["select"]} ${optionClassName}`}
         onClick={() => {
           if (
             window.innerHeight -
@@ -57,10 +59,13 @@ const Select = ({
       >
         {selectedVal?.label}
         {selectedVal?.img && (
-          <img
+          <Image
+            className={styles["selected-img"]}
             src={selectedVal?.img || "/flag-uae.svg"}
-            width={16}
+            width={20}
+            height={16}
             alt="image"
+            layout="fixed"
           />
         )}
       </span>
@@ -83,10 +88,13 @@ const Select = ({
               <a>
                 {opData.label}
                 {opData.img && (
-                  <img
+                  <Image
+                    className={styles["dropdown-flag"]}
                     src={opData.img || "/flag-uae.svg"}
-                    width={16}
+                    width={20}
+                    height={16}
                     alt="image"
+                    layout="fixed"
                   />
                 )}
               </a>

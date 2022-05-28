@@ -1,45 +1,77 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Link from "next/link";
-// import Image from "next/image";
-
 import styles from "./style.module.scss";
+import Image from "next/image";
+import useWindowSize from "lib/utils/useWindowSize";
+import { desktopScreenSize } from "lib/utils/common";
 
-interface iconProps {
-  url: string;
-  altText: string;
-}
-interface iconsObj {
-  link: string;
-  icon: iconProps;
-}
+type IconsType = {
+  link?: string;
+  width?: string | number;
+  mobileWidth?: string | number;
+  icon?: {
+    url?: string;
+    altText?: string;
+  };
+};
 
-interface iconsListType {
-  iconsList?: iconsObj[];
+type sizeType = {
+  width?: string | number;
+  mobileWidth?: string | number;
+};
+interface IconsListProps {
+  iconsList?: IconsType[];
   className?: string;
+  iconSize?: sizeType[];
+  isFooterIcons?: boolean;
+  role?: string;
 }
 
 const FooterIcons = ({
   iconsList,
+  iconSize = [],
   className = "",
-}: iconsListType): JSX.Element => {
+  isFooterIcons = false,
+  role = "",
+}: IconsListProps): JSX.Element => {
+  const [size] = useWindowSize();
   return (
     <>
-      <ul className={`${className} ${styles["icons__container"]}`}>
+      <ul role={role} className={`${className} ${styles["icons__container"]}`}>
         {iconsList?.length > 0 &&
           iconsList.map((socialIcon, index) => {
-            const { link, icon } = socialIcon;
+            const { link, icon, width, mobileWidth } = socialIcon;
             return (
-              <li className="icons__item" key={index}>
+              <li
+                className="icons__item"
+                key={index}
+                style={{
+                  width:
+                    size > desktopScreenSize
+                      ? width || iconSize[index]?.width
+                      : mobileWidth || iconSize[index]?.mobileWidth,
+                }}
+              >
                 <Link href={link}>
-                  <a>
-                    <img
+                  <a
+                    data-testid="footer-icon"
+                    role={"icons"}
+                    className={
+                      styles[`${isFooterIcons ? "footer-payment-icon" : ""}`]
+                    }
+                  >
+                    <Image
                       className={styles["icons__custom-img-style"]}
-                      src={icon?.url}
-                      alt={icon?.altText}
-                      // width={20}
-                      // height={20}
-                      // layout="fill"
+                      src={icon?.url || ""}
+                      alt={icon?.altText || "icon"}
+                      width={
+                        size > desktopScreenSize
+                          ? width || iconSize[index]?.width
+                          : mobileWidth || iconSize[index]?.mobileWidth
+                      }
+                      height={isFooterIcons ? 24 : 20}
+                      layout="responsive"
                     />
                   </a>
                 </Link>

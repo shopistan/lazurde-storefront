@@ -1,4 +1,134 @@
 {
+  "shopAll": "تسوق كل شيء",
+  "bannerHeading": "اختيار المشاهير",
+  "customerHeading": "ىانيدل تاضيفختلا عيمج قوست",
+  "search": "ىكل رخدي",
+  "customerTitle": "ىانيدل تاضيفختلا عيمج قوست",
+  "notFound": "لم يتم العثور على تطابق",
+  "customerButton": "لدي سؤال؟",
+  "addToCartBtnText": "أضف إلى السلة",
+  "onlineExclusiveTag": "حصريا على الانترنت",
+  "servicesProps": [
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    }
+  ],
+  "linksProps": [
+    {
+      "name": "ءيش لك قوست",
+      "content": "فافزلا L’azurde فاشكتسا",
+
+      "accordionProps": [
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        }
+      ]
+    },
+    {
+      "name": "ءيش لك قوست",
+      "content": "فافزلا L’azurde فاشكتسا",
+
+      "accordionProps": [
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        }
+      ]
+    }
+  ],
+
+  "accordionProps": [
+    {
+      "heading": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "heading": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "heading": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "heading": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    }
+  ],
+
+  "back-button": "ءيش لك قوست",
+
+  "termTitle": "ىكل رخدي",
   "sampleTranslationText": "يوضح هذا النص ترجمة اللغة عند تغيير اللغة. هذا ليس نصًا تم إنشاؤه بواسطة XM ، لا يدعم XM الصفحات متعددة اللغات حتى الآن.",
   "promoBarTitle": "ىكل رخدي",
   "promoBarLinkTitle": "انيدل تاضيفختلا عيمج قوست",
@@ -11,16 +141,107 @@
   "subscriptionText": "قوف رقنا ، كارتشالا ءاغلإل. انب ةصاخلا ةيصوصخلا ةسايسو ماكحألاو طورشلا ىلع قفاوت كنإف ، كارتشالاب .انب ةصاخلا ينورتكلإلا ديربلا لئاسر لفسأ",
   "socialIconText": "هسفن ملألا",
   "userNavBarTitle": " كيتوبلا قيرط نع قوست",
-  "cardHeading" : "ةيراجتلا انتامالع فشتكا",
-  "NavbarLangSelectorTitle" : "عقوملاو ةلضفملا كتغل ددح",
+  "cardHeading": "ةيراجتلا انتامالع فشتكا",
+  "NavbarLangSelectorTitle": "عقوملاو ةلضفملا كتغل ددح",
   "navbarBackBtn": "ىلا عجرا L’azurde",
-  "langSelectorBtnTxt" : "لمكي",
+  "langSelectorBtnTxt": "لمكي",
   "customerCareText": "رعاية العميل",
   "bookAnAppointmentText": "احجز موعدًا",
   "myAccountText": "حسابي",
   "storeLocatorText": "فروعنا",
   "signInBtnText": "تسجيل الدخول",
   "signOutBtnText": "خروج",
+  "bannerTitle": "خواتم",
+  "bannerSubTitle": "الألم بحد ذاته هو حب الألم ، المشاكل البيئية الرئيسية ، لكني أعطي هذا النوع من الوقت للتراجع ، بحيث يكون هناك بعض الألم والألم العظيمين.",
+  "plpCategoryTitle": "استكشف جميع الفئات",
+  "plpCategoryText": "تعتمد مجوهراتنا على إرث يمتد لأكثر من 180 عامًا من الحرفية الخبيرة مع قلادات ودلايات وأساور وخواتم ومصممة بشكل جميل وغير ذلك.  تُظهر أحدث مجوهراتنا إبداع لازوردي وتصميمه الذي لا مثيل له في أفضل حالاته.",
+  "textShow": "ضرع",
+  "textOf": "نم",
+  "textViewAll": "لكلا ةدهاشم",
+  "feedbackHeading": "لكلا ةدهاشم",
+  "firstName": "لكلا ةدهاشم",
+  "lastName": "لكلا ةدهاشم",
+  "phoneNumber": "لكلا ةدهاشم",
+  "feedback": "لكلا ةدهاشم",
+  "email": "لكلا ةدهاشم",
+  "sent": "لكلا ةدهاشم",
+  "helpHeading": "لكلا ةدهاشم",
+  "categories": [
+    {
+      "title": "استكشف جميع الفئات",
+      "text": "استكشف جميع الفئات",
+      "details": "استكشف جميع الفئات",
+      "link": "استكشف جميع الفئات",
+      "button": "  لمكي",
+      "tNumber": "استكشف جميع الفئات",
+      "vNumber": "استكشف جميع الفئات",
+      "crNumber": "استكشف جميع الفئات"
+    },
+    {
+      "title": "استكشف جميع الفئات",
+      "text": "استكشف جميع الفئات",
+      "details": "استكشف جميع الفئات",
+      "link": "استكشف جميع الفئات",
+      "button": "  لمكي",
+      "tNumber": "استكشف جميع الفئات",
+      "vNumber": "استكشف جميع الفئات",
+      "crNumber": "استكشف جميع الفئات"
+    },
+    {
+      "title": "استكشف جميع الفئات",
+      "text": "استكشف جميع الفئات",
+      "details": "استكشف جميع الفئات",
+      "link": "استكشف جميع الفئات",
+      "button": "  لمكي",
+      "tNumber": "استكشف جميع الفئات",
+      "vNumber": "استكشف جميع الفئات",
+      "crNumber": "استكشف جميع الفئات"
+    },
+    {
+      "title": "استكشف جميع الفئات",
+      "text": "استكشف جميع الفئات",
+      "details": "استكشف جميع الفئات",
+      "link": "استكشف جميع الفئات",
+      "button": "  لمكي",
+      "tNumber": "استكشف جميع الفئات",
+      "vNumber": "استكشف جميع الفئات",
+      "crNumber": "استكشف جميع الفئات"
+    },
+    {
+      "title": "استكشف جميع الفئات",
+      "text": "استكشف جميع الفئات",
+      "details": "استكشف جميع الفئات",
+      "link": "استكشف جميع الفئات",
+      "button": "  لمكي",
+      "tNumber": "استكشف جميع الفئات",
+      "vNumber": "استكشف جميع الفئات",
+      "crNumber": "استكشف جميع الفئات"
+    },
+    {
+      "title": "استكشف جميع الفئات",
+      "text": "استكشف جميع الفئات",
+      "details": "استكشف جميع الفئات",
+      "link": "استكشف جميع الفئات",
+      "button": "  لمكي",
+      "tNumber": "استكشف جميع الفئات",
+      "vNumber": "استكشف جميع الفئات",
+      "crNumber": "استكشف جميع الفئات"
+    }
+  ],
+  "plpCategoryCard": [
+    {
+      "cardTitle": "استكشف جميع الفئات"
+    },
+    {
+      "cardTitle": "استكشف جميع الفئات"
+    },
+    {
+      "cardTitle": "استكشف جميع الفئات"
+    },
+    {
+      "cardTitle": "استكشف جميع الفئات"
+    }
+  ],
   "siteNavLinks": [
     {
       "navTitle": "جديد",
@@ -498,6 +719,151 @@
           "url": "/Earrings.svg",
           "altText": "طارقأ"
         }
+      }
+    ]
+  },
+  "arabicProductCardData": [
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    }
+  ],
+  "sortingFilter": [
+    {
+      "label": "الجديد",
+      "value": "our recommendation"
+    },
+    {
+      "label": "أفضل البائعين",
+      "value": "most viewed"
+    },
+    {
+      "label": "أكبر توفير",
+      "value": "أكبر توفير"
+    },
+    {
+      "label": "الأكثر مشاهدة",
+      "value": "الأكثر مشاهدة"
+    },
+    {
+      "label": "اسم المنتج",
+      "value": "اسم المنتج"
+    }
+  ],
+  "arabicFilterList": [
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionName": "مجوهرات 1"
+        },
+        {
+          "optionName": "مجوهرات 2"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionName": "مجوهرات"
+        },
+        {
+          "optionName": "مجوهرات 1"
+        },
+        {
+          "optionName": "مجوهرات 2"
+        },
+        {
+          "optionName": "مجوهرات 3"
+        },
+        {
+          "optionName": "مجوهرات 4"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionName": "مجوهرات 1"
+        },
+        {
+          "optionName": "مجوهرات 2"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionName": "مجوهرات"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionName": "مجوهرات"
+        },
+        {
+          "optionName": "مجوهرات"
+        }
+      ]
+    }
+  ],
+  "arabicBambuserSliderData": {
+    "sectionHeading": "ماسقالا بسح قوست",
+    "cards": [
+      {
+        "heading": "رواسأ",
+        "description": "رواسأمتاوخرواسأمتاوخرواسأمتاوخ",
+        "btnText": "اسأمتاوخرواس"
+      },
+      {
+        "heading": "متاوخ",
+        "description": "رواسأمتاوخرواسأمتاوخرواسأمتاوخ",
+        "btnText": "اسأمتاوخرواس"
+      },
+      {
+        "heading": "طارقأ",
+        "description": "رواسأمتاوخرواسأمتاوخرواسأمتاوخ",
+        "btnText": "اسأمتاوخرواس"
+      },
+      {
+        "heading": "تادالق",
+        "description": "رواسأمتاوخرواسأمتاوخرواسأمتاوخ",
+        "btnText": "اسأمتاوخرواس"
+      },
+      {
+        "heading": "تادالق",
+        "description": "رواسأمتاوخرواسأمتاوخرواسأمتاوخ",
+        "btnText": "اسأمتاوخرواس"
       }
     ]
   }

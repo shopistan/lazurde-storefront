@@ -3,6 +3,7 @@ const ENDPOINTS = {
     FETCH_PAGE_BY_URL: (channel: number, url: string) =>
       `/api-xpm/v2/page/live?channel=${channel}&url=${url}`,
     FETCH_GLOBAL_COMPONENTS: "/api-xpm/global-component/live",
+    FETCH_ALL_LIVE_PAGES: "/api-xpm/v2/pages/live?channel=12",
   },
 
   RTPE: {
@@ -29,6 +30,16 @@ const ENDPOINTS = {
 
   OMS: {
     CREATE_ORDER: "/api-order/orders",
+  },
+
+  GET: {
+    REVIEWS: (storeHash: string | number, productId: string | number) =>
+      `https://stamped.io/api/v2/${storeHash}/dashboard/reviews?search=${productId}`,
+  },
+
+  POST: {
+    CREATE_REVIEW: (apikey: string | number, storeHash: string | number) =>
+      `https://stamped.io/api/reviews3?apiKey=${apikey}&sId=${storeHash}`,
   },
 };
 

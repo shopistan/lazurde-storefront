@@ -1,3 +1,5 @@
+@import '/styles/variables.scss';
+
 .site-navbar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -6,7 +8,7 @@
   justify-content: center;
   position: relative;
   padding-inline: 24px;
-  background-color: #fff;
+  background-color: $white-color;
 
   .back-btn {
     display: none;
@@ -40,8 +42,8 @@
     justify-self: flex-end;
   }
 
-  &[data-headerId="missLHeader"],
-  &[data-headerId="kenazHeader"] {
+  &[data-headerId='missLHeader'],
+  &[data-headerId='kenazHeader'] {
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 57px 57px;
     padding-inline: 0;
@@ -75,7 +77,6 @@
       min-width: 150px;
       text-align: end;
       padding-inline-end: 24px;
-
     }
   }
 
@@ -95,7 +96,7 @@
       position: relative;
 
       a {
-        color: black;
+        color: $black-color;
         text-decoration: none;
         font-weight: 500;
         font-size: 16px;
@@ -104,26 +105,26 @@
       }
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         margin-block-start: 8px;
         width: 0px;
         height: 2px;
         left: 50%;
         bottom: 15px;
-        background-color: black;
+        background-color: $black-color;
         transition: width ease-in-out 0.15s, left ease-in-out 0.15s;
       }
 
-      // &:hover::after {
-      //   width: 100%;
-      //   left: 0;
-      // }
-      &[data-selected="true"]::after {
+      &[data-selected='true']::after {
         width: 100%;
         left: 0;
       }
     }
+  }
+
+  .search-icon {
+    cursor: pointer;
   }
 
   .category-dropdown {
@@ -138,7 +139,7 @@
     transition: height 0.2s ease-in-out 0.1s;
     overflow: hidden;
 
-    &[data-opened="true"] {
+    &[data-opened='true'] {
       transition: height 0.2s ease-in-out;
       height: 478px;
     }
@@ -157,7 +158,7 @@
     opacity: 0;
     transition: opacity 0.3s ease-in-out 0.1s, height 0.3s ease-in-out 0.5s;
 
-    &[data-opened="true"] {
+    &[data-opened='true'] {
       transition: opacity 0.2s ease-in-out, height 0.2s ease-in-out;
       opacity: 1;
       height: 100vh;
@@ -165,10 +166,10 @@
   }
 }
 
-html[dir="rtl"] {
+html[dir='rtl'] {
   .back-btn {
     svg {
-      transform: rotateY(180deg)
+      transform: rotateY(180deg);
     }
   }
 }

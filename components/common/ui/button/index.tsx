@@ -8,14 +8,16 @@ interface ButtonProps {
   buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl";
   onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit";
+  children?: JSX.Element | string;
 }
 
 const Button = ({
   className = '',
   type = "button",
-  buttonText,
+  buttonText = '',
   buttonStyle = "black",
   buttonSize = "md",
+  children,
   onClick,
 }: ButtonProps): JSX.Element => {
   return (
@@ -28,6 +30,7 @@ const Button = ({
       type={type}
     >
       {buttonText || ""}
+      {children || ''}
     </button>
   );
 };

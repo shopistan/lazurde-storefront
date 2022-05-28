@@ -7,7 +7,7 @@ exports.default = Types.Component({
 
   attributes: {
     heading: Types.String({ label: "Section Heading" }),
-    exploreBrandsArray: Types.Array({
+    brandCards: Types.Array({
       label: "Brand Cards",
       children: Types.Shape({
         children: {
@@ -17,6 +17,7 @@ exports.default = Types.Component({
             altText: Types.String({ label: "Alt text" }),
           }),
           cardTitle: Types.String({ label: "Card Title" }),
+          cardLinks: Types.String({label : "Card Links"}),
         },
       }),
     }),

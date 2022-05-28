@@ -1,0 +1,87 @@
+@import "/styles/variables.scss";
+
+.div-modal-main {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  background-color: white;
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  z-index: 100;
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  padding: 24px;
+  overflow-y: auto;
+
+  @media (min-width: $breakPoint-desktop) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .div-top-bar {
+    display: flex;
+    width: 100%;
+
+    @media (min-width: $breakPoint-desktop) {
+      display: none;
+    }
+
+    .div-left {
+      flex: 1;
+    }
+  }
+
+  &[data-open="true"] {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  &[data-open="false"] {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.register-modal {
+  @media (min-width: $breakPoint-desktop) {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.div-modal-body {
+  margin-top: 45px;
+}
+
+html[dir="rtl"] {
+  .div-modal-main {
+    &[data-open="true"] {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    &[data-open="false"] {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+}
+
+.feedback-modal {
+  @media (min-width: 1024px) {
+    display: block;
+    padding-block-start: 100px;
+    padding-block-end: 178px;
+    display: flex;
+    background-color: #E5E5E5;
+  }
+
+  .div-modal-body {
+    @media (min-width: 1024px) {
+      background-color: white;
+      width: 562px;
+      margin-top: 60px;
+
+    }
+  }
+}

@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .promobar {
   display: flex;
   position: relative;
@@ -6,15 +8,12 @@
   width: 100%;
   height: 40px;
   padding-block: 10px;
-  font-family: "Roboto";
   font-size: 13px;
-  color: black;
-  transition: height 0.2s cubic-bezier(0, 0, 0.2, 1),
-    padding 0.2s cubic-bezier(0, 0, 0.2, 1);
+  color: $black-color;
   overflow: hidden;
   background-color: #c3a856;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     font-size: 14px;
 
     .title {
@@ -25,6 +24,8 @@
   &[data-visible="true"] {
     padding: 0;
     height: 0;
+    transition: height 0.2s cubic-bezier(0, 0, 0.2, 1),
+    padding 0.2s cubic-bezier(0, 0, 0.2, 1);
   }
 
   .title {
@@ -33,30 +34,34 @@
   }
 
   .link-text {
-    color: black;
+    color: $black-color;
     font-weight: 500;
   }
 
-  .closeButton {
+  button.closeButton {
+    position: absolute;
     margin: 0;
-    margin-inline-end: 16px;
     background-color: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
     line-height: 0;
+    inset-inline-end: 16px;
+    width: max-content;
+    width: 20px;
+    height: auto;
+
+    @media (min-width: $breakPoint-desktop) {
+      inset-inline-end: 24px;
+      width: 20px;
+      height: 20px;
+    }
 
     svg {
       width: 12px;
       height: 12px;
-    }
 
-    @media (min-width: 1024px) {
-      margin-inline-end: 0;
-      position: absolute;
-      inset-inline-end: 24px;
-
-      svg {
+      @media (min-width: $breakPoint-desktop) {
         width: 20px;
         height: 20px;
       }

@@ -27,7 +27,9 @@ exports.default = Types.Component({
           }),
           collectionbutton: Types.String({ label: "Button Text" }),
           collectiontitle : Types.String({label : "Title"}),
-          collectiontext : Types.String({label : "Text"})
+          collectiontext : Types.String({label : "Text"}),
+          collectionButtonLink : Types.String({ label : 'Button Link'}),
+          
         },
       }),
     }),

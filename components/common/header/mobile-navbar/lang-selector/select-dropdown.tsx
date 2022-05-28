@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { useContext } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { ArrowRight } from "components/icons";
-import React, { useState, useRef, useEffect } from "react";
-import { SelectProps, optionProps } from "../types";
+import { SelectProps, OptionProps } from "lib/types/mobile-header";
 import styles from "../style.module.scss";
 import { AppContext } from "lib/context";
+import Image from "next/image";
 
 const LanguageSelector = ({
   options = [{ label: "label", img: "", value: "value", langTitle: "" }],
@@ -14,7 +14,7 @@ const LanguageSelector = ({
 }: SelectProps): JSX.Element => {
   const dropdown = useRef(null);
   const { appState } = useContext(AppContext);
-  const [selectedVal, setSelectedVal] = useState<optionProps>();
+  const [selectedVal, setSelectedVal] = useState<OptionProps>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [position, setPosition] = useState<string>("bottom");
 
@@ -34,17 +34,21 @@ const LanguageSelector = ({
       onBlur={() => setIsOpen(false)}
     >
       <span
-        className={styles["mobile-header__lang-selected"]}
+        className={`${styles["mobile-header__lang-selected"]} ${
+          isOpen === true ? styles["margin"] : ""
+        }`}
         onClick={() => {
           setIsOpen(!isOpen);
         }}
       >
         <div className={styles["mobile-header__lang-left-side"]}>
           {selectedVal?.img && (
-            <img
+            <Image
               src={selectedVal?.img || "/flag-uae.svg"}
-              width={iconWidth}
+              width={iconWidth || 16}
+              height={iconWidth || 16}
               alt="image"
+              layout="fixed"
             />
           )}
           <span>
@@ -58,7 +62,7 @@ const LanguageSelector = ({
           {appState?.lang === "en" && selectedVal?.langTitle && (
             <span>{selectedVal?.langTitle}</span>
           )}
-          <ArrowRight />
+          <ArrowRight className={styles["dropdown-arrow"]} />
         </div>
       </span>
       <ul
@@ -86,12 +90,16 @@ const LanguageSelector = ({
             >
               <a>
                 <span>
-                  {opData.img && (
-                    <img
-                      src={opData?.img || "/flag-uae.svg"}
-                      width={iconWidth}
-                      alt="image"
-                    />
+                  {opData?.img && (
+                    <span className={styles["country-icon"]}>
+                      <Image
+                        src={opData?.img || "/flag-uae.svg"}
+                        width={iconWidth || 16}
+                        height={iconWidth || 16}
+                        alt="image"
+                        layout="fixed"
+                      />
+                    </span>
                   )}
                   <span>{opData?.label}</span>
                 </span>
