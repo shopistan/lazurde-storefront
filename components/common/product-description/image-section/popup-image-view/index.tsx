@@ -1,15 +1,18 @@
+import ImageMagnifier from "components/common/ui/imageMagnifier";
 import React from "react";
-import { SideBySideMagnifier } from "react-image-magnifiers";
 
 const PopupImageView = () => {
   return (
     <>
       <div>PopupImageView</div>
-      <SideBySideMagnifier
-        imageSrc="/brand-missL.jpg"
-        largeImageSrc="/brand-missL.jpg"
-        alwaysInPlace={true}
-      ></SideBySideMagnifier>
+      <ImageMagnifier
+        width={300}
+        height={300}
+        zoomNum={3}
+        url={
+          "https://cdn.lazurde.com/media/catalog/product/1/1/111405180250-1_optimized.png"
+        }
+      />
     </>
   );
 };

@@ -1,0 +1,31 @@
+.main-image-magnifier {
+  display: block;
+  width: 300px;
+  height: 300px;
+  margin-top: 20px;
+  margin-bottom: 1000px;
+  overflow: hidden;
+  position: relative;
+  cursor: zoom-in;
+
+  &:hover {
+    & > span:first-child {
+      opacity: 1 !important;
+    }
+    & > span:nth-child(2) {
+      opacity: 0 !important;
+    }
+  }
+  & > span {
+    position: absolute !important;
+    transition: opacity 0.4s;
+  }
+
+  & > span:first-child {
+    opacity: 0 !important;
+  }
+
+  & > span:nth-child(2) {
+    width: 100% !important;
+  }
+}
