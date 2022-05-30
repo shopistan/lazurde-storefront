@@ -560,3 +560,8 @@ export const reviewFilters = [
     label: "lowest",
   },
 ];
+
+export const productDescriptionData = {
+  productDetail:
+    "Statement 18k gold drop hoops shaped into rectangular silhouettes signed off with rounded edges. Illuminated by 0.2-carat diamonds that loop around the center so that every angle augments their beautiful glisten. The hoops feature an easy unlockable fastening that allows you to add extra charms, guaranteed to draw compliments.",
+};
