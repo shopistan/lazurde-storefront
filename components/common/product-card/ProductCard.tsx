@@ -96,7 +96,7 @@ const ProductCard = ({
           desktopSlidePerView={1}
           mobileSlidePerView={1}
           scrollbar={false}
-          navigation={false}
+          navigation={true}
           pagination={true}
           className={`product-slider ${swipperClassName} ${
             onlineExclusiveTag

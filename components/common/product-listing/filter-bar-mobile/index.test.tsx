@@ -36,6 +36,7 @@ const renderComponent = (list = filterListData) => {
         onApplyFilters={applyFunc}
         onSortingChange={sortingFunc}
         onClear={onClear}
+        hasFilteredData={true}
       />
     </ContextProvider>
   );
@@ -51,6 +52,7 @@ const renderComponentAR = () => {
         onApplyFilters={applyFunc}
         onSortingChange={sortingFunc}
         onClear={onClear}
+        hasFilteredData={true}
       />
     </AppContext.Provider>
   );

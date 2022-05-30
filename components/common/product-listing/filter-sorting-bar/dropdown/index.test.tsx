@@ -45,6 +45,7 @@ const renderComponent = (list: any = filterListData) => {
         }}
         setIsOpened={isOpenedFunc}
         setSelectedFilters={selectedFunc}
+        hasFilteredData={true}
       />
     </ContextProvider>
   );
@@ -68,6 +69,7 @@ const renderComponentAR = (list: any = filterListData) => {
         }}
         setIsOpened={isOpenedFunc}
         setSelectedFilters={selectedFunc}
+        hasFilteredData={true}
       />
     </AppContext.Provider>
   );
