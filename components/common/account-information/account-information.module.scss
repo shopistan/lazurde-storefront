@@ -1,0 +1,155 @@
+.account-container {
+  background-color: rgba(242, 242, 242, 1);
+  @media (min-width: 1024px) {
+    padding-block: 90px 80px;
+    padding-inline: 185px;
+  }
+}
+
+.account-main {
+  display: none;
+  @media (min-width: 1024px) {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin-inline-start: 20px;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 29px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
+  }
+}
+
+.account-profile {
+  background-color: white;
+  padding-block: 15px;
+  padding-inline: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+
+  p {
+    padding-inline-end: 100px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+}
+
+.account-review {
+  background: rgba(255, 0, 0, 0.05);
+  padding-block: 16px;
+  padding-inline: 28px 32px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+
+  @media (min-width: 1024px) {
+    padding-inline: 18px 32px;
+  }
+
+  p {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: start;
+    margin-block: 0;
+    margin-inline-start: 17.33px;
+    margin-block-end: 0;
+
+    @media (min-width: 1024px) {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 16px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
+  }
+}
+
+.account-overview {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding-block: 11px;
+  padding-inline: 28px 32px;
+  margin-block-end: 8px;
+
+  @media (min-width: 1024px) {
+    padding-inline: 16px;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: start;
+    margin-block: 0;
+    margin-inline-end: 0;
+    margin-inline-start: 18px;
+  }
+}
+
+.account-detail {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding-block: 11px;
+  padding-inline: 28px 32px;
+  @media (min-width: 1024px) {
+    padding-inline: 16px;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: start;
+    margin-block: 0;
+    margin-inline-end: 0;
+    margin-inline-start: 18px;
+  }
+}
+
+.account-details {
+  margin-block-end: 8px;
+}
+
+.account-detail-section {
+  display: flex;
+}
+
+.account-left {
+  @media (min-width: 1024px) {
+    width: 33%;
+    margin-inline-end: 60px;
+  }
+}
+
+.account-image-section {
+  display: none;
+  @media (min-width: 1024px) {
+    display: block;
+    position: relative;
+    width: 67%;
+
+    div {
+      position: absolute;
+      color: white;
+      z-index: 1;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 38px;
+      letter-spacing: 0em;
+      text-align: start;
+      top: 128.5px;
+      left: 62.5px;
+    }
+  }
+}
