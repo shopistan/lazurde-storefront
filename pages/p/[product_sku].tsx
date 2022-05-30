@@ -1,3 +1,4 @@
+import ProductDescription from 'components/common/product-description'
 import { PageProps } from 'lib/types/common'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import React, { FC } from 'react'
@@ -5,7 +6,10 @@ import React, { FC } from 'react'
 
 const LazurdeProductDescriptionPage: FC<PageProps> = () => {
     return (
-        <div>LazurdeProductDescriptionPage</div>
+        <div>
+            LazurdeProductDescriptionPage
+            <ProductDescription />
+        </div>
     )
 }
 
