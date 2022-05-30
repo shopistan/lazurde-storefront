@@ -1,27 +1,14 @@
-// import { fetchItemBySku, fetchItemBySkus } from 'lib/xm'
-import React, { useContext, useEffect } from 'react'
-import ImageSection from './image-section'
+import React from "react";
+import styles from "./style.module.scss";
+import ProductDetail from "./product-detail";
+import { productDescriptionData } from "lib/mock-data/data";
 
 const ProductDescription = () => {
-
-// useEffect(() => {
-//   fetchItemBySku("100").then((result) => {
-//     console.log("something1", result)
-//   })
-//   fetchItemBySkus(['100']).then((result) => {
-//     console.log("something", result)
-//   })
-
-// }, [])
-
-
   return (
-    <>
-    <div>ProductDescription</div>
-    <ImageSection></ImageSection>
-    </>
+    <div className={styles["product-description-wrapper"]}>
+      <ProductDetail productDetail={productDescriptionData?.productDetail} />
+    </div>
+  );
+};
 
-  )
-}
-
-export default ProductDescription
+export default ProductDescription;
