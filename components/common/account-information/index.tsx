@@ -4,23 +4,9 @@ import Label from "../ui/label";
 import Person from "components/icons/Person";
 import styles from "./account-information.module.scss";
 import { ImageType } from "lib/types/common";
+import { details } from "./data";
 
-type detailsProps = {
-  image: ImageType;
-  text: string | "";
-};
-
-type AccountsProps = {
-  details: detailsProps[] | [];
-};
-
-interface AccountInformationProps {
-  accounts: AccountsProps[] | [];
-}
-
-const AccountInformation: FC<AccountInformationProps> = ({ accounts }) => {
-    console.log(accounts);
-    
+const AccountInformation = ({}) => {
   return (
     <>
       <div className={styles["account-container"]}>
@@ -42,62 +28,24 @@ const AccountInformation: FC<AccountInformationProps> = ({ accounts }) => {
                   a chance to win your order payment back.
                 </Label>
               </div>
-              <div className={styles["account-overview"]}>
-                <Person />
-                <Label>Account Overview</Label>
-              </div>
-              <div className={styles["account-details"]}>
-                <div className={styles["account-detail"]}>
-                  <Person />
-                  <Label>My Orders</Label>
-                </div>
-                <div className={styles["account-detail"]}>
-                  <Person />
-                  <Label>My Returns</Label>
-                </div>
-                <div className={styles["account-detail"]}>
-                  <Person />
-                  <Label>My Reviews</Label>
-                </div>
-                <div className={styles["account-detail"]}>
-                  <Person />
-                  <Label>My Wish List</Label>
-                </div>
-              </div>
-              <div className={styles["account-details"]}>
-                <div className={styles["account-detail"]}>
-                  <Person />
-                  <Label>My Details</Label>
-                </div>
-                <div className={styles["account-detail"]}>
-                  <Person />
-                  <Label>Address Book</Label>
-                </div>
-                <div className={styles["account-detail"]}>
-                  <Person />
-                  <Label>Payment Methods</Label>
-                </div>
-                <div className={styles["account-detail"]}>
-                  <Person />
-                  <Label>My Gift Cards</Label>
-                </div>
-              </div>
-              <div className={styles["account-details"]}>
-                <div className={styles["account-detail"]}>
-                  <Person />
-                  <Label>Newsletter Subscriptions</Label>
-                </div>
-                <div className={styles["account-detail"]}>
-                  <Person />
-                  <Label>Need Help?</Label>
-                </div>
-              </div>
-              <div className={styles["account-details"]}>
-                <div className={styles["account-detail"]}>
-                  <Person />
-                  <Label>Sign Out</Label>
-                </div>
-              </div>
+              {details &&
+                details?.map((object, index) => {
+                  const { accounts } = object;
+                  return (
+                    <div className={styles["account-details"]}>
+                      {accounts &&
+                        accounts?.map((account, index) => {
+                          const { text, image } = account;
+                          return (
+                            <div className={styles["account-detail"]}>
+                              <Person />
+                              <Label>{text}</Label>
+                            </div>
+                          );
+                        })}
+                    </div>
+                  );
+                })}
             </div>
           </div>
           <div className={styles["account-image-section"]}>
