@@ -72,6 +72,8 @@ const ProductListing = ({
     setTotalSelectedFilterCount,
     selectedFilters,
     setSelectedFilters,
+    hasFilteredData,
+    setHasFilteredData,
   } = useContext(AppContext);
   const { t } = useTranslation("common");
   const [initialProductData, setInitialProductData] = useState<any>([]);
@@ -79,7 +81,7 @@ const ProductListing = ({
   const [filteredListData, setFilteredListData] = useState<any>([]);
   const [currentProductData, setCurrentProductData] = useState([]);
   // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
-  const [hasFilteredData, setHasFilteredData] = useState(false);
+  // const [hasFilteredData, setHasFilteredData] = useState(false);
 
   const _arabicProductCardData = t(
     "arabicProductCardData",
