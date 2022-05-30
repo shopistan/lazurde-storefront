@@ -1,9 +1,14 @@
 {
+  "InThePress": "في الصحافة",
+  "shopAll": "تسوق كل شيء",
+  "bannerHeading": "اختيار المشاهير",
   "customerHeading": "ىانيدل تاضيفختلا عيمج قوست",
   "search": "ىكل رخدي",
   "customerTitle": "ىانيدل تاضيفختلا عيمج قوست",
   "notFound": "لم يتم العثور على تطابق",
   "customerButton": "لدي سؤال؟",
+  "addToCartBtnText": "أضف إلى السلة",
+  "onlineExclusiveTag": "حصريا على الانترنت",
   "servicesProps": [
     {
       "iconTitle": "ءيش لك قوست",
@@ -751,27 +756,22 @@
   "sortingFilter": [
     {
       "label": "الجديد",
-      "img": "",
-      "value": "الجديد"
+      "value": "our recommendation"
     },
     {
       "label": "أفضل البائعين",
-      "img": "",
-      "value": "أفضل البائعين"
+      "value": "most viewed"
     },
     {
       "label": "أكبر توفير",
-      "img": "",
       "value": "أكبر توفير"
     },
     {
       "label": "الأكثر مشاهدة",
-      "img": "",
       "value": "الأكثر مشاهدة"
     },
     {
       "label": "اسم المنتج",
-      "img": "",
       "value": "اسم المنتج"
     }
   ],

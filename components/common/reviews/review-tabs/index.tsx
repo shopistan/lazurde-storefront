@@ -1,5 +1,5 @@
-import Label from "components/common/ui/label";
 import React, { useState } from "react";
+import Label from "components/common/ui/label";
 import styles from "./style.module.scss";
 import { reviewFilters } from "lib/mock-data/data";
 

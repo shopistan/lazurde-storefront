@@ -98,6 +98,8 @@ const filterListData = [
   },
 ];
 
+type optionProps = { label?: string; img?: string; value?: string };
+
 type FilterListProps = {
   filterName: string;
   filterOptions: { optionName: string }[];
@@ -115,6 +117,7 @@ interface FilterBarProps {
   onApplyFilters?: Function;
   onSortingChange?: Function;
   onClear?: Function;
+  hasFilteredData: Boolean;
 }
 
 interface DropdownDataProps {
@@ -132,9 +135,15 @@ const FilterBar: FC<FilterBarProps> = ({
   onApplyFilters = () => {},
   onSortingChange = () => {},
   onClear = () => {},
+  hasFilteredData = false,
 }): JSX.Element => {
-  const { appState, totalSelectedFilterCount, setTotalSelectedFilterCount } =
-    useContext(AppContext);
+  const {
+    appState,
+    totalSelectedFilterCount,
+    setTotalSelectedFilterCount,
+    selectedFilters,
+    setSelectedFilters,
+  } = useContext(AppContext);
   const { t } = useTranslation("common");
   const [currentSortingValue, setCurrentSortingValue] = useState<any>("");
 
@@ -142,25 +151,26 @@ const FilterBar: FC<FilterBarProps> = ({
     onApplyFilters(selectedFilter, currentSortingValue);
   };
 
-  let link: any = useRef(
-    Array.isArray(filterList) &&
-      filterList.length > 0 &&
-      filterList.map(() => React.createRef())
-  );
+  let link: any = useRef([1, 2, 3, 4, 5, 6, 7].map(() => React.createRef()));
 
   const _arabicFilterBarData = t(
     "arabicFilterList",
     {},
     { returnObjects: true }
   );
-  const _arabicSortingFilter = t("sortingFilter", {}, { returnObjects: true });
+
+  const _arabicSortingFilter: optionProps[] = t(
+    "sortingFilter",
+    {},
+    { returnObjects: true }
+  );
 
   const [currentFilterList, setCurrentFilterList] = useState<string | object>(
     filterList
   );
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
-  const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
+  // const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
   // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const [linkRefs, setLinkRefs] = useState(link);
   const [width] = useWindowSize();
@@ -190,16 +200,18 @@ const FilterBar: FC<FilterBarProps> = ({
   }, [selectedFilters]);
 
   useEffect(() => {
+    setCurrentSortingValue("");
+    setSelectedFilters({});
     setOptionData({
-      data: appState?.lang === "en" ? optionsData : _arabicSortingFilter,
+      data: _arabicSortingFilter,
       defaultValue:
-        appState?.lang === "en" ? "Our Recommendation" : "أفضل البائعين",
+        appState?.lang === "en" ? "Our Recommendation" : "our recommendation",
     });
 
     if (appState.lang === "en") {
       setCurrentFilterList(filterList);
     } else {
-      setCurrentFilterList(_arabicFilterBarData);
+      // setCurrentFilterList(_arabicFilterBarData);
     }
   }, [appState]);
 
@@ -282,7 +294,7 @@ const FilterBar: FC<FilterBarProps> = ({
         <div
           className={styles["div-clear-btn"]}
           data-opened={isOpened?.opened}
-          data-has-count={totalSelectedFilterCount > 0}
+          data-has-count={hasFilteredData || totalSelectedFilterCount > 0}
         >
           <Button
             buttonText={appState?.lang === "en" ? "Clear All Filters" : "مسح"}
@@ -299,7 +311,7 @@ const FilterBar: FC<FilterBarProps> = ({
           data-opened={isOpened?.opened}
         >
           <BorderlessSelect
-            options={optionData?.data}
+            options={_arabicSortingFilter}
             defaultValue={optionData?.defaultValue}
             selectedLabel={appState?.lang === "en" ? "Sort By: " : "بسح فنص:"}
             onChange={(value: { label: string; value: string }) => {
@@ -320,6 +332,7 @@ const FilterBar: FC<FilterBarProps> = ({
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
           onApplyFilters={onApplyButtonClick}
+          hasFilteredData={hasFilteredData}
         ></DropDown>
       </div>
       <div

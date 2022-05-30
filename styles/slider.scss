@@ -105,6 +105,8 @@
   &.swiper {
     .swiper-button-prev,
     .swiper-button-next {
+      pointer-events: none;
+
       &:after {
         display: inline-flex;
         align-items: center;
@@ -162,8 +164,9 @@
   &:hover {
     .swiper-button-prev,
     .swiper-button-next {
-      &:after {
-        @media (min-width: $breakPoint-desktop) {
+      @media (min-width: $breakPoint-desktop) {
+        pointer-events: unset;
+        &:after {
           opacity: 1;
           visibility: visible;
           z-index: 1;

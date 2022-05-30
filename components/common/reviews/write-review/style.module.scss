@@ -24,17 +24,28 @@
     }
   }
 
+  &_header {
+    position: sticky;
+    top: 0;
+    background-color: $white-color;
+  }
+
   &_body {
     width: 100%;
     height: 622px;
     overflow-y: hidden;
     margin: 0 auto;
+    padding-top: 16px;
+    padding-inline-end: 10px;
+    padding-bottom: 20px;
+    padding-inline-start: 20px;
     background-color: $white-color;
     border-radius: 8px;
 
     @media (min-width: $breakPoint-desktop) {
       width: 40.374%;
-      padding: 16px 20px 20px 40px;
+      padding-inline-end: 20px;
+      padding-inline-start: 40px;
     }
   }
 
@@ -42,9 +53,10 @@
     width: 100%;
     height: 590px;
     overflow-y: auto;
+    padding-inline-end: 10px;
 
     @media (min-width: $breakPoint-desktop) {
-      padding-top: 16px;
+      padding-top: 0;
       padding-inline-end: 20px;
     }
 
@@ -160,6 +172,7 @@
   position: sticky;
   bottom: 0;
   text-align: end;
+  background: linear-gradient(#fff, #fff);
 
   button {
     cursor: pointer;

@@ -994,5 +994,114 @@
       },
       "title": { "type": "String", "label": "Title", "default": "" }
     }
+  },
+  {
+    "type": "Component",
+    "id": "CelebrityChoice",
+    "label": "Celebrity Choice",
+    "allowNestedComponents": false,
+    "attributes": {
+      "bannerImage": {
+        "type": "Image",
+        "label": "Banner Image",
+        "url": { "type": "String", "label": "URL", "default": "" },
+        "altText": { "type": "String", "label": "Alt Text", "default": "" }
+      },
+      "heading": { "type": "String", "label": "Heading", "default": "" },
+      "celebrities": {
+        "type": "Array",
+        "label": "Celebrities",
+        "default": [],
+        "allowNestedComponents": false,
+        "children": {
+          "type": "Shape",
+          "default": {},
+          "children": {
+            "celebrityImage": {
+              "type": "Image",
+              "label": "Celebrity Image",
+              "url": { "type": "String", "label": "URL", "default": "" },
+              "altText": {
+                "type": "String",
+                "label": "Alt Text",
+                "default": ""
+              }
+            },
+            "celebritySign": {
+              "type": "Image",
+              "label": "Celebrity Sign",
+              "url": { "type": "String", "label": "URL", "default": "" },
+              "altText": {
+                "type": "String",
+                "label": "Alt Text",
+                "default": ""
+              }
+            }
+          }
+        }
+      },
+      "detailsHeading": {
+        "type": "String",
+        "label": "Details Heading",
+        "default": ""
+      },
+      "detailsDescription": {
+        "type": "RichText",
+        "label": "Details Description",
+        "default": ""
+      }
+    }
+  },
+  {
+    "type": "Component",
+    "id": "InThePress",
+    "label": "In The Press",
+    "allowNestedComponents": false,
+    "attributes": {
+      "bannerImage": {
+        "type": "Image",
+        "label": "Banner Image",
+        "url": { "type": "String", "label": "URL", "default": "" },
+        "altText": { "type": "String", "label": "Alt Text", "default": "" }
+      },
+      "heading": { "type": "String", "label": "Heading", "default": "" },
+      "stories": {
+        "type": "Array",
+        "label": "Stories",
+        "default": [],
+        "allowNestedComponents": false,
+        "children": {
+          "type": "Shape",
+          "default": {},
+          "children": {
+            "storyImage": {
+              "type": "Image",
+              "label": "Story Image",
+              "url": { "type": "String", "label": "URL", "default": "" },
+              "altText": {
+                "type": "String",
+                "label": "Alt Text",
+                "default": ""
+              }
+            },
+            "storyTitle": {
+              "type": "String",
+              "label": "Story Title",
+              "default": ""
+            },
+            "storyHeading": {
+              "type": "String",
+              "label": "Story Heading",
+              "default": ""
+            },
+            "storyDescriptin": {
+              "type": "RichText",
+              "label": "Story Description",
+              "default": ""
+            }
+          }
+        }
+      }
+    }
   }
 ]

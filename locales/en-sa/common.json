@@ -9,10 +9,37 @@
   "socialIconText": "",
   "navbarBackBtn": "Back to L’azurde",
   "userNavBarTitle": "Shop By Boutique",
-  "NavbarLangSelectorTitle" : "Select your preferred language and location",
-  "langSelectorBtnTxt" : "Continue",
+  "NavbarLangSelectorTitle": "Select your preferred language and location",
+  "langSelectorBtnTxt": "Continue",
   "textShow": "Showing",
   "textOf": "of",
   "textViewAll": "View All",
-  "arabicfooterLinks": ""
+  "arabicfooterLinks": "",
+
+  "sortingFilter": [
+    {
+      "label": "Our Recommendation",
+      "value": "Our Recommendation"
+    },
+    {
+      "label": "Most Viewed",
+      "value": "most viewed"
+    },
+    {
+      "label": "Best Sellers Online",
+      "value": "Best Sellers Online"
+    },
+    {
+      "label": "Best Sellers Store",
+      "value": "Best Sellers Store"
+    },
+    {
+      "label": "Price - Low to High",
+      "value": "Price - Low to High"
+    },
+    {
+      "label": "Price - High to Low",
+      "value": "Price - High to Low"
+    }
+  ]
 }
