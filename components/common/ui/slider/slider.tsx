@@ -10,7 +10,7 @@ import "swiper/css/scrollbar";
 import { desktopScreenSize } from 'lib/utils/common'
 
 interface SliderProps {
-  children?: JSX.Element | string;
+  children?: any | JSX.Element | string;
   desktopSlidePerView?: number;
   mobileSlidePerView?: number;
   pagination?: boolean;
