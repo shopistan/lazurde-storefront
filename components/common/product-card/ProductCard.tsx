@@ -13,7 +13,7 @@ import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
 import { desktopScreenSize } from "lib/utils/common";
 import useTranslation from "next-translate/useTranslation";
-
+import { useRouter } from "next/router";
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -51,6 +51,7 @@ const ProductCard = ({
   const { appState } = useContext(AppContext);
   const [fill, setFill] = useState(false);
   const { t } = useTranslation("common");
+  const router = useRouter()
   // const [showWishListIcon, setShowWishListIcon] = useState(false);
 
   const handleAddToCart = async () => {
@@ -79,6 +80,9 @@ const ProductCard = ({
     <div
       className={`show-arrow-on-hover ${styles["product-card__wrapper"]} ${wrapperClassName}`}
       key={index}
+      onClick={() => {
+        router.push(`/p/${sku}`)
+      }}
     >
       <div
         className={styles["product-card__img-wrapper"]}

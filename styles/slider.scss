@@ -254,3 +254,19 @@
     inset-inline-end: 16px !important;
   }
 }
+
+body .swiper-pagination-bullet {
+  margin: 0 3px;
+  opacity: 1;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  transition: background 0.2s, border 0.2s;
+  outline: 0;
+
+  &.swiper-pagination-bullet-active {
+    opacity: 1;
+    border: 0;
+    background: rgba(0, 0, 0, 0.4);
+    border: transparent
+  }
+}

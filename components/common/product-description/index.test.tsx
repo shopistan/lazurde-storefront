@@ -6,7 +6,7 @@ import ContextProvider from "lib/context";
 test("product detail page testing", () => {
   render(
     <ContextProvider>
-      <ProductDescription />
+      {/* <ProductDescription /> */}
     </ContextProvider>
   );
 });

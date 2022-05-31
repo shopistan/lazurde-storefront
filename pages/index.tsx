@@ -7,6 +7,7 @@ import Head from "next/head";
 import React, { FC, useEffect, useContext } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
 import { AppContext } from "lib/context";
+import ImageMagnifier from "components/common/ui/imageMagnifier";
 
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
