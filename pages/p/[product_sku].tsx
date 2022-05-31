@@ -12,6 +12,7 @@ import Footer from "components/common/footer";
 import AppContentWrapper from "components/common/app-content-wrapper";
 import Header from "components/common/header";
 import Head from "next/head";
+import ProductDescription from "components/common/product-description";
 
 interface ProductDescriptionPageProps extends PageProps {
   product: ProductType;
@@ -42,7 +43,9 @@ const LazurdeProductDescriptionPage: FC<ProductDescriptionPageProps> = ({
         </title>
       </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
-      <AppContentWrapper></AppContentWrapper>
+      <AppContentWrapper>
+        <ProductDescription />
+      </AppContentWrapper>
       <Footer {...footerProps}></Footer>
     </>
   );
