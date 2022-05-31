@@ -2,17 +2,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import ProductDetail from "./product-detail";
 import { productDescriptionData } from "lib/mock-data/data";
+import NotifyMeModal from "./notify-me-modal";
+import SizeChart from "./product-size";
 import ImageSection from "./image-section";
 import { ProductType } from "lib/types/product";
-
-type attributeProp = {
-  attributes: [
-    {
-      name: string;
-      value: string;
-    }
-  ];
-};
 
 interface ProductDescriptionProps {
   product: ProductType;
@@ -21,11 +14,15 @@ interface ProductDescriptionProps {
 const ProductDescription = ({
   product,
 }: ProductDescriptionProps): JSX.Element => {
+  const [notifyModalOpen, setNotifyModalOpen] = useState(false);
   const [prodArray, setProdArray] = useState(product);
-  const [imageArray, setImageArray] = useState<{url: string, altText: string}[]>([]);
+  const [imageArray, setImageArray] = useState<
+    { url: string; altText: string }[]
+  >([]);
+
   const destructureAttributes = (product: ProductType) => {
     const obj: { [key: string]: string } = {};
-    product?.attributes.map((attr: any) => {
+    product?.attributes?.map((attr: any) => {
       obj[attr?.name] = attr?.value;
     });
     setProdArray({ ...prodArray, ...obj });
@@ -34,7 +31,7 @@ const ProductDescription = ({
   const getImageArray = (product: any) => {
     const imageArray: { url: string; altText: string }[] = [];
     Object.keys(product).map((attr: any) => {
-      if (attr.includes("Image URL")) {
+      if (attr?.includes("Image URL")) {
         imageArray.push({ url: product[attr], altText: "" });
       }
     });
@@ -46,18 +43,31 @@ const ProductDescription = ({
   }, []);
 
   useEffect(() => {
-    if (prodArray.hasOwnProperty("Image URL")) {
+    if (prodArray?.hasOwnProperty("Image URL")) {
       getImageArray(prodArray);
     }
   }, [prodArray]);
 
-  // console.log("something", prodArray);
+  const onSizeChange = (val: number) => {
+    console.log("sizevalue", val);
+  };
 
   return (
     <div className={styles["product-description-wrapper"]}>
+      {/* <button onClick={() => setNotifyModalOpen(true)}>click me</button> */}
+      {notifyModalOpen && (
+        <NotifyMeModal
+          isOpened={notifyModalOpen}
+          onClose={() => setNotifyModalOpen(false)}
+        />
+      )}
+
+      <SizeChart
+        productSizeArray={productDescriptionData?.productSizeArray}
+        onSizeChange={onSizeChange}
+      />
       <ImageSection imageArray={imageArray}></ImageSection>
       <ProductDetail productDetail={productDescriptionData?.productDetail} />
-
     </div>
   );
 };

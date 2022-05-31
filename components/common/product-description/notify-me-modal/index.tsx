@@ -45,6 +45,8 @@ const NotifyMeModal = ({
         onClose={onClose}
         className={styles["notifyme-modal"]}
         bgBluryModal={true}
+        modalWidth="562px"
+        modalHeight="381px"
       >
         <div className={styles["notifyme-modal-body"]}>
           <Label className={styles["heading"]}>Product Not Available</Label>
