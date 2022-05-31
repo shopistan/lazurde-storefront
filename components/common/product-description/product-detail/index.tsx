@@ -21,7 +21,7 @@ interface ProductDetailProps {
 }
 
 const ProductDetail = ({
-  productDetail = "",
+  productDetail,
   metal = "18K White Gold",
   diamond = "18K White Gold",
   stone = "18K White Gold",
@@ -44,7 +44,7 @@ const ProductDetail = ({
             element="h3"
             className={styles["heading"]}
           >{`Designer’s Notes`}</Heading>
-          <Label className={styles["detail"]}>{productDetail}</Label>
+          <p className={styles["detail"]}>{productDetail}</p>
         </div>
         <div className={`${styles["column"]} ${styles["right-side"]}`}>
           <Heading
@@ -97,7 +97,9 @@ const ProductDetail = ({
             {earringSize && (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>Pendant Size</Label>
-                <Label className={styles["description"]}>{earringSize}</Label>
+                <Label testId="earing" className={styles["description"]}>
+                  {earringSize}
+                </Label>
               </div>
             )}
             {braceletSize && (

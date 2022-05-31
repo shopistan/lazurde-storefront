@@ -3,7 +3,7 @@ import React from "react";
 interface labelType {
   className?: string;
   style?: Object;
-  children?: JSX.Element | string;
+  children?: string | JSX.Element;
   testId?: string;
 }
 

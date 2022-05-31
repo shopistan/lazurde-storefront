@@ -6,7 +6,7 @@ const CrossSmall = ({ ...props }) => {
       width={props?.width || "10"}
       height={props?.height || "11"}
       viewBox="0 0 10 11"
-      fill="none"
+      fill={props?.color || "#000"}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

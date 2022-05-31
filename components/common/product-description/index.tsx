@@ -57,6 +57,7 @@ const ProductDescription = ({
     <div className={styles["product-description-wrapper"]}>
       <ImageSection imageArray={imageArray}></ImageSection>
       <ProductDetail productDetail={productDescriptionData?.productDetail} />
+
     </div>
   );
 };
