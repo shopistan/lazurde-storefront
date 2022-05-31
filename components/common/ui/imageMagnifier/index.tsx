@@ -21,7 +21,6 @@ const ImageMagnifier = ({
     // var zoomer = e.currentTarget;
     let offSetX = 0;
     let offSetY = 0;
-    console.log('something', e);
     
     if (e.nativeEvent.type === "pointermove") {
       offSetX = e.nativeEvent.offsetX;
@@ -32,15 +31,16 @@ const ImageMagnifier = ({
       offSetY = e.touches[0].clientY - window.pageYOffset - rect.top;
     }
 
-    let x = offSetX * zoomNum - offSetX;
-    let y = offSetY * zoomNum - offSetY;
+    let x = width * zoomNum - offSetX;
+    let y = height * zoomNum - offSetY;
 
     // let x = (offSetX / zoomer.offsetWidth) * 60;
     // let y = (offSetY / zoomer.offsetHeight) * 60;
     // zoomer.style.backgroundPosition = x + '% ' + y + '%';
     // zoomer.style.opacity = zoomer.style.opacity == 0 ? 1 : 0;
 
-    lazyRoot.current.children[0].children[0].style.transform = `translate(-${x}px, -${y}px)`;
+    lazyRoot.current.children[0].children[0].style.top = `-${offSetY}px`;
+    // lazyRoot.current.children[0].children[0].style.left = `${x}px`;
   }
 
   return (
@@ -50,6 +50,7 @@ const ImageMagnifier = ({
       onPointerMove={(event) => {
         zoomOnImage(event);
       }}
+      // style={{width: width * zoomNum, height: height * zoomNum}}
     >
       <Image
         alt={"product image"}
@@ -62,8 +63,10 @@ const ImageMagnifier = ({
       <Image
         alt={"product image"}
         className={styles["image-small"]}
+        width={width}
+        height={height}
         src={url}
-        layout="fill"
+        layout="fixed"
       />
     </div>
   );

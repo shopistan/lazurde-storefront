@@ -1,12 +1,22 @@
+@import "/styles/variables.scss";
+
+
 .main-image-magnifier {
-  display: block;
-  width: 300px;
-  height: 300px;
-  margin-top: 20px;
-  margin-bottom: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   position: relative;
   cursor: zoom-in;
+  width: 100%;
+
+  @media (min-width: $breakPoint-desktop) {
+    // align-items: initial;
+  }
+
+  & * {
+    pointer-events: none;
+  }
 
   &:hover {
     & > span:first-child {
@@ -26,6 +36,6 @@
   }
 
   & > span:nth-child(2) {
-    width: 100% !important;
+    // width: 100% !important;
   }
 }

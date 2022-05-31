@@ -34,7 +34,6 @@ const LazurdeHome: FC<PageProps> = ({
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
         <div className={"component-container"}>
-          <ImageMagnifier width={300} height={300} zoomNum={3} url={"https://cdn.lazurde.com/media/catalog/product/1/1/111405180250-1_optimized.png"}/>
           {pageComponents.map((component: XMComponent, index) => {
             const Component = componentsById[component.id];
             if (Component) {

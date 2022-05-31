@@ -1,18 +1,64 @@
+import React, { useState } from "react";
 import ImageMagnifier from "components/common/ui/imageMagnifier";
-import React from "react";
+import { Cross } from "components/icons";
+import Image from "next/image";
+import styles from "./popup-image-view.module.scss";
 
-const PopupImageView = () => {
+interface PopupImageViewProps {
+  closePopup: Function;
+  imageArray: { url: string; altText: string }[];
+  selectedImageUrl: string;
+  selectedImageIndex: string | number;
+  imageSize: {width: number, height: number}
+}
+
+const PopupImageView = ({
+  closePopup,
+  imageArray,
+  selectedImageUrl,
+  selectedImageIndex,
+  imageSize,
+}: PopupImageViewProps): JSX.Element => {
+  const [imageUrl, setImageUrl] = useState(selectedImageUrl);
+  const [activeImageIndex, setActiveImageIndex] = useState(selectedImageIndex);
   return (
     <>
-      <div>PopupImageView</div>
-      <ImageMagnifier
-        width={300}
-        height={300}
-        zoomNum={3}
-        url={
-          "https://cdn.lazurde.com/media/catalog/product/1/1/111405180250-1_optimized.png"
-        }
-      />
+      <div className={styles["main-popup-view"]}>
+        <div className={styles["div-images-column"]}>
+          {imageArray.map((image, index) => {
+            return (
+              <div
+                key={index}
+                onClick={() => {
+                  setImageUrl(image.url);
+                  setActiveImageIndex(index);
+                }}
+                data-active={activeImageIndex === index}
+              >
+                <Image
+                  src={image.url}
+                  alt={image.altText}
+                  layout={"fill"}
+                ></Image>
+              </div>
+            );
+          })}
+        </div>
+        <ImageMagnifier
+          width={imageSize.width}
+          height={imageSize.height}
+          zoomNum={2}
+          url={imageUrl}
+        />
+        <div
+          className={styles["div-close-button"]}
+          onClick={() => {
+            closePopup && closePopup();
+          }}
+        >
+          <Cross width={20}></Cross>
+        </div>
+      </div>
     </>
   );
 };
