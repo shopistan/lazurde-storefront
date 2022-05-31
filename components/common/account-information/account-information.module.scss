@@ -150,8 +150,8 @@
       line-height: 38px;
       letter-spacing: 0em;
       text-align: start;
-      top: 128.5px;
-      left: 62.5px;
+      inset-block-start: 128.5px;
+      inset-inline-start: 62.5px;
     }
   }
 }
@@ -187,5 +187,11 @@
     line-height: 18px;
     letter-spacing: 0em;
     text-align: center;
+  }
+}
+
+html[dir="rtl"] {
+  .account-image-text {
+    word-break: break-all;
   }
 }
