@@ -18,13 +18,14 @@ const ENDPOINTS = {
     GET_CART: (cartId: string) =>
       `https://dev.cart.fabric.inc/v2/carts/${cartId}`,
   },
-
   COPILOT: {
     PIM: {
       FETCH_ALL_CATEGORIES:
         "/api-category/v1/category?page=1&size=10&type=PRIMARY",
-      FETCH_PRODUCT_BY_SKU: (skus: string[]) =>
-        `/api-product/v1/product?skus=${skus}`,
+      FETCH_PRODUCT_BY_SKU: (skus: string) =>
+        `/api-product/v1/product?skus=${JSON.stringify([skus])}`,
+      FETCH_ALL_PRODUCTS: (page: Number, size: Number) =>
+        `/api-product/v1/product?page=${page}&size=${size}`,
     },
   },
 

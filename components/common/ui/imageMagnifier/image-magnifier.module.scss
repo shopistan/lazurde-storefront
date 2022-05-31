@@ -1,0 +1,41 @@
+@import "/styles/variables.scss";
+
+
+.main-image-magnifier {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  cursor: zoom-in;
+  width: 100%;
+
+  @media (min-width: $breakPoint-desktop) {
+    // align-items: initial;
+  }
+
+  & * {
+    pointer-events: none;
+  }
+
+  &:hover {
+    & > span:first-child {
+      opacity: 1 !important;
+    }
+    & > span:nth-child(2) {
+      opacity: 0 !important;
+    }
+  }
+  & > span {
+    position: absolute !important;
+    transition: opacity 0.4s;
+  }
+
+  & > span:first-child {
+    opacity: 0 !important;
+  }
+
+  & > span:nth-child(2) {
+    // width: 100% !important;
+  }
+}
