@@ -1,10 +1,12 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import Image from "next/image";
 import Label from "../ui/label";
 import styles from "./account-information.module.scss";
 import { ImageType } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import { accountInformationData } from "lib/mock-data/data";
+import useTranslation from "next-translate/useTranslation";
+import { AppContext } from "lib/context/index";
 
 interface AccountInformationProps {
   title: string | "";
@@ -38,7 +40,9 @@ const AccountInformation: FC<AccountInformationProps> = ({
   reviewText,
   details,
 }) => {
+  const { t } = useTranslation("common");
   const [width] = useWindowSize();
+  const { appState } = useContext(AppContext);
   return (
     <>
       <div className={styles["account-container"]}>
@@ -51,7 +55,11 @@ const AccountInformation: FC<AccountInformationProps> = ({
               height={30}
             />
           </div>
-          <Label>{accountInformationData.title}</Label>
+          <Label>
+            {appState.lang == "en"
+              ? accountInformationData.title
+              : t("accountTitle")}
+          </Label>
         </div>
         <div className={styles["account-detail-section"]}>
           <div className={styles["account-left"]}>
@@ -67,9 +75,13 @@ const AccountInformation: FC<AccountInformationProps> = ({
                   )}
                   <Label>
                     <>
-                      {accountInformationData.firstName}
+                      {appState.lang == "en"
+                        ? accountInformationData.firstName
+                        : t("firstname")}
                       <br />
-                      {accountInformationData.lastName}
+                      {appState.lang == "en"
+                        ? accountInformationData.lastName
+                        : t("lastname")}
                     </>
                   </Label>
                 </div>
@@ -87,9 +99,13 @@ const AccountInformation: FC<AccountInformationProps> = ({
                     )}
                     <Label>
                       <>
-                        {accountInformationData.firstName}
+                        {appState.lang == "en"
+                          ? accountInformationData.firstName
+                          : t("firstName")}
                         <br />
-                        {accountInformationData.lastName}
+                        {appState.lang == "en"
+                          ? accountInformationData.lastName
+                          : t("lastName")}
                       </>
                     </Label>
                   </div>
@@ -106,7 +122,13 @@ const AccountInformation: FC<AccountInformationProps> = ({
                     />
                   )}
                 </div>
-                <Label>{accountInformationData.reviewText}</Label>
+                {accountInformationData.reviewText && (
+                  <Label>
+                    {appState.lang == "en"
+                      ? accountInformationData.reviewText
+                      : t("reviewText")}
+                  </Label>
+                )}
               </div>
               {accountInformationData.details &&
                 accountInformationData.details?.map((object, index) => {
@@ -141,7 +163,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
           </div>
           <div className={styles["account-image-section"]}>
             <div className={styles["account-image-text"]}>
-              Welcome to <br /> your account
+              {appState.lang == 'en' ? `Welcome to <br /> your account` : t("welcome")}
             </div>
             <div className={styles["account-right"]}>
               <Image src={"/main-image.png"} width={650} height={760} />
