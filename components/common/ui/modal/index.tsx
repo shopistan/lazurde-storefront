@@ -57,7 +57,10 @@ const Modal = ({
           </div>
         </div>
       ) : (
-        <div className={styles["bg-blury-modal_wrapper"]} data-open={openState}>
+        <div
+          className={`${styles["bg-blury-modal_wrapper"]} ${className}`}
+          data-open={openState}
+        >
           <div
             onClick={(event) => {
               event.stopPropagation();

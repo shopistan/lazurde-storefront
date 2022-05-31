@@ -3,20 +3,32 @@ import styles from "./style.module.scss";
 import ProductDetail from "./product-detail";
 import { productDescriptionData } from "lib/mock-data/data";
 import NotifyMeModal from "./notify-me-modal";
+import SizeChart from "./product-size";
 
 const ProductDescription = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [notifyModalOpen, setNotifyModalOpen] = useState(false);
+
+  const onSizeChange = (val: number) => {
+    console.log("sizevalue", val);
+  };
+
   return (
     <div className={styles["product-description-wrapper"]}>
-      <button onClick={() => setModalOpen(true)}>click me</button>
+      <button onClick={() => setNotifyModalOpen(true)}>click me</button>
+
       <ProductDetail productDetail={productDescriptionData?.productDetail} />
 
-      {modalOpen && (
+      {notifyModalOpen && (
         <NotifyMeModal
-          isOpened={modalOpen}
-          onClose={() => setModalOpen(false)}
+          isOpened={notifyModalOpen}
+          onClose={() => setNotifyModalOpen(false)}
         />
       )}
+
+      <SizeChart
+        productSizeArray={productDescriptionData?.productSizeArray}
+        onSizeChange={onSizeChange}
+      />
     </div>
   );
 };
