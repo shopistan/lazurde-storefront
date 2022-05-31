@@ -560,3 +560,144 @@ export const reviewFilters = [
     label: "lowest",
   },
 ];
+
+export const accountInformationData = {
+  title: "My Account",
+  titleImage: { url: "/person.png", altText: "" },
+  barCode: { url: "/barcode.svg", altText: "" },
+  firstName: "Hi",
+  lastName: "San",
+  reviewImage: { url: "/stop.png", altText: "image" },
+  reviewText:
+    "You have products waiting to be reviewed. Review and enter for a chance to win your order payment back.",
+  details: [
+    {
+      accounts: [
+        {
+          text: "Account Overview",
+          image: {
+            url: "/person.png",
+            altText: "image-text",
+          },
+          width: "15.83px",
+          height: "16.67px",
+        },
+      ],
+    },
+    {
+      accounts: [
+        {
+          text: "My Orders",
+          image: {
+            url: "/order.png",
+            altText: "image-text",
+          },
+          width: "13.75px",
+          height: "15.28px",
+        },
+        {
+          text: "My Returns",
+          image: {
+            url: "/return.png",
+            altText: "image-text",
+          },
+          width: "15.83px",
+          height: "15.83px",
+        },
+        {
+          text: "My Reviews",
+          image: {
+            url: "/reviews.png",
+            altText: "image-text",
+          },
+          width: "16.67px",
+          height: "16.67px",
+        },
+        {
+          text: "My Wish List",
+          image: {
+            url: "/wishlist.png",
+            altText: "image-text",
+          },
+          width: "16.67px",
+          height: "14.58px",
+        },
+      ],
+    },
+    {
+      accounts: [
+        {
+          text: "My Details",
+          image: {
+            url: "/details.png",
+            altText: "image-text",
+          },
+          width: "16.67px",
+          height: "16.67px",
+        },
+        {
+          text: "Address Book",
+          image: {
+            url: "/address-book.png",
+            altText: "image-text",
+          },
+          width: "16.67px",
+          height: "17.08px",
+        },
+        {
+          text: "Payment Methods",
+          image: {
+            url: "/payment.png",
+            altText: "image-text",
+          },
+          width: "16.67px",
+          height: "13.33px",
+        },
+        {
+          text: "My Gift Cards",
+          image: {
+            url: "/gift-card.png",
+            altText: "image-text",
+          },
+          width: "16.67px",
+          height: "16.67px",
+        },
+      ],
+    },
+    {
+      accounts: [
+        {
+          text: "Newsletter Subscriptions",
+          image: {
+            url: "/newsletter.png",
+            altText: "image-text",
+          },
+          width: "16.67px",
+          height: "16.67px",
+        },
+        {
+          text: "Need Help?",
+          image: {
+            url: "/help.png",
+            altText: "image-text",
+          },
+          width: "16.67px",
+          height: "16.67px",
+        },
+      ],
+    },
+    {
+      accounts: [
+        {
+          text: "Sign Out",
+          image: {
+            url: "/sign-out.png",
+            altText: "image-text",
+          },
+          width: "15.59px",
+          height: "15.83px",
+        },
+      ],
+    },
+  ],
+};

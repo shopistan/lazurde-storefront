@@ -126,8 +126,9 @@
 }
 
 .account-left {
+  width: 100%;
   @media (min-width: 1024px) {
-    width: 33%;
+    width: 34%;
     margin-inline-end: 60px;
   }
 }
@@ -139,7 +140,7 @@
     position: relative;
     width: 67%;
 
-    div {
+    .account-image-text {
       position: absolute;
       color: white;
       z-index: 1;
@@ -151,5 +152,39 @@
       top: 128.5px;
       left: 62.5px;
     }
+  }
+}
+
+.account-image {
+  width: 20px;
+  height: 20px;
+}
+
+.account-right {
+  width: 100%;
+  height: 100%;
+}
+
+.account-profile-mobile {
+  background-color: white;
+  padding-bottom: 111px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.account-banner {
+  position: absolute;
+  top: 67px;
+
+  p {
+    margin-top: 8px !important;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: center;
   }
 }
