@@ -67,3 +67,19 @@ export const reviewStarAvg = (arr: any) => {
   const average = sum / arr.length;
   return average;
 };
+
+export const slashFormatDate = (date: any) => {
+  const _date = new Date(date);
+  const year = _date?.getFullYear();
+  let month: any = _date?.getMonth() + 1;
+  let day: any = _date?.getDate();
+
+  if (day < 10) {
+    day = "0" + day;
+  }
+  if (month < 10) {
+    month = "0" + month;
+  }
+
+  return `${month}/${day}`;
+};

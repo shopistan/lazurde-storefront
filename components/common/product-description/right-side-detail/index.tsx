@@ -69,7 +69,7 @@ const RightSideDetail = ({
           buttonStyle="white"
         ></Button>
       </div>
-      {/* <SubDetail /> */}
+      <SubDetail />
     </>
   );
 };
