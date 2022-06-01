@@ -6,6 +6,7 @@ import { ImageType } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
+import { useRouter } from "next/router";
 
 interface AccountInformationProps {
   title: string | "";
@@ -23,10 +24,18 @@ type AccountsProps = {
   text: string | "";
   width: string | number;
   height: string | number;
+  link: string | "";
 };
 
 type DetailsProps = {
   accounts: AccountsProps[];
+};
+
+type _DetailsProps = {
+  accounts: _AccountsProps[];
+};
+type _AccountsProps = {
+  text: string | "";
 };
 
 const AccountInformation: FC<AccountInformationProps> = ({
@@ -41,11 +50,22 @@ const AccountInformation: FC<AccountInformationProps> = ({
 }) => {
   const { t } = useTranslation("common");
   const [width] = useWindowSize();
+  const router = useRouter();
   const { appState } = useContext(AppContext);
+  const _detailsProps: _DetailsProps[] = t(
+    "detailsProps",
+    {},
+    { returnObjects: true }
+  );
   return (
     <>
       <div className={styles["account-container"]}>
-        <div className={styles["account-main"]}>
+        <div
+          className={styles["account-main"]}
+          onClick={() => {
+            router.push("/account-page");
+          }}
+        >
           <div className={styles["account-mainImage"]}>
             <Image
               src={titleImage?.url || "/"}
@@ -54,7 +74,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
               height={30}
             />
           </div>
-          <Label>{appState.lang == "en" ? title : t("accountTitle")}</Label>
+          <Label>{appState?.lang == "en" ? title : t("accountTitle")}</Label>
         </div>
         <div className={styles["account-detail-section"]}>
           <div className={styles["account-left"]}>
@@ -66,9 +86,12 @@ const AccountInformation: FC<AccountInformationProps> = ({
                   )}
                   <Label>
                     <>
-                      {appState.lang == "en" ? firstName : t("firstname")}
-                      {<br />}
-                      {appState.lang == "en" ? lastName : t("lastname")}
+                      <span>
+                        {appState?.lang == "en" ? firstName : t("firstname")}
+                      </span>
+                      <span>
+                        {appState?.lang == "en" ? lastName : t("lastname")}
+                      </span>
                     </>
                   </Label>
                 </div>
@@ -86,9 +109,12 @@ const AccountInformation: FC<AccountInformationProps> = ({
                     )}
                     <Label>
                       <>
-                        {appState.lang == "en" ? firstName : t("firstName")}
-                        {<br />}
-                        {appState.lang == "en" ? lastName : t("lastName")}
+                        <span>
+                          {appState?.lang == "en" ? firstName : t("firstname")}
+                        </span>
+                        <span>
+                          {appState?.lang == "en" ? lastName : t("lastname")}
+                        </span>
                       </>
                     </Label>
                   </div>
@@ -98,7 +124,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
                 <div className={styles["account-reviewsImage"]}>
                   {reviewImage?.url && (
                     <Image
-                      src={reviewImage.url || "/"}
+                      src={reviewImage?.url || "/"}
                       width={16.67}
                       height={16.67}
                       layout="fixed"
@@ -107,22 +133,25 @@ const AccountInformation: FC<AccountInformationProps> = ({
                 </div>
                 {reviewText && (
                   <Label>
-                    {appState.lang == "en" ? reviewText : t("reviewText")}
+                    {appState?.lang == "en" ? reviewText : t("reviewText")}
                   </Label>
                 )}
               </div>
               {details &&
-                details?.map((object, index) => {
+                details?.map((object, i) => {
                   const { accounts } = object;
                   return (
                     <div className={styles["account-details"]}>
                       {accounts &&
                         accounts?.map((account, index) => {
-                          const { text, image, width, height } = account;
+                          const { text, image, width, height, link } = account;
                           return (
                             <div
                               className={styles["account-detail"]}
                               key={index}
+                              onClick={() => {
+                                router.push(`/${link || ""}`);
+                              }}
                             >
                               <div className={styles["account-image"]}>
                                 <Image
@@ -133,7 +162,11 @@ const AccountInformation: FC<AccountInformationProps> = ({
                                   layout="fixed"
                                 />
                               </div>
-                              <Label>{text}</Label>
+                              <Label>
+                                {appState?.lang === "ar"
+                                  ? _detailsProps[i]?.accounts?.[index]?.text
+                                  : text}
+                              </Label>
                             </div>
                           );
                         })}
@@ -144,7 +177,9 @@ const AccountInformation: FC<AccountInformationProps> = ({
           </div>
           <div className={styles["account-image-section"]}>
             <div className={styles["account-image-text"]}>
-              {appState.lang == "en" ? `Welcome to your account` : t("welcome")}
+              {appState?.lang == "en"
+                ? `Welcome to your account`
+                : t("welcome")}
             </div>
             <div className={styles["account-right"]}>
               <Image src={"/main-image.png"} width={650} height={760} />
