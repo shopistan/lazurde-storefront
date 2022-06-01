@@ -4,8 +4,8 @@ import styles from "./button.module.scss";
 interface ButtonProps {
   className?: string;
   buttonText?: string | Function;
-  buttonStyle?: string;
-  buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl";
+  buttonStyle?: "black" | "white" | "underline";
+  buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl" | "xxxl";
   onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit";
   children?: JSX.Element | string;

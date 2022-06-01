@@ -1,0 +1,73 @@
+@import "/styles/variables.scss";
+
+.div-cart-buttons {
+  margin-block: 40px;
+  .book-apt-btn {
+    margin-block-start: 16px;
+  }
+}
+
+.detail {
+  .collection-tag {
+    margin: 0;
+    margin-bottom: 8px;
+    color: $black-color;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+
+  .title {
+    margin: 0;
+    color: $black-color;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 38.4px;
+    letter-spacing: 0em;
+    text-align: start;
+    text-transform: capitalize;
+  }
+
+  .review-section {
+    display: flex;
+    align-items: center;
+    margin-top: 17.5px;
+    margin-bottom: 17.5px;
+
+    .wishlist-icon {
+      cursor: pointer;
+      margin-inline-end: 27px;
+    }
+
+    .rating-stars {
+      margin-inline-end: 10px;
+    }
+
+    .write-review-btn {
+      button {
+        &.btn {
+          width: fit-content;
+          height: auto;
+          padding: 0;
+          background-color: transparent;
+          color: $black-color;
+          border: 0;
+          border-radius: 0;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 16.8px;
+          letter-spacing: 0em;
+          text-align: start;
+        }
+      }
+    }
+  }
+}
+
+.product-feature-detail {
+  padding-inline-end: 80px;
+  padding-inline-start: 80px;
+}

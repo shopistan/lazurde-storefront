@@ -4,9 +4,10 @@ import Label from "components/common/ui/label";
 import StarRating from "components/common/ui/star-ratings";
 import { Heart } from "components/icons";
 import React, { useState } from "react";
-import ProductColorSelection from "../color-selection";
+// import ProductColorSelection from "../color-selection";
 import SizeChart from "../size-selection";
-import styles from "../style.module.scss";
+import ButtonATC from "components/common/ui/button-add-to-cart";
+import styles from "./right-side-detail.module.scss";
 
 interface RightSideDetailProps {
   onSizeChange?: Function;
@@ -54,6 +55,19 @@ const RightSideDetail = ({
           onClose={() => setModalOpen(false)}
         />
       )}
+      <div className={styles['div-cart-buttons']}>
+        <ButtonATC
+          buttonSize={"xxxl"}
+          buttonText={"Add To Cart"}
+          showCounter={true}
+        ></ButtonATC>
+        <Button
+        className={styles['book-apt-btn']}
+          buttonSize={"xxxl"}
+          buttonText={"Book An Appointment"}
+          buttonStyle="black"
+        ></Button>
+      </div>
     </>
   );
 };
