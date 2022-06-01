@@ -143,10 +143,10 @@ const ReviewForm = ({ rating, productId = 5151231 }: any): JSX.Element => {
               </div>
             </div>
 
-            <ImageUploader
+            {/* <ImageUploader
               file={fileUpload?.fileArray}
               setFileUpload={setFileUpload}
-            />
+            /> */}
             <div className={styles["submit-btn"]}>
               <button type="submit" disabled={isSubmitting}>
                 post review

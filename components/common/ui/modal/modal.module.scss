@@ -3,11 +3,12 @@
 .div-modal-main {
   position: fixed;
   top: 0;
+  right: 0;
   bottom: 0;
+  left: 0;
   background-color: white;
   height: 100vh;
   width: 100vw;
-  left: 0;
   z-index: 100;
   transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   padding: 24px;
@@ -23,9 +24,9 @@
     display: flex;
     width: 100%;
 
-    @media (min-width: $breakPoint-desktop) {
-      display: none;
-    }
+    // @media (min-width: $breakPoint-desktop) {
+    //   display: none;
+    // }
 
     .div-left {
       flex: 1;
@@ -73,7 +74,7 @@ html[dir="rtl"] {
     padding-block-start: 100px;
     padding-block-end: 178px;
     display: flex;
-    background-color: #E5E5E5;
+    background-color: #e5e5e5;
   }
 
   .div-modal-body {
@@ -81,7 +82,65 @@ html[dir="rtl"] {
       background-color: white;
       width: 562px;
       margin-top: 60px;
-
     }
+  }
+}
+
+.bg-blury-modal {
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: fit-content;
+
+  &.div-modal-main {
+    &[data-open="true"] {
+      display: block;
+    }
+
+    &[data-open="false"] {
+      display: none;
+    }
+  }
+}
+
+.bg-blury-modal {
+  &_wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background-color: white;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    z-index: 100;
+    padding: 24px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+    &[data-open="true"] {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  &_body {
+    margin: 0 auto;
+    padding: 38px 20px 40px;
+    overflow-y: auto;
+    background-color: $white-color;
+    box-shadow: 0px 4px 40px 0px #0000000d;
+    border-radius: 8px;
+
+    @media (min-width: $breakPoint-desktop) {
+      padding: 38px 40px 40px;
+    }
+  }
+
+  &_cross-btn {
+    cursor: pointer;
+    text-align: end;
   }
 }

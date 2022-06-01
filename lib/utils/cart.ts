@@ -10,7 +10,7 @@ export const addProductToCart = async (payload?: ATCPayload) => {
   try {
     const atcResponse = await Axios.post(
       `${CART_DOMAIN}${ENDPOINTS.CART.ADD_ITEM_TO_CART}`,
-      (payload = dummyATCpayload),
+      payload,
       {
         headers: { ...HEADERS.common, "x-api-key": CART_V2_X_API_KEY },
       }

@@ -8,6 +8,7 @@
 
 .account-main {
   display: none;
+  cursor: pointer;
   @media (min-width: 1024px) {
     display: flex;
     align-items: center;
@@ -38,6 +39,11 @@
     line-height: 22px;
     letter-spacing: 0em;
     text-align: start;
+
+    span {
+      display: block;
+      margin-bottom: 8px;
+    }
   }
 }
 
@@ -74,6 +80,7 @@
 }
 
 .account-overview {
+  cursor: pointer;
   display: flex;
   align-items: center;
   background-color: white;
@@ -97,6 +104,7 @@
 }
 
 .account-detail {
+  cursor: pointer;
   display: flex;
   align-items: center;
   background-color: white;
@@ -126,8 +134,9 @@
 }
 
 .account-left {
+  width: 100%;
   @media (min-width: 1024px) {
-    width: 33%;
+    width: 34%;
     margin-inline-end: 60px;
   }
 }
@@ -139,7 +148,8 @@
     position: relative;
     width: 67%;
 
-    div {
+    .account-image-text {
+      max-width: 35%;
       position: absolute;
       color: white;
       z-index: 1;
@@ -148,8 +158,54 @@
       line-height: 38px;
       letter-spacing: 0em;
       text-align: start;
-      top: 128.5px;
-      left: 62.5px;
+      inset-block-start: 128.5px;
+      inset-inline-start: 62.5px;
     }
+  }
+}
+
+.account-image {
+  width: 20px;
+  height: 20px;
+}
+
+.account-right {
+  width: 100%;
+  height: 100%;
+}
+
+.account-profile-mobile {
+  background-color: white;
+  padding-bottom: 111px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.account-banner {
+  position: absolute;
+  top: 67px;
+
+  p {
+    margin-top: 8px !important;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: center;
+
+    span {
+      display: block;
+      margin-bottom: 8px;
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .account-image-text {
+    word-break: break-all;
   }
 }
