@@ -581,6 +581,7 @@ export const accountInformationData = {
           },
           width: "15.83px",
           height: "16.67px",
+          link: "",
         },
       ],
     },
@@ -594,6 +595,7 @@ export const accountInformationData = {
           },
           width: "13.75px",
           height: "15.28px",
+          link: "",
         },
         {
           text: "My Returns",
@@ -603,6 +605,7 @@ export const accountInformationData = {
           },
           width: "15.83px",
           height: "15.83px",
+          link: "",
         },
         {
           text: "My Reviews",
@@ -612,6 +615,7 @@ export const accountInformationData = {
           },
           width: "16.67px",
           height: "16.67px",
+          link: "",
         },
         {
           text: "My Wish List",
@@ -621,6 +625,7 @@ export const accountInformationData = {
           },
           width: "16.67px",
           height: "14.58px",
+          link: "",
         },
       ],
     },
@@ -634,6 +639,7 @@ export const accountInformationData = {
           },
           width: "16.67px",
           height: "16.67px",
+          link: "",
         },
         {
           text: "Address Book",
@@ -643,6 +649,7 @@ export const accountInformationData = {
           },
           width: "16.67px",
           height: "17.08px",
+          link: "",
         },
         {
           text: "Payment Methods",
@@ -652,6 +659,7 @@ export const accountInformationData = {
           },
           width: "16.67px",
           height: "13.33px",
+          link: "",
         },
         {
           text: "My Gift Cards",
@@ -661,6 +669,7 @@ export const accountInformationData = {
           },
           width: "16.67px",
           height: "16.67px",
+          link: "",
         },
       ],
     },
@@ -674,6 +683,7 @@ export const accountInformationData = {
           },
           width: "16.67px",
           height: "16.67px",
+          link: "",
         },
         {
           text: "Need Help?",
@@ -683,6 +693,7 @@ export const accountInformationData = {
           },
           width: "16.67px",
           height: "16.67px",
+          link: "",
         },
       ],
     },
@@ -696,6 +707,7 @@ export const accountInformationData = {
           },
           width: "15.59px",
           height: "15.83px",
+          link: "",
         },
       ],
     },
