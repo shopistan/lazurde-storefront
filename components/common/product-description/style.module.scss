@@ -1,0 +1,21 @@
+@import "/styles/variables.scss";
+
+.upper-section {
+  display: flex;
+  justify-content: space-between;
+
+  @media (min-width: $breakPoint-desktop) {
+    padding-top: 42px;
+    padding-inline-end: 64px;
+    padding-bottom: 41.5px;
+    padding-inline-start: 80px;
+  }
+
+  .left-side {
+    width: 63.658%;
+  }
+
+  .right-side {
+    width: 30%;
+  }
+}
