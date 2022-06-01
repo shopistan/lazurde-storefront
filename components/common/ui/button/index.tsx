@@ -12,9 +12,9 @@ interface ButtonProps {
 }
 
 const Button = ({
-  className = '',
+  className = "",
   type = "button",
-  buttonText = '',
+  buttonText = "",
   buttonStyle = "black",
   buttonSize = "md",
   children,
@@ -26,11 +26,11 @@ const Button = ({
       data-style={buttonStyle}
       data-size={buttonSize}
       className={`${styles["button"]} ${className}`}
-      onClick={onClick}
+      onClick={(e) => onClick(e)}
       type={type}
     >
       {buttonText || ""}
-      {children || ''}
+      {children || ""}
     </button>
   );
 };

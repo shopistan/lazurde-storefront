@@ -14,6 +14,7 @@ import { ATCPayload } from "lib/types/cart";
 import { desktopScreenSize } from "lib/utils/common";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
+import { fetchProductPriceByItemId } from "lib/utils/product";
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -51,10 +52,11 @@ const ProductCard = ({
   const { appState } = useContext(AppContext);
   const [fill, setFill] = useState(false);
   const { t } = useTranslation("common");
-  const router = useRouter()
+  const router = useRouter();
   // const [showWishListIcon, setShowWishListIcon] = useState(false);
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = async (event: any) => {
+    event.stopPropagation();
     const payload: ATCPayload = {
       cartId: null,
       items: [
@@ -62,7 +64,7 @@ const ProductCard = ({
           sku: sku,
           itemId: itemId,
           quantity: 1,
-          priceListId: priceListId,
+          priceListId: "100000",
           price: {
             currency: currency,
             amount: basePrice,
@@ -81,7 +83,7 @@ const ProductCard = ({
       className={`show-arrow-on-hover ${styles["product-card__wrapper"]} ${wrapperClassName}`}
       key={index}
       onClick={() => {
-        router.push(`/p/${sku}`)
+        router.push(`/p/${sku}`);
       }}
     >
       <div
@@ -155,8 +157,8 @@ const ProductCard = ({
                 appState?.lang === "en" ? "add to cart" : t("addToCartBtnText")
               }
               buttonSize={"sm"}
-              onClick={() => {
-                handleAddToCart();
+              onClick={(e) => {
+                handleAddToCart(e);
               }}
               type={"button"}
             />
