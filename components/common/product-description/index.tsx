@@ -6,6 +6,7 @@ import NotifyMeModal from "./notify-me-modal";
 import SizeChart from "./product-size";
 import ImageSection from "./image-section";
 import { ProductType } from "lib/types/product";
+import RightSideDetail from "./right-side-detail";
 
 interface ProductDescriptionProps {
   product: ProductType;
@@ -54,20 +55,25 @@ const ProductDescription = ({
 
   return (
     <div className={styles["product-description-wrapper"]}>
-      {/* <button onClick={() => setNotifyModalOpen(true)}>click me</button> */}
+      <div className={styles["upper-section"]}>
+        <div className={styles["left-side"]}>
+          <ImageSection imageArray={imageArray}></ImageSection>
+        </div>
+        <div className={styles["right-side"]}>
+          <RightSideDetail
+            productSizeArray={productDescriptionData?.productSizeArray}
+            onSizeChange={onSizeChange}
+          />
+        </div>
+      </div>
+
+      <ProductDetail productDetail={productDescriptionData?.productDetail} />
       {notifyModalOpen && (
         <NotifyMeModal
           isOpened={notifyModalOpen}
           onClose={() => setNotifyModalOpen(false)}
         />
       )}
-
-      <SizeChart
-        productSizeArray={productDescriptionData?.productSizeArray}
-        onSizeChange={onSizeChange}
-      />
-      <ImageSection imageArray={imageArray}></ImageSection>
-      <ProductDetail productDetail={productDescriptionData?.productDetail} />
     </div>
   );
 };
