@@ -305,7 +305,7 @@ const FilterAccordion = ({
       >
         <Button
           buttonText={appState?.lang === "en" ? "Clear All Filters" : "مسح"}
-          buttonStyle={"white"}
+          buttonStyle={"underline"}
           buttonSize={"sm"}
           onClick={() => {
             setSelectedFilters && setSelectedFilters({});
