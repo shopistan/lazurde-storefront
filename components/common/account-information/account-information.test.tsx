@@ -18,6 +18,7 @@ const details = [
         text: "text",
         width: "30px",
         height: "30px",
+        link: "/",
       },
     ],
   },
