@@ -65,7 +65,7 @@ const RightSideDetail = ({
         className={styles['book-apt-btn']}
           buttonSize={"xxxl"}
           buttonText={"Book An Appointment"}
-          buttonStyle="black"
+          buttonStyle="white"
         ></Button>
       </div>
     </>
