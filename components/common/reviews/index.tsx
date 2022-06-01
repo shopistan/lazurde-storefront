@@ -9,13 +9,20 @@ import WriteAReview from "./write-review";
 import ReviewTabs from "./review-tabs";
 import Pagination from "components/common/ui/pagination";
 
-const Reviews = (): JSX.Element => {
+interface ReviewsProps {
+  setTotalRating?: Function;
+  totalRating?: number;
+}
+
+const Reviews = ({
+  setTotalRating,
+  totalRating,
+}: ReviewsProps): JSX.Element => {
   const [reviewsData, setReviewsData] = useState<any>([]);
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [currentData, setCurrentData] = useState([]);
   const [filterData, setFilterData] = useState<any>([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [totalRating, setTotalRating] = useState(0);
 
   useEffect(() => {
     setFilterData("");
@@ -48,24 +55,25 @@ const Reviews = (): JSX.Element => {
     }
     if (filtername === "recent") {
       setFilterData(reviewsData);
-      // fetchingReviews();
     }
 
     if (filtername === "highest") {
+      const sortingArray = [...reviewsData];
       const highestReviewData =
-        reviewsData &&
-        reviewsData.length > 0 &&
-        reviewsData.sort(
+        sortingArray &&
+        sortingArray.length > 0 &&
+        sortingArray.sort(
           (a: any, b: any) => b?.review?.rating - a?.review?.rating
         );
       highestReviewData && setFilterData([...highestReviewData]);
     }
 
     if (filtername === "lowest") {
+      const sortingArray = [...reviewsData];
       const lowestReviewData =
-        reviewsData &&
-        reviewsData.length > 0 &&
-        reviewsData.sort(
+        sortingArray &&
+        sortingArray.length > 0 &&
+        sortingArray.sort(
           (a: any, b: any) => a?.review?.rating - b?.review?.rating
         );
       lowestReviewData && setFilterData([...lowestReviewData]);
@@ -80,7 +88,7 @@ const Reviews = (): JSX.Element => {
         return ratings.push(element?.review?.rating);
       });
     const ratingAvg = ratings && ratings.length > 0 && reviewStarAvg(ratings);
-    ratingAvg && setTotalRating(ratingAvg);
+    ratingAvg && setTotalRating && setTotalRating(ratingAvg);
   }, [reviewsData]);
 
   return (
