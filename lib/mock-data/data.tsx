@@ -924,3 +924,85 @@ export const orderData = {
     },
   ],
 };
+
+export const cartItems = [
+  {
+    sku: "11",
+    itemId: "123",
+    priceListId: "190",
+    currency: "usd",
+    "Base Price": 1250,
+    discountedPrice: 625,
+    discount: "-50%",
+    title: "Love Ring with Diamond",
+    onlineExclusiveTag: true,
+    "Image URL": "/blue-ring.png",
+    Image: [
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    sku: "12",
+    itemId: "1253",
+    priceListId: "3190",
+    currency: "usd",
+    title: "Love Ring with Diamond",
+    "Base Price": 1900,
+    basePrice: 1900,
+    discount: "",
+    discountedPrice: "",
+    onlineExclusiveTag: false,
+    "Image URL": "/blue-ring.png",
+    images: [
+      {
+        url: "/ring.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    sku: "12",
+    itemId: "1253",
+    priceListId: "3190",
+    currency: "usd",
+    title: "Love Ring with Diamond",
+    "Base Price": 1900,
+    basePrice: 1900,
+    discount: "",
+    discountedPrice: "",
+    onlineExclusiveTag: false,
+    "Image URL": "/blue-ring.png",
+    images: [
+      {
+        url: "/ring.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    sku: "12",
+    itemId: "1253",
+    priceListId: "3190",
+    currency: "usd",
+    title: "Love Ring with Diamond",
+    "Base Price": 1900,
+    basePrice: 1900,
+    discount: "",
+    discountedPrice: "",
+    onlineExclusiveTag: false,
+    "Image URL": "/blue-ring.png",
+    images: [
+      {
+        url: "/ring.png",
+        altText: "alt text",
+      },
+    ],
+  },
+];

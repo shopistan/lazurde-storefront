@@ -5,9 +5,10 @@ import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import Head from "next/head";
 import React, { FC } from "react";
-import AppContentWrapper from "../components/common/app-content-wrapper";
+import AppContentWrapper from "components/common/app-content-wrapper";
+import Cart from "components/common/cart";
 
-const CelebrityChoice: FC<PageProps> = ({
+const CartPage: FC<PageProps> = ({
   headerProps,
   brandSidebarProps,
   footerProps,
@@ -24,13 +25,14 @@ const CelebrityChoice: FC<PageProps> = ({
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
         <div className={"component-container"}>
-          {pageComponents.map((component: XMComponent, index) => {
+          {/* {pageComponents.map((component: XMComponent, index) => {
             const Component = componentsById[component.id];
             if (Component) {
               return <Component {...component.params} key={index} />;
             }
             return null;
-          })}
+          })} */}
+          <Cart />
         </div>
       </AppContentWrapper>
       <Footer {...footerProps}></Footer>
@@ -38,12 +40,11 @@ const CelebrityChoice: FC<PageProps> = ({
   );
 };
 
-export default CelebrityChoice;
+export default CartPage;
 
 export async function getStaticProps(context: any) {
   const globalComponents = (await fetchGlobalComponents()) || [];
-  const pageComponents =
-    (await fetchXMComponents(12, "/celebrity-choice")) || [];
+  const pageComponents = (await fetchXMComponents(12, "/cart")) || [];
   const headerProps =
     (
       globalComponents.find(

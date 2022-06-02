@@ -22,3 +22,21 @@ export const addProductToCart = async (payload?: ATCPayload) => {
     );
   }
 };
+
+export const getCartByCartId = async (cartId: string) => {
+  try {
+    // const payload = ;
+    const response = await Axios.get(
+      `${CART_DOMAIN}${ENDPOINTS.CART.GET_CART(cartId)}`,
+      {
+        headers: { ...HEADERS.common },
+      }
+    );
+    return response;
+  } catch (error: unknown) {
+    console.log(
+      "Error while fecthing wishlist",
+      (error as ErrorObject)?.message
+    );
+  }
+};
