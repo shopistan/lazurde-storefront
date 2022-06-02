@@ -64,7 +64,7 @@ const SideBar: FC<SideBarProps> = ({
               )}
               <Label>
                 <>
-                  <span>
+                  <span className={styles['firstName-desktop']}>
                     {appState?.lang == "en" ? firstName : t("firstname")}
                   </span>
                   <span>

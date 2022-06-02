@@ -103,7 +103,7 @@
   padding-block: 11px;
   padding-inline: 28px 32px;
   @media (min-width: 1024px) {
-    padding-inline: 16px;
+    padding-inline: 18px;
   }
   p {
     font-size: 16px;
@@ -114,10 +114,24 @@
     margin-block: 0;
     margin-inline-end: 0;
     margin-inline-start: 18px;
+
+    &:last-child {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 17px;
+      letter-spacing: 0em;
+    }
   }
 }
 
 .account-image {
   width: 20px;
   height: 20px;
+}
+
+.firstName-desktop {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
 }
