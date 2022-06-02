@@ -5,6 +5,8 @@ import Image from "next/image";
 import { CrossSmall, TabbyIcon } from "components/icons";
 import Link from "next/link";
 import { slashFormatDate } from "lib/utils/common";
+import TabbyModal from "components/common/tabby-popup";
+import TamaraModal from "components/common/tamara-popup";
 
 interface SubDetailProps {
   isStockAvailable?: boolean;
@@ -22,20 +24,16 @@ const SubDetail = ({ isStockAvailable }: SubDetailProps): JSX.Element => {
       >
         {!isStockAvailable ? (
           <>
-            <div className={styles["sub-detail-point"]}>
-              <Image
-                src="/icons/icon1.svg"
-                width={20}
-                height={20}
-                layout="fixed"
-                alt="tabby"
-              />
-              <Label className={styles["label"]}>As low as $75/mo with</Label>
-              <Link href="https://docs.tabby.ai/#section/Promo-Messages">
-                <a className={styles["label-link"]}>
-                  <TabbyIcon />
-                </a>
-              </Link>
+            <div
+              className={styles["sub-detail-point"]}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginBottom: "3px",
+              }}
+            >
+              <TabbyModal />
+              <TamaraModal />
             </div>
             <div className={styles["sub-detail-point"]}>
               <Image
