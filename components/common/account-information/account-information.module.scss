@@ -1,3 +1,4 @@
+@import "/styles/variables.scss";
 .account-container {
   background-color: rgba(242, 242, 242, 1);
   @media (min-width: 1024px) {
@@ -13,7 +14,7 @@
 .account-main {
   display: none;
   cursor: pointer;
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     display: flex;
     align-items: center;
 
@@ -37,7 +38,7 @@
   padding-inline: 28px 32px;
   margin-block-end: 8px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding-inline: 16px;
   }
   p {
@@ -67,19 +68,13 @@
   align-items: center;
   margin-bottom: 8px;
 }
-
-.account-image-mobile {
-  width: 100%;
-  height: 120px;
-}
-
 .account-lastName {
   font-size: 18px;
   font-weight: 500;
   line-height: 22px;
   letter-spacing: 0em;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     font-size: 18px;
     font-weight: 500;
     line-height: 22px;

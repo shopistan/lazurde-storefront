@@ -1,11 +1,16 @@
+@import "/styles/variables.scss";
+
 .account-detail-section {
   display: flex;
-  width: 66%;
+
+  @media (min-width: $breakPoint-desktop) {
+    width: 66%;
+  }
 }
 
 .account-image-section {
   display: none;
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     display: block;
     position: relative;
     width: 100%;
