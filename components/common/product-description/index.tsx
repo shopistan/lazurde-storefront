@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import ProductDetail from "./product-detail";
 import { productDescriptionData } from "lib/mock-data/data";
-import NotifyMeModal from "./notify-me-modal";
+import NotifyMeModal from "./right-side-detail/notify-me-modal";
 import ImageSection from "./image-section";
 import { ProductType } from "lib/types/product";
 import RightSideDetail from "./right-side-detail";
