@@ -13,7 +13,7 @@
 .account-main {
   display: none;
   cursor: pointer;
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     display: flex;
     align-items: center;
 
@@ -37,7 +37,7 @@
   padding-inline: 28px 32px;
   margin-block-end: 8px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding-inline: 16px;
   }
   p {
@@ -73,7 +73,7 @@
   line-height: 22px;
   letter-spacing: 0em;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     font-size: 18px;
     font-weight: 500;
     line-height: 22px;

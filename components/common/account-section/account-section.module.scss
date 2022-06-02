@@ -1,14 +1,14 @@
 .account-detail-section {
   display: flex;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     width: 66%;
   }
 }
 
 .account-image-section {
   display: none;
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     display: block;
     position: relative;
     width: 100%;
