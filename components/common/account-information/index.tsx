@@ -98,7 +98,14 @@ const AccountInformation: FC<AccountInformationProps> = ({
               )}
               {width < 1024 && (
                 <div className={styles["account-profile-mobile"]}>
-                  <Image src={"/contact.png"} width={375} height={120} />
+                  <div className={styles["account-image-mobile"]}>
+                    <Image
+                      src={"/contact.png"}
+                      width={375}
+                      height={120}
+                      layout="responsive"
+                    />
+                  </div>
                   <div className={styles["account-banner"]}>
                     {barCode?.url && (
                       <Image
@@ -112,7 +119,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
                         <span>
                           {appState?.lang == "en" ? firstName : t("firstname")}
                         </span>
-                        <span>
+                        <span className={styles["account-lastName"]}>
                           {appState?.lang == "en" ? lastName : t("lastname")}
                         </span>
                       </>
