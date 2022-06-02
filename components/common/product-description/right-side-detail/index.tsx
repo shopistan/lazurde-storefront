@@ -10,21 +10,73 @@ import ColorSelection from "./color-selection";
 import ButtonATC from "components/common/ui/button-add-to-cart";
 import styles from "./right-side-detail.module.scss";
 import SubDetail from "./sub-detail";
+import WishList from "components/common/wishlist";
+import NotifyMeModal from "./notify-me-modal";
 
 interface RightSideDetailProps {
   onSizeChange?: Function;
+  itemId?: string | number;
   productSizeArray?: { Size?: string; Color?: string }[];
   totalRating?: number;
   onColorChange?: Function;
+  currency?: string;
+  basePrice?: number | string;
+  discount?: string | number;
+  finalPrice?: number | string;
 }
 
 const RightSideDetail = ({
   onSizeChange,
   onColorChange,
   productSizeArray = [],
+  itemId = "",
   totalRating = 0,
+  currency = "USD",
+  basePrice = 0,
+  discount = 0 || "",
+  finalPrice = 0,
 }: RightSideDetailProps): JSX.Element => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [notifyModalOpen, setNotifyModalOpen] = useState(false);
+  const [isStockAvailable, setIsStockAvailable] = useState(false);
+
+  const productPricing = () => {
+    return (
+      <>
+        <div className={styles["price-wrapper"]}>
+          {basePrice ? (
+            <Label
+              className={`${styles["base-price"]} ${
+                discount ? styles["line-through"] : ""
+              }`}
+            >
+              {`${currency === "USD" ? "$" : "SAR"}${
+                basePrice && basePrice.toLocaleString()
+              }`}
+            </Label>
+          ) : (
+            ""
+          )}
+          {discount ? (
+            <Label className={styles["discount"]}>
+              {`${discount?.toLocaleString()}% off`}
+            </Label>
+          ) : (
+            ""
+          )}
+          {finalPrice ? (
+            <Label className={styles["final-price"]}>
+              {`${currency === "USD" ? "$" : "SAR"}${
+                finalPrice && finalPrice.toLocaleString()
+              }`}
+            </Label>
+          ) : (
+            ""
+          )}
+        </div>
+      </>
+    );
+  };
 
   return (
     <>
@@ -33,7 +85,7 @@ const RightSideDetail = ({
         <Label className={styles["title"]}>Tiffany T Diamond Gold Ring</Label>
         <div className={styles["review-section"]}>
           <div className={styles["wishlist-icon"]}>
-            <Heart fill="#000" stroke="#000" />
+            <WishList itemID={itemId} />
           </div>
           <div className={styles["rating-stars"]}>
             <StarRating count={5} rating={totalRating} />
@@ -48,6 +100,7 @@ const RightSideDetail = ({
           </div>
         </div>
       </div>
+      {productPricing()}
       <SizeChart
         productSizeArray={productSizeArray}
         onSizeChange={onSizeChange}
@@ -56,19 +109,25 @@ const RightSideDetail = ({
         productSizeArray={productSizeArray}
         onColorChange={onColorChange}
       />
-      {modalOpen && (
-        <WriteAReview
-          modalOpen={modalOpen}
-          onClose={() => setModalOpen(false)}
-        />
-      )}
       <div className={styles["div-cart-buttons"]}>
         <div>
-          <ButtonATC
-            buttonSize={"xxxl"}
-            buttonText={"Add To Cart"}
-            showCounter={true}
-          />
+          {!isStockAvailable ? (
+            <ButtonATC
+              buttonSize={"xxxl"}
+              buttonText={"Add To Cart"}
+              showCounter={true}
+            />
+          ) : (
+            <Button
+              className={styles["book-apt-btn"]}
+              buttonSize={"xxxl"}
+              buttonText={"Notify me when available"}
+              buttonStyle="black"
+              onClick={() => {
+                setNotifyModalOpen(true);
+              }}
+            ></Button>
+          )}
         </div>
         <Button
           className={styles["book-apt-btn"]}
@@ -77,7 +136,19 @@ const RightSideDetail = ({
           buttonStyle="white"
         ></Button>
       </div>
-      <SubDetail />
+      <SubDetail isStockAvailable={isStockAvailable} />
+      {modalOpen && (
+        <WriteAReview
+          isOpened={modalOpen}
+          onClose={() => setModalOpen(false)}
+        />
+      )}
+      {notifyModalOpen && (
+        <NotifyMeModal
+          isOpened={notifyModalOpen}
+          onClose={() => setNotifyModalOpen(false)}
+        />
+      )}
     </>
   );
 };

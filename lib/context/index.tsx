@@ -54,6 +54,7 @@ const ContextProvider: FC = ({ children }) => {
     {}
   );
   const [hasFilteredData, setHasFilteredData] = useState(false);
+  const [priceListId, setPriceListId] = useState("100000");
 
   return (
     <AppContext.Provider
@@ -68,6 +69,8 @@ const ContextProvider: FC = ({ children }) => {
         setSelectedFilters,
         hasFilteredData,
         setHasFilteredData,
+        priceListId,
+        setPriceListId,
       }}
     >
       {children}

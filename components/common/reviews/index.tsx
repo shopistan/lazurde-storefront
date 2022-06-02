@@ -107,9 +107,9 @@ const Reviews = ({
               starWidth={16.67}
               starHeight={16.67}
             />
-            <Label
-              className={styles["total-rating"]}
-            >{`${totalRating} rating`}</Label>
+            <Label className={styles["total-rating"]}>{`${totalRating?.toFixed(
+              2
+            )} rating`}</Label>
           </div>
         </div>
         <div className={styles["write-review-btn"]}>
@@ -164,7 +164,10 @@ const Reviews = ({
                         {review?.author?.replace(/"/g, "")}
                       </Label>
                       <div className={styles["review-rating"]}>
-                        <StarRating count={5} rating={review?.rating} />
+                        <StarRating
+                          count={5}
+                          rating={review?.rating?.toFixed(2)}
+                        />
                       </div>
                       <Label className={styles["review-content"]}>
                         {review?.body?.replace(/"/g, "")}
@@ -191,7 +194,7 @@ const Reviews = ({
           </Pagination>
         </>
       </div>
-      {modalOpen && <WriteAReview modalOpen={modalOpen} onClose={onClose} />}
+      {modalOpen && <WriteAReview isOpened={modalOpen} onClose={onClose} />}
     </>
   );
 };
