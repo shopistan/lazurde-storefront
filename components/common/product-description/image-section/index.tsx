@@ -5,6 +5,7 @@ import React, { FC, useContext, useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
 import styles from "./image-section.module.scss";
 import PopupImageView from "./popup-image-view";
+import PopupImageViewV2 from "./popup-image-view-v2";
 import { desktopScreenSize } from "lib/utils/common";
 import useWindowSize from "lib/utils/useWindowSize";
 
@@ -30,8 +31,8 @@ const images = [
 interface ImageSectionProps {
   imageArray: { url: string; altText: string }[];
   setShowPopup: Function;
-  setSelectedImageUrl: Function;
-  setSelectedImageIndex: Function;
+  setSelectedImageUrl?: Function;
+  setSelectedImageIndex?: Function;
 }
 
 const ImageSection = ({ imageArray = images }): JSX.Element => {
@@ -53,12 +54,15 @@ const ImageSection = ({ imageArray = images }): JSX.Element => {
     <>
       <div className={styles["main-image-section"]}>
         {width > desktopScreenSize ? (
-          <DesktopImageSection
-            imageArray={imageArray}
-            setShowPopup={setShowPopup}
-            setSelectedImageUrl={setSelectedImageUrl}
-            setSelectedImageIndex={setSelectedImageIndex}
-          />
+          imageArray &&
+          imageArray?.length > 0 && (
+            <DesktopImageSectionV2
+              imageArray={imageArray}
+              setShowPopup={setShowPopup}
+              setSelectedImageUrl={setSelectedImageUrl}
+              setSelectedImageIndex={setSelectedImageIndex}
+            />
+          )
         ) : (
           <MobileImageSection
             imageArray={imageArray}
@@ -69,7 +73,7 @@ const ImageSection = ({ imageArray = images }): JSX.Element => {
         )}
       </div>
       {showPopup && (
-        <PopupImageView
+        <PopupImageViewV2
           closePopup={() => {
             setShowPopup(false);
           }}
@@ -77,7 +81,7 @@ const ImageSection = ({ imageArray = images }): JSX.Element => {
           selectedImageUrl={selectedImageUrl}
           selectedImageIndex={selectedImageIndex}
           imageSize={imageSize}
-        ></PopupImageView>
+        ></PopupImageViewV2>
       )}
     </>
   );
@@ -85,7 +89,7 @@ const ImageSection = ({ imageArray = images }): JSX.Element => {
 
 export default ImageSection;
 
-const DesktopImageSection = ({
+const DesktopImageSectionV1 = ({
   imageArray,
   setShowPopup,
   setSelectedImageUrl,
@@ -95,7 +99,7 @@ const DesktopImageSection = ({
     return (
       <div
         key={index}
-        className={styles["div-image-container"]}
+        className={styles["div-image-container-v1"]}
         onClick={() => {
           setShowPopup(true);
           setSelectedImageUrl(image?.url);
@@ -115,6 +119,55 @@ const DesktopImageSection = ({
   });
 };
 
+const DesktopImageSectionV2 = ({
+  imageArray,
+  setShowPopup,
+  setSelectedImageUrl,
+  setSelectedImageIndex,
+}: ImageSectionProps): any => {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [imageUrl, setImageUrl] = useState(imageArray[0]?.url);
+
+  return (
+    <div className={styles["div-image-container-v2"]}>
+      <div
+        onClick={() => {
+          setShowPopup(true);
+          setSelectedImageUrl(imageUrl);
+          setSelectedImageIndex(activeImageIndex);
+        }}
+        className={styles["div-selected-image"]}
+      >
+        {imageUrl && (
+          <Image src={imageUrl || "/"} alt={""} layout={"fill"}></Image>
+        )}
+      </div>
+      <div className={styles["div-images-column"]}>
+        {imageArray &&
+          imageArray.length > 1 &&
+          imageArray.map((image, index) => {
+            return (
+              <div
+                key={index}
+                onClick={() => {
+                  setImageUrl(image.url);
+                  setActiveImageIndex(index);
+                }}
+                data-active={activeImageIndex === index}
+              >
+                <Image
+                  src={image.url}
+                  alt={image.altText}
+                  layout={"fill"}
+                ></Image>
+              </div>
+            );
+          })}
+      </div>
+    </div>
+  );
+};
+
 const MobileImageSection = ({
   imageArray,
   setShowPopup,
@@ -122,13 +175,13 @@ const MobileImageSection = ({
   setSelectedImageIndex,
 }: ImageSectionProps): any => {
   return (
-    <Slider mobileSlidePerView={1} productSlider={true} pagination={true}>
+    <Slider mobileSlidePerView={1} productSlider={true}>
       {imageArray?.map((image, index) => {
         return (
           <SwiperSlide key={index}>
             <div
               key={index}
-              className={styles["div-image-container"]}
+              className={styles["div-image-container-v2"]}
               onClick={() => {
                 setShowPopup(true);
                 setSelectedImageUrl(image?.url);
