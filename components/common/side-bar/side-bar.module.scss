@@ -115,7 +115,7 @@
   background-color: white;
   padding-block: 11px;
   padding-inline: 28px 32px;
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding-inline: 18px;
   }
   p {
