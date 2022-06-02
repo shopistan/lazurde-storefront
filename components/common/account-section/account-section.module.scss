@@ -1,25 +1,27 @@
 .account-detail-section {
-    display: flex;
-  }
-  
-  .account-image-section {
-    display: none;
-    @media (min-width: 1024px) {
-      display: block;
-      position: relative;
-  
-      .account-image-text {
-        max-width: 35%;
-        position: absolute;
-        color: white;
-        z-index: 1;
-        font-size: 32px;
-        font-weight: 500;
-        line-height: 38px;
-        letter-spacing: 0em;
-        text-align: start;
-        inset-block-start: 128.5px;
-        inset-inline-start: 62.5px;
-      }
+  display: flex;
+  width: 67%;
+}
+
+.account-image-section {
+  display: none;
+  @media (min-width: 1024px) {
+    display: block;
+    position: relative;
+    width: 100%;
+
+    .account-image-text {
+      max-width: 35%;
+      position: absolute;
+      color: white;
+      z-index: 1;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 38px;
+      letter-spacing: 0em;
+      text-align: start;
+      inset-block-start: 128.5px;
+      inset-inline-start: 62.5px;
     }
   }
+}
