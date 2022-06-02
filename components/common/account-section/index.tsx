@@ -15,7 +15,7 @@ const AccountSection = () => {
             {appState?.lang == "en" ? `Welcome to your account` : t("welcome")}
           </div>
           <div className={styles["account-right"]}>
-            <Image src={"/main-image.png"} width={650} height={760} />
+            <Image src={"/main-image.png"} width={650} height={760} layout='responsive' />
           </div>
         </div>
       </div>
