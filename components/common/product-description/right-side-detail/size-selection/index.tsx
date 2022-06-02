@@ -5,7 +5,7 @@ import Label from "components/common/ui/label";
 
 interface SizeChartProps {
   sizeChartUrl?: string;
-  productSizeArray?: { sizeValue?: string }[];
+  productSizeArray?: { Size?: string }[];
   onSizeChange?: Function;
 }
 
@@ -24,19 +24,20 @@ const SizeChart = ({
           <Label className={styles["size-heading"]}>Select Size</Label>
           <div className={styles["product-sizes"]}>
             {productSizeArray?.map((size, index) => {
-              const { sizeValue } = size;
+              const { Size } = size;
+              if(!Size) return null
               return (
                 <div
                   key={index}
                   onClick={() => {
                     setActiveSize(index);
-                    onSizeChange && onSizeChange(sizeValue);
+                    onSizeChange && onSizeChange(Size);
                   }}
                   className={`${styles["product-size"]} ${
                     activeSize === index ? styles["active"] : ""
                   }`}
                 >
-                  {sizeValue}
+                  {Size}
                 </div>
               );
             })}
