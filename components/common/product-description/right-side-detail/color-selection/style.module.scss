@@ -13,14 +13,18 @@
   }
 }
 
-.size-chart {
+.color-chart {
   .sizechart-header {
     display: flex;
     align-items: center;
   }
 }
 
-.size-heading {
+.color-wrapper {
+  margin-top: 32px;
+}
+
+.color-heading {
   margin: 0;
   padding-bottom: 8px;
   color: $black-color;
@@ -32,13 +36,13 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.product-sizes {
+.product-colors {
   display: flex;
   align-items: center;
   margin-top: 24px;
   margin-bottom: 24px;
 
-  .product-size {
+  .product-color {
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -48,7 +52,7 @@
     margin-inline-end: 12px;
     padding-top: 3px;
     border-radius: 51px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 0.1px solid rgba(0, 0, 0, 1);
     color: $black-color;
     font-size: 13px;
     font-weight: 400;
@@ -71,7 +75,7 @@
   }
 }
 
-.size-chart-btn {
+.color-chart-btn {
   button {
     cursor: pointer;
     padding: 0;

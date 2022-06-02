@@ -739,6 +739,26 @@ export const productDescriptionData = {
       sizeValue: "9",
     },
   ],
+
+  priceData: [
+    {
+      priceList: "100000",
+      itemId: 246,
+      lineId: null || "",
+      offers: {
+        price: {
+          sale: 10 || "",
+          base: 1138.16,
+          finalPrice: 938.16,
+          currency: "USD",
+          totalPrice: 1138.16,
+        },
+        kind: null || "",
+        channel: 12,
+        discounts: [{}],
+      },
+    },
+  ],
 };
 
 export const orderData = {

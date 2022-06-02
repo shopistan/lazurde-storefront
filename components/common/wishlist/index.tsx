@@ -4,8 +4,8 @@ import { getWishList, deleteWishList } from "lib/utils/wishlist";
 import FillHeart from "components/icons/FillHeart";
 
 interface WishListProps {
-  authToken: string | "";
-  itemID: string | number;
+  authToken?: string | "";
+  itemID?: string | number;
 }
 
 const WishList: FC<WishListProps> = ({
