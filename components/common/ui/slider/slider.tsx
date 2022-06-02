@@ -18,6 +18,8 @@ interface SliderProps {
   scrollbar?: boolean;
   className?: string;
   productSlider?: boolean;
+  hasScrollbar?: boolean;
+  isDraggable?: boolean;
 }
 
 const Slider = ({
@@ -25,6 +27,8 @@ const Slider = ({
   desktopSlidePerView = 4,
   mobileSlidePerView = 1.1,
   navigation = false,
+  hasScrollbar = true,
+  isDraggable = true,
   scrollbar = false,
   pagination = false,
   productSlider = false,
@@ -43,7 +47,7 @@ const Slider = ({
     spaceBetween: 8,
     slidesPerView: width > desktopScreenSize ? desktopSlidePerView : mobileSlidePerView,
     navigation: navigation,
-    scrollbar: { draggable: scrollbar },
+    scrollbar: hasScrollbar ? { draggable: isDraggable } : hasScrollbar,
     className: className,
     key: appState?.lang,
     dir: appState?.lang === "en" ? "ltr" : "rtl",

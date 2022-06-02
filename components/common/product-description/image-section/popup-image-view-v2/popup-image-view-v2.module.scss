@@ -1,0 +1,79 @@
+@import "/styles/variables.scss";
+
+.main-popup-view {
+  display: flex;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  z-index: 20;
+  // padding-top: 24px;
+  // padding-bottom: 5%;
+
+  @media (min-width: $breakPoint-desktop) {
+    // padding-top: 30px;
+  }
+
+  .div-image-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+
+    & > span {
+      position: relative !important;
+      width: 100vh !important;
+      margin-inline: 20vw;
+      margin: auto;
+      aspect-ratio: 1/1;
+    }
+  }
+
+  .div-images-column {
+    display: flex;
+    flex-direction: column;
+    // position: absolute;
+    // top: 20px;
+    // left: 20px;
+    margin-left: 18px;
+    margin-top: 0;
+
+    @media (min-width: $breakPoint-desktop) {
+      margin-left: 80px;
+      margin-top: 50px;
+    }
+
+    & > div {
+      position: relative;
+      width: 74px;
+      height: 68px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      margin-bottom: 16px;
+      cursor: pointer;
+    }
+
+    & > div[data-active="true"] {
+      border: 1px solid rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  .div-close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    margin-right: 25px;
+    cursor: pointer;
+    z-index: 100;
+  }
+
+  .swiper-button-next:after {
+    font-size: 36px!important;
+  }
+}
