@@ -11,7 +11,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@okta/okta-auth-js": "^6.4.1",
     "@teamfabric/xpm": "^1.5.0",
     "algoliasearch": "^4.12.1",
     "axios": "^0.25.0",
