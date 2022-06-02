@@ -23,3 +23,6 @@ export const ALGOLIA_APP_ID = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID;
 export const STAMPED_USERNAME = process.env.NEXT_PUBLIC_STAMPED_USERNAME;
 export const STAMPED_PASSWORD = process.env.NEXT_PUBLIC_STAMPED_PASSWORD;
 export const STAMPED_STORE_HASH_ID = process.env.NEXT_PUBLIC_STAMPED_STORE_HASH;
+
+export const GET_ORDER = process.env.NEXT_PUBLIC_GET_ORDER;
+export const WISHLIST = process.env.NEXT_PUBLIC_GET_WISHLIST;

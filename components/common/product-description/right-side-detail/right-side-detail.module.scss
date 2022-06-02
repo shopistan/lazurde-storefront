@@ -66,3 +66,44 @@
     }
   }
 }
+
+.sub-detail-wrapper {
+  padding-top: 48.5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+
+  .sub-detail-point {
+    display: flex;
+    align-items: center;
+    margin-bottom: 19px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .label {
+      color: $black-color;
+      margin: 0;
+      margin-inline-start: 7px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16.8px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
+
+    svg {
+      margin-inline-start: 7px;
+    }
+
+    .label-link {
+      display: inline-flex;
+      margin-inline-start: 7px;
+      color: $black-color;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16.8px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
+  }
+}

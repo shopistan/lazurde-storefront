@@ -31,6 +31,13 @@ const ENDPOINTS = {
 
   OMS: {
     CREATE_ORDER: "/api-order/orders",
+    GET_ORDER: "/api-order/orders/user",
+  },
+
+  WISHLIST: {
+    GET_WISHLIST: "/api-cart/wishlist/user",
+    DELETE_WISHLIST: (itemID: string | number) =>
+      `/api-cart/wishlist/user/item/${itemID}`,
   },
 
   GET: {

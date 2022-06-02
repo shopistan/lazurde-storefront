@@ -1,6 +1,6 @@
 @import "/styles/variables.scss";
 
-.button {
+.buttonATC {
   background: $black-color;
   border: none;
   border-radius: 100px;
@@ -98,7 +98,11 @@
   }
 
   &[data-size="xxxl"] {
-    width: 375px;
+    width: 100%;
     height: 50px;
+
+    @media (min-width: $breakPoint-desktop) {
+      width: 375px;
+    }
   }
 }

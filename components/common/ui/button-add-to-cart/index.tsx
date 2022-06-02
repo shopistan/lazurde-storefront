@@ -1,5 +1,5 @@
 import React, { MouseEventHandler, useEffect, useState } from "react";
-import styles from "./button.module.scss";
+import styles from "./buttonATC.module.scss";
 
 interface ButtonATCProps {
   className?: string;
@@ -14,8 +14,8 @@ interface ButtonATCProps {
 }
 
 interface QuantitySectionProps {
-    quantityCounter?: number;
-    setQuantityCounter?: Function;
+  quantityCounter?: number;
+  setQuantityCounter?: Function;
 }
 
 const ButtonATC = ({
@@ -37,11 +37,11 @@ const ButtonATC = ({
 
   return (
     <button
-      data-testid={"button"}
+      data-testid={"buttonATC"}
       data-style={buttonStyle}
       data-size={buttonSize}
       data-counter={showCounter}
-      className={`${styles["button"]} ${className}`}
+      className={`${styles["buttonATC"]} ${className}`}
       type={type}
     >
       {showCounter && (
@@ -57,7 +57,10 @@ const ButtonATC = ({
 };
 export default ButtonATC;
 
-const QuantitySection = ({ quantityCounter, setQuantityCounter }: QuantitySectionProps): JSX.Element => {
+const QuantitySection = ({
+  quantityCounter,
+  setQuantityCounter,
+}: QuantitySectionProps): JSX.Element => {
   return (
     <>
       <div className={styles["div-quantity-counter"]}>
