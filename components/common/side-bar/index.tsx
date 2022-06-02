@@ -64,7 +64,7 @@ const SideBar: FC<SideBarProps> = ({
               )}
               <Label>
                 <>
-                  <span className={styles['firstName-desktop']}>
+                  <span className={styles["firstName-desktop"]}>
                     {appState?.lang == "en" ? firstName : t("firstname")}
                   </span>
                   <span>
@@ -76,7 +76,14 @@ const SideBar: FC<SideBarProps> = ({
           )}
           {width < 1024 && (
             <div className={styles["account-profile-mobile"]}>
-              <Image src={"/contact.png"} width={375} height={120} />
+              <div className={styles["account-image-mobile"]}>
+                <Image
+                  src={"/contact.png"}
+                  width={375}
+                  height={120}
+                  layout="responsive"
+                />
+              </div>
               <div className={styles["account-banner"]}>
                 {barCode?.url && (
                   <Image src={barCode?.url || "/"} width={100} height={100} />
@@ -86,7 +93,7 @@ const SideBar: FC<SideBarProps> = ({
                     <span>
                       {appState?.lang == "en" ? firstName : t("firstname")}
                     </span>
-                    <span>
+                    <span className={styles["lastname-mobile"]}>
                       {appState?.lang == "en" ? lastName : t("lastname")}
                     </span>
                   </>

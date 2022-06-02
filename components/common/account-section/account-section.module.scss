@@ -1,6 +1,9 @@
 .account-detail-section {
   display: flex;
-  width: 66%;
+
+  @media (min-width: 1024px) {
+    width: 66%;
+  }
 }
 
 .account-image-section {
