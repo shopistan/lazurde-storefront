@@ -7,19 +7,19 @@ import StarRating from "components/common/ui/star-ratings";
 import ReviewForm from "./review-form";
 
 interface WriteAReviewProps {
-  modalOpen?: Boolean;
+  isOpened?: Boolean;
   onClose?: Function;
 }
 
 const WriteAReview = ({
-  modalOpen = false,
+  isOpened = false,
   onClose,
 }: WriteAReviewProps): JSX.Element => {
   const [ratingIndex, setRatingIndex] = useState(-1);
   return (
     <div
       className={styles["review-modal_wrapper"]}
-      data-open={modalOpen}
+      data-open={isOpened}
       onClick={() => {
         onClose();
       }}

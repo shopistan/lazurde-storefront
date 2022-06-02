@@ -25,7 +25,7 @@ const SizeChart = ({
           <div className={styles["product-sizes"]}>
             {productSizeArray?.map((size, index) => {
               const { Size } = size;
-              if(!Size) return null
+              if (!Size) return null;
               return (
                 <div
                   key={index}
@@ -42,13 +42,13 @@ const SizeChart = ({
               );
             })}
           </div>
+          <div className={styles["size-chart-btn"]}>
+            <button onClick={() => setSizeChartModalOpen(true)}>
+              Sizing Chart
+            </button>
+          </div>
         </>
       ) : null}
-      <div className={styles["size-chart-btn"]}>
-        <button onClick={() => setSizeChartModalOpen(true)}>
-          Sizing Chart
-        </button>
-      </div>
       {sizeChartModalOpen && (
         <SizeChartModal
           isOpened={sizeChartModalOpen}
