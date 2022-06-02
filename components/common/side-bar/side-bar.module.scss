@@ -105,6 +105,17 @@
 
 .account-details {
   margin-block-end: 8px;
+
+  &:last-child {
+    .account-detail {
+      p {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 17px;
+        letter-spacing: 0em;
+      }
+    }
+  }
 }
 
 .account-detail {
@@ -126,13 +137,6 @@
     margin-block: 0;
     margin-inline-end: 0;
     margin-inline-start: 18px;
-
-    &:last-child {
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 17px;
-      letter-spacing: 0em;
-    }
   }
 }
 
