@@ -6,18 +6,21 @@ import { Heart } from "components/icons";
 import React, { useState } from "react";
 // import ProductColorSelection from "../color-selection";
 import SizeChart from "./size-selection";
+import ColorSelection from "./color-selection";
 import ButtonATC from "components/common/ui/button-add-to-cart";
 import styles from "./right-side-detail.module.scss";
 import SubDetail from "./sub-detail";
 
 interface RightSideDetailProps {
   onSizeChange?: Function;
-  productSizeArray?: { sizeValue?: string }[];
+  productSizeArray?: { Size?: string; Color?: string }[];
   totalRating?: number;
+  onColorChange?: Function;
 }
 
 const RightSideDetail = ({
   onSizeChange,
+  onColorChange,
   productSizeArray = [],
   totalRating = 0,
 }: RightSideDetailProps): JSX.Element => {
@@ -49,7 +52,10 @@ const RightSideDetail = ({
         productSizeArray={productSizeArray}
         onSizeChange={onSizeChange}
       />
-      {/* <ProductColorSelection /> */}
+      <ColorSelection
+        productSizeArray={productSizeArray}
+        onColorChange={onColorChange}
+      />
       {modalOpen && (
         <WriteAReview
           modalOpen={modalOpen}
@@ -57,11 +63,13 @@ const RightSideDetail = ({
         />
       )}
       <div className={styles["div-cart-buttons"]}>
-        <ButtonATC
-          buttonSize={"xxxl"}
-          buttonText={"Add To Cart"}
-          showCounter={true}
-        ></ButtonATC>
+        <div>
+          <ButtonATC
+            buttonSize={"xxxl"}
+            buttonText={"Add To Cart"}
+            showCounter={true}
+          />
+        </div>
         <Button
           className={styles["book-apt-btn"]}
           buttonSize={"xxxl"}

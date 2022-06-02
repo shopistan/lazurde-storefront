@@ -12,6 +12,8 @@ interface ProductDescriptionProps {
   product: ProductType;
 }
 
+
+
 const ProductDescription = ({
   product,
 }: ProductDescriptionProps): JSX.Element => {
@@ -27,7 +29,7 @@ const ProductDescription = ({
     product?.attributes?.map((attr: any) => {
       obj[attr?.name] = attr?.value;
     });
-    setProdArray({ ...prodArray, ...obj });
+    return { ...prodArray, ...obj };
   };
 
   const getImageArray = (product: any) => {
@@ -41,7 +43,15 @@ const ProductDescription = ({
   };
 
   useEffect(() => {
-    destructureAttributes(prodArray);
+    let modifiedProdArray = destructureAttributes(prodArray);
+
+    if (modifiedProdArray?.children.length > 0) {
+      modifiedProdArray?.children.map((variant, index) => {
+        modifiedProdArray?.children.splice(index, 1, destructureAttributes(variant))
+      });
+    }
+
+    setProdArray(modifiedProdArray);
   }, []);
 
   useEffect(() => {
@@ -54,6 +64,10 @@ const ProductDescription = ({
     console.log("sizevalue", val);
   };
 
+  const onColorChange = (val: number) => {
+    console.log("colroValue", val);
+  };
+
   return (
     <>
       <div className={styles["product-description-wrapper"]}>
@@ -63,8 +77,9 @@ const ProductDescription = ({
           </div>
           <div className={styles["right-side"]}>
             <RightSideDetail
-              productSizeArray={productDescriptionData?.productSizeArray}
+              productSizeArray={prodArray?.children}
               onSizeChange={onSizeChange}
+              onColorChange={onColorChange}
               totalRating={totalRating}
             />
           </div>
