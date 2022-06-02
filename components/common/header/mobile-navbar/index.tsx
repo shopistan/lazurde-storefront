@@ -2,9 +2,18 @@ import React, { useState } from "react";
 import styles from "./style.module.scss";
 import { Bag, Heart, MenuIcon, Search, LazurdeLogo } from "components/icons";
 import Link from "next/link";
-import MobileMenu from "./mobile-menu";
+import MobileMenu from "./mobile-menu/mobile-menu";
+import Image from "next/image";
+import { MobileHeaderProps } from "lib/types/mobile-header";
 
-const MobileNavBar = ({ menuData }: any): JSX.Element => {
+const MobileNavBar = ({
+  menuData,
+  headerId,
+  brandSideBar,
+  siteLogo,
+  siteLogoUrl,
+  setOpenSearchDialog,
+}: MobileHeaderProps): JSX.Element => {
   const [menu, setMenu] = useState<Boolean>(false);
   const handleMenu = () => {
     setMenu(!menu);
@@ -17,9 +26,15 @@ const MobileNavBar = ({ menuData }: any): JSX.Element => {
   const renderSiteLogo = () => {
     return (
       <div className={styles["mobile-header__logo"]}>
-        <Link href="/">
+        <Link href={siteLogoUrl || "/"}>
           <a>
-            <LazurdeLogo width={152} height={20} />
+            <Image
+              src={siteLogo?.url || "/placeholder.jpg"}
+              width={152}
+              height={20}
+              layout="fixed"
+              alt={siteLogo?.altText}
+            />
           </a>
         </Link>
       </div>
@@ -33,7 +48,7 @@ const MobileNavBar = ({ menuData }: any): JSX.Element => {
           <button onClick={handleMenu}>
             <MenuIcon color="#000000" />
           </button>
-          <button>
+          <button onClick={() => setOpenSearchDialog(true)}>
             <Search />
           </button>
         </div>
@@ -52,6 +67,8 @@ const MobileNavBar = ({ menuData }: any): JSX.Element => {
         closeMenu={closeMenu}
         siteLogo={renderSiteLogo}
         menuData={menuData}
+        headerId={headerId}
+        brandSideBar={brandSideBar}
       />
     </>
   );

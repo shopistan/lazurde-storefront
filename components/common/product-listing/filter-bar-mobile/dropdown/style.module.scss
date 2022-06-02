@@ -1,0 +1,60 @@
+@import "/styles/variables.scss";
+
+.category-dropdown {
+  display: flex;
+  flex: 1;
+  background: $white-color;
+  flex-direction: column;
+  padding-block-start: 32px;
+  column-gap: 24px;
+
+  .div-titles {
+    display: flex;
+    flex-direction: column;
+    color: $black-color;
+    flex: 1;
+
+    .title {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 120%;
+      text-transform: capitalize;
+      color: rgba(0, 0, 0, 0.8);
+      cursor: pointer;
+      width: 180px;
+      margin-block-end: 8px;
+      min-height: 27px;
+
+      .div-tick {
+        width: 20px;
+        height: 19px;
+        display: inline-flex;
+        opacity: 0;
+        align-items: center;
+        justify-content: center;
+        margin-inline-start: 8px;
+        transition: opacity 0.2s ease-in-out;
+        color: $black-color;
+
+        &[data-showTick="true"] {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .div-filter-btns {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    padding-inline-end: 80px;
+    padding-block-end: 16px;
+
+    button {
+      transition: width 0.1s ease-in-out;
+    }
+  }
+}

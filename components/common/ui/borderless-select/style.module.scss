@@ -1,0 +1,138 @@
+@import "/styles/variables.scss";
+.dropdown {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  height: 34px;
+
+  @media (min-width: $breakPoint-desktop) {
+    min-width: 197px;
+  }
+
+  .select {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    background: #ffffff;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 115%;
+    color: #000;
+
+    .selected-text {
+      margin-inline-start: 4px;
+      font-weight: 500;
+
+      @media (min-width: $breakPoint-desktop) {
+        margin-inline-start: 8px;
+      }
+    }
+
+    @media (min-width: $breakPoint-desktop) {
+      font-size: 14px;
+    }
+  }
+
+  img {
+    margin-inline-start: 5px;
+  }
+
+  .options-ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    list-style-type: none;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 12px 0px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 10;
+    width: 100%;
+
+    &[data-position="top"] {
+      bottom: 100%;
+    }
+
+    .option {
+      font-size: 14px;
+      line-height: 115%;
+      cursor: pointer;
+      color: #000;
+      padding-block: 8px;
+      padding-inline: 16px;
+
+      a {
+        display: flex;
+        cursor: pointer;
+      }
+
+      &[data-selected="true"] {
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 115%;
+      }
+
+      @media (min-width: $breakPoint-desktop) {
+        &[data-selected="true"] {
+          font-weight: 400;
+          font-size: 14px;
+          color: $black-color;
+          background: rgba(0, 0, 0, 0.05);
+        }
+      }
+    }
+  }
+
+  .select-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    transform: rotateZ(0);
+    transform-origin: center;
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  &[data-open="true"] {
+    & .options-ul {
+      display: block;
+      opacity: 1;
+      pointer-events: initial;
+    }
+
+    .select-arrow {
+      transform: rotateZ(-180deg);
+      transform-origin: center;
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .dropdown {
+    .select {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 120%;
+
+      @media (min-width: $breakPoint-desktop) {
+        font-size: 14px;
+      }
+    }
+
+    .option {
+      display: flex;
+      direction: ltr;
+      justify-content: flex-end;
+      margin-inline-end: 0 !important;
+    }
+  }
+}

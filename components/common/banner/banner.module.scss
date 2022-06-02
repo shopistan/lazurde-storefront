@@ -1,0 +1,98 @@
+@import "/styles/variables.scss";
+
+.banner-container {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+
+  @media (min-width :$breakPoint-tablet) {
+    flex-direction: row-reverse;
+  }
+
+  @media (min-width: $breakPoint-desktop) {
+    overflow: unset;
+  }
+}
+
+.banner-text-section {
+  position: relative;
+  padding-inline-start: 16px;
+
+  @media (min-width: $breakPoint-desktop) {
+    position: unset;
+    padding-inline-start: 80px;
+    width: 56%;
+  }
+}
+
+.banner-title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: start;
+  color: $black-color;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 19px;
+  padding-bottom: 16px;
+
+  @media (min-width: $breakPoint-desktop) {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 38px;
+    padding-top: 71px;
+    margin-bottom: 16px;
+  }
+}
+
+.banner-text {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  color: $black-color;
+  text-align: start;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-inline-end: 145px;
+
+  @media (min-width: $breakPoint-tablet) {
+    padding-bottom: 0;
+    padding-inline-end: 0;
+  }
+
+  @media (min-width: $breakPoint-desktop) {
+    font-size: 14px;
+    line-height: 17px;
+    padding-bottom: 87px;
+    padding-inline-end: 10px;
+  }
+}
+
+.banner-image-section {
+  width: 100%;
+  height: 100%;
+  transform: translateX(113px);
+  margin-top: -35px;
+
+  &.arabic-layout {
+    transform: translateX(-113px);
+
+    @media (min-width : $breakPoint-tablet) {
+      transform: translate(0);
+    }
+  }
+
+  @media (min-width : $breakPoint-tablet) {
+    margin-top: 0;
+    transform: translate(0);
+  }
+}
+
+html[dir="rtl"] {
+  .banner-image {
+    transform: scaleX(-1);
+  }
+}

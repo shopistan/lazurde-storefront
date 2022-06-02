@@ -1,0 +1,106 @@
+@import "/styles/variables.scss";
+
+.detail-wrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 16px;
+  background-color: rgba(0, 0, 0, 0.02);
+
+  @media (min-width: $breakPoint-desktop) {
+    flex-direction: row;
+    padding-block: 80px;
+    padding-inline: 80px;
+  }
+
+  .column {
+    flex: 1;
+    margin-top: 32px;
+
+    @media (min-width: $breakPoint-desktop) {
+      margin: 0;
+    }
+
+    .heading {
+      margin: 0;
+      color: $black-color;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16.8px;
+      letter-spacing: 0em;
+      text-align: start;
+      text-transform: capitalize;
+
+      @media (min-width: $breakPoint-desktop) {
+        font-size: 18px;
+        line-height: 21.6px;
+      }
+    }
+
+    .detail {
+      margin: 0;
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 15.6px;
+      letter-spacing: 0em;
+      text-align: start;
+
+      @media (min-width: $breakPoint-desktop) {
+        margin-top: 24px;
+        padding-inline-end: 80px;
+        font-size: 14px;
+        line-height: 16.8px;
+      }
+    }
+  }
+}
+
+.detail-features {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  margin-top: 8px;
+
+  @media (min-width: $breakPoint-desktop) {
+    row-gap: 33px;
+    margin-top: 24px;
+  }
+
+  .feature-item {
+    width: 50%;
+
+    @media (min-width: $breakPoint-desktop) {
+      width: 33%;
+      padding-inline-end: 40px;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16.8px;
+      letter-spacing: 0em;
+      text-align: start;
+      text-transform: capitalize;
+
+      @media (min-width: $breakPoint-desktop) {
+        line-height: 18.2px;
+      }
+    }
+
+    .description {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 15.6px;
+      letter-spacing: 0em;
+      text-align: start;
+
+      @media (min-width: $breakPoint-desktop) {
+        font-size: 14px;
+        line-height: 16.8px;
+      }
+    }
+  }
+}

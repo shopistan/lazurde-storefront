@@ -8,6 +8,7 @@ export const fetchXMComponents = async (
   channel: number,
   pageUrl: string = "/"
 ) => {
+  console.log("Page URL", pageUrl);
   try {
     const response = await Axios.get(
       `${API_DOMAIN}${ENDPOINTS.XM.FETCH_PAGE_BY_URL(channel, pageUrl)}`,
@@ -15,6 +16,7 @@ export const fetchXMComponents = async (
         headers: HEADERS.common,
       }
     );
+
     return response.data?.data?.version[0]?.components ?? null;
   } catch (error: any) {
     console.log(
@@ -26,7 +28,7 @@ export const fetchXMComponents = async (
 };
 
 export const fetchGlobalComponents = async (): Promise<any> => {
-  console.log(`GC URL: ${API_DOMAIN}${ENDPOINTS.XM.FETCH_GLOBAL_COMPONENTS}`);
+  //console.log(`GC URL: ${API_DOMAIN}${ENDPOINTS.XM.FETCH_GLOBAL_COMPONENTS}`);
   try {
     const response = await Axios.get(
       `${API_DOMAIN}${ENDPOINTS.XM.FETCH_GLOBAL_COMPONENTS}`,
@@ -34,12 +36,37 @@ export const fetchGlobalComponents = async (): Promise<any> => {
         headers: HEADERS.common,
       }
     );
+
     return response.data;
   } catch (error: any) {
     console.log(
       `Error fetching global components: `,
       (error as ErrorObject).message
     );
+  }
+  return null;
+};
+
+export const fetchAllLivePageRoutes = async () => {
+  try {
+    const response = await Axios.get(
+      `${API_DOMAIN}${ENDPOINTS.XM.FETCH_ALL_LIVE_PAGES}`,
+      {
+        headers: HEADERS.common,
+      }
+    );
+
+    const livePagesFromAPI = response.data?.data?.livePages ?? null;
+    
+    const mappedLivePages =
+      livePagesFromAPI.map((livePage: any) => {
+        const { page = {} } = livePage;
+        const { pageUrl = "", typeUrl = "", typeName = '' } = page;
+        return { pageUrl, typeUrl, typeName };
+      }) || [];
+    return mappedLivePages;
+  } catch (error: any) {
+    console.log(`Error fetching live pages: `, (error as ErrorObject).message);
   }
   return null;
 };

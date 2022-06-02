@@ -1,10 +1,12 @@
+@import "/styles/variables.scss";
+
 .card-slider {
   &__wrapper {
     width: 100%;
     padding: 48px 16px 64px 16px;
     padding-inline-end: 0;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       padding: 83.5px 80px 80px;
     }
   }
@@ -17,7 +19,10 @@
     letter-spacing: 0em;
     text-align: start;
     text-transform: capitalize;
-    color: #000000;
+    color: $black-color;
+  }
+
+  &__navigation {
+    text-decoration: none;
   }
 }
-

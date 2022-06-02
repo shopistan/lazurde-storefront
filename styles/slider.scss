@@ -1,8 +1,10 @@
+@import "/styles/variables.scss";
+
 .card-slider {
   .swiper-slide {
     min-height: 352px;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       min-height: 429px;
     }
 
@@ -19,26 +21,26 @@
     min-height: 500px !important;
     padding-top: 65px;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       min-height: 565px !important;
     }
 
     .swiper-scrollbar {
-      right: 0;
+      inset-inline-end: 0;
       bottom: 0;
-      left: 0;
+      inset-inline-start: 0;
       width: 97%;
       height: 2px;
       background-color: rgba(0, 0, 0, 0.2);
       cursor: pointer;
 
-      @media (min-width: 1024px) {
+      @media (min-width: $breakPoint-desktop) {
         width: 100%;
       }
     }
 
     .swiper-scrollbar-drag {
-      background-color: #000000;
+      background-color: $black-color;
     }
   }
 
@@ -47,7 +49,7 @@
     top: 0;
     width: auto;
     align-items: flex-end;
-    color: #000000;
+    color: $black-color;
 
     &:after {
       font-size: 12px;
@@ -66,5 +68,205 @@
   .swiper-button-next {
     inset-inline-start: auto !important;
     inset-inline-end: 16px !important;
+  }
+}
+
+/*--------Explore our brands------*/
+
+.card-brands {
+  &.swiper {
+    .swiper-scrollbar {
+      height: 2px;
+      width: 97%;
+
+      .swiper-scrollbar-drag {
+        background: $black-color;
+      }
+    }
+  }
+}
+
+.collection-swiper {
+  &.swiper {
+    .swiper-scrollbar {
+      left: 0;
+      height: 2px;
+      width: 97%;
+
+      .swiper-scrollbar-drag {
+        background: $black-color;
+      }
+    }
+  }
+}
+
+/*-----------Product Card Slider ----------*/
+.product-slider {
+  &.swiper {
+    .swiper-button-prev,
+    .swiper-button-next {
+      pointer-events: none;
+
+      &:after {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        background: rgba(0, 0, 0, 0.05);
+        font-size: 8px;
+        color: rgba(0, 0, 0, 0.4);
+        border-radius: 100%;
+        opacity: 0;
+        visibility: hidden;
+        z-index: -1;
+      }
+    }
+
+    .swiper-pagination {
+      display: block;
+
+      @media (min-width: $breakPoint-desktop) {
+        display: none;
+      }
+
+      .swiper-pagination-bullet {
+        margin: 0 3px;
+        opacity: 1;
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        transition: all 0.2s;
+        outline: 0;
+
+        &.swiper-pagination-bullet-active {
+          opacity: 1;
+          border: 0;
+          background: rgba(0, 0, 0, 0.4);
+        }
+      }
+    }
+
+    &.slider-navigation-up {
+      .swiper-pagination {
+        bottom: 34px;
+      }
+    }
+
+    &.slider-navigation-down {
+      .swiper-pagination {
+        bottom: 10px;
+      }
+    }
+  }
+}
+
+.show-arrow-on-hover {
+  &:hover {
+    .swiper-button-prev,
+    .swiper-button-next {
+      @media (min-width: $breakPoint-desktop) {
+        pointer-events: unset;
+        &:after {
+          opacity: 1;
+          visibility: visible;
+          z-index: 1;
+        }
+      }
+    }
+  }
+}
+
+/*------------Bambuser-Card-Slider----------------*/
+
+.bambuser-card-slider {
+  .swiper-slide {
+    min-height: 314px;
+    background-color: $white-color;
+    padding-bottom: 24px;
+
+    @media (min-width: $breakPoint-desktop) {
+      min-height: 314px;
+    }
+
+    img {
+      width: 100% !important;
+
+      @media (max-width: 1023px) {
+        object-fit: cover;
+      }
+    }
+  }
+
+  &.swiper {
+    padding-top: 65px;
+    padding-bottom: 56px;
+
+    @media (min-width: $breakPoint-desktop) {
+      padding-bottom: 48px;
+    }
+
+    .swiper-scrollbar {
+      inset-inline-end: 0;
+      bottom: 0;
+      inset-inline-start: 0;
+      width: 96%;
+      height: 2px;
+      background-color: rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+
+      @media (min-width: $breakPoint-desktop) {
+        width: 100%;
+      }
+    }
+
+    .swiper-scrollbar-drag {
+      background-color: $black-color;
+    }
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 0;
+    width: auto;
+    align-items: flex-end;
+    color: $black-color;
+
+    &:after {
+      font-size: 8px;
+
+      @media (min-width: $breakPoint-desktop) {
+        font-size: 12px;
+      }
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.2;
+    }
+  }
+
+  .swiper-button-prev {
+    inset-inline-start: auto !important;
+    inset-inline-end: 46.29px !important;
+  }
+
+  .swiper-button-next {
+    inset-inline-start: auto !important;
+    inset-inline-end: 16px !important;
+  }
+}
+
+body .swiper-pagination-bullet {
+  margin: 0 3px;
+  opacity: 1;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  transition: background 0.2s, border 0.2s;
+  outline: 0;
+
+  &.swiper-pagination-bullet-active {
+    opacity: 1;
+    border: 0;
+    background: rgba(0, 0, 0, 0.4);
+    border: transparent
   }
 }

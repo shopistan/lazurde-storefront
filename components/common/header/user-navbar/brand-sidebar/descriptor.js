@@ -18,6 +18,8 @@ exports.default = Types.Component({
       label: "Logos",
       children: Types.Shape({
         children: {
+          width: Types.String({ label: "Logo Width" }),
+          mobileWidth: Types.String({ label: "Logo Mobile Width" }),
           logoImg: Types.Image({
             label: "Logo Image",
             url: Types.String({ label: "URL" }),

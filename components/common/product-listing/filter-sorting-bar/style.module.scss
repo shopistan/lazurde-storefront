@@ -1,0 +1,185 @@
+.filter-bar-main {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: #fff;
+
+  .back-btn {
+    display: none;
+    a {
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 120%;
+      text-decoration: none;
+
+      div {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+      }
+    }
+  }
+
+  .div-filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin-block: 8px;
+
+    .filter-links {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      height: 35px;
+      column-gap: 60px;
+
+      .links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 19px;
+        cursor: pointer;
+        position: relative;
+
+        & > span {
+          color: rgba(0, 0, 0, 0.8);
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 19.2px;
+          border-bottom: 2px solid transparent;
+
+          &:hover {
+            color: black;
+          }
+        }
+        div {
+          height: 19px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin-inline-start: 4px;
+          transform: scale(0);
+          transition: transform 0.1s ease-in-out, width 0.1s ease-in-out;
+          width: 0;
+
+          &[data-visible="true"] {
+            transform: scale(1);
+            width: 19px;
+          }
+
+          span {
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 14px;
+            height: 14px;
+            border-radius: 100%;
+            background: #c4c4c4;
+            font-weight: 400;
+            font-size: 9px;
+            text-align: center;
+            letter-spacing: 0.05em;
+          }
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          margin-block-start: 8px;
+          width: 0px;
+          height: 2px;
+          top: 100%;
+          left: 50%;
+          bottom: 15px;
+          background-color: black;
+          transition: width ease-in-out 0.15s, left ease-in-out 0.15s;
+        }
+
+        &[data-selected="true"]::after {
+          width: 100%;
+          left: 0;
+        }
+
+        &[data-has-count="true"] {
+          &::after {
+            width: 100%;
+            left: 0;
+          }
+
+          & > span {
+            color: black;
+          }
+        }
+      }
+    }
+
+    .div-clear-btn {
+      margin-inline-end: clamp(40px, 7.04%, 96px);
+      margin-inline-start: 20px;
+    }
+
+    .div-order-dropdown,
+    .div-clear-btn {
+      opacity: 1;
+      transition: opacity 0.2s 0.5s ease-in-out;
+
+      &[data-opened="true"],
+      &[data-has-count="false"] {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease-in-out;
+      }
+    }
+  }
+
+  .category-dropdown {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    z-index: 5;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
+    height: 0;
+    opacity: 1;
+    transition: height 0.2s ease-in-out 0.1s;
+    overflow: hidden;
+
+    &[data-opened="true"] {
+      transition: height 0.2s ease-in-out;
+      height: 347px;
+    }
+  }
+
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    width: 100vw;
+    height: 0;
+    top: 100%;
+    inset-inline-end: 0;
+    z-index: 3;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out 0.1s, height 0.3s ease-in-out 0.5s;
+
+    &[data-opened="true"] {
+      transition: opacity 0.2s ease-in-out, height 0.2s ease-in-out;
+      opacity: 1;
+      height: 100vh;
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .back-btn {
+    svg {
+      transform: rotateY(180deg);
+    }
+  }
+}

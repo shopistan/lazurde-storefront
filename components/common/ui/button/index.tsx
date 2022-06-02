@@ -2,18 +2,22 @@ import React, { MouseEventHandler } from "react";
 import styles from "./button.module.scss";
 
 interface ButtonProps {
-  buttonText?: string;
-  buttonStyle?: string;
-  buttonSize?: "sm" | "md" | "lr" | "xl";
+  className?: string;
+  buttonText?: string | Function;
+  buttonStyle?: "black" | "white" | "underline";
+  buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl" | "xxxl";
   onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit";
+  children?: JSX.Element | string;
 }
 
 const Button = ({
+  className = "",
   type = "button",
-  buttonText,
+  buttonText = "",
   buttonStyle = "black",
   buttonSize = "md",
+  children,
   onClick,
 }: ButtonProps): JSX.Element => {
   return (
@@ -21,11 +25,12 @@ const Button = ({
       data-testid={"button"}
       data-style={buttonStyle}
       data-size={buttonSize}
-      className={styles["button"]}
-      onClick={onClick}
+      className={`${styles["button"]} ${className}`}
+      onClick={(e) => onClick(e)}
       type={type}
     >
       {buttonText || ""}
+      {children || ""}
     </button>
   );
 };

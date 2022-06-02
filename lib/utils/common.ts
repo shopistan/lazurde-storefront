@@ -11,8 +11,13 @@ import {
   RegionType,
 } from "lib/types/common";
 
+export const desktopScreenSize = 1023;
+export const mobileScreenSize = 767;
+
 export const getAppStateFromLocalStorage = () => {
-  const appState = typeof window !== "undefined" && JSON.parse(window.localStorage.getItem("app-state"));
+  const appState =
+    typeof window !== "undefined" &&
+    JSON.parse(window.localStorage.getItem("app-state"));
   return appState;
 };
 
@@ -36,4 +41,45 @@ export const getChannelFromLocale = (locale: LocaleType) => {
   else if (processedLocale.includes("ae")) return NEXT_PUBLIC_CHANNEL_UAE;
   else if (processedLocale.includes("eg")) return NEXT_PUBLIC_CHANNEL_EG;
   else return 0;
+};
+
+export const updateBrand = (
+  brandVal: string,
+  saveAppState: any,
+  appState: object
+) => {
+  saveAppState({
+    ...appState,
+    brand: brandVal ? brandVal : "L'azurde",
+  });
+};
+
+const dateOptions: any = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+export const formateDate = (date: string) =>
+  new Date(date).toLocaleDateString("en-US", dateOptions);
+
+export const reviewStarAvg = (arr: any) => {
+  const sum = arr?.reduce((acc: never, cur: never) => acc + cur);
+  const average = sum / arr.length;
+  return average;
+};
+
+export const slashFormatDate = (date: any) => {
+  const _date = new Date(date);
+  const year = _date?.getFullYear();
+  let month: any = _date?.getMonth() + 1;
+  let day: any = _date?.getDate();
+
+  if (day < 10) {
+    day = "0" + day;
+  }
+  if (month < 10) {
+    month = "0" + month;
+  }
+
+  return `${month}/${day}`;
 };

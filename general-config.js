@@ -5,6 +5,11 @@ export const CHANNEL = process.env.NEXT_PUBLIC_CHANNEL;
 
 export const CART_DOMAIN = process.env.NEXT_PUBLIC_CART_V2_DOMAIN;
 export const CART_V2_X_API_KEY = process.env.NEXT_PUBLIC_CART_V2_X_API_KEY;
+export const COPILOT_DOMAIN = process.env.NEXT_PUBLIC_COPILOT_DOMAIN;
+
+export const RTPE_DOMAIN = process.env.NEXT_PUBLIC_RTPE_DOMAIN;
+export const RTPE_X_API_KEY = process.env.NEXT_PUBLIC_RTPE_X_API_KEY;
+export const TENANT_KEY = process.env.NEXT_PUBLIC_TENANT_KEY;
 
 export const NEXT_PUBLIC_CHANNEL_SA = 12;
 export const NEXT_PUBLIC_CHANNEL_UAE = 13;
@@ -25,3 +30,9 @@ export const OKTA_REDIRECT_URI_PERSONAL =
 export const OKTA_DOMAIN = process.env.NEXT_PUBLIC_OKTA_DOMAIN;
 export const OKTA_CLIENT_ID = process.env.NEXT_PUBLIC_OKTA_CLIENT_ID;
 export const OKTA_REDIRECT_URI = process.env.NEXT_PUBLIC_OKTA_REDIRECT_URI;
+export const STAMPED_USERNAME = process.env.NEXT_PUBLIC_STAMPED_USERNAME;
+export const STAMPED_PASSWORD = process.env.NEXT_PUBLIC_STAMPED_PASSWORD;
+export const STAMPED_STORE_HASH_ID = process.env.NEXT_PUBLIC_STAMPED_STORE_HASH;
+
+export const GET_ORDER = process.env.NEXT_PUBLIC_GET_ORDER;
+export const WISHLIST = process.env.NEXT_PUBLIC_GET_WISHLIST;

@@ -1,8 +1,7 @@
-import React, { FC, useState, useContext } from "react";
+import React, { FC, useState, useEffect, useContext } from "react";
 import styles from "./user-navbar.module.scss";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
-import { AppContext } from "lib/context";
 import {
   Bag,
   Heart,
@@ -14,58 +13,48 @@ import {
 } from "components/icons";
 import BrandSidebar from "./brand-sidebar";
 import { BrandSidebarProps, ErrorObject } from "lib/types/common";
-import Axios from "axios";
+import useWindowSize from "lib/utils/useWindowSize";
+import { AppContext } from "lib/context";
+import { desktopScreenSize } from "lib/utils/common";
 import { OKTA_CLIENT_ID, OKTA_DOMAIN, OKTA_REDIRECT_URI } from "general-config";
-
-const sidebarData = {
-  mainImg: {
-    url: "/",
-    altText: "image",
-  },
-  mainTitle: "main title",
-  logoArr: [
-    {
-      logoImg: {
-        url: "/",
-        altText: "image",
-      },
-    },
-  ],
-  brandArr: [
-    {
-      url: "/",
-      altText: "image",
-      label: "label",
-      labelUrl: "/",
-    },
-  ],
-};
-
-const signInUser = async () => {
-  try {
-    const signInRes = await Axios.get(`${OKTA_DOMAIN}/authorize`, {
-      params: {
-        client_id: OKTA_CLIENT_ID,
-        responseType: "code",
-        scope: "openid",
-        redirect_uri: OKTA_REDIRECT_URI,
-        state: "state-8600b31f-52d1-4dca-987c-386e3d8967e9",
-        code_challenge_method: "S256",
-        code_challenge: "qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es",
-      },
-    });
-    console.log(signInRes);
-  } catch (error) {
-    console.log("Error signing in: ", (error as ErrorObject).message);
-  }
-};
+import Axios from "axios";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
 }): JSX.Element => {
+  const { appState, saveAppState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const { appState } = useContext(AppContext);
   const [isOpened, setIsOpened] = useState(false);
+  const [width] = useWindowSize();
+
+  useEffect(() => {
+    if (isOpened) {
+      document.body.style.overflow = "hidden";
+    } else {
+      setTimeout(() => {
+        document.body.style.overflow = "auto";
+      }, 280);
+    }
+  }, [isOpened]);
+
+  const signInUser = async () => {
+    try {
+      const signInRes = await Axios.get(`${OKTA_DOMAIN}/authorize`, {
+        params: {
+          client_id: OKTA_CLIENT_ID,
+          responseType: "code",
+          scope: "openid",
+          redirect_uri: OKTA_REDIRECT_URI,
+          state: "state-8600b31f-52d1-4dca-987c-386e3d8967e9",
+          code_challenge_method: "S256",
+          code_challenge: "qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es",
+        },
+      });
+      console.log(signInRes);
+    } catch (error) {
+      console.log("Error signing in: ", (error as ErrorObject).message);
+    }
+  };
 
   return (
     <div className={styles["user-navbar"]} data-testid="product-card">
@@ -86,9 +75,55 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
         </div>
         <div className={styles["brand_ticker"]}>
           <ul>
-            <li className="item-1">{`Lazurde`}</li>
-            <li className="item-2">{`Miss'L`}</li>
-            <li className="item-3">{`Kenaz`}</li>
+            <li className="item-1">
+              <Link href="/">
+                <a
+                  data-testid="item1"
+                  onClick={() =>
+                    saveAppState({
+                      ...appState,
+                      brand: `L'azurde`,
+                    })
+                  }
+                >{`L'azurde`}</a>
+              </Link>
+            </li>
+            <li className="item-2">
+              <Link href="/missl">
+                <a
+                  onClick={() =>
+                    saveAppState({
+                      ...appState,
+                      brand: `Miss L'`,
+                    })
+                  }
+                >{`Miss L'`}</a>
+              </Link>
+            </li>
+            <li className="item-3">
+              <Link href="/kenaz">
+                <a
+                  onClick={() =>
+                    saveAppState({
+                      ...appState,
+                      brand: `Kenaz`,
+                    })
+                  }
+                >{`Kenaz`}</a>
+              </Link>
+            </li>
+            <li className="item-4">
+              <Link href="/">
+                <a
+                  onClick={() =>
+                    saveAppState({
+                      ...appState,
+                      brand: `L'azurde`,
+                    })
+                  }
+                >{`L'azurde`}</a>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
@@ -124,6 +159,14 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
           </a>
         </Link>
       </div>
+      {width > desktopScreenSize && (
+        <div
+          role={"overlay"}
+          className={styles["overlay"]}
+          data-opened={isOpened}
+          onClick={() => setIsOpened(!isOpened)}
+        ></div>
+      )}
       <BrandSidebar
         {...brandSideBar}
         isOpened={isOpened}
