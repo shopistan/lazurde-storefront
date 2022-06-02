@@ -15,6 +15,7 @@ import CustomerService from "./common/customer-service";
 import TermCondtion from "components/common/terms-condition";
 import CelebrityChoice from "components/common/celebrity-choice";
 import InThePress from "components/common/in-the-press";
+import ExponeaHomepageRecommendations from "./common/cdxp-homepage-recommendations";
 
 export const componentsById: any = {
   LazurdeHeroBanner,
@@ -34,4 +35,5 @@ export const componentsById: any = {
   TermCondtion,
   CelebrityChoice,
   InThePress,
+  ExponeaHomepageRecommendations,
 };
