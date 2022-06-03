@@ -104,13 +104,16 @@
 }
 
 .sub-detail-wrapper {
-  @media (min-width: $breakPoint-desktop) {
-    padding-top: 48.5px;
-  }
   padding-bottom: 17.5px;
   padding-top: 26px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+  @media (max-width: $breakPoint-mobile) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  @media (min-width: $breakPoint-desktop) {
+    padding-top: 48.5px;
+  }
 
   .sub-detail-point {
     display: flex;
