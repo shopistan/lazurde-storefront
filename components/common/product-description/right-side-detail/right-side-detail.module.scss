@@ -1,6 +1,7 @@
 @import "/styles/variables.scss";
 
 .div-cart-buttons {
+  cursor: pointer;
   margin-block: 48px;
   @media (min-width: $breakPoint-desktop) {
     margin-block: 40px;

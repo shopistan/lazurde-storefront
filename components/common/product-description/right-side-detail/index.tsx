@@ -14,6 +14,8 @@ import WishList from "components/common/wishlist";
 import NotifyMeModal from "./notify-me-modal";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
+import { addProductToCart } from "lib/utils/cart";
+import { ATCPayload } from "lib/types/cart";
 
 interface RightSideDetailProps {
   onSizeChange?: Function;
@@ -84,6 +86,28 @@ const RightSideDetail = ({
     );
   };
 
+  const handleAddToCart = async () => {
+    const payload: ATCPayload = {
+      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
+      items: [
+        {
+          sku: productData && productData?.sku,
+          itemId: productData && productData?.itemId,
+          quantity: 1,
+          priceListId: "100000",
+          price: {
+            currency: currency,
+            amount: basePrice,
+            discount: {
+              discountAmount: finalPrice,
+            },
+          },
+        },
+      ],
+    };
+    const res = await addProductToCart(payload);
+  };
+
   return (
     <>
       <div className={styles["detail"]}>
@@ -125,6 +149,9 @@ const RightSideDetail = ({
         <div>
           {!isStockAvailable ? (
             <ButtonATC
+              onClick={() => {
+                handleAddToCart();
+              }}
               buttonSize={"fill"}
               buttonText={
                 appState.lang == "en"
