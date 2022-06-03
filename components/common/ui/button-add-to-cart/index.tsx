@@ -1,3 +1,4 @@
+import { MinusIcon, PlusIcon } from "components/icons";
 import React, { MouseEventHandler, useEffect, useState } from "react";
 import styles from "./buttonATC.module.scss";
 
@@ -72,7 +73,7 @@ const QuantitySection = ({
           }}
           className={styles["counter-decrement"]}
         >
-          -
+          <MinusIcon color="white" width="20px" height="20px" />
         </button>
         <span className={styles["counter-span"]}>{quantityCounter}</span>
         <button
@@ -81,7 +82,7 @@ const QuantitySection = ({
           }}
           className={styles["counter-increment"]}
         >
-          +
+          <PlusIcon width="20px" height="20px" color="white" />
         </button>
       </div>
       <div className={styles["div-divider"]}></div>

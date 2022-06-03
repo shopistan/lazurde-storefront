@@ -38,6 +38,9 @@
       }
 
       .counter-decrement {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .counter-span {
@@ -47,6 +50,9 @@
       }
 
       .counter-increment {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
     .div-divider {
