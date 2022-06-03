@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./cart-item.module.scss";
 import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize, mobileScreenSize } from "lib/utils/common";
-import { CrossSmall } from "components/icons";
+import { Bag, CrossSmall } from "components/icons";
 
 interface CartItemObject {
   title: string;
@@ -29,16 +29,17 @@ interface CartItemProps {
     event: React.ChangeEvent<HTMLInputElement>,
     item: CartItemObject
   ) => void;
-  updatingCartItem: boolean;
-  removeItem: (item: CartItemObject) => void;
+  updatingCartItem?: boolean;
+  removeItem?: (item: CartItemObject) => void;
+  wishListItem?: boolean;
 }
 const CartItem = ({
   item,
   handleChange,
   updatingCartItem = false,
   removeItem = () => {},
+  wishListItem = false,
 }: CartItemProps): JSX.Element => {
-  console.log("cartitem", item);
   const [width] = useWindowSize();
   const [updatingItem, setUpdatingItem] = useState(false);
   const [removingItem, setRemovingItem] = useState(false);
@@ -55,14 +56,19 @@ const CartItem = ({
   return (
     <div className={styles["cart-item-wrapper"]}>
       <Image
-        width={width > mobileScreenSize ? 146 : 100}
-        height={width > mobileScreenSize ? 146 : 100}
+        width={width > mobileScreenSize ? "146px" : "100px"}
+        height={width > mobileScreenSize ? "146px" : "100px"}
         src={imageSrc?.value || "/public/blue-ring.png"}
         alt=""
       />
       <div className={styles["item-details"]}>
         <div className={styles["item-title"]}>
-          <span>{item?.title || "No Title"}</span>
+          <span>
+            {item?.title ||
+              item?.attributes?.find((attr) => attr?.mapping === "title")
+                ?.value ||
+              "No Title"}
+          </span>
           <span>{`$${
             item?.totalPrice?.amount?.toLocaleString() ||
             "0.00"?.toLocaleString()
@@ -73,24 +79,26 @@ const CartItem = ({
             <span>Rings</span>
           </div>
         )}
-        <div className={styles["item-quantity"]}>
-          <span>
-            Quantity:{" "}
-            <input
-              type="number"
-              id="quantity"
-              name="quantity"
-              min="1"
-              max="500"
-              defaultValue={item?.quantity}
-              onChange={(e) => {
-                handleChange(e, item);
-                setUpdatingItem(true);
-              }}
-              disabled={updatingItem}
-            />
-          </span>
-        </div>
+        {!wishListItem && (
+          <div className={styles["item-quantity"]}>
+            <span>
+              Quantity:{" "}
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="1"
+                max="500"
+                defaultValue={item?.quantity}
+                onChange={(e) => {
+                  handleChange(e, item);
+                  setUpdatingItem(true);
+                }}
+                disabled={updatingItem}
+              />
+            </span>
+          </div>
+        )}
         <div className={styles["remove-btn"]}>
           <CrossSmall width={12} height={12} />
           <button
@@ -102,6 +110,19 @@ const CartItem = ({
             {removingItem ? "Removing..." : "Remove"}
           </button>
         </div>
+        {wishListItem && (
+          <div className={styles["add-to-bag-btn"]}>
+            <CrossSmall width={12} height={12} />
+            <button
+              onClick={() => {
+                setRemovingItem(true);
+                removeItem(item);
+              }}
+            >
+              {removingItem ? "Adding..." : "Add to Bag"}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
