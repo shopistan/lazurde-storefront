@@ -125,12 +125,6 @@ const ProductDescription = ({
           productData={prodArray}
         />
       </div>
-      {notifyModalOpen && (
-        <NotifyMeModal
-          isOpened={notifyModalOpen}
-          onClose={() => setNotifyModalOpen(false)}
-        />
-      )}
     </>
   );
 };
