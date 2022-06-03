@@ -41,9 +41,10 @@ const ImageMagnifier = ({
       offSetX = e.offsetX;
       offSetY = e.offsetY;
     } else {
-      const rect = e.target.getBoundingClientRect();
-      offSetX = e.touches[0].clientX - window.pageXOffset - rect.left;
-      offSetY = e.touches[0].clientY - window.pageYOffset - rect.top;
+      // const rect = e.target.getBoundingClientRect();
+      // offSetX = e.touches[0].clientX - window.pageXOffset - rect.left;
+      // offSetY = e.touches[0].clientY - window.pageYOffset - rect.top;
+      return
     }
 
     let x = width * zoomNum - offSetX;

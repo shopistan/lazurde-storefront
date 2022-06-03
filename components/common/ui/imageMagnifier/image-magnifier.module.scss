@@ -14,20 +14,20 @@
 
   @media (min-width: $breakPoint-desktop) {
     // align-items: initial;
+    &[data-zoomed="true"] {
+      & > span:first-child {
+        opacity: 1 !important;
+      }
+      & > span:nth-child(2) {
+        opacity: 0 !important;
+      }
+    }
   }
 
   & * {
     pointer-events: none;
   }
 
-  &[data-zoomed="true"] {
-    & > span:first-child {
-      opacity: 1 !important;
-    }
-    & > span:nth-child(2) {
-      opacity: 0 !important;
-    }
-  }
   & > span {
     position: absolute !important;
     transition: opacity 0.4s;
