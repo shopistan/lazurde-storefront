@@ -1,0 +1,232 @@
+.cart-wrapper {
+  padding: 40px;
+  max-width: 1250px;
+
+  @media (max-width: 500px) {
+    max-width: 100%;
+    min-width: 100%;
+    padding: 0px;
+  }
+
+  .flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    column-gap: 40px;
+    row-gap: 8px;
+
+    .shipping-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .free-shipping-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+
+      width: 692px;
+      height: 76px;
+      background: rgba(255, 255, 255, 0.6);
+
+      @media (max-width: 600px) {
+        width: 100%;
+        height: 89px;
+      }
+
+      span {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 120%;
+      }
+      p {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 130%;
+        color: #000000;
+      }
+    }
+
+    .bag-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 40px;
+      gap: 40px;
+
+      width: 692px;
+      height: 521px;
+      background: #ffffff;
+      overflow-y: scroll;
+
+      @media (max-width: 600px) {
+        padding: 40px 24px;
+        width: 100%;
+        min-height: 429px;
+        max-height: 700px;
+      }
+
+      span {
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 120%;
+        color: #000000;
+      }
+
+      hr {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .summary-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 40px;
+      gap: 24px;
+      background: #ffffff;
+      width: 420px;
+      height: 474px;
+
+      @media (max-width: 600px) {
+        height: 522px;
+        padding: 40px 24px;
+      }
+
+      span {
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 120%;
+        color: #000000;
+      }
+      .order-details {
+        width: 100%;
+        div {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 8px;
+
+          span {
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 120%;
+            color: #000000;
+
+            &[data-amount='true'] {
+              font-weight: 500;
+            }
+          }
+        }
+      }
+      .checkout-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+        width: 100%;
+        height: 51px;
+        background: #000000;
+        border-radius: 100px;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 120%;
+        text-transform: capitalize;
+        cursor: pointer;
+      }
+      .half-divider {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        hr {
+          width: 118.5px;
+          height: 0px;
+          border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+        span {
+          &[data-divider='true'] {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 130%;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.6);
+          }
+        }
+      }
+      .external-btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 12px;
+
+        @media (max-width: 600px) {
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+        }
+
+        .apple-pay-btn {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 0px;
+          gap: 10px;
+          width: 164px;
+          height: 40px;
+          background: #ffffff;
+          border: 1px solid rgba(0, 0, 0, 0.4);
+          cursor: pointer;
+
+          @media (max-width: 600px) {
+            width: 100%;
+          }
+        }
+        .paypal-btn {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 0px;
+          gap: 10px;
+          width: 164px;
+          height: 40px;
+          background: #f7c557;
+          border: 1px solid #f7c557;
+          border-radius: 100px;
+          cursor: pointer;
+
+          @media (max-width: 600px) {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .need-help-wrapper {
+      .need-help-heading {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .horizontal-divider {
+    width: 100%;
+    height: 0px;
+
+    /* Dark/20 */
+    margin: 0;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}

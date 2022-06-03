@@ -9,13 +9,16 @@ import ReviewForm from "./review-form";
 interface WriteAReviewProps {
   isOpened?: Boolean;
   onClose?: Function;
+  productData?: any;
 }
 
 const WriteAReview = ({
   isOpened = false,
   onClose,
+  productData = {},
 }: WriteAReviewProps): JSX.Element => {
   const [ratingIndex, setRatingIndex] = useState(-1);
+
   return (
     <div
       className={styles["review-modal_wrapper"]}
@@ -54,7 +57,7 @@ const WriteAReview = ({
                 setRatingIndex(rate);
               }}
             />
-            <ReviewForm rating={ratingIndex + 1} />
+            <ReviewForm rating={ratingIndex + 1} productData={productData} />
           </div>
         </div>
       </div>

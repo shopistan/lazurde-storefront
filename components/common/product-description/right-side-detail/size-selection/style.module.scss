@@ -1,6 +1,25 @@
 @import "/styles/variables.scss";
 
+body {
+  .sizechart-modal {
+    @media (max-width: $breakPoint-mobile) {
+      padding: 0;
+    }
+
+    .sizechart-modal-content {
+      @media (max-width: $breakPoint-mobile) {
+        min-height: 100%;
+        border-radius: 0;
+      }
+    }
+  }
+}
+
 .sizechart-modal-body {
+  @media (max-width: $breakPoint-mobile) {
+    margin-top: 49px;
+  }
+
   .heading {
     margin: 0;
     color: $black-color;
@@ -34,6 +53,7 @@
 
 .product-sizes {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 24px;
   margin-bottom: 24px;

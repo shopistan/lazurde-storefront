@@ -6,6 +6,7 @@ import { desktopScreenSize } from "lib/utils/common";
 
 interface ModalProps {
   className?: string;
+  modalBodyClassName?: string;
   isOpened?: Boolean;
   children?: JSX.Element | string;
   onClose?: Function;
@@ -16,6 +17,7 @@ interface ModalProps {
 
 const Modal = ({
   className = "",
+  modalBodyClassName = "",
   isOpened = false,
   children,
   onClose = () => {},
@@ -65,7 +67,7 @@ const Modal = ({
             onClick={(event) => {
               event.stopPropagation();
             }}
-            className={styles["bg-blury-modal_body"]}
+            className={`${styles["bg-blury-modal_body"]} ${modalBodyClassName}`}
             style={{
               width: size > desktopScreenSize ? modalWidth : "100%",
               height: size > desktopScreenSize ? modalHeight : "fit-content",

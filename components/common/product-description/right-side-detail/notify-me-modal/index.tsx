@@ -44,6 +44,7 @@ const NotifyMeModal = ({
         isOpened={isOpened}
         onClose={onClose}
         className={styles["notifyme-modal"]}
+        modalBodyClassName={styles["notifyme-modal-content"]}
         bgBluryModal={true}
         modalWidth="562px"
         modalHeight="381px"

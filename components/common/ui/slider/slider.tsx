@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Zoom, Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { desktopScreenSize } from 'lib/utils/common'
+import { desktopScreenSize } from "lib/utils/common";
 
 interface SliderProps {
   children?: any | JSX.Element | string;
@@ -20,6 +20,7 @@ interface SliderProps {
   productSlider?: boolean;
   hasScrollbar?: boolean;
   isDraggable?: boolean;
+  hasZoom?: boolean;
 }
 
 const Slider = ({
@@ -33,6 +34,7 @@ const Slider = ({
   pagination = false,
   productSlider = false,
   className = "",
+  hasZoom = false,
 }: SliderProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
@@ -43,22 +45,28 @@ const Slider = ({
   }, [appState]);
 
   const sliderSetting = {
-    modules: [Navigation, Pagination, Scrollbar, A11y],
+    modules: [Zoom, Navigation, Pagination, Scrollbar, A11y],
     spaceBetween: 8,
-    slidesPerView: width > desktopScreenSize ? desktopSlidePerView : mobileSlidePerView,
+    slidesPerView:
+      width > desktopScreenSize ? desktopSlidePerView : mobileSlidePerView,
     navigation: navigation,
     scrollbar: hasScrollbar ? { draggable: isDraggable } : hasScrollbar,
+    cssMode: true,
+    zoom: hasZoom,
     className: className,
     key: appState?.lang,
     dir: appState?.lang === "en" ? "ltr" : "rtl",
   };
 
   const productSliderSetting = {
-    modules: [Navigation, Pagination, Scrollbar, A11y],
+    modules: [Zoom, Navigation, Pagination, Scrollbar, A11y],
     spaceBetween: 0,
-    slidesPerView: width > desktopScreenSize ? desktopSlidePerView : mobileSlidePerView,
+    slidesPerView:
+      width > desktopScreenSize ? desktopSlidePerView : mobileSlidePerView,
     pagination: { clickable: pagination },
     navigation: navigation,
+    cssMode: true,
+    zoom: hasZoom,
     className: className,
     key: appState?.lang,
     dir: appState?.lang === "en" ? "ltr" : "rtl",

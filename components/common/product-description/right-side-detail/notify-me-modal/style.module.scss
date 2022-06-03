@@ -1,8 +1,19 @@
 @import "/styles/variables.scss";
 
+.notifyme-modal {
+  @media (max-width: 1023px) {
+    padding: 0;
+  }
+
+  .notifyme-modal-content {
+    min-height: 100%;
+    border-radius: 0;
+  }
+}
+
 .notifyme-modal-body {
   .heading {
-    margin: 0;
+    margin-top: 40px;
     color: $black-color;
     font-size: 24px;
     font-weight: 500;
@@ -10,16 +21,27 @@
     letter-spacing: 0em;
     text-align: start;
     text-transform: capitalize;
+
+    @media (min-width: $breakPoint-desktop) {
+      margin-top: 0;
+    }
   }
 
   .sub-heading {
-    margin-top: 32px;
-    margin-bottom: 24px;
-    font-size: 14px;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    font-size: 13px;
     font-weight: 400;
-    line-height: 16.8px;
+    line-height: 15.6px;
     letter-spacing: 0em;
     text-align: start;
+
+    @media (min-width: $breakPoint-desktop) {
+      margin-top: 32px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 16.8px;
+    }
   }
 }
 
@@ -53,12 +75,17 @@
   .input-label {
     margin: 0;
     padding-inline-start: 20px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 400;
-    line-height: 15.6px;
+    line-height: 13.2px;
     letter-spacing: 0em;
     text-align: start;
     color: rgba(0, 0, 0, 0.6);
+
+    @media (min-width: $breakPoint-desktop) {
+      font-size: 12px;
+      line-height: 15.6px;
+    }
   }
 
   .error-msg {
@@ -89,11 +116,16 @@
 
 .checkbox-label {
   color: $black-color;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 16.8px;
   letter-spacing: 0em;
   text-align: start;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 15.6px;
+
+  @media (min-width: $breakPoint-desktop) {
+    font-size: 14px;
+    line-height: 16.8px;
+  }
 }
 
 .checkbox-wrapper {
@@ -112,8 +144,13 @@
 }
 
 .submit-btn {
-  margin-top: 25.5px;
-  text-align: end;
+  margin-top: 40px;
+  text-align: center;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-top: 25.5px;
+    text-align: end;
+  }
 
   button {
     cursor: pointer;

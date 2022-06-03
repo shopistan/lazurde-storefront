@@ -66,14 +66,14 @@
 
   .div-close-button {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    margin-right: 25px;
     cursor: pointer;
     z-index: 100;
-  }
+    top: 26px;
+    right: 25px;
 
-  .swiper-button-next:after {
-    font-size: 36px!important;
+    @media (min-width: $breakPoint-desktop) {
+      top: 20px;
+      right: 45px;
+    }
   }
 }
