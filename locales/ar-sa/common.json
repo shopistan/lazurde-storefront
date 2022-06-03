@@ -958,5 +958,25 @@
   "Brand": "ماركة",
   "Style Number": "رقم النمط",
   "brandDetails-arabic": "لازوردي",
-  "collection": "مجموعة"
+  "collection": "مجموعة",
+  "Select Size": "أختر الحجم",
+  "Sizing Chart": "مخطط التحجيم",
+  "Select Color": "إختر لون",
+  "customer reviews": "آراء المستهلكين",
+  "rating": "تقييم",
+  "write a review": "أكتب مراجعة",
+  "reviewtabs": [
+    {
+      "label": "مؤخرًا"
+    },
+    {
+      "label": "خاصية"
+    },
+    {
+      "label": "الأعلى"
+    },
+    {
+      "label": "أدنى"
+    }
+  ]
 }

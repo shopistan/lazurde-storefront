@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./style.module.scss";
 import { getReviews } from "lib/utils/reviews";
 import Label from "components/common/ui/label";
@@ -8,6 +8,8 @@ import { formateDate, reviewStarAvg } from "lib/utils/common";
 import WriteAReview from "./write-review";
 import ReviewTabs from "./review-tabs";
 import Pagination from "components/common/ui/pagination";
+import useTranslation from "next-translate/useTranslation";
+import { AppContext } from "lib/context/index";
 
 interface ReviewsProps {
   setTotalRating?: Function;
@@ -20,6 +22,8 @@ const Reviews = ({
   totalRating,
   productData = {},
 }: ReviewsProps): JSX.Element => {
+  const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
   const [reviewsData, setReviewsData] = useState<any>([]);
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [currentData, setCurrentData] = useState([]);
@@ -100,7 +104,11 @@ const Reviews = ({
           <div className={styles["review-summary"]}>
             {reviewsData && reviewsData.length > 0 && (
               <Label className={styles["total-review-label"]}>
-                {`${reviewsData?.length} customer reviews`}
+                {`${reviewsData?.length} ${
+                  appState.lang == "en"
+                    ? "customer reviews"
+                    : t("customer reviews")
+                }`}
               </Label>
             )}
             <div className={styles["review-summary-stars"]}>
@@ -112,7 +120,9 @@ const Reviews = ({
               />
               <Label
                 className={styles["total-rating"]}
-              >{`${totalRating?.toFixed(2)} rating`}</Label>
+              >{`${totalRating?.toFixed(2)} ${
+                appState.lang == "en" ? "rating" : t("rating")
+              }`}</Label>
             </div>
           </div>
           <div className={styles["write-review-btn"]}>
@@ -122,7 +132,7 @@ const Reviews = ({
                 document.body.style.overflow = "hidden";
               }}
             >
-              write a review
+              {appState.lang == "en" ? "write a review" : t("write a review")}
             </button>
           </div>
           <ReviewTabs

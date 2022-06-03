@@ -947,5 +947,53 @@
         }
       ]
     }
+  ],
+  "pdpTag-arabic": "لمكي",
+  "pdpTitle-arabic": "تيفاني تي خاتم ذهب ألماس",
+  "pdpButton-arabic": "أكتب مراجعة",
+  "addCartButton-arabic": "أضف إلى السلة",
+  "notifyButton-arabic": "يخطر لي عندما تكون متاحة",
+  "appointmentButton-arabic": "حجز موعد",
+  "delivery-arabic": "توصيلة متوقعة",
+  "Click and collect": "انقر وجمع",
+  "Available": "متوفرة",
+  "30 day return": "30 يوم العودة",
+  "Have a question?": "لدي سؤال؟",
+  "unavailable-arabic": "المنتج غير متوفر حاليا. يرجى الاتصال بخدمة العملاء لمزيد من المعلومات",
+  "Designer’s Notes": "ملاحظات المصمم",
+  "productDetails": "أطواق متدلية من الذهب عيار 18 قيراط على شكل أشكال مستطيلة موقعة بحواف مستديرة. مضاءة بماسات عيار 0.2 قيراط تدور حول المركز بحيث تزيد كل زاوية من لمعانها الجميل. تتميز الأطواق بإبزيم سهل غير قابل للفتح يسمح لك بإضافة المزيد من التعويذات المضمونة لجذب الإطراء.",
+  "Product Details": "تفاصيل المنتج",
+  "metal": "فلز",
+  "metalDetails-arabic": "ذهب أبيض عيار 18 قيراط",
+  "diamond": "الماس",
+  "diamondDetails-arabic": "ذهب أبيض عيار 18 قيراط",
+  "stone": "حصاة",
+  "stoneDetails-arabic": "ذهب أبيض عيار 18 قيراط",
+  "Pendant Size": "حجم القلادة",
+  "charm Size": "حجم القلادة",
+  "Chain Length": "طول السلسلة",
+  "Brand": "ماركة",
+  "Style Number": "رقم النمط",
+  "brandDetails-arabic": "لازوردي",
+  "collection": "مجموعة",
+  "Select Size": "أختر الحجم",
+  "Sizing Chart": "مخطط التحجيم",
+  "Select Color": "إختر لون",
+  "customer reviews": "آراء المستهلكين",
+  "rating": "تقييم",
+  "write a review": "أكتب مراجعة",
+  "reviewtabs": [
+    {
+      "label": "مؤخرًا"
+    },
+    {
+      "label": "خاصية"
+    },
+    {
+      "label": "الأعلى"
+    },
+    {
+      "label": "أدنى"
+    }
   ]
 }

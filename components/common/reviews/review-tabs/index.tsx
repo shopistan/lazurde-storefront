@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Label from "components/common/ui/label";
 import styles from "./style.module.scss";
 import { reviewFilters } from "lib/mock-data/data";
+import useTranslation from "next-translate/useTranslation";
+import { AppContext } from "lib/context/index";
 
 interface ReviewTabsProps {
   onClick?: Function;
   className?: string;
+}
+
+interface ReviewsTabs {
+  label?: string | "";
 }
 
 const ReviewTabs = ({
@@ -13,6 +19,13 @@ const ReviewTabs = ({
   className = "",
 }: ReviewTabsProps): JSX.Element => {
   const [active, setActive] = useState(0);
+  const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
+  const arabicReviewTabs: ReviewsTabs[] = t(
+    "reviewtabs",
+    {},
+    { returnObjects: true }
+  );
   return (
     <>
       <div className={`${styles["tab-wrapper"]} ${className}`}>
@@ -30,7 +43,11 @@ const ReviewTabs = ({
                   setActive(index);
                 }}
               >
-                <Label>{data?.label}</Label>
+                <Label>
+                  {appState.lang == "en"
+                    ? data?.label
+                    : arabicReviewTabs[index].label}
+                </Label>
               </div>
             );
           })}

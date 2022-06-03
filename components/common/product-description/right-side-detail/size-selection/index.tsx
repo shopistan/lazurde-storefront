@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./style.module.scss";
 import SizeChartModal from "./size-chart-modal";
 import Label from "components/common/ui/label";
+import useTranslation from "next-translate/useTranslation";
+import { AppContext } from "lib/context";
 
 interface SizeChartProps {
   sizeChartUrl?: string;
@@ -14,6 +16,8 @@ const SizeChart = ({
   productSizeArray = [],
   onSizeChange = () => {},
 }: SizeChartProps): JSX.Element => {
+  const { appState } = useContext(AppContext);
+  const { t } = useTranslation("common");
   const [activeSize, setActiveSize] = useState(1);
   const [sizeChartModalOpen, setSizeChartModalOpen] = useState(false);
 
@@ -21,7 +25,9 @@ const SizeChart = ({
     <div className={styles["sizechart-wrapper"]}>
       {productSizeArray && productSizeArray.length > 0 ? (
         <>
-          <Label className={styles["size-heading"]}>Select Size</Label>
+          <Label className={styles["size-heading"]}>
+            {appState.lang == "en" ? "Select Size" : t("Select Size")}
+          </Label>
           <div className={styles["product-sizes"]}>
             {productSizeArray?.map((size, index) => {
               const { Size } = size;
@@ -44,7 +50,7 @@ const SizeChart = ({
           </div>
           <div className={styles["size-chart-btn"]}>
             <button onClick={() => setSizeChartModalOpen(true)}>
-              Sizing Chart
+              {appState.lang == "en" ? "Sizing Chart" : t("Sizing Chart")}
             </button>
           </div>
         </>
