@@ -97,7 +97,6 @@ const ProductDescription = ({
               onSizeChange={onSizeChange}
               onColorChange={onColorChange}
               totalRating={totalRating}
-              itemId={product?.itemId}
               currency={
                 productDescriptionData?.priceData[0]?.offers?.price?.currency
               }

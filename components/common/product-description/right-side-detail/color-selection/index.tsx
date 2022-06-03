@@ -26,17 +26,23 @@ const ColorSelection = ({
                 return (
                   <div
                     key={index}
-                    onClick={() => {
-                      setActiveSize(index);
-                      onColorChange && onColorChange(Color);
-                    }}
-                    style={{
-                      background: `linear-gradient(to right, ${Color} 0%,#ffffff 100%)`,
-                    }}
-                    className={`${styles["product-color"]} ${
+                    className={`${styles["outer-div"]} ${
                       activeSize === index ? styles["active"] : ""
                     }`}
-                  ></div>
+                  >
+                    <div
+                      onClick={() => {
+                        setActiveSize(index);
+                        onColorChange && onColorChange(Color);
+                      }}
+                      style={{
+                        background: `linear-gradient(to right, ${Color} 0%,#ffffff 100%)`,
+                      }}
+                      className={`${styles["product-color"]} ${
+                        activeSize === index ? styles["active"] : ""
+                      }`}
+                    ></div>
+                  </div>
                 );
               })}
             </div>
