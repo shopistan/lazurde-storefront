@@ -10,13 +10,17 @@
     width: 100vw;
     left: 0;
     z-index: 100;
-    padding: 24px;
+    padding: 0;
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
     transform: scale(0);
     opacity: 0;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+    @media (min-width: $breakPoint-desktop) {
+      padding: 24px;
+    }
 
     &[data-open="true"] {
       transform: scale(1);
@@ -32,7 +36,7 @@
 
   &_body {
     width: 100%;
-    height: 622px;
+    height: 100%;
     overflow-y: hidden;
     margin: 0 auto;
     padding-top: 16px;
@@ -40,22 +44,25 @@
     padding-bottom: 20px;
     padding-inline-start: 20px;
     background-color: $white-color;
-    border-radius: 8px;
+    border-radius: 0;
 
     @media (min-width: $breakPoint-desktop) {
       width: 40.374%;
+      height: 622px;
       padding-inline-end: 20px;
       padding-inline-start: 40px;
+      border-radius: 8px;
     }
   }
 
   &_content {
     width: 100%;
-    height: 590px;
+    height: 100%;
     overflow-y: auto;
     padding-inline-end: 10px;
 
     @media (min-width: $breakPoint-desktop) {
+      height: 590px;
       padding-top: 0;
       padding-inline-end: 20px;
     }
@@ -172,7 +179,6 @@
   position: sticky;
   bottom: 0;
   text-align: end;
-  background: linear-gradient(#fff, #fff);
 
   button {
     cursor: pointer;
