@@ -84,10 +84,12 @@ const RightSideDetail = ({
     <>
       <div className={styles["detail"]}>
         <Label className={styles["collection-tag"]}>Collection</Label>
-        <Label className={styles["title"]}>Tiffany T Diamond Gold Ring</Label>
+        <Label className={styles["title"]}>
+          {productData && productData["Product Title"]}
+        </Label>
         <div className={styles["review-section"]}>
           <div className={styles["wishlist-icon"]}>
-            <WishList itemID={itemId} />
+            <WishList itemID={productData && productData['itemId']} />
           </div>
           <div className={styles["rating-stars"]}>
             <StarRating count={5} rating={totalRating} />
