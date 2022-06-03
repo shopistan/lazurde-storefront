@@ -27,16 +27,15 @@
   }
 
   .right-side {
-    // width: 100%;
+    width: 343px;
     margin-top: 56px;
-    margin-inline: 18px;
+    margin-inline-start: 16px;
 
     @media (min-width: $breakPoint-desktop) {
+      width: 40.5vw;
+      min-width: 330px;
+      max-width: 391px;
       padding-inline: 16px;
-    }
-
-    @media (min-width: $breakPoint-desktop) {
-      // width: 30%;
       margin-top: 40px;
     }
   }

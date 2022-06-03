@@ -15,7 +15,7 @@ const TamaraModal = () => {
       {renderScript && (
         <>
           <div
-            className="tamara-product-widget"
+            className="tamara-product-widget pdp-tamara"
             data-lang={appState?.lang}
             data-price="250"
             data-currency="SAR"
