@@ -14,9 +14,9 @@ const ENDPOINTS = {
   CART: {
     ADD_ITEM_TO_CART: "/v2/carts/items",
     REMOVE_ITEM_FROM_CART: (cartId: string, lineItemId: number) =>
-      `https://dev.cart.fabric.inc/v2/carts/${cartId}/items/${lineItemId}`,
-    GET_CART: (cartId: string) =>
-      `https://dev.cart.fabric.inc/v2/carts/${cartId}`,
+      `/v2/carts/${cartId}/items/${lineItemId}`,
+    UPDATE_ITEM_OF_CART: (cartId: string) => `/v2/carts/${cartId}/items`,
+    GET_CART: (cartId: string) => `/v2/carts/${cartId}`,
   },
   COPILOT: {
     PIM: {
