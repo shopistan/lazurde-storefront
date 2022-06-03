@@ -58,7 +58,7 @@ const ProductCard = ({
   const handleAddToCart = async (event: any) => {
     event.stopPropagation();
     const payload: ATCPayload = {
-      cartId: null,
+      cartId: '98b0ed93-aaf1-4001-b540-b61796c4663d',
       items: [
         {
           sku: sku,
