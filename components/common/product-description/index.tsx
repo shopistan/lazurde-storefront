@@ -56,7 +56,6 @@ const ProductDescription = ({
 
   useEffect(() => {
     let modifiedProdArray = destructureAttributes(prodArray);
-
     if (modifiedProdArray && modifiedProdArray?.children.length > 0) {
       modifiedProdArray?.children?.map((variant, index) => {
         modifiedProdArray?.children?.splice(
@@ -93,6 +92,7 @@ const ProductDescription = ({
           </div>
           <div className={styles["right-side"]}>
             <RightSideDetail
+              productData={prodArray}
               productSizeArray={prodArray?.children}
               onSizeChange={onSizeChange}
               onColorChange={onColorChange}
@@ -119,14 +119,12 @@ const ProductDescription = ({
             productDetail={productDescriptionData?.productDetail}
           />
         </div>
-        <Reviews setTotalRating={setTotalRating} totalRating={totalRating} />
-      </div>
-      {notifyModalOpen && (
-        <NotifyMeModal
-          isOpened={notifyModalOpen}
-          onClose={() => setNotifyModalOpen(false)}
+        <Reviews
+          setTotalRating={setTotalRating}
+          totalRating={totalRating}
+          productData={prodArray}
         />
-      )}
+      </div>
     </>
   );
 };
