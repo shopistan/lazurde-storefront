@@ -87,3 +87,22 @@ export const getAttributeValue = (
   }
   return matchingAttribute;
 };
+
+export const fetchProductsByItemId = async (itemIds: []) => {
+  try {
+    const response = await Axios.get(
+      `${ENDPOINTS.RTPE.GET_PRODUCTS_BY_ITEM_IDS(itemIds)}`,
+      {
+        headers: {
+          ...HEADERS.common,
+          Authorization:
+            "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MjM0MzEzLCJleHAiOjE2NTQyMzYxMTN9.rNteIxD1Ayd3FB7whWILHMPZ1g0vMKmDeKjfy9oWPZb7S4MW1_en2dj6-idQzHBl7RfYW0-WZMvgpu1A1WzcnKx8t2tsbGdz62auaU63yBWQ-ELqHEXHPmYOeSN1DQqOODx58jEvKkaB7Q71B33Wm55-yol-ynfIB76p6XRLyCM",
+        },
+      }
+    );
+    return (response as any) || null;
+  } catch (error) {
+    console.log(`Error fetching items!`, (error as ErrorObject).message);
+  }
+  return null;
+};

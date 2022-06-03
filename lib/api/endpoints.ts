@@ -9,6 +9,8 @@ const ENDPOINTS = {
   RTPE: {
     GET_PRICE_BY_ITEM_ID: "/price/get-by-sku",
     EVALUATE_PROMOTION: "/promo/evaluate-promotions",
+    GET_PRODUCTS_BY_ITEM_IDS: (itemIds: []) =>
+      `https://sandbox.copilot.fabric.inc/api-product/v1/product?itemIds=[${itemIds}]`,
   },
 
   CART: {

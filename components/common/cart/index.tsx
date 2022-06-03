@@ -9,12 +9,13 @@ import {
 } from "lib/utils/cart";
 import { getWishList } from "lib/utils/wishlist";
 import Image from "next/image";
-import { CrossSmall } from "components/icons";
+import { AppleButton, CrossSmall, PaypalButton } from "components/icons";
 import { number } from "yup/lib/locale";
+import { fetchProductsByItemId } from "lib/utils/product";
 
 interface CartProps {}
 const Cart = ({}: CartProps): JSX.Element => {
-  const [freeShipping, showFreeShipping] = useState(false);
+  const [freeShipping, showFreeShipping] = useState(true);
   const [cartData, setCartData] = useState({
     status: "",
     items: [],
@@ -31,33 +32,44 @@ const Cart = ({}: CartProps): JSX.Element => {
   const [isWishListLoading, setIsWishListLoading] = useState(false);
   const [updatingCartItem, setUpdatingCartItem] = useState(false);
 
+  async function getWishListData() {
+    setIsWishListLoading(true);
+    const wishListData = await getWishList(
+      "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MTQ5MjIwLCJleHAiOjE2NTQxNTEwMjB9.YwC1Gh4rVOjjaTutEGCSswIsFX7iPJp1zARnrF4EOTIp2QGY_atgSXkkd77VDPGPgAVm306UTH5Mi-iuJq7aCD1YigESYnJRIXU2qeNgPMEIoXnEEnUVs-JfOclzWWC90bzJzO8MPMXRYgMPFBc2jkEaZIuMuABeAhzqwHQroqY"
+    );
+    if (wishListData?.status === 200) {
+      let getItemsbyItemIds = await fetchProductsByItemId(
+        wishListData?.data?.items || []
+      );
+      if (getItemsbyItemIds?.status === 200) {
+        setIsWishListLoading(false);
+        setWishListData({
+          status: "",
+          cartId: cartData?.cartId || null,
+          items: getItemsbyItemIds?.data?.products,
+        });
+      } else setIsWishListLoading(false);
+    } else {
+      setIsWishListLoading(false);
+    }
+  }
+
   async function getCartData() {
     setisLoadingCart(true);
-    setIsWishListLoading(true);
     const cartData = await getCartByCartId(
       "98b0ed93-aaf1-4001-b540-b61796c4663d"
     );
-    console.log("cartData", cartData);
     if (cartData?.status === 200) {
       setCartData(cartData?.data);
       setisLoadingCart(false);
     } else {
       setisLoadingCart(false);
     }
-
-    const wishListData = await getWishList(
-      "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MTQ5MjIwLCJleHAiOjE2NTQxNTEwMjB9.YwC1Gh4rVOjjaTutEGCSswIsFX7iPJp1zARnrF4EOTIp2QGY_atgSXkkd77VDPGPgAVm306UTH5Mi-iuJq7aCD1YigESYnJRIXU2qeNgPMEIoXnEEnUVs-JfOclzWWC90bzJzO8MPMXRYgMPFBc2jkEaZIuMuABeAhzqwHQroqY"
-    );
-    if (wishListData?.status === 200) {
-      setIsWishListLoading(false);
-      setWishListData(wishListData?.data);
-    } else {
-      setIsWishListLoading(false);
-    }
   }
 
   useEffect(() => {
     getCartData();
+    getWishListData();
   }, []);
 
   const handleChange = async (
@@ -116,7 +128,7 @@ const Cart = ({}: CartProps): JSX.Element => {
     <div className={styles["cart-wrapper"]}>
       <div className={styles["flex-wrap"]}>
         <div className={styles["shipping-column"]}>
-          {!freeShipping && (
+          {freeShipping && (
             <div className={styles["free-shipping-card"]}>
               <div>
                 <span>Free Shipping for Members</span>
@@ -125,7 +137,11 @@ const Cart = ({}: CartProps): JSX.Element => {
                   or Sign In
                 </p>
               </div>
-              <CrossSmall width={12} height={12} />
+              <CrossSmall
+                width={12}
+                height={12}
+                onClick={() => showFreeShipping(false)}
+              />
             </div>
           )}
           <div className={styles["bag-wrapper"]}>
@@ -195,9 +211,13 @@ const Cart = ({}: CartProps): JSX.Element => {
             <hr />
           </div>
           <div className={styles["external-btns"]}>
-            <button className={styles["apple-pay-btn"]} >Pay</button>
+            <button className={styles["apple-pay-btn"]}>
+              <AppleButton />
+            </button>
             <button className={styles["paypal-btn"]}>Paypal</button>
           </div>
+
+          <hr className={styles["bold-line"]} />
         </div>
         {/* <div className={styles["flex-wrap"]}> */}
         <div className={styles["bag-wrapper"]}>
@@ -206,18 +226,20 @@ const Cart = ({}: CartProps): JSX.Element => {
             <div>Loading...</div>
           ) : (
             <>
-              {/* {Object.keys(wishListData).length !== 0 ? (
+              {Object.keys(wishListData).length !== 0 ? (
                 wishListData?.items?.length ? (
                   wishListData?.items?.map((item, index) => {
-                    return <CartItem key={index} item={item} />;
+                    return (
+                      <CartItem key={index} item={item} wishListItem={true} />
+                    );
                   })
                 ) : (
                   <div>No Cart Data Found!</div>
                 )
               ) : (
                 <div>No Cart Data Found!</div>
-              )} */}
-              <div>No Data Found!</div>
+              )}
+              {/* <div>No Data Found!</div> */}
             </>
           )}
         </div>
