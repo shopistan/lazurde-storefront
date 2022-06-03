@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   // justify-content: space-between;
-  margin-top: 42px;
+  // margin-top: 42px;
 
   @media (min-width: $breakPoint-desktop) {
     flex-direction: row;
@@ -62,5 +62,36 @@
     letter-spacing: 0em;
     text-align: start;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.product-desc-breadcrumb {
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  margin: 0 16px;
+  background-color: $white-color;
+
+  @media (min-width: $breakPoint-desktop) {
+    min-height: 42px;
+    margin: 0 80px;
+  }
+
+  .divider {
+    margin-top: -2px;
+    margin-inline-start: 5px;
+    margin-inline-end: 5px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .link {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15.6px;
+    letter-spacing: 0em;
+    text-align: start;
+    text-transform: capitalize;
+    text-decoration: unset;
   }
 }
