@@ -21,6 +21,11 @@
       flex-direction: row;
       flex-wrap: wrap;
 
+      @media (max-width: 600px) {
+        flex-direction: row;
+        gap: 8px;
+      }
+
       span {
         font-weight: 500;
         font-size: 15px;
@@ -54,6 +59,22 @@
 
     .remove-btn {
       margin-top: 18px;
+      display: flex;
+      align-items: center;
+      button {
+        border: none;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 120%;
+        text-decoration-line: underline;
+        text-transform: capitalize;
+        color: #000000;
+        cursor: pointer;
+      }
+    }
+
+    .add-to-bag-btn {
+      margin-top: 0px;
       display: flex;
       align-items: center;
       button {
