@@ -5,6 +5,10 @@
   gap: 20px;
   width: 100%;
 
+  @media (max-width: 600px) {
+    padding: 0px;
+  }
+
   .item-details {
     display: flex;
     flex-direction: column;
@@ -50,6 +54,8 @@
 
     .remove-btn {
       margin-top: 18px;
+      display: flex;
+      align-items: center;
       button {
         border: none;
         font-weight: 500;

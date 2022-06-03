@@ -9,6 +9,8 @@ import {
 } from "lib/utils/cart";
 import { getWishList } from "lib/utils/wishlist";
 import Image from "next/image";
+import { CrossSmall } from "components/icons";
+import { number } from "yup/lib/locale";
 
 interface CartProps {}
 const Cart = ({}: CartProps): JSX.Element => {
@@ -17,6 +19,8 @@ const Cart = ({}: CartProps): JSX.Element => {
     status: "",
     items: [],
     cartId: "",
+    subTotal: 0.0,
+    totalAmount: 0.0,
   });
   const [wishListData, setWishListData] = useState({
     status: "",
@@ -121,7 +125,7 @@ const Cart = ({}: CartProps): JSX.Element => {
                   or Sign In
                 </p>
               </div>
-              <Image src="/public/contact.png" alt="" width={12} height={12} />
+              <CrossSmall width={12} height={12} />
             </div>
           )}
           <div className={styles["bag-wrapper"]}>
@@ -161,22 +165,26 @@ const Cart = ({}: CartProps): JSX.Element => {
           <div className={styles["order-details"]}>
             <div>
               <span>Subtotal</span>
-              <span data-amount={true}>$265.00</span>
+              <span data-amount={true}>
+                {cartData?.subTotal?.toLocaleString()}
+              </span>
             </div>
             <div>
               <span>Estimated Shipping &amp; Handling</span>
-              <span data-amount={true}>$265.00</span>
+              <span data-amount={true}>$0.00</span>
             </div>
             <div>
               <span>VAT Tax</span>
-              <span data-amount={true}>$125.00</span>
+              <span data-amount={true}>$0.00</span>
             </div>
           </div>
           <hr className={styles["horizontal-divider"]} />
           <div className={styles["order-details"]}>
             <div>
               <span data-amount={true}>Total to Pay</span>
-              <span data-amount={true}>$265.00</span>
+              <span
+                data-amount={true}
+              >{`$${cartData?.totalAmount?.toLocaleString()}`}</span>
             </div>
           </div>
           <hr className={styles["horizontal-divider"]} />
@@ -187,7 +195,7 @@ const Cart = ({}: CartProps): JSX.Element => {
             <hr />
           </div>
           <div className={styles["external-btns"]}>
-            <button className={styles["apple-pay-btn"]}>Pay</button>
+            <button className={styles["apple-pay-btn"]} >Pay</button>
             <button className={styles["paypal-btn"]}>Paypal</button>
           </div>
         </div>
