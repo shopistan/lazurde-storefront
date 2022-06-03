@@ -217,7 +217,7 @@ const Cart = ({}: CartProps): JSX.Element => {
             <button className={styles["paypal-btn"]}>Paypal</button>
           </div>
 
-          <hr />
+          <hr className={styles["bold-line"]} />
         </div>
         {/* <div className={styles["flex-wrap"]}> */}
         <div className={styles["bag-wrapper"]}>
