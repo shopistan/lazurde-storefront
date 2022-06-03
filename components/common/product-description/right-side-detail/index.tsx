@@ -23,6 +23,7 @@ interface RightSideDetailProps {
   basePrice?: number | string;
   discount?: string | number;
   finalPrice?: number | string;
+  productData?: any;
 }
 
 const RightSideDetail = ({
@@ -35,6 +36,7 @@ const RightSideDetail = ({
   basePrice = 0,
   discount = 0 || "",
   finalPrice = 0,
+  productData = {},
 }: RightSideDetailProps): JSX.Element => {
   const [modalOpen, setModalOpen] = useState(false);
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
@@ -141,6 +143,7 @@ const RightSideDetail = ({
         <WriteAReview
           isOpened={modalOpen}
           onClose={() => setModalOpen(false)}
+          productData={productData}
         />
       )}
       {notifyModalOpen && (
