@@ -5,9 +5,12 @@ import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import Head from "next/head";
 import React, { FC } from "react";
-import AppContentWrapper from "../components/common/app-content-wrapper";
+import AppContentWrapper from "components/common/app-content-wrapper";
+import Cart from "components/common/cart";
+import { GetServerSideProps } from "next";
+import { getCartByCartId } from "lib/utils/cart";
 
-const CelebrityChoice: FC<PageProps> = ({
+const CartPage: FC<PageProps> = ({
   headerProps,
   brandSidebarProps,
   footerProps,
@@ -23,14 +26,18 @@ const CelebrityChoice: FC<PageProps> = ({
       </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
-        <div className={"component-container"}>
-          {pageComponents.map((component: XMComponent, index) => {
+        <div
+          className={"component-container"}
+          style={{ background: "#f2f2f2" }}
+        >
+          {/* {pageComponents.map((component: XMComponent, index) => {
             const Component = componentsById[component.id];
             if (Component) {
               return <Component {...component.params} key={index} />;
             }
             return null;
-          })}
+          })} */}
+          <Cart />
         </div>
       </AppContentWrapper>
       <Footer {...footerProps}></Footer>
@@ -38,12 +45,11 @@ const CelebrityChoice: FC<PageProps> = ({
   );
 };
 
-export default CelebrityChoice;
+export default CartPage;
 
-export async function getStaticProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const globalComponents = (await fetchGlobalComponents()) || [];
-  const pageComponents =
-    (await fetchXMComponents(12, "/celebrity-choice")) || [];
+  const pageComponents = (await fetchXMComponents(12, "/search")) || [];
   const headerProps =
     (
       globalComponents.find(
@@ -67,6 +73,5 @@ export async function getStaticProps(context: any) {
       brandSidebarProps,
       pageComponents,
     },
-    revalidate: 5,
   };
-}
+};
