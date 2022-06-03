@@ -103,7 +103,7 @@ const ProductDescription = ({
           </Link>
           <div className={styles["divider"]}>/</div>
           <Link
-            href={`/c/${
+            href={`${link}/c/${
               product && product["categories"][0]?.name?.toLocaleLowerCase()
             }`}
           >
