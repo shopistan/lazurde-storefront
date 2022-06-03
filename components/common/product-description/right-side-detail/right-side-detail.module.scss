@@ -1,7 +1,10 @@
 @import "/styles/variables.scss";
 
 .div-cart-buttons {
-  margin-block: 40px;
+  margin-block: 48px;
+  @media (min-width: $breakPoint-desktop) {
+    margin-block: 40px;
+  }
   .book-apt-btn {
     margin-block-start: 16px;
   }
@@ -9,25 +12,45 @@
 
 .detail {
   .collection-tag {
-    margin: 0;
-    margin-bottom: 8px;
-    color: $black-color;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
-    line-height: 18px;
+    line-height: 17px;
     letter-spacing: 0em;
     text-align: start;
+    margin-top: 0;
+    margin-bottom: 8px;
+
+    @media (min-width: $breakPoint-desktop) {
+      margin: 0;
+      margin-bottom: 8px;
+      color: $black-color;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
   }
 
   .title {
-    margin: 0;
-    color: $black-color;
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 500;
-    line-height: 38.4px;
+    line-height: 29px;
     letter-spacing: 0em;
     text-align: start;
-    text-transform: capitalize;
+    margin-top: 0;
+    margin-bottom: 19px;
+
+    @media (min-width: $breakPoint-desktop) {
+      margin: 0;
+      color: $black-color;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 38.4px;
+      letter-spacing: 0em;
+      text-align: start;
+      text-transform: capitalize;
+    }
   }
 
   .review-section {
@@ -48,6 +71,10 @@
     .write-review-btn {
       button {
         &.btn {
+          font-size: 14px;
+          line-height: 17px;
+          letter-spacing: 0em;
+          text-align: start;
           width: fit-content;
           height: auto;
           padding: 0;
@@ -56,11 +83,14 @@
           border: 0;
           border-radius: 0;
           border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-          font-size: 14px;
-          font-weight: 500;
-          line-height: 16.8px;
-          letter-spacing: 0em;
-          text-align: start;
+
+          @media (min-width: $breakPoint-desktop) {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 16.8px;
+            letter-spacing: 0em;
+            text-align: start;
+          }
         }
       }
     }
@@ -73,8 +103,13 @@
 }
 
 .sub-detail-wrapper {
-  padding-top: 48.5px;
+  @media (min-width: $breakPoint-desktop) {
+    padding-top: 48.5px;
+  }
+  padding-bottom: 17.5px;
+  padding-top: 26px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
   .sub-detail-point {
     display: flex;
@@ -86,14 +121,22 @@
     }
 
     .label {
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: 0em;
+      text-align: start;
       color: $black-color;
       margin: 0;
       margin-inline-start: 7px;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 16.8px;
-      letter-spacing: 0em;
-      text-align: start;
+
+      @media (min-width: $breakPoint-desktop) {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16.8px;
+        letter-spacing: 0em;
+        text-align: start;
+      }
     }
 
     svg {
@@ -116,8 +159,13 @@
 .price-wrapper {
   display: flex;
   align-items: center;
-  margin-top: 18.5px;
-  margin-bottom: 48px;
+  margin-top: 20px;
+  margin-bottom: 56px;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-top: 18.5px;
+    margin-bottom: 48px;
+  }
 
   .base-price {
     margin: 0;
@@ -132,21 +180,35 @@
   .discount {
     margin: 0;
     margin-inline-end: 4px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
-    line-height: 17px;
+    line-height: 16px;
     letter-spacing: 0em;
-    text-align: start;
     color: $black-color;
+
+    @media (min-width: $breakPoint-desktop) {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 17px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
   }
 
   .final-price {
     margin: 0;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 18px;
-    letter-spacing: 0em;
     color: #da0059;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+
+    @media (min-width: $breakPoint-desktop) {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0em;
+    }
   }
 }
 
