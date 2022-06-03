@@ -967,42 +967,4 @@ export const cartItems = [
       },
     ],
   },
-  {
-    sku: "12",
-    itemId: "1253",
-    priceListId: "3190",
-    currency: "usd",
-    title: "Love Ring with Diamond",
-    "Base Price": 1900,
-    basePrice: 1900,
-    discount: "",
-    discountedPrice: "",
-    onlineExclusiveTag: false,
-    "Image URL": "/blue-ring.png",
-    images: [
-      {
-        url: "/ring.png",
-        altText: "alt text",
-      },
-    ],
-  },
-  {
-    sku: "12",
-    itemId: "1253",
-    priceListId: "3190",
-    currency: "usd",
-    title: "Love Ring with Diamond",
-    "Base Price": 1900,
-    basePrice: 1900,
-    discount: "",
-    discountedPrice: "",
-    onlineExclusiveTag: false,
-    "Image URL": "/blue-ring.png",
-    images: [
-      {
-        url: "/ring.png",
-        altText: "alt text",
-      },
-    ],
-  },
 ];

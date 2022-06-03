@@ -1,12 +1,13 @@
 .cart-wrapper {
-  background: #f2f2f2;
   padding: 40px;
+  max-width: 1250px;
 
   .flex-wrap {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    gap: 40px;
+    column-gap: 40px;
+    row-gap: 8px;
 
     .shipping-column {
       display: flex;
@@ -52,12 +53,18 @@
       width: 692px;
       height: 521px;
       background: #ffffff;
+      overflow-y: scroll;
 
       span {
         font-weight: 500;
         font-size: 24px;
         line-height: 120%;
         color: #000000;
+      }
+
+      hr {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.2);
       }
     }
 
@@ -165,6 +172,13 @@
           border-radius: 100px;
           cursor: pointer;
         }
+      }
+    }
+
+    .need-help-wrapper {
+      .need-help-heading {
+        display: flex;
+        justify-content: space-between;
       }
     }
   }
