@@ -3,7 +3,7 @@ import Button from "components/common/ui/button";
 import Label from "components/common/ui/label";
 import StarRating from "components/common/ui/star-ratings";
 import { Heart } from "components/icons";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 // import ProductColorSelection from "../color-selection";
 import SizeChart from "./size-selection";
 import ColorSelection from "./color-selection";
@@ -12,6 +12,8 @@ import styles from "./right-side-detail.module.scss";
 import SubDetail from "./sub-detail";
 import WishList from "components/common/wishlist";
 import NotifyMeModal from "./notify-me-modal";
+import useTranslation from "next-translate/useTranslation";
+import { AppContext } from "lib/context/index";
 
 interface RightSideDetailProps {
   onSizeChange?: Function;
@@ -23,6 +25,7 @@ interface RightSideDetailProps {
   basePrice?: number | string;
   discount?: string | number;
   finalPrice?: number | string;
+  productData?: any;
 }
 
 const RightSideDetail = ({
@@ -35,10 +38,13 @@ const RightSideDetail = ({
   basePrice = 0,
   discount = 0 || "",
   finalPrice = 0,
+  productData = {},
 }: RightSideDetailProps): JSX.Element => {
+  const { appState } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
   const [isStockAvailable, setIsStockAvailable] = useState(false);
+  const { t } = useTranslation("common");
 
   const productPricing = () => {
     return (
@@ -81,11 +87,17 @@ const RightSideDetail = ({
   return (
     <>
       <div className={styles["detail"]}>
-        <Label className={styles["collection-tag"]}>Collection</Label>
-        <Label className={styles["title"]}>Tiffany T Diamond Gold Ring</Label>
+        <Label className={styles["collection-tag"]}>
+          {appState.lang == "en" ? `Collection` : t("pdpTag-arabic")}
+        </Label>
+        <Label className={styles["title"]}>
+          {appState.lang == "en"
+            ? productData && productData["Product Title"]
+            : t("pdpTitle-arabic")}
+        </Label>
         <div className={styles["review-section"]}>
           <div className={styles["wishlist-icon"]}>
-            <WishList itemID={itemId} />
+            <WishList itemID={productData && productData["itemId"]} />
           </div>
           <div className={styles["rating-stars"]}>
             <StarRating count={5} rating={totalRating} />
@@ -95,7 +107,7 @@ const RightSideDetail = ({
               onClick={() => setModalOpen(true)}
               className={styles["btn"]}
             >
-              write a review
+              {appState.lang == "en" ? "write a review" : t("pdpButton-arabic")}
             </Button>
           </div>
         </div>
@@ -113,15 +125,23 @@ const RightSideDetail = ({
         <div>
           {!isStockAvailable ? (
             <ButtonATC
-              buttonSize={"xxxl"}
-              buttonText={"Add To Cart"}
+              buttonSize={"fill"}
+              buttonText={
+                appState.lang == "en"
+                  ? "Add To Cart"
+                  : t("addCartButton-arabic")
+              }
               showCounter={true}
             />
           ) : (
             <Button
               className={styles["book-apt-btn"]}
-              buttonSize={"xxxl"}
-              buttonText={"Notify me when available"}
+              buttonSize={"fill"}
+              buttonText={
+                appState.lang == "en"
+                  ? "Notify me when available"
+                  : t("notifyButton-arabic")
+              }
               buttonStyle="black"
               onClick={() => {
                 setNotifyModalOpen(true);
@@ -131,8 +151,12 @@ const RightSideDetail = ({
         </div>
         <Button
           className={styles["book-apt-btn"]}
-          buttonSize={"xxxl"}
-          buttonText={"Book An Appointment"}
+          buttonSize={"fill"}
+          buttonText={
+            appState.lang == "en"
+              ? "Book An Appointment"
+              : t("appointmentButton-arabic")
+          }
           buttonStyle="white"
         ></Button>
       </div>
@@ -141,6 +165,7 @@ const RightSideDetail = ({
         <WriteAReview
           isOpened={modalOpen}
           onClose={() => setModalOpen(false)}
+          productData={productData}
         />
       )}
       {notifyModalOpen && (

@@ -18,12 +18,15 @@ const SignupSchema = Yup.object().shape({
     .matches(phoneRegExp, "Phone number is not valid"),
 });
 
-const ReviewForm = ({ rating, productId = 5151231 }: any): JSX.Element => {
+const ReviewForm = ({
+  rating,
+  productData = {},
+}: any): JSX.Element => {
   const [fileUpload, setFileUpload] = useState<any>([{ fileArray: {} }]);
 
   const renderReviewApi = async (values: any) => {
     let formData: any = new FormData();
-    formData.append("productId", productId);
+    formData.append("productId", productData && productData["itemId"]);
     formData.append("author", `${values?.firstName} ${values?.lastName}`);
     formData.append("email", values?.email);
     formData.append("location", "KSA");
@@ -31,16 +34,10 @@ const ReviewForm = ({ rating, productId = 5151231 }: any): JSX.Element => {
     formData.append("reviewTitle", values?.review);
     formData.append("reviewMessage", values?.review);
     formData.append("reviewRecommendProduct", false);
-    formData.append("productName", "Product's Title");
-    formData.append("productSKU", "45634");
-    formData.append(
-      "productImageUrl",
-      "https://example.com/image/product-image.png"
-    );
-    formData.append(
-      "productUrl",
-      "https://example.com/products/product-image.png"
-    );
+    formData.append("productName", productData && productData["Product Title"]);
+    formData.append("productSKU", productData && productData["sku"]);
+    formData.append("productImageUrl", productData && productData["Image URL"]);
+    formData.append("productUrl", productData && productData["Image URL"]);
     formData.append("reviewSource", "api");
     formData.append("photo0", null);
     formData.append("video0", null);

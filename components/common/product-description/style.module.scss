@@ -3,33 +3,40 @@
 .upper-section {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: 42px;
+  // justify-content: space-between;
+  // margin-top: 42px;
 
   @media (min-width: $breakPoint-desktop) {
     flex-direction: row;
-    padding-inline-end: 64px;
-    padding-bottom: 41.5px;
-    padding-inline-start: 80px;
+    margin-inline-end: 80px;
+    margin-bottom: 40px;
+    margin-inline-start: 80px;
+    // height: 994px;
   }
 
   .left-side {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     @media (min-width: $breakPoint-desktop) {
-      width: 63.658%;
+      // width: 63.658%;
+      margin-inline-end: 24px;
     }
   }
 
   .right-side {
-    width: 100%;
-    padding-top: 56px;
-    padding-inline-end: 16px;
-    padding-inline-start: 16px;
+    width: 343px;
+    margin-top: 56px;
+    margin-inline-start: 16px;
 
     @media (min-width: $breakPoint-desktop) {
-      width: 30%;
-      padding-top: 40px;
+      width: 40.5vw;
+      min-width: 330px;
+      max-width: 391px;
+      padding-inline: 16px;
+      margin-top: 40px;
     }
   }
 }
@@ -54,5 +61,36 @@
     letter-spacing: 0em;
     text-align: start;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.product-desc-breadcrumb {
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  margin: 0 16px;
+  background-color: $white-color;
+
+  @media (min-width: $breakPoint-desktop) {
+    min-height: 42px;
+    margin: 0 80px;
+  }
+
+  .divider {
+    margin-top: -2px;
+    margin-inline-start: 5px;
+    margin-inline-end: 5px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .link {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15.6px;
+    letter-spacing: 0em;
+    text-align: start;
+    text-transform: capitalize;
+    text-decoration: unset;
   }
 }

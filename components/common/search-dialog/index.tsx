@@ -40,11 +40,6 @@ const SearchDialog: FC<SearchDialogProps> = ({
   const [isLangSelectorHide, setIsLangSelectorHide] = useState(false);
 
   useEffect(() => {
-    // setPromobar(
-    //   typeof window !== "undefined"
-    //     ? JSON.parse(window.localStorage.getItem("promo-bar-visible"))
-    //     : "false"
-    // );
     try {
       let newState = getAppStateFromLocalStorage();
       setPlaceHolderBrand(newState?.brand);

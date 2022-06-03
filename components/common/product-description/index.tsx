@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import ProductDetail from "./product-detail";
 import { productDescriptionData } from "lib/mock-data/data";
-import NotifyMeModal from "./right-side-detail/notify-me-modal";
 import ImageSection from "./image-section";
 import { ProductType } from "lib/types/product";
 import RightSideDetail from "./right-side-detail";
 import Reviews from "components/common/reviews/index";
 import { AppContext } from "lib/context";
 import { fetchProductPriceByItemId } from "lib/utils/product";
+import Link from "next/link";
 
 interface ProductDescriptionProps {
   product: ProductType;
@@ -17,12 +17,13 @@ interface ProductDescriptionProps {
 const ProductDescription = ({
   product,
 }: ProductDescriptionProps): JSX.Element => {
+  const { appState } = useContext(AppContext);
   const { priceListId } = useContext(AppContext);
-  const [notifyModalOpen, setNotifyModalOpen] = useState(false);
   const [prodArray, setProdArray] = useState(product);
   const [imageArray, setImageArray] = useState<
     { url: string; altText: string }[]
   >([]);
+  const [link, setLink] = useState("");
   const [totalRating, setTotalRating] = useState(0);
 
   useEffect(() => {
@@ -56,7 +57,6 @@ const ProductDescription = ({
 
   useEffect(() => {
     let modifiedProdArray = destructureAttributes(prodArray);
-
     if (modifiedProdArray && modifiedProdArray?.children.length > 0) {
       modifiedProdArray?.children?.map((variant, index) => {
         modifiedProdArray?.children?.splice(
@@ -84,20 +84,45 @@ const ProductDescription = ({
     console.log("colroValue", val);
   };
 
+  useEffect(() => {
+    const redriectBreadCrumbs =
+      appState?.brand === `Miss L'`
+        ? "/missl"
+        : appState?.brand === `Kenaz`
+        ? "/kenaz"
+        : "/";
+    redriectBreadCrumbs && setLink(redriectBreadCrumbs);
+  }, [appState?.brand]);
+
   return (
     <>
       <div className={styles["product-description-wrapper"]}>
+        <div className={styles["product-desc-breadcrumb"]}>
+          <Link href={link}>
+            <a className={styles["link"]}>Home</a>
+          </Link>
+          <div className={styles["divider"]}>/</div>
+          <Link
+            href={`/c/${
+              product && product["categories"][0]?.name?.toLocaleLowerCase()
+            }`}
+          >
+            <a className={styles["link"]}>
+              {product && product["categories"][0]?.name}
+            </a>
+          </Link>
+        </div>
         <div className={styles["upper-section"]}>
           <div className={styles["left-side"]}>
             <ImageSection imageArray={imageArray}></ImageSection>
           </div>
           <div className={styles["right-side"]}>
             <RightSideDetail
+              productData={prodArray}
               productSizeArray={prodArray?.children}
               onSizeChange={onSizeChange}
               onColorChange={onColorChange}
               totalRating={totalRating}
-              itemId={product?.itemId}
               currency={
                 productDescriptionData?.priceData[0]?.offers?.price?.currency
               }
@@ -119,14 +144,12 @@ const ProductDescription = ({
             productDetail={productDescriptionData?.productDetail}
           />
         </div>
-        <Reviews setTotalRating={setTotalRating} totalRating={totalRating} />
-      </div>
-      {notifyModalOpen && (
-        <NotifyMeModal
-          isOpened={notifyModalOpen}
-          onClose={() => setNotifyModalOpen(false)}
+        <Reviews
+          setTotalRating={setTotalRating}
+          totalRating={totalRating}
+          productData={prodArray}
         />
-      )}
+      </div>
     </>
   );
 };

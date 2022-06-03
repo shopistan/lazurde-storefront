@@ -5,7 +5,7 @@
   // align-items: center;
   padding: 0px;
 
-  @media (min-width: 1400px) {
+  @media (min-width: 1439px) {
     padding-inline: 80px;
     padding-bottom: 80px;
     max-width: 1440px;
@@ -13,6 +13,7 @@
 
   @media only screen and (min-width: 600px) and (max-width: 1400px) {
     padding-inline: 8px;
+    justify-content: center;
   }
 
   .heading {
@@ -68,7 +69,7 @@
       height: 374px;
       overflow: hidden;
 
-      @media screen and (max-width: 600px) {
+      @media screen and (max-width: 1439px) {
         width: 343px;
       }
 

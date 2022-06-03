@@ -1,0 +1,92 @@
+.cart-item-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+
+  @media (max-width: 600px) {
+    padding: 0px;
+  }
+
+  .item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+
+    .item-title {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      @media (max-width: 600px) {
+        flex-direction: row;
+        gap: 8px;
+      }
+
+      span {
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 120%;
+        color: #000000;
+        max-width: 80%;
+      }
+    }
+
+    .item-category {
+      span {
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 120%;
+        color: rgba(0, 0, 0, 0.8);
+      }
+    }
+    .item-quantity {
+      span {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+        color: rgba(0, 0, 0, 0.6);
+
+        input {
+          width: 40px;
+          height: 20px;
+        }
+      }
+    }
+
+    .remove-btn {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      button {
+        border: none;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 120%;
+        text-decoration-line: underline;
+        text-transform: capitalize;
+        color: #000000;
+        cursor: pointer;
+      }
+    }
+
+    .add-to-bag-btn {
+      margin-top: 0px;
+      display: flex;
+      align-items: center;
+      button {
+        border: none;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 120%;
+        text-decoration-line: underline;
+        text-transform: capitalize;
+        color: #000000;
+        cursor: pointer;
+      }
+    }
+  }
+}

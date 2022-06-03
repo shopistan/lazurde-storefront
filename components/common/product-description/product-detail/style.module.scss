@@ -6,6 +6,11 @@
   flex-direction: column;
   padding: 16px;
   background-color: rgba(0, 0, 0, 0.02);
+  margin-top: 32px;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-top: 0;
+  }
 
   @media (min-width: $breakPoint-desktop) {
     flex-direction: row;
@@ -15,7 +20,10 @@
 
   .column {
     flex: 1;
-    margin-top: 32px;
+
+    &:nth-child(2) {
+      margin-top: 32px;
+    }
 
     @media (min-width: $breakPoint-desktop) {
       margin: 0;
