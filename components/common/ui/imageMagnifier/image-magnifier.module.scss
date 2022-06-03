@@ -9,6 +9,8 @@
   position: relative;
   cursor: zoom-in;
   width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
 
   @media (min-width: $breakPoint-desktop) {
     // align-items: initial;
@@ -18,7 +20,7 @@
     pointer-events: none;
   }
 
-  &:hover {
+  &[data-zoomed="true"] {
     & > span:first-child {
       opacity: 1 !important;
     }
