@@ -3,7 +3,8 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import styles from "./cart-item.module.scss";
 import useWindowSize from "lib/utils/useWindowSize";
-import { desktopScreenSize } from "lib/utils/common";
+import { desktopScreenSize, mobileScreenSize } from "lib/utils/common";
+import { CrossSmall } from "components/icons";
 
 interface CartItemObject {
   title: string;
@@ -54,8 +55,8 @@ const CartItem = ({
   return (
     <div className={styles["cart-item-wrapper"]}>
       <Image
-        width={width > desktopScreenSize ? 146 : 100}
-        height={width > desktopScreenSize ? 146 : 100}
+        width={width > mobileScreenSize ? 146 : 100}
+        height={width > mobileScreenSize ? 146 : 100}
         src={imageSrc?.value || "/public/blue-ring.png"}
         alt=""
       />
@@ -67,9 +68,11 @@ const CartItem = ({
             "0.00"?.toLocaleString()
           }`}</span>
         </div>
-        <div className={styles["item-category"]}>
-          <span>Rings</span>
-        </div>
+        {width > mobileScreenSize && (
+          <div className={styles["item-category"]}>
+            <span>Rings</span>
+          </div>
+        )}
         <div className={styles["item-quantity"]}>
           <span>
             Quantity:{" "}
@@ -89,12 +92,7 @@ const CartItem = ({
           </span>
         </div>
         <div className={styles["remove-btn"]}>
-          <Image
-            src="/public/icons/cross-icon.png"
-            alt=""
-            height="12px"
-            width="12px"
-          />
+          <CrossSmall width={12} height={12} />
           <button
             onClick={() => {
               setRemovingItem(true);
