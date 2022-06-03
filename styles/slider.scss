@@ -267,6 +267,41 @@ body .swiper-pagination-bullet {
     opacity: 1;
     border: 0;
     background: rgba(0, 0, 0, 0.4);
-    border: transparent
+    border: transparent;
+  }
+}
+
+/*-------PDP POPUP IMAGE VIEW SLIDER--------*/
+
+.popup-image-slider {
+  .swiper-button-next {
+    inset-inline-end: 25px;
+    width: 20px;
+    height: 20px;
+  }
+  .swiper-button-prev {
+    inset-inline-start: 25px;
+    width: 20px;
+    height: 20px;
+  }
+
+  :is(.swiper-button-next, .swiper-button-prev):after {
+    font-size: 20px !important;
+    color: $black-color;
+  }
+
+  @media (min-width: $breakPoint-desktop) {
+    .swiper-button-next {
+      inset-inline-end: 55px;
+
+    }
+    .swiper-button-prev {
+      inset-inline-start: 55px;
+    }
+
+    :is(.swiper-button-next, .swiper-button-prev):after {
+      font-size: 34px !important;
+      color: $black-color;
+    }
   }
 }
