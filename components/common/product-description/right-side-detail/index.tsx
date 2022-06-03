@@ -125,7 +125,7 @@ const RightSideDetail = ({
         <div>
           {!isStockAvailable ? (
             <ButtonATC
-              buttonSize={"xxxl"}
+              buttonSize={"fill"}
               buttonText={
                 appState.lang == "en"
                   ? "Add To Cart"
@@ -136,7 +136,7 @@ const RightSideDetail = ({
           ) : (
             <Button
               className={styles["book-apt-btn"]}
-              buttonSize={"xxxl"}
+              buttonSize={"fill"}
               buttonText={
                 appState.lang == "en"
                   ? "Notify me when available"
@@ -151,7 +151,7 @@ const RightSideDetail = ({
         </div>
         <Button
           className={styles["book-apt-btn"]}
-          buttonSize={"xxxl"}
+          buttonSize={"fill"}
           buttonText={
             appState.lang == "en"
               ? "Book An Appointment"

@@ -5,7 +5,7 @@ interface ButtonATCProps {
   className?: string;
   buttonText?: string | Function;
   buttonStyle?: string;
-  buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl" | "xxxl";
+  buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl" | "fill";
   onClick?: MouseEventHandler<HTMLDivElement>;
   type?: "button" | "submit";
   children?: JSX.Element | string;
