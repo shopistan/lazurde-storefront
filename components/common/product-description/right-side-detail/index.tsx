@@ -46,6 +46,7 @@ const RightSideDetail = ({
   const [modalOpen, setModalOpen] = useState(false);
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
   const [isStockAvailable, setIsStockAvailable] = useState(false);
+  const [quantityCounter, setQuantityCounter] = useState(1);
   const { t } = useTranslation("common");
 
   const productPricing = () => {
@@ -93,7 +94,7 @@ const RightSideDetail = ({
         {
           sku: productData && productData?.sku,
           itemId: productData && productData?.itemId,
-          quantity: 1,
+          quantity: quantityCounter,
           priceListId: "100000",
           price: {
             currency: currency,
@@ -159,6 +160,8 @@ const RightSideDetail = ({
                   : t("addCartButton-arabic")
               }
               showCounter={true}
+              quantityCounter={quantityCounter}
+              setQuantityCounter={setQuantityCounter}
             />
           ) : (
             <Button
@@ -187,7 +190,10 @@ const RightSideDetail = ({
           buttonStyle="white"
         ></Button>
       </div>
-      <SubDetail isStockAvailable={isStockAvailable} />
+      <SubDetail
+        isStockAvailable={isStockAvailable}
+        productData={productData}
+      />
       {modalOpen && (
         <WriteAReview
           isOpened={modalOpen}

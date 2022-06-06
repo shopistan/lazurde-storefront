@@ -23,10 +23,10 @@
 
     &:nth-child(2) {
       margin-top: 32px;
-    }
 
-    @media (min-width: $breakPoint-desktop) {
-      margin: 0;
+      @media (min-width: $breakPoint-desktop) {
+        margin: 0;
+      }
     }
 
     .heading {

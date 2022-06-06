@@ -12,9 +12,13 @@ import { AppContext } from "lib/context/index";
 
 interface SubDetailProps {
   isStockAvailable?: boolean;
+  productData?: any;
 }
 
-const SubDetail = ({ isStockAvailable }: SubDetailProps): JSX.Element => {
+const SubDetail = ({
+  isStockAvailable,
+  productData = {},
+}: SubDetailProps): JSX.Element => {
   const date = new Date();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");

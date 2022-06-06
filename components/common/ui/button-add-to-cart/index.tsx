@@ -12,6 +12,8 @@ interface ButtonATCProps {
   children?: JSX.Element | string;
   showCounter?: boolean;
   onQuantityChange?: Function;
+  quantityCounter?: number;
+  setQuantityCounter?: Function;
 }
 
 interface QuantitySectionProps {
@@ -27,10 +29,12 @@ const ButtonATC = ({
   buttonSize = "md",
   children,
   showCounter = false,
-  onClick,
+  onClick = () => {},
   onQuantityChange = () => {},
+  quantityCounter = 1,
+  setQuantityCounter = () => {},
 }: ButtonATCProps): JSX.Element => {
-  const [quantityCounter, setQuantityCounter] = useState(1);
+  // const [quantityCounter, setQuantityCounter] = useState(1);
 
   useEffect(() => {
     onQuantityChange(quantityCounter);

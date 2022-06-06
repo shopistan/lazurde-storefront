@@ -28,7 +28,10 @@ const ReviewTabs = ({
   );
   return (
     <>
-      <div className={`${styles["tab-wrapper"]} ${className}`}>
+      <div
+        className={`${styles["tab-wrapper"]} ${className}`}
+        data-testid="tab-section"
+      >
         {reviewFilters &&
           reviewFilters.length > 0 &&
           reviewFilters?.map((data, index) => {
@@ -42,6 +45,7 @@ const ReviewTabs = ({
                   onClick && onClick(data);
                   setActive(index);
                 }}
+                data-testid="tab-name"
               >
                 <Label>
                   {appState.lang == "en"
