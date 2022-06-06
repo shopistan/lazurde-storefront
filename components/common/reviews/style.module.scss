@@ -69,8 +69,9 @@
   justify-content: center;
 
   @media (min-width: $breakPoint-desktop) {
-    justify-content: baseline;
+    justify-content: flex-start;
   }
+
   button {
     cursor: pointer;
     width: 200px;
