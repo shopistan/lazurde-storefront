@@ -1,0 +1,118 @@
+.order-container {
+  width: 100%;
+}
+
+.order-section {
+  background-color: white;
+  padding: 24px;
+}
+.order-history {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-delivery {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-sent {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-bottom: 8px !important;
+}
+
+.delivery-estimate {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: start;
+}
+
+.order-heading {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-block: 10.72px 8px;
+}
+
+.order-text {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-block: 0;
+}
+
+.order-image {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.order-main {
+  background-color: white;
+  padding-block: 43px 40px;
+  padding-inline-start: 42px;
+  margin-bottom: 8px;
+}
+
+.order-date {
+  display: flex;
+  align-items: flex-start;
+}
+
+.order-date-text {
+  margin-inline-start: 9.5px;
+  margin-block: 0 10px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+
+  span {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+}
+
+.order-number-text {
+  margin-block: 0 10px;
+  margin-inline-start: 9.5px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+
+  span {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+}
+
+.order-link {
+  margin-inline-start: 9.5px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: start;
+  color: black;
+  text-decoration: none;
+}
