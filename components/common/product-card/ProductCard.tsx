@@ -58,7 +58,7 @@ const ProductCard = ({
   const handleAddToCart = async (event: any) => {
     event.stopPropagation();
     const payload: ATCPayload = {
-      cartId: '98b0ed93-aaf1-4001-b540-b61796c4663d',
+      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
       items: [
         {
           sku: sku,
@@ -75,7 +75,12 @@ const ProductCard = ({
         },
       ],
     };
-    const res = await addProductToCart(payload);
+    const response = await addProductToCart(payload);
+    if (response?.hasError) {
+      alert("error while adding product");
+    } else {
+      router?.push("/cart");
+    }
   };
 
   return (
