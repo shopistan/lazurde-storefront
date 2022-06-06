@@ -1,12 +1,12 @@
 @import '/styles/variables.scss';
 
 .search-results-info-wrapper {
-  margin: 16px 80px -8px 80px;
+  margin: 16px 80px -32px 80px;
   font-family: 'Roboto';
   font-style: normal;
 
   @media (max-width: $breakPoint-tablet) {
-    margin: 16px;
+    margin: 16px 16px -16px 16px;
   }
 
   p {
