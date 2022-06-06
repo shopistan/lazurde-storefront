@@ -28,27 +28,37 @@
 
       span {
         font-weight: 500;
-        font-size: 15px;
+        font-size: 15px !important;
         line-height: 120%;
         color: #000000;
         max-width: 80%;
+        @media (max-width: 500px) {
+          font-size: 14px;
+        }
       }
     }
 
     .item-category {
       span {
         font-weight: 500;
-        font-size: 15px;
+        font-size: 15px !important;
         line-height: 120%;
         color: rgba(0, 0, 0, 0.8);
+      }
+      @media (max-width: 500px) {
+        font-size: 14px;
       }
     }
     .item-quantity {
       span {
-        font-weight: 400;
-        font-size: 14px;
+        font-weight: 400 !important;
+        font-size: 14px !important;
         line-height: 120%;
-        color: rgba(0, 0, 0, 0.6);
+        color: rgba(0, 0, 0, 0.6) !important;
+        @media (max-width: 500px) {
+          font-size: 13px !important;
+          color: rgba(0, 0, 0, 0.6) !important;
+        }
 
         input {
           width: 40px;
@@ -70,6 +80,7 @@
         text-transform: capitalize;
         color: #000000;
         cursor: pointer;
+        background: #fff;
       }
     }
 
@@ -86,6 +97,7 @@
         text-transform: capitalize;
         color: #000000;
         cursor: pointer;
+        background: #fff;
       }
     }
   }
