@@ -68,10 +68,14 @@ const CelebrityChoice: FC<CelebrityChoiceProps> = ({
       </div>
       <div className={styles["details-wrapper"]}>
         <div className={styles["details-heading"]}>
-          <h1>{detailsHeading}</h1>
+          <h1>{appState?.lang === "en" ? detailsHeading : "وهميهذا عنوان وهمي"}</h1>
         </div>
         <div className={styles["details-description"]}>
-          <p>{detailsDescription}</p>
+          <p>
+            {appState?.lang === "en"
+              ? detailsDescription
+              : "هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي"}
+          </p>
           <button className={styles["shop-all-btn"]}>
             {appState?.lang === "en" ? "Shop All" : t("shopAll")}
           </button>
