@@ -40,6 +40,7 @@
   color: rgba(0, 0, 0, 0.6);
   margin-top: 28px;
   margin-bottom: 24px;
+  word-break: break-word;
 
   @media (min-width: $breakPoint-desktop) {
     margin-top: 25.67px;

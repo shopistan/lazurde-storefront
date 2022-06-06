@@ -142,6 +142,7 @@ const ProductDescription = ({
         <div className={styles["product-feature-detail"]}>
           <ProductDetail
             productDetail={productDescriptionData?.productDetail}
+            productData={prodArray}
           />
         </div>
         <Reviews
