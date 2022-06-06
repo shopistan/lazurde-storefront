@@ -15,7 +15,7 @@ import CustomerService from "./common/customer-service";
 import TermCondtion from "components/common/terms-condition";
 import CelebrityChoice from "components/common/celebrity-choice";
 import InThePress from "components/common/in-the-press";
-import ExponeaHomepageRecommendations from "./common/cdxp-homepage-recommendations";
+import ExponeaHomepageRecommendations from "./common/exponea-homepage-recommendations";
 
 export const componentsById: any = {
   LazurdeHeroBanner,
