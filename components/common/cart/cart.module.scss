@@ -39,18 +39,29 @@
         height: 89px;
       }
 
-      span {
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 120%;
-      }
-      p {
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 130%;
-        color: #000000;
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        span {
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 120%;
+          @media (max-width: 500px) {
+            font-size: 14px;
+          }
+        }
+        .para {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 130%;
+          color: #000000;
+          @media (max-width: 500px) {
+            font-size: 13px;
+          }
+        }
       }
     }
 
@@ -89,6 +100,10 @@
       }
     }
 
+    .bag-wrapper::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+
     .summary-card {
       display: flex;
       flex-direction: column;
@@ -97,7 +112,7 @@
       gap: 24px;
       background: #ffffff;
       width: 420px;
-      height: 474px;
+      // height: 474px;
 
       @media (max-width: 600px) {
         height: 522px;
@@ -122,6 +137,10 @@
             font-size: 15px;
             line-height: 120%;
             color: #000000;
+
+            @media (max-width: 500px) {
+              font-size: 14px;
+            }
 
             &[data-amount='true'] {
               font-weight: 500;
@@ -215,16 +234,26 @@
           }
         }
       }
+    }
+
+    .need-help-wrapper {
+      width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      // @media (min-width: 1250px) {
+      //   margin-top: -270px;
+      // }
+      @media (max-width: 500px) {
+        padding: 24px;
+      }
 
       .bold-line {
         height: 0px;
         width: 100%;
         border: 4px solid #c3a956;
       }
-    }
-
-    .need-help-wrapper {
-      width: 420px;
       .need-help-heading {
         display: flex;
         justify-content: space-between;
@@ -243,6 +272,9 @@
 
           text-decoration-line: underline;
           text-transform: capitalize;
+        }
+        h6 {
+          margin: 0px;
         }
       }
     }

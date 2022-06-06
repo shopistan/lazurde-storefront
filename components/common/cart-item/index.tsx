@@ -112,14 +112,14 @@ const CartItem = ({
         </div>
         {wishListItem && (
           <div className={styles["add-to-bag-btn"]}>
-            <CrossSmall width={12} height={12} />
+            <Bag fill="#000000" stroke="#000000"/>
             <button
               onClick={() => {
                 setRemovingItem(true);
                 removeItem(item);
               }}
             >
-              {removingItem ? "Adding..." : "Add to Bag"}
+              {"Add to Bag"}
             </button>
           </div>
         )}
