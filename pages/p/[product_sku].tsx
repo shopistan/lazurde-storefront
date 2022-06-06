@@ -44,9 +44,14 @@ const LazurdeProductDescriptionPage: FC<ProductDescriptionPageProps> = ({
       </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
-        <ProductDescription product={product}></ProductDescription>
+        <div>
+          <ProductDescription product={product}></ProductDescription>
+        </div>
+        {/*-----FIX FOR DUPLICATE FOOTER/MISSING FOOTER STYLING------ */}
+        <div>
+          <Footer {...footerProps}></Footer>
+        </div>
       </AppContentWrapper>
-      <Footer {...footerProps}></Footer>
     </>
   );
 };
