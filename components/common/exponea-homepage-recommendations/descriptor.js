@@ -5,5 +5,5 @@ exports.default = Types.Component({
   label: "Exponea Homepage Recommendations",
   description: ``,
 
-  attributes: {},
+  attributes: "",
 });
