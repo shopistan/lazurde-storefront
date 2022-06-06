@@ -7,36 +7,12 @@ import useTranslation from "next-translate/useTranslation";
 
 interface ProductDetailProps {
   productDetail?: string;
-  metal?: string;
-  diamond?: string;
-  stone?: string;
-  pendantSize?: string;
-  charmSize?: string;
-  chainLength?: string;
-  rignSize?: string;
-  earringSize?: string;
-  ankletSize?: string;
-  braceletSize?: string;
-  styleNumber?: string;
-  brand?: string;
-  collection?: string;
+  productData?: any;
 }
 
 const ProductDetail = ({
   productDetail,
-  metal = "18K White Gold",
-  diamond = "18K White Gold",
-  stone = "18K White Gold",
-  pendantSize = "18K White Gold",
-  charmSize = "18K White Gold",
-  chainLength = "",
-  rignSize = "",
-  earringSize = "",
-  ankletSize = "",
-  braceletSize = "",
-  styleNumber = "KP701276SB",
-  brand = `L'azurde`,
-  collection = "lorem ipsum",
+  productData = {},
 }: ProductDetailProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
@@ -56,144 +32,220 @@ const ProductDetail = ({
             {appState.lang == "en" ? `Product Details` : t("Product Details")}
           </Heading>
           <div className={styles["detail-features"]}>
-            {metal && (
+            {productData && productData?.Metal && (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
                   {appState.lang == "en" ? "metal" : t("metal")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en" ? metal : t("metalDetails-arabic")}
+                  {appState.lang == "en"
+                    ? productData && productData?.Metal
+                    : t("metalDetails-arabic")}
                 </Label>
               </div>
             )}
-            {diamond && (
+
+            {productData &&
+            productData?.hasOwnProperty("Diamond Carat") &&
+            productData["Diamond Carat"] ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "diamond" : t("diamond")}
+                  {appState.lang == "en"
+                    ? "Diamond"
+                    : t("diamondDetails-arabic")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en" ? diamond : t("diamondDetails-arabic")}
+                  {appState.lang == "en"
+                    ? `${
+                        productData && productData?.hasOwnProperty("Diamond")
+                          ? productData["Diamond"]
+                          : ""
+                      } ${
+                        productData &&
+                        productData?.hasOwnProperty("Diamond Carat") &&
+                        productData["Diamond Carat"]
+                          ? `${
+                              productData && productData["Diamond Carat"]
+                            } Carat`
+                          : ""
+                      } ${
+                        productData &&
+                        productData?.hasOwnProperty("Diamond Carat") &&
+                        productData["Diamond Cut"]
+                      }`
+                    : t("stoneDetails-arabic")}
                 </Label>
               </div>
-            )}
-            {stone && (
+            ) : null}
+            {productData &&
+            productData?.hasOwnProperty("Stone") &&
+            productData["Stone"] ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
                   {appState.lang == "en" ? "stone" : t("stone")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en" ? stone : t("stoneDetails-arabic")}
+                  {appState.lang == "en"
+                    ? `${
+                        productData && productData?.hasOwnProperty("Stone")
+                          ? productData["Stone"]
+                          : ""
+                      } ${
+                        productData &&
+                        productData?.hasOwnProperty("Stone Carat") &&
+                        productData["Stone Carat"]
+                          ? `${productData && productData["Stone Carat"]} Carat`
+                          : ""
+                      } ${
+                        productData &&
+                        productData?.hasOwnProperty("Stone Carat") &&
+                        productData["Stone Cut"]
+                      }`
+                    : t("stoneDetails-arabic")}
                 </Label>
               </div>
-            )}
-            {pendantSize && (
+            ) : null}
+            {productData &&
+            productData?.hasOwnProperty("Pendant Size") &&
+            productData["Pendant Size"] > 0 ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
                   {appState.lang == "en" ? "Pendant Size" : t("Pendant Size")}
                 </Label>
                 <Label className={styles["description"]}>
                   {appState.lang == "en"
-                    ? pendantSize
+                    ? productData && productData["Pendant Size"]
                     : t("stoneDetails-arabic")}
                 </Label>
               </div>
-            )}
-            {charmSize && (
+            ) : null}
+            {productData &&
+            productData?.hasOwnProperty("Charm Size") &&
+            productData["Charm Size"] > 0 ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
                   {appState.lang == "en" ? "charm Size" : t("charm Size")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en" ? charmSize : t("stoneDetails-arabic")}
+                  {appState.lang == "en"
+                    ? productData && productData["Charm Size"]
+                    : t("stoneDetails-arabic")}
                 </Label>
               </div>
-            )}
-            {chainLength && (
+            ) : null}
+            {productData &&
+            productData?.hasOwnProperty("Chain Length") &&
+            productData["Chain Length"] > 0 ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
                   {appState.lang == "en" ? "Chain Length" : t("Chain Length")}
                 </Label>
                 <Label className={styles["description"]}>
                   {appState.lang == "en"
-                    ? chainLength
+                    ? productData && productData["Chain Length"]
                     : t("stoneDetails-arabic")}
                 </Label>
               </div>
-            )}
-            {rignSize && (
+            ) : null}
+
+            {productData &&
+            productData?.hasOwnProperty("Ring Size") &&
+            productData["Ring Size"] > 0 ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Pendant Size" : t("Pendant Size")}
-                </Label>
-                <Label className={styles["description"]}>
-                  {appState.lang == "en" ? rignSize : t("stoneDetails-arabic")}
-                </Label>
-              </div>
-            )}
-            {earringSize && (
-              <div className={styles["feature-item"]}>
-                <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Pendant Size" : t("Pendant Size")}
-                </Label>
-                <Label testId="earing" className={styles["description"]}>
-                  {appState.lang == "en"
-                    ? earringSize
-                    : t("stoneDetails-arabic")}
-                </Label>
-              </div>
-            )}
-            {braceletSize && (
-              <div className={styles["feature-item"]}>
-                <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Pendant Size" : t("Pendant Size")}
+                  {appState.lang == "en" ? "Ring Size" : t("Ring Size")}
                 </Label>
                 <Label className={styles["description"]}>
                   {appState.lang == "en"
-                    ? braceletSize
+                    ? productData && productData["Ring Size"]
                     : t("stoneDetails-arabic")}
                 </Label>
               </div>
-            )}
-            {ankletSize && (
+            ) : null}
+            {productData &&
+            productData?.hasOwnProperty("Earring Size") &&
+            productData["Earring Size"] > 0 ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Pendant Size" : t("Pendant Size")}
+                  {appState.lang == "en" ? "Earring Size" : t("Pendant Size")}
                 </Label>
                 <Label className={styles["description"]}>
                   {appState.lang == "en"
-                    ? ankletSize
+                    ? productData && productData["Earring Size"]
                     : t("stoneDetails-arabic")}
                 </Label>
               </div>
-            )}
-            {collection && (
+            ) : null}
+            {productData &&
+            productData?.hasOwnProperty("Bracelet Size") &&
+            productData["Bracelet Size"] > 0 ? (
+              <div className={styles["feature-item"]}>
+                <Label className={styles["title"]}>
+                  {appState.lang == "en" ? "Bracelet Size" : t("Pendant Size")}
+                </Label>
+                <Label className={styles["description"]}>
+                  {appState.lang == "en"
+                    ? productData && productData["Bracelet Size"]
+                    : t("stoneDetails-arabic")}
+                </Label>
+              </div>
+            ) : null}
+            {productData &&
+            productData?.hasOwnProperty("Anklet Size") &&
+            productData["Anklet Size"] !== "None" ? (
+              <div className={styles["feature-item"]}>
+                <Label className={styles["title"]}>
+                  {appState.lang == "en" ? "Anklet Size" : t("Pendant Size")}
+                </Label>
+                <Label className={styles["description"]}>
+                  {appState.lang == "en"
+                    ? productData && productData["Anklet Size"]
+                    : t("stoneDetails-arabic")}
+                </Label>
+              </div>
+            ) : null}
+            {productData &&
+            productData?.hasOwnProperty("Collection") &&
+            productData["Collection"] ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
                   {appState.lang == "en" ? "Collection" : t("pdpTag-arabic")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en" ? collection : t("collection")}
+                  {appState.lang == "en"
+                    ? productData && productData?.Collection
+                    : t("collection")}
                 </Label>
               </div>
-            )}
-            {brand && (
+            ) : null}
+            {productData &&
+            productData?.hasOwnProperty("Brand") &&
+            productData["Brand"] ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
                   {appState.lang == "en" ? "Brand" : t("Brand")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang ? brand : t("brandDetails-arabic")}
+                  {appState.lang
+                    ? productData && productData?.Brand
+                    : t("brandDetails-arabic")}
                 </Label>
               </div>
-            )}
-            {styleNumber && (
+            ) : null}
+            {productData &&
+            productData?.hasOwnProperty("Style Number") &&
+            productData["Style Number"] ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Style Number" : t("Style Number")}
+                  {appState.lang == "en" ? "Style Number" : t("Brand")}
                 </Label>
-                <Label className={styles["description"]}>{styleNumber}</Label>
+                <Label className={styles["description"]}>
+                  {appState?.lang == "en"
+                    ? productData && productData["Style Number"]
+                    : t("brandDetails-arabic")}
+                </Label>
               </div>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
