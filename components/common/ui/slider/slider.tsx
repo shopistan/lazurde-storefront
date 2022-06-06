@@ -21,6 +21,7 @@ interface SliderProps {
   hasScrollbar?: boolean;
   isDraggable?: boolean;
   hasZoom?: boolean;
+  initialSlide?: number ;
 }
 
 const Slider = ({
@@ -35,6 +36,7 @@ const Slider = ({
   productSlider = false,
   className = "",
   hasZoom = false,
+  initialSlide = 0,
 }: SliderProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
@@ -56,6 +58,7 @@ const Slider = ({
     className: className,
     key: appState?.lang,
     dir: appState?.lang === "en" ? "ltr" : "rtl",
+    initialSlide: initialSlide,
   };
 
   const productSliderSetting = {
@@ -70,6 +73,7 @@ const Slider = ({
     className: className,
     key: appState?.lang,
     dir: appState?.lang === "en" ? "ltr" : "rtl",
+    initialSlide: initialSlide,
   };
 
   return (
