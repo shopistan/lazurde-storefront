@@ -968,3 +968,45 @@ export const cartItems = [
     ],
   },
 ];
+
+export const singleProductData = {
+  Active: true,
+  "Best Seller": true,
+  Brand: "Kenaz",
+  "Chain Length": "25",
+  "Charm Size": "0",
+  Collection: "Designer Collection",
+  Description:
+    "This piece is giving us all those Bedouin feels. Right from the rich colors that are set in an enamel design on the pendant, to the cut work accented chain and the little danglers, everything in this necklace is deserving of a second look. This piece from our Ramadan edit will sit right with abayas or longline traditional dresses. Go for something in solid colors to let the design stand out.",
+  "Diamond Carat": "20",
+  "Diamond Cut": "Yes",
+  Gemstone: "Yes",
+  "Image URL":
+    "https://cdn.lazurde.com/media/catalog/product/1/1/111405180229-3_optimized.png",
+  "Image URL 4":
+    "https://cdn.lazurde.com/media/catalog/product/1/1/111405180229-3_optimized.png",
+  IsMostViewed: false,
+  "Last Chance": true,
+  Metal: "Gold",
+  "New In": true,
+  "Online Exclusive": true,
+  "Pendant Size": "20",
+  "Product Title": "Square design necklace",
+  Stone: "Enamel",
+  "Stone Carat": "18k",
+  "Stone Cut": "None",
+  "Tax Code": "FR20000",
+  Type: "Designer",
+  Variant: "0",
+  Weight: "20",
+  attributes: [
+    {
+      description: "",
+      id: "621dcb3408cf020009caf6dc",
+      mapping: "title",
+      name: "Product Title",
+      type: "TEXT",
+      value: "Square design necklace",
+    },
+  ],
+};
