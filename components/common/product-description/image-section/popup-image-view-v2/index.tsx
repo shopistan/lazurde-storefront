@@ -12,9 +12,26 @@ interface PopupImageViewProps {
   closePopup: Function;
   imageArray: { url: string; altText: string }[];
   selectedImageUrl: string;
-  selectedImageIndex: string | number;
+  selectedImageIndex: number;
   imageSize: { width: number; height: number };
 }
+
+const checkMediaType = (media: string) => {
+  // const mediaSrc = media.url;
+  const types = new Map([
+    ["jpg", "img"],
+    ["png", "img"],
+    ["webp", "img"],
+    ["gif", "img"],
+    ["mp4", "video"],
+    ["3gp", "video"],
+  ]);
+
+  const url = new URL(media || "/");
+  const extension = url.pathname.split(".")[1];
+  // const element = document.createElement(types.get(extension))
+  return types.get(extension);
+};
 
 const PopupImageViewV2 = ({
   closePopup,
@@ -36,6 +53,7 @@ const PopupImageViewV2 = ({
           hasScrollbar={false}
           pagination={false}
           navigation={true}
+          initialSlide={activeImageIndex}
         >
           {imageArray?.map((image, index) => {
             return (
@@ -51,13 +69,30 @@ const PopupImageViewV2 = ({
                     alt={image?.altText || ""}
                     layout={"fill"}
                   /> */}
-                  <ImageMagnifier
-                    width={imageSize.width}
-                    height={imageSize.height}
-                    zoomNum={2}
-                    url={image?.url}
-                    imageIndex={index}
-                  />
+                  {checkMediaType(image?.url) !== "img" ? (
+                    <video
+                      autoPlay={true}
+                      muted={true}
+                      loop={true}
+                      playsInline={true}
+                      height="100%"
+                      width="100%"
+                      controls={false}
+                    >
+                      <source src={`${image?.url}#t=0.1`} type="video/mp4" />
+                    </video>
+                  ) : (
+                    image?.url && (
+                      <ImageMagnifier
+                      width={imageSize.width}
+                      height={imageSize.height}
+                      zoomNum={2}
+                      url={image?.url}
+                      imageIndex={index}
+                    />
+                    )
+                  )}
+
                 </div>
               </SwiperSlide>
             );

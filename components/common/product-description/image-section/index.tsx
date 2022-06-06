@@ -33,7 +33,25 @@ interface ImageSectionProps {
   setShowPopup: Function;
   setSelectedImageUrl?: Function;
   setSelectedImageIndex?: Function;
+  selectedImageIndex?: number;
 }
+
+const checkMediaType = (media: string) => {
+  // const mediaSrc = media.url;
+  const types = new Map([
+    ["jpg", "img"],
+    ["png", "img"],
+    ["webp", "img"],
+    ["gif", "img"],
+    ["mp4", "video"],
+    ["3gp", "video"],
+  ]);
+
+  const url = new URL(media || "/");
+  const extension = url.pathname.split(".")[1];
+  // const element = document.createElement(types.get(extension))
+  return types.get(extension);
+};
 
 const ImageSection = ({ imageArray = images }): JSX.Element => {
   const [showPopup, setShowPopup] = useState(false);
@@ -101,9 +119,9 @@ const DesktopImageSectionV1 = ({
         key={index}
         className={styles["div-image-container-v1"]}
         onClick={() => {
-          setShowPopup(true);
-          setSelectedImageUrl(image?.url);
           setSelectedImageIndex(index);
+          setSelectedImageUrl(image?.url);
+          setShowPopup(true);
         }}
       >
         <Image
@@ -132,15 +150,16 @@ const DesktopImageSectionV2 = ({
     <div className={styles["div-image-container-v2"]}>
       <div
         onClick={() => {
-          setShowPopup(true);
-          setSelectedImageUrl(imageUrl);
           setSelectedImageIndex(activeImageIndex);
+          setSelectedImageUrl(imageUrl);
+          setShowPopup(true);
         }}
         className={styles["div-selected-image"]}
       >
-        {imageUrl && (
-          <Image src={imageUrl || "/"} alt={""} layout={"fill"}></Image>
-        )}
+        {MultiMediaDisplay(imageUrl, false)}
+        <div className={styles["div-zoom-icon"]}>
+          <ZoomIcon />
+        </div>
       </div>
       <div className={styles["div-images-column"]}>
         {imageArray &&
@@ -155,11 +174,12 @@ const DesktopImageSectionV2 = ({
                 }}
                 data-active={activeImageIndex === index}
               >
-                <Image
+                {MultiMediaDisplay(image.url, true)}
+                {/* <Image
                   src={image.url}
                   alt={image.altText}
                   layout={"fill"}
-                ></Image>
+                ></Image> */}
               </div>
             );
           })}
@@ -173,9 +193,14 @@ const MobileImageSection = ({
   setShowPopup,
   setSelectedImageUrl,
   setSelectedImageIndex,
+  selectedImageIndex,
 }: ImageSectionProps): any => {
   return (
-    <Slider mobileSlidePerView={1} productSlider={true}>
+    <Slider
+      mobileSlidePerView={1}
+      productSlider={true}
+      initialSlide={selectedImageIndex}
+    >
       {imageArray?.map((image, index) => {
         return (
           <SwiperSlide key={index}>
@@ -188,11 +213,31 @@ const MobileImageSection = ({
                 setSelectedImageIndex(index);
               }}
             >
-              <Image
-                src={image?.url || "/"}
-                alt={image?.altText || ""}
-                layout={"fill"}
-              />
+              {checkMediaType(image?.url) !== "img" ? (
+                <>
+                  <video
+                    autoPlay={false}
+                    muted={true}
+                    loop={true}
+                    playsInline={true}
+                    height="100%"
+                    width="100%"
+                    controls={false}
+                  >
+                    <source src={`${image?.url}#t=0.1`} type="video/mp4" />
+                  </video>
+                  <div className={styles["label-360-view"]}>360 view</div>
+                </>
+              ) : (
+                image?.url && (
+                  <Image
+                    src={image?.url || "/"}
+                    alt={image?.altText || ""}
+                    layout={"fill"}
+                  />
+                )
+              )}
+
               {/* <div className={styles["div-zoom-icon"]}>
               <ZoomIcon />
             </div> */}
@@ -201,5 +246,34 @@ const MobileImageSection = ({
         );
       })}
     </Slider>
+  );
+};
+
+const MultiMediaDisplay = (imageUrl: string, showLabel: boolean) => {
+  return (
+    <>
+      {checkMediaType(imageUrl) !== "img" ? (
+        <>
+          <video
+            autoPlay={false}
+            muted={true}
+            loop={true}
+            playsInline={true}
+            height="100%"
+            width="100%"
+            controls={false}
+          >
+            <source src={`${imageUrl}#t=0.1`} type="video/mp4" />
+          </video>
+          {showLabel && (
+            <div className={styles["label-360-view"]}>360 view</div>
+          )}
+        </>
+      ) : (
+        imageUrl && (
+          <Image src={imageUrl || "/"} alt={""} layout={"fill"}></Image>
+        )
+      )}
+    </>
   );
 };
