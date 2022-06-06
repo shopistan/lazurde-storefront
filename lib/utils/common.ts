@@ -83,3 +83,47 @@ export const slashFormatDate = (date: any) => {
 
   return `${month}/${day}`;
 };
+
+export const ordeFormatDate = (date: any) => {
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  var days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const _date = new Date(date);
+  const month = monthNames[_date.getMonth()];
+  const year = _date.getFullYear();
+  var day = _date.getDay();
+  var _day = days[_date.getDay()];
+  var dayString = "";
+
+  if (day == 1) {
+    dayString = `${day}st`;
+  } else if (day == 2) {
+    dayString = `${day}nd`;
+  } else if (day == 3) {
+    dayString = `${day}rd`;
+  } else {
+    dayString = `${day}th`;
+  }
+
+  return `${_day} ${month} ${dayString} ${year}`;
+};
