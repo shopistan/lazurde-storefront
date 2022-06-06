@@ -26,6 +26,7 @@ const WriteAReview = ({
       onClick={() => {
         onClose();
       }}
+      data-testid="review-modal"
     >
       <div
         className={styles["review-modal_body"]}
