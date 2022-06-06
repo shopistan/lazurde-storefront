@@ -43,9 +43,11 @@ const LazurdeProductDescriptionPage: FC<ProductDescriptionPageProps> = ({
         </title>
       </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
-      <AppContentWrapper>
+      <div>
         <ProductDescription product={product}></ProductDescription>
-      </AppContentWrapper>
+      </div>
+      {/* <AppContentWrapper>
+      </AppContentWrapper> */}
       <Footer {...footerProps}></Footer>
     </>
   );
