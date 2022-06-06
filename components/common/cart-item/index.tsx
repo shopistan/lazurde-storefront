@@ -1,11 +1,11 @@
 import { ImageType } from "lib/types/common";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styles from "./cart-item.module.scss";
 import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize, mobileScreenSize } from "lib/utils/common";
 import { Bag, CrossSmall } from "components/icons";
-
+import { AppContext } from "lib/context";
 interface CartItemObject {
   title: string;
   ["Image URL"]: string;
@@ -40,6 +40,7 @@ const CartItem = ({
   removeItem = () => {},
   wishListItem = false,
 }: CartItemProps): JSX.Element => {
+  const { appState } = useContext(AppContext);
   const [width] = useWindowSize();
   const [updatingItem, setUpdatingItem] = useState(false);
   const [removingItem, setRemovingItem] = useState(false);
@@ -64,10 +65,12 @@ const CartItem = ({
       <div className={styles["item-details"]}>
         <div className={styles["item-title"]}>
           <span>
-            {item?.title ||
-              item?.attributes?.find((attr) => attr?.mapping === "title")
-                ?.value ||
-              "No Title"}
+            {appState?.lang === "en"
+              ? item?.title ||
+                item?.attributes?.find((attr) => attr?.mapping === "title")
+                  ?.value ||
+                "No Title"
+              : "مجوهرات الماس تتصدر"}
           </span>
           <span>{`$${
             item?.totalPrice?.amount?.toLocaleString() ||
@@ -76,13 +79,13 @@ const CartItem = ({
         </div>
         {width > mobileScreenSize && (
           <div className={styles["item-category"]}>
-            <span>Rings</span>
+            <span>{appState?.lang === "en" ? "Rings" : "خواتم"}</span>
           </div>
         )}
         {!wishListItem && (
           <div className={styles["item-quantity"]}>
             <span>
-              Quantity:{" "}
+              {appState?.lang === "en" ? "Quantity: " : "كمية "}
               <input
                 type="number"
                 id="quantity"
@@ -107,19 +110,25 @@ const CartItem = ({
               removeItem(item);
             }}
           >
-            {removingItem ? "Removing..." : "Remove"}
+            {appState?.lang === "en"
+              ? removingItem
+                ? "Removing..."
+                : "Remove"
+              : removingItem
+              ? "جارٍ الإزالة…"
+              : "إزالة"}
           </button>
         </div>
         {wishListItem && (
           <div className={styles["add-to-bag-btn"]}>
-            <Bag fill="#000000" stroke="#000000"/>
+            <Bag fill="#000000" stroke="#000000" />
             <button
               onClick={() => {
                 setRemovingItem(true);
                 removeItem(item);
               }}
             >
-              {"Add to Bag"}
+              {appState?.lang === "en" ? "Add to Bag" : "أضف الى الحقيبة"}
             </button>
           </div>
         )}

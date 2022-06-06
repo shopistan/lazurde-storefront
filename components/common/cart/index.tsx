@@ -15,12 +15,15 @@ import {
   fetchProductsByItemId,
 } from "lib/utils/product";
 import { AppContext } from "lib/context";
+import paypalLogo from "../../../public/paypal-logo.png";
+import useTranslation from "next-translate/useTranslation";
 
 interface CartProps {}
 const Cart = ({}: CartProps): JSX.Element => {
+  const { t } = useTranslation("common");
   const authToken =
     "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MTUzMzYxLCJleHAiOjE2NTQxNTUxNjF9.FLBjzjjR3g1zreH03aIE9B92H5y1HL6RfhwoePFbKeASfqq2RcyGqkKiexRTELDTPMOJEa9XXklsqfaegYS-fKrEXoIjjHv4KpolommWzaSINL5C__zljx7QZtF5sRtyYKPPlwEcuPtdMJTCERIfyDIHsMF4oehEVvN-cd6DwOA";
-  const { priceListId } = useContext(AppContext);
+  const { priceListId, appState } = useContext(AppContext);
   const [freeShipping, showFreeShipping] = useState(true);
   const [cartData, setCartData] = useState({
     status: "",
@@ -157,10 +160,15 @@ const Cart = ({}: CartProps): JSX.Element => {
           {freeShipping && (
             <div className={styles["free-shipping-card"]}>
               <div>
-                <span>Free Shipping for Members</span>
+                <span>
+                  {appState?.lang === "en"
+                    ? "Free Shipping for Members"
+                    : t("freeShipping")}
+                </span>
                 <span className={styles["para"]}>
-                  Become a L’azurde member for fast and free shipping. Join Us
-                  or Sign In
+                  {appState?.lang === "en"
+                    ? "Become a L’azurde member for fast and free shipping. Join Us or Sign In"
+                    : t("becomeMember")}
                 </span>
               </div>
               <div
@@ -172,9 +180,9 @@ const Cart = ({}: CartProps): JSX.Element => {
             </div>
           )}
           <div className={styles["bag-wrapper"]}>
-            <span>Bag</span>
+            <span>{appState?.lang === "en" ? "Bag" : t("bag")}</span>
             {isLoadingCart ? (
-              <div>Loading...</div>
+              <div>{appState?.lang === "en" ? "Loading..." : t("loading")}</div>
             ) : (
               <>
                 {Object.keys(cartData).length !== 0 ? (
@@ -194,47 +202,71 @@ const Cart = ({}: CartProps): JSX.Element => {
                       );
                     })
                   ) : (
-                    <div>No Cart Data Found!</div>
+                    <div>
+                      {appState?.lang === "en"
+                        ? "No Cart Data Found!"
+                        : t("noCartDataFound")}
+                    </div>
                   )
                 ) : (
-                  <div>No Cart Data Found!</div>
+                  <div>
+                    {" "}
+                    {appState?.lang === "en"
+                      ? "No Cart Data Found!"
+                      : t("noCartDataFound")}
+                  </div>
                 )}
               </>
             )}
           </div>
         </div>
         <div className={styles["summary-card"]}>
-          <span>Summary</span>
+          <span> {appState?.lang === "en" ? "Summary" : t("summary")}</span>
           <div className={styles["order-details"]}>
             <div>
-              <span>Subtotal</span>
+              <span>
+                {appState?.lang === "en" ? "Subtotal" : t("subTotal")}
+              </span>
               <span data-amount={true}>
                 {cartData?.subTotal?.toLocaleString()}
               </span>
             </div>
             <div>
-              <span>Estimated Shipping &amp; Handling</span>
+              <span>
+                {" "}
+                {appState?.lang === "en"
+                  ? "Estimated Shipping &amp; Handling"
+                  : t("estimatedShipping")}
+              </span>
               <span data-amount={true}>$0.00</span>
             </div>
             <div>
-              <span>VAT Tax</span>
+              <span>{appState?.lang === "en" ? "VAT Tax" : t("vatTax")}</span>
               <span data-amount={true}>$0.00</span>
             </div>
           </div>
           <hr className={styles["horizontal-divider"]} />
           <div className={styles["order-details"]}>
             <div>
-              <span data-amount={true}>Total to Pay</span>
+              <span data-amount={true}>
+                {appState?.lang === "en" ? "Total to pay" : t("totalToPay")}
+              </span>
               <span
                 data-amount={true}
               >{`$${cartData?.totalAmount?.toLocaleString()}`}</span>
             </div>
           </div>
           <hr className={styles["horizontal-divider"]} />
-          <button className={styles["checkout-button"]}>Checkout</button>
+          <button className={styles["checkout-button"]}>
+            {appState?.lang === "en" ? "Checkout" : t("checkout")}
+          </button>
           <div className={styles["half-divider"]}>
             <hr />
-            <span data-divider={true}>Or Continue with</span>
+            <span data-divider={true}>
+              {appState?.lang === "en"
+                ? "Or Continue With"
+                : t("orContinueWith")}
+            </span>
             <hr />
           </div>
           <div className={styles["external-btns"]}>
@@ -242,15 +274,17 @@ const Cart = ({}: CartProps): JSX.Element => {
               <AppleButton />
             </button>
             <button className={styles["paypal-btn"]}>
-              <PaypalButton />
+              <Image src={paypalLogo} alt="" width={174} height={40} />
             </button>
           </div>
         </div>
         {/* <div className={styles["flex-wrap"]}> */}
         <div className={styles["bag-wrapper"]}>
-          <span>Your WishList</span>
+          <span>
+            {appState?.lang === "en" ? "Your Wishlist" : t("yourWishList")}
+          </span>
           {isWishListLoading ? (
-            <div>Loading...</div>
+            <div>{appState?.lang === "en" ? "Loading..." : t("loading")}</div>
           ) : (
             <>
               {Object.keys(wishListData).length !== 0 ? (
@@ -270,24 +304,43 @@ const Cart = ({}: CartProps): JSX.Element => {
                     );
                   })
                 ) : (
-                  <div>No Cart Data Found!</div>
+                  <div>
+                    {" "}
+                    {appState?.lang === "en"
+                      ? "No Cart Data Found!"
+                      : t("noCartDataFound")}
+                  </div>
                 )
               ) : (
-                <div>No Cart Data Found!</div>
+                <div>
+                  {" "}
+                  {appState?.lang === "en"
+                    ? "No Cart Data Found!"
+                    : t("noCartDataFound")}
+                </div>
               )}
-              {/* <div>No Data Found!</div> */}
             </>
           )}
         </div>
         <div className={styles["need-help-wrapper"]}>
           <hr className={styles["bold-line"]} />
           <div className={styles["need-help-heading"]}>
-            <span>Need help ?</span>
-            <a>Help Center</a>
+            <span>
+              {" "}
+              {appState?.lang === "en" ? "Need Help ?" : t("needHelp")}
+            </span>
+            <a> {appState?.lang === "en" ? "Help Center" : t("helpCenter")}</a>
           </div>
           <div>
             {[1, 2, , 3, 4]?.map((index) => {
-              return <p key={index}>Lorem ipsum dolor sit </p>;
+              return (
+                <p key={index}>
+                  {" "}
+                  {appState?.lang === "en"
+                    ? "Lorem ipsum dolor sit"
+                    : t("dummyText")}
+                </p>
+              );
             })}
           </div>
         </div>
