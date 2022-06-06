@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styles from "./cart.module.scss";
 import CartItem from "components/common/cart-item";
 import { cartItems } from "lib/mock-data/data";
@@ -7,14 +7,20 @@ import {
   removeItemFromCart,
   updateItemOfCart,
 } from "lib/utils/cart";
-import { getWishList } from "lib/utils/wishlist";
+import { deleteWishList, getWishList } from "lib/utils/wishlist";
 import Image from "next/image";
 import { AppleButton, CrossSmall, PaypalButton } from "components/icons";
-import { number } from "yup/lib/locale";
-import { fetchProductsByItemId } from "lib/utils/product";
+import {
+  fetchProductPriceByItemId,
+  fetchProductsByItemId,
+} from "lib/utils/product";
+import { AppContext } from "lib/context";
 
 interface CartProps {}
 const Cart = ({}: CartProps): JSX.Element => {
+  const authToken =
+    "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MTUzMzYxLCJleHAiOjE2NTQxNTUxNjF9.FLBjzjjR3g1zreH03aIE9B92H5y1HL6RfhwoePFbKeASfqq2RcyGqkKiexRTELDTPMOJEa9XXklsqfaegYS-fKrEXoIjjHv4KpolommWzaSINL5C__zljx7QZtF5sRtyYKPPlwEcuPtdMJTCERIfyDIHsMF4oehEVvN-cd6DwOA";
+  const { priceListId } = useContext(AppContext);
   const [freeShipping, showFreeShipping] = useState(true);
   const [cartData, setCartData] = useState({
     status: "",
@@ -31,16 +37,22 @@ const Cart = ({}: CartProps): JSX.Element => {
   const [isLoadingCart, setisLoadingCart] = useState(false);
   const [isWishListLoading, setIsWishListLoading] = useState(false);
   const [updatingCartItem, setUpdatingCartItem] = useState(false);
+  const [deletingWishList, setDeletingWishList] = useState(false);
 
   async function getWishListData() {
+    // setDeletingWishList(false);
     setIsWishListLoading(true);
-    const wishListData = await getWishList(
-      "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MTQ5MjIwLCJleHAiOjE2NTQxNTEwMjB9.YwC1Gh4rVOjjaTutEGCSswIsFX7iPJp1zARnrF4EOTIp2QGY_atgSXkkd77VDPGPgAVm306UTH5Mi-iuJq7aCD1YigESYnJRIXU2qeNgPMEIoXnEEnUVs-JfOclzWWC90bzJzO8MPMXRYgMPFBc2jkEaZIuMuABeAhzqwHQroqY"
-    );
+    const wishListData = await getWishList(authToken);
     if (wishListData?.status === 200) {
-      let getItemsbyItemIds = await fetchProductsByItemId(
-        wishListData?.data?.items || []
-      );
+      const itemIds = wishListData?.data?.items;
+      console.log("itemsids", itemIds);
+      const getItemsbyItemIds = await fetchProductsByItemId(itemIds || []);
+      const payload = {
+        priceList: [priceListId],
+        itemId: itemIds || [],
+      };
+      const response = await fetchProductPriceByItemId(payload);
+      console.log("res", response);
       if (getItemsbyItemIds?.status === 200) {
         setIsWishListLoading(false);
         setWishListData({
@@ -124,6 +136,20 @@ const Cart = ({}: CartProps): JSX.Element => {
     }
   };
 
+  const removeWishListItem = async (item: any) => {
+    setDeletingWishList(true);
+    try {
+      const response = await deleteWishList(item?.itemId, authToken);
+      if (response?.status === 200) {
+        getWishListData();
+      }
+      setDeletingWishList(false);
+    } catch (err) {
+      console.log("Error!");
+      setDeletingWishList(false);
+    }
+  };
+
   return (
     <div className={styles["cart-wrapper"]}>
       <div className={styles["flex-wrap"]}>
@@ -132,16 +158,17 @@ const Cart = ({}: CartProps): JSX.Element => {
             <div className={styles["free-shipping-card"]}>
               <div>
                 <span>Free Shipping for Members</span>
-                <p>
+                <span className={styles["para"]}>
                   Become a L’azurde member for fast and free shipping. Join Us
                   or Sign In
-                </p>
+                </span>
               </div>
-              <CrossSmall
-                width={12}
-                height={12}
+              <div
+                style={{ cursor: "pointer" }}
                 onClick={() => showFreeShipping(false)}
-              />
+              >
+                <CrossSmall width={12} height={12} />
+              </div>
             </div>
           )}
           <div className={styles["bag-wrapper"]}>
@@ -214,10 +241,10 @@ const Cart = ({}: CartProps): JSX.Element => {
             <button className={styles["apple-pay-btn"]}>
               <AppleButton />
             </button>
-            <button className={styles["paypal-btn"]}>Paypal</button>
+            <button className={styles["paypal-btn"]}>
+              <PaypalButton />
+            </button>
           </div>
-
-          <hr className={styles["bold-line"]} />
         </div>
         {/* <div className={styles["flex-wrap"]}> */}
         <div className={styles["bag-wrapper"]}>
@@ -230,7 +257,16 @@ const Cart = ({}: CartProps): JSX.Element => {
                 wishListData?.items?.length ? (
                   wishListData?.items?.map((item, index) => {
                     return (
-                      <CartItem key={index} item={item} wishListItem={true} />
+                      <>
+                        <CartItem
+                          key={index}
+                          item={item}
+                          wishListItem={true}
+                          removeItem={removeWishListItem}
+                          updatingCartItem={deletingWishList}
+                        />
+                        {index < wishListData?.items?.length - 1 && <hr />}
+                      </>
                     );
                   })
                 ) : (
@@ -244,13 +280,14 @@ const Cart = ({}: CartProps): JSX.Element => {
           )}
         </div>
         <div className={styles["need-help-wrapper"]}>
+          <hr className={styles["bold-line"]} />
           <div className={styles["need-help-heading"]}>
             <span>Need help ?</span>
             <a>Help Center</a>
           </div>
           <div>
             {[1, 2, , 3, 4]?.map((index) => {
-              return <h6 key={index}>Lorem ipsum dolor sit </h6>;
+              return <p key={index}>Lorem ipsum dolor sit </p>;
             })}
           </div>
         </div>
