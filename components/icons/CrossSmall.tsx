@@ -11,7 +11,7 @@ const CrossSmall = ({ ...props }) => {
     >
       <path
         d="M0.757359 1.24264L9.24264 9.72792M9.24264 1.24264L0.757359 9.72792"
-        stroke="black"
+        stroke={props?.color || "black"}
         strokeWidth="1.5"
       />
     </svg>
