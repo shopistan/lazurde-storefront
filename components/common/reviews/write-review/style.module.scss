@@ -188,8 +188,12 @@
 
 .submit-btn {
   position: sticky;
-  bottom: 40px;
+  bottom: 15px;
   text-align: end;
+
+  @media (min-width: $breakPoint-desktop) {
+    bottom: 40px;
+  }
 
   button {
     cursor: pointer;
