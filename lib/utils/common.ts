@@ -128,9 +128,29 @@ export const ordeFormatDate = (date: any) => {
   return `${_day} ${month} ${dayString} ${year}`;
 };
 
+export const updateOrderDate = (date: any) => {
+  const _date = new Date(date);
+  const _day = _date.getDay();
+  const _month = _date.getMonth();
+  const _year = _date.getFullYear();
+  const _hours = _date.getHours();
+  const _minutes = _date.getMinutes();
+  const _seconds = _date.getSeconds();
+
+  if (_hours > 12) {
+    var timeZone = "AM";
+  } else {
+    var timeZone = "PM";
+  }
+
+  return `${
+    _day + 2
+  }/${_month}/${_year} ${_hours}:${_minutes}:${_seconds} ${timeZone}`;
+};
+
 export const checkMediaType = (media: string) => {
   // const mediaSrc = media.url;
-  if(!media) return null
+  if (!media) return null;
   const types = new Map([
     ["jpg", "img"],
     ["png", "img"],
@@ -139,7 +159,7 @@ export const checkMediaType = (media: string) => {
     ["mp4", "video"],
     ["3gp", "video"],
   ]);
-  const url = new URL(media || "/", 'https://cdn.lazurde.com/');
+  const url = new URL(media || "/", "https://cdn.lazurde.com/");
   const extension = url.pathname.split(".")[1];
   // const element = document.createElement(types.get(extension))
   return types.get(extension);

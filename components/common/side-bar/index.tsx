@@ -59,6 +59,7 @@ const SideBar: FC<SideBarProps> = ({
     {},
     { returnObjects: true }
   );
+
   return (
     <>
       {activeComponent !== "Account Overview" && width < desktopScreenSize ? (
@@ -69,12 +70,16 @@ const SideBar: FC<SideBarProps> = ({
           }}
         >
           <BackArrow />
-          <span>Back To My Account</span>
+          <span>
+            {appState?.lang == "en"
+              ? "Back To My Account"
+              : t("Back To My Account")}
+          </span>
         </div>
       ) : (
         <div className={styles["account-left"]}>
           <div>
-            {width >= 1024 && (
+            {width >= desktopScreenSize && (
               <div className={styles["account-profile"]}>
                 {barCode?.url && (
                   <Image src={barCode?.url || "/"} width={100} height={100} />
@@ -91,7 +96,7 @@ const SideBar: FC<SideBarProps> = ({
                 </Label>
               </div>
             )}
-            {width < 1024 && (
+            {width < desktopScreenSize && (
               <div className={styles["account-profile-mobile"]}>
                 <div className={styles["account-image-mobile"]}>
                   <Image
@@ -145,7 +150,9 @@ const SideBar: FC<SideBarProps> = ({
                         const { text, image, width, height, link } = account;
                         return (
                           <div
-                            className={styles["account-detail"]}
+                            className={`${styles["account-detail"]} ${
+                              activeComponent == text && styles["active-block"]
+                            }`}
                             key={index}
                             onClick={() => {
                               setActiveComponent(text);
@@ -160,7 +167,12 @@ const SideBar: FC<SideBarProps> = ({
                                 layout="fixed"
                               />
                             </div>
-                            <Label>
+                            <Label
+                              className={
+                                text == activeComponent &&
+                                styles["active-state"]
+                              }
+                            >
                               {appState?.lang === "ar"
                                 ? _detailsProps[i]?.accounts?.[index]?.text
                                 : text}
