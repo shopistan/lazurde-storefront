@@ -59,6 +59,7 @@ const SideBar: FC<SideBarProps> = ({
     {},
     { returnObjects: true }
   );
+
   return (
     <>
       {activeComponent !== "Account Overview" && width < desktopScreenSize ? (
@@ -149,7 +150,9 @@ const SideBar: FC<SideBarProps> = ({
                         const { text, image, width, height, link } = account;
                         return (
                           <div
-                            className={styles["account-detail"]}
+                            className={`${styles["account-detail"]} ${
+                              activeComponent == text && styles["active-block"]
+                            }`}
                             key={index}
                             onClick={() => {
                               setActiveComponent(text);
@@ -164,7 +167,12 @@ const SideBar: FC<SideBarProps> = ({
                                 layout="fixed"
                               />
                             </div>
-                            <Label>
+                            <Label
+                              className={
+                                text == activeComponent &&
+                                styles["active-state"]
+                              }
+                            >
                               {appState?.lang === "ar"
                                 ? _detailsProps[i]?.accounts?.[index]?.text
                                 : text}
