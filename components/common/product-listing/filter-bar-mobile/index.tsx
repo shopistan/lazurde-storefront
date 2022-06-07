@@ -280,7 +280,7 @@ const FilterAccordion = ({
                   </div>
                 </div>
               }
-              links={data?.filterOptions}
+              // links={data?.filterOptions}
               arrowIcon={false}
             >
               <DropDown

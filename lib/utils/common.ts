@@ -147,3 +147,20 @@ export const updateOrderDate = (date: any) => {
     _day + 2
   }/${_month}/${_year} ${_hours}:${_minutes}:${_seconds} ${timeZone}`;
 };
+
+export const checkMediaType = (media: string) => {
+  // const mediaSrc = media.url;
+  if (!media) return null;
+  const types = new Map([
+    ["jpg", "img"],
+    ["png", "img"],
+    ["webp", "img"],
+    ["gif", "img"],
+    ["mp4", "video"],
+    ["3gp", "video"],
+  ]);
+  const url = new URL(media || "/", "https://cdn.lazurde.com/");
+  const extension = url.pathname.split(".")[1];
+  // const element = document.createElement(types.get(extension))
+  return types.get(extension);
+};
