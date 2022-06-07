@@ -981,6 +981,7 @@
   "customer reviews": "آراء المستهلكين",
   "rating": "تقييم",
   "write a review": "أكتب مراجعة",
+  "Overall rating": "تقييم عام",
   "reviewtabs": [
     {
       "label": "مؤخرًا"
@@ -994,5 +995,13 @@
     {
       "label": "أدنى"
     }
-  ]
+  ],
+  "reviewFormData": {
+    "reviewLabel": "إعادة النظر",
+    "firstName": "الاسم الاول",
+    "lastName": "الكنية",
+    "email": "البريد الإلكتروني",
+    "phoneNumber": "هاتف محمول",
+    "submitBtnText": "مراجعة آخر"
+  }
 }

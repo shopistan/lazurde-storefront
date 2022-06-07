@@ -6,97 +6,99 @@
 }
 
 .top-center {
-  top: 20px;
-  right: 0;
-  bottom: auto;
-  left: 0;
+  inset-block-start: 20px;
+  inset-inline-end: 0;
+  inset-block-end: auto;
+  inset-inline-start: 0;
   transition: transform 0.4s ease-in-out;
   animation: toast-in-top 0.4s;
 }
 
 .top-right {
-  top: 12px;
-  right: 12px;
+  inset-block-start: 12px;
+  inset-inline-end: 12px;
   transition: transform 0.4s ease-in-out;
   animation: toast-in-right 0.4s;
 }
 
 .bottom-right {
-  bottom: 12px;
-  right: 12px;
+  inset-block-end: 12px;
+  inset-inline-end: 12px;
   transition: transform 0.4s ease-in-out;
   animation: toast-in-right 0.4s;
 }
 
 .top-left {
-  top: 12px;
-  left: 12px;
+  inset-block-start: 12px;
+  inset-inline-start: 12px;
   transition: transform 0.4s ease-in;
   animation: toast-in-left 0.4s;
 }
 
 .bottom-left {
-  bottom: 12px;
-  left: 12px;
+  inset-block-end: 12px;
+  inset-inline-start: 12px;
   transition: transform 0.4s ease-in;
   animation: toast-in-left 0.4s;
 }
 
+.top-center {
+  .notification {
+    margin-inline-end: auto;
+    margin-inline-start: auto;
+  }
+}
+
 .notification {
+  position: relative;
   background: #fff;
   transition: 0.3s ease;
-  position: relative;
   pointer-events: auto;
   overflow: hidden;
-  margin: 0 0 6px;
+  margin: 0;
   padding: 30px;
-  margin-bottom: 15px;
+  margin-bottom: 0;
   width: 300px;
-  max-height: 100px;
   border-radius: 3px 3px 3px 3px;
   box-shadow: 0 0 10px #999;
   color: #000;
   opacity: 0.9;
   background-position: 15px;
   background-repeat: no-repeat;
-}
 
-.top-center {
-  .notification {
-    margin-right: auto;
-    margin-left: auto;
+  &:hover {
+    box-shadow: 0 0 12px #fff;
+    opacity: 1;
+    cursor: pointer;
   }
 }
 
-.notification:hover {
-  box-shadow: 0 0 12px #fff;
-  opacity: 1;
-  cursor: pointer;
+.close-btn {
+  width: 100%;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0 20px;
+  text-align: end;
 }
 
 .notification-title {
   font-weight: 700;
   font-size: 16px;
-  text-align: left;
-  margin-top: 0;
-  margin-bottom: 6px;
-  width: 300px;
-  height: 18px;
+  text-align: start;
+  margin: 0;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .notification-message {
   margin: 0;
-  text-align: left;
-  height: 18px;
-  margin-left: -1px;
+  text-align: start;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.notification-image {
-  float: left;
-  margin-right: 15px;
 }
 
 .notification-image img {
@@ -113,9 +115,8 @@
 
 .notification-container button {
   position: relative;
-  right: -0.3em;
-  top: -0.3em;
-  float: right;
+  inset-inline-end: -0.3em;
+  inset-block-start: -0.3em;
   font-weight: 700;
   color: #fff;
   outline: none;
