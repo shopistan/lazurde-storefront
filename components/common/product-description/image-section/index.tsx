@@ -6,7 +6,7 @@ import { SwiperSlide } from "swiper/react";
 import styles from "./image-section.module.scss";
 import PopupImageView from "./popup-image-view";
 import PopupImageViewV2 from "./popup-image-view-v2";
-import { desktopScreenSize } from "lib/utils/common";
+import { checkMediaType, desktopScreenSize } from "lib/utils/common";
 import useWindowSize from "lib/utils/useWindowSize";
 
 const images = [
@@ -36,22 +36,7 @@ interface ImageSectionProps {
   selectedImageIndex?: number;
 }
 
-const checkMediaType = (media: string) => {
-  // const mediaSrc = media.url;
-  const types = new Map([
-    ["jpg", "img"],
-    ["png", "img"],
-    ["webp", "img"],
-    ["gif", "img"],
-    ["mp4", "video"],
-    ["3gp", "video"],
-  ]);
 
-  const url = new URL(media || "/");
-  const extension = url.pathname.split(".")[1];
-  // const element = document.createElement(types.get(extension))
-  return types.get(extension);
-};
 
 const ImageSection = ({ imageArray = images }): JSX.Element => {
   const [showPopup, setShowPopup] = useState(false);

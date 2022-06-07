@@ -28,6 +28,10 @@
     cursor: pointer;
     position: relative;
     background-color: #fafafa;
+
+    .product-img {
+      object-fit: cover;
+    }
   }
 
   &__wishlist-icon {
