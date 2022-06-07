@@ -39,31 +39,31 @@ const OrderDetails = ({}) => {
             after you complete a purchase.
           </div>
         )}
-        {orderData.orders.length < 1 && width < desktopScreenSize && (
+        {orderData?.orders?.length < 1 && width < desktopScreenSize && (
           <Button className={styles["start-shopping"]}>Start shopping</Button>
         )}
       </div>
-      {orderData?.orders && orderData?.orders.length > 0 ? (
+      {orderData?.orders && orderData?.orders?.length > 0 ? (
         orderData?.orders?.map((order, index) => {
           console.log("order", order);
           return (
             <div className={styles["order-section"]}>
-              {orderData.orders[index].tracking &&
-                orderData.orders[index].tracking.length > 0 &&
-                orderData.orders[index].tracking.map((track, i) => {
+              {orderData?.orders[index]?.tracking &&
+                orderData?.orders[index]?.tracking?.length > 0 &&
+                orderData?.orders[index]?.tracking?.map((track, i) => {
                   const { number } = track;
                   return (
                     <div className={styles["order-details"]}>
                       <div className={styles["order-delivery"]}>
                         <div>
                           <Label className={styles["order-sent"]}>
-                            {appState.lang == "en"
+                            {appState?.lang == "en"
                               ? "We’ve Sent It!"
                               : t("We’ve Sent It!")}
                           </Label>
                           <Label className={styles["delivery-estimate"]}>
                             {`${
-                              appState.lang == "en"
+                              appState?.lang == "en"
                                 ? "Estimated Delivery"
                                 : t("Estimated Delivery")
                             } ${ordeFormatDate(
@@ -73,7 +73,7 @@ const OrderDetails = ({}) => {
                         </div>
                         <div>
                           <Button onClick={() => {}}>{`${
-                            appState.lang == "en"
+                            appState?.lang == "en"
                               ? "Track Parcel"
                               : t("Track Parcel")
                           } ${i + 1 || number}`}</Button>
@@ -96,7 +96,7 @@ const OrderDetails = ({}) => {
                   <div className={styles["order-date"]}>
                     <Image src={"/calendar.png"} width={18} height={18} />
                     <p className={styles["order-date-text"]}>
-                      {appState.lang == "en" ? "Order Date" : t("Order Date")}:{" "}
+                      {appState?.lang == "en" ? "Order Date" : t("Order Date")}:{" "}
                       <span>
                         {updateOrderDate(orderData?.orders[index]?.createdAt)}
                       </span>
@@ -105,7 +105,7 @@ const OrderDetails = ({}) => {
                   <div className={styles["order-date"]}>
                     <Image src={"/calendar.png"} width={18} height={18} />
                     <p className={styles["order-number-text"]}>
-                      {appState.lang == "en"
+                      {appState?.lang == "en"
                         ? "Order Number"
                         : t("Order Number")}
                       : <span> {orderData?.orders[index]?.orderId}</span>
@@ -115,7 +115,7 @@ const OrderDetails = ({}) => {
                     <Image src={"/calendar.png"} width={18} height={18} />
                     <Link href={"/"}>
                       <a className={styles["order-link"]}>
-                        {appState.lang == "en"
+                        {appState?.lang == "en"
                           ? " View Digital Receipt & Warranty"
                           : t("View Digital Receipt & Warranty")}
                       </a>
@@ -123,11 +123,11 @@ const OrderDetails = ({}) => {
                   </div>
                 </div>
                 <Button className={styles["view-button"]} onClick={() => {}}>
-                  {width > 1024
-                    ? appState.lang == "en"
+                  {width > desktopScreenSize
+                    ? appState?.lang == "en"
                       ? "View Order"
                       : t("View Order")
-                    : appState.lang == "en"
+                    : appState?.lang == "en"
                     ? "View"
                     : t("View")}
                 </Button>

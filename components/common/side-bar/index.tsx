@@ -71,7 +71,7 @@ const SideBar: FC<SideBarProps> = ({
         >
           <BackArrow />
           <span>
-            {appState.lang == "en"
+            {appState?.lang == "en"
               ? "Back To My Account"
               : t("Back To My Account")}
           </span>
@@ -79,7 +79,7 @@ const SideBar: FC<SideBarProps> = ({
       ) : (
         <div className={styles["account-left"]}>
           <div>
-            {width >= 1024 && (
+            {width >= desktopScreenSize && (
               <div className={styles["account-profile"]}>
                 {barCode?.url && (
                   <Image src={barCode?.url || "/"} width={100} height={100} />
@@ -96,7 +96,7 @@ const SideBar: FC<SideBarProps> = ({
                 </Label>
               </div>
             )}
-            {width < 1024 && (
+            {width < desktopScreenSize && (
               <div className={styles["account-profile-mobile"]}>
                 <div className={styles["account-image-mobile"]}>
                   <Image
