@@ -34,7 +34,7 @@ const SizeChart = ({
               if (!Size) return null;
               return (
                 <div
-                  key={index}
+                  key={Math.random()}
                   onClick={() => {
                     setActiveSize(index);
                     onSizeChange && onSizeChange(Size);
