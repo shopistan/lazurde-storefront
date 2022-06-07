@@ -1,3 +1,4 @@
+import { CrossSmall } from "components/icons";
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
@@ -59,7 +60,11 @@ const Notification = (props: NotificationProps): JSX.Element => {
                 className={`notification toast ${position}`}
                 style={{ backgroundColor: toast?.backgroundColor }}
               >
-                <button onClick={() => deleteToast(toast?.id)}>X</button>
+                <div className="close-btn">
+                  <button onClick={() => deleteToast(toast?.id)}>
+                    <CrossSmall color="#fff" />
+                  </button>
+                </div>
                 <div>
                   <p className="notification-title">{toast?.title}</p>
                   <p className="notification-message">{toast?.description}</p>
