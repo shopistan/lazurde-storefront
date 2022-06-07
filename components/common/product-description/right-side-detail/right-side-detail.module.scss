@@ -1,9 +1,14 @@
 @import "/styles/variables.scss";
 
 .div-cart-buttons {
+  width: 343px;
   cursor: pointer;
   margin-block: 48px;
+  margin-left: auto;
+  margin-right: auto;
+
   @media (min-width: $breakPoint-desktop) {
+    width: 100%;
     margin-block: 40px;
   }
   .book-apt-btn {
