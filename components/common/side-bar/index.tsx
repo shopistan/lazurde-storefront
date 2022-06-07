@@ -69,7 +69,11 @@ const SideBar: FC<SideBarProps> = ({
           }}
         >
           <BackArrow />
-          <span>Back To My Account</span>
+          <span>
+            {appState.lang == "en"
+              ? "Back To My Account"
+              : t("Back To My Account")}
+          </span>
         </div>
       ) : (
         <div className={styles["account-left"]}>
