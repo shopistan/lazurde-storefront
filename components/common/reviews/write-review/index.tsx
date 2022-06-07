@@ -43,7 +43,7 @@ const WriteAReview = ({
               <CrossSmall />
             </div>
             <Heading element="h3" className={styles["heading"]}>
-              write a review
+              Write a Review
             </Heading>
           </div>
           <div className={styles["review-sec"]}>
