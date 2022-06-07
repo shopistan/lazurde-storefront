@@ -5,7 +5,7 @@
   flex: 1;
   background: $white-color;
   flex-direction: column;
-  padding-block-start: 32px;
+  padding-block-start: 24px;
   column-gap: 24px;
 
   .div-titles {
@@ -24,8 +24,8 @@
       color: rgba(0, 0, 0, 0.8);
       cursor: pointer;
       width: 180px;
-      margin-block-end: 8px;
-      min-height: 27px;
+      margin-block-end: 16px;
+      // min-height: 27px;
 
       .div-tick {
         width: 20px;
