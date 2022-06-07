@@ -1,10 +1,13 @@
 .order-container {
-  width: 100%;
+  @media (min-width: 1024px) {
+    width: 66%;
+  }
 }
 
 .order-section {
   background-color: white;
   padding: 24px;
+  margin-bottom: 8px;
 }
 .order-history {
   display: flex;
@@ -22,15 +25,25 @@
   line-height: 18px;
   letter-spacing: 0em;
   text-align: start;
+  margin-top: 0;
   margin-bottom: 8px !important;
 }
 
 .delivery-estimate {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
-  line-height: 17px;
+  line-height: 16px;
   letter-spacing: 0em;
   text-align: start;
+  margin: 0;
+
+  @media (min-width: 1024px) {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
 }
 
 .order-heading {
@@ -39,13 +52,24 @@
   line-height: 29px;
   letter-spacing: 0em;
   text-align: start;
-  margin-block: 10.72px 8px;
+  margin-block: 10.72px 16px;
+
+  @media (min-width: 1024px) {
+    margin-block: 10.72px 8px;
+  }
 }
 
 .order-text {
-  font-size: 15px;
+  @media (min-width: 1024px) {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+  font-size: 13px;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 16px;
   letter-spacing: 0em;
   text-align: start;
   margin-block: 0;
@@ -60,9 +84,14 @@
 
 .order-main {
   background-color: white;
-  padding-block: 43px 40px;
-  padding-inline-start: 42px;
+  padding-block: 26px 24px;
+  padding-inline-start: 27px;
   margin-bottom: 8px;
+
+  @media (min-width: 1024px) {
+    padding-block: 43px 40px;
+    padding-inline-start: 42px;
+  }
 }
 
 .order-date {
@@ -71,38 +100,74 @@
 }
 
 .order-date-text {
-  margin-inline-start: 9.5px;
-  margin-block: 0 10px;
-  font-size: 15px;
+  width: 100%;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 17px;
   letter-spacing: 0em;
   text-align: start;
+  margin-block: 0 9px;
+  margin-inline-start: 9.5px;
 
-  span {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 17px;
+  @media (min-width: 1024px) {
+    margin-block: 0 10px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
     letter-spacing: 0em;
     text-align: start;
+  }
+
+  span {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: start;
+
+    @media (min-width: 1024px) {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 17px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
   }
 }
 
 .order-number-text {
-  margin-block: 0 10px;
-  margin-inline-start: 9.5px;
-  font-size: 15px;
+  width: 100%;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 17px;
   letter-spacing: 0em;
   text-align: start;
+  margin-block: 0 9px;
+  margin-inline-start: 9.5px;
 
-  span {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 17px;
+  @media (min-width: 1024px) {
+    margin-block: 0 10px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
     letter-spacing: 0em;
     text-align: start;
+  }
+
+  span {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: start;
+
+    @media (min-width: 1024px) {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 17px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
   }
 }
 
@@ -115,4 +180,38 @@
   text-align: start;
   color: black;
   text-decoration: none;
+}
+
+.view-button {
+  width: 74px !important;
+  height: 38px !important;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  @media (min-width: 1024px) {
+    width: 138px !important;
+    height: 40px !important;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+}
+
+.no-order {
+  margin-top: 56px;
+}
+
+.start-shopping {
+  width: 200px;
+  height: 51px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
 }
