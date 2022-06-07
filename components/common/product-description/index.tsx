@@ -42,7 +42,7 @@ const ProductDescription = ({
     product?.attributes?.map((attr: any) => {
       obj[attr?.name] = attr?.value;
     });
-    return { ...prodArray, ...obj };
+    return { ...product, ...obj };
   };
 
   const getImageArray = (product: any) => {
@@ -56,7 +56,7 @@ const ProductDescription = ({
   };
 
   useEffect(() => {
-    let modifiedProdArray = destructureAttributes(prodArray);
+    let modifiedProdArray = destructureAttributes(product);
     if (modifiedProdArray && modifiedProdArray?.children.length > 0) {
       modifiedProdArray?.children?.map((variant, index) => {
         modifiedProdArray?.children?.splice(
@@ -66,9 +66,9 @@ const ProductDescription = ({
         );
       });
     }
-
+    
     setProdArray(modifiedProdArray);
-  }, []);
+  }, [product]);
 
   useEffect(() => {
     if (prodArray?.hasOwnProperty("Image URL")) {

@@ -20,7 +20,6 @@ const SizeChart = ({
   const { t } = useTranslation("common");
   const [activeSize, setActiveSize] = useState(1);
   const [sizeChartModalOpen, setSizeChartModalOpen] = useState(false);
-  console.log("prodictARray", productSizeArray);
   
   return (
     <div className={styles["sizechart-wrapper"]}>
@@ -35,7 +34,7 @@ const SizeChart = ({
               if (!Size) return null;
               return (
                 <div
-                  key={Math.random()}
+                  key={index}
                   onClick={() => {
                     setActiveSize(index);
                     onSizeChange && onSizeChange(Size);
