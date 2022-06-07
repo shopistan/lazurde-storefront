@@ -160,7 +160,16 @@
     margin-block: 0;
     margin-inline-end: 0;
     margin-inline-start: 18px;
+    color: rgba(0, 0, 0, 0.8);
   }
+}
+
+.active-state {
+  color: rgba(0, 0, 0, 1) !important;
+}
+
+.active-block {
+  border-left: 2px solid black;
 }
 
 .account-image {
