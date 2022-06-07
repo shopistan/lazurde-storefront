@@ -974,6 +974,7 @@
   "customer reviews": "آراء المستهلكين",
   "rating": "تقييم",
   "write a review": "أكتب مراجعة",
+  "Overall rating": "تقييم عام",
   "reviewtabs": [
     {
       "label": "مؤخرًا"
@@ -999,5 +1000,13 @@
   "View Digital Receipt & Warranty": "عرض الإيصال الرقمي والضمان",
   "View Order": "مشاهدة الطلب",
   "View": "رأي",
-  "Back To My Account" : "العودة إلى حسابي"
+  "Back To My Account": "العودة إلى حسابي",
+  "reviewFormData": {
+    "reviewLabel": "إعادة النظر",
+    "firstName": "الاسم الاول",
+    "lastName": "الكنية",
+    "email": "البريد الإلكتروني",
+    "phoneNumber": "هاتف محمول",
+    "submitBtnText": "مراجعة آخر"
+  }
 }
