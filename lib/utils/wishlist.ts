@@ -22,6 +22,25 @@ export const getWishList = async (authToken: any) => {
   }
 };
 
+export const addWishList = async (authToken: any, itemID: any) => {
+  try {
+    // const payload = ;
+    const response = await Axios.post(
+      `${WISHLIST}${ENDPOINTS.WISHLIST.GET_WISHLIST}`,
+      JSON.stringify({ itemId: itemID }),
+      {
+        headers: { ...HEADERS.common, Authorization: authToken },
+      }
+    );
+    return response;
+  } catch (error: unknown) {
+    console.log(
+      "Error while fecthing wishlist",
+      (error as ErrorObject)?.message
+    );
+  }
+};
+
 export const deleteWishList = async (itemID: any, authToken: any) => {
   try {
     // const payload = ;
