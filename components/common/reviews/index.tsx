@@ -23,7 +23,7 @@ const Reviews = ({
   productData = {},
 }: ReviewsProps): JSX.Element => {
   const { t } = useTranslation("common");
-  const { appState } = useContext(AppContext);
+  const { appState, callgetReviewsApi } = useContext(AppContext);
   const [reviewsData, setReviewsData] = useState<any>([]);
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [currentData, setCurrentData] = useState([]);
@@ -34,6 +34,13 @@ const Reviews = ({
     setFilterData("");
     fetchingReviews();
   }, []);
+
+  useEffect(() => {
+    if (callgetReviewsApi) {
+      setFilterData("");
+      fetchingReviews();
+    }
+  }, [callgetReviewsApi]);
 
   const fetchingReviews = async () => {
     const productId = productData && productData["itemId"];

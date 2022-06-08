@@ -25,7 +25,7 @@ const ReviewForm = ({
 }: any): JSX.Element => {
   const [fileUpload, setFileUpload] = useState<any>([{ fileArray: {} }]);
   const [errorList, setErrorList] = useState([]);
-  const { appState } = useContext(AppContext);
+  const { appState, setCallgetReviewsApi } = useContext(AppContext);
   const { t } = useTranslation("common");
   const arabicLabels: arabicLabelTypes = t(
     "reviewFormData",
@@ -101,10 +101,12 @@ const ReviewForm = ({
           icon: "/",
         };
         setErrorList([...errorList, successMsg]);
+        setCallgetReviewsApi(true);
         setTimeout(() => {
           onClose && onClose();
         }, 3000);
       } else {
+        setCallgetReviewsApi(false);
         const errorMsg = {
           id: id,
           title: "Error",

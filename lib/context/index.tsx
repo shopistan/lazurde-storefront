@@ -55,6 +55,7 @@ const ContextProvider: FC = ({ children }) => {
   );
   const [hasFilteredData, setHasFilteredData] = useState(false);
   const [priceListId, setPriceListId] = useState("100000");
+  const [callgetReviewsApi, setCallgetReviewsApi] = useState(false);
 
   return (
     <AppContext.Provider
@@ -71,6 +72,8 @@ const ContextProvider: FC = ({ children }) => {
         setHasFilteredData,
         priceListId,
         setPriceListId,
+        callgetReviewsApi,
+        setCallgetReviewsApi,
       }}
     >
       {children}
