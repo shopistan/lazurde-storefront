@@ -4,11 +4,11 @@ import HEADERS from "lib/api/headers";
 import { ErrorObject } from "lib/types/common";
 import { GET_ORDER } from "general-config";
 
-export const getOrders = async () => {
+export const getOrders = async (authToken: any) => {
   try {
     // const payload = ;
     const response = await Axios.get(`${GET_ORDER}${ENDPOINTS.OMS.GET_ORDER}`, {
-      headers: HEADERS.common,
+      headers: { ...HEADERS.common, Authorization: authToken },
     });
     return response;
   } catch (error: unknown) {

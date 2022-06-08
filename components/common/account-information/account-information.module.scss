@@ -8,7 +8,7 @@
 }
 
 .details-section {
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     display: flex;
   }
 }

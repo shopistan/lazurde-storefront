@@ -119,9 +119,9 @@ const RightSideDetail = ({
   return (
     <>
       <div className={styles["detail"]}>
-        <Label className={styles["collection-tag"]}>
+        {/* <Label className={styles["collection-tag"]}>
           {appState.lang == "en" ? `Collection` : t("pdpTag-arabic")}
-        </Label>
+        </Label> */}
         <Label className={styles["title"]}>
           {appState.lang == "en"
             ? productData && productData["Product Title"]

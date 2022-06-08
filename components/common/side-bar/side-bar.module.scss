@@ -160,12 +160,38 @@
     margin-block: 0;
     margin-inline-end: 0;
     margin-inline-start: 18px;
+    color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.active-state {
+  color: rgba(0, 0, 0, 0.8) !important;
+
+  @media (min-width: $breakPoint-desktop) {
+    color: rgba(0, 0, 0, 1) !important;
+  }
+}
+
+.active-block {
+  @media (min-width: $breakPoint-desktop) {
+    position: relative;
+    &::before {
+      content: "";
+      background-color: black;
+      position: absolute;
+      right: 0;
+      left: 0;
+      width: 2px;
+      height: 50%;
+    }
   }
 }
 
 .account-image {
   width: 20px;
   height: 20px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .firstName-desktop {

@@ -12,12 +12,6 @@ export default function AccountPage({
   brandSidebarProps,
   footerProps,
 }: PageProps) {
-  useEffect(() => {
-    const getOrder = async () => {
-      const response = await getOrders();
-    };
-    getOrder();
-  }, []);
   return (
     <>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>

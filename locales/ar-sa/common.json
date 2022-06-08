@@ -996,6 +996,18 @@
       "label": "أدنى"
     }
   ],
+  "My Orders": "طلباتي",
+  "Displaying": "العرض",
+  "Orders": "الطلب",
+  "We’ve Sent It!": "لقد أرسلناها!",
+  "Estimated Delivery": "التوصيل المتوقع",
+  "Track Parcel": "تتبع الطرود",
+  "Order Date": "تاريخ الطلب",
+  "Order Number": "رقم الطلب",
+  "View Digital Receipt & Warranty": "عرض الإيصال الرقمي والضمان",
+  "View Order": "مشاهدة الطلب",
+  "View": "رأي",
+  "Back To My Account": "العودة إلى حسابي",
   "reviewFormData": {
     "reviewLabel": "إعادة النظر",
     "firstName": "الاسم الاول",
