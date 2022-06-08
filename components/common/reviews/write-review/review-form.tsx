@@ -22,10 +22,11 @@ const ReviewForm = ({
   rating,
   productData = {},
   onClose,
+  fetchingReviews = () => {},
 }: any): JSX.Element => {
   const [fileUpload, setFileUpload] = useState<any>([{ fileArray: {} }]);
   const [errorList, setErrorList] = useState([]);
-  const { appState, setCallgetReviewsApi } = useContext(AppContext);
+  const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
   const arabicLabels: arabicLabelTypes = t(
     "reviewFormData",
@@ -101,12 +102,11 @@ const ReviewForm = ({
           icon: "/",
         };
         setErrorList([...errorList, successMsg]);
-        setCallgetReviewsApi(true);
+        fetchingReviews && fetchingReviews();
         setTimeout(() => {
           onClose && onClose();
         }, 3000);
       } else {
-        setCallgetReviewsApi(false);
         const errorMsg = {
           id: id,
           title: "Error",

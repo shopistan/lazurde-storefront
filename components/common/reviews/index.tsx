@@ -35,13 +35,6 @@ const Reviews = ({
     fetchingReviews();
   }, []);
 
-  useEffect(() => {
-    if (callgetReviewsApi) {
-      setFilterData("");
-      fetchingReviews();
-    }
-  }, [callgetReviewsApi]);
-
   const fetchingReviews = async () => {
     const productId = productData && productData["itemId"];
     const response = await getReviews(productId);
@@ -218,6 +211,7 @@ const Reviews = ({
           productData={productData}
           isOpened={modalOpen}
           onClose={onClose}
+          fetchingReviews={fetchingReviews}
         />
       )}
     </>
