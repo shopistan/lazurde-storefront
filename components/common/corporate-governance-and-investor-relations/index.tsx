@@ -180,7 +180,25 @@ const TermCondtion: FC<TermCondtionProps> = ({
             {currentObject?.moreContent &&
               currentObject?.moreContent?.length > 0 && (
                 <div className={styles["more-content-block"]}>
-                  {currentObject?.moreContent &&
+                  {currentObject?.name === "Fact Sheet" ? (
+                    <iframe
+                      id="euroland_frame_id"
+                      className="EurolandTool"
+                      style={{
+                        // background: "transparent",
+                        maxWidth: "750px",
+                        maxHeight: "none",
+                        minHeight: "0px",
+                        height: "2700px",
+                      }}
+                      src="https://tools.euroland.com/FactSheet/sa-lazurde_2021/FactSheetHtml.asp?lang=english"
+                      width="100%"
+                      height="982"
+                      frameBorder="0"
+                      scrolling="no"
+                    ></iframe>
+                  ) : (
+                    currentObject?.moreContent &&
                     currentObject?.moreContent?.length > 0 &&
                     currentObject?.moreContent?.map((obj, index) => {
                       const { heading, text } = obj;
@@ -190,7 +208,8 @@ const TermCondtion: FC<TermCondtionProps> = ({
                           {text && <p>{text}</p>}
                         </div>
                       );
-                    })}
+                    })
+                  )}
                   {currentObject?.name === "IR Home Page" ? (
                     <iframe
                       id="euroland_frame_id"
