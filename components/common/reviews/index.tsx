@@ -15,35 +15,30 @@ interface ReviewsProps {
   setTotalRating?: Function;
   totalRating?: number;
   productData?: any;
+  reviewsData?: any;
+  initialProductData?: any;
+  currentData?: any;
+  setCurrentData?: Function;
+  filterData?: any;
+  setFilterData?: Function;
+  fetchingReviews?: Function;
 }
 
 const Reviews = ({
   setTotalRating,
   totalRating,
   productData = {},
+  reviewsData = [],
+  initialProductData = [],
+  currentData = [],
+  setCurrentData,
+  filterData = [],
+  setFilterData,
+  fetchingReviews = () => {},
 }: ReviewsProps): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
-  const [reviewsData, setReviewsData] = useState<any>([]);
-  const [initialProductData, setInitialProductData] = useState<any>([]);
-  const [currentData, setCurrentData] = useState([]);
-  const [filterData, setFilterData] = useState<any>([]);
   const [modalOpen, setModalOpen] = useState(false);
-
-  useEffect(() => {
-    setFilterData("");
-    fetchingReviews();
-  }, []);
-
-  const fetchingReviews = async () => {
-    const productId = productData && productData["itemId"];
-    const response = await getReviews(productId);
-    response && response?.data && setReviewsData(response?.data?.results);
-    response &&
-      response?.data &&
-      setInitialProductData(response?.data?.results);
-    response && response?.data && setCurrentData(response?.data?.results);
-  };
 
   const onClose = () => {
     setModalOpen(false);

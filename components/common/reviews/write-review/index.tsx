@@ -19,7 +19,7 @@ const WriteAReview = ({
   isOpened = false,
   onClose,
   productData = {},
-  fetchingReviews = () => {},
+  fetchingReviews,
 }: WriteAReviewProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
