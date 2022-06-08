@@ -21,24 +21,26 @@ const ProductDetail = ({
       <div className={styles["detail-wrapper"]}>
         <div className={`${styles["column"]} ${styles["left-side"]}`}>
           <Heading element="h3" className={styles["heading"]}>
-            {appState.lang == "en" ? `Designer’s Notes` : t("Designer’s Notes")}
+            {appState?.lang == "en"
+              ? `Designer’s Notes`
+              : t("Designer’s Notes")}
           </Heading>
           <p className={styles["detail"]}>
-            {appState.lang == "en" ? productDetail : t("productDetails")}
+            {appState?.lang == "en" ? productDetail : t("productDetails")}
           </p>
         </div>
         <div className={`${styles["column"]} ${styles["right-side"]}`}>
           <Heading element="h3" className={styles["heading"]}>
-            {appState.lang == "en" ? `Product Details` : t("Product Details")}
+            {appState?.lang == "en" ? `Product Details` : t("Product Details")}
           </Heading>
           <div className={styles["detail-features"]}>
             {productData && productData?.Metal && (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "metal" : t("metal")}
+                  {appState?.lang == "en" ? "metal" : t("metal")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en"
+                  {appState?.lang == "en"
                     ? productData && productData?.Metal
                     : t("metalDetails-arabic")}
                 </Label>
@@ -50,12 +52,12 @@ const ProductDetail = ({
             productData["Diamond Carat"] ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en"
+                  {appState?.lang == "en"
                     ? "Diamond"
                     : t("diamondDetails-arabic")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en"
+                  {appState?.lang == "en"
                     ? `${
                         productData && productData?.hasOwnProperty("Diamond")
                           ? productData["Diamond"]
@@ -82,10 +84,10 @@ const ProductDetail = ({
             productData["Stone"] ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "stone" : t("stone")}
+                  {appState?.lang == "en" ? "stone" : t("stone")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en"
+                  {appState?.lang == "en"
                     ? `${
                         productData && productData?.hasOwnProperty("Stone")
                           ? productData["Stone"]
@@ -110,10 +112,10 @@ const ProductDetail = ({
             productData["Pendant Size"] > 0 ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Pendant Size" : t("Pendant Size")}
+                  {appState?.lang == "en" ? "Pendant Size" : t("Pendant Size")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en"
+                  {appState?.lang == "en"
                     ? productData && productData["Pendant Size"]
                     : t("stoneDetails-arabic")}
                 </Label>
@@ -124,10 +126,10 @@ const ProductDetail = ({
             productData["Charm Size"] > 0 ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "charm Size" : t("charm Size")}
+                  {appState?.lang == "en" ? "charm Size" : t("charm Size")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en"
+                  {appState?.lang == "en"
                     ? productData && productData["Charm Size"]
                     : t("stoneDetails-arabic")}
                 </Label>
@@ -138,10 +140,10 @@ const ProductDetail = ({
             productData["Chain Length"] > 0 ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Chain Length" : t("Chain Length")}
+                  {appState?.lang == "en" ? "Chain Length" : t("Chain Length")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en"
+                  {appState?.lang == "en"
                     ? productData && productData["Chain Length"]
                     : t("stoneDetails-arabic")}
                 </Label>
@@ -153,10 +155,10 @@ const ProductDetail = ({
             productData["Ring Size"] > 0 ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Ring Size" : t("Ring Size")}
+                  {appState?.lang == "en" ? "Ring Size" : t("Ring Size")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en"
+                  {appState?.lang == "en"
                     ? productData && productData["Ring Size"]
                     : t("stoneDetails-arabic")}
                 </Label>
@@ -167,10 +169,10 @@ const ProductDetail = ({
             productData["Earring Size"] > 0 ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Earring Size" : t("Pendant Size")}
+                  {appState?.lang == "en" ? "Earring Size" : t("Pendant Size")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en"
+                  {appState?.lang == "en"
                     ? productData && productData["Earring Size"]
                     : t("stoneDetails-arabic")}
                 </Label>
@@ -181,10 +183,10 @@ const ProductDetail = ({
             productData["Bracelet Size"] > 0 ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Bracelet Size" : t("Pendant Size")}
+                  {appState?.lang == "en" ? "Bracelet Size" : t("Pendant Size")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en"
+                  {appState?.lang == "en"
                     ? productData && productData["Bracelet Size"]
                     : t("stoneDetails-arabic")}
                 </Label>
@@ -195,10 +197,10 @@ const ProductDetail = ({
             productData["Anklet Size"] !== "None" ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Anklet Size" : t("Pendant Size")}
+                  {appState?.lang == "en" ? "Anklet Size" : t("Pendant Size")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en"
+                  {appState?.lang == "en"
                     ? productData && productData["Anklet Size"]
                     : t("stoneDetails-arabic")}
                 </Label>
@@ -209,10 +211,10 @@ const ProductDetail = ({
             productData["Collection"] ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Collection" : t("pdpTag-arabic")}
+                  {appState?.lang == "en" ? "Collection" : t("pdpTag-arabic")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang == "en"
+                  {appState?.lang == "en"
                     ? productData && productData?.Collection
                     : t("collection")}
                 </Label>
@@ -223,10 +225,10 @@ const ProductDetail = ({
             productData["Brand"] ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Brand" : t("Brand")}
+                  {appState?.lang == "en" ? "Brand" : t("Brand")}
                 </Label>
                 <Label className={styles["description"]}>
-                  {appState.lang
+                  {appState?.lang
                     ? productData && productData?.Brand
                     : t("brandDetails-arabic")}
                 </Label>
@@ -237,7 +239,7 @@ const ProductDetail = ({
             productData["Style Number"] ? (
               <div className={styles["feature-item"]}>
                 <Label className={styles["title"]}>
-                  {appState.lang == "en" ? "Style Number" : t("Brand")}
+                  {appState?.lang == "en" ? "Style Number" : t("Brand")}
                 </Label>
                 <Label className={styles["description"]}>
                   {appState?.lang == "en"

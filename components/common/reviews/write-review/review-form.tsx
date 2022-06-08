@@ -22,6 +22,7 @@ const ReviewForm = ({
   rating,
   productData = {},
   onClose,
+  fetchingReviews = () => {},
 }: any): JSX.Element => {
   const [fileUpload, setFileUpload] = useState<any>([{ fileArray: {} }]);
   const [errorList, setErrorList] = useState([]);
@@ -101,6 +102,7 @@ const ReviewForm = ({
           icon: "/",
         };
         setErrorList([...errorList, successMsg]);
+        fetchingReviews && fetchingReviews();
         setTimeout(() => {
           onClose && onClose();
         }, 3000);

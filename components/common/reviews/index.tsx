@@ -211,6 +211,7 @@ const Reviews = ({
           productData={productData}
           isOpened={modalOpen}
           onClose={onClose}
+          fetchingReviews={fetchingReviews}
         />
       )}
     </>
