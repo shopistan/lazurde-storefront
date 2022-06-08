@@ -29,6 +29,7 @@ interface RightSideDetailProps {
   discount?: string | number;
   finalPrice?: number | string;
   productData?: any;
+  fetchingReviews?: Function;
 }
 
 const RightSideDetail = ({
@@ -42,12 +43,15 @@ const RightSideDetail = ({
   discount = 0 || "",
   finalPrice = 0,
   productData = {},
+  fetchingReviews = () => {},
 }: RightSideDetailProps): JSX.Element => {
   const router = useRouter();
   const { appState } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
-  const [isStockAvailable, setIsStockAvailable] = useState(false);
+  const [isStockAvailable, setIsStockAvailable] = useState(
+    productData?.sku === "TestItemStock"
+  );
   const [quantityCounter, setQuantityCounter] = useState(1);
   const { t } = useTranslation("common");
 
@@ -206,6 +210,7 @@ const RightSideDetail = ({
           isOpened={modalOpen}
           onClose={() => setModalOpen(false)}
           productData={productData}
+          fetchingReviews={fetchingReviews}
         />
       )}
       {notifyModalOpen && (

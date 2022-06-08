@@ -13,17 +13,23 @@ interface ModalProps {
   bgBluryModal?: boolean;
   modalWidth?: string;
   modalHeight?: string;
+  divModalBody?: string;
+  divTopBar?: string;
+  divModalRight?: string;
 }
 
 const Modal = ({
   className = "",
   modalBodyClassName = "",
+  divModalBody = "",
   isOpened = false,
   children,
   onClose = () => {},
   bgBluryModal = false,
   modalWidth = "562px",
   modalHeight = "381px",
+  divTopBar = "",
+  divModalRight = ''
 }: ModalProps): JSX.Element => {
   const [openState, setOpenState] = useState(isOpened);
   const [size] = useWindowSize();
@@ -42,11 +48,11 @@ const Modal = ({
             event.stopPropagation();
           }}
         >
-          <div className={styles["modal-body"]}>
-            <div className={styles["div-top-bar"]}>
+          <div className={`${styles["modal-body"]} ${modalBodyClassName}`}>
+            <div className={`${styles["div-top-bar"]} ${divTopBar}`}>
               <div className={styles["div-left"]}></div>
               <div
-                className={styles["div-right"]}
+                className={`${styles["div-right"]} ${divModalRight}`}
                 onClick={() => {
                   setOpenState(false);
                   onClose && onClose();
@@ -55,7 +61,9 @@ const Modal = ({
                 <CrossSmall width={"12px"} height={"12px"} />
               </div>
             </div>
-            <div className={styles["div-modal-body"]}>{children}</div>
+            <div className={`${styles["div-modal-body"]} ${divModalBody}`}>
+              {children}
+            </div>
           </div>
         </div>
       ) : (

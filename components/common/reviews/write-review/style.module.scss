@@ -145,6 +145,13 @@
   }
 }
 
+.errors {
+  input,
+  textarea {
+    border: 1px solid red;
+  }
+}
+
 .field-label {
   margin: 0;
   padding-inline-start: 20px;

@@ -14,3 +14,11 @@ test("testing product feature", () => {
 
   expect(screen.getByText(testproductDetail)).toBeInTheDocument();
 });
+
+test("testing product feature arabic feature", () => {
+  render(
+    <AppContext.Provider value={{ appState: { lang: "ar" } }}>
+      <ProductDetail productDetail={testproductDetail} />
+    </AppContext.Provider>
+  );
+});

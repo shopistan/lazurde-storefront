@@ -2,6 +2,7 @@ import React from "react";
 const Star = ({ ...props }) => {
   return (
     <svg
+      key={props.key}
       width={props?.width || "18"}
       height={props?.height || "18"}
       viewBox="0 0 18 18"
