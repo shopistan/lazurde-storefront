@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React, { FC, useState, useContext, useEffect } from "react";
 import ContentBlock from "../content-block";
 import Image from "next/image";
