@@ -37,19 +37,19 @@ const ReviewForm = ({
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const SignupSchema = Yup.object().shape({
     review: Yup.string().required(
-      appState?.lang === "en" ? "Required" : "مطلوب"
+      appState?.lang === "en" ? "Enter reviews" : "مطلوب"
     ),
     firstName: Yup.string().required(
-      appState?.lang === "en" ? "Required" : "مطلوب"
+      appState?.lang === "en" ? "Enter first name" : "مطلوب"
     ),
     lastName: Yup.string().required(
-      appState?.lang === "en" ? "Required" : "مطلوب"
+      appState?.lang === "en" ? "Enter last name" : "مطلوب"
     ),
     email: Yup.string()
       .email(appState?.lang === "en" ? "Invalid email" : "بريد إلكتروني خاطئ")
-      .required(appState?.lang === "en" ? "Required" : "مطلوب"),
+      .required(appState?.lang === "en" ? "Enter valid email" : "مطلوب"),
     phoneNumber: Yup.string()
-      .required(appState?.lang === "en" ? "Required" : "مطلوب")
+      .required(appState?.lang === "en" ? "Enter phone #" : "مطلوب")
       .matches(
         phoneRegExp,
         appState?.lang === "en"
@@ -144,7 +144,11 @@ const ReviewForm = ({
             isSubmitting,
           }: any) => (
             <form onSubmit={handleSubmit}>
-              <div className={`${styles["field"]} ${styles["review-field"]}`}>
+              <div
+                className={`${styles["field"]} ${styles["review-field"]}  ${
+                  errors.review && touched.review && styles["errors"]
+                }`}
+              >
                 <Label className={styles["field-label"]}>
                   {appState?.lang === "en"
                     ? "review"
@@ -156,12 +160,16 @@ const ReviewForm = ({
                   onBlur={handleBlur}
                   value={values.review}
                 />
-                <div className={styles["error-msg"]}>
-                  {errors.review && touched.email && errors.email}
+                <div className={`${styles["error-msg"]}`}>
+                  {errors.review && touched.review && errors.review}
                 </div>
               </div>
               <div className={styles["flex"]}>
-                <div className={styles["field"]}>
+                <div
+                  className={`${styles["field"]} ${
+                    errors.firstName && touched.firstName && styles["errors"]
+                  }`}
+                >
                   <Label className={styles["field-label"]}>
                     {appState?.lang === "en"
                       ? "first name"
@@ -178,7 +186,11 @@ const ReviewForm = ({
                     {errors.firstName && touched.firstName && errors.firstName}
                   </div>
                 </div>
-                <div className={styles["field"]}>
+                <div
+                  className={`${styles["field"]} ${
+                    errors.lastName && touched.lastName && styles["errors"]
+                  }`}
+                >
                   <Label className={styles["field-label"]}>
                     {appState?.lang === "en"
                       ? "last name"
@@ -196,7 +208,11 @@ const ReviewForm = ({
                   </div>
                 </div>
               </div>
-              <div className={styles["field"]}>
+              <div
+                className={`${styles["field"]} ${
+                  errors.email && touched.email && styles["errors"]
+                }`}
+              >
                 <Label className={styles["field-label"]}>
                   {appState?.lang === "en" ? "email" : arabicLabels?.email}
                 </Label>
@@ -211,7 +227,11 @@ const ReviewForm = ({
                   {errors.email && touched.email && errors.email}
                 </div>
               </div>
-              <div className={styles["field"]}>
+              <div
+                className={`${styles["field"]} ${
+                  errors.phoneNumber && touched.phoneNumber && styles["errors"]
+                }`}
+              >
                 <Label className={styles["field-label"]}>
                   {appState?.lang === "en"
                     ? "mobile phone"
