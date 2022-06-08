@@ -74,9 +74,10 @@ html[dir="rtl"] {
     background-color: #e5e5e5;
   }
 
-  .div-modal-body {
+  &.div-feedbackBody {
+    margin-top: 41px;
     @media (min-width: 1024px) {
-      background-color: white;
+      background-color: #e5e5e5;
       width: 562px;
       margin-top: 60px;
     }
