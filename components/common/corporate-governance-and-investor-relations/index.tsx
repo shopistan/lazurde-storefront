@@ -4,7 +4,7 @@ import ContentBlock from "../content-block";
 import Image from "next/image";
 import Label from "../ui/label";
 import { ImageType } from "lib/types/common";
-import styles from "../terms-condition/term-condition.module.scss";
+import styles from "./cgir.module.scss";
 import Accordion from "components/common/ui/accordion/Accordion";
 import BackArrow from "components/icons/BackArrow";
 import { useRouter } from "next/router";
@@ -50,6 +50,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
   contentBgcolor,
   title,
 }) => {
+  console.log("cgirPages", title, cgirPages);
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
 
@@ -66,7 +67,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
   //   );
   const router = useRouter();
   const [currentObject, setCurrentObject] = useState({
-    moreContent: cgirPages[0].moreContent || [],
+    moreContent: cgirPages[0]?.moreContent || [],
     name: cgirPages[0]?.name || "",
     content: cgirPages[0]?.content || "",
     icon: {
@@ -95,20 +96,6 @@ const TermCondtion: FC<TermCondtionProps> = ({
       <Label className={styles["cgir-heading"]}>
         {appState?.lang == "en" ? title : t("termTitle")}
       </Label>
-      {/* {currentObject?.name && (
-        <div className={styles["bread-crumb_item"]}>
-          <Link href={`/help-centre`}>
-            <a>
-              {appState?.lang === "en"
-                ? `Help Centre /`
-                : "/ تائفلا عيمج فشتكاا"}
-            </a>
-          </Link>
-          <Label>
-            {appState?.lang === "en" ? currentObject?.name : " ةيسيئرلا ةحفصلا"}
-          </Label>
-        </div>
-      )} */}
       <div className={styles["cgir-section"]}>
         <div
           className={styles["cgir-left-sidebar"]}
@@ -130,18 +117,20 @@ const TermCondtion: FC<TermCondtionProps> = ({
                 <div
                   className={styles["page-block"]}
                   key={index}
-                  //   onClick={() => {
-                  //     setObjects({
-                  //       accordion: accordion,
-                  //       content:
-                  //         appState.lang == "en" ? content : _links[index].content,
-                  //       name: appState.lang == "en" ? name : _links[index].name,
-                  //       icon: {
-                  //         url: icon?.url,
-                  //         altText: icon?.altText,
-                  //       },
-                  //     });
-                  //   }}
+                  onClick={() => {
+                    setCurrentObject({
+                      moreContent: moreContent,
+                      //   content:
+                      //     appState.lang == "en" ? content : _links[index].content,
+                      //   name: appState.lang == "en" ? name : _links[index].name,
+                      content: content,
+                      name: name,
+                      icon: {
+                        url: icon?.url,
+                        altText: icon?.altText,
+                      },
+                    });
+                  }}
                 >
                   {icon?.url && (
                     <div className={styles["page-image"]}>
@@ -162,7 +151,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
             })}
         </div>
         <div className={styles["cgir-right-container"]}>
-          {/* <div
+          <div
             className={styles["back-button"]}
             style={{ backgroundColor: contentBgcolor }}
             onClick={() => {
@@ -173,9 +162,11 @@ const TermCondtion: FC<TermCondtionProps> = ({
               <BackArrow />
             </div>
             <button className={styles["back-content"]}>
-              {appState?.lang == "en" ? "Back To Help centre" : "ءيش لك قوست"}
+              {appState?.lang == "en"
+                ? "Back To L'azurde Policies"
+                : "ءيش لك قوست"}
             </button>
-          </div> */}
+          </div>
           <div
             className={styles["page-right"]}
             style={{ backgroundColor: contentBgcolor }}
@@ -183,41 +174,53 @@ const TermCondtion: FC<TermCondtionProps> = ({
             <ContentBlock key={Math.random()} content={currentObject} />
           </div>
           <div
-            className={styles["page-right"]}
+            className={styles["page-right-second"]}
             style={{ backgroundColor: contentBgcolor }}
           >
             {currentObject?.moreContent &&
               currentObject?.moreContent?.length > 0 && (
-                <div className={styles["accordion-block"]}>
-                  {currentObject?.moreContent &&
+                <div className={styles["more-content-block"]}>
+                  {currentObject?.name === "Fact Sheet" ? (
+                    <iframe
+                      id="euroland_frame_id"
+                      className="EurolandTool"
+                      style={{
+                        // background: "transparent",
+                        maxWidth: "750px",
+                        maxHeight: "none",
+                        minHeight: "0px",
+                        height: "2700px",
+                      }}
+                      src="https://tools.euroland.com/FactSheet/sa-lazurde_2021/FactSheetHtml.asp?lang=english"
+                      width="100%"
+                      height="982"
+                      frameBorder="0"
+                      scrolling="no"
+                    ></iframe>
+                  ) : (
+                    currentObject?.moreContent &&
                     currentObject?.moreContent?.length > 0 &&
                     currentObject?.moreContent?.map((obj, index) => {
                       const { heading, text } = obj;
                       return (
-                        <Accordion
-                          key={index}
-                          className={`accordion-help`}
-                          heading={
-                            appState.lang == "en" ? heading : heading
-                            //   : _accordion[index].heading
-                          }
-                          children={
-                            appState.lang == "en" ? (
-                              <p
-                                key={Math.random()}
-                                dangerouslySetInnerHTML={{
-                                  __html: text,
-                                }}
-                              ></p>
-                            ) : (
-                              text
-                              //   _accordion[index].text
-                            )
-                          }
-                          arrowDown={true}
-                        />
+                        <div key={index}>
+                          {heading && <span>{heading}</span>}
+                          {text && <p>{text}</p>}
+                        </div>
                       );
-                    })}
+                    })
+                  )}
+                  {currentObject?.name === "IR Home Page" ? (
+                    <iframe
+                      id="euroland_frame_id"
+                      className="EurolandTool"
+                      src="https://ksatools.eurolandir.com/tools/ticker/html/?companycode=sa-lazurde&amp;v=static2021&amp;lang=en-gb"
+                      width="250"
+                      height="300"
+                      frameBorder="0"
+                      scrolling="no"
+                    ></iframe>
+                  ) : null}
                 </div>
               )}
           </div>
