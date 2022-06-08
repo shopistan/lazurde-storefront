@@ -38,7 +38,7 @@
         transition: opacity 0.2s ease-in-out;
         color: $black-color;
 
-        &[data-showTick="true"] {
+        &[data-show-tick="true"] {
           opacity: 1;
         }
       }

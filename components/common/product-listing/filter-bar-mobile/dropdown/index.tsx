@@ -111,7 +111,7 @@ const DropDown = ({
                 {optionName}
                 <div
                   className={styles["div-tick"]}
-                  data-showTick={
+                  data-show-tick={
                     selectedFilters?.[filterIndex]?.selectedOptions?.[index]
                       ?.selected
                   }

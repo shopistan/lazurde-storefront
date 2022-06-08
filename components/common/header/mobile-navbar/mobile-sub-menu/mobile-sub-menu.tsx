@@ -91,7 +91,7 @@ const MobileSubMenu = ({
                             }}
                           >
                             <Link href={data?.url || "/"}>
-                              <a data-isBold={data?.isBold}>
+                              <a data-is-bold={data?.isBold}>
                                 {appState?.lang === "en"
                                   ? data?.title
                                   : categoryLinkArabic?.title}
