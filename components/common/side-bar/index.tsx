@@ -30,12 +30,12 @@ type _AccountsProps = {
 };
 
 interface SideBarProps {
-  barCode: ImageType;
-  firstName: string;
-  lastName: string;
-  reviewImage: ImageType;
-  reviewText: string;
-  details: DetailsProps[];
+  barCode?: ImageType;
+  firstName?: string;
+  lastName?: string;
+  reviewImage?: ImageType;
+  reviewText?: string;
+  details?: DetailsProps[];
   setActiveComponent?: Function;
   activeComponent?: string | boolean;
 }

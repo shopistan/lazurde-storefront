@@ -12,12 +12,14 @@ interface WriteAReviewProps {
   isOpened?: Boolean;
   onClose?: Function;
   productData?: any;
+  fetchingReviews?: Function;
 }
 
 const WriteAReview = ({
   isOpened = false,
   onClose,
   productData = {},
+  fetchingReviews = () => {},
 }: WriteAReviewProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
@@ -68,6 +70,7 @@ const WriteAReview = ({
               rating={ratingIndex + 1}
               productData={productData}
               onClose={onClose}
+              fetchingReviews={fetchingReviews}
             />
           </div>
         </div>
