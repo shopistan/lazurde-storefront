@@ -22,7 +22,7 @@ const ReviewForm = ({
   rating,
   productData = {},
   onClose,
-  fetchingReviews = () => {},
+  fetchingReviews,
 }: any): JSX.Element => {
   const [fileUpload, setFileUpload] = useState<any>([{ fileArray: {} }]);
   const [errorList, setErrorList] = useState([]);

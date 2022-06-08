@@ -13,6 +13,7 @@ const renderComponent = () => {
         totalRating={totalRating}
         setTotalRating={jest.fn()}
         productData={singleProductData}
+        fetchingReviews={jest.fn()}
       />
     </ContextProvider>
   );
@@ -25,6 +26,7 @@ const renderComponentAR = () => {
         totalRating={totalRating}
         setTotalRating={jest.fn()}
         productData={singleProductData}
+        fetchingReviews={jest.fn()}
       />
     </AppContext.Provider>
   );
