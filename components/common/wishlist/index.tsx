@@ -16,7 +16,7 @@ const WishList: FC<WishListProps> = ({
   useEffect(() => {
     const initializeWislist = async () => {
       const wishlistArray = await getwishlist();
-      const isSelected = wishlistArray.items.find((item: string) => item === itemID);
+      const isSelected = wishlistArray.data.items.find((item: string) => item === itemID);
       
       isSelected && setActive(true)
     };
