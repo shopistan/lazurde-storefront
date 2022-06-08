@@ -123,9 +123,18 @@ const RightSideDetail = ({
   return (
     <>
       <div className={styles["detail"]}>
-        {/* <Label className={styles["collection-tag"]}>
-          {appState.lang == "en" ? `Collection` : t("pdpTag-arabic")}
-        </Label> */}
+        <div className={styles["collection-and-outofstock"]}>
+          <Label className={styles["collection-tag"]}>
+            <>
+              {/* {appState?.lang == "en" ? `Collection` : t("pdpTag-arabic")} */}
+            </>
+          </Label>
+          {isStockAvailable ? (
+            <Label className={styles["outofstock-tag"]}>
+              {appState?.lang == "en" ? `Out of Stock` : t("pdpTag-arabic")}
+            </Label>
+          ) : null}
+        </div>
         <Label className={styles["title"]}>
           {appState.lang == "en"
             ? productData && productData["Product Title"]
