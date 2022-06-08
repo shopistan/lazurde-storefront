@@ -5,6 +5,9 @@
     position: fixed;
     top: 0;
     bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: white;
     height: 100vh;
     width: 100vw;
@@ -48,6 +51,7 @@
 
     @media (min-width: $breakPoint-desktop) {
       width: 40.374%;
+      padding-top: 38px;
       height: 622px;
       padding-inline-end: 20px;
       padding-inline-start: 40px;
@@ -83,7 +87,7 @@
 }
 
 .close-btn {
-  margin-bottom: 8px;
+  margin-bottom: 5.03px;
   cursor: pointer;
   text-align: end;
 }
@@ -95,7 +99,7 @@
   line-height: 29px;
   letter-spacing: 0em;
   text-align: center;
-  text-transform: capitalize;
+  // text-transform: capitalize;
   color: $black-color;
 }
 
@@ -133,6 +137,11 @@
     outline: 0;
     border-radius: 20px;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    letter-spacing: 0em;
+    text-align: start;
   }
 }
 
@@ -154,6 +163,7 @@
   textarea {
     height: 141px;
     border-radius: 8px;
+    color: rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -178,8 +188,12 @@
 
 .submit-btn {
   position: sticky;
-  bottom: 0;
+  bottom: 15px;
   text-align: end;
+
+  @media (min-width: $breakPoint-desktop) {
+    bottom: 40px;
+  }
 
   button {
     cursor: pointer;

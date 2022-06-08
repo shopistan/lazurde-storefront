@@ -11,7 +11,7 @@ import { ImageType } from "lib/types/common";
 import { AppContext } from "lib/context";
 import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
-import { desktopScreenSize } from "lib/utils/common";
+import { checkMediaType, desktopScreenSize } from "lib/utils/common";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import { fetchProductPriceByItemId } from "lib/utils/product";
@@ -58,7 +58,7 @@ const ProductCard = ({
   const handleAddToCart = async (event: any) => {
     event.stopPropagation();
     const payload: ATCPayload = {
-      cartId: '98b0ed93-aaf1-4001-b540-b61796c4663d',
+      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
       items: [
         {
           sku: sku,
@@ -75,16 +75,18 @@ const ProductCard = ({
         },
       ],
     };
-    const res = await addProductToCart(payload);
+    const response = await addProductToCart(payload);
+    if (response?.hasError) {
+      alert("error while adding product");
+    } else {
+      router?.push("/cart");
+    }
   };
 
   return (
     <div
       className={`show-arrow-on-hover ${styles["product-card__wrapper"]} ${wrapperClassName}`}
       key={index}
-      onClick={() => {
-        router.push(`/p/${sku}`);
-      }}
     >
       <div
         className={styles["product-card__img-wrapper"]}
@@ -114,17 +116,43 @@ const ProductCard = ({
             {productCardImages &&
               productCardImages.length > 0 &&
               productCardImages?.map((data, index) => {
+                const imageUrl = data?.url;
                 return (
                   <SwiperSlide key={index}>
-                    {data?.url && (
-                      <Image
-                        src={data?.url}
-                        alt={data?.altText}
-                        width={width > desktopScreenSize ? 314 : 167.5}
-                        height={width > desktopScreenSize ? 322 : 190.67}
-                        layout="responsive"
-                      />
-                    )}
+                    {imageUrl &&
+                      (checkMediaType(imageUrl) !== "img" ? (
+                        <>
+                          <video
+                            autoPlay={false}
+                            muted={true}
+                            loop={true}
+                            playsInline={true}
+                            height="100%"
+                            width="100%"
+                            controls={false}
+                            onClick={() => {
+                              router.push(`/p/${sku}`);
+                            }}
+                          >
+                            <source
+                              src={`${imageUrl}#t=0.1`}
+                              type="video/mp4"
+                            />
+                          </video>
+                        </>
+                      ) : (
+                        <Image
+                          src={data?.url}
+                          alt={data?.altText}
+                          width={width > desktopScreenSize ? 314 : 167.5}
+                          height={width > desktopScreenSize ? 322 : 190.67}
+                          layout="responsive"
+                          className={styles["product-img"]}
+                          onClick={() => {
+                            router.push(`/p/${sku}`);
+                          }}
+                        ></Image>
+                      ))}
                   </SwiperSlide>
                 );
               })}
@@ -166,33 +194,39 @@ const ProductCard = ({
         )}
       </div>
 
-      <Label className={styles["product-card__title"]}>{title}</Label>
-      <div className={styles["product-card__price-wrapper"]}>
-        {basePrice ? (
-          <Label
-            className={`${styles["product-card__price__base-price"]} ${
-              discount ? styles["line-through"] : ""
-            }`}
-          >
-            {`$${basePrice && basePrice.toLocaleString()}`}
-          </Label>
-        ) : (
-          ""
-        )}
-        {discount ? (
-          <Label className={styles["product-card__price-discount"]}>
-            {discount}
-          </Label>
-        ) : (
-          ""
-        )}
-        {discountAmount ? (
-          <Label className={styles["product-card__price__discounted-price"]}>
-            {`$${discountAmount && discountAmount.toLocaleString()}`}
-          </Label>
-        ) : (
-          ""
-        )}
+      <div
+        onClick={() => {
+          router.push(`/p/${sku}`);
+        }}
+      >
+        <Label className={styles["product-card__title"]}>{title}</Label>
+        <div className={styles["product-card__price-wrapper"]}>
+          {basePrice ? (
+            <Label
+              className={`${styles["product-card__price__base-price"]} ${
+                discount ? styles["line-through"] : ""
+              }`}
+            >
+              {`$${basePrice && basePrice.toLocaleString()}`}
+            </Label>
+          ) : (
+            ""
+          )}
+          {discount ? (
+            <Label className={styles["product-card__price-discount"]}>
+              {discount}
+            </Label>
+          ) : (
+            ""
+          )}
+          {discountAmount ? (
+            <Label className={styles["product-card__price__discounted-price"]}>
+              {`$${discountAmount && discountAmount.toLocaleString()}`}
+            </Label>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </div>
   );

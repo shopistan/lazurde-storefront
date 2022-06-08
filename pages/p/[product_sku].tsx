@@ -5,7 +5,7 @@ import {
   fetchProductPriceByItemId,
 } from "lib/utils/product";
 import { GetStaticPaths, GetStaticProps } from "next";
-import React, { FC, useEffect } from "react";
+import React, { FC, useState, useEffect, useContext } from "react";
 import { ProductType } from "lib/types/product";
 import { fetchGlobalComponents } from "lib/xm";
 import Footer from "components/common/footer";
@@ -13,6 +13,7 @@ import AppContentWrapper from "components/common/app-content-wrapper";
 import Header from "components/common/header";
 import Head from "next/head";
 import ProductDescription from "components/common/product-description";
+import { AppContext } from "lib/context";
 
 interface ProductDescriptionPageProps extends PageProps {
   product: ProductType;
@@ -20,7 +21,7 @@ interface ProductDescriptionPageProps extends PageProps {
 
 const LazurdeProductDescriptionPage: FC<ProductDescriptionPageProps> = ({
   product,
-  headerProps,
+  headerArray,
   footerProps,
   brandSidebarProps,
 }) => {
@@ -34,6 +35,26 @@ const LazurdeProductDescriptionPage: FC<ProductDescriptionPageProps> = ({
   //   };
   //   f();
   // }, []);
+  const { appState } = useContext(AppContext);
+  const [headerData, setHeaderData] = useState<any>({});
+
+  const getCurrentBrandId = () => {
+    if (appState?.brand === `L'azurde`) return "lazurdeHeader";
+    else if (appState?.brand === `Miss L'`) return "missLHeader";
+    else if (appState?.brand === "Kenaz") return "kenazHeader";
+    else return "lazurdeHeader";
+  };
+
+  useEffect(() => {
+    const currentHeaderProps: any[] =
+      headerArray &&
+      headerArray?.length > 0 &&
+      headerArray?.filter((header: { params: any }) => {
+        return header.params.headerId === getCurrentBrandId();
+      });
+    setHeaderData(currentHeaderProps?.[0].params);
+  }, []);
+
   return (
     <>
       <Head>
@@ -42,13 +63,18 @@ const LazurdeProductDescriptionPage: FC<ProductDescriptionPageProps> = ({
           L&apos;AZURDE
         </title>
       </Head>
-      <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
-      <div>
-        <ProductDescription product={product}></ProductDescription>
-      </div>
-      {/* <AppContentWrapper>
-      </AppContentWrapper> */}
-      <Footer {...footerProps}></Footer>
+      {headerData && Object.keys(headerData).length > 0 && (
+        <Header {...headerData} brandSidebarProps={brandSidebarProps}></Header>
+      )}
+      <AppContentWrapper>
+        <div>
+          <ProductDescription product={product}></ProductDescription>
+        </div>
+        {/*-----FIX FOR DUPLICATE FOOTER/MISSING FOOTER STYLING------ */}
+        <div>
+          <Footer {...footerProps}></Footer>
+        </div>
+      </AppContentWrapper>
     </>
   );
 };
@@ -80,13 +106,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { product_sku = "" } = context.params;
   const product: ProductType = await fetchProductBySku(product_sku as string);
   const globalComponents = (await fetchGlobalComponents()) || [];
-  const headerProps =
-    (
-      globalComponents.find(
-        (item: XMComponent) =>
-          item.id === "Header" && item.params.headerId === "lazurdeHeader"
-      ) || {}
-    ).params || {};
+  const headerArray =
+    globalComponents.filter((item: XMComponent) => item.id === "Header") || {};
   const footerProps =
     (globalComponents.find((item: XMComponent) => item.id === "Footer") || {})
       .params || {};
@@ -98,7 +119,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     ).params || {};
 
   return {
-    props: { product, headerProps, footerProps, brandSidebarProps },
+    props: { product, headerArray, footerProps, brandSidebarProps },
     revalidate: 5,
   };
 };

@@ -16,6 +16,7 @@ import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
 import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
+import { useRouter } from "next/router";
 
 interface RightSideDetailProps {
   onSizeChange?: Function;
@@ -42,6 +43,7 @@ const RightSideDetail = ({
   finalPrice = 0,
   productData = {},
 }: RightSideDetailProps): JSX.Element => {
+  const router = useRouter();
   const { appState } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
@@ -106,15 +108,20 @@ const RightSideDetail = ({
         },
       ],
     };
-    const res = await addProductToCart(payload);
+    const response = await addProductToCart(payload);
+    if (response?.hasError) {
+      alert("error while adding product");
+    } else {
+      router?.push("/cart");
+    }
   };
 
   return (
     <>
       <div className={styles["detail"]}>
-        <Label className={styles["collection-tag"]}>
+        {/* <Label className={styles["collection-tag"]}>
           {appState.lang == "en" ? `Collection` : t("pdpTag-arabic")}
-        </Label>
+        </Label> */}
         <Label className={styles["title"]}>
           {appState.lang == "en"
             ? productData && productData["Product Title"]

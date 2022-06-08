@@ -1,0 +1,159 @@
+.notification-container {
+  font-size: 14px;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 999999;
+}
+
+.top-center {
+  inset-block-start: 20px;
+  inset-inline-end: 0;
+  inset-block-end: auto;
+  inset-inline-start: 0;
+  transition: transform 0.4s ease-in-out;
+  animation: toast-in-top 0.4s;
+}
+
+.top-right {
+  inset-block-start: 12px;
+  inset-inline-end: 12px;
+  transition: transform 0.4s ease-in-out;
+  animation: toast-in-right 0.4s;
+}
+
+.bottom-right {
+  inset-block-end: 12px;
+  inset-inline-end: 12px;
+  transition: transform 0.4s ease-in-out;
+  animation: toast-in-right 0.4s;
+}
+
+.top-left {
+  inset-block-start: 12px;
+  inset-inline-start: 12px;
+  transition: transform 0.4s ease-in;
+  animation: toast-in-left 0.4s;
+}
+
+.bottom-left {
+  inset-block-end: 12px;
+  inset-inline-start: 12px;
+  transition: transform 0.4s ease-in;
+  animation: toast-in-left 0.4s;
+}
+
+.top-center {
+  .notification {
+    margin-inline-end: auto;
+    margin-inline-start: auto;
+  }
+}
+
+.notification {
+  position: relative;
+  background: #fff;
+  transition: 0.3s ease;
+  pointer-events: auto;
+  overflow: hidden;
+  margin: 0;
+  padding: 30px;
+  margin-bottom: 0;
+  width: 300px;
+  border-radius: 3px 3px 3px 3px;
+  box-shadow: 0 0 10px #999;
+  color: #000;
+  opacity: 0.9;
+  background-position: 15px;
+  background-repeat: no-repeat;
+
+  &:hover {
+    box-shadow: 0 0 12px #fff;
+    opacity: 1;
+    cursor: pointer;
+  }
+}
+
+.close-btn {
+  width: 100%;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0 20px;
+  text-align: end;
+}
+
+.notification-title {
+  font-weight: 700;
+  font-size: 16px;
+  text-align: start;
+  margin: 0;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.notification-message {
+  margin: 0;
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notification-image img {
+  width: 30px;
+  height: 30px;
+}
+
+.toast {
+  width: 365px;
+  min-height: 72px;
+  color: #fff;
+  padding: 15px 15px 10px 10px;
+}
+
+.notification-container button {
+  position: relative;
+  inset-inline-end: -0.3em;
+  inset-block-start: -0.3em;
+  font-weight: 700;
+  color: #fff;
+  outline: none;
+  border: none;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.8;
+  line-height: 1;
+  font-size: 16px;
+  padding: 0;
+  cursor: pointer;
+  background: 0 0;
+  border: 0;
+}
+
+@keyframes toast-in-top {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./style.module.scss";
 import { CrossSmall } from "components/icons";
 import Heading from "components/common/ui/heading";
 import Label from "components/common/ui/label";
 import StarRating from "components/common/ui/star-ratings";
 import ReviewForm from "./review-form";
+import { AppContext } from "lib/context";
+import useTranslation from "next-translate/useTranslation";
 
 interface WriteAReviewProps {
   isOpened?: Boolean;
@@ -17,6 +19,8 @@ const WriteAReview = ({
   onClose,
   productData = {},
 }: WriteAReviewProps): JSX.Element => {
+  const { appState } = useContext(AppContext);
+  const { t } = useTranslation("common");
   const [ratingIndex, setRatingIndex] = useState(-1);
 
   return (
@@ -43,11 +47,13 @@ const WriteAReview = ({
               <CrossSmall />
             </div>
             <Heading element="h3" className={styles["heading"]}>
-              write a review
+              {appState.lang == "en" ? "Write a Review" : t("write a review")}
             </Heading>
           </div>
           <div className={styles["review-sec"]}>
-            <Label className={styles["rating-label"]}>Overall rating</Label>
+            <Label className={styles["rating-label"]}>
+              {appState?.lang === "en" ? "Overall rating" : t("Overall rating")}
+            </Label>
 
             <StarRating
               rating={ratingIndex + 1}
@@ -58,7 +64,11 @@ const WriteAReview = ({
                 setRatingIndex(rate);
               }}
             />
-            <ReviewForm rating={ratingIndex + 1} productData={productData} />
+            <ReviewForm
+              rating={ratingIndex + 1}
+              productData={productData}
+              onClose={onClose}
+            />
           </div>
         </div>
       </div>

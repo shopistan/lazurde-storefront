@@ -40,7 +40,7 @@
     height: 100%;
     position: relative;
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.02);
+    // background-color: rgba(0, 0, 0, 0.02);
     aspect-ratio: 1 / 1;
 
     @media (min-width: $breakPoint-desktop) {
@@ -80,6 +80,7 @@
 
       & > div {
         position: relative;
+        background: #fff;
         width: 74px;
         height: 68px;
         border: 1px solid rgba(0, 0, 0, 0.2);

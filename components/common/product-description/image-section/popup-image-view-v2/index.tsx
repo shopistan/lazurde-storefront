@@ -6,8 +6,7 @@ import styles from "./popup-image-view-v2.module.scss";
 import Slider from "components/common/ui/slider/slider";
 import { SwiperSlide } from "swiper/react";
 import useWindowSize from "lib/utils/useWindowSize";
-import { desktopScreenSize } from "lib/utils/common";
-
+import { checkMediaType, desktopScreenSize } from "lib/utils/common";
 interface PopupImageViewProps {
   closePopup: Function;
   imageArray: { url: string; altText: string }[];
@@ -15,23 +14,6 @@ interface PopupImageViewProps {
   selectedImageIndex: number;
   imageSize: { width: number; height: number };
 }
-
-const checkMediaType = (media: string) => {
-  // const mediaSrc = media.url;
-  const types = new Map([
-    ["jpg", "img"],
-    ["png", "img"],
-    ["webp", "img"],
-    ["gif", "img"],
-    ["mp4", "video"],
-    ["3gp", "video"],
-  ]);
-
-  const url = new URL(media || "/");
-  const extension = url.pathname.split(".")[1];
-  // const element = document.createElement(types.get(extension))
-  return types.get(extension);
-};
 
 const PopupImageViewV2 = ({
   closePopup,

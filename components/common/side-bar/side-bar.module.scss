@@ -119,6 +119,28 @@
   }
 }
 
+.account-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding-block: 16.5px;
+  padding-inline-start: 21px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  text-align: start;
+
+  span {
+    margin-inline-start: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: start;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
 .account-detail {
   cursor: pointer;
   display: flex;
@@ -138,7 +160,16 @@
     margin-block: 0;
     margin-inline-end: 0;
     margin-inline-start: 18px;
+    color: rgba(0, 0, 0, 0.8);
   }
+}
+
+.active-state {
+  color: rgba(0, 0, 0, 1) !important;
+}
+
+.active-block {
+  border-left: 2px solid black;
 }
 
 .account-image {
