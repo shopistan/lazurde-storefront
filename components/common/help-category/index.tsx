@@ -209,11 +209,13 @@ const HelpCategory: FC<HelpCategoryProps> = ({
             })}
         </div>
       </div>
-      <FeedbackPopUp
-        heading="Send Feedback"
-        open={modalOpen}
-        onClose={onclose}
-      />
+      {modalOpen && (
+        <FeedbackPopUp
+          heading="Send Feedback"
+          open={modalOpen}
+          onClose={onclose}
+        />
+      )}
     </>
   );
 };

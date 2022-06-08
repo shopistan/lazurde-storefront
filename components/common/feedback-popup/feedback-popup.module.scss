@@ -142,3 +142,18 @@
     }
   }
 }
+
+.error-msg {
+  width: 100%;
+  display: block;
+  margin-block-start: 4px;
+  padding-inline-start: 20px;
+  color: red;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15.6px;
+}
+
+.errors {
+  border: 1px solid red;
+}
