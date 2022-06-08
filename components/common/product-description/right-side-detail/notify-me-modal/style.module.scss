@@ -1,7 +1,7 @@
 @import "/styles/variables.scss";
 
 .notifyme-modal {
-  @media (max-width: 1023px) {
+  @media (max-width: $breakPoint-mobile) {
     padding: 0;
 
     .notifyme-modal-content {
