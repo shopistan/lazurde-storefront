@@ -13,7 +13,7 @@ export const getWishList = async (authToken: any) => {
         headers: { ...HEADERS.common, Authorization: authToken },
       }
     );
-    return response.data;
+    return response;
   } catch (error: unknown) {
     console.log(
       "Error while fecthing wishlist",
