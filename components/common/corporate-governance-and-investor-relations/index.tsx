@@ -4,7 +4,7 @@ import ContentBlock from "../content-block";
 import Image from "next/image";
 import Label from "../ui/label";
 import { ImageType } from "lib/types/common";
-import styles from "./term-condition.module.scss";
+import styles from "../terms-condition/term-condition.module.scss";
 import Accordion from "components/common/ui/accordion/Accordion";
 import BackArrow from "components/icons/BackArrow";
 import { useRouter } from "next/router";
