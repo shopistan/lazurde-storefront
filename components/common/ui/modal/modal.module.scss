@@ -66,7 +66,7 @@ html[dir="rtl"] {
 }
 
 .feedback-modal {
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     display: block;
     padding-block-start: 100px;
     padding-block-end: 178px;
@@ -76,7 +76,7 @@ html[dir="rtl"] {
 
   &.div-feedbackBody {
     margin-top: 41px;
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       background-color: #e5e5e5;
       width: 562px;
       margin-top: 60px;

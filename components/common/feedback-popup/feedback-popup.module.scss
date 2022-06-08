@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .heading {
   //styleName: Web/Header/H3 - Medium 24;
   font-family: Roboto;
@@ -8,7 +10,7 @@
   text-align: left;
   margin-top: 0;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     font-size: 24px;
     font-weight: 500;
     line-height: 29px;
@@ -26,7 +28,7 @@
   text-align: start;
   color: rgba(0, 0, 0, 0.6);
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     font-size: 12px;
     font-weight: 400;
     line-height: 16px;
@@ -63,7 +65,7 @@
   width: 200px !important;
   height: 51px !important;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     float: right;
     margin-top: 74px;
     margin-bottom: 40px;
@@ -75,7 +77,7 @@
   padding-block-start: 40px;
   padding-inline: 24px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding-block-start: 60px;
     padding-inline: 40px;
   }
@@ -84,7 +86,7 @@
 .cross-icon {
   display: none;
 
-  @media (min-width: 1023px) {
+  @media (min-width: $breakPoint-desktop) {
     display: block;
     position: absolute;
     right: 38px;
@@ -106,7 +108,7 @@
 }
 
 .feedback-modal {
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     display: block;
     padding-block-start: 100px;
     padding-block-end: 178px;
@@ -128,13 +130,13 @@
     padding-top: 26px;
     padding-inline-end: 25px;
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       display: none;
     }
   }
   .div-feedbackBody {
     margin-top: 41px;
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       width: 562px;
       margin-top: 0px;
     }
