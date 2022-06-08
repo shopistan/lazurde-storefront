@@ -87,8 +87,6 @@ const TermCondtion: FC<TermCondtionProps> = ({
     });
   }, [appState.lang]);
 
-  console.log("object", objects);
-
   return (
     <div className={styles["term-comtainer"]}>
       <Label className={styles["term-heading"]}>

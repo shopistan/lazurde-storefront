@@ -42,8 +42,8 @@
     justify-self: flex-end;
   }
 
-  &[data-headerId='missLHeader'],
-  &[data-headerId='kenazHeader'] {
+  &[data-header-id='missLHeader'],
+  &[data-header-id='kenazHeader'] {
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 57px 57px;
     padding-inline: 0;

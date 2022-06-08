@@ -137,7 +137,7 @@ const Pagination = ({
       >
         <div className={styles["div-left-arrow"]}>
           <button
-            disabled={currentPage === 1}
+            data-disabled={currentPage === 1}
             onClick={() => pageDown(onPageDown)}
           >
             <ArrowLeft fillOpacity={currentPage === 1 ? "0.4" : "1"} />
@@ -150,7 +150,7 @@ const Pagination = ({
         </div>
         <div className={styles["div-right-arrow"]}>
           <button
-            disabled={currentPage === totalPages}
+            data-disabled={currentPage === totalPages}
             onClick={() => pageUp(onPageUp)}
           >
             <ArrowRight
