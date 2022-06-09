@@ -14,7 +14,7 @@ const TamaraModal = () => {
     <>
       {renderScript && (
         <>
-          <div
+          {/* <div
             className="tamara-product-widget pdp-tamara"
             data-lang={appState?.lang}
             data-price="250"
@@ -37,7 +37,7 @@ const TamaraModal = () => {
               window.TamaraProductWidget.init({ lang: 'en', })
               window.TamaraProductWidget.render()
             }`}
-          </Script>
+          </Script> */}
         </>
       )}
     </>

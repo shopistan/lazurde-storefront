@@ -14,7 +14,7 @@ const TabbyModal = () => {
     <>
       {renderScript && (
         <>
-          <div id="TabbyPromo"></div>
+          {/* <div id="TabbyPromo"></div>
 
           <Script
             id={Math.random()?.toString()}
@@ -30,7 +30,7 @@ const TabbyModal = () => {
             source: 'product',
             publicKey: 'pk_test_427f73ce-ebb9-4609-9c83-c12088518f50'
           });`}
-          </Script>
+          </Script> */}
         </>
       )}
     </>

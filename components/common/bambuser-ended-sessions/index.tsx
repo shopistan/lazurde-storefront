@@ -11,7 +11,7 @@ const BambuserEndedSessions = ({
   return (
     <>
      
-     <div
+     {/* <div
         data-bambuser-liveshopping-widget="channel"
         data-channel-id={channelId}
         data-channel-locale=""
@@ -26,7 +26,7 @@ const BambuserEndedSessions = ({
             ss.parentNode.insertBefore(s, ss);
           })(document, 'script', "bambuser-liveshopping-widget");
         `}
-      </Script>
+      </Script> */}
 
     </>
   );

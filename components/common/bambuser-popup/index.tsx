@@ -27,7 +27,7 @@ const BambuserPopup = ({
         )}
       </div>
 
-      <Script id={scriptId}>
+      {/* <Script id={scriptId}>
         {`   (function() {
             if (!window.initBambuserLiveShopping){
               window.initBambuserLiveShopping = function(item) { window.initBambuserLiveShopping.queue.push(item) }; window.initBambuserLiveShopping.queue = [];
@@ -42,7 +42,7 @@ const BambuserPopup = ({
               type: "overlay",
             });
           })();`}
-      </Script>
+      </Script> */}
     </>
   );
 };
