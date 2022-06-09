@@ -203,7 +203,7 @@ const RightSideDetail = ({
             ></Button>
           )}
         </div>
-        <Button
+        {/* <Button
           className={styles["book-apt-btn"]}
           buttonSize={"fill"}
           buttonText={
@@ -212,7 +212,7 @@ const RightSideDetail = ({
               : t("appointmentButton-arabic")
           }
           buttonStyle="white"
-        ></Button>
+        ></Button> */}
       </div>
       <SubDetail
         isStockAvailable={isStockAvailable}
