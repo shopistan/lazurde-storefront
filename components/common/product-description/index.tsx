@@ -30,6 +30,7 @@ const ProductDescription = ({
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [currentData, setCurrentData] = useState([]);
   const [filterData, setFilterData] = useState<any>([]);
+  const [isRatingError, setIsRatingError] = useState("");
 
   useEffect(() => {
     const payload = {
@@ -144,6 +145,8 @@ const ProductDescription = ({
               onColorChange={onColorChange}
               totalRating={totalRating}
               fetchingReviews={fetchingReviews}
+              setIsRatingError={setIsRatingError}
+              isRatingError={isRatingError}
               currency={
                 productDescriptionData?.priceData[0]?.offers?.price?.currency
               }
@@ -177,6 +180,8 @@ const ProductDescription = ({
           filterData={filterData}
           setFilterData={setFilterData}
           fetchingReviews={fetchingReviews}
+          setIsRatingError={setIsRatingError}
+          isRatingError={isRatingError}
         />
       </div>
     </>

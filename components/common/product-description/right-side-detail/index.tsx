@@ -30,6 +30,8 @@ interface RightSideDetailProps {
   finalPrice?: number | string;
   productData?: any;
   fetchingReviews?: Function;
+  setIsRatingError?: Function;
+  isRatingError?: string;
 }
 
 const RightSideDetail = ({
@@ -44,6 +46,8 @@ const RightSideDetail = ({
   finalPrice = 0,
   productData = {},
   fetchingReviews = () => {},
+  setIsRatingError,
+  isRatingError,
 }: RightSideDetailProps): JSX.Element => {
   const router = useRouter();
   const { appState } = useContext(AppContext);
@@ -220,6 +224,8 @@ const RightSideDetail = ({
           onClose={() => setModalOpen(false)}
           productData={productData}
           fetchingReviews={fetchingReviews}
+          setIsRatingError={setIsRatingError}
+          isRatingError={isRatingError}
         />
       )}
       {notifyModalOpen && (

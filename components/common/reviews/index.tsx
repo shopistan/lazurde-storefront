@@ -22,6 +22,8 @@ interface ReviewsProps {
   filterData?: any;
   setFilterData?: Function;
   fetchingReviews?: Function;
+  setIsRatingError?: Function;
+  isRatingError?: string;
 }
 
 const Reviews = ({
@@ -35,6 +37,8 @@ const Reviews = ({
   filterData = [],
   setFilterData,
   fetchingReviews = () => {},
+  setIsRatingError,
+  isRatingError,
 }: ReviewsProps): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
@@ -207,6 +211,8 @@ const Reviews = ({
           isOpened={modalOpen}
           onClose={onClose}
           fetchingReviews={fetchingReviews}
+          setIsRatingError={setIsRatingError}
+          isRatingError={isRatingError}
         />
       )}
     </>
