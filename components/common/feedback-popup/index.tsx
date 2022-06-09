@@ -82,6 +82,9 @@ const FeedbackPopUp: FC<FeedbackPopUpProps> = ({
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               // alert(JSON.stringify(values, null, 2));
+              if (SignupSchema) {
+                onClose();
+              }
               setSubmitting(false);
             }, 400);
           }}
@@ -196,19 +199,7 @@ const FeedbackPopUp: FC<FeedbackPopUpProps> = ({
                 </div>
               </div>
               <Button
-                onClick={() => {
-                  if (
-                    errors.firstName &&
-                    errors.lastName &&
-                    errors.email &&
-                    errors.phoneNumber &&
-                    errors.feedback
-                  ) {
-                    console.log("error");
-                  } else {
-                    onClose();
-                  }
-                }}
+                onClick={() => {}}
                 className={styles["button"]}
                 type="submit"
               >
