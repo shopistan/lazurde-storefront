@@ -60,8 +60,10 @@
   padding-inline: 20px;
   padding-block: 11px;
   min-height: 182px;
+  max-height: 182px;
 
   @media (min-width: $breakPoint-desktop) {
+    max-height: 40px;
     min-height: 40px;
   }
 }
