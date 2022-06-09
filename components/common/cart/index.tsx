@@ -17,6 +17,7 @@ import {
 import { AppContext } from "lib/context";
 import paypalLogo from "../../../public/paypal-logo.png";
 import useTranslation from "next-translate/useTranslation";
+import Link from "next/link";
 
 interface CartProps {}
 const Cart = ({}: CartProps): JSX.Element => {
@@ -169,8 +170,15 @@ const Cart = ({}: CartProps): JSX.Element => {
                 </span>
                 <span className={styles["para"]}>
                   {appState?.lang === "en"
-                    ? "Become a L’azurde member for fast and free shipping. Join Us or Sign In"
+                    ? `Become a L’azurde member for fast and free shipping. `
                     : t("becomeMember")}
+                  <Link href="#">
+                    {appState?.lang === "en" ? "Join Us" : t("signUpBtnText")}
+                  </Link>{" "}
+                  {appState?.lang === "en" ? "or" : "أو"}
+                  <Link href="#">
+                    {appState?.lang === "en" ? "Sign In" : t("signInBtnText")}
+                  </Link>
                 </span>
               </div>
               <div
@@ -331,7 +339,9 @@ const Cart = ({}: CartProps): JSX.Element => {
               {" "}
               {appState?.lang === "en" ? "Need Help ?" : t("needHelp")}
             </span>
-            <a> {appState?.lang === "en" ? "Help Center" : t("helpCenter")}</a>
+            <Link href="/help-center">
+              {appState?.lang === "en" ? "Help Center" : t("helpCenter")}
+            </Link>
           </div>
           <div>
             {[1, 2, , 3, 4]?.map((index) => {
