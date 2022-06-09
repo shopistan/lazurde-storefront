@@ -70,33 +70,35 @@ const CartItem = ({
           alt=""
           layout="fixed"
         />
-        <Label
-          className={`${styles["cart-image_tag"]} ${
-            styles[
-              `${
-                brandName?.value === `Miss L'`
-                  ? "bg_missl"
+        {!wishListItem && (
+          <Label
+            className={`${styles["cart-image_tag"]} ${
+              styles[
+                `${
+                  brandName?.value === `Miss L'`
+                    ? "bg_missl"
+                    : brandName?.value === "Kenaz"
+                    ? "bg_kenaz"
+                    : "bg_lazurde"
+                }`
+              ]
+            }`}
+          >
+            <Image
+              width={"62px"}
+              height={"8px"}
+              src={
+                brandName?.value === "Miss L'"
+                  ? missLogo
                   : brandName?.value === "Kenaz"
-                  ? "bg_kenaz"
-                  : "bg_lazurde"
-              }`
-            ]
-          }`}
-        >
-          <Image
-            width={"62px"}
-            height={"8px"}
-            src={
-              brandName?.value === "Miss L'"
-                ? missLogo
-                : brandName?.value === "Kenaz"
-                ? kenazLogo
-                : lazurdeLogo
-            }
-            alt=""
-            layout="fixed"
-          />
-        </Label>
+                  ? kenazLogo
+                  : lazurdeLogo
+              }
+              alt=""
+              layout="fixed"
+            />
+          </Label>
+        )}
       </div>
       <div className={styles["item-details"]}>
         <div className={styles["item-title"]}>
