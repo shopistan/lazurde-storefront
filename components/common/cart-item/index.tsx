@@ -56,12 +56,20 @@ const CartItem = ({
 
   return (
     <div className={styles["cart-item-wrapper"]}>
-      <Image
-        width={width > mobileScreenSize ? "146px" : "100px"}
-        height={width > mobileScreenSize ? "146px" : "100px"}
-        src={imageSrc?.value || "/public/blue-ring.png"}
-        alt=""
-      />
+      <div
+        style={{
+          width: width > mobileScreenSize ? "146px" : "100px",
+          height: width > mobileScreenSize ? "146px" : "100px",
+        }}
+      >
+        <Image
+          width={width > mobileScreenSize ? "146px" : "100px"}
+          height={width > mobileScreenSize ? "146px" : "100px"}
+          src={imageSrc?.value || "/public/blue-ring.png"}
+          alt=""
+          layout="fixed"
+        />
+      </div>
       <div className={styles["item-details"]}>
         <div className={styles["item-title"]}>
           <span>
