@@ -81,7 +81,10 @@ const FeedbackPopUp: FC<FeedbackPopUpProps> = ({
           validationSchema={SignupSchema}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
+              // alert(JSON.stringify(values, null, 2));
+              if (SignupSchema) {
+                onClose();
+              }
               setSubmitting(false);
             }, 400);
           }}
@@ -181,11 +184,10 @@ const FeedbackPopUp: FC<FeedbackPopUpProps> = ({
                 <Label className={styles["title"]}>
                   {appState.lang === "en" ? "Feedback" : t("feedback")}
                 </Label>
-                <input
-                  className={`${styles["input"]} ${
+                <textarea
+                  className={` ${
                     errors.feedback && touched.feedback && styles["errors"]
-                  }`}
-                  type="text"
+                  } ${styles["feedback-input"]}`}
                   name="feedback"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -196,9 +198,7 @@ const FeedbackPopUp: FC<FeedbackPopUpProps> = ({
                 </div>
               </div>
               <Button
-                onClick={() => {
-                  alert("success");
-                }}
+                onClick={() => {}}
                 className={styles["button"]}
                 type="submit"
               >

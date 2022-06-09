@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .cart-wrapper {
   padding: 40px;
   max-width: 1250px;
@@ -12,8 +14,18 @@
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    column-gap: 40px;
+    column-gap: 0;
     row-gap: 8px;
+
+    @media (min-width: $breakPoint-desktop) {
+      column-gap: 40px;
+    }
+
+    .inner-wrapper {
+      @media (max-width: $breakPoint-mobile) {
+        width: 100%;
+      }
+    }
 
     .shipping-column {
       display: flex;
@@ -44,7 +56,7 @@
         flex-direction: column;
         gap: 8px;
         span {
-          font-family: 'Roboto';
+          font-family: "Roboto";
           font-style: normal;
           font-weight: 500;
           font-size: 15px;
@@ -52,14 +64,22 @@
           @media (max-width: 500px) {
             font-size: 14px;
           }
+
+          a {
+            color: #000000;
+          }
         }
         .para {
           font-weight: 400;
-          font-size: 14px;
-          line-height: 130%;
+          font-size: 13px;
+          line-height: 15.6px;
           color: #000000;
-          @media (max-width: 500px) {
-            font-size: 13px;
+
+          a {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 16.8px;
+            color: #000000;
           }
         }
       }
@@ -73,21 +93,33 @@
       gap: 40px;
 
       width: 692px;
-      min-height: 521px;
-      max-height: 800px;
+      // min-height: 521px;
+      max-height: 521px;
       background: #ffffff;
       overflow-y: scroll;
       -ms-overflow-style: none; /* Internet Explorer 10+ */
-      scrollbar-width: none;
+      scrollbar-width: auto;
+
+      &::-webkit-scrollbar {
+        width: 3px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #fff;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+      }
 
       @media (max-width: 600px) {
         padding: 40px 24px;
         width: 100%;
-        min-height: 429px;
+        // min-height: 429px;
         max-height: 700px;
       }
 
-      span {
+      .main-heading {
         font-weight: 500;
         font-size: 24px;
         line-height: 120%;
@@ -98,10 +130,6 @@
         width: 100%;
         border: 1px solid rgba(0, 0, 0, 0.2);
       }
-    }
-
-    .bag-wrapper::-webkit-scrollbar {
-      display: none; /* Safari and Chrome */
     }
 
     .summary-card {
@@ -115,6 +143,7 @@
       // height: 474px;
 
       @media (max-width: 600px) {
+        width: 100%;
         height: 522px;
         padding: 40px 24px;
       }
@@ -142,7 +171,7 @@
               font-size: 14px;
             }
 
-            &[data-amount='true'] {
+            &[data-amount="true"] {
               font-weight: 500;
             }
           }
@@ -170,13 +199,19 @@
         display: flex;
         justify-content: space-between;
         gap: 8px;
+
         hr {
-          width: 118.5px;
+          width: 110px;
           height: 0px;
           border: 1px solid rgba(0, 0, 0, 0.2);
+
+          @media (min-width: $breakPoint-desktop) {
+            width: 118.5px;
+          }
         }
+
         span {
-          &[data-divider='true'] {
+          &[data-divider="true"] {
             font-weight: 400;
             font-size: 12px;
             line-height: 130%;
@@ -242,11 +277,13 @@
       flex-direction: column;
       gap: 24px;
 
-      // @media (min-width: 1250px) {
-      //   margin-top: -270px;
-      // }
+      @media (min-width: 1024px) {
+        margin-top: 32px;
+      }
+
       @media (max-width: 500px) {
-        padding: 24px;
+        width: 100%;
+        padding: 24px 24px 48px;
       }
 
       .bold-line {
@@ -259,12 +296,24 @@
         justify-content: space-between;
 
         span {
-          font-weight: 500;
-          font-size: 18px;
-          line-height: 120%;
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 19.2px;
+          letter-spacing: 0em;
+          text-align: start;
+          color: rgba(0, 0, 0, 0.8);
+
+          @media (min-width: $breakPoint-desktop) {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 21.8px;
+            letter-spacing: 0em;
+            text-align: start;
+          }
         }
 
         a {
+          color: #000000;
           font-weight: 500;
           font-size: 14px;
           line-height: 120%;
@@ -287,5 +336,54 @@
     /* Dark/20 */
     margin: 0;
     border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  .free-shipping-content {
+    @media (max-width: $breakPoint-mobile) {
+      padding-inline-end: 20px;
+    }
+  }
+
+  .cartpage-items {
+    .item-details {
+      .item-title {
+        span {
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 16.8px;
+          letter-spacing: 0em;
+          text-align: start;
+
+          @media (min-width: $breakPoint-desktop) {
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 18px;
+          }
+        }
+      }
+    }
+  }
+
+  .need-help-points {
+    p {
+      margin: 0;
+      margin-bottom: 16px;
+      color: rgba(0, 0, 0, 0.8);
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0em;
+      text-align: start;
+
+      &:last-child {
+        margin: 0;
+      }
+
+      @media (min-width: $breakPoint-desktop) {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 19.2px;
+      }
+    }
   }
 }

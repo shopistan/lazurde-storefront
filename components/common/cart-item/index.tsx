@@ -6,6 +6,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize, mobileScreenSize } from "lib/utils/common";
 import { Bag, CrossSmall } from "components/icons";
 import { AppContext } from "lib/context";
+import Label from "components/common/ui/label";
 interface CartItemObject {
   title: string;
   ["Image URL"]: string;
@@ -46,6 +47,7 @@ const CartItem = ({
   const [removingItem, setRemovingItem] = useState(false);
   // const [removingItem, setRemovingItem]
   const imageSrc = item?.attributes?.find((attr) => attr?.mapping === "image");
+  const brandName = item?.attributes?.find((attr) => attr?.name === "Brand");
 
   useEffect(() => {
     if (!updatingCartItem) {
@@ -56,12 +58,36 @@ const CartItem = ({
 
   return (
     <div className={styles["cart-item-wrapper"]}>
-      <Image
-        width={width > mobileScreenSize ? "146px" : "100px"}
-        height={width > mobileScreenSize ? "146px" : "100px"}
-        src={imageSrc?.value || "/public/blue-ring.png"}
-        alt=""
-      />
+      <div className={styles["cart-image"]}>
+        <Image
+          width={width < desktopScreenSize ? "100px" : "146px"}
+          height={width < desktopScreenSize ? "100px" : "146px"}
+          src={imageSrc?.value || "/public/blue-ring.png"}
+          alt=""
+          layout="fixed"
+        />
+        <Label
+          className={`${styles["cart-image_tag"]} ${
+            styles[
+              `${
+                brandName?.value === `Miss L'`
+                  ? "bg_missl"
+                  : brandName?.value === "Kenaz"
+                  ? "bg_kenaz"
+                  : "bg_lazurde"
+              }`
+            ]
+          }`}
+        >
+          <Image
+            width={width < desktopScreenSize ? "62px" : "62px"}
+            height={width < desktopScreenSize ? "8px" : "8px"}
+            src={"/public/lazurdeLogo.png"}
+            alt=""
+            // layout="fixed"
+          />
+        </Label>
+      </div>
       <div className={styles["item-details"]}>
         <div className={styles["item-title"]}>
           <span>
@@ -94,8 +120,10 @@ const CartItem = ({
                 max="500"
                 defaultValue={item?.quantity}
                 onChange={(e) => {
-                  handleChange(e, item);
-                  setUpdatingItem(true);
+                  if (Number(e.target.value) > 0) {
+                    handleChange(e, item);
+                    setUpdatingItem(true);
+                  }
                 }}
                 disabled={updatingItem}
               />
