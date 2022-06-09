@@ -94,8 +94,10 @@ const CartItem = ({
                 max="500"
                 defaultValue={item?.quantity}
                 onChange={(e) => {
-                  handleChange(e, item);
-                  setUpdatingItem(true);
+                  if (e.target.value) {
+                    handleChange(e, item);
+                    setUpdatingItem(true);
+                  }
                 }}
                 disabled={updatingItem}
               />
