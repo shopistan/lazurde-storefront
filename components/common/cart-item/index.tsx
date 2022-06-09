@@ -7,6 +7,9 @@ import { desktopScreenSize, mobileScreenSize } from "lib/utils/common";
 import { Bag, CrossSmall } from "components/icons";
 import { AppContext } from "lib/context";
 import Label from "components/common/ui/label";
+import lazurdeLogo from "/public/lazurdeLogo.png";
+import missLogo from "/public/missLogo.png";
+import kenazLogo from "/public/kenazLogo.png";
 interface CartItemObject {
   title: string;
   ["Image URL"]: string;
@@ -45,6 +48,7 @@ const CartItem = ({
   const [width] = useWindowSize();
   const [updatingItem, setUpdatingItem] = useState(false);
   const [removingItem, setRemovingItem] = useState(false);
+  const [value, setValue] = useState(item?.quantity);
   // const [removingItem, setRemovingItem]
   const imageSrc = item?.attributes?.find((attr) => attr?.mapping === "image");
   const brandName = item?.attributes?.find((attr) => attr?.name === "Brand");
@@ -80,11 +84,17 @@ const CartItem = ({
           }`}
         >
           <Image
-            width={width < desktopScreenSize ? "62px" : "62px"}
-            height={width < desktopScreenSize ? "8px" : "8px"}
-            src={"/public/lazurdeLogo.png"}
+            width={"62px"}
+            height={"8px"}
+            src={
+              brandName?.value === "Miss L'"
+                ? missLogo
+                : brandName?.value === "Kenaz"
+                ? kenazLogo
+                : lazurdeLogo
+            }
             alt=""
-            // layout="fixed"
+            layout="fixed"
           />
         </Label>
       </div>
@@ -103,11 +113,11 @@ const CartItem = ({
             "0.00"?.toLocaleString()
           }`}</span>
         </div>
-        {width > mobileScreenSize && (
+        {/* {width > mobileScreenSize && (
           <div className={styles["item-category"]}>
             <span>{appState?.lang === "en" ? "Rings" : "خواتم"}</span>
           </div>
-        )}
+        )} */}
         {!wishListItem && (
           <div className={styles["item-quantity"]}>
             <span>
@@ -119,10 +129,12 @@ const CartItem = ({
                 min="1"
                 max="500"
                 defaultValue={item?.quantity}
+                value={value}
                 onChange={(e) => {
                   if (Number(e.target.value) > 0) {
                     handleChange(e, item);
                     setUpdatingItem(true);
+                    setValue(e.target.value);
                   }
                 }}
                 disabled={updatingItem}

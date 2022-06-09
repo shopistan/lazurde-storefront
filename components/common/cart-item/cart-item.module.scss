@@ -1,4 +1,4 @@
-@import "/styles/variables.scss";
+@import '/styles/variables.scss';
 
 .cart-item-wrapper {
   display: flex;
@@ -21,7 +21,7 @@
       z-index: 1;
       position: absolute;
       top: auto;
-      // bottom: 0;
+      bottom: 0;
       width: 100%;
       text-align: center;
       margin: 0;
@@ -33,7 +33,7 @@
       }
 
       &_lazurde {
-        background-color: $primary-color;
+        background-color: #f2f2f2;
       }
 
       &_kenaz {
