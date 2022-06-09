@@ -71,7 +71,7 @@ const CartItem = ({
               `${
                 brandName?.value === `Miss L'`
                   ? "bg_missl"
-                  : appState?.brand === "Kenaz"
+                  : brandName?.value === "Kenaz"
                   ? "bg_kenaz"
                   : "bg_lazurde"
               }`
