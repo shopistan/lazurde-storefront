@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import SideBar from "components/common/side-bar/index";
 import AccountSection from "../account-section";
 import OrderDetails from "components/common/order-details/index";
+import OrderHistory from "../order-history";
 import { desktopScreenSize } from "lib/utils/common";
 
 interface AccountInformationProps {
