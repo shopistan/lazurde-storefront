@@ -1,9 +1,46 @@
+@import "/styles/variables.scss";
+
 .cart-item-wrapper {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   gap: 20px;
   width: 100%;
+
+  .cart-image {
+    width: 146px;
+    height: 146px;
+    position: relative;
+
+    @media (max-width: 768px) {
+      width: 100px;
+      height: 100px;
+    }
+
+    &_tag {
+      z-index: 1;
+      position: absolute;
+      top: auto;
+      // bottom: 0;
+      width: 100%;
+      text-align: center;
+      margin: 0;
+    }
+
+    .bg {
+      &_missl {
+        background-color: #dde8db;
+      }
+
+      &_lazurde {
+        background-color: $primary-color;
+      }
+
+      &_kenaz {
+        background-color: #cde9f2;
+      }
+    }
+  }
 
   @media (max-width: 600px) {
     padding: 0px;

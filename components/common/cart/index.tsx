@@ -254,8 +254,15 @@ const Cart = ({}: CartProps): JSX.Element => {
                   </span>
                   <span className={styles["para"]}>
                     {appState?.lang === "en"
-                      ? "Become a L’azurde member for fast and free shipping. Join Us or Sign In"
+                      ? `Become a L’azurde member for fast and free shipping. `
                       : t("becomeMember")}
+                    <Link href="#">
+                      {appState?.lang === "en" ? "Join Us" : t("signUpBtnText")}
+                    </Link>{" "}
+                    {appState?.lang === "en" ? "or " : "أو"}
+                    <Link href="#">
+                      {appState?.lang === "en" ? "Sign In" : t("signInBtnText")}
+                    </Link>
                   </span>
                 </div>
                 <div
