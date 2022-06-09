@@ -9,6 +9,7 @@
   letter-spacing: 0em;
   text-align: left;
   margin-top: 0;
+  margin-bottom: 40px;
 
   @media (min-width: $breakPoint-desktop) {
     font-size: 24px;
@@ -27,6 +28,9 @@
   letter-spacing: 0em;
   text-align: start;
   color: rgba(0, 0, 0, 0.6);
+  margin-top: 0;
+  margin-bottom: 4px;
+  margin-inline-start: 20px;
 
   @media (min-width: $breakPoint-desktop) {
     font-size: 12px;
@@ -47,6 +51,19 @@
   width: 100%;
   padding-inline: 20px;
   padding-block: 11px;
+}
+
+.feedback-input {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  width: 100%;
+  padding-inline: 20px;
+  padding-block: 11px;
+  min-height: 182px;
+
+  @media (min-width: $breakPoint-desktop) {
+    min-height: 40px;
+  }
 }
 
 .first-name {
@@ -74,7 +91,7 @@
 
 .feedback-container {
   position: relative;
-  padding-block-start: 40px;
+  padding-block-start: 41px;
   padding-inline: 24px;
 
   @media (min-width: $breakPoint-desktop) {
@@ -135,7 +152,7 @@
     }
   }
   .div-feedbackBody {
-    margin-top: 41px;
+    margin-top: 0;
     @media (min-width: $breakPoint-desktop) {
       width: 562px;
       margin-top: 0px;
@@ -144,10 +161,13 @@
 }
 
 .error-msg {
+  @media (min-width: $breakPoint-desktop) {
+    padding-inline-start: 20px;
+  }
   width: 100%;
   display: block;
   margin-block-start: 4px;
-  padding-inline-start: 20px;
+  margin-inline-start: 4px;
   color: red;
   font-size: 12px;
   font-weight: 400;
