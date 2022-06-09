@@ -184,11 +184,10 @@ const FeedbackPopUp: FC<FeedbackPopUpProps> = ({
                 <Label className={styles["title"]}>
                   {appState.lang === "en" ? "Feedback" : t("feedback")}
                 </Label>
-                <input
+                <textarea
                   className={` ${
                     errors.feedback && touched.feedback && styles["errors"]
                   } ${styles["feedback-input"]}`}
-                  type="text"
                   name="feedback"
                   onChange={handleChange}
                   onBlur={handleBlur}

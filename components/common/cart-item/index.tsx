@@ -64,6 +64,7 @@ const CartItem = ({
           height={width < desktopScreenSize ? "100px" : "146px"}
           src={imageSrc?.value || "/public/blue-ring.png"}
           alt=""
+          layout="fixed"
         />
         <Label
           className={`${styles["cart-image_tag"]} ${
