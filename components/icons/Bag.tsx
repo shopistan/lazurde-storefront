@@ -3,15 +3,19 @@ import React from "react";
 const Bag = ({
   fill = "#fff",
   stroke = "#fff",
+  width = 20,
+  height = 20,
   ...props
 }: {
   fill?: string;
   stroke?: string;
+  width?: number | string;
+  height?: number | string;
 }) => {
   return (
     <svg
-      width="20"
-      height="20"
+      width={width}
+      height={height}
       viewBox="0 0 20 20"
       fill={fill}
       xmlns="http://www.w3.org/2000/svg"
