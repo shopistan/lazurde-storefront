@@ -30,7 +30,8 @@ interface CartItemObject {
 interface CartItemProps {
   item: CartItemObject;
   handleChange?: (
-    event: React.ChangeEvent<HTMLInputElement>,
+    // event: React.ChangeEvent<HTMLInputElement>,
+    value: number | string,
     item: CartItemObject
   ) => void;
   updatingCartItem?: boolean;
@@ -48,7 +49,7 @@ const CartItem = ({
   const [width] = useWindowSize();
   const [updatingItem, setUpdatingItem] = useState(false);
   const [removingItem, setRemovingItem] = useState(false);
-  const [value, setValue] = useState(item?.quantity);
+  const [value, setValue] = useState(item?.quantity || 1);
   // const [removingItem, setRemovingItem]
   const imageSrc = item?.attributes?.find((attr) => attr?.mapping === "image");
   const brandName = item?.attributes?.find((attr) => attr?.name === "Brand");
@@ -86,7 +87,8 @@ const CartItem = ({
           >
             <Image
               width={"62px"}
-              height={"8px"}
+              height={"11px"}
+              quality={100}
               src={
                 brandName?.value === "Miss L'"
                   ? missLogo
@@ -95,7 +97,6 @@ const CartItem = ({
                   : lazurdeLogo
               }
               alt=""
-              layout="fixed"
             />
           </Label>
         )}
@@ -125,7 +126,7 @@ const CartItem = ({
             <span>
               {appState?.lang === "en" ? "Quantity: " : "كمية "}
               <input
-                type="number"
+                // type="number"
                 id="quantity"
                 name="quantity"
                 min="1"
@@ -133,15 +134,21 @@ const CartItem = ({
                 defaultValue={item?.quantity}
                 value={value}
                 onChange={(e) => {
-                  if (Number(e.target.value) > 0) {
-                    handleChange(e, item);
-                    setUpdatingItem(true);
-                    setValue(e.target.value);
-                  }
+                  // if (e.target.value) {
+                  setValue(e.target.value);
+                  // }
+                }}
+                onBlur={() => {
+                  handleChange(value || 1, item);
+                  setUpdatingItem(true);
+                  if (!value) setValue(1);
                 }}
                 disabled={updatingItem}
               />
             </span>
+            {/* <div>
+              <span>Error While updating quanitity!</span>
+            </div> */}
           </div>
         )}
         <div className={styles["remove-btn"]}>
@@ -163,7 +170,7 @@ const CartItem = ({
         </div>
         {wishListItem && (
           <div className={styles["add-to-bag-btn"]}>
-            <Bag fill="#000000" stroke="#000000" />
+            <Bag fill="#000000" stroke="#000000" width="12px" height="16px" />
             <button
               onClick={() => {
                 setRemovingItem(true);
