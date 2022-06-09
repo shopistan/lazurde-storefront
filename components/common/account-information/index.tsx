@@ -84,7 +84,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
           />
           {activeComponent == "Account Overview" && <AccountSection />}
 
-          {activeComponent === "My Orders" && <OrderDetails />}
+          {activeComponent === "My Orders" && <OrderHistory />}
         </div>
       </div>
     </>
