@@ -34,12 +34,12 @@
 
 .cgir-left-sidebar {
   cursor: pointer;
-  display: none;
+  //   display: none;
   background-color: white;
-  padding-block: 45px;
-  padding-inline-start: 18px;
+  padding: 32px 18px;
+  //   padding-inline-start: 18px;
   @media (min-width: 1023px) {
-    width: 39%;
+    width: 360px;
     height: fit-content;
     display: block;
     margin-inline-end: 60px;
@@ -58,7 +58,7 @@
 }
 
 .page-block {
-  display: none;
+  display: flex;
   @media (min-width: 1023px) {
     cursor: pointer;
     display: flex;
@@ -113,7 +113,7 @@
 
 .more-content-block {
   //   margin-top: 8px;
-  background-color: #f2f2f2;
+  //   background-color: #f2f2f2;
   //   cursor: pointer;
 
   @media (min-width: 1024px) {
@@ -121,6 +121,13 @@
     // padding-inline: 48px;
     // padding: 24px;
     background-color: white;
+  }
+
+  .fact-sheet-iframe {
+    width: 100%;
+    @media (min-width: 1023px) {
+      width: 650px;
+    }
   }
 }
 
@@ -189,7 +196,7 @@
 
 .cgir-right-container {
   @media (min-width: 1024px) {
-    width: 71%;
+    width: 650px;
     display: flex;
     flex-direction: column;
     gap: 8px;

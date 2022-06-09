@@ -95,28 +95,30 @@ const Cart = ({}: CartProps): JSX.Element => {
       cartId: string;
     }
   ) => {
-    setUpdatingCartItem(true);
-    let payload = {
-      cartId: cartData?.cartId || null,
-      items: [
-        {
-          lineItemId: item?.lineItemId,
-          quantity: Number(e.target.value),
-          itemId: item?.itemId,
-        },
-      ],
-    };
-    try {
-      const response = await updateItemOfCart(cartData?.cartId, payload);
-      if (response?.status === 200) {
-        setCartData(response?.data);
+    if (e.target.value) {
+      setUpdatingCartItem(true);
+      let payload = {
+        cartId: cartData?.cartId || null,
+        items: [
+          {
+            lineItemId: item?.lineItemId,
+            quantity: Number(e.target.value),
+            itemId: item?.itemId,
+          },
+        ],
+      };
+      try {
+        const response = await updateItemOfCart(cartData?.cartId, payload);
+        if (response?.status === 200) {
+          setCartData(response?.data);
+          setUpdatingCartItem(false);
+        } else {
+          setUpdatingCartItem(false);
+        }
+      } catch (err) {
         setUpdatingCartItem(false);
-      } else {
-        setUpdatingCartItem(false);
+        console.log("Error", err);
       }
-    } catch (err) {
-      setUpdatingCartItem(false);
-      console.log("Error", err);
     }
   };
 

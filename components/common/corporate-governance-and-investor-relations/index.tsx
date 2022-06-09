@@ -11,6 +11,8 @@ import { useRouter } from "next/router";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
+import useWindowSize from "lib/utils/useWindowSize";
+import { mobileScreenSize } from "lib/utils/common";
 
 type CGIRPagesProps = {
   name?: string | "";
@@ -53,6 +55,8 @@ const TermCondtion: FC<TermCondtionProps> = ({
   console.log("cgirPages", title, cgirPages);
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
+  const [showPolicies, setShowPolicies] = useState(false);
+  const [width] = useWindowSize();
 
   //   const _accordion: _AccordionProps[] = t(
   //     "accordionProps",
@@ -183,13 +187,16 @@ const TermCondtion: FC<TermCondtionProps> = ({
                   {currentObject?.name === "Fact Sheet" ? (
                     <iframe
                       id="euroland_frame_id"
-                      className="EurolandTool"
+                      className="EurolandTool fact-sheet-iframe"
                       style={{
                         // background: "transparent",
-                        maxWidth: "750px",
+                        // maxWidth: "650px",
                         maxHeight: "none",
                         minHeight: "0px",
                         height: "2700px",
+                        width: "100%",
+                        fontFamily: "Roboto",
+                        fontSize: "14px",
                       }}
                       src="https://tools.euroland.com/FactSheet/sa-lazurde_2021/FactSheetHtml.asp?lang=english"
                       width="100%"
