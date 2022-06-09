@@ -7,6 +7,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
 import { useRouter } from "next/router";
+import { logout } from "lib/identity";
 
 type AccountsProps = {
   image: ImageType;
@@ -131,7 +132,11 @@ const SideBar: FC<SideBarProps> = ({
                           className={styles["account-detail"]}
                           key={index}
                           onClick={() => {
-                            router.push(`/${link || ""}`);
+                            if (text.toLowerCase() === "sign out") {
+                              logout();
+                            } else {
+                              router.push(`/${link || ""}`);
+                            }
                           }}
                         >
                           <div className={styles["account-image"]}>

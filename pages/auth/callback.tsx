@@ -1,11 +1,23 @@
 import { callback, validateAccess } from "lib/identity";
-import React, { useEffect } from "react";
+import Router from "next/router";
+import React, { useEffect, useState } from "react";
 
 const Callback = () => {
+  const [error, setError] = useState("");
   useEffect(() => {
-    callback()
-  }, [])
-  return <div>Validating...</div>;
+    const fetchTokens = () => {
+      const callbackRes = callback()  || {};
+      debugger
+      if (!!(callbackRes as any).errorMessage) {
+        setError((callbackRes as any).errorMessage);
+      } else {
+        console.log("Tokens on callback", (callbackRes as any).tokens);
+        Router.push("/");
+      }
+    };
+    fetchTokens();
+  }, []);
+  return <div>{error ? error : "Validating..."}</div>;
 };
 
 export default Callback;

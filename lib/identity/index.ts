@@ -3,27 +3,28 @@ import {
   OKTA_DOMAIN_PERSONAL,
   OKTA_REDIRECT_URI_PERSONAL,
   OKTA_CLIENT_ID_PERSONAL,
+  OKTA_DOMAIN,
+  OKTA_CLIENT_ID,
+  OKTA_REDIRECT_URI,
 } from "general-config";
 import Router from "next/router";
 import { OktaAuth } from "@okta/okta-auth-js";
+import { ErrorObject } from "lib/types/common";
 
-const ISSUER = "https://dev-92452513.okta.com/oauth2/default";
-const CLIENT_ID = "0oa4gxm0iruNhUUeW5d7";
-const REDIRECT_URL = "http://localhost:8080" + "/authorization-code/callback";
 const GRANT_TYPE = "code";
 
 const oktaAuth = new OktaAuth({
-  issuer: OKTA_DOMAIN_PERSONAL,
-  clientId: OKTA_CLIENT_ID_PERSONAL,
-  redirectUri: OKTA_REDIRECT_URI_PERSONAL,
+  issuer: OKTA_DOMAIN,
+  clientId: OKTA_CLIENT_ID,
+  redirectUri: OKTA_REDIRECT_URI,
 });
 
 export function validateAccess() {
   getIdToken()
     .then(function (token: any) {
       if (token) {
-        //next();
         console.log("Already logged in", token);
+        getUserInfo();
       } else {
         oktaAuth.tokenManager.clear();
         loginOkta(GRANT_TYPE);
@@ -33,23 +34,25 @@ export function validateAccess() {
 }
 
 export function loginOkta(grantType: any) {
-  // oktaAuth.options.grantType = grantType;
-  oktaAuth.token.getWithRedirect({
-    responseType: grantType,
-    scopes: ["openid", "profile", "email"],
-  });
+  try {
+    oktaAuth.token.getWithRedirect({
+      responseType: grantType,
+      scopes: ["openid", "email", "profile", "offline_access"],
+    });
+  } catch (error) {
+    console.log("Error logging in: ", error);
+  }
 }
 
 export function logout() {
-
   getIdToken().then(function (token: any) {
     if (token) {
       var idToken = token.idToken;
       oktaAuth.tokenManager.clear();
       Router.push(
-        OKTA_DOMAIN_PERSONAL +
+        OKTA_DOMAIN +
           "/v1/logout?client_id=" +
-          OKTA_CLIENT_ID_PERSONAL +
+          OKTA_CLIENT_ID +
           "&id_token_hint=" +
           idToken +
           "&post_logout_redirect_uri=" +
@@ -61,13 +64,10 @@ export function logout() {
   });
 }
 
-export function callback() {
-  // detect code
-  var grantType = GRANT_TYPE;
-  oktaAuth.token
-    .parseFromUrl()
-    .then((tokensRes: any) => {
-      console.log("tokens are", tokensRes);
+export async function callback() {
+  const getTokens = async () => {
+    try {
+      const tokensRes = await oktaAuth.token.parseFromUrl();
       const { tokens } = tokensRes;
 
       if (tokens.idToken) {
@@ -76,10 +76,14 @@ export function callback() {
       if (tokens.accessToken) {
         oktaAuth.tokenManager.add("access_token", tokens.accessToken);
       }
-
-      Router.push("/");
-    })
-    .catch(console.error);
+      if (tokens.refreshToken) {
+        oktaAuth.tokenManager.add("refresh_token", tokens.refreshToken);
+      }
+    } catch (error) {
+      console.log("Error fetching tokens", error);
+    }
+  };
+  await getTokens();
 }
 
 export function getIdToken() {
@@ -90,26 +94,25 @@ export function getAccessToken() {
   return oktaAuth.tokenManager.get("access_token");
 }
 
-export const getAccessTokenFromAuthCode = async (req: any, res: any) => {
-  try {
-    const tokenRes = await axios.post(`${OKTA_DOMAIN_PERSONAL}/v1/token`, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+export function getRefreshToken() {
+  return oktaAuth.tokenManager.get("refresh_token");
+}
 
-      params: {
-        redirect_uri: OKTA_REDIRECT_URI_PERSONAL,
-        code: req.query.code,
-        code_verifier:
-          "M25iVXpKU3puUjFaYWg3T1NDTDQtcW1ROUY5YXlwalNoc0hhakxifmZHag",
-        grant_type: "authorization_code",
-      },
-    });
-    console.log("TOKEN", tokenRes.data, tokenRes);
-    window.localStorage.setItem("token", JSON.stringify(tokenRes.data));
-    window.location.href = "http://localhost:3000";
+export const getUserInfo = async () => {
+  try {
+    const userRes = await axios.get(
+      "https://api.identity.fabric.zone/ums/v2/users/self",
+      {
+        headers: {
+          Authorization: `Bearer ${(await getAccessToken()).accessToken}`,
+        },
+      }
+    );
+    console.log("User Info: ", userRes);
+    // const uInfo = await oktaAuth.token.getUserInfo();
+    // const { name = "", email = "" } = uInfo;
+    // return { name, email };
   } catch (error) {
-    console.log("Error fetching token", error);
+    console.log("Error fetching user info: ", error);
   }
 };
