@@ -20,6 +20,7 @@ import useTranslation from "next-translate/useTranslation";
 import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from "lib/utils/common";
 import Link from "next/link";
+import Label from "components/common/ui/label";
 
 interface CartProps {}
 const Cart = ({}: CartProps): JSX.Element => {
@@ -170,7 +171,7 @@ const Cart = ({}: CartProps): JSX.Element => {
             <a> {appState?.lang === "en" ? "Help Center" : t("helpCenter")}</a>
           </Link>
         </div>
-        <div>
+        <div className={styles["need-help-points"]}>
           {[1, 2, , 3, 4]?.map((index) => {
             return (
               <p key={index}>
@@ -194,7 +195,7 @@ const Cart = ({}: CartProps): JSX.Element => {
           marginTop: width > desktopScreenSize ? "8px" : "",
         }}
       >
-        <span>
+        <span className={styles["main-heading"]}>
           {appState?.lang === "en" ? "Your Wishlist" : t("yourWishList")}
         </span>
         {isWishListLoading ? (
@@ -242,21 +243,30 @@ const Cart = ({}: CartProps): JSX.Element => {
   return (
     <div className={styles["cart-wrapper"]}>
       <div className={styles["flex-wrap"]}>
-        <div>
+        <div className={styles["inner-wrapper"]}>
           <div className={styles["shipping-column"]}>
             {freeShipping && (
               <div className={styles["free-shipping-card"]}>
-                <div>
+                <div className={styles["free-shipping-content"]}>
                   <span>
                     {appState?.lang === "en"
                       ? "Free Shipping for Members"
                       : t("freeShipping")}
                   </span>
-                  <span className={styles["para"]}>
-                    {appState?.lang === "en"
-                      ? "Become a L’azurde member for fast and free shipping. Join Us or Sign In"
-                      : t("becomeMember")}
-                  </span>
+                  {appState?.lang === "en" ? (
+                    <span className={styles["para"]}>
+                      {`Become a L'azurde member for fast and free shipping`}.{" "}
+                      <Link href={"/"}>
+                        <a>Join Us</a>
+                      </Link>{" "}
+                      or{" "}
+                      <Link href={"/"}>
+                        <a>Sign In</a>
+                      </Link>
+                    </span>
+                  ) : (
+                    <span>{t("becomeMember")}</span>
+                  )}
                 </div>
                 <div
                   style={{ cursor: "pointer" }}
@@ -267,7 +277,9 @@ const Cart = ({}: CartProps): JSX.Element => {
               </div>
             )}
             <div className={styles["bag-wrapper"]}>
-              <span>{appState?.lang === "en" ? "Bag" : t("bag")}</span>
+              <span className={styles["main-heading"]}>
+                {appState?.lang === "en" ? "Bag" : t("bag")}
+              </span>
               {isLoadingCart ? (
                 <div>
                   {appState?.lang === "en" ? "Loading..." : t("loading")}
@@ -311,7 +323,7 @@ const Cart = ({}: CartProps): JSX.Element => {
           </div>
           {width > desktopScreenSize ? renderWishListSection() : null}
         </div>
-        <div>
+        <div className={styles["inner-wrapper"]}>
           <div className={styles["summary-card"]}>
             <span> {appState?.lang === "en" ? "Summary" : t("summary")}</span>
             <div className={styles["order-details"]}>
