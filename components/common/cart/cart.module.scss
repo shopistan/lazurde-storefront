@@ -198,7 +198,7 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
-        gap: 8px;
+        gap: 6px;
 
         hr {
           width: 110px;
@@ -213,10 +213,14 @@
         span {
           &[data-divider="true"] {
             font-weight: 400;
-            font-size: 12px;
+            font-size: 11px;
             line-height: 130%;
             text-align: center;
             color: rgba(0, 0, 0, 0.6);
+
+            @media (min-width: $breakPoint-desktop) {
+              font-size: 12px;
+            }
           }
         }
       }
