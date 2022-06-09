@@ -84,6 +84,7 @@ const CartItem = ({
             height={width < desktopScreenSize ? "8px" : "8px"}
             src={"/public/lazurdeLogo.png"}
             alt=""
+            // layout="fixed"
           />
         </Label>
       </div>
