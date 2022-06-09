@@ -64,7 +64,8 @@ module.exports = {
     '!components/common/product-listing/index.tsx',
     '!components/common/search-dialog/index.tsx',
     '!components/common/search-results-info/index.tsx',
-    '!components/common/bambuser-card-slider/index.tsx'
+    '!components/common/bambuser-card-slider/index.tsx',
+    '!components/common/product-description/image-section/**/*.{js,jsx,tsx,ts}'
   ],
   setupFiles: ['./setup.js']
 }

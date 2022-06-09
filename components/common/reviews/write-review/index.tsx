@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import styles from "./style.module.scss";
 import { CrossSmall } from "components/icons";
 import Heading from "components/common/ui/heading";
@@ -12,12 +12,18 @@ interface WriteAReviewProps {
   isOpened?: Boolean;
   onClose?: Function;
   productData?: any;
+  fetchingReviews?: Function;
+  setIsRatingError?: Function;
+  isRatingError?: string;
 }
 
 const WriteAReview = ({
   isOpened = false,
   onClose,
   productData = {},
+  fetchingReviews,
+  setIsRatingError,
+  isRatingError,
 }: WriteAReviewProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
@@ -29,6 +35,7 @@ const WriteAReview = ({
       data-open={isOpened}
       onClick={() => {
         onClose();
+        setIsRatingError("");
       }}
       data-testid="review-modal"
     >
@@ -42,6 +49,7 @@ const WriteAReview = ({
               className={styles["close-btn"]}
               onClick={() => {
                 onClose && onClose();
+                setIsRatingError("");
               }}
             >
               <CrossSmall />
@@ -50,24 +58,30 @@ const WriteAReview = ({
               {appState.lang == "en" ? "Write a Review" : t("write a review")}
             </Heading>
           </div>
-          <div className={styles["review-sec"]}>
+          <div id="rating-stars" className={styles["review-sec"]}>
             <Label className={styles["rating-label"]}>
               {appState?.lang === "en" ? "Overall rating" : t("Overall rating")}
             </Label>
 
-            <StarRating
-              rating={ratingIndex + 1}
-              count={5}
-              starWidth={24}
-              starHeight={24}
-              onClick={(rate: number) => {
-                setRatingIndex(rate);
-              }}
-            />
+            <div className={styles[""]}>
+              <StarRating
+                rating={ratingIndex + 1}
+                count={5}
+                starWidth={24}
+                starHeight={24}
+                onClick={(rate: number) => {
+                  setRatingIndex(rate);
+                  setIsRatingError("");
+                }}
+              />
+              <Label className={styles["rating-error"]}>{isRatingError}</Label>
+            </div>
             <ReviewForm
               rating={ratingIndex + 1}
               productData={productData}
               onClose={onClose}
+              fetchingReviews={fetchingReviews}
+              setIsRatingError={setIsRatingError}
             />
           </div>
         </div>

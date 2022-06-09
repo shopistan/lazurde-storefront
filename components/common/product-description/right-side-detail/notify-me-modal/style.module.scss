@@ -1,13 +1,22 @@
 @import "/styles/variables.scss";
 
 .notifyme-modal {
-  @media (max-width: 1023px) {
+  @media (max-width: $breakPoint-mobile) {
     padding: 0;
-  }
 
+    .notifyme-modal-content {
+      min-height: 100%;
+      border-radius: 0;
+      padding: 26px 24px 40px;
+    }
+  }
+}
+
+html[dir="rtl"] {
   .notifyme-modal-content {
-    min-height: 100%;
-    border-radius: 0;
+    @media (min-width: $breakPoint-desktop) {
+      padding: 38px 40px 24px;
+    }
   }
 }
 
@@ -59,11 +68,16 @@
       border: 1px solid rgba(0, 0, 0, 0.2);
       border-radius: 100px;
       color: $black-color;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 400;
-      line-height: 16.8px;
+      line-height: 15.6px;
       letter-spacing: 0em;
       text-align: start;
+
+      @media (min-width: $breakPoint-desktop) {
+        font-size: 14px;
+        line-height: 16.8px;
+      }
 
       &::placeholder {
         color: $black-color;

@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import Label from "components/common/ui/label";
 import { writeReview } from "lib/utils/reviews";
 // import ImageUploader from "./image-uploader";
-import Notification from "components/common/ui/alert";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 
@@ -22,9 +21,10 @@ const ReviewForm = ({
   rating,
   productData = {},
   onClose,
+  fetchingReviews,
+  setIsRatingError,
 }: any): JSX.Element => {
   const [fileUpload, setFileUpload] = useState<any>([{ fileArray: {} }]);
-  const [errorList, setErrorList] = useState([]);
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
   const arabicLabels: arabicLabelTypes = t(
@@ -37,19 +37,19 @@ const ReviewForm = ({
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const SignupSchema = Yup.object().shape({
     review: Yup.string().required(
-      appState?.lang === "en" ? "Required" : "مطلوب"
+      appState?.lang === "en" ? "Enter reviews" : "مطلوب"
     ),
     firstName: Yup.string().required(
-      appState?.lang === "en" ? "Required" : "مطلوب"
+      appState?.lang === "en" ? "Enter first name" : "مطلوب"
     ),
     lastName: Yup.string().required(
-      appState?.lang === "en" ? "Required" : "مطلوب"
+      appState?.lang === "en" ? "Enter last name" : "مطلوب"
     ),
     email: Yup.string()
       .email(appState?.lang === "en" ? "Invalid email" : "بريد إلكتروني خاطئ")
-      .required(appState?.lang === "en" ? "Required" : "مطلوب"),
+      .required(appState?.lang === "en" ? "Enter valid email" : "مطلوب"),
     phoneNumber: Yup.string()
-      .required(appState?.lang === "en" ? "Required" : "مطلوب")
+      .required(appState?.lang === "en" ? "Enter phone #" : "مطلوب")
       .matches(
         phoneRegExp,
         appState?.lang === "en"
@@ -78,41 +78,21 @@ const ReviewForm = ({
 
     const id = Math.floor(Math.random() * 100 + 1);
     if (rating === 0) {
-      const errorMsg = {
-        id: id,
-        title: appState?.lang === "en" ? "Error" : "خطأ",
-        description:
-          appState?.lang === "en" ? "please add rating" : "الرجاء إضافة تصنيف",
-        backgroundColor: "#d9534f",
-        icon: "/",
-      };
-      setErrorList([...errorList, errorMsg]);
+      setIsRatingError && setIsRatingError("please add rating");
+      document
+        ?.getElementById("rating-stars")
+        ?.scrollIntoView({ behavior: "smooth" });
     } else {
+      setIsRatingError && setIsRatingError("");
       const response = await writeReview(formData);
       if (response?.hasError === false) {
-        const successMsg = {
-          id: id,
-          title: appState?.lang === "en" ? "Success" : "النجاح",
-          description:
-            appState?.lang === "en"
-              ? "review posted successfully"
-              : "تم نشر المراجعة بنجاح",
-          backgroundColor: "#5cb85c",
-          icon: "/",
-        };
-        setErrorList([...errorList, successMsg]);
+        setIsRatingError && setIsRatingError("");
+        fetchingReviews && fetchingReviews();
         setTimeout(() => {
           onClose && onClose();
         }, 3000);
       } else {
-        const errorMsg = {
-          id: id,
-          title: "Error",
-          description: "NetWork Error",
-          backgroundColor: "#d9534f",
-          icon: "/",
-        };
-        setErrorList([...errorList, errorMsg]);
+        setIsRatingError && setIsRatingError("network error");
       }
     }
   };
@@ -144,7 +124,11 @@ const ReviewForm = ({
             isSubmitting,
           }: any) => (
             <form onSubmit={handleSubmit}>
-              <div className={`${styles["field"]} ${styles["review-field"]}`}>
+              <div
+                className={`${styles["field"]} ${styles["review-field"]}  ${
+                  errors.review && touched.review && styles["errors"]
+                }`}
+              >
                 <Label className={styles["field-label"]}>
                   {appState?.lang === "en"
                     ? "review"
@@ -156,12 +140,16 @@ const ReviewForm = ({
                   onBlur={handleBlur}
                   value={values.review}
                 />
-                <div className={styles["error-msg"]}>
-                  {errors.review && touched.email && errors.email}
+                <div className={`${styles["error-msg"]}`}>
+                  {errors.review && touched.review && errors.review}
                 </div>
               </div>
               <div className={styles["flex"]}>
-                <div className={styles["field"]}>
+                <div
+                  className={`${styles["field"]} ${
+                    errors.firstName && touched.firstName && styles["errors"]
+                  }`}
+                >
                   <Label className={styles["field-label"]}>
                     {appState?.lang === "en"
                       ? "first name"
@@ -178,7 +166,11 @@ const ReviewForm = ({
                     {errors.firstName && touched.firstName && errors.firstName}
                   </div>
                 </div>
-                <div className={styles["field"]}>
+                <div
+                  className={`${styles["field"]} ${
+                    errors.lastName && touched.lastName && styles["errors"]
+                  }`}
+                >
                   <Label className={styles["field-label"]}>
                     {appState?.lang === "en"
                       ? "last name"
@@ -196,7 +188,11 @@ const ReviewForm = ({
                   </div>
                 </div>
               </div>
-              <div className={styles["field"]}>
+              <div
+                className={`${styles["field"]} ${
+                  errors.email && touched.email && styles["errors"]
+                }`}
+              >
                 <Label className={styles["field-label"]}>
                   {appState?.lang === "en" ? "email" : arabicLabels?.email}
                 </Label>
@@ -211,7 +207,11 @@ const ReviewForm = ({
                   {errors.email && touched.email && errors.email}
                 </div>
               </div>
-              <div className={styles["field"]}>
+              <div
+                className={`${styles["field"]} ${
+                  errors.phoneNumber && touched.phoneNumber && styles["errors"]
+                }`}
+              >
                 <Label className={styles["field-label"]}>
                   {appState?.lang === "en"
                     ? "mobile phone"
@@ -246,12 +246,6 @@ const ReviewForm = ({
           )}
         </Formik>
       </div>
-      <Notification
-        toastList={errorList}
-        position="top-center"
-        autoDelete={true}
-        autoDeleteTime={6000}
-      />
     </>
   );
 };

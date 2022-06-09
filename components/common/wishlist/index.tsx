@@ -1,6 +1,6 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { Heart } from "components/icons";
-import { getWishList, deleteWishList } from "lib/utils/wishlist";
+import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
 import FillHeart from "components/icons/FillHeart";
 
 interface WishListProps {
@@ -13,8 +13,21 @@ const WishList: FC<WishListProps> = ({
   itemID = "68",
 }) => {
   const [active, setActive] = useState(false);
+  useEffect(() => {
+    const initializeWislist = async () => {
+      const wishlistArray = await getwishlist();
+      const isSelected = wishlistArray.data.items.find((item: string) => item === itemID);
+      
+      isSelected && setActive(true)
+    };
+    initializeWislist();
+  }, []);
   const getwishlist = async () => {
     const response = await getWishList(authToken);
+    return response;
+  };
+  const addwishlist = async () => {
+    const response = await addWishList(authToken, itemID);
   };
 
   const deletewishlist = async () => {
@@ -26,7 +39,7 @@ const WishList: FC<WishListProps> = ({
         <div
           onClick={() => {
             setActive(true);
-            getwishlist();
+            addwishlist();
           }}
         >
           <Heart fill="black" stroke="black" />

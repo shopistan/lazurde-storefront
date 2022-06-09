@@ -15,6 +15,7 @@ import { checkMediaType, desktopScreenSize } from "lib/utils/common";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import { fetchProductPriceByItemId } from "lib/utils/product";
+import WishList from "components/common/wishlist/index";
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -97,7 +98,7 @@ const ProductCard = ({
           className={styles["product-card__wishlist-icon"]}
           onClick={() => setFill(!fill)}
         >
-          <Heart fill={fill ? "red" : "#000"} />
+          <WishList itemID={itemId} />
         </div>
         <Slider
           productSlider={true}

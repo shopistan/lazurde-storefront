@@ -7,6 +7,7 @@ import { ProductType } from "lib/types/product";
 import RightSideDetail from "./right-side-detail";
 import Reviews from "components/common/reviews/index";
 import { AppContext } from "lib/context";
+import { getReviews } from "lib/utils/reviews";
 import { fetchProductPriceByItemId } from "lib/utils/product";
 import Link from "next/link";
 
@@ -25,6 +26,11 @@ const ProductDescription = ({
   >([]);
   const [link, setLink] = useState("");
   const [totalRating, setTotalRating] = useState(0);
+  const [reviewsData, setReviewsData] = useState<any>([]);
+  const [initialProductData, setInitialProductData] = useState<any>([]);
+  const [currentData, setCurrentData] = useState([]);
+  const [filterData, setFilterData] = useState<any>([]);
+  const [isRatingError, setIsRatingError] = useState("");
 
   useEffect(() => {
     const payload = {
@@ -66,7 +72,7 @@ const ProductDescription = ({
         );
       });
     }
-    
+
     setProdArray(modifiedProdArray);
   }, [product]);
 
@@ -75,6 +81,21 @@ const ProductDescription = ({
       getImageArray(prodArray);
     }
   }, [prodArray]);
+
+  useEffect(() => {
+    setFilterData("");
+    fetchingReviews();
+  }, []);
+
+  const fetchingReviews = async () => {
+    const productId = prodArray && prodArray["itemId"];
+    const response = await getReviews(productId);
+    response && response?.data && setReviewsData(response?.data?.results);
+    response &&
+      response?.data &&
+      setInitialProductData(response?.data?.results);
+    response && response?.data && setCurrentData(response?.data?.results);
+  };
 
   const onSizeChange = (val: number) => {
     console.log("sizevalue", val);
@@ -123,6 +144,9 @@ const ProductDescription = ({
               onSizeChange={onSizeChange}
               onColorChange={onColorChange}
               totalRating={totalRating}
+              fetchingReviews={fetchingReviews}
+              setIsRatingError={setIsRatingError}
+              isRatingError={isRatingError}
               currency={
                 productDescriptionData?.priceData[0]?.offers?.price?.currency
               }
@@ -149,6 +173,15 @@ const ProductDescription = ({
           setTotalRating={setTotalRating}
           totalRating={totalRating}
           productData={prodArray}
+          reviewsData={reviewsData}
+          initialProductData={initialProductData}
+          currentData={currentData}
+          setCurrentData={setCurrentData}
+          filterData={filterData}
+          setFilterData={setFilterData}
+          fetchingReviews={fetchingReviews}
+          setIsRatingError={setIsRatingError}
+          isRatingError={isRatingError}
         />
       </div>
     </>

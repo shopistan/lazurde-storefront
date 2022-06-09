@@ -29,6 +29,9 @@ interface RightSideDetailProps {
   discount?: string | number;
   finalPrice?: number | string;
   productData?: any;
+  fetchingReviews?: Function;
+  setIsRatingError?: Function;
+  isRatingError?: string;
 }
 
 const RightSideDetail = ({
@@ -42,12 +45,17 @@ const RightSideDetail = ({
   discount = 0 || "",
   finalPrice = 0,
   productData = {},
+  fetchingReviews = () => {},
+  setIsRatingError,
+  isRatingError,
 }: RightSideDetailProps): JSX.Element => {
   const router = useRouter();
   const { appState } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
-  const [isStockAvailable, setIsStockAvailable] = useState(false);
+  const [isStockAvailable, setIsStockAvailable] = useState(
+    productData?.sku === "TestItemStock"
+  );
   const [quantityCounter, setQuantityCounter] = useState(1);
   const { t } = useTranslation("common");
 
@@ -119,9 +127,18 @@ const RightSideDetail = ({
   return (
     <>
       <div className={styles["detail"]}>
-        {/* <Label className={styles["collection-tag"]}>
-          {appState.lang == "en" ? `Collection` : t("pdpTag-arabic")}
-        </Label> */}
+        <div className={styles["collection-and-outofstock"]}>
+          <Label className={styles["collection-tag"]}>
+            <>
+              {/* {appState?.lang == "en" ? `Collection` : t("pdpTag-arabic")} */}
+            </>
+          </Label>
+          {isStockAvailable ? (
+            <Label className={styles["outofstock-tag"]}>
+              {appState?.lang == "en" ? `Out of Stock` : t("pdpTag-arabic")}
+            </Label>
+          ) : null}
+        </div>
         <Label className={styles["title"]}>
           {appState.lang == "en"
             ? productData && productData["Product Title"]
@@ -206,6 +223,9 @@ const RightSideDetail = ({
           isOpened={modalOpen}
           onClose={() => setModalOpen(false)}
           productData={productData}
+          fetchingReviews={fetchingReviews}
+          setIsRatingError={setIsRatingError}
+          isRatingError={isRatingError}
         />
       )}
       {notifyModalOpen && (
