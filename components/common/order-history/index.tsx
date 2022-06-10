@@ -69,7 +69,9 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
             <Label className={styles["history-forth-title"]}>
               Click & Collect Order
             </Label>
-            <Label className={styles["history-forth-text"]}>2 Items</Label>
+            <p className={styles["history-forth-text"]}>
+              {order.items.length} Items
+            </p>
           </div>
           <div>
             <p className={styles["history-forth-description"]}>
@@ -116,9 +118,37 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
             );
           })}
       </div>
-      <div className={styles["history-six"]}>
-        
-      </div>
+      {order.items &&
+        order.items.length > 0 &&
+        order.items.map((object: any, index: any) => {
+          return (
+            <>
+              <div className={styles["history-six"]}>
+                <p className={styles["history-six-first"]}>Order Total</p>
+                <div>
+                  <div
+                    className={`${styles["history-flex"]} ${styles["history-price"]}`}
+                  >
+                    <p>Sub-Total:</p>
+                    <p>${object.price.toFixed(2)}</p>
+                  </div>
+                  <div
+                    className={`${styles["history-flex"]} ${styles["discount-price"]}`}
+                  >
+                    <p>Discount:</p>
+                    <p>${object.discount.toFixed(2)}</p>
+                  </div>
+                </div>
+                <div className={styles["history-flex"]}>
+                  <p className={styles["history-six-first"]}>Total:</p>
+                  <p className={styles["history-six-first"]}>
+                    ${(object.price - object.discount).toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            </>
+          );
+        })}
     </div>
   );
 };

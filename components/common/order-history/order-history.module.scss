@@ -159,3 +159,35 @@
   padding: 40px;
   background-color: white;
 }
+
+.history-six-first {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-block: 0 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.history-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    margin: 0;
+  }
+}
+
+.history-price {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.discount-price {
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
