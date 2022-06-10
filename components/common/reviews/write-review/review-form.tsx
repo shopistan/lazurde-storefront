@@ -78,7 +78,7 @@ const ReviewForm = ({
 
     const id = Math.floor(Math.random() * 100 + 1);
     if (rating === 0) {
-      setIsRatingError && setIsRatingError("please add rating");
+      setIsRatingError && setIsRatingError("Please Add Rating");
       document
         ?.getElementById("rating-stars")
         ?.scrollIntoView({ behavior: "smooth" });
@@ -92,7 +92,7 @@ const ReviewForm = ({
           onClose && onClose();
         }, 3000);
       } else {
-        setIsRatingError && setIsRatingError("network error");
+        setIsRatingError && setIsRatingError("Network Error");
       }
     }
   };
