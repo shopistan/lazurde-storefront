@@ -94,7 +94,7 @@ const Cart = ({}: CartProps): JSX.Element => {
 
   const handleChange = async (
     // e: React.ChangeEvent<HTMLInputElement>,
-    value: number | string,
+    value: number,
     item: {
       lineItemId: number;
       itemId: string;
@@ -107,7 +107,7 @@ const Cart = ({}: CartProps): JSX.Element => {
       items: [
         {
           lineItemId: item?.lineItemId,
-          quantity: Number(value),
+          quantity: value ? Number(value) : 1,
           itemId: item?.itemId,
         },
       ],

@@ -31,7 +31,7 @@ interface CartItemProps {
   item: CartItemObject;
   handleChange?: (
     // event: React.ChangeEvent<HTMLInputElement>,
-    value: number | string,
+    value: number,
     item: CartItemObject
   ) => void;
   updatingCartItem?: boolean;
@@ -49,13 +49,14 @@ const CartItem = ({
   const [width] = useWindowSize();
   const [updatingItem, setUpdatingItem] = useState(false);
   const [removingItem, setRemovingItem] = useState(false);
-  const [value, setValue] = useState(item?.quantity || 1);
+  const [value, setValue] = useState("");
   // const [removingItem, setRemovingItem]
   const imageSrc = item?.attributes?.find((attr) => attr?.mapping === "image");
   const brandName = item?.attributes?.find((attr) => attr?.name === "Brand");
 
   useEffect(() => {
     if (!updatingCartItem) {
+      setValue(item?.quantity?.toString());
       setUpdatingItem(false);
       setRemovingItem(false);
     }
@@ -126,22 +127,22 @@ const CartItem = ({
             <span>
               {appState?.lang === "en" ? "Quantity: " : "كمية "}
               <input
-                // type="number"
+                type="number"
                 id="quantity"
                 name="quantity"
-                min="1"
-                max="500"
                 defaultValue={item?.quantity}
                 value={value}
                 onChange={(e) => {
-                  // if (e.target.value) {
                   setValue(e.target.value);
-                  // }
                 }}
+                onKeyDown={(e) =>
+                  (e.keyCode === 69 || e.keyCode === 190) && e.preventDefault()
+                }
                 onBlur={() => {
-                  handleChange(value || 1, item);
-                  setUpdatingItem(true);
-                  if (!value) setValue(1);
+                  if (Number(value || 1) !== Number(item?.quantity)) {
+                    setUpdatingItem(true);
+                    handleChange(Number(value), item);
+                  } else setValue(item?.quantity);
                 }}
                 disabled={updatingItem}
               />
