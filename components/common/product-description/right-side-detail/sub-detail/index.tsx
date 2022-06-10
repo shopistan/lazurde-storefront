@@ -117,7 +117,7 @@ const SubDetail = ({
               <Link href="/contact-us">
                 <a className={styles["label-link"]}>
                   {appState.lang == "en"
-                    ? "Have a question?"
+                    ? "Ask an Expert"
                     : t("Have a question?")}
                 </a>
               </Link>
