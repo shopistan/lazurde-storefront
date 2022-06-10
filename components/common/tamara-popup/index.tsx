@@ -2,13 +2,17 @@ import React, { useContext, useState, useEffect } from "react";
 import Script from "next/script";
 import { AppContext } from "lib/context";
 
-const TamaraModal = () => {
+const TamaraModal = ({
+  productPricing,
+}: {
+  productPricing: { finalPrice: number, currency: string };
+}) => {
   const { appState } = useContext(AppContext);
   const [renderScript, setRendeScript] = useState(false);
 
   useEffect(() => {
     setRendeScript(true);
-  }, [appState?.lang]);
+  }, [appState?.lang, productPricing.finalPrice]);
 
   return (
     <>
@@ -17,8 +21,8 @@ const TamaraModal = () => {
           <div
             className="tamara-product-widget pdp-tamara"
             data-lang={appState?.lang}
-            data-price="250"
-            data-currency="SAR"
+            data-price={`${productPricing.finalPrice}`}
+            data-currency={`${productPricing.currency}`}
             data-country-code="SA"
             data-color-type="default"
             data-show-border="false"

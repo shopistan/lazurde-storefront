@@ -34,7 +34,7 @@ const SizeChart = ({
       const item = productSizeArray[index];
       item.Size && sizeSet.add(item.Size);
     }
-
+    
     if (activeSize === 0) {
       setSelectedSize({
         size: [...Array.from(sizeSet)][0],
@@ -42,7 +42,6 @@ const SizeChart = ({
       });
     }
     setSizeArray([...Array.from(sizeSet)]);
-  
   };
 
   useEffect(() => {

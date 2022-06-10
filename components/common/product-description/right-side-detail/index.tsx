@@ -319,7 +319,7 @@ const RightSideDetail = ({
       </div>
       <SubDetail
         isStockAvailable={isStockAvailable}
-        productData={productData}
+        productPricing={productPricing}
       />
       {modalOpen && (
         <WriteAReview

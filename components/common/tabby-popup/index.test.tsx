@@ -6,7 +6,7 @@ import ContextProvider, { AppContext } from "lib/context";
 const renderComponent = () => {
   render(
     <ContextProvider>
-      <TabbyModal />
+      <TabbyModal productPricing={{finalPrice: 0}}/>
     </ContextProvider>
   );
 };
