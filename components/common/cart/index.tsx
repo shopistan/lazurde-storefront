@@ -390,7 +390,13 @@ const Cart = ({}: CartProps): JSX.Element => {
                 <AppleButton />
               </button>
               <button className={styles["paypal-btn"]}>
-                <Image src={paypalLogo} alt="" width={174} height={40} />
+                <Image
+                  src={paypalLogo}
+                  alt=""
+                  width={174}
+                  height={40}
+                  quality={100}
+                />
               </button>
             </div>
           </div>
