@@ -18,16 +18,22 @@ const OrderHistory = ({}) => {
       <div className={styles["history-second"]}>
         <div className={styles["history-second-first"]}>
           <div>
-            <div className={styles['history-second-first-block']}>
-              <Image src={"/"} width={10} height={10} />
+            <div className={styles["history-second-first-block"]}>
+              <div className={styles["history-second-first-image"]}>
+                <Image src={"/calendar.png"} width={18} height={18} />
+              </div>
               <Label>Order No:</Label>
             </div>
-            <div>
-              <Image src={"/"} width={10} height={10} />
+            <div className={styles["history-second-first-block"]}>
+              <div className={styles["history-second-first-image"]}>
+                <Image src={"/calendar.png"} width={18} height={18} />
+              </div>
               <Label>Order Date:</Label>
             </div>
-            <div>
-              <Image src={"/"} width={10} height={10} />
+            <div className={styles["history-second-first-block"]}>
+              <div className={styles["history-second-first-image"]}>
+                <Image src={"/calendar.png"} width={18} height={18} />
+              </div>
               <Label>View Digital Receipt & Warranty</Label>
             </div>
           </div>
@@ -37,11 +43,15 @@ const OrderHistory = ({}) => {
         </div>
         <Button>Return Order</Button>
       </div>
-      <div>
-        <Label>Ready for Collection</Label>
-        <Label>
-          L’azurde #5234 2976 Al Imam Saud Ibn Abdul Aziz Branch Rd Al Nakheel
-          Mall, Riyadh 12483, Saudi Arabia
+      <div className={styles["history-third"]}>
+        <Label className={styles["history-third-title"]}>
+          Ready for Collection
+        </Label>
+        <Label className={styles["history-third-text"]}>
+          <>
+            L’azurde #5234 2976 <br /> Al Imam Saud Ibn Abdul Aziz Branch Rd{" "}
+            <br /> Al Nakheel Mall, Riyadh 12483, Saudi Arabia
+          </>
         </Label>
       </div>
     </div>
