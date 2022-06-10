@@ -254,28 +254,31 @@ const Cart = ({}: CartProps): JSX.Element => {
                       ? "Free Shipping for Members"
                       : t("freeShipping")}
                   </span>
-                  {appState?.lang === "en" ? (
-                    <span className={styles["para"]}>
-                      {`Become a L'azurde member for fast and free shipping`}.{" "}
-                      <Link href={"/"}>
-                        <a>
-                          {appState?.lang === "en"
-                            ? "Join Us"
-                            : t("signUpBtnText")}
-                        </a>
-                      </Link>{" "}
-                      or{" "}
-                      <Link href={"/"}>
-                        <a>
-                          {appState?.lang === "en"
-                            ? "Sign In"
-                            : t("signInBtnText")}
-                        </a>
-                      </Link>
-                    </span>
-                  ) : (
+                  {/* {appState?.lang === "en" ? ( */}
+                  <span className={styles["para"]}>
+                    {appState?.lang === "en"
+                      ? `Become a L'azurde member for fast and free shipping`
+                      : t("becomeMember")}
+                    .{" "}
+                    <Link href={"/"}>
+                      <a>
+                        {appState?.lang === "en"
+                          ? "Join Us"
+                          : t("signUpBtnText")}
+                      </a>
+                    </Link>{" "}
+                    or{" "}
+                    <Link href={"/"}>
+                      <a>
+                        {appState?.lang === "en"
+                          ? "Sign In"
+                          : t("signInBtnText")}
+                      </a>
+                    </Link>
+                  </span>
+                  {/* ) : (
                     <span>{t("becomeMember")}</span>
-                  )}
+                  )} */}
                 </div>
                 <div
                   style={{ cursor: "pointer" }}
@@ -387,7 +390,13 @@ const Cart = ({}: CartProps): JSX.Element => {
                 <AppleButton />
               </button>
               <button className={styles["paypal-btn"]}>
-                <Image src={paypalLogo} alt="" width={174} height={40} />
+                <Image
+                  src={paypalLogo}
+                  alt=""
+                  width={174}
+                  height={40}
+                  quality={100}
+                />
               </button>
             </div>
           </div>

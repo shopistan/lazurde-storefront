@@ -36,7 +36,7 @@ const CelebrityChoice: FC<CelebrityChoiceProps> = ({
           src={bannerImage?.url}
           alt={bannerImage?.altText}
           width={size > desktopScreenSize ? 1280 : 375}
-          height={size > desktopScreenSize ? 308 : 266}
+          height={size > desktopScreenSize ? 376 : 200}
           layout="responsive"
           objectFit="cover"
         />
@@ -45,27 +45,30 @@ const CelebrityChoice: FC<CelebrityChoiceProps> = ({
         </div>
       </div>
       <div className={styles["celebrities-wrapper"]}>
-        {celebrities?.map((celeb, index) => {
-          return (
-            <div key={index} className={styles["celebrity-card"]}>
-              <Image
-                src={celeb?.celebrityImage?.url}
-                alt={celeb?.celebrityImage?.altText}
-                width={size > desktopScreenSize ? 421 : 370}
-                height={size > desktopScreenSize ? 416 : 302}
-                // layout="responsive"
-              />
-              <Image
-                src={celeb?.celebritySign?.url}
-                alt={celeb?.celebritySign?.altText}
-                width={244}
-                height={113}
-                // layout="responsive"
-              />
-            </div>
-          );
-        })}
+        {celebrities &&
+          celebrities.length > 0 &&
+          celebrities?.map((celeb, index) => {
+            return (
+              <div key={index} className={styles["celebrity-card"]}>
+                <Image
+                  src={celeb?.celebrityImage?.url}
+                  alt={celeb?.celebrityImage?.altText}
+                  width={size > desktopScreenSize ? 421 : 343}
+                  height={size > desktopScreenSize ? 416 : 302}
+                  objectFit="cover"
+                  layout="fixed"
+                />
+                <Image
+                  src={celeb?.celebritySign?.url}
+                  alt={celeb?.celebritySign?.altText}
+                  width={244}
+                  height={113}
+                />
+              </div>
+            );
+          })}
       </div>
+      <hr className={styles["divider"]} />
       <div className={styles["details-wrapper"]}>
         <div className={styles["details-heading"]}>
           <h1>
@@ -73,11 +76,16 @@ const CelebrityChoice: FC<CelebrityChoiceProps> = ({
           </h1>
         </div>
         <div className={styles["details-description"]}>
-          <p>
-            {appState?.lang === "en"
-              ? detailsDescription
-              : "هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي هذا وصف وهمي"}
-          </p>
+          {appState.lang == "en" ? (
+            <p
+              key={Math.random()}
+              dangerouslySetInnerHTML={{
+                __html: detailsDescription,
+              }}
+            ></p>
+          ) : (
+            " نا والآن سنجعل هذا اختبارًا أكبر لمطابقة التصميم هذه فقرة وهمية مكتوبة هنا والآن سنجعل هذا اختبارًا أكبر لمطابقة التصميم"
+          )}
           <button className={styles["shop-all-btn"]}>
             {appState?.lang === "en" ? "Shop All" : t("shopAll")}
           </button>
