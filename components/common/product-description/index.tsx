@@ -43,6 +43,8 @@ const ProductDescription = ({
     getPrice();
   }, []);
 
+  console.log('product',  product);
+  
   const destructureAttributes = (product: ProductType) => {
     const obj: { [key: string]: string } = {};
     product?.attributes?.map((attr: any) => {

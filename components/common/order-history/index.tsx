@@ -29,15 +29,23 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
               <div className={styles["history-second-first-image"]}>
                 <Image src={"/calendar.png"} width={18} height={18} />
               </div>
-              <Label>
-                <>Order No: {order.orderId}</>
-              </Label>
+              <p className={styles["order-details-text"]}>
+                Order No:{" "}
+                <span className={styles["order-details-span"]}>
+                  {order.orderId}
+                </span>
+              </p>
             </div>
             <div className={styles["history-second-first-block"]}>
               <div className={styles["history-second-first-image"]}>
                 <Image src={"/calendar.png"} width={18} height={18} />
               </div>
-              <p>Order Date: {updateOrderDate(order.updatedAt)}</p>
+              <p className={styles["order-details-text"]}>
+                Order Date:{" "}
+                <span className={styles["order-details-span"]}>
+                  {updateOrderDate(order.updatedAt)}
+                </span>
+              </p>
             </div>
             <div className={styles["history-second-first-block"]}>
               <div className={styles["history-second-first-image"]}>
@@ -46,7 +54,7 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
               <Label>View Digital Receipt & Warranty</Label>
             </div>
           </div>
-          <div>
+          <div className={styles["history-barcode"]}>
             <Image src={"/barcode.svg"} width={160} height={160} />
           </div>
         </div>
@@ -109,7 +117,7 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
           order.payments.length > 0 &&
           order.payments.map((object: any, index: any) => {
             return (
-              <div className={styles["history-fifth-second"]}>
+              <div key={index} className={styles["history-fifth-second"]}>
                 <p>{object.cardHolder}</p>
                 <p>{object.cardNumber}</p>
                 <p>{object.expiryDate}</p>
@@ -129,14 +137,14 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
                   <div
                     className={`${styles["history-flex"]} ${styles["history-price"]}`}
                   >
-                    <p>Sub-Total:</p>
-                    <p>${object.price.toFixed(2)}</p>
+                    <p className={styles['history-six-total-title']}>Sub-Total:</p>
+                    <p className={styles['history-six-total-text']}>${object.price.toFixed(2)}</p>
                   </div>
                   <div
                     className={`${styles["history-flex"]} ${styles["discount-price"]}`}
                   >
-                    <p>Discount:</p>
-                    <p>${object.discount.toFixed(2)}</p>
+                    <p className={styles['history-six-total-title']}>Discount:</p>
+                    <p className={styles['history-six-total-text']}>${object.discount.toFixed(2)}</p>
                   </div>
                 </div>
                 <div className={styles["history-flex"]}>

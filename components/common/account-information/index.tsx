@@ -54,7 +54,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
   const router = useRouter();
   const { appState } = useContext(AppContext);
   const [activeComponent, setActiveComponent] = useState("Account Overview");
-  const [orderDetails , setOrderDetails] = useState('')
+  const [orderDetails, setOrderDetails] = useState("");
 
   return (
     <>
@@ -88,14 +88,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
           />
           {activeComponent == "Account Overview" && <AccountSection />}
 
-          {activeComponent === "My Orders" && (
-            <OrderDetails
-              activeComponent={activeComponent}
-              setActiveComponent={setActiveComponent}
-              setOrderDetails ={setOrderDetails}
-              orderDetails = {orderDetails}
-            />
-          )}
+          {activeComponent === "My Orders" && <OrderDetails />}
         </div>
       </div>
     </>

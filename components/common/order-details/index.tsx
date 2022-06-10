@@ -1,4 +1,4 @@
-import React, { useContext, FC, useState } from "react";
+import React, { useContext, FC, useState, useEffect } from "react";
 import Image from "next/image";
 import Label from "../ui/label";
 import { orderData } from "lib/mock-data/data";
@@ -12,20 +12,11 @@ import { updateOrderDate } from "lib/utils/common";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 import OrderHistory from "../order-history";
+import { ProductType } from "lib/types/product";
 
-interface OrderDetailsProps {
-  setActiveComponent?: Function;
-  activeComponent?: string;
-  orderDetails?: string;
-  setOrderDetails?: Function;
-}
+interface OrderDetailsProps {}
 
-const OrderDetails: FC<OrderDetailsProps> = ({
-  activeComponent,
-  // setActiveComponent,
-  // orderDetails,
-  // setOrderDetails,
-}) => {
+const OrderDetails: FC<OrderDetailsProps> = ({}) => {
   const payload = {
     authToken: "",
   };
@@ -35,13 +26,24 @@ const OrderDetails: FC<OrderDetailsProps> = ({
   const [width] = useWindowSize();
   const [orderObject, setOrderObject] = useState({});
   const [orderDetails, setOrderDetails] = useState("");
+  const [prod, setProd] = useState();
 
-  console.log("testing", orderDetails);
+  console.log("testing", orderObject);
 
   const handleOrderDetail = (order: any) => {
     order && setOrderObject(order);
     setOrderDetails("Order Details");
   };
+
+  // const destructureAttributes = (product: ProductType) => {
+  //   const obj: { [key: string]: string } = {};
+  //   orderObject?.items?.map((obj: any) => {
+  //     obj?.attributes?.map((ob: any, i: any) => {
+  //       obj[ob?.name] = ob?.value;
+  //     });
+  //   });
+  //   return { ...product, ...obj };
+  // };
 
   return orderDetails != "Order Details" ? (
     <div className={styles["order-container"]}>
@@ -149,6 +151,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({
                   className={styles["view-button"]}
                   onClick={() => {
                     handleOrderDetail(order);
+                    console.log("clicks", order);
                   }}
                 >
                   {width > desktopScreenSize
@@ -168,7 +171,9 @@ const OrderDetails: FC<OrderDetailsProps> = ({
       )}
     </div>
   ) : (
-    orderDetails === "Order Details" && <OrderHistory order={orderObject} />
+    <div>
+      {orderDetails === "Order Details" && <OrderHistory order={orderObject} />}
+    </div>
   );
 };
 export default OrderDetails;
