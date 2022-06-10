@@ -149,7 +149,11 @@ const RightSideDetail = ({
             <WishList itemID={productData && productData["itemId"]} />
           </div>
           <div className={styles["rating-stars"]}>
-            <StarRating count={5} rating={totalRating} />
+            <StarRating
+              count={5}
+              rating={totalRating}
+              pointerEventsNone={true}
+            />
           </div>
           <div className={styles["write-review-btn"]}>
             <Button

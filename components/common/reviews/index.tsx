@@ -116,6 +116,7 @@ const Reviews = ({
                 rating={totalRating}
                 starWidth={16.67}
                 starHeight={16.67}
+                pointerEventsNone={true}
               />
               <Label
                 className={styles["total-rating"]}
@@ -173,10 +174,16 @@ const Reviews = ({
                       <Label className={styles["customer-name"]}>
                         {review?.author?.replace(/"/g, "")}
                       </Label>
-                      <div className={styles["review-rating"]}>
+                      <div
+                        className={styles["review-rating"]}
+                        style={{
+                          pointerEvents: "none",
+                        }}
+                      >
                         <StarRating
                           count={5}
                           rating={review?.rating?.toFixed(2)}
+                          pointerEventsNone={true}
                         />
                       </div>
                       <Label className={styles["review-content"]}>
