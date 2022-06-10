@@ -27,3 +27,7 @@ export { default as Star } from "./Star";
 export { default as FilledStar } from "./FilledStar";
 export { default as CrossSmall } from "./CrossSmall";
 export { default as ArrowDown } from "./ArrowDown";
+export { default as IconTick } from "./IconTick";
+export { default as TabbyIcon } from "./Tabby";
+export { default as PaypalButton } from "./PaypalButton";
+export { default as AppleButton } from "./AppleButton";

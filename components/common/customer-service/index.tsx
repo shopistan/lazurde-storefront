@@ -155,7 +155,7 @@ const CustomerService: FC<CustomerServiceProps> = ({
         )}
       </div>
       <button className={styles["button"]}>
-        <Image src={"/question.png"} width={20} height={20} />
+        <Image alt="question" src={"/question.png"} width={20} height={20} />
         <p>
           {appState.lang == "en" ? "Have a question?" : t("customerButton")}
         </p>

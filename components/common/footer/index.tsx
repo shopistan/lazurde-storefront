@@ -71,6 +71,7 @@ const Footer = ({
                 _footerLinks.map((footerLink, index) =>
                   width > desktopScreenSize ? (
                     <FooterLinks
+                      key={index}
                       heading={footerLink.linkHeading}
                       links={footerLink.links}
                       index={index}

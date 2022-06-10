@@ -92,7 +92,7 @@ const BorderlessSelect = ({
       </div>
       {showInModal ? (
         <Modal
-          className=""
+          className={styles['select-modal']}
           isOpened={isOpen}
           onClose={() => {
             setIsOpen(false);

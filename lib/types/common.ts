@@ -77,6 +77,7 @@ export type FooterProps = {
 
 export interface PageProps {
   headerProps: HeaderProps;
+  headerArray: [];
   footerProps: FooterProps;
   brandSidebarProps: BrandSidebarProps;
   pageComponents?: XMComponent[];

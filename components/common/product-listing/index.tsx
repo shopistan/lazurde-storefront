@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import ProductCard from "components/common/product-card/ProductCard";
 import FilterBar from "./filter-sorting-bar";
 import useWindowSize from "lib/utils/useWindowSize";
@@ -72,14 +72,17 @@ const ProductListing = ({
     setTotalSelectedFilterCount,
     selectedFilters,
     setSelectedFilters,
+    hasFilteredData,
+    setHasFilteredData,
   } = useContext(AppContext);
   const { t } = useTranslation("common");
+  const listingWrapper = useRef<HTMLInputElement>();
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [filteredProductData, setFilteredProductData] = useState<any>("");
   const [filteredListData, setFilteredListData] = useState<any>([]);
   const [currentProductData, setCurrentProductData] = useState([]);
   // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
-  const [hasFilteredData, setHasFilteredData] = useState(false);
+  // const [hasFilteredData, setHasFilteredData] = useState(false);
 
   const _arabicProductCardData = t(
     "arabicProductCardData",
@@ -178,8 +181,6 @@ const ProductListing = ({
         }
       );
 
-      console.log("orFilters", orFilters, categoryArray);
-
       payload.push(orFilters);
     }
 
@@ -196,7 +197,6 @@ const ProductListing = ({
         const obj = result[index];
 
         hitsArray = hitsArray.concat(obj.hits);
-        console.log("hitsArray", hitsArray, obj.hits);
       }
       filteredData = hitsArray;
     } else {
@@ -227,7 +227,8 @@ const ProductListing = ({
         }
       );
     }
-
+    const nonVariantArray = filteredArray.filter((item: any) => item.isVariant === false)
+    filteredArray = nonVariantArray
     return filteredArray;
   };
 
@@ -310,12 +311,21 @@ const ProductListing = ({
     setFilteredListData(newFilterList);
   };
 
+  const scrollToTop = () => {
+    const header = document.getElementById("main-header");
+    const headerHeight = header.getBoundingClientRect().height;
+    const elementTop = listingWrapper?.current.offsetTop;
+    window.scroll({
+      top: elementTop - headerHeight,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
-      <div className={styles["product-listing__wrapper"]}>
-        {(showBreadcrumb || totalSelectedFilterCount > 0) && (
-          <BreadCrumbs pageName={pageName} />
-        )}
+      <div ref={listingWrapper} className={styles["product-listing__wrapper"]}>
+        {showBreadcrumb && <BreadCrumbs pageName={pageName} />}
 
         <Pagination
           pKey={productDataArray}
@@ -336,9 +346,11 @@ const ProductListing = ({
             setCurrentProductData(slicedArray);
           }}
           onPageUp={(slicedArray: []) => {
+            scrollToTop();
             setCurrentProductData(slicedArray);
           }}
           onPageDown={(slicedArray: []) => {
+            scrollToTop();
             setCurrentProductData(slicedArray);
           }}
         >

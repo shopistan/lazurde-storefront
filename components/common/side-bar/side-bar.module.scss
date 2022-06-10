@@ -1,0 +1,204 @@
+@import "/styles/variables.scss";
+
+.account-left {
+  width: 100%;
+  @media (min-width: $breakPoint-desktop) {
+    width: 36.5%;
+    margin-inline-end: 60px;
+  }
+}
+
+.account-profile {
+  background-color: white;
+  padding-block: 15px;
+  padding-inline: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+
+  p {
+    padding-inline-end: 100px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: start;
+
+    span {
+      display: block;
+      margin-bottom: 8px;
+    }
+  }
+}
+.account-profile-mobile {
+  background-color: white;
+  padding-bottom: 111px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.lastname-mobile {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0em;
+}
+.account-image-mobile {
+  width: 100%;
+}
+
+.account-banner {
+  position: absolute;
+  top: 67px;
+
+  p {
+    margin-top: 8px !important;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: center;
+
+    span {
+      display: block;
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.account-review {
+  background: rgba(255, 0, 0, 0.05);
+  padding-block: 16px;
+  padding-inline: 28px 32px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+
+  @media (min-width: $breakPoint-desktop) {
+    padding-inline: 18px 32px;
+  }
+
+  p {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: start;
+    margin-block: 0;
+    margin-inline-start: 17.33px;
+    margin-block-end: 0;
+
+    @media (min-width: $breakPoint-desktop) {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 16px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
+  }
+}
+
+.account-details {
+  margin-block-end: 8px;
+
+  &:last-child {
+    margin-block-end: 0;
+
+    .account-detail {
+      p {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 17px;
+        letter-spacing: 0em;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.account-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding-block: 16.5px;
+  padding-inline-start: 21px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  text-align: start;
+
+  span {
+    margin-inline-start: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: start;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.account-detail {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding-block: 11px;
+  padding-inline: 28px 32px;
+  @media (min-width: $breakPoint-desktop) {
+    padding-inline: 18px;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: start;
+    margin-block: 0;
+    margin-inline-end: 0;
+    margin-inline-start: 18px;
+    color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.active-state {
+  color: rgba(0, 0, 0, 0.8) !important;
+
+  @media (min-width: $breakPoint-desktop) {
+    color: rgba(0, 0, 0, 1) !important;
+  }
+}
+
+.active-block {
+  @media (min-width: $breakPoint-desktop) {
+    position: relative;
+    &::before {
+      content: "";
+      background-color: black;
+      position: absolute;
+      right: 0;
+      left: 0;
+      width: 2px;
+      height: 50%;
+    }
+  }
+}
+
+.account-image {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.firstName-desktop {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+}

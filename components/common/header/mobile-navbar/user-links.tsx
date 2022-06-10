@@ -26,7 +26,8 @@ const UserLinks = (): JSX.Element => {
             </a>
           </Link>
         </li>
-        <li className={styles["mobile-header__user-links-item"]}>
+        {/*---do not delete below commented code---*/}
+        {/* <li className={styles["mobile-header__user-links-item"]}>
           <Link href={"/"}>
             <a>
               <Calendar width="20px" height="20px" fill="#000" />
@@ -37,7 +38,7 @@ const UserLinks = (): JSX.Element => {
               </span>
             </a>
           </Link>
-        </li>
+        </li> */}
         <li className={styles["mobile-header__user-links-item"]}>
           <Link href={"/"}>
             <a>

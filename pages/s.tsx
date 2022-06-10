@@ -30,8 +30,14 @@ const SearchPage: FC<SearchPageProps> = ({
   pageComponents,
   algoliaSearchResults,
 }) => {
-  const { appState, totalSelectedFilterCount } = useContext(AppContext);
+  const {
+    appState,
+    totalSelectedFilterCount,
+    selectedFilter,
+    hasFilteredData,
+  } = useContext(AppContext);
   console.log("Search Page Props: ", algoliaSearchResults);
+  console.log("selected filters", selectedFilter);
   return (
     <>
       <Head>
@@ -41,11 +47,17 @@ const SearchPage: FC<SearchPageProps> = ({
       </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
-        {totalSelectedFilterCount === 0 && (
+        {!hasFilteredData ? (
           <SearchResultsInfo
             searchTerm={algoliaSearchResults?.query}
             totalItems={algoliaSearchResults?.hits?.length}
           />
+        ) : (
+          <div
+            style={{
+              height: "39px",
+            }}
+          ></div>
         )}
         {pageComponents?.map((component: XMComponent, index) => {
           const Component = componentsById[component.id];

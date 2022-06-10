@@ -221,7 +221,7 @@ const FilterBar: FC<FilterBarProps> = ({
   }, [filterList]);
 
   return (
-    <div className={styles["filter-bar-main"]} data-headerid={headerId}>
+    <div className={styles["filter-bar-main"]} data-header-id={headerId}>
       <div className={styles["div-filter-bar"]}>
         <div className={styles["filter-links"]}>
           {Array.isArray(currentFilterList) &&
@@ -298,7 +298,7 @@ const FilterBar: FC<FilterBarProps> = ({
         >
           <Button
             buttonText={appState?.lang === "en" ? "Clear All Filters" : "مسح"}
-            buttonStyle={"white"}
+            buttonStyle={"underline"}
             buttonSize={"sm"}
             onClick={() => {
               setSelectedFilters && setSelectedFilters({});

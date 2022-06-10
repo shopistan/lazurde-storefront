@@ -1,16 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Zoom, Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { desktopScreenSize } from 'lib/utils/common'
+import { desktopScreenSize } from "lib/utils/common";
 
 interface SliderProps {
-  children?: JSX.Element | string;
+  children?: any | JSX.Element | string;
   desktopSlidePerView?: number;
   mobileSlidePerView?: number;
   pagination?: boolean;
@@ -18,6 +18,10 @@ interface SliderProps {
   scrollbar?: boolean;
   className?: string;
   productSlider?: boolean;
+  hasScrollbar?: boolean;
+  isDraggable?: boolean;
+  hasZoom?: boolean;
+  initialSlide?: number ;
 }
 
 const Slider = ({
@@ -25,10 +29,14 @@ const Slider = ({
   desktopSlidePerView = 4,
   mobileSlidePerView = 1.1,
   navigation = false,
+  hasScrollbar = true,
+  isDraggable = true,
   scrollbar = false,
   pagination = false,
   productSlider = false,
   className = "",
+  hasZoom = false,
+  initialSlide = 0,
 }: SliderProps): JSX.Element => {
   const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
@@ -39,25 +47,33 @@ const Slider = ({
   }, [appState]);
 
   const sliderSetting = {
-    modules: [Navigation, Pagination, Scrollbar, A11y],
+    modules: [Zoom, Navigation, Pagination, Scrollbar, A11y],
     spaceBetween: 8,
-    slidesPerView: width > desktopScreenSize ? desktopSlidePerView : mobileSlidePerView,
+    slidesPerView:
+      width > desktopScreenSize ? desktopSlidePerView : mobileSlidePerView,
     navigation: navigation,
-    scrollbar: { draggable: scrollbar },
+    scrollbar: hasScrollbar ? { draggable: isDraggable } : hasScrollbar,
+    cssMode: true,
+    zoom: hasZoom,
     className: className,
     key: appState?.lang,
     dir: appState?.lang === "en" ? "ltr" : "rtl",
+    initialSlide: initialSlide,
   };
 
   const productSliderSetting = {
-    modules: [Navigation, Pagination, Scrollbar, A11y],
+    modules: [Zoom, Navigation, Pagination, Scrollbar, A11y],
     spaceBetween: 0,
-    slidesPerView: width > desktopScreenSize ? desktopSlidePerView : mobileSlidePerView,
+    slidesPerView:
+      width > desktopScreenSize ? desktopSlidePerView : mobileSlidePerView,
     pagination: { clickable: pagination },
     navigation: navigation,
+    cssMode: true,
+    zoom: hasZoom,
     className: className,
     key: appState?.lang,
     dir: appState?.lang === "en" ? "ltr" : "rtl",
+    initialSlide: initialSlide,
   };
 
   return (

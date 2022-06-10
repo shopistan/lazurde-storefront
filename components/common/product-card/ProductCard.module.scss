@@ -25,8 +25,13 @@
   }
 
   &__img-wrapper {
+    cursor: pointer;
     position: relative;
-    background-color: #fafafa;
+    // background-color: #fafafa;
+
+    .product-img {
+      object-fit: cover;
+    }
   }
 
   &__wishlist-icon {

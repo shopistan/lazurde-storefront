@@ -15,6 +15,10 @@ import CustomerService from "./common/customer-service";
 import TermCondtion from "components/common/terms-condition";
 import CelebrityChoice from "components/common/celebrity-choice";
 import InThePress from "components/common/in-the-press";
+import ExponeaHomepageRecommendations from "components/common/exponea-homepage-recommendations";
+import ExponeaHomepageRecommendationsNewest from "components/common/exponea-homepage-recommendations-newest";
+import ExponeaHomepageRecommendationsTrending from "components/common/exponea-homepage-recommendations-trending";
+import CGIR from "components/common/corporate-governance-and-investor-relations";
 
 export const componentsById: any = {
   LazurdeHeroBanner,
@@ -34,4 +38,8 @@ export const componentsById: any = {
   TermCondtion,
   CelebrityChoice,
   InThePress,
+  ExponeaHomepageRecommendations,
+  ExponeaHomepageRecommendationsNewest,
+  ExponeaHomepageRecommendationsTrending,
+  CGIR,
 };
