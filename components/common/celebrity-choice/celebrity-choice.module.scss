@@ -1,9 +1,11 @@
+@import "/styles/variables.scss";
+
 .celebrity-container {
   width: 100%;
   padding: 0;
   max-width: 1440px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding-inline: 80px;
   }
 
@@ -60,10 +62,11 @@
   .details-wrapper {
     display: flex;
     // justify-content: space-between;
-    margin-top: 120px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    // margin-top: 120px;
+    // border-top: 1px solid rgba(0, 0, 0, 0.1);
 
     @media screen and (max-width: 600px) {
+      margin-top: 0;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -82,7 +85,7 @@
 
     .details-heading {
       width: 50%;
-      padding-top: 120px;
+      // padding-top: 120px;
       padding-bottom: 80px;
 
       @media screen and (max-width: 600px) {
@@ -94,7 +97,7 @@
     }
     .details-description {
       width: 50%;
-      padding-top: 120px;
+      // padding-top: 120px;
       padding-bottom: 80px;
       margin: 0px;
       font-size: 14px;
@@ -134,5 +137,20 @@
         }
       }
     }
+  }
+}
+
+.divider {
+  margin-top: 56px;
+  margin-bottom: 48px;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 90%;
+  height: 1px;
+  border: 0;
+
+  @media (min-width: $breakPoint-desktop) {
+    width: 100%;
+    margin-top: 120px;
+    margin-bottom: 120px;
   }
 }
