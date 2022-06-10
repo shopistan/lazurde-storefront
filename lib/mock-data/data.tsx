@@ -912,6 +912,9 @@ export const orderData = {
             cardIdentifier: 4242,
           },
           paymentMethod: "visa",
+          cardHolder: "Mike Anderson",
+          cardNumber: "43************04",
+          expiryDate: "03/27",
           paymentKind: "CARD_STRIPE",
           conversion: 1,
           paymentToken: {
@@ -1053,6 +1056,9 @@ export const orderData = {
             cardIdentifier: 4242,
           },
           paymentMethod: "visa",
+          cardHolder: "Mike Anderson",
+          cardNumber: "43************04",
+          expiryDate: "03/27",
           paymentKind: "CARD_STRIPE",
           conversion: 1,
           paymentToken: {

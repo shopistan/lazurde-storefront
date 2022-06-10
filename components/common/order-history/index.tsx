@@ -1,11 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
 import Label from "../ui/label";
 import Image from "next/image";
 import Button from "../ui/button";
 import Link from "next/link";
 import styles from "./order-history.module.scss";
+import { updateOrderDate, ordeFormatDate } from "lib/utils/common";
 
-const OrderHistory = ({}) => {
+interface OrderHistoryProps {
+  order?: any;
+}
+
+const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
+  console.log("order", order);
+
   return (
     <div className={styles["history-container"]}>
       <div className={styles["history-first"]}>
@@ -22,13 +29,15 @@ const OrderHistory = ({}) => {
               <div className={styles["history-second-first-image"]}>
                 <Image src={"/calendar.png"} width={18} height={18} />
               </div>
-              <Label>Order No:</Label>
+              <Label>
+                <>Order No: {order.orderId}</>
+              </Label>
             </div>
             <div className={styles["history-second-first-block"]}>
               <div className={styles["history-second-first-image"]}>
                 <Image src={"/calendar.png"} width={18} height={18} />
               </div>
-              <Label>Order Date:</Label>
+              <p>Order Date: {updateOrderDate(order.updatedAt)}</p>
             </div>
             <div className={styles["history-second-first-block"]}>
               <div className={styles["history-second-first-image"]}>
@@ -53,6 +62,62 @@ const OrderHistory = ({}) => {
             <br /> Al Nakheel Mall, Riyadh 12483, Saudi Arabia
           </>
         </Label>
+      </div>
+      <div className={styles["history-forth"]}>
+        <div>
+          <div className={styles["history-forth-first"]}>
+            <Label className={styles["history-forth-title"]}>
+              Click & Collect Order
+            </Label>
+            <Label className={styles["history-forth-text"]}>2 Items</Label>
+          </div>
+          <div>
+            <p className={styles["history-forth-description"]}>
+              Estimated Collection: {ordeFormatDate(order.updatedAt)}
+            </p>
+          </div>
+        </div>
+        <div className={styles["history-forth-second"]}>
+          {order.items &&
+            order.items.length > 0 &&
+            order.items.map((object: any, index: any) => {
+              return (
+                <div key={index}>
+                  <div>
+                    <Image src={"/small-ring.png"} width={100} height={100} />
+                  </div>
+                  <div>
+                    <p>{object.title}</p>
+                    <p>${object.price}</p>
+                    <p>Quantity: {object.quantity}</p>
+                    <p>Size: {object.price}</p>
+                    <p>Color: {object.price}</p>
+                    <p>Style Number: {object.sku}</p>
+                    <p>Order Date: {updateOrderDate(order.updatedAt)}</p>
+                    <p>{order.status}</p>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+      </div>
+      <div className={styles["history-fifth"]}>
+        <p className={styles["history-fifth-title"]}>Payment Details</p>
+        {order.payments &&
+          order.payments.length > 0 &&
+          order.payments.map((object: any, index: any) => {
+            return (
+              <div className={styles["history-fifth-second"]}>
+                <p>{object.cardHolder}</p>
+                <p>{object.cardNumber}</p>
+                <p>{object.expiryDate}</p>
+                <p>{object.paymentMethod}</p>
+              </div>
+            );
+          })}
+      </div>
+      <div className={styles["history-six"]}>
+        
       </div>
     </div>
   );

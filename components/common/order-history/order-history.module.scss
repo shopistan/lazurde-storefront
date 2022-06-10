@@ -62,6 +62,7 @@
 .history-third {
   padding: 40px;
   background-color: white;
+  margin-bottom: 8px;
 }
 
 .history-third-title {
@@ -82,4 +83,79 @@
   text-align: start;
   margin-block: 0;
   color: rgba(0, 0, 0, 0.6);
+}
+
+.history-forth {
+  padding: 40px;
+  background-color: white;
+}
+
+.history-forth-first {
+  display: flex;
+  justify-content: space-between;
+}
+
+.history-forth-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-block: 0;
+}
+
+.history-forth-text {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-block: 0;
+}
+
+.history-forth-description {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-bottom: 0;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.history-fifth {
+  background-color: white;
+  padding: 40px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.history-fifth-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.history-fifth-second {
+  padding-top: 24px;
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: start;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0;
+  }
+}
+
+.history-six {
+  padding: 40px;
+  background-color: white;
 }

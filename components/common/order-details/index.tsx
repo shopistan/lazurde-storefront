@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, FC, useState } from "react";
 import Image from "next/image";
 import Label from "../ui/label";
 import { orderData } from "lib/mock-data/data";
@@ -11,16 +11,39 @@ import { getOrders } from "lib/utils/order";
 import { updateOrderDate } from "lib/utils/common";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
+import OrderHistory from "../order-history";
 
-const OrderDetails = ({}) => {
+interface OrderDetailsProps {
+  setActiveComponent?: Function;
+  activeComponent?: string;
+  orderDetails?: string;
+  setOrderDetails?: Function;
+}
+
+const OrderDetails: FC<OrderDetailsProps> = ({
+  activeComponent,
+  // setActiveComponent,
+  // orderDetails,
+  // setOrderDetails,
+}) => {
   const payload = {
     authToken: "",
   };
-  const response = getOrders(payload);
+  // const response = getOrders(payload);
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
   const [width] = useWindowSize();
-  return (
+  const [orderObject, setOrderObject] = useState({});
+  const [orderDetails, setOrderDetails] = useState("");
+
+  console.log("testing", orderDetails);
+
+  const handleOrderDetail = (order: any) => {
+    order && setOrderObject(order);
+    setOrderDetails("Order Details");
+  };
+
+  return orderDetails != "Order Details" ? (
     <div className={styles["order-container"]}>
       <div className={styles["order-main"]}>
         <Image src={"/order.png"} width={13.75} height={15.28} />
@@ -122,7 +145,12 @@ const OrderDetails = ({}) => {
                     </Link>
                   </div>
                 </div>
-                <Button className={styles["view-button"]} onClick={() => {}}>
+                <Button
+                  className={styles["view-button"]}
+                  onClick={() => {
+                    handleOrderDetail(order);
+                  }}
+                >
                   {width > desktopScreenSize
                     ? appState?.lang == "en"
                       ? "View Order"
@@ -139,6 +167,8 @@ const OrderDetails = ({}) => {
         <></>
       )}
     </div>
+  ) : (
+    orderDetails === "Order Details" && <OrderHistory order={orderObject} />
   );
 };
 export default OrderDetails;
