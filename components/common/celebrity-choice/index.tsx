@@ -36,7 +36,7 @@ const CelebrityChoice: FC<CelebrityChoiceProps> = ({
           src={bannerImage?.url}
           alt={bannerImage?.altText}
           width={size > desktopScreenSize ? 1280 : 375}
-          height={size > desktopScreenSize ? 308 : 200}
+          height={size > desktopScreenSize ? 376 : 200}
           layout="responsive"
           objectFit="cover"
         />
@@ -53,9 +53,10 @@ const CelebrityChoice: FC<CelebrityChoiceProps> = ({
                 <Image
                   src={celeb?.celebrityImage?.url}
                   alt={celeb?.celebrityImage?.altText}
-                  width={size > desktopScreenSize ? 421 : 370}
+                  width={size > desktopScreenSize ? 421 : 343}
                   height={size > desktopScreenSize ? 416 : 302}
                   objectFit="cover"
+                  layout="fixed"
                 />
                 <Image
                   src={celeb?.celebritySign?.url}
@@ -67,6 +68,7 @@ const CelebrityChoice: FC<CelebrityChoiceProps> = ({
             );
           })}
       </div>
+      <hr className={styles["divider"]} />
       <div className={styles["details-wrapper"]}>
         <div className={styles["details-heading"]}>
           <h1>
