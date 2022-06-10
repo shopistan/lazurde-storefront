@@ -10,7 +10,7 @@ interface SizeChartProps {
   productSizeArray?: { Size?: number }[];
   onSizeChange?: Function;
   setSelectedSize?: Function;
-  selectedSize: {size: number, index: number};
+  selectedSize: { size: number; index: number };
 }
 
 const SizeChart = ({
@@ -27,27 +27,28 @@ const SizeChart = ({
   const [sizeArray, setSizeArray] = useState([]);
 
   const getSizes = () => {
+    const sizeSet = new Set();
     if (!productSizeArray) return;
     if (productSizeArray.length < 1) return;
-    const sizeSet = new Set();
-    productSizeArray.map((item) => {
+    for (let index = 0; index < productSizeArray.length; index++) {
+      const item = productSizeArray[index];
       item.Size && sizeSet.add(item.Size);
-    });
-    setSizeArray([...Array.from(sizeSet)]);
+    }
 
     if (activeSize === 0) {
       setSelectedSize({
         size: [...Array.from(sizeSet)][0],
         index: 0,
-      })
+      });
     }
+    setSizeArray([...Array.from(sizeSet)]);
+  
   };
 
   useEffect(() => {
     getSizes();
   }, [productSizeArray]);
-  console.log("something", sizeArray);
-  
+
   return (
     <div className={styles["sizechart-wrapper"]}>
       {sizeArray && sizeArray.length > 0 ? (

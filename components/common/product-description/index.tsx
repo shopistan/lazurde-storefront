@@ -8,7 +8,6 @@ import RightSideDetail from "./right-side-detail";
 import Reviews from "components/common/reviews/index";
 import { AppContext } from "lib/context";
 import { getReviews } from "lib/utils/reviews";
-import { fetchProductPriceByItemId } from "lib/utils/product";
 import Link from "next/link";
 
 interface ProductDescriptionProps {
@@ -33,33 +32,19 @@ const ProductDescription = ({
   const [isRatingError, setIsRatingError] = useState("");
 
   useEffect(() => {
-    const payload = {
-      priceList: [priceListId],
-      itemId: [product?.itemId?.toString()],
-    };
-    const getPrice = async () => {
-      const response = await fetchProductPriceByItemId(payload);
-    };
-    getPrice();
+    setFilterData("");
+    fetchingReviews();
   }, []);
 
-  const destructureAttributes = (product: ProductType) => {
-    const obj: { [key: string]: string } = {};
-    product?.attributes?.map((attr: any) => {
-      obj[attr?.name] = attr?.value;
-    });
-    return { ...product, ...obj };
-  };
-
-  const getImageArray = (product: any) => {
-    const imageArray: { url: string; altText: string }[] = [];
-    Object.keys(product).map((attr: any) => {
-      if (attr?.includes("Image URL")) {
-        imageArray.push({ url: product[attr], altText: "" });
-      }
-    });
-    setImageArray(imageArray);
-  };
+  useEffect(() => {
+    const redriectBreadCrumbs =
+      appState?.brand === `Miss L'`
+        ? "/missl"
+        : appState?.brand === `Kenaz`
+        ? "/kenaz"
+        : "/";
+    redriectBreadCrumbs && setLink(redriectBreadCrumbs);
+  }, [appState?.brand]);
 
   useEffect(() => {
     let modifiedProdArray = destructureAttributes(product);
@@ -82,10 +67,23 @@ const ProductDescription = ({
     }
   }, [prodArray]);
 
-  useEffect(() => {
-    setFilterData("");
-    fetchingReviews();
-  }, []);
+  const destructureAttributes = (product: ProductType) => {
+    const obj: { [key: string]: string } = {};
+    product?.attributes?.map((attr: any) => {
+      obj[attr?.name] = attr?.value;
+    });
+    return { ...product, ...obj };
+  };
+
+  const getImageArray = (product: any) => {
+    const imageArray: { url: string; altText: string }[] = [];
+    Object.keys(product).map((attr: any) => {
+      if (attr?.includes("Image URL")) {
+        imageArray.push({ url: product[attr], altText: "" });
+      }
+    });
+    setImageArray(imageArray);
+  };
 
   const fetchingReviews = async () => {
     const productId = prodArray && prodArray["itemId"];
@@ -105,15 +103,6 @@ const ProductDescription = ({
     console.log("colroValue", val);
   };
 
-  useEffect(() => {
-    const redriectBreadCrumbs =
-      appState?.brand === `Miss L'`
-        ? "/missl"
-        : appState?.brand === `Kenaz`
-        ? "/kenaz"
-        : "/";
-    redriectBreadCrumbs && setLink(redriectBreadCrumbs);
-  }, [appState?.brand]);
 
   return (
     <>
@@ -147,18 +136,7 @@ const ProductDescription = ({
               fetchingReviews={fetchingReviews}
               setIsRatingError={setIsRatingError}
               isRatingError={isRatingError}
-              currency={
-                productDescriptionData?.priceData[0]?.offers?.price?.currency
-              }
-              basePrice={
-                productDescriptionData?.priceData[0]?.offers?.price?.base
-              }
-              discount={
-                productDescriptionData?.priceData[0]?.offers?.price?.sale
-              }
-              finalPrice={
-                productDescriptionData?.priceData[0]?.offers?.price?.finalPrice
-              }
+              priceListId={priceListId}
             />
           </div>
         </div>
