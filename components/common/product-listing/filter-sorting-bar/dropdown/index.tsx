@@ -123,7 +123,7 @@ const DropDown = ({
                 {optionName}
                 <div
                   className={styles["div-tick"]}
-                  data-showTick={
+                  data-show-tick={
                     selectedFilters?.[filterIndex]?.selectedOptions?.[index]
                       ?.selected
                   }
@@ -141,7 +141,7 @@ const DropDown = ({
       >
         <Button
           buttonText={appState?.lang === "en" ? "Clear All Filters" : "مسح"}
-          buttonStyle={"white"}
+          buttonStyle={"underline"}
           buttonSize={"sm"}
           onClick={() => {
             setSelectedFilters && setSelectedFilters({});

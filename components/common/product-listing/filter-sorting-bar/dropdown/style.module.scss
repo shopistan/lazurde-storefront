@@ -40,7 +40,7 @@
         transition: opacity 0.2s ease-in-out;
         color: #000000;
 
-        &[data-showTick="true"] {
+        &[data-show-tick="true"] {
           opacity: 1;
         }
       }

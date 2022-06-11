@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./style.module.scss";
 import { getReviews } from "lib/utils/reviews";
 import Label from "components/common/ui/label";
@@ -8,29 +8,41 @@ import { formateDate, reviewStarAvg } from "lib/utils/common";
 import WriteAReview from "./write-review";
 import ReviewTabs from "./review-tabs";
 import Pagination from "components/common/ui/pagination";
+import useTranslation from "next-translate/useTranslation";
+import { AppContext } from "lib/context/index";
 
-const Reviews = (): JSX.Element => {
-  const [reviewsData, setReviewsData] = useState<any>([]);
-  const [initialProductData, setInitialProductData] = useState<any>([]);
-  const [currentData, setCurrentData] = useState([]);
-  const [filterData, setFilterData] = useState<any>([]);
+interface ReviewsProps {
+  setTotalRating?: Function;
+  totalRating?: number;
+  productData?: any;
+  reviewsData?: any;
+  initialProductData?: any;
+  currentData?: any;
+  setCurrentData?: Function;
+  filterData?: any;
+  setFilterData?: Function;
+  fetchingReviews?: Function;
+  setIsRatingError?: Function;
+  isRatingError?: string;
+}
+
+const Reviews = ({
+  setTotalRating,
+  totalRating,
+  productData = {},
+  reviewsData = [],
+  initialProductData = [],
+  currentData = [],
+  setCurrentData,
+  filterData = [],
+  setFilterData,
+  fetchingReviews = () => {},
+  setIsRatingError,
+  isRatingError,
+}: ReviewsProps): JSX.Element => {
+  const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
-  const [totalRating, setTotalRating] = useState(0);
-
-  useEffect(() => {
-    setFilterData("");
-    fetchingReviews();
-  }, []);
-
-  const fetchingReviews = async () => {
-    const productId = 5151231;
-    const response = await getReviews(productId);
-    response && response?.data && setReviewsData(response?.data?.results);
-    response &&
-      response?.data &&
-      setInitialProductData(response?.data?.results);
-    response && response?.data && setCurrentData(response?.data?.results);
-  };
 
   const onClose = () => {
     setModalOpen(false);
@@ -48,24 +60,25 @@ const Reviews = (): JSX.Element => {
     }
     if (filtername === "recent") {
       setFilterData(reviewsData);
-      // fetchingReviews();
     }
 
     if (filtername === "highest") {
+      const sortingArray = [...reviewsData];
       const highestReviewData =
-        reviewsData &&
-        reviewsData.length > 0 &&
-        reviewsData.sort(
+        sortingArray &&
+        sortingArray.length > 0 &&
+        sortingArray.sort(
           (a: any, b: any) => b?.review?.rating - a?.review?.rating
         );
       highestReviewData && setFilterData([...highestReviewData]);
     }
 
     if (filtername === "lowest") {
+      const sortingArray = [...reviewsData];
       const lowestReviewData =
-        reviewsData &&
-        reviewsData.length > 0 &&
-        reviewsData.sort(
+        sortingArray &&
+        sortingArray.length > 0 &&
+        sortingArray.sort(
           (a: any, b: any) => a?.review?.rating - b?.review?.rating
         );
       lowestReviewData && setFilterData([...lowestReviewData]);
@@ -80,83 +93,98 @@ const Reviews = (): JSX.Element => {
         return ratings.push(element?.review?.rating);
       });
     const ratingAvg = ratings && ratings.length > 0 && reviewStarAvg(ratings);
-    ratingAvg && setTotalRating(ratingAvg);
+    ratingAvg && setTotalRating && setTotalRating(ratingAvg);
   }, [reviewsData]);
 
   return (
     <>
-      <div className={styles["reviews-wrapper"]}>
-        <div className={styles["review-summary"]}>
-          {reviewsData && reviewsData.length > 0 && (
-            <Label className={styles["total-review-label"]}>
-              {`${reviewsData?.length} customer reviews`}
-            </Label>
-          )}
-          <div className={styles["review-summary-stars"]}>
-            <StarRating
-              count={5}
-              rating={totalRating}
-              starWidth={16.67}
-              starHeight={16.67}
-            />
-            <Label
-              className={styles["total-rating"]}
-            >{`${totalRating} rating`}</Label>
+      {reviewsData && reviewsData.length > 0 ? (
+        <div className={styles["reviews-wrapper"]}>
+          <div className={styles["review-summary"]}>
+            {reviewsData && reviewsData.length > 0 && (
+              <Label className={styles["total-review-label"]}>
+                {`${reviewsData?.length} ${
+                  appState.lang == "en"
+                    ? "customer reviews"
+                    : t("customer reviews")
+                }`}
+              </Label>
+            )}
+            <div className={styles["review-summary-stars"]}>
+              <StarRating
+                count={5}
+                rating={totalRating}
+                starWidth={16.67}
+                starHeight={16.67}
+                pointerEventsNone={true}
+              />
+              <Label
+                className={styles["total-rating"]}
+              >{`${totalRating?.toFixed(2)} ${
+                appState.lang == "en" ? "rating" : t("rating")
+              }`}</Label>
+            </div>
           </div>
-        </div>
-        <div className={styles["write-review-btn"]}>
-          <button
-            onClick={() => {
-              setModalOpen(true);
-              document.body.style.overflow = "hidden";
+          <div className={styles["write-review-btn"]}>
+            <button
+              onClick={() => {
+                setModalOpen(true);
+                document.body.style.overflow = "hidden";
+              }}
+            >
+              {appState.lang == "en" ? "write a review" : t("write a review")}
+            </button>
+          </div>
+          <ReviewTabs
+            onClick={(e: any) => {
+              filterReview(e);
             }}
-          >
-            write a review
-          </button>
-        </div>
-        <ReviewTabs
-          onClick={(e: any) => {
-            filterReview(e);
-          }}
-        />
+          />
 
-        <>
-          <Pagination
-            showPaginationCount={false}
-            pKey={currentData}
-            paginationClass={styles["div-pagination"]}
-            defaultPageNumber={1}
-            pageSize={3}
-            totalSize={
-              Array.isArray(filterData)
-                ? filterData?.length
-                : initialProductData?.length
-            }
-            dataArray={
-              Array.isArray(filterData) ? filterData : initialProductData
-            }
-            onInitialize={(slicedArray: []) => {
-              setCurrentData(slicedArray);
-            }}
-            onPageUp={(slicedArray: []) => {
-              setCurrentData(slicedArray);
-            }}
-            onPageDown={(slicedArray: []) => {
-              setCurrentData(slicedArray);
-            }}
-          >
-            <>
-              {currentData &&
-                currentData.length > 0 &&
-                currentData?.map((reviews: any, index: number) => {
+          <>
+            <Pagination
+              showPaginationCount={false}
+              pKey={currentData}
+              paginationClass={styles["div-pagination"]}
+              defaultPageNumber={1}
+              pageSize={3}
+              totalSize={
+                Array.isArray(filterData)
+                  ? filterData?.length
+                  : initialProductData?.length
+              }
+              dataArray={
+                Array.isArray(filterData) ? filterData : initialProductData
+              }
+              onInitialize={(slicedArray: []) => {
+                setCurrentData(slicedArray);
+              }}
+              onPageUp={(slicedArray: []) => {
+                setCurrentData(slicedArray);
+              }}
+              onPageDown={(slicedArray: []) => {
+                setCurrentData(slicedArray);
+              }}
+            >
+              <>
+                {currentData?.map((reviews: any, index: number) => {
                   const { review = {}, customer = {} } = reviews;
                   return (
                     <div className={styles["review"]} key={index}>
                       <Label className={styles["customer-name"]}>
                         {review?.author?.replace(/"/g, "")}
                       </Label>
-                      <div className={styles["review-rating"]}>
-                        <StarRating count={5} rating={review?.rating} />
+                      <div
+                        className={styles["review-rating"]}
+                        style={{
+                          pointerEvents: "none",
+                        }}
+                      >
+                        <StarRating
+                          count={5}
+                          rating={review?.rating?.toFixed(2)}
+                          pointerEventsNone={true}
+                        />
                       </div>
                       <Label className={styles["review-content"]}>
                         {review?.body?.replace(/"/g, "")}
@@ -179,11 +207,21 @@ const Reviews = (): JSX.Element => {
                     </div>
                   );
                 })}
-            </>
-          </Pagination>
-        </>
-      </div>
-      {modalOpen && <WriteAReview modalOpen={modalOpen} onClose={onClose} />}
+              </>
+            </Pagination>
+          </>
+        </div>
+      ) : null}
+      {modalOpen && (
+        <WriteAReview
+          productData={productData}
+          isOpened={modalOpen}
+          onClose={onClose}
+          fetchingReviews={fetchingReviews}
+          setIsRatingError={setIsRatingError}
+          isRatingError={isRatingError}
+        />
+      )}
     </>
   );
 };

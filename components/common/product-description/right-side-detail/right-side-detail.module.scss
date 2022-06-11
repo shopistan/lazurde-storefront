@@ -1,0 +1,281 @@
+@import "/styles/variables.scss";
+
+.div-cart-buttons {
+  width: 343px;
+  cursor: pointer;
+  margin-block: 48px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: $breakPoint-desktop) {
+    width: 100%;
+    margin-block: 40px;
+  }
+  .book-apt-btn {
+    margin-block-start: 16px;
+  }
+}
+
+.detail {
+  .collection-tag {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: start;
+    margin-top: 0;
+    margin-bottom: 8px;
+
+    @media (min-width: $breakPoint-desktop) {
+      margin: 0;
+      margin-bottom: 8px;
+      color: $black-color;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: start;
+    margin-top: 0;
+    margin-bottom: 19px;
+
+    @media (min-width: $breakPoint-desktop) {
+      margin: 0;
+      color: $black-color;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 38.4px;
+      letter-spacing: 0em;
+      text-align: start;
+      text-transform: capitalize;
+    }
+  }
+
+  .review-section {
+    display: flex;
+    align-items: center;
+    margin-top: 17.5px;
+    margin-bottom: 17.5px;
+
+    .wishlist-icon {
+      cursor: pointer;
+      margin-inline-end: 27px;
+    }
+
+    .rating-stars {
+      margin-inline-end: 10px;
+    }
+
+    .write-review-btn {
+      button {
+        &.btn {
+          font-size: 14px;
+          line-height: 17px;
+          letter-spacing: 0em;
+          text-align: start;
+          width: fit-content;
+          height: auto;
+          padding: 0;
+          background-color: transparent;
+          color: $black-color;
+          border: 0;
+          border-radius: 0;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+          @media (min-width: $breakPoint-desktop) {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 16.8px;
+            letter-spacing: 0em;
+            text-align: start;
+          }
+        }
+      }
+    }
+  }
+}
+
+.sub-detail-wrapper {
+  padding-bottom: 17.5px;
+  padding-top: 26px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+
+  @media (max-width: $breakPoint-mobile) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  @media (min-width: $breakPoint-desktop) {
+    padding-top: 48.5px;
+  }
+
+  .sub-detail-point {
+    display: flex;
+    align-items: center;
+    margin-bottom: 19px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .label {
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: 0em;
+      text-align: start;
+      color: $black-color;
+      margin: 0;
+      margin-inline-start: 7px;
+
+      @media (min-width: $breakPoint-desktop) {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16.8px;
+        letter-spacing: 0em;
+        text-align: start;
+      }
+    }
+
+    svg {
+      margin-inline-start: 7px;
+    }
+
+    .label-link {
+      display: inline-flex;
+      margin-inline-start: 7px;
+      color: $black-color;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16.8px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
+  }
+}
+
+.price-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 56px;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-top: 18.5px;
+    margin-bottom: 48px;
+  }
+
+  .base-price {
+    margin: 0;
+    margin-inline-end: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: 0em;
+    color: $black-color;
+  }
+
+  .discount {
+    margin: 0;
+    margin-inline-end: 4px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    color: $black-color;
+
+    @media (min-width: $breakPoint-desktop) {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 17px;
+      letter-spacing: 0em;
+      text-align: start;
+    }
+  }
+
+  .final-price {
+    margin: 0;
+    color: #da0059;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+
+    @media (min-width: $breakPoint-desktop) {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0em;
+    }
+  }
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.product-not-available {
+  display: flex;
+  margin-bottom: 9.5px;
+
+  .cross-btn {
+    margin-inline-end: 8.5px;
+  }
+
+  .label {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+}
+
+.product-not-available-wrapper {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+  .label {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 15.6px;
+    letter-spacing: 0em;
+    text-align: start;
+
+    @media (min-width: $breakPoint-desktop) {
+      font-size: 14px;
+      line-height: 16.8px;
+    }
+  }
+}
+
+.collection-and-outofstock {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .outofstock-tag {
+    margin: 0;
+    color: rgba(255, 0, 0, 1);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 15.6px;
+    letter-spacing: 0em;
+    text-align: start;
+
+    @media (min-width: $breakPoint-desktop) {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+    }
+  }
+}

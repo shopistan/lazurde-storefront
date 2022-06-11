@@ -9,14 +9,16 @@ const ENDPOINTS = {
   RTPE: {
     GET_PRICE_BY_ITEM_ID: "/price/get-by-sku",
     EVALUATE_PROMOTION: "/promo/evaluate-promotions",
+    GET_PRODUCTS_BY_ITEM_IDS: (itemIds: []) =>
+      `https://sandbox.copilot.fabric.inc/api-product/v1/product?itemIds=[${itemIds}]`,
   },
 
   CART: {
     ADD_ITEM_TO_CART: "/v2/carts/items",
     REMOVE_ITEM_FROM_CART: (cartId: string, lineItemId: number) =>
-      `https://dev.cart.fabric.inc/v2/carts/${cartId}/items/${lineItemId}`,
-    GET_CART: (cartId: string) =>
-      `https://dev.cart.fabric.inc/v2/carts/${cartId}`,
+      `/v2/carts/${cartId}/items/${lineItemId}`,
+    UPDATE_ITEM_OF_CART: (cartId: string) => `/v2/carts/${cartId}/items`,
+    GET_CART: (cartId: string) => `/v2/carts/${cartId}`,
   },
   COPILOT: {
     PIM: {
@@ -31,6 +33,13 @@ const ENDPOINTS = {
 
   OMS: {
     CREATE_ORDER: "/api-order/orders",
+    GET_ORDER: "/api-order/orders/user",
+  },
+
+  WISHLIST: {
+    GET_WISHLIST: "/api-cart/wishlist/user",
+    DELETE_WISHLIST: (itemID: string | number) =>
+      `/api-cart/wishlist/user/item/${itemID}`,
   },
 
   GET: {

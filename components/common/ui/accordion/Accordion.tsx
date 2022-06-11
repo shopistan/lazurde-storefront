@@ -64,11 +64,9 @@ const Accordion = ({
       </div>
       <div className={`${styles["custom-content"]}`} data-opened={isOpened}>
         {children}
-        {links && (
+        {links && links.length > 0 && (
           <ul className={styles["menu__links"]}>
-            {links &&
-              links.length > 0 &&
-              links.map((link, index) => (
+            {links.map((link, index) => (
                 <li key={index}>
                   <Link href={link.url || "/"}>
                     <a className="opacity-60">{link.text}</a>

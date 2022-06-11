@@ -4,17 +4,17 @@ import styles from "./button.module.scss";
 interface ButtonProps {
   className?: string;
   buttonText?: string | Function;
-  buttonStyle?: string;
-  buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl";
+  buttonStyle?: "black" | "white" | "underline";
+  buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl" | "fill";
   onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit";
   children?: JSX.Element | string;
 }
 
 const Button = ({
-  className = '',
+  className = "",
   type = "button",
-  buttonText = '',
+  buttonText = "",
   buttonStyle = "black",
   buttonSize = "md",
   children,
@@ -26,11 +26,11 @@ const Button = ({
       data-style={buttonStyle}
       data-size={buttonSize}
       className={`${styles["button"]} ${className}`}
-      onClick={onClick}
+      onClick={(e) => onClick(e)}
       type={type}
     >
       {buttonText || ""}
-      {children || ''}
+      {children || ""}
     </button>
   );
 };

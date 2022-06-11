@@ -11,9 +11,11 @@ import { ImageType } from "lib/types/common";
 import { AppContext } from "lib/context";
 import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
-import { desktopScreenSize } from "lib/utils/common";
+import { checkMediaType, desktopScreenSize } from "lib/utils/common";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
+import { fetchProductPriceByItemId } from "lib/utils/product";
+import WishList from "components/common/wishlist/index";
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -51,18 +53,19 @@ const ProductCard = ({
   const { appState } = useContext(AppContext);
   const [fill, setFill] = useState(false);
   const { t } = useTranslation("common");
-  const router = useRouter()
+  const router = useRouter();
   // const [showWishListIcon, setShowWishListIcon] = useState(false);
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = async (event: any) => {
+    event.stopPropagation();
     const payload: ATCPayload = {
-      cartId: null,
+      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
       items: [
         {
           sku: sku,
           itemId: itemId,
           quantity: 1,
-          priceListId: priceListId,
+          priceListId: "100000",
           price: {
             currency: currency,
             amount: basePrice,
@@ -73,16 +76,18 @@ const ProductCard = ({
         },
       ],
     };
-    const res = await addProductToCart(payload);
+    const response = await addProductToCart(payload);
+    if (response?.hasError) {
+      alert("error while adding product");
+    } else {
+      router?.push("/cart");
+    }
   };
 
   return (
     <div
       className={`show-arrow-on-hover ${styles["product-card__wrapper"]} ${wrapperClassName}`}
       key={index}
-      onClick={() => {
-        router.push(`/p/${sku}`)
-      }}
     >
       <div
         className={styles["product-card__img-wrapper"]}
@@ -93,7 +98,7 @@ const ProductCard = ({
           className={styles["product-card__wishlist-icon"]}
           onClick={() => setFill(!fill)}
         >
-          <Heart fill={fill ? "red" : "#000"} />
+          <WishList itemID={itemId} />
         </div>
         <Slider
           productSlider={true}
@@ -112,17 +117,43 @@ const ProductCard = ({
             {productCardImages &&
               productCardImages.length > 0 &&
               productCardImages?.map((data, index) => {
+                const imageUrl = data?.url;
                 return (
                   <SwiperSlide key={index}>
-                    {data?.url && (
-                      <Image
-                        src={data?.url}
-                        alt={data?.altText}
-                        width={width > desktopScreenSize ? 314 : 167.5}
-                        height={width > desktopScreenSize ? 322 : 190.67}
-                        layout="responsive"
-                      />
-                    )}
+                    {imageUrl &&
+                      (checkMediaType(imageUrl) !== "img" ? (
+                        <>
+                          <video
+                            autoPlay={false}
+                            muted={true}
+                            loop={true}
+                            playsInline={true}
+                            height="100%"
+                            width="100%"
+                            controls={false}
+                            onClick={() => {
+                              router.push(`/p/${sku}`);
+                            }}
+                          >
+                            <source
+                              src={`${imageUrl}#t=0.1`}
+                              type="video/mp4"
+                            />
+                          </video>
+                        </>
+                      ) : (
+                        <Image
+                          src={data?.url}
+                          alt={data?.altText}
+                          width={width > desktopScreenSize ? 314 : 167.5}
+                          height={width > desktopScreenSize ? 322 : 190.67}
+                          layout="responsive"
+                          className={styles["product-img"]}
+                          onClick={() => {
+                            router.push(`/p/${sku}`);
+                          }}
+                        ></Image>
+                      ))}
                   </SwiperSlide>
                 );
               })}
@@ -155,8 +186,8 @@ const ProductCard = ({
                 appState?.lang === "en" ? "add to cart" : t("addToCartBtnText")
               }
               buttonSize={"sm"}
-              onClick={() => {
-                handleAddToCart();
+              onClick={(e) => {
+                handleAddToCart(e);
               }}
               type={"button"}
             />
@@ -164,33 +195,39 @@ const ProductCard = ({
         )}
       </div>
 
-      <Label className={styles["product-card__title"]}>{title}</Label>
-      <div className={styles["product-card__price-wrapper"]}>
-        {basePrice ? (
-          <Label
-            className={`${styles["product-card__price__base-price"]} ${
-              discount ? styles["line-through"] : ""
-            }`}
-          >
-            {`$${basePrice && basePrice.toLocaleString()}`}
-          </Label>
-        ) : (
-          ""
-        )}
-        {discount ? (
-          <Label className={styles["product-card__price-discount"]}>
-            {discount}
-          </Label>
-        ) : (
-          ""
-        )}
-        {discountAmount ? (
-          <Label className={styles["product-card__price__discounted-price"]}>
-            {`$${discountAmount && discountAmount.toLocaleString()}`}
-          </Label>
-        ) : (
-          ""
-        )}
+      <div
+        onClick={() => {
+          router.push(`/p/${sku}`);
+        }}
+      >
+        <Label className={styles["product-card__title"]}>{title}</Label>
+        <div className={styles["product-card__price-wrapper"]}>
+          {basePrice ? (
+            <Label
+              className={`${styles["product-card__price__base-price"]} ${
+                discount ? styles["line-through"] : ""
+              }`}
+            >
+              {`$${basePrice && basePrice.toLocaleString()}`}
+            </Label>
+          ) : (
+            ""
+          )}
+          {discount ? (
+            <Label className={styles["product-card__price-discount"]}>
+              {discount}
+            </Label>
+          ) : (
+            ""
+          )}
+          {discountAmount ? (
+            <Label className={styles["product-card__price__discounted-price"]}>
+              {`$${discountAmount && discountAmount.toLocaleString()}`}
+            </Label>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </div>
   );

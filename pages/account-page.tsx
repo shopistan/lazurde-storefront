@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import Footer from "components/common/footer";
 import Header from "components/common/header";
 import { XMComponent, PageProps } from "lib/types/common";
 import AccountInformation from "components/common/account-information";
 import { accountInformationData } from "lib/mock-data/data";
+import { getOrders } from "lib/utils/order";
 
 export default function AccountPage({
   headerProps,

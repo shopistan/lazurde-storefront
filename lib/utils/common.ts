@@ -67,3 +67,100 @@ export const reviewStarAvg = (arr: any) => {
   const average = sum / arr.length;
   return average;
 };
+
+export const slashFormatDate = (date: any) => {
+  const _date = new Date(date);
+  const year = _date?.getFullYear();
+  let month: any = _date?.getMonth() + 1;
+  let day: any = _date?.getDate();
+
+  if (day < 10) {
+    day = "0" + day;
+  }
+  if (month < 10) {
+    month = "0" + month;
+  }
+
+  return `${month}/${day}`;
+};
+
+export const ordeFormatDate = (date: any) => {
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  var days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const _date = new Date(date);
+  const month = monthNames[_date.getMonth()];
+  const year = _date.getFullYear();
+  var day = _date.getDay();
+  var _day = days[_date.getDay()];
+  var dayString = "";
+
+  if (day == 1) {
+    dayString = `${day}st`;
+  } else if (day == 2) {
+    dayString = `${day}nd`;
+  } else if (day == 3) {
+    dayString = `${day}rd`;
+  } else {
+    dayString = `${day}th`;
+  }
+
+  return `${_day} ${month} ${dayString} ${year}`;
+};
+
+export const updateOrderDate = (date: any) => {
+  const _date = new Date(date);
+  const _day = _date.getDay();
+  const _month = _date.getMonth();
+  const _year = _date.getFullYear();
+  const _hours = _date.getHours();
+  const _minutes = _date.getMinutes();
+  const _seconds = _date.getSeconds();
+
+  if (_hours > 12) {
+    var timeZone = "AM";
+  } else {
+    var timeZone = "PM";
+  }
+
+  return `${
+    _day + 2
+  }/${_month}/${_year} ${_hours}:${_minutes}:${_seconds} ${timeZone}`;
+};
+
+export const checkMediaType = (media: string) => {
+  // const mediaSrc = media.url;
+  if (!media) return null;
+  const types = new Map([
+    ["jpg", "img"],
+    ["png", "img"],
+    ["webp", "img"],
+    ["gif", "img"],
+    ["mp4", "video"],
+    ["3gp", "video"],
+  ]);
+  const url = new URL(media || "/", "https://cdn.lazurde.com/");
+  const extension = url.pathname.split(".")[1];
+  // const element = document.createElement(types.get(extension))
+  return types.get(extension);
+};

@@ -121,7 +121,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     categoryName,
   });
 
-  const {
+  let {
     hits = [],
     nbHits = 0,
     page = 0,
@@ -129,6 +129,8 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     hitsPerPage = 0,
   } = searchResults || {};
 
+  const nonVariantArray = hits.filter((item: any) => item.isVariant === false)
+  hits = nonVariantArray
   return {
     props: {
       headerProps,
