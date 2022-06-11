@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 interface RightSideDetailProps {
   onSizeChange?: Function;
   itemId?: string | number;
-  productSizeArray?: { Size?: string; Color?: string }[];
+  productSizeArray?: { Size?: number; Color?: string, sku?: string, itemId?: string }[];
   totalRating?: number;
   onColorChange?: Function;
   currency?: string;
@@ -57,6 +57,8 @@ const RightSideDetail = ({
     productData?.sku === "TestItemStock"
   );
   const [quantityCounter, setQuantityCounter] = useState(1);
+  const [selectedSize, setSelectedSize] = useState({ size: -1, index: 0 });
+  const [selectedColor, setSelectedColor] = useState({ color: "", index: 0 });
   const { t } = useTranslation("common");
 
   const productPricing = () => {
@@ -98,12 +100,14 @@ const RightSideDetail = ({
   };
 
   const handleAddToCart = async () => {
+    const selectedProduct: {sku?: string, itemId?: string, Size?: number, Color?: string} = getProductSku() || productData;
+    
     const payload: ATCPayload = {
       cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
       items: [
         {
-          sku: productData && productData?.sku,
-          itemId: productData && productData?.itemId,
+          sku: selectedProduct && selectedProduct?.sku,
+          itemId: selectedProduct && selectedProduct?.itemId,
           quantity: quantityCounter,
           priceListId: "100000",
           price: {
@@ -122,6 +126,35 @@ const RightSideDetail = ({
     } else {
       router?.push("/cart");
     }
+  };
+
+  const getProductSku = () => {
+    let skuType = "";
+    if (selectedSize.size > -1) skuType = "sizeOnly";
+    if (selectedColor.color)
+      skuType = skuType === "sizeOnly" ? "sizeAndColor" : "colorOnly";
+    const item = productSizeArray.find((item) => {
+      let selectedSku = false;
+      switch (skuType) {
+        case "sizeOnly":
+          selectedSku = Number(item.Size) === Number(selectedSize.size);
+          break;
+        case "colorOnly":
+          selectedSku = item.Color === selectedColor.color;
+          break;
+        case "sizeAndColor":
+          selectedSku =
+            Number(item.Size) === Number(selectedSize.size) &&
+            item.Color === selectedColor.color;
+          break;
+        default:
+          selectedSku = false;
+          break;
+      }
+      return selectedSku;
+    });
+    console.log("proditem", item, selectedColor);
+    return item;
   };
 
   return (
@@ -169,10 +202,15 @@ const RightSideDetail = ({
       <SizeChart
         productSizeArray={productSizeArray}
         onSizeChange={onSizeChange}
+        setSelectedSize={setSelectedSize}
+        selectedSize={selectedSize}
       />
       <ColorSelection
         productSizeArray={productSizeArray}
         onColorChange={onColorChange}
+        selectedSize={selectedSize}
+        selectedColor={selectedColor}
+        setSelectedColor={setSelectedColor}
       />
       <div className={styles["div-cart-buttons"]}>
         <div>
