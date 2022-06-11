@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, memo } from "react";
 import { Heart } from "components/icons";
 import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
 import FillHeart from "components/icons/FillHeart";
@@ -16,9 +16,11 @@ const WishList: FC<WishListProps> = ({
   useEffect(() => {
     const initializeWislist = async () => {
       const wishlistArray = await getwishlist();
-      const isSelected = wishlistArray.data.items.find((item: string) => item === itemID);
-      
-      isSelected && setActive(true)
+      const isSelected = wishlistArray.data.items.find(
+        (item: string) => item === itemID
+      );
+
+      isSelected && setActive(true);
     };
     initializeWislist();
   }, []);
@@ -58,4 +60,4 @@ const WishList: FC<WishListProps> = ({
     </>
   );
 };
-export default WishList;
+export default memo(WishList);

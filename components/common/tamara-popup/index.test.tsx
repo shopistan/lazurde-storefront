@@ -6,7 +6,7 @@ import ContextProvider, { AppContext } from "lib/context";
 const renderComponent = () => {
   render(
     <ContextProvider>
-      <TamaraModal />
+      <TamaraModal productPricing={{finalPrice: 0, currency: 'AED'}} />
     </ContextProvider>
   );
 };
