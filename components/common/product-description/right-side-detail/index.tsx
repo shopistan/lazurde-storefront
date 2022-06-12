@@ -2,9 +2,7 @@ import WriteAReview from "components/common/reviews/write-review";
 import Button from "components/common/ui/button";
 import Label from "components/common/ui/label";
 import StarRating from "components/common/ui/star-ratings";
-import { Heart } from "components/icons";
-import React, { useState, useContext } from "react";
-// import ProductColorSelection from "../color-selection";
+import React, { useState, useContext, useEffect, memo } from "react";
 import SizeChart from "./size-selection";
 import ColorSelection from "./color-selection";
 import ButtonATC from "components/common/ui/button-add-to-cart";
@@ -17,37 +15,37 @@ import { AppContext } from "lib/context/index";
 import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
 import { useRouter } from "next/router";
+import { fetchProductPriceByItemId } from "lib/utils/product";
+import { string } from "yup";
 
 interface RightSideDetailProps {
   onSizeChange?: Function;
   itemId?: string | number;
-  productSizeArray?: { Size?: string; Color?: string }[];
+  productSizeArray?: {
+    Size?: number;
+    Color?: string;
+    sku?: string;
+    itemId?: string;
+  }[];
   totalRating?: number;
   onColorChange?: Function;
-  currency?: string;
-  basePrice?: number | string;
-  discount?: string | number;
-  finalPrice?: number | string;
   productData?: any;
   fetchingReviews?: Function;
   setIsRatingError?: Function;
   isRatingError?: string;
+  priceListId?: number;
 }
 
 const RightSideDetail = ({
   onSizeChange,
   onColorChange,
   productSizeArray = [],
-  itemId = "",
   totalRating = 0,
-  currency = "USD",
-  basePrice = 0,
-  discount = 0 || "",
-  finalPrice = 0,
   productData = {},
   fetchingReviews = () => {},
   setIsRatingError,
   isRatingError,
+  priceListId,
 }: RightSideDetailProps): JSX.Element => {
   const router = useRouter();
   const { appState } = useContext(AppContext);
@@ -57,36 +55,99 @@ const RightSideDetail = ({
     productData?.sku === "TestItemStock"
   );
   const [quantityCounter, setQuantityCounter] = useState(1);
+  const [selectedSize, setSelectedSize] = useState({ size: -1, index: 0 });
+  const [selectedColor, setSelectedColor] = useState({ color: "", index: 0 });
+  const [productPricing, setProductPricing] = useState<{
+    currency: string;
+    base: number | string;
+    discount: string | number;
+    finalPrice: number | string;
+  }>();
+  const [allProductPrices, setAllProductPrices] = useState([]);
   const { t } = useTranslation("common");
 
-  const productPricing = () => {
+  useEffect(() => {
+    const itemIdArray = [productData?.itemId];
+
+    productData.children.length > 0 &&
+      productData.children.map((item: { itemId: number }) => {
+        itemIdArray.push(item.itemId);
+      });
+
+    const payload = {
+      priceList: [priceListId],
+      itemId: itemIdArray,
+    };
+    const getPrice = async () => {
+      const response = await fetchProductPriceByItemId(payload);
+      if (response.status === 200) {
+        setAllProductPrices(response?.data);
+      }
+    };
+    getPrice();
+  }, []);
+
+  useEffect(() => {
+    getProductSku();
+  }, [selectedColor, selectedSize, allProductPrices]);
+
+  const getSelectedPrice = (selectedProduct: { itemId: number }) => {
+    const price = allProductPrices.find(
+      (item) => item.itemId === selectedProduct.itemId
+    );
+
+    if (!price) return;
+    const offers = price?.offers;
+    const discountArray = offers?.discounts;
+    let discountAmount: string = "0";
+    if (discountArray?.length > 0) {
+      const discountType = discountArray[0].discountType;
+      switch (discountType) {
+        case "PERCENTAGE":
+          discountAmount = `${discountArray[0].value}%`;
+          break;
+
+        default:
+          break;
+      }
+    }
+    setProductPricing({
+      currency: offers?.price?.currency,
+      base: offers?.price?.base,
+      discount: discountAmount,
+      finalPrice: offers?.price?.totalPrice,
+    });
+  };
+
+  const getProductPricing = () => {
     return (
       <>
         <div className={styles["price-wrapper"]}>
-          {basePrice ? (
+          {productPricing?.base ? (
             <Label
               className={`${styles["base-price"]} ${
-                discount ? styles["line-through"] : ""
+                productPricing?.discount ? styles["line-through"] : ""
               }`}
             >
-              {`${currency === "USD" ? "$" : "SAR"}${
-                basePrice && basePrice.toLocaleString()
+              {`${productPricing?.currency === "USD" ? "$" : "SAR"}${
+                productPricing?.base && productPricing?.base.toLocaleString()
               }`}
             </Label>
           ) : (
             ""
           )}
-          {discount ? (
+          {productPricing?.discount ? (
             <Label className={styles["discount"]}>
-              {`${discount?.toLocaleString()}% off`}
+              {`${productPricing?.discount?.toLocaleString()} off`}
             </Label>
           ) : (
             ""
           )}
-          {finalPrice ? (
+          {productPricing?.finalPrice && productPricing?.discount ? (
             <Label className={styles["final-price"]}>
-              {`${currency === "USD" ? "$" : "SAR"}${
-                finalPrice && finalPrice.toLocaleString()
+              {`${productPricing?.currency === "USD" ? "$" : "SAR"}${
+                productPricing?.finalPrice &&
+                productPricing?.finalPrice.toLocaleString()
               }`}
             </Label>
           ) : (
@@ -98,19 +159,26 @@ const RightSideDetail = ({
   };
 
   const handleAddToCart = async () => {
+    const selectedProduct: {
+      sku?: string;
+      itemId?: string;
+      Size?: number;
+      Color?: string;
+    } = getProductSku() || productData;
+
     const payload: ATCPayload = {
       cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
       items: [
         {
-          sku: productData && productData?.sku,
-          itemId: productData && productData?.itemId,
+          sku: selectedProduct && selectedProduct?.sku,
+          itemId: selectedProduct && selectedProduct?.itemId,
           quantity: quantityCounter,
           priceListId: "100000",
           price: {
-            currency: currency,
-            amount: basePrice,
+            currency: productPricing?.currency,
+            amount: productPricing?.base,
             discount: {
-              discountAmount: finalPrice,
+              discountAmount: productPricing?.finalPrice,
             },
           },
         },
@@ -122,6 +190,36 @@ const RightSideDetail = ({
     } else {
       router?.push("/cart");
     }
+  };
+
+  const getProductSku = () => {
+    let skuType = "";
+    if (selectedSize.size > -1) skuType = "sizeOnly";
+    if (selectedColor.color)
+      skuType = skuType === "sizeOnly" ? "sizeAndColor" : "colorOnly";
+    const item = productSizeArray.find((item) => {
+      let selectedSku = false;
+      switch (skuType) {
+        case "sizeOnly":
+          selectedSku = Number(item.Size) === Number(selectedSize.size);
+          break;
+        case "colorOnly":
+          selectedSku = item.Color === selectedColor.color;
+          break;
+        case "sizeAndColor":
+          selectedSku =
+            Number(item.Size) === Number(selectedSize.size) &&
+            item.Color === selectedColor.color;
+          break;
+        default:
+          selectedSku = false;
+          break;
+      }
+      return selectedSku;
+    });
+    getSelectedPrice(item || productData);
+    // setSelectedVariant(item || productData);
+    return item;
   };
 
   return (
@@ -146,10 +244,14 @@ const RightSideDetail = ({
         </Label>
         <div className={styles["review-section"]}>
           <div className={styles["wishlist-icon"]}>
-            <WishList itemID={productData && productData["itemId"]} />
+            <WishList />
           </div>
           <div className={styles["rating-stars"]}>
-            <StarRating count={5} rating={totalRating} />
+            <StarRating
+              count={5}
+              rating={totalRating}
+              pointerEventsNone={true}
+            />
           </div>
           <div className={styles["write-review-btn"]}>
             <Button
@@ -161,14 +263,19 @@ const RightSideDetail = ({
           </div>
         </div>
       </div>
-      {productPricing()}
+      {getProductPricing()}
       <SizeChart
         productSizeArray={productSizeArray}
         onSizeChange={onSizeChange}
+        setSelectedSize={setSelectedSize}
+        selectedSize={selectedSize}
       />
       <ColorSelection
         productSizeArray={productSizeArray}
         onColorChange={onColorChange}
+        selectedSize={selectedSize}
+        selectedColor={selectedColor}
+        setSelectedColor={setSelectedColor}
       />
       <div className={styles["div-cart-buttons"]}>
         <div>
@@ -216,7 +323,7 @@ const RightSideDetail = ({
       </div>
       <SubDetail
         isStockAvailable={isStockAvailable}
-        productData={productData}
+        productPricing={productPricing}
       />
       {modalOpen && (
         <WriteAReview
@@ -237,4 +344,4 @@ const RightSideDetail = ({
     </>
   );
 };
-export default RightSideDetail;
+export default memo(RightSideDetail);
