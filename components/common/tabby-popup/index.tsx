@@ -2,14 +2,18 @@ import React, { useContext, useState, useEffect } from "react";
 import Script from "next/script";
 import { AppContext } from "lib/context";
 
-const TabbyModal = () => {
+const TabbyModal = ({
+  productPricing,
+}: {
+  productPricing: { finalPrice: number };
+}) => {
   const { appState } = useContext(AppContext);
 
   const [renderScript, setRendeScript] = useState(false);
 
   useEffect(() => {
     setRendeScript(true);
-  }, [appState?.lang]);
+  }, [appState?.lang, productPricing.finalPrice]);
   return (
     <>
       {renderScript && (
@@ -23,8 +27,8 @@ const TabbyModal = () => {
           <Script strategy="lazyOnload" id={Math.random()?.toString()}>
             {`new TabbyPromo({
             selector: '#TabbyPromo',
-            currency: 'AED',
-            price: '500.00',
+            currency: "$",
+            price: ${productPricing?.finalPrice},
             installmentsCount: 4,
             lang: '${appState?.lang}',
             source: 'product',
