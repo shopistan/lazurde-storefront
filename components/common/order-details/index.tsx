@@ -26,24 +26,22 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
   const [width] = useWindowSize();
   const [orderObject, setOrderObject] = useState({});
   const [orderDetails, setOrderDetails] = useState("");
-  const [prod, setProd] = useState();
 
   console.log("testing", orderObject);
 
-  const handleOrderDetail = (order: any) => {
-    order && setOrderObject(order);
-    setOrderDetails("Order Details");
+  const destructureAttributes = (product: ProductType) => {
+    const obj: { [key: string]: string } = {};
+    product?.attributes?.map((attr: any) => {
+      obj[attr?.name] = attr?.value;
+    });
+    return { ...product, ...obj };
   };
 
-  // const destructureAttributes = (product: ProductType) => {
-  //   const obj: { [key: string]: string } = {};
-  //   orderObject?.items?.map((obj: any) => {
-  //     obj?.attributes?.map((ob: any, i: any) => {
-  //       obj[ob?.name] = ob?.value;
-  //     });
-  //   });
-  //   return { ...product, ...obj };
-  // };
+  const handleOrderDetail = (order: any) => {
+    order && setOrderObject(order);
+    console.log("orders", order);
+    setOrderDetails("Order Details");
+  };
 
   return orderDetails != "Order Details" ? (
     <div className={styles["order-container"]}>
@@ -171,9 +169,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
       )}
     </div>
   ) : (
-    <div>
-      {orderDetails === "Order Details" && <OrderHistory order={orderObject} />}
-    </div>
+    orderDetails === "Order Details" && <OrderHistory order={orderObject} />
   );
 };
 export default OrderDetails;
