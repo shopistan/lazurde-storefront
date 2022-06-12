@@ -49,7 +49,7 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
               <p className={styles["order-details-text"]}>
                 {appState.lang == "en" ? "Order No" : t("Order No")}:
                 <span className={styles["order-details-span"]}>
-                  {order.orderId}
+                  {` ${order.orderId}`}
                 </span>
               </p>
             </div>
@@ -58,9 +58,9 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
                 <Image src={"/calendar.png"} width={18} height={18} />
               </div>
               <p className={styles["order-details-text"]}>
-                {appState.lang == "en" ? "Order Date:" : t("Order Date")}:
+                {appState.lang == "en" ? "Order Date" : t("Order Date")}:
                 <span className={styles["order-details-span"]}>
-                  {updateOrderDate(order?.updatedAt)}
+                  {` ${updateOrderDate(order?.updatedAt)}`}
                 </span>
               </p>
             </div>
@@ -149,7 +149,7 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
                           {obj["Size"]}
                         </p>
                         <p className={styles["history-forth-sub"]}>
-                          {appState.lang == "en" ? "Color" : t("Color")} :{" "}
+                          {appState.lang == "en" ? "Color": t("Color")}:{" "}
                           {obj["Color"]}
                         </p>
                         <p className={styles["history-forth-sub"]}>
