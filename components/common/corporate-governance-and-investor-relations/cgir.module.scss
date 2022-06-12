@@ -34,10 +34,13 @@
 
 .cgir-left-sidebar {
   cursor: pointer;
-  //   display: none;
+  display: none;
   background-color: white;
   padding: 32px 18px;
   //   padding-inline-start: 18px;
+  &[data-opened='true'] {
+    display: block;
+  }
   @media (min-width: 1023px) {
     width: 360px;
     height: fit-content;
@@ -58,12 +61,9 @@
 }
 
 .page-block {
+  cursor: pointer;
   display: flex;
-  @media (min-width: 1023px) {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-  }
+  align-items: center;
 }
 
 .page-right {
@@ -195,6 +195,10 @@
 }
 
 .cgir-right-container {
+  // display: none;
+  &[data-opened='true'] {
+    display: none;
+  }
   @media (min-width: 1024px) {
     width: 650px;
     display: flex;
