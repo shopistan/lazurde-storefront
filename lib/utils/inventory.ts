@@ -4,9 +4,9 @@ import HEADERS from "lib/api/headers";
 import { ErrorObject } from "lib/types/common";
 import { OMS_DOMAIN } from "general-config";
 
-export const getInventoryByIds = async (authToken: any) => {
+export const getInventoryByIds = async (authToken: any, itemIds: number) => {
   try {
-    const response = await Axios.get(`${OMS_DOMAIN}${ENDPOINTS.INVENTORY.GET_BY_IDS}`, {
+    const response = await Axios.get(`${OMS_DOMAIN}${ENDPOINTS.INVENTORY.GET_BY_IDS(itemIds)}`, {
       headers: { ...HEADERS.common, Authorization: authToken },
     });
     return response;

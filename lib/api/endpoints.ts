@@ -37,7 +37,7 @@ const ENDPOINTS = {
   },
 
   INVENTORY: {
-    GET_BY_IDS: "/api-inventory/inventory?itemIds=68",
+    GET_BY_IDS: (itemIds: number) => `/api-inventory/inventory?itemIds=${itemIds}`,
   },
 
   WISHLIST: {
