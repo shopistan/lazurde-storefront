@@ -98,7 +98,7 @@ const ProductCard = ({
           className={styles["product-card__wishlist-icon"]}
           onClick={() => setFill(!fill)}
         >
-          <WishList itemID={itemId} />
+          <WishList itemId={itemId} />
         </div>
         <Slider
           productSlider={true}

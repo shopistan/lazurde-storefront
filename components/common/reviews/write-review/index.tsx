@@ -22,13 +22,11 @@ const WriteAReview = ({
   onClose,
   productData = {},
   fetchingReviews,
-  setIsRatingError,
-  isRatingError,
 }: WriteAReviewProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
   const [ratingIndex, setRatingIndex] = useState(-1);
-
+  const [isRatingError, setIsRatingError] = useState("");
   return (
     <div
       className={styles["review-modal_wrapper"]}
