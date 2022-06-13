@@ -1,5 +1,5 @@
 import { ImageType } from "lib/types/common";
-import React, { FC, useContext, useEffect, useState } from "react";
+import React, { FC, useContext } from "react";
 import Label from "../ui/label";
 import Image from "next/image";
 import styles from "./side-bar.module.scss";
@@ -7,7 +7,6 @@ import useWindowSize from "lib/utils/useWindowSize";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
 import { useRouter } from "next/router";
-import { getUserInfo, logout } from "lib/identity";
 import { desktopScreenSize } from "lib/utils/common";
 import { BackArrow } from "components/icons";
 
@@ -60,18 +59,6 @@ const SideBar: FC<SideBarProps> = ({
     {},
     { returnObjects: true }
   );
-  const [userName, setUserName] = useState("");
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      const uInfo = await getUserInfo();
-      let name = 'San'
-      if (uInfo) {
-        name = uInfo.name;
-      }
-      setUserName(name);
-    };
-    fetchUserInfo();
-  }, []);
 
   return (
     <>
@@ -100,11 +87,11 @@ const SideBar: FC<SideBarProps> = ({
                 <Label>
                   <>
                     <span className={styles["firstName-desktop"]}>
-                      {appState?.lang == "en" ? `Hi ${userName}` : t("firstname")}
+                      {appState?.lang == "en" ? firstName : t("firstname")}
                     </span>
-                    {/* <span>
+                    <span>
                       {appState?.lang == "en" ? lastName : t("lastname")}
-                    </span> */}
+                    </span>
                   </>
                 </Label>
               </div>
