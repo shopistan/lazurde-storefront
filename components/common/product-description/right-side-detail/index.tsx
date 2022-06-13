@@ -244,7 +244,7 @@ const RightSideDetail = ({
         </Label>
         <div className={styles["review-section"]}>
           <div className={styles["wishlist-icon"]}>
-            <WishList />
+            <WishList itemId={productData?.itemId}/>
           </div>
           <div className={styles["rating-stars"]}>
             <StarRating
