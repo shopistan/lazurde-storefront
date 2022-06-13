@@ -6,7 +6,7 @@ import Script from "next/script";
 function LazurdeApp({ Component, pageProps }: AppProps) {
   return (
     <ContextProvider>
-      {/* <Script
+      <Script
         strategy="afterInteractive"
         id="exponea-init"
         dangerouslySetInnerHTML={{
@@ -23,7 +23,7 @@ function LazurdeApp({ Component, pageProps }: AppProps) {
           });
           exponea.start();`,
         }}
-      /> */}
+      />
       <Component {...pageProps} />
     </ContextProvider>
   );
