@@ -57,6 +57,7 @@ const RightSideDetail = ({
   const [quantityCounter, setQuantityCounter] = useState(1);
   const [selectedSize, setSelectedSize] = useState({ size: -1, index: 0 });
   const [selectedColor, setSelectedColor] = useState({ color: "", index: 0 });
+  const [selectedItemId, setSelectedItemId] = useState(productData?.itemId)
   const [productPricing, setProductPricing] = useState<{
     currency: string;
     base: number | string;
@@ -80,7 +81,7 @@ const RightSideDetail = ({
     };
     const getPrice = async () => {
       const response = await fetchProductPriceByItemId(payload);
-      if (response.status === 200) {
+      if (response && response?.status === 200) {
         setAllProductPrices(response?.data);
       }
     };
@@ -217,6 +218,7 @@ const RightSideDetail = ({
       }
       return selectedSku;
     });
+    setSelectedItemId(item?.itemId || productData?.itemId)
     getSelectedPrice(item || productData);
     // setSelectedVariant(item || productData);
     return item;
@@ -244,7 +246,7 @@ const RightSideDetail = ({
         </Label>
         <div className={styles["review-section"]}>
           <div className={styles["wishlist-icon"]}>
-            <WishList itemId={productData?.itemId}/>
+            <WishList itemId={selectedItemId}/>
           </div>
           <div className={styles["rating-stars"]}>
             <StarRating
@@ -265,12 +267,14 @@ const RightSideDetail = ({
       </div>
       {getProductPricing()}
       <SizeChart
+        productData={productData}
         productSizeArray={productSizeArray}
         onSizeChange={onSizeChange}
         setSelectedSize={setSelectedSize}
         selectedSize={selectedSize}
       />
       <ColorSelection
+        productData={productData}
         productSizeArray={productSizeArray}
         onColorChange={onColorChange}
         selectedSize={selectedSize}

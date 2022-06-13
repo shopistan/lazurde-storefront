@@ -1,7 +1,8 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useContext } from "react";
 import { Heart } from "components/icons";
 import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
 import FillHeart from "components/icons/FillHeart";
+import { AppContext } from "lib/context";
 
 interface WishListProps {
   authToken?: string | "";
@@ -13,27 +14,33 @@ const WishList: FC<WishListProps> = ({
   itemId = "68",
 }): JSX.Element => {
   const [active, setActive] = useState(false);
+  const { allWishListProducts, setAllWishListProducts } = useContext(AppContext);
   useEffect(() => {
-    const initializeWislist = async () => {
-      const wishlistArray = await getwishlist();
-      const isSelected = wishlistArray.data.items.find(
-        (item: string) => item === itemId
-      );
+    const isSelected = allWishListProducts.find(
+      (item: string) => item === itemId
+    );
 
-      isSelected && setActive(true);
-    };
-    initializeWislist();
-  }, []);
+    setActive(isSelected !== undefined);
+  }, [itemId, allWishListProducts]);
+
   const getwishlist = async () => {
-    const response = await getWishList(authToken);
-    return response;
+    const wishlistArray = await getWishList(authToken);
+    setAllWishListProducts(wishlistArray?.data?.items);
+    typeof window !== "undefined" &&
+      window.sessionStorage.setItem(
+        "wishListArray",
+        JSON.stringify(wishlistArray?.data?.items)
+      );
   };
+
   const addwishlist = async () => {
     const response = await addWishList(authToken, itemId);
+    getwishlist();
   };
 
   const deletewishlist = async () => {
     const response = await deleteWishList(itemId, authToken);
+    getwishlist();
   };
   return (
     <>

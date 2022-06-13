@@ -13,11 +13,15 @@ const productSizeArray = [
     Size: 5,
   },
 ];
+const productData = {
+  Size: 4,
+};
 
 test("product size component testing", () => {
   render(
     <ContextProvider>
       <SizeChart
+        productData={productData}
         sizeChartUrl={sizeChartUrl}
         productSizeArray={productSizeArray}
         onSizeChange={onSizeChange}
@@ -49,6 +53,7 @@ test("product size empty component testing", () => {
   render(
     <ContextProvider>
       <SizeChart
+        productData={productData}
         sizeChartUrl={sizeChartUrl}
         productSizeArray={productSizeArray}
         onSizeChange={onSizeChange}
