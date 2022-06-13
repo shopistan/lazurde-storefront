@@ -13,8 +13,14 @@ import { ErrorObject } from "lib/types/common";
 
 const GRANT_TYPE = "code";
 
+/**
+ * NOTE: Adding issuer with an OR is temporary fix. Need to check ho to pass env
+ * to jest tests, so that jest picks issues from OKTA_DOMAIN env variable and does
+ * not throw no issuer passed error.
+ */
+
 const oktaAuth = new OktaAuth({
-  issuer: OKTA_DOMAIN,
+  issuer: OKTA_DOMAIN || "https://dev-secure.lazurde.com/oauth2/default",
   clientId: OKTA_CLIENT_ID,
   redirectUri: OKTA_REDIRECT_URI,
 });
@@ -33,7 +39,7 @@ export function validateAccess() {
     .catch(console.error);
 }
 
-export function loginOkta(grantType: any) {
+const loginOkta = (grantType: any) => {
   try {
     oktaAuth.token.getWithRedirect({
       responseType: grantType,
@@ -42,7 +48,7 @@ export function loginOkta(grantType: any) {
   } catch (error) {
     console.log("Error logging in: ", error);
   }
-}
+};
 
 export function logout() {
   getIdToken().then(function (token: any) {
@@ -100,18 +106,19 @@ export function getRefreshToken() {
 
 export const getUserInfo = async () => {
   try {
-    const userRes = await axios.get(
-      "https://api.identity.fabric.zone/ums/v2/users/self",
-      {
-        headers: {
-          Authorization: `Bearer ${(await getAccessToken()).accessToken}`,
-        },
-      }
-    );
-    console.log("User Info: ", userRes);
-    // const uInfo = await oktaAuth.token.getUserInfo();
-    // const { name = "", email = "" } = uInfo;
-    // return { name, email };
+    // const userRes = await axios.get(
+    //   "https://api.identity.fabric.zone/ums/v2/users/self",
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${(await getAccessToken()).accessToken}`,
+    //     },
+    //   }
+    // );
+    //console.log("User Info: ", userRes);
+    const uInfo = await oktaAuth.token.getUserInfo();
+    console.log("User Info: ", uInfo);
+    const { name = "", email = "" } = uInfo;
+    return { name, email };
   } catch (error) {
     console.log("Error fetching user info: ", error);
   }

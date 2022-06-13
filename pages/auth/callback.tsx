@@ -7,7 +7,6 @@ const Callback = () => {
   useEffect(() => {
     const fetchTokens = () => {
       const callbackRes = callback()  || {};
-      debugger
       if (!!(callbackRes as any).errorMessage) {
         setError((callbackRes as any).errorMessage);
       } else {

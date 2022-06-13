@@ -46,23 +46,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   }, [isOpened]);
 
   const signInUser = async () => {
-    validateAccess()
-    // try {
-    //   const signInRes = await Axios.get(`${OKTA_DOMAIN}/authorize`, {
-    //     params: {
-    //       client_id: OKTA_CLIENT_ID,
-    //       responseType: "code",
-    //       scope: "openid",
-    //       redirect_uri: OKTA_REDIRECT_URI,
-    //       state: "state-8600b31f-52d1-4dca-987c-386e3d8967e9",
-    //       code_challenge_method: "S256",
-    //       code_challenge: "qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es",
-    //     },
-    //   });
-    //   console.log(signInRes);
-    // } catch (error) {
-    //   console.log("Error signing in: ", (error as ErrorObject).message);
-    // }
+    validateAccess();
   };
 
   return (
@@ -151,7 +135,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
           href={`${OKTA_DOMAIN_PERSONAL}/v1/authorize?client_id=${OKTA_CLIENT_ID_PERSONAL}&response_type=code&scope=openid&redirect_uri=${OKTA_REDIRECT_URI_PERSONAL}&state=state-8600b31f-52d1-4dca-987c-386e3d8967e9&code_challenge_method=S256&code_challenge=qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es`}
         >
           <a> */}
-        <div onClick={signInUser}>
+        <div onClick={signInUser} className="cursor-pointer">
           <User />
         </div>
         {/* </a>
