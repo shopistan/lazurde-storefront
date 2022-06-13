@@ -7,10 +7,10 @@ const sizeChartUrl = "/url";
 const onSizeChange = jest.fn();
 const productSizeArray = [
   {
-    Size: "4.5",
+    Size: 4.5,
   },
   {
-    Size: "5",
+    Size: 5,
   },
 ];
 
@@ -21,14 +21,15 @@ test("product size component testing", () => {
         sizeChartUrl={sizeChartUrl}
         productSizeArray={productSizeArray}
         onSizeChange={onSizeChange}
+        selectedSize={{ size: 0, index: 0 }}
       />
     </ContextProvider>
   );
   expect(productSizeArray).toHaveLength(2);
   expect(productSizeArray).toEqual(
     expect.arrayContaining([
-      expect.objectContaining({ Size: "4.5" }),
-      expect.objectContaining({ Size: "5" }),
+      expect.objectContaining({ Size: 4.5 }),
+      expect.objectContaining({ Size: 5 }),
     ])
   );
 });
@@ -38,10 +39,10 @@ test("product size empty component testing", () => {
   const onSizeChange = jest.fn();
   const productSizeArray = [
     {
-      Size: "",
+      Size: -1,
     },
     {
-      Size: "",
+      Size: -1,
     },
   ];
 
@@ -51,14 +52,15 @@ test("product size empty component testing", () => {
         sizeChartUrl={sizeChartUrl}
         productSizeArray={productSizeArray}
         onSizeChange={onSizeChange}
+        selectedSize={{ size: 0, index: 0 }}
       />
     </ContextProvider>
   );
   expect(productSizeArray).toHaveLength(2);
   expect(productSizeArray).toEqual(
     expect.arrayContaining([
-      expect.objectContaining({ Size: "" }),
-      expect.objectContaining({ Size: "" }),
+      expect.objectContaining({ Size: -1 }),
+      expect.objectContaining({ Size: -1 }),
     ])
   );
 });
