@@ -6,6 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 
 interface SizeChartProps {
+  productData?: { Size?: number; Color?: string };
   sizeChartUrl?: string;
   productSizeArray?: { Size?: number }[];
   onSizeChange?: Function;
@@ -14,6 +15,7 @@ interface SizeChartProps {
 }
 
 const SizeChart = ({
+  productData = {},
   sizeChartUrl = "https://lazurdesandbox.imgix.net/Frame%20208150.jpg",
   productSizeArray = [],
   onSizeChange = () => {},
@@ -28,13 +30,15 @@ const SizeChart = ({
 
   const getSizes = () => {
     const sizeSet = new Set();
-    if (!productSizeArray) return;
-    if (productSizeArray.length < 1) return;
-    for (let index = 0; index < productSizeArray.length; index++) {
-      const item = productSizeArray[index];
-      item.Size && sizeSet.add(item.Size);
+    if (productData && productData.hasOwnProperty("Size")) {
+      sizeSet.add(productData.Size);
     }
-    
+    productSizeArray &&
+      productSizeArray.length > 0 &&
+      productSizeArray.map((item: { Size?: number }) => {
+        item.Size && sizeSet.add(item.Size);
+      });
+
     if (activeSize === 0) {
       setSelectedSize({
         size: [...Array.from(sizeSet)][0],
@@ -46,7 +50,7 @@ const SizeChart = ({
 
   useEffect(() => {
     getSizes();
-  }, [productSizeArray]);
+  }, [productData, productSizeArray]);
 
   return (
     <div className={styles["sizechart-wrapper"]}>
