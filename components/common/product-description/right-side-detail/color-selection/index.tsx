@@ -5,14 +5,16 @@ import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 
 interface ColorSelectionProps {
-  productSizeArray?: { Size?: number, Color?: string }[];
+  productData?: { Size?: number; Color?: string };
+  productSizeArray?: { Size?: number; Color?: string }[];
   onColorChange?: Function;
   setSelectedColor?: Function;
-  selectedColor: {color: string, index: number};
-  selectedSize: {size: number, index: number};
+  selectedColor: { color: string; index: number };
+  selectedSize: { size: number; index: number };
 }
 
 const ColorSelection = ({
+  productData = {},
   productSizeArray = [],
   onColorChange = () => {},
   setSelectedColor = () => {},
@@ -26,10 +28,21 @@ const ColorSelection = ({
 
   const getColors = () => {
     const colorSet = new Set();
+    if (productData.hasOwnProperty("Color")) {
+      if (selectedSize.size > -1) {
+        productData.Size === selectedSize.size &&
+          productData.Color &&
+          colorSet.add(productData.Color);
+      } else {
+        productData.Color && colorSet.add(productData.Color);
+      }
+    }
     productSizeArray.length > 0 &&
-      productSizeArray.map((item: {Size?: number, Color?: string}) => {
+      productSizeArray.map((item: { Size?: number; Color?: string }) => {
         if (selectedSize.size > -1) {
-          item.Size === selectedSize.size && item.Color && colorSet.add(item.Color);
+          item.Size === selectedSize.size &&
+            item.Color &&
+            colorSet.add(item.Color);
         } else {
           item.Color && colorSet.add(item.Color);
         }
@@ -39,7 +52,7 @@ const ColorSelection = ({
       color: [...Array.from(colorSet)][0],
       index: 0,
     });
-    setActiveColor(0)
+    setActiveColor(0);
 
     setColorArray([...Array.from(colorSet)]);
   };
