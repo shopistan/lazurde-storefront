@@ -80,7 +80,7 @@ const ProductCard = ({
     if (response?.hasError) {
       alert("error while adding product");
     } else {
-      // router?.push("/cart");
+      router?.push("/cart");
     }
   };
 
