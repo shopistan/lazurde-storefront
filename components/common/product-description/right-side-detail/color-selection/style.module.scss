@@ -38,6 +38,7 @@
 
 .product-colors {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 24px;
   margin-bottom: 24px;
@@ -49,10 +50,9 @@
     justify-content: center;
     width: 32px;
     height: 32px;
-    margin-inline-end: 12px;
     padding-top: 3px;
     border-radius: 51px;
-    border: 0.1px solid rgba(0, 0, 0, 1);
+    border: 0;
     color: $black-color;
     font-size: 13px;
     font-weight: 400;
@@ -65,13 +65,23 @@
       line-height: 16.8px;
     }
 
-    &.active {
-      border: 1px solid rgba(0, 0, 0, 0.4);
-    }
-
     &:last-child {
       margin-inline-end: 0;
     }
+  }
+}
+
+.outer-div {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: 12px;
+  border-radius: 100px;
+
+  &.active {
+    border: 1px solid rgba(0, 0, 0, 0.4);
   }
 }
 

@@ -62,7 +62,7 @@ const SiteNavBar: FC<siteNavBarProps> = ({
     <div
       data-testid="id"
       className={styles["site-navbar"]}
-      data-headerId={headerId}
+      data-header-id={headerId}
     >
       <div
         className={styles["back-btn"]}

@@ -1,18 +1,16 @@
 @import "/styles/variables.scss";
 
 .reviews-wrapper {
-  padding: 32px 16px 40px;
+  padding: 40px 16px;
 
   @media (min-width: $breakPoint-desktop) {
     padding: 42px 96px 144px;
   }
 
   .review {
-    @media (min-width: $breakPoint-desktop) {
-      margin-bottom: 38px;
-      padding-bottom: 38px;
-      border-bottom: 1px solid #f2f2f2;
-    }
+    margin-bottom: 38px;
+    padding-bottom: 38px;
+    border-bottom: 1px solid #f2f2f2;
   }
 }
 
@@ -34,13 +32,20 @@
 
 .review-content {
   margin: 0;
-  margin-top: 25.67px;
   font-size: 14px;
   font-weight: 400;
   line-height: 16.8px;
   letter-spacing: 0em;
   text-align: start;
   color: rgba(0, 0, 0, 0.6);
+  margin-top: 28px;
+  margin-bottom: 24px;
+  word-break: break-word;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-top: 25.67px;
+    margin-bottom: 0;
+  }
 }
 
 .date {
@@ -61,6 +66,13 @@
 }
 
 .write-review-btn {
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: $breakPoint-desktop) {
+    justify-content: flex-start;
+  }
+
   button {
     cursor: pointer;
     width: 200px;
@@ -80,7 +92,7 @@
 }
 
 .review-summary {
-  margin-bottom: 33px;
+  margin-bottom: 32px;
 
   @media (min-width: $breakPoint-desktop) {
     margin-bottom: 52px;
@@ -99,7 +111,11 @@
   .review-summary-stars {
     display: flex;
     align-items: center;
-    margin-top: 25.67px;
+    margin-top: 16px;
+
+    @media (min-width: $breakPoint-desktop) {
+      margin-top: 25.67px;
+    }
 
     .total-rating {
       margin: 0;

@@ -801,6 +801,14 @@ export const orderData = {
       statusLog: "Order has been created",
       orderReference: "1635-8532-92190",
       orderId: "8677-7648-19307",
+      tracking: [
+        {
+          number: "1",
+        },
+        {
+          number: "2",
+        },
+      ],
       shipTo: [
         {
           pickupPerson: {
@@ -921,6 +929,233 @@ export const orderData = {
       createdAt: "2021-06-16T20:21:17.038Z",
       updatedAt: "2021-06-16T20:21:18.355Z",
       __v: 0,
+    },
+    {
+      _id: "60ca5d3dc0fac00008e64c91",
+      tags: [{}],
+      cartId: "60ca5b6ae3b5d900081ae44a",
+      customerUserId: "60c128045a38bf0009ad6502",
+      attributes: [{}],
+      customerEmail: "mike@fabric.inc",
+      orderCurrency: "USD",
+      orderTotal: 90.5,
+      taxTotal: 0.5,
+      channel: 12,
+      status: "ORDER_CREATED",
+      statusLog: "Order has been created",
+      orderReference: "1635-8532-92190",
+      orderId: "8677-7648-19307",
+      tracking: [
+        {
+          number: "1",
+        },
+      ],
+      shipTo: [
+        {
+          pickupPerson: {
+            name: {
+              first: "John",
+              last: "Doe",
+            },
+            phone: {
+              number: 8087769338,
+              kind: "Mobile",
+            },
+            email: "us@fabric.inc",
+          },
+          altPickupPerson: {
+            name: {
+              first: "first",
+              last: "last",
+            },
+            phone: {
+              number: 8087769338,
+              kind: "Mobile",
+            },
+            email: "first@fabric.inc",
+          },
+          promosApplied: [{}],
+          _id: "60ca5c1c9f490e0008020b28",
+          shipToType: "BOPIS",
+          taxCode: "FR1000",
+          shipToId: 390,
+          price: 0,
+          currency: null || "",
+          shipmentMethodId: null || "",
+          estimatedTax: 0.5,
+          shipmentCarrier: null || "",
+          shipmentMethod: null || "",
+          total: 0.5,
+          id: "60ca5c1c9f490e0008020b28",
+        },
+      ],
+      items: [
+        {
+          group: [1.2312312312312322e23],
+          promosApplied: [{}],
+          _id: "60ca5b6ae3b5d900081ae44b",
+          price: 90,
+          weightUnit: "lb",
+          isPickup: true,
+          itemId: 89,
+          quantity: 1,
+          priceListId: 100000,
+          sku: "GardenWoodSofa",
+          taxCode: "tytuy",
+          title: "Garden Wood Sofa",
+          weight: 2345,
+          lineItemId: 1,
+          attributeTotalPrice: 0,
+          attributes: [{}],
+          warehouseId: "60bf9615e66d120008b37e5e",
+          currency: "USD",
+          shipToId: 390,
+          discount: 0,
+          estimatedTax: 0,
+          total: 90,
+          reservedLocation: [
+            {
+              _id: "60ca5d3e06b91d0008427435",
+              warehouseId: "60bf9615e66d120008b37e5e",
+              quantity: 1,
+              id: "60ca5d3e06b91d0008427435",
+            },
+          ],
+          id: "60ca5b6ae3b5d900081ae44b",
+        },
+      ],
+      shipments: [{}],
+      payments: [
+        {
+          billToAddress: {
+            name: {
+              first: "John",
+              last: "Smith",
+            },
+            phone: {
+              number: 7780811973,
+              kind: "mobile",
+            },
+            email: "johnsmith@gmail.com",
+            street1: "600 Congress Ave",
+            street2: "suite 219",
+            city: "Austin",
+            state: "Tx",
+            country: "US",
+            zipCode: 10033,
+          },
+          shipToId: [390],
+          _id: "60ca5d3dc0fac00008e64c94",
+          paymentStatus: "succeeded",
+          amount: 90.5,
+          currency: "USD",
+          paymentIdentifier: {
+            cardIdentifier: 4242,
+          },
+          paymentMethod: "visa",
+          paymentKind: "CARD_STRIPE",
+          conversion: 1,
+          paymentToken: {
+            token: "pi_1J35DCJxr7zyIFb9axtM3OKv",
+            type: "CARD_STRIPE",
+          },
+          id: "60ca5d3dc0fac00008e64c94",
+        },
+      ],
+      revision: 0,
+      totalQuantity: 1,
+      statusDescriptions: [{}],
+      events: [{}],
+      pickups: [{}],
+      createdAt: "2021-06-16T20:21:17.038Z",
+      updatedAt: "2021-06-16T20:21:18.355Z",
+      __v: 0,
+    },
+  ],
+};
+
+export const cartItems = [
+  {
+    sku: "11",
+    itemId: "123",
+    priceListId: "190",
+    currency: "usd",
+    "Base Price": 1250,
+    discountedPrice: 625,
+    discount: "-50%",
+    title: "Love Ring with Diamond",
+    onlineExclusiveTag: true,
+    "Image URL": "/blue-ring.png",
+    Image: [
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+      {
+        url: "/product-card-one.png",
+        altText: "alt text",
+      },
+    ],
+  },
+  {
+    sku: "12",
+    itemId: "1253",
+    priceListId: "3190",
+    currency: "usd",
+    title: "Love Ring with Diamond",
+    "Base Price": 1900,
+    basePrice: 1900,
+    discount: "",
+    discountedPrice: "",
+    onlineExclusiveTag: false,
+    "Image URL": "/blue-ring.png",
+    images: [
+      {
+        url: "/ring.png",
+        altText: "alt text",
+      },
+    ],
+  },
+];
+
+export const singleProductData = {
+  Active: true,
+  "Best Seller": true,
+  Brand: "Kenaz",
+  "Chain Length": "25",
+  "Charm Size": "0",
+  Collection: "Designer Collection",
+  Description:
+    "This piece is giving us all those Bedouin feels. Right from the rich colors that are set in an enamel design on the pendant, to the cut work accented chain and the little danglers, everything in this necklace is deserving of a second look. This piece from our Ramadan edit will sit right with abayas or longline traditional dresses. Go for something in solid colors to let the design stand out.",
+  "Diamond Carat": "20",
+  "Diamond Cut": "Yes",
+  Gemstone: "Yes",
+  "Image URL":
+    "https://cdn.lazurde.com/media/catalog/product/1/1/111405180229-3_optimized.png",
+  "Image URL 4":
+    "https://cdn.lazurde.com/media/catalog/product/1/1/111405180229-3_optimized.png",
+  IsMostViewed: false,
+  "Last Chance": true,
+  Metal: "Gold",
+  "New In": true,
+  "Online Exclusive": true,
+  "Pendant Size": "20",
+  "Product Title": "Square design necklace",
+  Stone: "Enamel",
+  "Stone Carat": "18k",
+  "Stone Cut": "None",
+  "Tax Code": "FR20000",
+  Type: "Designer",
+  Variant: "0",
+  Weight: "20",
+  attributes: [
+    {
+      description: "",
+      id: "621dcb3408cf020009caf6dc",
+      mapping: "title",
+      name: "Product Title",
+      type: "TEXT",
+      value: "Square design necklace",
     },
   ],
 };

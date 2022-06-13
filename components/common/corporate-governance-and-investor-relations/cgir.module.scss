@@ -1,0 +1,257 @@
+.cgir-container {
+  padding: 0;
+  width: 100%;
+  background-color: #f2f2f2;
+  @media (min-width: 1023px) {
+    padding-inline: 185px;
+    padding-block-end: 80px;
+    max-width: 1440px;
+  }
+
+  .cgir-heading {
+    display: none;
+    @media (min-width: 1023px) {
+      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 120%;
+      letter-spacing: 0em;
+      // margin-inline-start: 39.5%;
+      margin-top: 88px;
+      margin-bottom: 32px;
+    }
+  }
+}
+
+.cgir-section {
+  @media (min-width: 1023px) {
+    display: flex;
+  }
+}
+
+.cgir-left-sidebar {
+  cursor: pointer;
+  display: none;
+  background-color: white;
+  padding: 32px 18px;
+  //   padding-inline-start: 18px;
+  &[data-opened='true'] {
+    display: block;
+  }
+  @media (min-width: 1023px) {
+    width: 360px;
+    height: fit-content;
+    display: block;
+    margin-inline-end: 60px;
+  }
+
+  p {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: start;
+    margin-inline-start: 19px;
+    margin-block: 11px;
+  }
+}
+
+.page-block {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.page-right {
+  background-color: white;
+  padding-top: 24px;
+  padding-inline: 24px;
+
+  &:nth-child(3) {
+    padding-top: 0;
+    padding-inline: 0;
+  }
+  @media (min-width: 1023px) {
+    width: 100%;
+    padding: 40px;
+    // padding-top: 46px;
+    // padding-inline: 47px 40px;
+  }
+}
+
+.page-right-second {
+  background-color: white;
+  //   padding-top: 24px;
+  //   padding-inline: 24px;
+  padding: 24px;
+
+  //   &:nth-child(3) {
+  //     padding-top: 0;
+  //     padding-inline: 0;
+  //   }
+  @media (min-width: 1023px) {
+    width: 100%;
+    padding: 24px;
+    // padding-top: 46px;
+    // padding-inline: 47px 40px;
+  }
+}
+
+.page-image {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+
+  img {
+    width: auto;
+  }
+}
+
+.more-content-block {
+  //   margin-top: 8px;
+  //   background-color: #f2f2f2;
+  //   cursor: pointer;
+
+  @media (min-width: 1024px) {
+    // padding-block: 40px;
+    // padding-inline: 48px;
+    // padding: 24px;
+    background-color: white;
+  }
+
+  .fact-sheet-iframe {
+    width: 100%;
+    @media (min-width: 1023px) {
+      width: 650px;
+    }
+  }
+}
+
+.back-button {
+  background-color: white;
+  margin-bottom: 8px;
+  padding-inline: 16px;
+  padding-block: 16px;
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  color: black;
+
+  button {
+    color: black;
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+.back-content {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: start;
+  border: none;
+  background-color: white;
+}
+
+.button {
+  padding-block: 16px;
+  padding-inline: 40px;
+  background-color: #922840;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  border: none;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  color: white;
+  margin-left: auto;
+
+  p {
+    margin-inline-start: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.back-block {
+  padding-top: 136px;
+  padding-inline-end: 24px;
+  padding-bottom: 24px;
+  background-color: white;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+.cgir-right-container {
+  // display: none;
+  &[data-opened='true'] {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    width: 650px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@import '/styles/variables.scss';
+
+.bread-crumb {
+  cursor: pointer;
+  &_item {
+    display: none;
+    @media (min-width: 1024px) {
+      margin-inline-start: 39.5%;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: 0em;
+      text-align: start;
+      text-decoration: none;
+      text-transform: capitalize;
+
+      p {
+        margin: 0;
+        margin-inline-start: 5px;
+      }
+
+      a {
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+        letter-spacing: 0em;
+        text-align: start;
+        text-decoration: none;
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+
+html[dir='rtl'] {
+  .bread-crumb {
+    &_item {
+      a {
+        direction: ltr;
+      }
+    }
+  }
+}

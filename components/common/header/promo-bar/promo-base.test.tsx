@@ -75,7 +75,7 @@ describe("Promo Bar Tests", () => {
     expect(promobar).toHaveAttribute("data-visible", "true");
   });
 
-  test("prop test: title", () => {
+  test("resize test", () => {
     act(() => {
       renderComponent();
       resizeWindow(375, 600);
@@ -83,6 +83,7 @@ describe("Promo Bar Tests", () => {
       expect(title).toBeInTheDocument();
     });
   });
+  
   test("render arabic version", () => {
     renderComponentAR();
   });

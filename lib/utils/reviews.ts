@@ -34,8 +34,14 @@ export const writeReview = async (payload?: any) => {
         headers: HEADERS.reviews,
       }
     );
-    return writeReview;
+    return {
+      hasError: false,
+      response: writeReview,
+    };
   } catch (error: unknown) {
+    return {
+      hasError: true,
+    };
     console.log(
       "Error while adding a review: ",
       (error as ErrorObject).message

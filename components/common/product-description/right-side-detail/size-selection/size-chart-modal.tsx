@@ -20,6 +20,7 @@ const SizeChartModal = ({
         isOpened={isOpened}
         onClose={onClose}
         className={styles["sizechart-modal"]}
+        modalBodyClassName={styles["sizechart-modal-content"]}
         bgBluryModal={true}
         modalWidth="562px"
         modalHeight="619px"

@@ -8,7 +8,9 @@
 }
 
 .details-section {
-  display: flex;
+  @media (min-width: $breakPoint-desktop) {
+    display: flex;
+  }
 }
 
 .account-main {

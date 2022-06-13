@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Label from "../ui/label";
 import styles from "./account-information.module.scss";
@@ -9,6 +9,9 @@ import { AppContext } from "lib/context/index";
 import { useRouter } from "next/router";
 import SideBar from "components/common/side-bar/index";
 import AccountSection from "../account-section";
+import OrderDetails from "components/common/order-details/index";
+import OrderHistory from "../order-history";
+import { desktopScreenSize } from "lib/utils/common";
 
 interface AccountInformationProps {
   title: string | "";
@@ -47,6 +50,8 @@ const AccountInformation: FC<AccountInformationProps> = ({
   const [width] = useWindowSize();
   const router = useRouter();
   const { appState } = useContext(AppContext);
+  const [activeComponent, setActiveComponent] = useState("Account Overview");
+
   return (
     <>
       <div className={styles["account-container"]}>
@@ -74,8 +79,12 @@ const AccountInformation: FC<AccountInformationProps> = ({
             reviewImage={reviewImage}
             reviewText={reviewText}
             details={details}
+            setActiveComponent={setActiveComponent}
+            activeComponent={activeComponent}
           />
-          <AccountSection />
+          {activeComponent == "Account Overview" && <AccountSection />}
+
+          {activeComponent === "My Orders" && <OrderDetails />}
         </div>
       </div>
     </>

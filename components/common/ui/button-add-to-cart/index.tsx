@@ -1,3 +1,4 @@
+import { MinusIcon, PlusIcon } from "components/icons";
 import React, { MouseEventHandler, useEffect, useState } from "react";
 import styles from "./buttonATC.module.scss";
 
@@ -5,12 +6,14 @@ interface ButtonATCProps {
   className?: string;
   buttonText?: string | Function;
   buttonStyle?: string;
-  buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl" | "xxxl";
+  buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl" | "fill";
   onClick?: MouseEventHandler<HTMLDivElement>;
   type?: "button" | "submit";
   children?: JSX.Element | string;
   showCounter?: boolean;
   onQuantityChange?: Function;
+  quantityCounter?: number;
+  setQuantityCounter?: Function;
 }
 
 interface QuantitySectionProps {
@@ -26,10 +29,12 @@ const ButtonATC = ({
   buttonSize = "md",
   children,
   showCounter = false,
-  onClick,
+  onClick = () => {},
   onQuantityChange = () => {},
+  quantityCounter = 1,
+  setQuantityCounter = () => {},
 }: ButtonATCProps): JSX.Element => {
-  const [quantityCounter, setQuantityCounter] = useState(1);
+  // const [quantityCounter, setQuantityCounter] = useState(1);
 
   useEffect(() => {
     onQuantityChange(quantityCounter);
@@ -72,7 +77,7 @@ const QuantitySection = ({
           }}
           className={styles["counter-decrement"]}
         >
-          -
+          <MinusIcon color="white" width="20px" height="20px" />
         </button>
         <span className={styles["counter-span"]}>{quantityCounter}</span>
         <button
@@ -81,7 +86,7 @@ const QuantitySection = ({
           }}
           className={styles["counter-increment"]}
         >
-          +
+          <PlusIcon width="20px" height="20px" color="white" />
         </button>
       </div>
       <div className={styles["div-divider"]}></div>

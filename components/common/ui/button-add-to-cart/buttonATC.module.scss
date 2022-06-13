@@ -38,6 +38,9 @@
       }
 
       .counter-decrement {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .counter-span {
@@ -47,6 +50,9 @@
       }
 
       .counter-increment {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
     .div-divider {
@@ -97,12 +103,8 @@
     height: 51px;
   }
 
-  &[data-size="xxxl"] {
+  &[data-size="fill"] {
     width: 100%;
     height: 50px;
-
-    @media (min-width: $breakPoint-desktop) {
-      width: 375px;
-    }
   }
 }

@@ -32,7 +32,7 @@ const Header = ({
   const { appState } = useContext(AppContext);
 
   return (
-    <div className={styles["header-container"]}>
+    <div className={styles["header-container"]} id={"main-header"}>
       <PromoBar
         title={promoTitle || "Save up to 50%"}
         linkText={promoLinkText || "Shop All Our Markdowns"}
