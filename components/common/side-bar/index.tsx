@@ -6,9 +6,11 @@ import styles from "./side-bar.module.scss";
 import useWindowSize from "lib/utils/useWindowSize";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { desktopScreenSize } from "lib/utils/common";
 import { BackArrow } from "components/icons";
+import oktaAuth from "lib/identity";
+import { OKTA_CLIENT_ID, OKTA_DOMAIN } from "general-config";
 // import { getUserInfo, logout } from "lib/identity";
 
 type AccountsProps = {
@@ -63,16 +65,40 @@ const SideBar: FC<SideBarProps> = ({
 
   const [userName, setUserName] = useState("");
   useEffect(() => {
-    // const fetchUserInfo = async () => {
-    //   const uInfo = await getUserInfo();
-    //   let name = "San";
-    //   if (uInfo) {
-    //     name = uInfo.name;
-    //   }
-    //   setUserName(name);
-    // };
-    // fetchUserInfo();
+    const fetchUserInfo = async () => {
+      let name = "San";
+      try {
+        const uInfo = await oktaAuth.token.getUserInfo();
+        console.log("User Info: ", uInfo);
+        if (uInfo) {
+          name = uInfo.name;
+        }
+      } catch (error) {
+        console.log("Error fetching user info: ", error);
+      }
+      setUserName(name);
+    };
+    fetchUserInfo();
   }, []);
+
+  const signOut = async () => {
+    const idToken = await oktaAuth.tokenManager.get("id_token");
+    if (idToken) {
+      let iToken = idToken.idToken;
+      oktaAuth.tokenManager.clear();
+      Router.push(
+        OKTA_DOMAIN +
+          "/v1/logout?client_id=" +
+          OKTA_CLIENT_ID +
+          "&id_token_hint=" +
+          iToken +
+          "&post_logout_redirect_uri=" +
+          window.location.origin
+      );
+    } else {
+      Router.push("/");
+    }
+  };
 
   return (
     <>
@@ -105,9 +131,9 @@ const SideBar: FC<SideBarProps> = ({
                         ? `Hi ${userName}`
                         : t("firstname")}
                     </span>
-                    <span>
+                    {/* <span>
                       {appState?.lang == "en" ? lastName : t("lastname")}
-                    </span>
+                    </span> */}
                   </>
                 </Label>
               </div>
@@ -172,7 +198,7 @@ const SideBar: FC<SideBarProps> = ({
                             key={index}
                             onClick={() => {
                               if (text.toLowerCase().includes("sign out")) {
-                                //logout();
+                                signOut();
                               } else {
                                 setActiveComponent(text);
                               }
