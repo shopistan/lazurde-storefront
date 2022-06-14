@@ -120,7 +120,9 @@ const CGIR: FC<CGIRProps> = ({
                           ? moreContent
                           : _links[index].moreContent,
                       content:
-                        appState.lang == "en" ? content : _links[index]?.content,
+                        appState.lang == "en"
+                          ? content
+                          : _links[index]?.content,
                       name: appState.lang == "en" ? name : _links[index]?.name,
                       engName: name,
                       icon: {

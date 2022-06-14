@@ -53,8 +53,12 @@ const CelebrityChoice: FC<CelebrityChoiceProps> = ({
                 <Image
                   src={celeb?.celebrityImage?.url}
                   alt={celeb?.celebrityImage?.altText}
-                  width={size > desktopScreenSize ? 421 : 343}
-                  height={size > desktopScreenSize ? 416 : 302}
+                  width={
+                    size > desktopScreenSize ? 421 : size > 600 ? 250 : 343
+                  }
+                  height={
+                    size > desktopScreenSize ? 416 : size > 600 ? 280 : 302
+                  }
                   objectFit="cover"
                   layout="fixed"
                 />
