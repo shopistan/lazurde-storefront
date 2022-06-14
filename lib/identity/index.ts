@@ -139,3 +139,5 @@ export const getUserInfo = async () => {
     console.log("Error fetching user info: ", error);
   }
 };
+
+export default oktaAuth

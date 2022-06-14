@@ -18,7 +18,8 @@ import { AppContext } from "lib/context";
 import { desktopScreenSize } from "lib/utils/common";
 import Axios from "axios";
 import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
-import { validateAccess } from "lib/identity";
+// import { validateAccess } from "lib/identity";
+import oktaAuth from "lib/identity";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
@@ -56,7 +57,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   }, [isOpened]);
 
   const signInUser = async () => {
-    validateAccess();
+    // validateAccess();
   };
 
   return (
