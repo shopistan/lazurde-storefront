@@ -127,7 +127,7 @@ const RightSideDetail = ({
           {productPricing?.base ? (
             <Label
               className={`${styles["base-price"]} ${
-                productPricing?.discount ? styles["line-through"] : ""
+                productPricing?.discount !== '0'  ? styles["line-through"] : ""
               }`}
             >
               {`${productPricing?.currency === "USD" ? "$" : "SAR"}${
@@ -137,14 +137,14 @@ const RightSideDetail = ({
           ) : (
             ""
           )}
-          {productPricing?.discount ? (
+          {productPricing?.discount !== '0' ? (
             <Label className={styles["discount"]}>
               {`${productPricing?.discount?.toLocaleString()} off`}
             </Label>
           ) : (
             ""
           )}
-          {productPricing?.finalPrice && productPricing?.discount ? (
+          {productPricing?.finalPrice && productPricing?.discount !== '0'  ? (
             <Label className={styles["final-price"]}>
               {`${productPricing?.currency === "USD" ? "$" : "SAR"}${
                 productPricing?.finalPrice &&
