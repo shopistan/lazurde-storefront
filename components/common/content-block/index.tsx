@@ -31,7 +31,11 @@ const ContentBlock: FC<ContentBlockProps> = ({ content = {} }) => {
         {content?.name === "IR Home Page" ||
         content?.name === "Fact Sheet" ||
         content?.name === "الصفحة الرئيسية لـ IR" ||
-        content?.name === "بيان حقائق" ? (
+        content?.name === "بيان حقائق" ||
+        content?.name === "Announcements" ||
+        content?.name === "الإعلانات" ||
+        content?.name === "Financial Calendar" ||
+        content?.name === "التقويم المالي" ? (
           appState?.lang === "en" ? (
             <iframe
               title="Scrolling Iframe"
