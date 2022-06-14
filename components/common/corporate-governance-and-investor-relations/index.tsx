@@ -60,8 +60,8 @@ const CGIR: FC<CGIRProps> = ({
   const router = useRouter();
   const [currentObject, setCurrentObject] = useState({
     moreContent: cgirPages[0]?.moreContent || [],
-    name: cgirPages[0]?.name || "",
-    engName: cgirPages[0]?.name,
+    name: cgirPages[0]?.name || null,
+    engName: cgirPages[0]?.name || null,
     content: cgirPages[0]?.content || "",
     icon: {
       url: cgirPages[0]?.icon?.url || "",
@@ -74,10 +74,10 @@ const CGIR: FC<CGIRProps> = ({
       moreContent:
         appState.lang == "en"
           ? cgirPages[0]?.moreContent
-          : _links[0].moreContent,
+          : _links[0]?.moreContent,
       content:
-        appState.lang == "en" ? cgirPages[0]?.content : _links[0].content,
-      name: appState.lang == "en" ? cgirPages[0]?.name : _links[0].name,
+        appState.lang == "en" ? cgirPages[0]?.content : _links[0]?.content,
+      name: appState.lang == "en" ? cgirPages[0]?.name : _links[0]?.name,
       icon: cgirPages[0]?.icon,
       engName: cgirPages[0]?.name,
     });
@@ -120,8 +120,8 @@ const CGIR: FC<CGIRProps> = ({
                           ? moreContent
                           : _links[index].moreContent,
                       content:
-                        appState.lang == "en" ? content : _links[index].content,
-                      name: appState.lang == "en" ? name : _links[index].name,
+                        appState.lang == "en" ? content : _links[index]?.content,
+                      name: appState.lang == "en" ? name : _links[index]?.name,
                       engName: name,
                       icon: {
                         url: icon?.url,
@@ -141,7 +141,7 @@ const CGIR: FC<CGIRProps> = ({
                     </div>
                   )}
                   <Label>
-                    {appState?.lang === "en" ? name : _links[index].name}
+                    {appState?.lang === "en" ? name : _links[index]?.name}
                     {/* {appState?.lang === "en" ? name : name} */}
                   </Label>
                 </div>

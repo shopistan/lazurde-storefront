@@ -17,7 +17,7 @@ const ContentBlock: FC<ContentBlockProps> = ({ content = {} }) => {
   return (
     <>
       <div className={styles["content-container"]}>
-        {content.icon?.url && (
+        {content?.icon?.url && (
           <div className={styles["image"]}>
             <Image
               src={content.icon.url}
