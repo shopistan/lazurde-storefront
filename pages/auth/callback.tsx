@@ -1,4 +1,4 @@
-import { callback, validateAccess } from "lib/identity";
+import { callback } from "lib/identity";
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
 
