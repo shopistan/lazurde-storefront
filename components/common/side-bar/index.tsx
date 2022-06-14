@@ -9,7 +9,7 @@ import { AppContext } from "lib/context/index";
 import { useRouter } from "next/router";
 import { desktopScreenSize } from "lib/utils/common";
 import { BackArrow } from "components/icons";
-import { getUserInfo, logout } from "lib/identity";
+// import { getUserInfo, logout } from "lib/identity";
 
 type AccountsProps = {
   image: ImageType;
@@ -63,15 +63,15 @@ const SideBar: FC<SideBarProps> = ({
 
   const [userName, setUserName] = useState("");
   useEffect(() => {
-    const fetchUserInfo = async () => {
-      const uInfo = await getUserInfo();
-      let name = "San";
-      if (uInfo) {
-        name = uInfo.name;
-      }
-      setUserName(name);
-    };
-    fetchUserInfo();
+    // const fetchUserInfo = async () => {
+    //   const uInfo = await getUserInfo();
+    //   let name = "San";
+    //   if (uInfo) {
+    //     name = uInfo.name;
+    //   }
+    //   setUserName(name);
+    // };
+    // fetchUserInfo();
   }, []);
 
   return (
@@ -172,7 +172,7 @@ const SideBar: FC<SideBarProps> = ({
                             key={index}
                             onClick={() => {
                               if (text.toLowerCase().includes("sign out")) {
-                                logout();
+                                //logout();
                               } else {
                                 setActiveComponent(text);
                               }
