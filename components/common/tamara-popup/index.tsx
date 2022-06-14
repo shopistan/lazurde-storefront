@@ -12,7 +12,7 @@ const TamaraModal = ({
 
   useEffect(() => {
     setRendeScript(true);
-  }, [appState?.lang, productPricing.finalPrice]);
+  }, [appState?.lang, productPricing?.finalPrice]);
 
   return (
     <>
@@ -21,8 +21,8 @@ const TamaraModal = ({
           <div
             className="tamara-product-widget pdp-tamara"
             data-lang={appState?.lang}
-            data-price={`${productPricing.finalPrice}`}
-            data-currency={`${productPricing.currency}`}
+            data-price={`${productPricing?.finalPrice}`}
+            data-currency={`${productPricing?.currency}`}
             data-country-code="SA"
             data-color-type="default"
             data-show-border="false"
