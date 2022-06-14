@@ -367,7 +367,7 @@
                     }
                   },
                   "imageTitle": {
-                    "type": "RichText",
+                    "type": "String",
                     "label": "Image Title",
                     "default": ""
                   }
