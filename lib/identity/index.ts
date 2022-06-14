@@ -42,17 +42,17 @@ function getRedirectUri() {
 }
 
 export const validateAccess = () => {
-  getIdToken()
-    .then(function (token: any) {
-      if (token) {
-        console.log("Already logged in", token);
-        getUserInfo();
-      } else {
-        oktaAuth.tokenManager.clear();
-        loginOkta(GRANT_TYPE);
-      }
-    })
-    .catch(console.error);
+  // getIdToken()
+  //   .then(function (token: any) {
+  //     if (token) {
+  //       console.log("Already logged in", token);
+  //       getUserInfo();
+  //     } else {
+  //       oktaAuth.tokenManager.clear();
+  //       loginOkta(GRANT_TYPE);
+  //     }
+  //   })
+  //   .catch(console.error);
 };
 
 const loginOkta = (grantType: any) => {
