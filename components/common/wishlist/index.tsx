@@ -25,7 +25,7 @@ const WishList: FC<WishListProps> = ({
 
   const getwishlist = async () => {
     const wishlistArray = await getWishList(authToken);
-    setAllWishListProducts(wishlistArray?.data?.items);
+    setAllWishListProducts && setAllWishListProducts(wishlistArray?.data?.items);
     typeof window !== "undefined" &&
       window.sessionStorage.setItem(
         "wishListArray",
