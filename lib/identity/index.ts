@@ -29,15 +29,15 @@ const oktaAuth = new OktaAuth({
 });
 
 function getRedirectUri() {
-  if (process.env.NODE_ENV === "production") {
-    if (window?.location?.hostname?.includes("dev")) {
-      return OKTA_REDIRECT_URI_DEV;
-    } else if (window?.location?.hostname?.includes("qa")) {
-      return OKTA_REDIRECT_URI_QA;
-    } else if (window?.location?.hostname?.includes("uat")) {
-      return OKTA_REDIRECT_URI_UAT;
-    }
-  }
+  // if (process.env.NODE_ENV === "production") {
+  //   if (window?.location?.hostname?.includes("dev")) {
+  //     return OKTA_REDIRECT_URI_DEV;
+  //   } else if (window?.location?.hostname?.includes("qa")) {
+  //     return OKTA_REDIRECT_URI_QA;
+  //   } else if (window?.location?.hostname?.includes("uat")) {
+  //     return OKTA_REDIRECT_URI_UAT;
+  //   }
+  // }
   return OKTA_REDIRECT_URI_LOCAL;
 }
 
