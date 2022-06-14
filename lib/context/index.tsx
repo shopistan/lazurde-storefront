@@ -55,6 +55,10 @@ const ContextProvider: FC = ({ children }) => {
   );
   const [hasFilteredData, setHasFilteredData] = useState(false);
   const [priceListId, setPriceListId] = useState("100000");
+  const [allWishListProducts, setAllWishListProducts] = useState(
+    typeof window !== "undefined" &&
+      JSON.parse(window.sessionStorage.getItem("wishListArray")) || []
+  );
 
   return (
     <AppContext.Provider
@@ -71,6 +75,8 @@ const ContextProvider: FC = ({ children }) => {
         setHasFilteredData,
         priceListId,
         setPriceListId,
+        allWishListProducts,
+        setAllWishListProducts,
       }}
     >
       {children}

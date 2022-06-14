@@ -28,7 +28,8 @@ const Cart = ({}: CartProps): JSX.Element => {
   const { t } = useTranslation("common");
   const authToken =
     "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MTUzMzYxLCJleHAiOjE2NTQxNTUxNjF9.FLBjzjjR3g1zreH03aIE9B92H5y1HL6RfhwoePFbKeASfqq2RcyGqkKiexRTELDTPMOJEa9XXklsqfaegYS-fKrEXoIjjHv4KpolommWzaSINL5C__zljx7QZtF5sRtyYKPPlwEcuPtdMJTCERIfyDIHsMF4oehEVvN-cd6DwOA";
-  const { priceListId, appState } = useContext(AppContext);
+  const { priceListId, appState, allWishListProducts, setAllWishListProducts } =
+    useContext(AppContext);
   const [freeShipping, showFreeShipping] = useState(true);
   const [cartData, setCartData] = useState({
     status: "",
@@ -41,32 +42,57 @@ const Cart = ({}: CartProps): JSX.Element => {
     status: "",
     items: [],
     cartId: "",
+    priceList: [],
   });
   const [isLoadingCart, setisLoadingCart] = useState(false);
   const [isWishListLoading, setIsWishListLoading] = useState(false);
   const [updatingCartItem, setUpdatingCartItem] = useState(false);
   const [deletingWishList, setDeletingWishList] = useState(false);
 
-  async function getWishListData() {
+  async function getWishListData(wishList: [] = []) {
     // setDeletingWishList(false);
     setIsWishListLoading(true);
-    const wishListData = await getWishList(authToken);
-    if (wishListData?.status === 200) {
-      const itemIds = wishListData?.data?.items;
-      console.log("itemsids", itemIds);
-      const getItemsbyItemIds = await fetchProductsByItemId(itemIds || []);
+    // const wishListData = await getWishList(authToken);
+    const wishListData =
+      wishList && wishList?.length > 0 ? wishList : allWishListProducts;
+    if (wishListData && wishListData.length > 0) {
+      const getItemsbyItemIds = await fetchProductsByItemId(wishListData || []);
       const payload = {
         priceList: [priceListId],
-        itemId: itemIds || [],
+        itemId: wishListData || [],
       };
       const response = await fetchProductPriceByItemId(payload);
-      console.log("res", response);
+      const wishListArray: {}[] = [];
+      getItemsbyItemIds?.data?.products.filter(
+        (product: { itemId: number }) => {
+          let wishListObj: {} = {};
+          const matchedProduct = response?.data.find(
+            (item: { itemId: number }) => product.itemId === item.itemId
+          );
+          if (matchedProduct) {
+            wishListObj = {
+              ...product,
+              priceList: matchedProduct,
+              totalPrice: {
+                sale: matchedProduct?.offers?.price?.totalPrice,
+                amount: matchedProduct?.offers?.price?.finalPrice,
+                currency: matchedProduct?.offers?.price?.currency,
+              },
+            };
+          } else {
+            wishListObj = { ...product };
+          }
+          wishListArray.push(wishListObj);
+        }
+      );
+
       if (getItemsbyItemIds?.status === 200) {
         setIsWishListLoading(false);
         setWishListData({
           status: "",
           cartId: cartData?.cartId || null,
-          items: getItemsbyItemIds?.data?.products,
+          items: wishListArray,
+          priceList: response?.data,
         });
       } else setIsWishListLoading(false);
     } else {
@@ -150,13 +176,25 @@ const Cart = ({}: CartProps): JSX.Element => {
     try {
       const response = await deleteWishList(item?.itemId, authToken);
       if (response?.status === 200) {
-        getWishListData();
+        const wishListData = await updateWishListData();
+        getWishListData(wishListData);
       }
       setDeletingWishList(false);
     } catch (err) {
       console.log("Error!");
       setDeletingWishList(false);
     }
+  };
+
+  const updateWishListData = async () => {
+    const wishlistArray = await getWishList(authToken);
+    setAllWishListProducts(wishlistArray?.data?.items);
+    typeof window !== "undefined" &&
+      window.sessionStorage.setItem(
+        "wishListArray",
+        JSON.stringify(wishlistArray?.data?.items)
+      );
+    return wishlistArray?.data?.items;
   };
 
   const renderHelpCenterSection = () => {
@@ -214,6 +252,7 @@ const Cart = ({}: CartProps): JSX.Element => {
                         wishListItem={true}
                         removeItem={removeWishListItem}
                         updatingCartItem={deletingWishList}
+                        getCartData={getCartData}
                       />
                       {index < wishListData?.items?.length - 1 && <hr />}
                     </>
