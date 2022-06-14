@@ -311,6 +311,19 @@ const CGIR: FC<CGIRProps> = ({
                       <br />
                     </iframe>
                   )
+                ) : currentObject?.name === "Prospectus" ||
+                  currentObject?.name === "نشرة" ? (
+                  <div>
+                    {currentObject?.moreContent?.length > 0 &&
+                      currentObject?.moreContent?.map((obj, index) => {
+                        return (
+                          <div key={index}>
+                            <Image alt="" src="" width={213} height={276} />
+                            <span></span>
+                          </div>
+                        );
+                      })}
+                  </div>
                 ) : (
                   currentObject?.moreContent &&
                   currentObject?.moreContent?.length > 0 &&
