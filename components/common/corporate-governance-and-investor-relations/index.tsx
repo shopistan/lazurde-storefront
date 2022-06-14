@@ -225,6 +225,90 @@ const CGIR: FC<CGIRProps> = ({
                       scrolling="no"
                     ></iframe>
                   )
+                ) : currentObject?.name === "Announcements" ||
+                  currentObject?.name === "الإعلانات" ? (
+                  appState?.lang === "en" ? (
+                    <iframe
+                      id="euroland_frame_id"
+                      className="EurolandTool"
+                      style={{
+                        background: "transparent",
+                        minWidth: "100%",
+                        width: "1px",
+                        maxHeight: "none",
+                        minHeight: "0px",
+                        height: "1500px",
+                      }}
+                      src="https://ksatools.eurolandir.com/tools/pressreleases/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
+                      width="100%"
+                      height="1262"
+                      frameBorder="0"
+                      scrolling="no"
+                    >
+                      <br />
+                    </iframe>
+                  ) : (
+                    <iframe
+                      id="euroland_frame_id"
+                      className="EurolandTool"
+                      style={{
+                        background: "transparent",
+                        minWidth: "100%",
+                        width: "1px",
+                        maxHeight: "none",
+                        minHeight: "0px",
+                        height: "1500px",
+                      }}
+                      src="https://ksatools.eurolandir.com/tools/pressreleases/?companycode=sa-lazurde&amp;v=2021&amp;lang=ar-ae"
+                      width="100%"
+                      height="1262"
+                      frameBorder="0"
+                      scrolling="no"
+                    >
+                      <br />
+                    </iframe>
+                  )
+                ) : currentObject?.name === "Financial Calendar" ||
+                  currentObject?.name === "التقويم المالي" ? (
+                  appState?.lang === "en" ? (
+                    <iframe
+                      id="euroland_frame_id"
+                      className="EurolandTool"
+                      style={{
+                        background: "transparent",
+                        maxWidth: "700px",
+                        maxHeight: "none",
+                        minHeight: "0px",
+                        height: "840px",
+                      }}
+                      src="https://ksatools.eurolandir.com/tools/fincalendar2/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
+                      width="100%"
+                      height="807"
+                      frameBorder="0"
+                      scrolling="no"
+                    >
+                      <br />
+                    </iframe>
+                  ) : (
+                    <iframe
+                      id="euroland_frame_id"
+                      className="EurolandTool"
+                      style={{
+                        background: "transparent",
+                        maxWidth: "700px",
+                        maxHeight: "none",
+                        minHeight: "0px",
+                        height: "840px",
+                      }}
+                      src="https://ksatools.eurolandir.com/tools/fincalendar2/?companycode=sa-lazurde&amp;v=2021&amp;lang=ar-ae"
+                      width="100%"
+                      height="807"
+                      frameBorder="0"
+                      scrolling="no"
+                    >
+                      <br />
+                    </iframe>
+                  )
                 ) : (
                   currentObject?.moreContent &&
                   currentObject?.moreContent?.length > 0 &&
