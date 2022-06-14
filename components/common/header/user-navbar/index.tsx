@@ -56,7 +56,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   }, [isOpened]);
 
   const signInUser = async () => {
-    validateAccess()
+    validateAccess();
   };
 
   return (
