@@ -5,7 +5,7 @@ import { AppContext } from "lib/context";
 const TabbyModal = ({
   productPricing,
 }: {
-  productPricing: { finalPrice: number };
+  productPricing: { finalPrice: number, currency?: number };
 }) => {
   const { appState } = useContext(AppContext);
 
@@ -13,12 +13,12 @@ const TabbyModal = ({
 
   useEffect(() => {
     setRendeScript(true);
-  }, [appState?.lang, productPricing.finalPrice]);
+  }, [appState?.lang, productPricing?.finalPrice]);
   return (
     <>
       {renderScript && (
         <>
-          <div id="TabbyPromo"></div>
+          <div key={productPricing?.finalPrice} id="TabbyPromo"></div>
 
           <Script
             id={Math.random()?.toString()}
@@ -27,7 +27,7 @@ const TabbyModal = ({
           <Script strategy="lazyOnload" id={Math.random()?.toString()}>
             {`new TabbyPromo({
             selector: '#TabbyPromo',
-            currency: "$",
+            currency: '${productPricing?.currency}',
             price: ${productPricing?.finalPrice},
             installmentsCount: 4,
             lang: '${appState?.lang}',
