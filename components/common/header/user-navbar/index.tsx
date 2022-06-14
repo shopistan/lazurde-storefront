@@ -16,9 +16,9 @@ import { BrandSidebarProps, ErrorObject } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { desktopScreenSize } from "lib/utils/common";
-import { OKTA_CLIENT_ID, OKTA_DOMAIN, OKTA_REDIRECT_URI } from "general-config";
 import Axios from "axios";
 import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
+import { validateAccess } from "lib/identity";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
@@ -56,22 +56,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   }, [isOpened]);
 
   const signInUser = async () => {
-    try {
-      const signInRes = await Axios.get(`${OKTA_DOMAIN}/authorize`, {
-        params: {
-          client_id: OKTA_CLIENT_ID,
-          responseType: "code",
-          scope: "openid",
-          redirect_uri: OKTA_REDIRECT_URI,
-          state: "state-8600b31f-52d1-4dca-987c-386e3d8967e9",
-          code_challenge_method: "S256",
-          code_challenge: "qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es",
-        },
-      });
-      console.log(signInRes);
-    } catch (error) {
-      console.log("Error signing in: ", (error as ErrorObject).message);
-    }
+    validateAccess()
   };
 
   return (

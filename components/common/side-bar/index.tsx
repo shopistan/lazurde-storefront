@@ -1,5 +1,5 @@
 import { ImageType } from "lib/types/common";
-import React, { FC, useContext } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import Label from "../ui/label";
 import Image from "next/image";
 import styles from "./side-bar.module.scss";
@@ -9,6 +9,7 @@ import { AppContext } from "lib/context/index";
 import { useRouter } from "next/router";
 import { desktopScreenSize } from "lib/utils/common";
 import { BackArrow } from "components/icons";
+import { getUserInfo, logout } from "lib/identity";
 
 type AccountsProps = {
   image: ImageType;
@@ -60,6 +61,19 @@ const SideBar: FC<SideBarProps> = ({
     { returnObjects: true }
   );
 
+  const [userName, setUserName] = useState("");
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const uInfo = await getUserInfo();
+      let name = "San";
+      if (uInfo) {
+        name = uInfo.name;
+      }
+      setUserName(name);
+    };
+    fetchUserInfo();
+  }, []);
+
   return (
     <>
       {activeComponent !== "Account Overview" && width < desktopScreenSize ? (
@@ -87,7 +101,9 @@ const SideBar: FC<SideBarProps> = ({
                 <Label>
                   <>
                     <span className={styles["firstName-desktop"]}>
-                      {appState?.lang == "en" ? firstName : t("firstname")}
+                      {appState?.lang == "en"
+                        ? `Hi ${userName}`
+                        : t("firstname")}
                     </span>
                     <span>
                       {appState?.lang == "en" ? lastName : t("lastname")}
@@ -155,7 +171,11 @@ const SideBar: FC<SideBarProps> = ({
                             }`}
                             key={index}
                             onClick={() => {
-                              setActiveComponent(text);
+                              if (text.toLowerCase().includes("sign out")) {
+                                logout();
+                              } else {
+                                setActiveComponent(text);
+                              }
                             }}
                           >
                             <div className={styles["account-image"]}>
