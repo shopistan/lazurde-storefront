@@ -33,7 +33,7 @@ const LazurdeProductListingPage: FC<ProductListingPageProps> = ({
   pageComponents = [],
   algoliaSearchResults,
 }) => {
-  
+  debugger
   return (
     <>
       <Head>
