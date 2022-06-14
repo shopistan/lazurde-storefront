@@ -41,7 +41,7 @@ function getRedirectUri() {
   return OKTA_REDIRECT_URI_LOCAL;
 }
 
-export function validateAccess() {
+export const validateAccess = () => {
   getIdToken()
     .then(function (token: any) {
       if (token) {
@@ -53,7 +53,7 @@ export function validateAccess() {
       }
     })
     .catch(console.error);
-}
+};
 
 const loginOkta = (grantType: any) => {
   try {
