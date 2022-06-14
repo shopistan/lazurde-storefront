@@ -119,12 +119,13 @@ const RightSideDetail = ({
       finalPrice: offers?.price?.totalPrice,
     });
   };
-
+  
   const getProductPricing = () => {
+    if(!productPricing) return
     return (
       <>
         <div className={styles["price-wrapper"]}>
-          {productPricing?.base ? (
+          {productPricing?.base? (
             <Label
               className={`${styles["base-price"]} ${
                 productPricing?.discount !== '0'  ? styles["line-through"] : ""
@@ -139,7 +140,7 @@ const RightSideDetail = ({
           )}
           {productPricing?.discount !== '0' ? (
             <Label className={styles["discount"]}>
-              {`${productPricing?.discount?.toLocaleString()} off`}
+              {`${productPricing?.discount} off`}
             </Label>
           ) : (
             ""
