@@ -19,6 +19,11 @@ import { desktopScreenSize } from "lib/utils/common";
 import { OKTA_CLIENT_ID, OKTA_DOMAIN, OKTA_REDIRECT_URI } from "general-config";
 import Axios from "axios";
 import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
+import SideBar from "components/common/ui/sidebar";
+import AccountSidebar from "./account-sidebar";
+import WhishListSidebar from "./whishlist-sidebar";
+import ShopBag from "./shopbag-sidebar";
+import Language from "./language-sidebar";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
@@ -28,6 +33,13 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   const { t } = useTranslation("common");
   const [isOpened, setIsOpened] = useState(false);
   const [width] = useWindowSize();
+  const [sidebarOpened, setSidebarOpened] = useState(false);
+  const [sidebarchild, setSidebarChild] = useState({
+    account: false,
+    whishlist: false,
+    shopbag: false,
+    language: false
+  });
 
   useEffect(() => {
     const hasWishListData = allWishListProducts
@@ -58,6 +70,8 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   }, [isOpened]);
 
   const signInUser = async () => {
+    setSidebarOpened(!sidebarOpened);
+    setSidebarChild({ ...sidebarchild, account: true });
     try {
       const signInRes = await Axios.get(`${OKTA_DOMAIN}/authorize`, {
         params: {
@@ -75,6 +89,39 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
       console.log("Error signing in: ", (error as ErrorObject).message);
     }
   };
+
+  const handlewhishlist = () => {
+    setSidebarOpened(!sidebarOpened);
+    setSidebarChild({
+      ...sidebarchild,
+      whishlist: true,
+      shopbag: false,
+      account: false,
+      language: false
+    });
+  };
+
+  const handleshopbag = () => {
+    setSidebarOpened(!sidebarOpened);
+    setSidebarChild({
+      ...sidebarchild,
+      shopbag: true,
+      account: false,
+      whishlist: false,
+      language: false
+    });
+  };
+
+  const handlelanguage = () => {
+    setSidebarOpened(!sidebarOpened);
+    setSidebarChild({
+      ...sidebarchild,
+      shopbag: false,
+      account: false,
+      whishlist: false,
+      language: true
+    });
+  }
 
   return (
     <div className={styles["user-navbar"]} data-testid="product-card">
@@ -153,11 +200,13 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
             <MapPin />
           </a>
         </Link>
-        <Link href={"/"}>
-          <a>
+        {/* <Link href={"/"}>
+          <a> */}
+          <div onClick={handlelanguage}>
             <Globe />
-          </a>
-        </Link>
+            </div>
+          {/* </a>
+        </Link> */}
         {/* <Link href={"/"}>
           <a> */}
         <div onClick={signInUser}>
@@ -165,19 +214,23 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
         </div>
         {/* </a>
         </Link> */}
-        <Link href={"/"}>
-          <a>
-            <Heart />
-          </a>
-        </Link>
+        {/* <Link href={"/"}>
+          <a> */}
+        <div onClick={handlewhishlist}>
+          <Heart />
+        </div>
+        {/* </a>
+        </Link> */}
         <div>
           <Divider />
         </div>
-        <Link href={"/"}>
-          <a>
-            <Bag />
-          </a>
-        </Link>
+        {/* <Link href={"/"}>
+          <a> */}
+        <div onClick={handleshopbag}>
+          <Bag />
+        </div>
+        {/* </a>
+        </Link> */}
       </div>
       {width > desktopScreenSize && (
         <div
@@ -192,6 +245,19 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
         isOpened={isOpened}
         setIsOpened={setIsOpened}
       />
+      {sidebarOpened && (
+        <SideBar isopend={sidebarOpened} setIsOpened={setSidebarOpened}>
+          {sidebarchild.account ? (
+            <AccountSidebar />
+          ) : sidebarchild.whishlist ? (
+            <WhishListSidebar />
+          ) : sidebarchild.shopbag ? (
+            <ShopBag />
+          ) : sidebarchild.language ? (
+            <Language />
+          ): ""}
+        </SideBar>
+      )}
     </div>
   );
 };

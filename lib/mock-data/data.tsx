@@ -47,7 +47,7 @@ export const sliderData = {
 export const langSelectData = [
   {
     label: "KSA",
-    img: "/icons/flag-sa.png",
+    img: "/icons/flag-sa.jpg",
     value: "en-sa",
     langTitle: "english",
   },
@@ -1159,3 +1159,42 @@ export const singleProductData = {
     },
   ],
 };
+export const langSidebarData = [
+  {
+    label: "KSA",
+    img: "/icons/flag-sa.jpg",
+    value: "en-sa",
+    langTitle: "english",
+  },
+  {
+    label: "السعودية",
+    img: "/icons/flag-sa.jpg",
+    value: "ar-sa",
+    langTitle: "عربي",
+  },
+  
+  {
+    label: "مصر",
+    img: "/icons/flag-egypt.png",
+    value: "ar-eg",
+    langTitle: "عربي",
+  },
+  {
+    label: "egypt",
+    img: "/icons/flag-egypt.png",
+    value: "en-eg",
+    langTitle: "english",
+  },
+  {
+    label: "الإمارات",
+    img: "/icons/flag-uae.png",
+    value: "en-ae",
+    langTitle: "عربي",
+  },
+  {
+    label: "u.a.e",
+    img: "/icons/flag-uae.png",
+    value: "ar-ae",
+    langTitle: " english",
+  },
+];
