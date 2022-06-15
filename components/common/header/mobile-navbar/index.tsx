@@ -43,7 +43,10 @@ const MobileNavBar = ({
 
   return (
     <>
-      <div className={styles["mobile-header__wrapper"]}>
+      <div
+        className={styles["mobile-header__wrapper"]}
+        style={{ height: "56px" }}
+      >
         <div className={styles["mobile-header__left"]}>
           <button onClick={handleMenu}>
             <MenuIcon color="#000000" />

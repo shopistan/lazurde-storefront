@@ -84,7 +84,7 @@ export default LazurdeProductDescriptionPage;
 export const getStaticPaths: GetStaticPaths = async () => {
   const allProducts: ProductType[] = await fetchAllProducts(1, 50);
   let randomlyFilteredProducts: ProductType[] = [];
-  for (let i = 0; i < allProducts.length; i++) {
+  for (let i = 0; i < 2; i++) {
     if (Math.random() > 0.5) {
       randomlyFilteredProducts.push(allProducts[i]);
     }
