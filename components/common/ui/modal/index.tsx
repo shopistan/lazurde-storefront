@@ -29,7 +29,7 @@ const Modal = ({
   modalWidth = "562px",
   modalHeight = "381px",
   divTopBar = "",
-  divModalRight = ''
+  divModalRight = "",
 }: ModalProps): JSX.Element => {
   const [openState, setOpenState] = useState(isOpened);
   const [size] = useWindowSize();
@@ -51,14 +51,15 @@ const Modal = ({
           <div className={`${styles["modal-body"]} ${modalBodyClassName}`}>
             <div className={`${styles["div-top-bar"]} ${divTopBar}`}>
               <div className={styles["div-left"]}></div>
-              <div
-                className={`${styles["div-right"]} ${divModalRight}`}
-                onClick={() => {
-                  setOpenState(false);
-                  onClose && onClose();
-                }}
-              >
-                <CrossSmall width={"12px"} height={"12px"} />
+              <div className={`${styles["div-right"]} ${divModalRight}`}>
+                <CrossSmall
+                  width={"12px"}
+                  height={"12px"}
+                  onClick={() => {
+                    setOpenState(false);
+                    onClose && onClose();
+                  }}
+                />
               </div>
             </div>
             <div className={`${styles["div-modal-body"]} ${divModalBody}`}>
@@ -81,14 +82,15 @@ const Modal = ({
               height: size > desktopScreenSize ? modalHeight : "fit-content",
             }}
           >
-            <div
-              className={styles["bg-blury-modal_cross-btn"]}
-              onClick={() => {
-                setOpenState(false);
-                onClose && onClose();
-              }}
-            >
-              <CrossSmall width={"12px"} height={"12px"} />
+            <div className={styles["bg-blury-modal_cross-btn"]}>
+              <CrossSmall
+                width={"12px"}
+                height={"12px"}
+                onClick={() => {
+                  setOpenState(false);
+                  onClose && onClose();
+                }}
+              />
             </div>
             <div className={styles["bg-blury-modal_content"]}>{children}</div>
           </div>

@@ -61,8 +61,11 @@ const Notification = (props: NotificationProps): JSX.Element => {
                 style={{ backgroundColor: toast?.backgroundColor }}
               >
                 <div className="close-btn">
-                  <button onClick={() => deleteToast(toast?.id)}>
-                    <CrossSmall color="#fff" />
+                  <button>
+                    <CrossSmall
+                      color="#fff"
+                      onClick={() => deleteToast(toast?.id)}
+                    />
                   </button>
                 </div>
                 <div>

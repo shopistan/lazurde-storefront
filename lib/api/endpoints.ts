@@ -36,6 +36,10 @@ const ENDPOINTS = {
     GET_ORDER: "/api-order/orders/user",
   },
 
+  INVENTORY: {
+    GET_BY_IDS: "/api-inventory/inventory?itemIds=68",
+  },
+
   WISHLIST: {
     GET_WISHLIST: "/api-cart/wishlist/user",
     DELETE_WISHLIST: (itemID: string | number) =>

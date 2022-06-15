@@ -1,9 +1,54 @@
+@import '/styles/variables.scss';
+
 .cart-item-wrapper {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   gap: 20px;
   width: 100%;
+
+  .cart-image {
+    width: 146px;
+    height: 146px;
+    position: relative;
+
+    @media (max-width: 768px) {
+      width: 100px;
+      height: 100px;
+    }
+
+    &_tag {
+      z-index: 1;
+      position: absolute;
+      top: auto;
+      bottom: 0;
+      width: 100%;
+      // text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      height: 22px;
+
+      @media (max-width: 768px) {
+        height: 15px;
+      }
+    }
+
+    .bg {
+      &_missl {
+        background-color: #dde8db;
+      }
+
+      &_lazurde {
+        background-color: #f2f2f2;
+      }
+
+      &_kenaz {
+        background-color: #cde9f2;
+      }
+    }
+  }
 
   @media (max-width: 600px) {
     padding: 0px;
@@ -22,18 +67,20 @@
       flex-wrap: wrap;
 
       @media (max-width: 600px) {
-        flex-direction: row;
+        flex-direction: column;
         gap: 8px;
       }
 
       span {
+        font-size: 14px;
         font-weight: 500;
-        font-size: 15px !important;
         line-height: 120%;
         color: #000000;
-        max-width: 80%;
-        @media (max-width: 500px) {
-          font-size: 14px;
+        max-width: 100%;
+
+        @media (min-width: $breakPoint-desktop) {
+          max-width: 80%;
+          font-size: 15px !important;
         }
       }
     }
@@ -61,16 +108,39 @@
         }
 
         input {
-          width: 40px;
+          width: 60px;
           height: 20px;
+          border: 1px solid rgba(0, 0, 0, 0.2);
+          border-radius: 100px;
+          padding: 5px;
+          color: rgba(0, 0, 0, 0.6) !important;
+          -webkit-text-fill-color: rgba(0, 0, 0, 0.6);
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          /* display: none; <- Crashes Chrome on hover */
+          -webkit-appearance: none;
+          margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        }
+
+        input::-webkit-text-fill-color {
+          color: rgba(0, 0, 0, 0.6) !important;
+        }
+
+        input[type='number'] {
+          -moz-appearance: textfield; /* Firefox */
         }
       }
     }
 
     .remove-btn {
-      margin-top: 18px;
+      margin-top: 25px;
       display: flex;
       align-items: center;
+      @media (max-width: 600px) {
+        margin-top: 9px;
+      }
       button {
         border: none;
         font-weight: 500;
@@ -98,6 +168,24 @@
         color: #000000;
         cursor: pointer;
         background: #fff;
+      }
+    }
+  }
+
+  .item-details {
+    .item-title {
+      span {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16.8px;
+        letter-spacing: 0em;
+        text-align: start;
+
+        @media (min-width: $breakPoint-desktop) {
+          font-size: 15px;
+          font-weight: 500;
+          line-height: 18px;
+        }
       }
     }
   }

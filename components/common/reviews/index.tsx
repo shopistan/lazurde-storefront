@@ -30,23 +30,33 @@ const Reviews = ({
   setTotalRating,
   totalRating,
   productData = {},
-  reviewsData = [],
-  initialProductData = [],
-  currentData = [],
-  setCurrentData,
-  filterData = [],
-  setFilterData,
-  fetchingReviews = () => {},
-  setIsRatingError,
-  isRatingError,
 }: ReviewsProps): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
+  const [initialProductData, setInitialProductData] = useState<any>([]);
+  const [currentData, setCurrentData] = useState([]);
+  const [reviewsData, setReviewsData] = useState<any>([]);
+  const [filterData, setFilterData] = useState<any>([]);
+
+  useEffect(() => {
+    setFilterData("");
+    fetchingReviews();
+  }, []);
 
   const onClose = () => {
     setModalOpen(false);
     document.body.style.overflow = "auto";
+  };
+
+  const fetchingReviews = async () => {
+    const productId = productData && productData["itemId"];
+    const response = await getReviews(productId);
+    response && response?.data && setReviewsData(response?.data?.results);
+    response &&
+      response?.data &&
+      setInitialProductData(response?.data?.results);
+    response && response?.data && setCurrentData(response?.data?.results);
   };
 
   const filterReview = (val: any) => {
@@ -116,6 +126,7 @@ const Reviews = ({
                 rating={totalRating}
                 starWidth={16.67}
                 starHeight={16.67}
+                pointerEventsNone={true}
               />
               <Label
                 className={styles["total-rating"]}
@@ -173,10 +184,16 @@ const Reviews = ({
                       <Label className={styles["customer-name"]}>
                         {review?.author?.replace(/"/g, "")}
                       </Label>
-                      <div className={styles["review-rating"]}>
+                      <div
+                        className={styles["review-rating"]}
+                        style={{
+                          pointerEvents: "none",
+                        }}
+                      >
                         <StarRating
                           count={5}
                           rating={review?.rating?.toFixed(2)}
+                          pointerEventsNone={true}
                         />
                       </div>
                       <Label className={styles["review-content"]}>
@@ -211,8 +228,6 @@ const Reviews = ({
           isOpened={modalOpen}
           onClose={onClose}
           fetchingReviews={fetchingReviews}
-          setIsRatingError={setIsRatingError}
-          isRatingError={isRatingError}
         />
       )}
     </>

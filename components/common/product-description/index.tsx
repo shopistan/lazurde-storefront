@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import styles from "./style.module.scss";
 import ProductDetail from "./product-detail";
 import { productDescriptionData } from "lib/mock-data/data";
@@ -7,8 +7,6 @@ import { ProductType } from "lib/types/product";
 import RightSideDetail from "./right-side-detail";
 import Reviews from "components/common/reviews/index";
 import { AppContext } from "lib/context";
-import { getReviews } from "lib/utils/reviews";
-import { fetchProductPriceByItemId } from "lib/utils/product";
 import Link from "next/link";
 
 interface ProductDescriptionProps {
@@ -18,52 +16,26 @@ interface ProductDescriptionProps {
 const ProductDescription = ({
   product,
 }: ProductDescriptionProps): JSX.Element => {
-  const { appState } = useContext(AppContext);
-  const { priceListId } = useContext(AppContext);
+  const { appState, priceListId } = useContext(AppContext);
   const [prodArray, setProdArray] = useState(product);
   const [imageArray, setImageArray] = useState<
     { url: string; altText: string }[]
   >([]);
   const [link, setLink] = useState("");
   const [totalRating, setTotalRating] = useState(0);
-  const [reviewsData, setReviewsData] = useState<any>([]);
-  const [initialProductData, setInitialProductData] = useState<any>([]);
-  const [currentData, setCurrentData] = useState([]);
-  const [filterData, setFilterData] = useState<any>([]);
   const [isRatingError, setIsRatingError] = useState("");
 
   useEffect(() => {
-    const payload = {
-      priceList: [priceListId],
-      itemId: [product?.itemId?.toString()],
-    };
-    const getPrice = async () => {
-      const response = await fetchProductPriceByItemId(payload);
-    };
-    getPrice();
-  }, []);
+    const redriectBreadCrumbs =
+      appState?.brand === `Miss L'`
+        ? "/missl"
+        : appState?.brand === `Kenaz`
+        ? "/kenaz"
+        : "/";
+    redriectBreadCrumbs && setLink(redriectBreadCrumbs);
+  }, [appState?.brand]);
 
-  console.log('product',  product);
-  
-  const destructureAttributes = (product: ProductType) => {
-    const obj: { [key: string]: string } = {};
-    product?.attributes?.map((attr: any) => {
-      obj[attr?.name] = attr?.value;
-    });
-    return { ...product, ...obj };
-  };
-
-  const getImageArray = (product: any) => {
-    const imageArray: { url: string; altText: string }[] = [];
-    Object.keys(product).map((attr: any) => {
-      if (attr?.includes("Image URL")) {
-        imageArray.push({ url: product[attr], altText: "" });
-      }
-    });
-    setImageArray(imageArray);
-  };
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     let modifiedProdArray = destructureAttributes(product);
     if (modifiedProdArray && modifiedProdArray?.children.length > 0) {
       modifiedProdArray?.children?.map((variant, index) => {
@@ -84,20 +56,24 @@ const ProductDescription = ({
     }
   }, [prodArray]);
 
-  useEffect(() => {
-    setFilterData("");
-    fetchingReviews();
-  }, []);
-
-  const fetchingReviews = async () => {
-    const productId = prodArray && prodArray["itemId"];
-    const response = await getReviews(productId);
-    response && response?.data && setReviewsData(response?.data?.results);
-    response &&
-      response?.data &&
-      setInitialProductData(response?.data?.results);
-    response && response?.data && setCurrentData(response?.data?.results);
+  const destructureAttributes = (product: ProductType) => {
+    const obj: { [key: string]: string } = {};
+    product?.attributes?.map((attr: any) => {
+      obj[attr?.name] = attr?.value;
+    });
+    return { ...product, ...obj };
   };
+
+  const getImageArray = (product: any) => {
+    const imageArray: { url: string; altText: string }[] = [];
+    Object.keys(product).map((attr: any) => {
+      if (attr?.includes("Image URL")) {
+        imageArray.push({ url: product[attr], altText: "" });
+      }
+    });
+    setImageArray(imageArray);
+  };
+
 
   const onSizeChange = (val: number) => {
     console.log("sizevalue", val);
@@ -107,15 +83,6 @@ const ProductDescription = ({
     console.log("colroValue", val);
   };
 
-  useEffect(() => {
-    const redriectBreadCrumbs =
-      appState?.brand === `Miss L'`
-        ? "/missl"
-        : appState?.brand === `Kenaz`
-        ? "/kenaz"
-        : "/";
-    redriectBreadCrumbs && setLink(redriectBreadCrumbs);
-  }, [appState?.brand]);
 
   return (
     <>
@@ -146,21 +113,9 @@ const ProductDescription = ({
               onSizeChange={onSizeChange}
               onColorChange={onColorChange}
               totalRating={totalRating}
-              fetchingReviews={fetchingReviews}
               setIsRatingError={setIsRatingError}
               isRatingError={isRatingError}
-              currency={
-                productDescriptionData?.priceData[0]?.offers?.price?.currency
-              }
-              basePrice={
-                productDescriptionData?.priceData[0]?.offers?.price?.base
-              }
-              discount={
-                productDescriptionData?.priceData[0]?.offers?.price?.sale
-              }
-              finalPrice={
-                productDescriptionData?.priceData[0]?.offers?.price?.finalPrice
-              }
+              priceListId={priceListId}
             />
           </div>
         </div>
@@ -175,13 +130,6 @@ const ProductDescription = ({
           setTotalRating={setTotalRating}
           totalRating={totalRating}
           productData={prodArray}
-          reviewsData={reviewsData}
-          initialProductData={initialProductData}
-          currentData={currentData}
-          setCurrentData={setCurrentData}
-          filterData={filterData}
-          setFilterData={setFilterData}
-          fetchingReviews={fetchingReviews}
           setIsRatingError={setIsRatingError}
           isRatingError={isRatingError}
         />

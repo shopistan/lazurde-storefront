@@ -4,15 +4,36 @@ import { componentsById } from "components/xm-component-library";
 import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import Head from "next/head";
-import React, { FC } from "react";
+import React, { FC, useState, useContext, useEffect } from "react";
 import AppContentWrapper from "../components/common/app-content-wrapper";
+import { AppContext } from "lib/context";
 
 const InThePress: FC<PageProps> = ({
-  headerProps,
+  // headerProps,
+  headerArray,
   brandSidebarProps,
   footerProps,
   pageComponents,
 }) => {
+  const { appState } = useContext(AppContext);
+  const [headerData, setHeaderData] = useState<any>({});
+
+  const getCurrentBrandId = () => {
+    if (appState?.brand === `L'azurde`) return "lazurdeHeader";
+    else if (appState?.brand === `Miss L'`) return "missLHeader";
+    else if (appState?.brand === "Kenaz") return "kenazHeader";
+    else return "lazurdeHeader";
+  };
+
+  useEffect(() => {
+    const currentHeaderProps: any[] =
+      headerArray &&
+      headerArray?.length > 0 &&
+      headerArray?.filter((header: { params: any }) => {
+        return header.params.headerId === getCurrentBrandId();
+      });
+    setHeaderData(currentHeaderProps?.[0].params);
+  }, []);
   return (
     <>
       <Head>
@@ -21,7 +42,10 @@ const InThePress: FC<PageProps> = ({
           L&apos;AZURDE
         </title>
       </Head>
-      <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
+      {/* <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header> */}
+      {headerData && Object.keys(headerData).length > 0 && (
+        <Header {...headerData} brandSidebarProps={brandSidebarProps}></Header>
+      )}
       <AppContentWrapper>
         <div className={"component-container"}>
           {pageComponents.map((component: XMComponent, index) => {
@@ -43,6 +67,8 @@ export default InThePress;
 export async function getStaticProps(context: any) {
   const globalComponents = (await fetchGlobalComponents()) || [];
   const pageComponents = (await fetchXMComponents(12, "/in-the-press")) || [];
+  const headerArray =
+    globalComponents.filter((item: XMComponent) => item.id === "Header") || {};
   const headerProps =
     (
       globalComponents.find(
@@ -61,7 +87,8 @@ export async function getStaticProps(context: any) {
     ).params || {};
   return {
     props: {
-      headerProps,
+      // headerProps,
+      headerArray,
       footerProps,
       brandSidebarProps,
       pageComponents,

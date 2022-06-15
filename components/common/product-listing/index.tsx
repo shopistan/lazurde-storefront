@@ -227,7 +227,8 @@ const ProductListing = ({
         }
       );
     }
-
+    const nonVariantArray = filteredArray.filter((item: any) => item.isVariant === false)
+    filteredArray = nonVariantArray
     return filteredArray;
   };
 

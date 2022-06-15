@@ -8,6 +8,7 @@ interface StarRatingProps {
   onClick?: Function;
   starWidth?: number | string;
   starHeight?: number | string;
+  pointerEventsNone?: boolean;
 }
 
 const StarRating = ({
@@ -16,9 +17,14 @@ const StarRating = ({
   onClick = () => {},
   starWidth = 18,
   starHeight = 18,
+  pointerEventsNone = false,
 }: StarRatingProps): JSX.Element => {
   return (
-    <div>
+    <div
+      style={{
+        pointerEvents: pointerEventsNone ? "none" : "auto",
+      }}
+    >
       {[...Array(count)]?.map((_, index) => {
         return (
           <>

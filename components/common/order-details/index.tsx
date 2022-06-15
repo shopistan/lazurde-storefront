@@ -134,7 +134,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                       : <span> {orderData?.orders[index]?.orderId}</span>
                     </p>
                   </div>
-                  <div className={styles["order-date"]}>
+                  {/* <div className={styles["order-date"]}>
                     <Image src={"/calendar.png"} width={18} height={18} />
                     <Link href={"/"}>
                       <a className={styles["order-link"]}>
@@ -143,7 +143,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                           : t("View Digital Receipt & Warranty")}
                       </a>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
                 <Button
                   className={styles["view-button"]}
