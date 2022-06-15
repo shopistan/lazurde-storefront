@@ -9,7 +9,8 @@ import { AppContext } from "lib/context/index";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import Slider from "components/common/ui/slider/slider";
-import {desktopScreenSize} from 'lib/utils/common'
+import { desktopScreenSize } from "lib/utils/common";
+import Skeleton from "react-loading-skeleton";
 
 interface CollectionCardTypes {
   collectionbutton?: string;
@@ -18,7 +19,7 @@ interface CollectionCardTypes {
   collectionImage?: ImageType;
   collectionImageKenaz?: ImageType;
   collectionImageMissl?: ImageType;
-  collectionButtonLink ?: string;
+  collectionButtonLink?: string;
 }
 
 interface _CollectionCardTypes {
@@ -44,11 +45,12 @@ const CollectionCard: FC<CollectionCardProps> = ({
     {},
     { returnObjects: true }
   );
-  
+
   return (
     <div
-      className={`${styles["collection-container"]} ${appState.lang === "ar" && styles["arabic-card"]
-        }`}
+      className={`${styles["collection-container"]} ${
+        appState.lang === "ar" && styles["arabic-card"]
+      }`}
     >
       <Slider
         desktopSlidePerView={2}
@@ -58,7 +60,7 @@ const CollectionCard: FC<CollectionCardProps> = ({
         className={`collection-swiper`}
       >
         <>
-          {collectionCard &&
+          {(collectionCard &&
             collectionCard.map((data, index) => {
               const {
                 collectionImage,
@@ -67,7 +69,7 @@ const CollectionCard: FC<CollectionCardProps> = ({
                 collectiontitle,
                 collectionImageKenaz,
                 collectiontext,
-                collectionButtonLink = '/'
+                collectionButtonLink = "/",
               } = data;
               return (
                 <SwiperSlide key={index}>
@@ -108,7 +110,9 @@ const CollectionCard: FC<CollectionCardProps> = ({
                       )}
 
                       <Button
-                      onClick={() => {router.push(collectionButtonLink)}}
+                        onClick={() => {
+                          router.push(collectionButtonLink);
+                        }}
                         className={styles["collection-button"]}
                         buttonText={
                           appState.lang === "en"
@@ -132,7 +136,8 @@ const CollectionCard: FC<CollectionCardProps> = ({
                   </div>
                 </SwiperSlide>
               );
-            })}
+            })) ||
+            [1, 2, 3].map((s, i) => <Skeleton />)}
         </>
       </Slider>
     </div>

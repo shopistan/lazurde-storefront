@@ -52,13 +52,13 @@ const PromoBar: FC<PromoBarProps> = ({
       style={{ backgroundColor: bgColor }}
     >
       <div className={styles["title"]} data-testid="test-title">
-        {/* {appState.lang === "en" ? `${title} ` : t("promoBarTitle")} */}
-        {title}
+        {appState.lang === "en" ? `${title} ` : t("promoBarTitle")}
+        {/* {title} */}
         <Link href={link || "/"} locale={false}>
           <a className={styles["link-text"]}>
             <span data-testid="link-text">
-              {dynamicText || <Skeleton />}
-              {/* {appState.lang === "en" ? dynamicText : t("promoBarLinkTitle")} */}
+              {/* {dynamicText || <Skeleton />} */}
+              {appState.lang === "en" ? dynamicText : t("promoBarLinkTitle")}
             </span>
           </a>
         </Link>
