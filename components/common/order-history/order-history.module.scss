@@ -1,5 +1,7 @@
+@import "/styles/variables.scss";
+
 .history-container {
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     width: 66%;
     display: flex;
     flex-direction: column;
@@ -7,7 +9,7 @@
 }
 
 .history-first {
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding-block: 42px 40px;
     padding-inline: 40px;
   }
@@ -24,7 +26,7 @@
   text-align: start;
   margin-top: 10.72px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     margin-top: 8px;
     margin-bottom: 8px;
   }
@@ -39,7 +41,7 @@
   margin-top: 0;
   margin-bottom: 0;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     font-size: 15px;
     font-weight: 400;
     line-height: 18px;
@@ -53,7 +55,7 @@
   margin-bottom: 8px;
   padding: 24px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding: 40px;
   }
 }
@@ -61,7 +63,7 @@
 .history-second-first {
   margin-bottom: 48px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     margin-bottom: 56.8px;
     display: flex;
     justify-content: space-between;
@@ -73,7 +75,7 @@
   text-align: center;
   margin-top: 17px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     text-align: start;
     margin-top: 0;
   }
@@ -99,7 +101,7 @@
   margin-bottom: 8px;
   padding: 24px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding: 40px;
   }
 }
@@ -128,7 +130,7 @@
   background-color: white;
   padding: 24px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding: 40px;
   }
 }
@@ -194,7 +196,7 @@
   letter-spacing: 0em;
   text-align: start;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     font-size: 15px;
     font-weight: 500;
     line-height: 18px;
@@ -210,7 +212,7 @@
   letter-spacing: 0em;
   text-align: start;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
@@ -236,7 +238,7 @@
   margin-top: 8px;
   margin-bottom: 8px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding: 40px;
   }
 }
@@ -286,7 +288,7 @@
   background-color: white;
   padding: 24px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding: 40px;
   }
 }
