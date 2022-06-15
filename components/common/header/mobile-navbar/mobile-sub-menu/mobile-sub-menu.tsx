@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import styles from "../style.module.scss";
-import { Cross, BackArrow } from "components/icons";
+import { Cross, BackArrow, CrossSmall } from "components/icons";
 import Link from "next/link";
 import Label from "components/common/ui/label";
 import { AppContext } from "lib/context";
 import { MobileSubMenuProps } from "lib/types/mobile-header";
+import { desktopScreenSize } from "lib/utils/common";
+import useWindowSize from "lib/utils/useWindowSize";
 
 type ArabicCategoryType = {
   linkHeading?: string;
@@ -18,7 +20,8 @@ const MobileSubMenu = ({
   subMenuData,
   menuTitle = "",
 }: MobileSubMenuProps): JSX.Element => {
-  const { appState } = useContext(AppContext);  
+  const { appState } = useContext(AppContext);
+  const [width] = useWindowSize();
 
   return (
     <div
@@ -41,13 +44,25 @@ const MobileSubMenu = ({
           </span>
         </div>
         <button
-          onClick={() => {
-            closeMenu();
-            closeSubMenu();
-          }}
           data-testid="cross-btn"
         >
-          <Cross width="20px" height="20px" />
+          {width >= desktopScreenSize ? (
+            <Cross
+              width="20px"
+              height="20px"
+              onClick={() => {
+                closeMenu();
+                closeSubMenu();
+              }}
+            />
+          ) : (
+            <CrossSmall
+              onClick={() => {
+                closeMenu();
+                closeSubMenu();
+              }}
+            ></CrossSmall>
+          )}
         </button>
       </div>
       {menuTitle ? (

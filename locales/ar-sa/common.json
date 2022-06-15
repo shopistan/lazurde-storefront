@@ -1050,5 +1050,24 @@
     "required": "مطلوب",
     "checkboxLabel": "سجل في النشرة الإخبارية لدينا",
     "submitbtn": "أشعرني، أعلمني، بلغني"
-  }
+  },
+
+  "Order Details": "تفاصيل الطلب",
+  "Thanks for your order! Check out the details below.": "شكرا لطلبك! تحقق من التفاصيل أدناه.",
+  "Order No": "رقم الطلب",
+  "Order Date:": "تاريخ الطلب:",
+  "Return Order": "أمر الإرجاع",
+  "Ready for Collection": "جاهز للتحصيل",
+  "Click & Collect Order": "انقر واستلم الطلب",
+  "Items": "العناصر",
+  "Estimated Collection": "المجموعة المقدرة:",
+  "Leave Review": "اترك مراجعة",
+  "Color": "اللون",
+  "Size": "بحجم",
+  "Quantity": "كمية",
+  "Payment Details": "بيانات الدفع",
+  "Order Total": "الطلب الكلي",
+  "Sub-Total": "المجموع الفرعي",
+  "Discount": "تخفيض",
+  "Total": "كامل"
 }

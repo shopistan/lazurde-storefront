@@ -21,8 +21,8 @@ const RegisterModal: FC<RegisterModalProps> = ({ isOpen = false, modalImage, mod
     return (
         <Modal className='register-modal' isOpened={open} onClose={() => { }}  >
             <div className={styles['register-container']}>
-                <div className={styles['cross-icon']} onClick={() => { setOpen(!open) }}>
-                    <CrossSmall />
+                <div className={styles['cross-icon']} >
+                    <CrossSmall onClick={() => { setOpen(!open) }}/>
                 </div>
                 {
                     modalImage && modalImage.url &&
