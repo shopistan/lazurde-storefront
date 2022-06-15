@@ -200,7 +200,7 @@ const CartItem = ({
           </div>
         )}
         <div className={styles["remove-btn"]}>
-          <CrossSmall width={12} height={12} />
+          <CrossSmall width={12} height={12}/>
           <button
             onClick={() => {
               setRemovingItem(true);

@@ -43,14 +43,13 @@ const WriteAReview = ({
       >
         <div className={styles["review-modal_content"]}>
           <div className={styles["review-modal_header"]}>
-            <div
-              className={styles["close-btn"]}
-              onClick={() => {
-                onClose && onClose();
-                setIsRatingError("");
-              }}
-            >
-              <CrossSmall />
+            <div className={styles["close-btn"]}>
+              <CrossSmall
+                onClick={() => {
+                  onClose && onClose();
+                  setIsRatingError("");
+                }}
+              />
             </div>
             <Heading element="h3" className={styles["heading"]}>
               {appState.lang == "en" ? "Write a Review" : t("write a review")}
