@@ -127,12 +127,15 @@ const BrandSideBar: FC<SidebarProps> = ({
               </span>
             </div>
             <button
-              onClick={() => setIsOpened(false)}
               style={{
                 padding: "0",
               }}
             >
-              <CrossSmall width={"12px"} height={"12px"} />
+              <CrossSmall
+                width={"12px"}
+                height={"12px"}
+                onClick={() => setIsOpened(false)}
+              />
             </button>
           </div>
         )}

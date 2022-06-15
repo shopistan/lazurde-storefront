@@ -70,12 +70,12 @@ const MobileMenu = ({
               </span>
             </div>
           )}
-          <button
-            data-testid="cross-btn1"
-            className=""
-            onClick={() => closeMenu()}
-          >
-            <CrossSmall width={"12px"} height={"12px"} />
+          <button data-testid="cross-btn1" className="">
+            <CrossSmall
+              width={"12px"}
+              height={"12px"}
+              onClick={() => closeMenu()}
+            />
           </button>
         </div>
         <div className={styles["mobile-header__brand-name"]}>

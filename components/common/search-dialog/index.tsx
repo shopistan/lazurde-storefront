@@ -139,11 +139,12 @@ const SearchDialog: FC<SearchDialogProps> = ({
               inputRef={inputRef}
             ></Input>
           </div>
-          <div
-            className={styles["cross-icon"]}
-            onClick={() => setOpenSearchDialog(false)}
-          >
-            <CrossSmall width="12" height="12" />
+          <div className={styles["cross-icon"]}>
+            <CrossSmall
+              width="12"
+              height="12"
+              onClick={() => setOpenSearchDialog(false)}
+            />
           </div>
         </div>
         <div className={styles["category-section"]}>
