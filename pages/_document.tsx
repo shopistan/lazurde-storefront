@@ -43,7 +43,7 @@ class LazurdeDocument extends Document {
           <Main />
           <div id="portal" />
           <NextScript />
-          <Script
+          {/* <Script
             strategy="beforeInteractive"
             id="exponea-init"
             dangerouslySetInnerHTML={{
@@ -60,7 +60,7 @@ class LazurdeDocument extends Document {
           });
           exponea.start();`,
             }}
-          />
+          /> */}
         </body>
       </Html>
     );
