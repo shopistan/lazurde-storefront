@@ -99,6 +99,36 @@
     // padding-top: 46px;
     // padding-inline: 47px 40px;
   }
+
+  .images-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 16px;
+
+    .image-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+
+      span {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+        /* identical to box height, or 17px */
+
+        text-align: center;
+
+        /* Dark/100 */
+
+        color: #000000;
+      }
+    }
+  }
 }
 
 .page-image {

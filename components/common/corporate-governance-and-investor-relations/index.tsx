@@ -36,6 +36,8 @@ type _CGIRProps = {
 type MoreContentProps = {
   heading?: string | "";
   text?: string | "";
+  image?: ImageType;
+  imageTitle?: string;
 };
 
 interface CGIRProps {
@@ -55,6 +57,8 @@ const CGIR: FC<CGIRProps> = ({
   const { appState } = useContext(AppContext);
   const [showPolicies, setShowPolicies] = useState(false);
   const [width] = useWindowSize();
+
+  console.log("cgir", cgirPages);
 
   const _links: _CGIRProps[] = t("cgirProps", {}, { returnObjects: true });
   const router = useRouter();
@@ -120,7 +124,9 @@ const CGIR: FC<CGIRProps> = ({
                           ? moreContent
                           : _links[index].moreContent,
                       content:
-                        appState.lang == "en" ? content : _links[index]?.content,
+                        appState.lang == "en"
+                          ? content
+                          : _links[index]?.content,
                       name: appState.lang == "en" ? name : _links[index]?.name,
                       engName: name,
                       icon: {
@@ -309,6 +315,25 @@ const CGIR: FC<CGIRProps> = ({
                       <br />
                     </iframe>
                   )
+                ) : currentObject?.name === "Prospectus" ||
+                  currentObject?.name === "نشرة" ? (
+                  <div className={styles["images-wrapper"]}>
+                    {currentObject?.moreContent?.length > 0 &&
+                      currentObject?.moreContent?.map((obj, index) => {
+                        const { image, imageTitle } = obj;
+                        return (
+                          <div key={index} className={styles["image-block"]}>
+                            <Image
+                              alt=""
+                              src={image?.url}
+                              width={213}
+                              height={276}
+                            />
+                            <span>{imageTitle || "Image"}</span>
+                          </div>
+                        );
+                      })}
+                  </div>
                 ) : (
                   currentObject?.moreContent &&
                   currentObject?.moreContent?.length > 0 &&

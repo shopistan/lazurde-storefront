@@ -13,6 +13,7 @@ import {
 
 export const desktopScreenSize = 1023;
 export const mobileScreenSize = 767;
+export const tabletScreenSize = 950;
 
 export const getAppStateFromLocalStorage = () => {
   const appState =
