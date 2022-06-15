@@ -370,6 +370,11 @@
                     "type": "String",
                     "label": "Image Title",
                     "default": ""
+                  },
+                  "pdfUrl": {
+                    "type": "String",
+                    "label": "PDF URL",
+                    "default": ""
                   }
                 }
               }
