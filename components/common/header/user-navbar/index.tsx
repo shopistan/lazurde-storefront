@@ -18,9 +18,8 @@ import { AppContext } from "lib/context";
 import { desktopScreenSize } from "lib/utils/common";
 import Axios from "axios";
 import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
-// import { validateAccess } from "lib/identity";
-import oktaAuth from "lib/identity";
 import Router from "next/router";
+import { loginUser } from "lib/identity";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
@@ -58,28 +57,8 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
     }
   }, [isOpened]);
 
-  const loginOkta = (grantType: any) => {
-    try {
-      oktaAuth.token.getWithRedirect({
-        responseType: grantType,
-        scopes: ["openid", "email", "profile", "offline_access"],
-      });
-    } catch (error) {
-      console.log("Error logging in: ", error);
-    }
-  };
-
   const signInUser = async () => {
-    // validateAccess();
-    const idToken = await oktaAuth.tokenManager.get("id_token");
-    if (idToken) {
-      console.log("Already logged in", idToken);
-      //getUserInfo();
-      Router.push("/account");
-    } else {
-      oktaAuth.tokenManager.clear();
-      loginOkta(GRANT_TYPE);
-    }
+    loginUser();
   };
 
   return (

@@ -9,9 +9,8 @@ import { AppContext } from "lib/context/index";
 import Router, { useRouter } from "next/router";
 import { desktopScreenSize } from "lib/utils/common";
 import { BackArrow } from "components/icons";
-import oktaAuth from "lib/identity";
 import { OKTA_CLIENT_ID, OKTA_DOMAIN } from "general-config";
-// import { getUserInfo, logout } from "lib/identity";
+import { logoutUser } from "lib/identity";
 
 type AccountsProps = {
   image: ImageType;
@@ -64,40 +63,10 @@ const SideBar: FC<SideBarProps> = ({
   );
 
   const [userName, setUserName] = useState("");
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      let name = "San";
-      try {
-        const uInfo = await oktaAuth.token.getUserInfo();
-        console.log("User Info: ", uInfo);
-        if (uInfo) {
-          name = uInfo.name;
-        }
-      } catch (error) {
-        console.log("Error fetching user info: ", error);
-      }
-      setUserName(name);
-    };
-    fetchUserInfo();
-  }, []);
+  useEffect(() => {}, []);
 
   const signOut = async () => {
-    const idToken = await oktaAuth.tokenManager.get("id_token");
-    if (idToken) {
-      let iToken = idToken.idToken;
-      oktaAuth.tokenManager.clear();
-      Router.push(
-        OKTA_DOMAIN +
-          "/v1/logout?client_id=" +
-          OKTA_CLIENT_ID +
-          "&id_token_hint=" +
-          iToken +
-          "&post_logout_redirect_uri=" +
-          window.location.origin
-      );
-    } else {
-      Router.push("/");
-    }
+    logoutUser();
   };
 
   return (
