@@ -15,7 +15,13 @@ exports.default = Types.Component({
             children: Types.Shape({
               children: {
                 heading: Types.String({ label: 'Heading' }),
-                text: Types.RichText({ label: 'Paragraph' })
+                text: Types.RichText({ label: 'Paragraph' }),
+                image: Types.Image({
+                  label: 'Image',
+                  url: Types.String({ label: 'URL' }),
+                  altText: Types.String({ label: 'Alt Text' })
+                }),
+                imageTitle: Types.String({ label: 'Image Title' })
               }
             })
           }),

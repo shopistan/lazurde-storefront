@@ -10,6 +10,8 @@ import Label from "components/common/ui/label";
 import lazurdeLogo from "/public/lazurdeLogo.png";
 import missLogo from "/public/missLogo.png";
 import kenazLogo from "/public/kenazLogo.png";
+import { addProductToCart } from "lib/utils/cart";
+import { ATCPayload } from "lib/types/cart";
 interface CartItemObject {
   title: string;
   ["Image URL"]: string;
@@ -19,6 +21,7 @@ interface CartItemObject {
   cartId: string;
   totalPrice: {
     amount: number;
+    sale: number;
     currency: string;
   };
   attributes: Array<{
@@ -36,6 +39,7 @@ interface CartItemProps {
   ) => void;
   updatingCartItem?: boolean;
   removeItem?: (item: CartItemObject) => void;
+  getCartData?: Function;
   wishListItem?: boolean;
 }
 const CartItem = ({
@@ -43,6 +47,7 @@ const CartItem = ({
   handleChange,
   updatingCartItem = false,
   removeItem = () => {},
+  getCartData,
   wishListItem = false,
 }: CartItemProps): JSX.Element => {
   const { appState } = useContext(AppContext);
@@ -61,6 +66,47 @@ const CartItem = ({
       setRemovingItem(false);
     }
   }, [updatingCartItem]);
+
+  const handleAddToCart = async (item: CartItemObject) => {
+    setRemovingItem(true);
+
+    const selectedProduct: {
+      sku?: string;
+      itemId?: string;
+      Size?: number;
+      Color?: string;
+    } = item;
+
+    const productPricing = {
+      currency: "0",
+      base: 0,
+      finalPrice: 0,
+    };
+
+    const payload: ATCPayload = {
+      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
+      items: [
+        {
+          sku: selectedProduct && selectedProduct?.sku,
+          itemId: selectedProduct && selectedProduct?.itemId,
+          quantity: 1,
+          priceListId: "100000",
+          price: {
+            currency: productPricing?.currency,
+            amount: productPricing?.base,
+            discount: {
+              discountAmount: productPricing?.finalPrice,
+            },
+          },
+        },
+      ],
+    };
+    const response = await addProductToCart(payload);
+    if (response) {
+      getCartData && getCartData();
+      removeItem(item);
+    }
+  };
 
   return (
     <div className={styles["cart-item-wrapper"]}>
@@ -113,6 +159,7 @@ const CartItem = ({
               : "مجوهرات الماس تتصدر"}
           </span>
           <span>{`$${
+            item?.totalPrice?.sale?.toLocaleString() ||
             item?.totalPrice?.amount?.toLocaleString() ||
             "0.00"?.toLocaleString()
           }`}</span>
@@ -153,7 +200,7 @@ const CartItem = ({
           </div>
         )}
         <div className={styles["remove-btn"]}>
-          <CrossSmall width={12} height={12} />
+          <CrossSmall width={12} height={12}/>
           <button
             onClick={() => {
               setRemovingItem(true);
@@ -174,8 +221,7 @@ const CartItem = ({
             <Bag fill="#000000" stroke="#000000" width="12px" height="16px" />
             <button
               onClick={() => {
-                setRemovingItem(true);
-                removeItem(item);
+                handleAddToCart(item);
               }}
             >
               {appState?.lang === "en" ? "Add to Bag" : "أضف الى الحقيبة"}
