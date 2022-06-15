@@ -38,6 +38,7 @@ type MoreContentProps = {
   text?: string | "";
   image?: ImageType;
   imageTitle?: string;
+  pdfUrl?: string;
 };
 
 interface CGIRProps {
@@ -320,15 +321,18 @@ const CGIR: FC<CGIRProps> = ({
                   <div className={styles["images-wrapper"]}>
                     {currentObject?.moreContent?.length > 0 &&
                       currentObject?.moreContent?.map((obj, index) => {
-                        const { image, imageTitle } = obj;
+                        const { image, imageTitle, pdfUrl } = obj;
                         return (
                           <div key={index} className={styles["image-block"]}>
-                            <Image
-                              alt=""
-                              src={image?.url}
-                              width={213}
-                              height={276}
-                            />
+                            <a href={pdfUrl} target="_blank" rel="noreferrer">
+                              <Image
+                                alt=""
+                                src={image?.url}
+                                width={213}
+                                height={276}
+                                // onClick={() =>}
+                              />
+                            </a>
                             <span>{imageTitle || "Image"}</span>
                           </div>
                         );
