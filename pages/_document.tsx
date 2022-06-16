@@ -40,9 +40,9 @@ class LazurdeDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="anonymous"
           ></link> */}
-          <link rel="preload" as="font" href='/fonts/Roboto-Regular.ttf' type="font/ttf"></link>
-          <link rel="preload" as="font" href='/fonts/Roboto-Medium.ttf' type="font/ttf"></link>
-          <link rel="preload" as="font" href='/fonts/Roboto-Bold.ttf' type="font/ttf"></link>
+          <link rel="preload" as="font" href='/fonts/roboto/Roboto-Regular.ttf' type="font/ttf"></link>
+          <link rel="preload" as="font" href='/fonts/roboto/Roboto-Medium.ttf' type="font/ttf"></link>
+          <link rel="preload" as="font" href='/fonts/roboto/Roboto-Bold.ttf' type="font/ttf"></link>
           <link
             href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap"
             rel="stylesheet"
