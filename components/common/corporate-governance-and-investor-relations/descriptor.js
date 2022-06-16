@@ -21,7 +21,8 @@ exports.default = Types.Component({
                   url: Types.String({ label: 'URL' }),
                   altText: Types.String({ label: 'Alt Text' })
                 }),
-                imageTitle: Types.String({ label: 'Image Title' })
+                imageTitle: Types.String({ label: 'Image Title' }),
+                pdfUrl: Types.String({ label: 'PDF URL' })
               }
             })
           }),

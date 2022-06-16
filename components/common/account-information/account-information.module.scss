@@ -19,6 +19,7 @@
   @media (min-width: $breakPoint-desktop) {
     display: flex;
     align-items: center;
+    margin-bottom: 24px;
 
     p {
       margin-inline-start: 20px;
@@ -27,6 +28,7 @@
       line-height: 29px;
       letter-spacing: 0em;
       text-align: start;
+      margin-block: 0;
     }
   }
 }
