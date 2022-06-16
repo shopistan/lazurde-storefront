@@ -115,8 +115,11 @@ const Cart = ({}: CartProps): JSX.Element => {
 
   useEffect(() => {
     getCartData();
-    getWishListData();
   }, []);
+
+  useEffect(() => {
+    getWishListData();
+  }, [allWishListProducts]);
 
   const handleChange = async (
     // e: React.ChangeEvent<HTMLInputElement>,
