@@ -28,6 +28,14 @@ const countryArr = [
   },
 ];
 
+const kenazCountryArr = [
+  {
+    label: "KSA",
+    img: "/flag-sa.png",
+    value: "sa",
+  },
+];
+
 const languageArr = [
   {
     label: "English",
@@ -46,11 +54,13 @@ const LanguageSelector = ({
   className = "",
   mainWrapperClass = "",
   optionClassName = "",
+  onSubmit,
 }: {
   showButton?: Boolean;
   className?: string;
   mainWrapperClass?: string;
   optionClassName?: string;
+  onSubmit?: Function;
 }): JSX.Element => {
   const router = useRouter();
   const { pathname, query, asPath } = router || {
@@ -110,9 +120,12 @@ const LanguageSelector = ({
   };
 
   return (
-    <div className={`${styles["language-selector"]} ${mainWrapperClass}`}>
+    <div
+      data-testid={"main-wrapper"}
+      className={`${styles["language-selector"]} ${mainWrapperClass}`}
+    >
       <Select
-        options={countryArr}
+        options={appState?.brand === "Kenaz" ? kenazCountryArr : countryArr}
         onChange={onCountryChange}
         defaultValue={appState.region}
         className={className}
@@ -132,7 +145,10 @@ const LanguageSelector = ({
             buttonText={t("langSelectorBtnTxt")}
             buttonStyle={"black"}
             buttonSize={"sm"}
-            onClick={() => submitChanges()}
+            onClick={() => {
+              submitChanges();
+              onSubmit && onSubmit();
+            }}
           ></Button>
         </div>
       )}

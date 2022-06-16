@@ -1,0 +1,181 @@
+@import "/styles/variables.scss";
+
+.heading {
+  //styleName: Web/Header/H3 - Medium 24;
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 40px;
+
+  @media (min-width: $breakPoint-desktop) {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+}
+
+.title {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0em;
+  text-align: start;
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 0;
+  margin-bottom: 4px;
+  margin-inline-start: 20px;
+
+  @media (min-width: $breakPoint-desktop) {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: start;
+    margin-top: 0;
+    margin-bottom: 4px;
+    margin-inline-start: 4px;
+    padding-inline-start: 17px;
+  }
+}
+
+.input {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  width: 100%;
+  padding-inline: 20px;
+  padding-block: 11px;
+}
+
+.feedback-input {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  width: 100%;
+  padding-inline: 20px;
+  padding-block: 11px;
+  min-height: 182px;
+  max-height: 182px;
+
+  @media (min-width: $breakPoint-desktop) {
+    max-height: 40px;
+    min-height: 40px;
+  }
+}
+
+.first-name {
+  margin-inline-end: 16px;
+}
+
+.input-field {
+  margin-bottom: 24px;
+}
+
+.name-section {
+  display: flex;
+}
+
+.button {
+  width: 200px !important;
+  height: 51px !important;
+
+  @media (min-width: $breakPoint-desktop) {
+    float: right;
+    margin-top: 74px;
+    margin-bottom: 40px;
+  }
+}
+
+.feedback-container {
+  position: relative;
+  padding-block-start: 41px;
+  padding-inline: 24px;
+
+  @media (min-width: $breakPoint-desktop) {
+    padding-block-start: 60px;
+    padding-inline: 40px;
+  }
+}
+
+.cross-icon {
+  display: none;
+
+  @media (min-width: $breakPoint-desktop) {
+    display: block;
+    position: absolute;
+    right: 38px;
+    top: 38px;
+
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+}
+
+.first-name {
+  width: 100%;
+}
+
+.last-name {
+  width: 100%;
+}
+
+.feedback-modal {
+  @media (min-width: $breakPoint-desktop) {
+    display: block;
+    padding-block-start: 100px;
+    padding-block-end: 178px;
+    padding-inline: 439px;
+    display: flex;
+    background-color: #e5e5e5;
+  }
+
+  .feedback-modalBody {
+    background-color: white;
+  }
+
+  .div-rightModal {
+    top: 32px;
+    right: 38px;
+  }
+
+  .div-topBar {
+    padding-top: 26px;
+    padding-inline-end: 25px;
+
+    @media (min-width: $breakPoint-desktop) {
+      display: none;
+    }
+  }
+  .div-feedbackBody {
+    margin-top: 0;
+    @media (min-width: $breakPoint-desktop) {
+      width: 562px;
+      margin-top: 0px;
+    }
+  }
+}
+
+.error-msg {
+  @media (min-width: $breakPoint-desktop) {
+    padding-inline-start: 20px;
+  }
+  width: 100%;
+  display: block;
+  margin-block-start: 4px;
+  margin-inline-start: 4px;
+  color: red;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15.6px;
+}
+
+.errors {
+  border: 1px solid red;
+}

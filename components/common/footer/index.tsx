@@ -12,6 +12,8 @@ import useWindowSize from "lib/utils/useWindowSize";
 import Accordion from "components/common/ui/accordion/Accordion";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
+import { desktopScreenSize } from "lib/utils/common";
+import { socialIconSize, paymentIconSize } from "lib/mock-data/data";
 
 const Footer = ({
   heading = "",
@@ -19,6 +21,7 @@ const Footer = ({
   subscriptionText = "",
   socialIconText = "",
   footerLogo,
+  footerLogoLink = "/",
   footerLinks = [],
   socialLinks = [],
   paymentLinks = [],
@@ -36,7 +39,7 @@ const Footer = ({
     <>
       <div className={styles["footer__container"]}>
         <div className={styles["footer__content-wrapper"]}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
+          <div data-testid="wrapper" className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
             <div className={`${styles["footer__sub-container"]}`}>
               <Heading element="h3" className={styles["footer__heading"]}>
                 {appState?.lang === "en" ? heading : t("footerHeading")}
@@ -66,17 +69,22 @@ const Footer = ({
               {Array.isArray(_footerLinks) &&
                 _footerLinks.length > 0 &&
                 _footerLinks.map((footerLink, index) =>
-                  width > 1023 ? (
+                  width > desktopScreenSize ? (
                     <FooterLinks
+                      key={index}
                       heading={footerLink.linkHeading}
                       links={footerLink.links}
                       index={index}
+                      role={"footerLinks"}
                     />
                   ) : (
                     <Accordion
+                      className={"footer-accordion"}
                       index={index}
-                      heading={footerLink.linkHeading}
-                      links={footerLink.links}
+                      heading={footerLink?.linkHeading}
+                      links={footerLink?.links}
+                      arrowIcon={true}
+                      role={"footerLinks-accordion"}
                     />
                   )
                 )}
@@ -89,27 +97,26 @@ const Footer = ({
               >
                 {appState?.lang === "en" ? socialIconText : t("socialIconText")}
               </Label>
-              <FooterIcons iconsList={socialLinks} />
+              <FooterIcons
+                iconsList={socialLinks}
+                iconSize={socialIconSize}
+                isFooterIcons={false}
+                role={"socialicons"}
+              />
             </div>
-            {footerLogo?.url ? (
+            {appState?.region === "sa" && (
               <div className={styles["footer__maroof-logo"]}>
-                <Image
-                  src={footerLogo.url}
-                  alt={footerLogo.altText}
-                  width={214}
-                  height={66}
-                  layout="fixed"
-                />
-              </div>
-            ) : (
-              <div className={styles["footer__maroof-logo"]}>
-                <Image
-                  src={"/images/maroof.svg"}
-                  alt={"maroof logo"}
-                  width={214}
-                  height={66}
-                  layout="fixed"
-                />
+                <Link href={footerLogoLink || "/"}>
+                  <a target="_blank">
+                    <Image
+                      src={footerLogo?.url || "/maroof.svg"}
+                      alt={footerLogo?.altText}
+                      width={214}
+                      height={66}
+                      layout="fixed"
+                    />
+                  </a>
+                </Link>
               </div>
             )}
           </div>
@@ -126,6 +133,8 @@ const Footer = ({
           <FooterIcons
             className={styles["footer__footer-icons"]}
             iconsList={paymentLinks}
+            iconSize={paymentIconSize}
+            isFooterIcons={true}
           />
         </div>
       </div>

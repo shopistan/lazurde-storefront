@@ -9,8 +9,14 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['cdn.lazurde.com', 'greatwall-sandbox-sandbox-image.imgix.net', 'www.google.com']
-  }
+    domains: [
+      "cdn.lazurde.com",
+      "greatwall-sandbox-sandbox-image.imgix.net",
+      "lazurdesandbox.imgix.net",
+      "www.google.com",
+      "cdn.bfldr.com"
+    ],
+  },
 };
 
 module.exports = nextConfig;

@@ -1,13 +1,16 @@
 import React, { useContext } from "react";
-import styles from "./style.module.scss";
-import { Cross, BackArrow } from "components/icons";
+import styles from "../style.module.scss";
+import { Cross, BackArrow, CrossSmall } from "components/icons";
 import Link from "next/link";
 import Label from "components/common/ui/label";
 import { AppContext } from "lib/context";
 import { MobileSubMenuProps } from "lib/types/mobile-header";
+import { desktopScreenSize } from "lib/utils/common";
+import useWindowSize from "lib/utils/useWindowSize";
+
 type ArabicCategoryType = {
   linkHeading?: string;
-  linkTitle?: [{ title: string }];
+  linkTitle?: [{ title?: string }];
 };
 
 const MobileSubMenu = ({
@@ -15,37 +18,60 @@ const MobileSubMenu = ({
   closeMenu,
   closeSubMenu,
   subMenuData,
-  menuTitle,
+  menuTitle = "",
 }: MobileSubMenuProps): JSX.Element => {
   const { appState } = useContext(AppContext);
+  const [width] = useWindowSize();
 
   return (
     <div
       className={`${styles[`mobile-header__sub-menu-wrapper`]} ${
         active ? `${styles[`mobile-header__sub-menu-active`]}` : ``
       }`}
+      data-testid="submenu"
     >
       <div className={styles["mobile-header__sub-menu-close-icon"]}>
         <div
-          onClick={() => closeSubMenu()}
+          data-testid="close-sub-menu"
+          onClick={() => {
+            closeSubMenu();
+          }}
           className={styles["mobile-header__sub-menu-back-btn"]}
         >
           <BackArrow fill="#000000" opacity="0.6" />
-          <span className="opacity-60">back</span>
+          <span data-testid="back" className="opacity-60">
+            back
+          </span>
         </div>
         <button
-          onClick={() => {
-            closeMenu();
-            closeSubMenu();
-          }}
+          data-testid="cross-btn"
         >
-          <Cross width={"20px"} height={"20px"} />
+          {width >= desktopScreenSize ? (
+            <Cross
+              width="20px"
+              height="20px"
+              onClick={() => {
+                closeMenu();
+                closeSubMenu();
+              }}
+            />
+          ) : (
+            <CrossSmall
+              onClick={() => {
+                closeMenu();
+                closeSubMenu();
+              }}
+            ></CrossSmall>
+          )}
         </button>
       </div>
-      {menuTitle && (
+      {menuTitle ? (
         <div className={styles["mobile-header__menu-title"]}>{menuTitle}</div>
-      )}
-      <div className={styles["mobile-header__sub-menu-list-wrapper"]}>
+      ) : null}
+      <div
+        data-testid="sub-links"
+        className={styles["mobile-header__sub-menu-list-wrapper"]}
+      >
         <ul className={styles["mobile-header__sub-menu-list"]}>
           {subMenuData?.dropdownData &&
             subMenuData?.dropdownData.length > 0 &&
@@ -71,24 +97,22 @@ const MobileSubMenu = ({
                           currentCategoryArabic?.linkTitle[index];
 
                         return (
-                          <>
-                            <li
-                              key={index}
-                              className={`${styles["mobile-header__sub-menu-list-item"]}`}
-                              onClick={() => {
-                                closeMenu();
-                                closeSubMenu();
-                              }}
-                            >
-                              <Link href={data?.url || ""}>
-                                <a data-isBold={data?.isBold}>
-                                  {appState?.lang === "en"
-                                    ? data?.title
-                                    : categoryLinkArabic?.title}
-                                </a>
-                              </Link>
-                            </li>
-                          </>
+                          <li
+                            key={index}
+                            className={`${styles["mobile-header__sub-menu-list-item"]}`}
+                            onClick={() => {
+                              closeMenu();
+                              closeSubMenu();
+                            }}
+                          >
+                            <Link href={data?.url || "/"}>
+                              <a data-is-bold={data?.isBold}>
+                                {appState?.lang === "en"
+                                  ? data?.title
+                                  : categoryLinkArabic?.title}
+                              </a>
+                            </Link>
+                          </li>
                         );
                       })}
                   </ul>

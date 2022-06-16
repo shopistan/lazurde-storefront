@@ -1,12 +1,16 @@
 export type FetchCategoryProductsArgs = {
   categoryName: string;
+  pageSize?: number;
   page?: number;
   filterParents?: boolean;
 };
 
 export type FilteredSearchArgs = {
-  query: string;
-  filters: string[];
+  categoryArray?: string[];
+  query?: string;
+  filters: string[] | string[][];
+  pageSize?: number;
+  page?: number;
 };
 
 export type KeywordSearchArgs = {
@@ -14,6 +18,7 @@ export type KeywordSearchArgs = {
   pageSize?: number;
   page?: number;
   filterParents?: boolean;
+  facetFilters?: string[];
 };
 
 export type AlgoliaProductType = {

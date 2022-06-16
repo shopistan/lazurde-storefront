@@ -1,24 +1,26 @@
+@import "/styles/variables.scss";
+
 .navbar-lang {
   display: flex;
   position: relative;
-  background: #f2f2f2;
+  background: $primary-color;
   width: 100%;
   height: 164.2px;
   align-items: center;
   justify-content: center;
   padding-block: 16px;
   font-size: 13px;
-  color: black;
-  transition: height 0.2s cubic-bezier(0, 0, 0.2, 1),
-    padding 0.2s cubic-bezier(0, 0, 0.2, 1);
+  color: $black-color;
 
   &[data-visible="true"] {
     padding: 0;
     height: 0;
     overflow: hidden;
+    transition: height 0.2s cubic-bezier(0, 0, 0.2, 1),
+    padding 0.2s cubic-bezier(0, 0, 0.2, 1);
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     height: 72.1px;
     font-size: 14px;
 
@@ -59,7 +61,7 @@
       align-items: flex-start;
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       flex-direction: row;
       margin-inline: 0;
       padding-inline-start: 55px;
@@ -104,7 +106,7 @@
       width: 12px;
       height: 12px;
     }
-    @media (min-width: 1024px) {
+    @media (min-width: $breakPoint-desktop) {
       position: static;
       svg {
         margin-inline-end: 24px;
@@ -121,13 +123,13 @@ html[dir="rtl"] {
       div:nth-child(2) {
         span {
           font-size: 13px;
-          @media (min-width: 1024px) {
+          @media (min-width: $breakPoint-desktop) {
             font-size: 14px;
             line-height: 130%;
           }
         }
       }
-      button { 
+      button {
         font-size: 15px;
       }
     }

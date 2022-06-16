@@ -1,4 +1,176 @@
 {
+  "becomeMember": "كن عضوًا في L’azurde للحصول على شحن سريع ومجاني",
+  "dummyText": "هذا بعض النص الوهمي",
+  "helpCenter": "مركز المساعدة",
+  "needHelp": "تحتاج مساعدة ؟",
+  "yourWishList": "قائمة امنياتك",
+  "orContinueWith": "أو تواصل مع",
+  "checkout": "الدفع",
+  "totalToPay": "إجمالي للدفع",
+  "vatTax": "ضريبة",
+  "estimatedShipping": "الشحن المقدر",
+  "subTotal": "المجموع الفرعي",
+  "summary": "ملخص",
+  "noCartDataFound": "لم يتم العثور على بيانات سلة التسوق!",
+  "loading": "___جار التحميل",
+  "bag": "شنطة",
+  "freeMember": "كن عضوا في لازوردي للحصول على شحن سريع ومجاني. انضم إلينا أو قم بتسجيل الدخول",
+  "freeShipping": "شحن مجاني للأعضاء",
+  "InThePress": "في الصحافة",
+  "shopAll": "تسوق كل شيء",
+  "bannerHeading": "اختيار المشاهير",
+  "customerHeading": "ىانيدل تاضيفختلا عيمج قوست",
+  "search": "ىكل رخدي",
+  "customerTitle": "ىانيدل تاضيفختلا عيمج قوست",
+  "notFound": "لم يتم العثور على تطابق",
+  "customerButton": "لدي سؤال؟",
+  "addToCartBtnText": "أضف إلى السلة",
+  "onlineExclusiveTag": "حصريا على الانترنت",
+  "servicesProps": [
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "iconTitle": "ءيش لك قوست",
+      "iconText": "فافزلا L’azurde فاشكتسا"
+    }
+  ],
+  "cgirTitle": "حوكمة الشركات وعلاقات المستثمرين",
+  "cgirProps": [
+    {
+      "name": "الصفحة الرئيسية لـ IR",
+      "moreContent": [
+        {
+          "text": "تهدف إدارة الحوكمة وعلاقات المستثمرين إلى تحقيق التواصل الفعال بين الشركة والمستثمرين ، وتهدف إدارة علاقات الحوكمة وعلاقات المستثمرين إلى تحقيق التواصل الفعال بين الشركة والمستثمرين"
+        },
+        {
+          "text": "كما تسعى إلى الالتزام بالحوكمة وتعزيز مستوى الإفصاح والشفافية مما يساعد المساهمين على ممارسة حقوقهم المنصوص عليها في القوانين واللوائح ذات الصلة."
+        }
+      ]
+    },
+    {
+      "name": "بيان حقائق"
+    },
+    {
+      "name": "نشرة"
+    },
+    {
+      "name": "الإعلانات"
+    },
+    {
+      "name": "التقويم المالي"
+    }
+  ],
+  "linksProps": [
+    {
+      "name": "ءيش لك قوست",
+      "content": "فافزلا L’azurde فاشكتسا",
+
+      "accordionProps": [
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        }
+      ]
+    },
+    {
+      "name": "ءيش لك قوست",
+      "content": "فافزلا L’azurde فاشكتسا",
+
+      "accordionProps": [
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        },
+        {
+          "heading": "ءيش لك قوست",
+          "text": "فافزلا L’azurde فاشكتسا"
+        }
+      ]
+    }
+  ],
+
+  "accordionProps": [
+    {
+      "heading": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "heading": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "heading": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    },
+    {
+      "heading": "ءيش لك قوست",
+      "text": "فافزلا L’azurde فاشكتسا"
+    }
+  ],
+
+  "termTitle": "ىكل رخدي",
   "sampleTranslationText": "يوضح هذا النص ترجمة اللغة عند تغيير اللغة. هذا ليس نصًا تم إنشاؤه بواسطة XM ، لا يدعم XM الصفحات متعددة اللغات حتى الآن.",
   "promoBarTitle": "ىكل رخدي",
   "promoBarLinkTitle": "ىانيدل تاضيفختلا عيمج قوست",
@@ -10,15 +182,106 @@
   "subscriptionText": "قوف رقنا ، كارتشالا ءاغلإل. انب ةصاخلا ةيصوصخلا ةسايسو ماكحألاو طورشلا ىلع قفاوت كنإف ، كارتشالاب .انب ةصاخلا ينورتكلإلا ديربلا لئاسر لفسأ",
   "socialIconText": "هسفن ملألا",
   "userNavBarTitle": " كيتوبلا قيرط نع قوست",
-  "cardHeading" : "ةيراجتلا انتامالع فشتكا",
-  "NavbarLangSelectorTitle" : "عقوملاو ةلضفملا كتغل ددح",
+  "cardHeading": "ةيراجتلا انتامالع فشتكا",
+  "NavbarLangSelectorTitle": "عقوملاو ةلضفملا كتغل ددح",
   "navbarBackBtn": "ىلا عجرا L’azurde",
-  "langSelectorBtnTxt" : "لمكي",
+  "langSelectorBtnTxt": "لمكي",
   "langSelectorText": "لمكي",
   "customerCareText": "رعاية العميل",
   "bookAnAppointmentText": "احجز موعدًا",
   "myAccountText": "حسابي",
   "storeLocatorText": "فروعنا",
+  "bannerTitle": "خواتم",
+  "bannerSubTitle": "الألم بحد ذاته هو حب الألم ، المشاكل البيئية الرئيسية ، لكني أعطي هذا النوع من الوقت للتراجع ، بحيث يكون هناك بعض الألم والألم العظيمين.",
+  "plpCategoryTitle": "استكشف جميع الفئات",
+  "plpCategoryText": "تعتمد مجوهراتنا على إرث يمتد لأكثر من 180 عامًا من الحرفية الخبيرة مع قلادات ودلايات وأساور وخواتم ومصممة بشكل جميل وغير ذلك.  تُظهر أحدث مجوهراتنا إبداع لازوردي وتصميمه الذي لا مثيل له في أفضل حالاته.",
+  "textShow": "ضرع",
+  "textOf": "نم",
+  "feedbackHeading": "لكلا ةدهاشم",
+  "firstName": "لكلا ةدهاشم",
+  "lastName": "لكلا ةدهاشم",
+  "phoneNumber": "لكلا ةدهاشم",
+  "feedback": "لكلا ةدهاشم",
+  "email": "لكلا ةدهاشم",
+  "sent": "لكلا ةدهاشم",
+  "textViewAll": "لكلا ةدهاشم",
+  "helpHeading": "لكلا ةدهاشم",
+  "categories": [
+    {
+      "title": "استكشف جميع الفئات",
+      "text": "استكشف جميع الفئات",
+      "details": "استكشف جميع الفئات",
+      "link": "استكشف جميع الفئات",
+      "button": "  لمكي",
+      "tNumber": "استكشف جميع الفئات",
+      "vNumber": "استكشف جميع الفئات",
+      "crNumber": "استكشف جميع الفئات"
+    },
+    {
+      "title": "استكشف جميع الفئات",
+      "text": "استكشف جميع الفئات",
+      "details": "استكشف جميع الفئات",
+      "link": "استكشف جميع الفئات",
+      "button": "  لمكي",
+      "tNumber": "استكشف جميع الفئات",
+      "vNumber": "استكشف جميع الفئات",
+      "crNumber": "استكشف جميع الفئات"
+    },
+    {
+      "title": "استكشف جميع الفئات",
+      "text": "استكشف جميع الفئات",
+      "details": "استكشف جميع الفئات",
+      "link": "استكشف جميع الفئات",
+      "button": "  لمكي",
+      "tNumber": "استكشف جميع الفئات",
+      "vNumber": "استكشف جميع الفئات",
+      "crNumber": "استكشف جميع الفئات"
+    },
+    {
+      "title": "استكشف جميع الفئات",
+      "text": "استكشف جميع الفئات",
+      "details": "استكشف جميع الفئات",
+      "link": "استكشف جميع الفئات",
+      "button": "  لمكي",
+      "tNumber": "استكشف جميع الفئات",
+      "vNumber": "استكشف جميع الفئات",
+      "crNumber": "استكشف جميع الفئات"
+    },
+    {
+      "title": "استكشف جميع الفئات",
+      "text": "استكشف جميع الفئات",
+      "details": "استكشف جميع الفئات",
+      "link": "استكشف جميع الفئات",
+      "button": "  لمكي",
+      "tNumber": "استكشف جميع الفئات",
+      "vNumber": "استكشف جميع الفئات",
+      "crNumber": "استكشف جميع الفئات"
+    },
+    {
+      "title": "استكشف جميع الفئات",
+      "text": "استكشف جميع الفئات",
+      "details": "استكشف جميع الفئات",
+      "link": "استكشف جميع الفئات",
+      "button": "  لمكي",
+      "tNumber": "استكشف جميع الفئات",
+      "vNumber": "استكشف جميع الفئات",
+      "crNumber": "استكشف جميع الفئات"
+    }
+  ],
+  "plpCategoryCard": [
+    {
+      "cardTitle": "استكشف جميع الفئات"
+    },
+    {
+      "cardTitle": "استكشف جميع الفئات"
+    },
+    {
+      "cardTitle": "استكشف جميع الفئات"
+    },
+    {
+      "cardTitle": "استكشف جميع الفئات"
+    }
+  ],
   "siteNavLinks": [
     {
       "navTitle": "جديد",
@@ -459,10 +722,7 @@
       },
       {
         "heading": "متاوخ",
-        "image": {
-          "url": "/Rings.svg",
-          "altText": "متاوخ"
-        }
+        "description": "رواسأمتاوخرواسأمتاوخرواسأمتاوخ"
       },
       {
         "heading": "طارقأ",
@@ -498,5 +758,308 @@
       "collectiontitle": "!ةيلاثملا ةيدهلا ىلع رثعاو فشتكا",
       "collectiontext": "ةيبرعلا ةباتكلا نأ ضعبلا لوقي. رطسأ ةعبرأ ىلع ودبيس فيك رطسأ ةعبرأ نم نوكملا يمهولا صنلا رهظ ةريزجلا بونج نم تأشن اهنإ رخآلا ضعبلا لوقي امنيب ، لامشلا يف) عباسلاو عبارلا نينرقلا (ةريحلا نم تأش لدجلا نم ريثكلا عوضوم وه ةيبرعلا ةغللا لصأ."
     }
-  ]
+  ],
+  "arabicProductCardData": [
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    },
+    {
+      "title": "خاتم الفراشة المشعة",
+      "onlineExclusiveTag": "حصريا على الانترنت"
+    }
+  ],
+  "sortingFilter": [
+    {
+      "label": "الجديد",
+      "value": "our recommendation"
+    },
+    {
+      "label": "أفضل البائعين",
+      "value": "most viewed"
+    },
+    {
+      "label": "أكبر توفير",
+      "value": "أكبر توفير"
+    },
+    {
+      "label": "الأكثر مشاهدة",
+      "value": "الأكثر مشاهدة"
+    },
+    {
+      "label": "اسم المنتج",
+      "value": "اسم المنتج"
+    }
+  ],
+  "arabicFilterList": [
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionName": "مجوهرات 1"
+        },
+        {
+          "optionName": "مجوهرات 2"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionName": "مجوهرات"
+        },
+        {
+          "optionName": "مجوهرات 1"
+        },
+        {
+          "optionName": "مجوهرات 2"
+        },
+        {
+          "optionName": "مجوهرات 3"
+        },
+        {
+          "optionName": "مجوهرات 4"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionName": "مجوهرات 1"
+        },
+        {
+          "optionName": "مجوهرات 2"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionName": "مجوهرات"
+        }
+      ]
+    },
+    {
+      "filterName": "مجوهرات",
+      "filterOptions": [
+        {
+          "optionName": "مجوهرات"
+        },
+        {
+          "optionName": "مجوهرات"
+        }
+      ]
+    }
+  ],
+  "arabicBambuserSliderData": {
+    "sectionHeading": "ماسقالا بسح قوست",
+    "cards": [
+      {
+        "heading": "رواسأ",
+        "description": "رواسأمتاوخرواسأمتاوخرواسأمتاوخ",
+        "btnText": "اسأمتاوخرواس"
+      },
+      {
+        "heading": "متاوخ",
+        "description": "رواسأمتاوخرواسأمتاوخرواسأمتاوخ",
+        "btnText": "اسأمتاوخرواس"
+      },
+      {
+        "heading": "طارقأ",
+        "description": "رواسأمتاوخرواسأمتاوخرواسأمتاوخ",
+        "btnText": "اسأمتاوخرواس"
+      },
+      {
+        "heading": "تادالق",
+        "description": "رواسأمتاوخرواسأمتاوخرواسأمتاوخ",
+        "btnText": "اسأمتاوخرواس"
+      },
+      {
+        "heading": "تادالق",
+        "description": "رواسأمتاوخرواسأمتاوخرواسأمتاوخ",
+        "btnText": "اسأمتاوخرواس"
+      }
+    ]
+  },
+  "accountTitle": "تادالق",
+  "firstname": "اسأمتاوخرواس",
+  "lastname": "اسأمتاوخرواس",
+  "reviewText": "لديك منتجات تنتظر المراجعة. قم بالمراجعة والدخول للحصول على فرصة للفوز بدفعة طلبك مرة أخرى.",
+  "welcome": "رواسأمتاوخرواسأمتاوخرواسأمتاوخ",
+  "detailsProps": [
+    {
+      "accounts": [
+        {
+          "text": "نظرة عامة على الحساب"
+        }
+      ]
+    },
+    {
+      "accounts": [
+        {
+          "text": "طلباتي"
+        },
+        {
+          "text": "عوائدي"
+        },
+        {
+          "text": "ملاحظاتي"
+        },
+        {
+          "text": "قائمة امنياتي"
+        }
+      ]
+    },
+    {
+      "accounts": [
+        {
+          "text": "تفاصيلي"
+        },
+        {
+          "text": "دليل العناوين"
+        },
+        {
+          "text": "طرق الدفع"
+        },
+        {
+          "text": "بطاقات الهدايا الخاصة بي"
+        }
+      ]
+    },
+    {
+      "accounts": [
+        {
+          "text": "اشتراك الرسائل الإخبارية"
+        },
+        {
+          "text": "تحتاج مساعدة؟"
+        }
+      ]
+    },
+    {
+      "accounts": [
+        {
+          "text": "خروج"
+        }
+      ]
+    }
+  ],
+  "pdpTag-arabic": "لمكي",
+  "pdpTitle-arabic": "تيفاني تي خاتم ذهب ألماس",
+  "pdpButton-arabic": "أكتب مراجعة",
+  "addCartButton-arabic": "أضف إلى السلة",
+  "notifyButton-arabic": "يخطر لي عندما تكون متاحة",
+  "appointmentButton-arabic": "حجز موعد",
+  "delivery-arabic": "توصيلة متوقعة",
+  "Click and collect": "انقر وجمع",
+  "Available": "متوفرة",
+  "30 day return": "30 يوم العودة",
+  "Have a question?": "لدي سؤال؟",
+  "unavailable-arabic": "المنتج غير متوفر حاليا. يرجى الاتصال بخدمة العملاء لمزيد من المعلومات",
+  "Designer’s Notes": "ملاحظات المصمم",
+  "productDetails": "أطواق متدلية من الذهب عيار 18 قيراط على شكل أشكال مستطيلة موقعة بحواف مستديرة. مضاءة بماسات عيار 0.2 قيراط تدور حول المركز بحيث تزيد كل زاوية من لمعانها الجميل. تتميز الأطواق بإبزيم سهل غير قابل للفتح يسمح لك بإضافة المزيد من التعويذات المضمونة لجذب الإطراء.",
+  "Product Details": "تفاصيل المنتج",
+  "metal": "فلز",
+  "metalDetails-arabic": "ذهب أبيض عيار 18 قيراط",
+  "diamond": "الماس",
+  "diamondDetails-arabic": "ذهب أبيض عيار 18 قيراط",
+  "stone": "حصاة",
+  "stoneDetails-arabic": "ذهب أبيض عيار 18 قيراط",
+  "Pendant Size": "حجم القلادة",
+  "charm Size": "حجم القلادة",
+  "Chain Length": "طول السلسلة",
+  "Brand": "ماركة",
+  "Style Number": "رقم النمط",
+  "brandDetails-arabic": "لازوردي",
+  "collection": "مجموعة",
+  "Select Size": "أختر الحجم",
+  "Sizing Chart": "مخطط التحجيم",
+  "Select Color": "إختر لون",
+  "customer reviews": "آراء المستهلكين",
+  "rating": "تقييم",
+  "write a review": "أكتب مراجعة",
+  "Overall rating": "تقييم عام",
+  "reviewtabs": [
+    {
+      "label": "مؤخرًا"
+    },
+    {
+      "label": "خاصية"
+    },
+    {
+      "label": "الأعلى"
+    },
+    {
+      "label": "أدنى"
+    }
+  ],
+  "My Orders": "طلباتي",
+  "Displaying": "العرض",
+  "Orders": "الطلب",
+  "We’ve Sent It!": "لقد أرسلناها!",
+  "Estimated Delivery": "التوصيل المتوقع",
+  "Track Parcel": "تتبع الطرود",
+  "Order Date": "تاريخ الطلب",
+  "Order Number": "رقم الطلب",
+  "View Digital Receipt & Warranty": "عرض الإيصال الرقمي والضمان",
+  "View Order": "مشاهدة الطلب",
+  "View": "رأي",
+  "Back To My Account": "العودة إلى حسابي",
+  "reviewFormData": {
+    "reviewLabel": "إعادة النظر",
+    "firstName": "الاسم الاول",
+    "lastName": "الكنية",
+    "email": "البريد الإلكتروني",
+    "phoneNumber": "هاتف محمول",
+    "submitBtnText": "مراجعة آخر"
+  },
+  "notifyModal": {
+    "heading": "المنتج غير متوفر",
+    "subHeading": "سنخطرك عندما يصبح هذا المنتج متاحًا.",
+    "inputLabel": "بريد الكتروني او هاتف",
+    "required": "مطلوب",
+    "checkboxLabel": "سجل في النشرة الإخبارية لدينا",
+    "submitbtn": "أشعرني، أعلمني، بلغني"
+  },
+  "Order Details": "تفاصيل الطلب",
+  "Thanks for your order! Check out the details below.": "شكرا لطلبك! تحقق من التفاصيل أدناه.",
+  "Order No": "رقم الطلب",
+  "Order Date:": "تاريخ الطلب:",
+  "Return Order": "أمر الإرجاع",
+  "Ready for Collection": "جاهز للتحصيل",
+  "Click & Collect Order": "انقر واستلم الطلب",
+  "Items": "العناصر",
+  "Estimated Collection": "المجموعة المقدرة:",
+  "Leave Review": "اترك مراجعة",
+  "Color": "اللون",
+  "Size": "بحجم",
+  "Quantity": "كمية",
+  "Payment Details": "بيانات الدفع",
+  "Order Total": "الطلب الكلي",
+  "Sub-Total": "المجموع الفرعي",
+  "Discount": "تخفيض",
+  "Total": "كامل"
 }

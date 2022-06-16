@@ -1,0 +1,55 @@
+@import "/styles/variables.scss";
+
+.tab-wrapper {
+  display: flex;
+  align-items: center;
+  padding-bottom: 8px;
+  margin-top: 40px;
+  margin-bottom: 70px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-top: 50px;
+    margin-bottom: 42px;
+  }
+}
+
+.tab-item {
+  cursor: pointer;
+  margin-inline-end: 43px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.2px;
+  letter-spacing: 0em;
+  text-align: start;
+  color: $black-color;
+  text-transform: capitalize;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-inline-end: 60px;
+  }
+
+  &:last-child {
+    margin-inline-end: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &.active {
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: auto;
+      bottom: -9px;
+      width: 100%;
+      height: 2px;
+      background-color: $black-color;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+    }
+  }
+}

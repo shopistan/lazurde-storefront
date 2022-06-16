@@ -57,11 +57,12 @@ export const fetchAllLivePageRoutes = async () => {
     );
 
     const livePagesFromAPI = response.data?.data?.livePages ?? null;
+    
     const mappedLivePages =
       livePagesFromAPI.map((livePage: any) => {
         const { page = {} } = livePage;
-        const { pageUrl = "", typeUrl = "" } = page;
-        return { pageUrl, typeUrl };
+        const { pageUrl = "", typeUrl = "", typeName = '' } = page;
+        return { pageUrl, typeUrl, typeName };
       }) || [];
     return mappedLivePages;
   } catch (error: any) {

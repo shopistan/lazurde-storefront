@@ -1,0 +1,129 @@
+.inthepress-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  // padding: 40px;
+  justify-content: center;
+
+  @media (min-width: 1439px) {
+    padding-inline: 80px;
+    padding-bottom: 80px;
+    max-width: 1440px;
+  }
+
+  @media only screen and (min-width: 600px) and (max-width: 1400px) {
+    padding: 20px;
+  }
+
+  @media only screen and (min-width: 600px) and (max-width: 1400px) {
+    // padding-inline: 8px;
+    justify-content: center;
+  }
+
+  .heading {
+    // margin-top: 20px;
+    display: flex;
+    padding-top: 80px;
+    padding-bottom: 40px;
+
+    @media screen and (max-width: 600px) {
+      padding: 16px;
+      justify-content: center;
+      text-align: center;
+    }
+
+    span {
+      width: 168px;
+      // height: 38px;
+
+      /* Web/Header/H2 - Medium 32 */
+
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 120%;
+
+      @media screen and (max-width: 600px) {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .stories-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 0;
+    margin: 0;
+    justify-content: space-around;
+
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+      padding: 0px 16px 16px 16px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .story-card {
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+      // gap: 40px;
+      width: 400px;
+      // height: 374px;
+      overflow: hidden;
+
+      @media screen and (max-width: 1439px) {
+        width: 343px;
+      }
+
+      a {
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 130%;
+        /* identical to box height, or 17px */
+
+        letter-spacing: 0.05em;
+        text-decoration-line: underline;
+
+        /* Dark/100 */
+
+        color: #000000;
+        margin-top: 24px;
+      }
+
+      span {
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 120%;
+        /* or 29px */
+
+        /* Dark/100 */
+
+        color: #000000;
+        margin-top: 12px;
+      }
+
+      p {
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+        margin-top: 12px;
+        /* or 17px */
+
+        /* Dark/80 */
+
+        color: rgba(0, 0, 0, 0.8);
+
+        @media screen and (max-width: 600px) {
+          text-align: justify;
+        }
+      }
+    }
+  }
+}

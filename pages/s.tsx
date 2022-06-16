@@ -1,6 +1,7 @@
 import AppContentWrapper from "components/common/app-content-wrapper";
 import Footer from "components/common/footer";
 import Header from "components/common/header";
+import SearchResultsInfo from "components/common/search-results-info";
 import { componentsById } from "components/xm-component-library";
 import { performKeywordSearch } from "lib/algolia";
 import { AlgoliaProductType } from "lib/types/algolia";
@@ -8,7 +9,8 @@ import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
+import { AppContext } from "lib/context";
 
 interface SearchPageProps extends PageProps {
   algoliaSearchResults: {
@@ -28,7 +30,14 @@ const SearchPage: FC<SearchPageProps> = ({
   pageComponents,
   algoliaSearchResults,
 }) => {
+  const {
+    appState,
+    totalSelectedFilterCount,
+    selectedFilter,
+    hasFilteredData,
+  } = useContext(AppContext);
   console.log("Search Page Props: ", algoliaSearchResults);
+  console.log("selected filters", selectedFilter);
   return (
     <>
       <Head>
@@ -38,9 +47,34 @@ const SearchPage: FC<SearchPageProps> = ({
       </Head>
       <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
-        {pageComponents.map((component: XMComponent, index) => {
+        {!hasFilteredData ? (
+          <SearchResultsInfo
+            searchTerm={algoliaSearchResults?.query}
+            totalItems={algoliaSearchResults?.hits?.length}
+          />
+        ) : (
+          <div
+            style={{
+              height: "39px",
+            }}
+          ></div>
+        )}
+        {pageComponents?.map((component: XMComponent, index) => {
           const Component = componentsById[component.id];
           if (Component) {
+            if (component.id === "ProductListing") {
+              if (algoliaSearchResults?.hits?.length) {
+                return (
+                  <Component
+                    {...component.params}
+                    productDataArray={algoliaSearchResults?.hits || []}
+                    key={index}
+                    showBreadcrumb={false}
+                    searchTerm={algoliaSearchResults?.query || ""}
+                  />
+                );
+              } else return null;
+            }
             return <Component {...component.params} key={index} />;
           }
           return null;
@@ -55,22 +89,43 @@ export default SearchPage;
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { query = {} } = context;
-  const {
+  const getFaceFilters = () => {
+    if (query?.brand === `L'azurde`)
+      return [`Brand: L'azurde`, `Brand: Miss L'`, `Brand: Kenaz`];
+    else if (query?.brand === `Miss L'`)
+      return [`Brand: Miss L'`, `Brand: L'azurde,Miss L'`];
+    else if (query?.brand === "Kenaz")
+      return [`Brand: Kenaz`, `Brand: L'azurde,Kenaz`];
+    else return [`Brand: L'azurde`, `Brand: Miss L'`, `Brand: Kenaz`];
+  };
+
+  let {
     hits = [],
-    nbHits,
-    page,
-    nbPages,
-    hitsPerPage,
+    nbHits = 0,
+    page = 0,
+    nbPages = 0,
+    hitsPerPage = 0,
   } = await performKeywordSearch({
     query: query.keyword || "",
+    facetFilters: getFaceFilters() || [],
   });
+
+  const nonVariantArray = hits.filter((item: any) => item.isVariant === false)
+  hits = nonVariantArray
+
+  const getCurrentBrandId = () => {
+    if (query?.brand === `L'azurde`) return "lazurdeHeader";
+    else if (query?.brand === `Miss L'`) return "missLHeader";
+    else if (query?.brand === "Kenaz") return "kenazHeader";
+    else return "lazurdeHeader";
+  };
   const globalComponents = (await fetchGlobalComponents()) || [];
   const pageComponents = (await fetchXMComponents(12, "/search")) || [];
   const headerProps =
     (
       globalComponents.find(
         (item: XMComponent) =>
-          item.id === "Header" && item.params.headerId === "lazurdeHeader"
+          item.id === "Header" && item.params.headerId === getCurrentBrandId()
       ) || {}
     ).params || {};
   const footerProps =

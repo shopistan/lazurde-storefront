@@ -15,13 +15,14 @@ const INDEX = ALGOLIA_CLIENT.initIndex(ALGOLIA_SEARCH_INDEX);
 
 export const fetchCategoryProducts = async ({
   categoryName,
+  pageSize = 500,
   page = 0,
   filterParents = false,
 }: FetchCategoryProductsArgs) => {
   try {
     let response = await INDEX.search(categoryName, {
       restrictSearchableAttributes: ["Category"],
-      hitsPerPage: 20,
+      hitsPerPage: pageSize,
       facetFilters: filterParents ? [["isVariant:false"]] : [],
       page,
     });
@@ -34,12 +35,16 @@ export const fetchCategoryProducts = async ({
 
 export const performFilteredSearch = async ({
   query = "",
+  pageSize = 500,
+  page = 0,
   filters,
 }: FilteredSearchArgs) => {
   try {
     return new Promise((resolve, reject) => {
       INDEX.search(query, {
+        hitsPerPage: pageSize,
         facetFilters: filters,
+        page,
       })
         .then(({ hits }) => {
           return resolve(hits);
@@ -54,17 +59,55 @@ export const performFilteredSearch = async ({
   }
 };
 
+export const performMultiFilteredSearch = async ({
+  categoryArray,
+  filters,
+}: FilteredSearchArgs) => {
+  const queryArray: any[] = [];
+
+  categoryArray &&
+    categoryArray.length > 0 &&
+    categoryArray.forEach((query) => {
+      const obj = {
+        indexName: ALGOLIA_SEARCH_INDEX,
+        query: query,
+        params: {
+          facetFilters: filters,
+          hitsPerPage: 500,
+          page: 0,
+        },
+      };
+      queryArray.push(obj);
+    });
+
+  try {
+    return new Promise((resolve, reject) => {
+      ALGOLIA_CLIENT.multipleQueries(queryArray.sort(() => Math.random() - 0.5))
+        .then(({ results }) => {
+          return resolve(results);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  } catch (err) {
+    // console.log(`Error fetching items for query: ${query}`, err);
+    return null;
+  }
+};
+
 export const performKeywordSearch = async ({
   query,
   pageSize = 500,
   page = 0,
   filterParents = false,
+  facetFilters = [],
 }: KeywordSearchArgs) => {
   try {
     let response = await INDEX.search(query, {
       // restrictSearchableAttributes: ['title', 'description'],
       hitsPerPage: pageSize,
-      facetFilters: filterParents ? [["isVariant:false"]] : [],
+      facetFilters: [facetFilters],
       page,
     });
     return response;

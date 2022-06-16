@@ -8,6 +8,17 @@ import CardSlider from "./common/card-slider";
 import CollectionCard from "./common/collection-card";
 import ProductListing from "./common/product-listing";
 import PLPCategory from "./common/plp-category";
+import Banner from "./common/banner";
+import BambuserCardSlider from "./common/bambuser-card-slider";
+import HelpCategory from "./common/help-category";
+import CustomerService from "./common/customer-service";
+import TermCondtion from "components/common/terms-condition";
+import CelebrityChoice from "components/common/celebrity-choice";
+import InThePress from "components/common/in-the-press";
+import ExponeaHomepageRecommendations from "components/common/exponea-homepage-recommendations";
+import ExponeaHomepageRecommendationsNewest from "components/common/exponea-homepage-recommendations-newest";
+import ExponeaHomepageRecommendationsTrending from "components/common/exponea-homepage-recommendations-trending";
+import CGIR from "components/common/corporate-governance-and-investor-relations";
 
 export const componentsById: any = {
   LazurdeHeroBanner,
@@ -19,5 +30,16 @@ export const componentsById: any = {
   CardSlider,
   CollectionCard,
   ProductListing,
-  PLPCategory
+  PLPCategory,
+  Banner,
+  BambuserCardSlider,
+  HelpCategory,
+  CustomerService,
+  TermCondtion,
+  CelebrityChoice,
+  InThePress,
+  ExponeaHomepageRecommendations,
+  ExponeaHomepageRecommendationsNewest,
+  ExponeaHomepageRecommendationsTrending,
+  CGIR,
 };

@@ -1,43 +1,74 @@
 /* eslint-disable react/no-unknown-property */
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import styles from "./Accordion.module.scss";
-
-type LinksArrType = { url?: string; text?: string };
+import { MinusIcon, PlusIcon, ChevronDown, ArrowDown } from "components/icons";
 interface AccordionProps {
+  className?: string;
   index?: number;
-  heading?: string;
-  links?: LinksArrType[];
+  heading?: string | JSX.Element;
+  links?: { [key: string]: string }[] | [];
   isPlusMinusIcon?: boolean;
+  children?: string | JSX.Element;
+  arrowIcon?: Boolean;
+  role?: string;
+  arrowColor?: string;
+  arrowDown?: Boolean;
 }
 
 const Accordion = ({
+  className = "",
   index = 0,
   heading = "",
   links = [],
-  isPlusMinusIcon = false,
+  children,
+  arrowIcon = false,
+  role = "",
+  arrowColor,
+  arrowDown = false,
 }: AccordionProps): JSX.Element => {
+  const [isOpened, setIsOpened] = useState(false);
+
   return (
     <div
       tabIndex={index}
-      className={`collapse collapse-arrow ${styles["collapse__wrapper"]}`}
+      className={`${styles["wrapper"]} ${styles[className]}`}
+      role={role}
     >
-      <input type="checkbox" />
       <div
-        className={`collapse-title text-xl font-medium ${
-          styles["collapse__custom-title"]
-        } ${isPlusMinusIcon ? "plus-minus-icon" : ""}`}
+        className={`${styles["div-heading"]}`}
+        onClick={() => {
+          setIsOpened(!isOpened);
+        }}
       >
-        {heading}
+        <div className={`${styles["heading-text"]}`}>{heading}</div>
+        <div className={`${styles["heading-icons"]}`} data-opened={isOpened}>
+          {arrowDown ? (
+            <div className={`${isOpened && styles['arrowDown-open']}`}>
+              <ArrowDown />
+            </div>
+          ) : arrowIcon ? (
+            <div className={styles["angle-down"]}>
+              <ChevronDown
+                color={arrowColor || "#ffffff"}
+                width="10px"
+                height="7px"
+              />
+            </div>
+          ) : (
+            <div className={`${styles["plus-icon"]}`}>
+              {!isOpened ? <PlusIcon /> : <MinusIcon />}
+            </div>
+          )}
+        </div>
       </div>
-      <div className={`collapse-content ${styles["collapse__custom-content"]}`}>
-        {links && (
+      <div className={`${styles["custom-content"]}`} data-opened={isOpened}>
+        {children}
+        {links && links.length > 0 && (
           <ul className={styles["menu__links"]}>
-            {links &&
-              links.length > 0 &&
-              links.map((link, index) => (
+            {links.map((link, index) => (
                 <li key={index}>
-                  <Link href={link.url}>
+                  <Link href={link.url || "/"}>
                     <a className="opacity-60">{link.text}</a>
                   </Link>
                 </li>

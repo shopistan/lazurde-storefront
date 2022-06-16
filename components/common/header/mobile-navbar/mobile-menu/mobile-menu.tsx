@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
 import { useRouter } from "next/router";
 
-import styles from "./style.module.scss";
-import { Cross } from "components/icons";
+import styles from "../style.module.scss";
+import { CrossSmall } from "components/icons";
 import Link from "next/link";
 import { ArrowRight, BackArrow } from "components/icons";
-import MobileSubMenu from "./mobile-sub-menu";
-import UserLinks from "./user-links";
-import BrandSideBar from "../user-navbar/brand-sidebar/index";
+import MobileSubMenu from "../mobile-sub-menu/mobile-sub-menu";
+import UserLinks from "../user-links";
+import BrandSideBar from "../../user-navbar/brand-sidebar/index";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 import {
@@ -15,6 +15,7 @@ import {
   DropdownDataProps,
   LinksProps,
 } from "lib/types/mobile-header";
+import { updateBrand } from "lib/utils/common";
 
 const MobileMenu = ({
   active = false,
@@ -24,7 +25,7 @@ const MobileMenu = ({
   brandSideBar,
 }: MenuProps): JSX.Element => {
   const router = useRouter();
-  const { appState } = useContext(AppContext);
+  const { appState, saveAppState } = useContext(AppContext);
   const [isSubMenuOpen, setIsSubMenuOpen] = useState<Boolean>(false);
   const [subMenuData, setSubMenuData] = useState<DropdownDataProps>();
   const [isOpened, setIsOpened] = useState(false);
@@ -53,10 +54,12 @@ const MobileMenu = ({
         >
           {headerId !== "lazurdeHeader" && (
             <div
+              data-testid={"site-logo"}
               className={`opacity-60 ${styles["mobile-header__rotate-icon"]}`}
               onClick={() => {
-                router.push("/");
                 closeMenu();
+                updateBrand(`L'azurde`, saveAppState, appState);
+                router?.push("/");
               }}
             >
               <BackArrow fill="#000000" opacity="0.6" />
@@ -67,8 +70,12 @@ const MobileMenu = ({
               </span>
             </div>
           )}
-          <button className="" onClick={() => closeMenu()}>
-            <Cross width={"20px"} height={"20px"} />
+          <button data-testid="cross-btn1" className="">
+            <CrossSmall
+              width={"12px"}
+              height={"12px"}
+              onClick={() => closeMenu()}
+            />
           </button>
         </div>
         <div className={styles["mobile-header__brand-name"]}>

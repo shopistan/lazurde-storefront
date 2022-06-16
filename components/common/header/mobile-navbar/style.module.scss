@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .mobile-header {
   &__wrapper {
     width: 100%;
@@ -6,7 +8,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    background-color: #ffffff;
+    background-color: $white-color;
   }
 
   &__left,
@@ -23,14 +25,14 @@
   }
 
   &__brand-name {
-    margin-top: 29px;
-    margin-bottom: 32px;
+    margin-top: 33.03px;
+    margin-bottom: 40px;
     font-size: 24px;
     font-weight: 500;
     line-height: 28.8px;
     letter-spacing: 0em;
     text-align: start;
-    color: #000000;
+    color: $black-color;
   }
 
   &__menu {
@@ -41,7 +43,7 @@
       bottom: 0;
       inset-inline-start: 0;
       height: 100vh;
-      padding: 24px 24px 60px 24px;
+      padding: 24px 32.29px 60px 24px;
       z-index: 2;
       background-color: #fff;
       transform: translateX(-100%);
@@ -79,6 +81,7 @@
       }
 
       button {
+        padding: 0;
         background-color: transparent;
         border: 0;
       }
@@ -92,9 +95,9 @@
       }
     }
 
-    &-list-wrapper {
-      margin-top: 32px;
-    }
+    // &-list-wrapper {
+    //   margin-top: 32px;
+    // }
 
     &-list {
       &-item {
@@ -102,16 +105,16 @@
         align-items: center;
         justify-content: space-between;
         list-style: none;
-        margin-bottom: 16px;
+        margin-bottom: 24px;
         font-size: 15px;
         font-weight: 500;
         line-height: 18px;
         letter-spacing: 0em;
         text-align: start;
-        color: #000000;
+        color: $black-color;
 
         a {
-          color: #000000;
+          color: $black-color;
           text-decoration: none;
         }
 
@@ -129,7 +132,7 @@
     line-height: 18px;
     letter-spacing: 0em;
     text-align: start;
-    color: #000000;
+    color: $black-color;
   }
 
   &__sub-menu {
@@ -189,7 +192,7 @@
     }
 
     &-list-items {
-      margin-bottom: 36px;
+      margin-bottom: 40px;
 
       p {
         margin: 0;
@@ -215,11 +218,11 @@
       }
 
       a {
-        color: #000000;
+        color: $black-color;
         text-decoration: none;
         opacity: 0.6;
 
-        &[data-isBold="true"] {
+        &[data-is-bold="true"] {
           opacity: 1;
         }
       }
@@ -232,7 +235,7 @@
       letter-spacing: 0em;
       text-align: start;
       text-transform: capitalize;
-      color: #000000;
+      color: $black-color;
     }
   }
 
@@ -246,8 +249,8 @@
     letter-spacing: 0em;
     text-align: start;
     text-transform: capitalize;
-    color: #000000;
-    margin-top: 28px;
+    color: $black-color;
+    margin-top: 32px;
     margin-bottom: 25px;
     padding-top: 25px;
     padding-bottom: 25px;
@@ -268,7 +271,7 @@
       a {
         display: inline-flex;
         align-items: center;
-        color: #000000;
+        color: $black-color;
         text-decoration: none;
 
         svg {
@@ -279,7 +282,7 @@
   }
 
   &__auth-btns {
-    margin-top: 64px;
+    margin-top: 8px;
     text-align: center;
 
     button {
@@ -291,6 +294,12 @@
         letter-spacing: 0em;
         text-decoration: underline;
       }
+
+      &.signin-btn {
+        border: none;
+        text-decoration: underline;
+        height: auto;
+      }
     }
   }
 
@@ -299,6 +308,7 @@
     align-items: center;
     flex-direction: row-reverse;
     justify-content: center;
+    margin-top: 147px;
 
     span {
       font-size: 14px;
@@ -319,12 +329,12 @@
       align-items: center;
       flex-direction: row;
       justify-content: space-between;
-      margin-bottom: 16px;
+      // margin-bottom: 16px;
       font-size: 15px;
       font-weight: 500;
       line-height: 18px;
       letter-spacing: 0em;
-      color: #000000;
+      color: $black-color;
     }
 
     &-arrow {
@@ -348,7 +358,7 @@
         font-weight: 400;
         line-height: 18px;
         letter-spacing: 0em;
-        color: #000000;
+        color: $black-color;
 
         &[data-selected="true"] {
           font-weight: 700;
@@ -378,6 +388,7 @@
     }
 
     &-dropdown {
+      outline: 0;
       &[data-open="true"] {
         ul {
           display: block;
@@ -413,6 +424,15 @@
       }
     }
   }
+}
+
+.margin {
+  margin-bottom: 16px;
+}
+
+.country-icon {
+  margin: 0 !important;
+  padding-inline-end: 16px;
 }
 
 html[dir="rtl"] {

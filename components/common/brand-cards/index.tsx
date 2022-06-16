@@ -7,11 +7,13 @@ import { SwiperSlide } from "swiper/react";
 import { AppContext } from "lib/context/index";
 import useTranslation from "next-translate/useTranslation";
 import Slider from "components/common/ui/slider/slider";
+import { desktopScreenSize } from "lib/utils/common";
+import { useRouter } from "next/router";
 
 type BrandCardsType = {
-  cardTitle: string;
+  cardTitle: string | "";
   cardImage: ImageType;
-  favIconSrc: ImageType;
+  cardLinks: string | "";
 };
 
 interface BrandCardsProps {
@@ -24,9 +26,9 @@ const BrandCards: FC<BrandCardsProps> = ({
   brandCards,
 }): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState } = useContext(AppContext);
+  const { appState, saveAppState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const onClick = () => { };
+  const router = useRouter();
 
   return (
     <div className={styles["cards-container"]}>
@@ -36,25 +38,48 @@ const BrandCards: FC<BrandCardsProps> = ({
       <Slider
         desktopSlidePerView={3}
         mobileSlidePerView={1.1}
-        navigation={width > 1023 ? true : false}
+        navigation={width > desktopScreenSize ? true : false}
         scrollbar={true}
         className={`card-brands`}
       >
         <div className={`flex justify-between`}>
           {brandCards &&
             brandCards.map((data, index) => {
-              const { cardTitle, cardImage, favIconSrc } = data;
+              const {
+                cardTitle,
+                cardImage,
+                cardLinks = "/",
+              } = data;
+
               return (
                 <SwiperSlide key={index}>
-                  <div className={`${styles["cards"]} ${appState.lang == 'ar' && styles["arabic-card"]}`} key={index}>
+                  <div
+                    className={`${styles["cards"]} ${
+                      appState.lang == "ar" && styles["arabic-card"]
+                    }`}
+                    key={index}
+                  >
                     <Cards
-                      onClick={onClick}
+                      onClick={() => {
+                        router?.push(cardLinks);
+                        if (cardLinks === "/missl") {
+                          saveAppState({
+                            ...appState,
+                            brand: `Miss L'`,
+                          });
+                        }
+                        if (cardLinks === "/kenaz") {
+                          saveAppState({
+                            ...appState,
+                            brand: `Kenaz`,
+                          });
+                        }
+                      }}
                       className={styles["brand-card"]}
                       height="100%"
                       width="100%"
                       cardTitle={cardTitle}
                       cardImage={cardImage}
-                      favIconSrc={favIconSrc}
                     />
                   </div>
                 </SwiperSlide>

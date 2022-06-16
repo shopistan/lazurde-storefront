@@ -1,0 +1,41 @@
+@import '/styles/variables.scss';
+
+.search-results-info-wrapper {
+  margin: 16px 80px -32px 80px;
+  font-family: 'Roboto';
+  font-style: normal;
+
+  @media (max-width: $breakPoint-tablet) {
+    margin: 16px 16px -16px 16px;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+
+    @media (max-width: $breakPoint-tablet) {
+      font-size: 13px;
+    }
+  }
+
+  strong {
+    // font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+  }
+
+  .need-help {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 120%;
+    margin-top: 33px;
+  }
+
+  .contact-us {
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 120%;
+    margin-bottom: 30px;
+  }
+}

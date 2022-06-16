@@ -4,6 +4,7 @@ import { ArrowRight } from "components/icons";
 import { SelectProps, OptionProps } from "lib/types/mobile-header";
 import styles from "../style.module.scss";
 import { AppContext } from "lib/context";
+import Image from "next/image";
 
 const LanguageSelector = ({
   options = [{ label: "label", img: "", value: "value", langTitle: "" }],
@@ -33,17 +34,21 @@ const LanguageSelector = ({
       onBlur={() => setIsOpen(false)}
     >
       <span
-        className={styles["mobile-header__lang-selected"]}
+        className={`${styles["mobile-header__lang-selected"]} ${
+          isOpen === true ? styles["margin"] : ""
+        }`}
         onClick={() => {
           setIsOpen(!isOpen);
         }}
       >
         <div className={styles["mobile-header__lang-left-side"]}>
           {selectedVal?.img && (
-            <img
+            <Image
               src={selectedVal?.img || "/flag-uae.svg"}
-              width={iconWidth}
+              width={iconWidth || 16}
+              height={iconWidth || 16}
               alt="image"
+              layout="fixed"
             />
           )}
           <span>
@@ -85,12 +90,16 @@ const LanguageSelector = ({
             >
               <a>
                 <span>
-                  {opData.img && (
-                    <img
-                      src={opData?.img || "/flag-uae.svg"}
-                      width={iconWidth}
-                      alt="image"
-                    />
+                  {opData?.img && (
+                    <span className={styles["country-icon"]}>
+                      <Image
+                        src={opData?.img || "/flag-uae.svg"}
+                        width={iconWidth || 16}
+                        height={iconWidth || 16}
+                        alt="image"
+                        layout="fixed"
+                      />
+                    </span>
                   )}
                   <span>{opData?.label}</span>
                 </span>

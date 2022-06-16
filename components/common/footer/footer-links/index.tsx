@@ -11,15 +11,17 @@ interface FooterLinkProps {
   heading?: string;
   links?: LinksArrType[];
   index?: number;
+  role?: string;
 }
 
 const FooterLinks = ({
   heading = "",
   links = [],
   index,
+  role = "role",
 }: FooterLinkProps): JSX.Element => {
   return (
-    <div className={styles["menu__column"]} key={index}>
+    <div role={role} className={styles["menu__column"]} key={index}>
       <Heading element="h2" className={styles["menu__heading"]}>
         {heading}
       </Heading>

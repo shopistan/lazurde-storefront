@@ -71,17 +71,19 @@ export type FooterProps = {
   socialIconText?: string;
   socialLinks?: iconsObjType[];
   footerLogo?: footerLogoProp;
+  footerLogoLink?: string;
   paymentLinks?: iconsObjType[];
 };
 
 export interface PageProps {
   headerProps: HeaderProps;
+  headerArray: [];
   footerProps: FooterProps;
   brandSidebarProps: BrandSidebarProps;
   pageComponents?: XMComponent[];
 }
 
-export type BrandType = "lazurde" | "missl" | "kenaz";
+export type BrandType = `L'azurde` | `Miss L'` | `Kenaz`;
 export type LangType = "en" | "ar";
 export type RegionType = "sa" | "ae" | "eg";
 export type LocaleType =
@@ -102,4 +104,13 @@ export type AppStateType = {
   locale: LocaleType;
   lang: LangType;
   region: RegionType;
+};
+
+export type AuthTokens = {
+  access_token?: string;
+  id_token?: string;
+  refresh_token?: string;
+  scope?: string;
+  token_type?: string;
+  expires_in: number;
 };

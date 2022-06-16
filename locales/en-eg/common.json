@@ -11,5 +11,35 @@
   "navbarBackBtn": "Back to L’azurde",
   "NavbarLangSelectorTitle" : "Select your preferred language and location",
   "langSelectorBtnTxt" : "Continue",
-  "arabicfooterLinks": ""
+  "textShow": "Showing",
+  "textOf": "of",
+  "textViewAll": "View All",
+  "arabicfooterLinks": "",
+
+  "sortingFilter": [
+    {
+      "label": "Our Recommendation",
+      "value": "Our Recommendation"
+    },
+    {
+      "label": "Most Viewed",
+      "value": "most viewed"
+    },
+    {
+      "label": "Best Sellers Online",
+      "value": "Best Sellers Online"
+    },
+    {
+      "label": "Best Sellers Store",
+      "value": "Best Sellers Store"
+    },
+    {
+      "label": "Price - Low to High",
+      "value": "Price - Low to High"
+    },
+    {
+      "label": "Price - High to Low",
+      "value": "Price - High to Low"
+    }
+  ]
 }

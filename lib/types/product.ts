@@ -1,4 +1,4 @@
-export type ProductAttribute = {
+export type ProductAttributeType = {
   _id: string;
   name: string;
   description: string;
@@ -7,19 +7,19 @@ export type ProductAttribute = {
   value: string;
 };
 
-export type ProductCategoryBreadcrumb = {
+export type ProductCategoryBreadcrumbType = {
   id: string;
   name: string;
   attributes: any[];
 };
 
-export type ProductCategory = {
+export type ProductCategoryType = {
   id: string;
   name: string;
-  breadcrumbs: ProductCategoryBreadcrumb[];
+  breadcrumbs: ProductCategoryBreadcrumbType[];
 };
 
-export type Product = {
+export type ProductType = {
   _id: string;
   sku: string;
   itemId: number;
@@ -27,8 +27,8 @@ export type Product = {
   type: string;
   status: boolean;
   bundleItems: any[];
-  categories: ProductCategory[];
-  attributes: ProductAttribute[];
+  categories: ProductCategoryType[];
+  attributes: ProductAttributeType[];
   variants: any[];
   dependants: any[];
 };

@@ -1,0 +1,343 @@
+@import "/styles/variables.scss";
+
+.history-container {
+  @media (min-width: $breakPoint-desktop) {
+    width: 66%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.history-first {
+  @media (min-width: $breakPoint-desktop) {
+    padding-block: 42px 40px;
+    padding-inline: 40px;
+  }
+  background-color: white;
+  margin-bottom: 8px;
+  padding: 24px;
+}
+
+.history-first-title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-top: 10.72px;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+.history-first-text {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (min-width: $breakPoint-desktop) {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+}
+
+.history-second {
+  background-color: white;
+  margin-bottom: 8px;
+  padding: 24px;
+
+  @media (min-width: $breakPoint-desktop) {
+    padding: 40px;
+  }
+}
+
+.history-second-first {
+  margin-bottom: 48px;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-bottom: 56.8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.history-barcode {
+  text-align: center;
+  margin-top: 17px;
+
+  @media (min-width: $breakPoint-desktop) {
+    text-align: start;
+    margin-top: 0;
+  }
+}
+
+.history-second-first-block {
+  display: flex;
+  align-items: center;
+
+  p {
+    margin-block: 0;
+    margin-inline-start: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+}
+
+.history-third {
+  background-color: white;
+  margin-bottom: 8px;
+  padding: 24px;
+
+  @media (min-width: $breakPoint-desktop) {
+    padding: 40px;
+  }
+}
+
+.history-third-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.history-third-text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-block: 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.history-forth {
+  background-color: white;
+  padding: 24px;
+
+  @media (min-width: $breakPoint-desktop) {
+    padding: 40px;
+  }
+}
+
+.history-forth-first {
+  display: flex;
+  justify-content: space-between;
+}
+
+.history-forth-sections {
+  display: flex;
+}
+
+.product-details {
+  p {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+}
+
+.reviews-section {
+  cursor: pointer;
+  display: flex;
+  margin-top: 8px;
+  align-items: flex-end;
+  p {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: start;
+    margin-block: 0;
+    margin-inline-start: 4px;
+  }
+}
+
+.history-forth-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-block: 0;
+}
+
+.history-forth-image {
+  margin-right: 16px;
+}
+
+.history-forth-text {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-block: 0;
+}
+
+.history-forth-heading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: start;
+
+  @media (min-width: $breakPoint-desktop) {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+}
+
+.history-forth-sub {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: start;
+
+  @media (min-width: $breakPoint-desktop) {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+}
+
+.history-forth-description {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.history-fifth {
+  background-color: white;
+  padding: 24px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+
+  @media (min-width: $breakPoint-desktop) {
+    padding: 40px;
+  }
+}
+
+.history-fifth-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+.order-details-span {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: start;
+}
+
+.order-details-text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: start;
+}
+
+.history-fifth-second {
+  padding-top: 24px;
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: start;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0;
+  }
+}
+
+.history-six {
+  background-color: white;
+  padding: 24px;
+
+  @media (min-width: $breakPoint-desktop) {
+    padding: 40px;
+  }
+}
+
+.history-six-first {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-block: 0 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.history-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    margin: 0;
+  }
+}
+
+.history-six-total-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.history-six-total-text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: start;
+}
+
+.history-price {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.discount-price {
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}

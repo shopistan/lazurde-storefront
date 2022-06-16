@@ -9,7 +9,7 @@
   width: 100%;
   flex-direction: column;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     flex-direction: row;
     justify-content: space-evenly;
 
@@ -38,7 +38,7 @@
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding: 76px 50px 50px 80px;
     height: 700px;
 
@@ -74,11 +74,11 @@
 }
 
 .button-1 {
-  background-color: black;
+  background-color: $black-color;
   border-radius: 8px;
   border-style: none;
   box-sizing: border-box;
-  color: #ffffff;
+  color: $white-color;
   cursor: pointer;
   display: inline-block;
   font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
@@ -143,7 +143,7 @@
   margin-top: 0;
   margin-bottom: 24px;
   color: white;
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     width: 330px;
     font-size: 24px;
     line-height: 29px;
@@ -162,7 +162,7 @@ html[dir="rtl"] {
   margin-top: 0;
   margin-bottom: 0;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     margin-top: 16px;
     width: 98%;
   }
@@ -172,7 +172,7 @@ html[dir="rtl"] {
   padding-inline-start: 24px;
   padding-block-start: 24px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding-block-start: 64px;
     padding-inline-start: 64px;
   }
@@ -182,7 +182,7 @@ html[dir="rtl"] {
   padding-inline-start: 24px;
   padding-block-start: 24px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     padding-inline-start: 60px;
     padding-block-start: 64px;
   }
@@ -190,7 +190,7 @@ html[dir="rtl"] {
 
 .missl-spacing {
   width: 96%;
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     margin-top: 16px;
     width: 98%;
   }
