@@ -10,9 +10,11 @@ body {
   margin: 0;
   font-family: "Roboto", sans-serif;
   background-color: white;
-  overflow: hidden;
-}
 
+  @media (min-width: 1024px) {
+    overflow: hidden;
+  }
+}
 #__next {
   flex: 1;
   display: flex;
