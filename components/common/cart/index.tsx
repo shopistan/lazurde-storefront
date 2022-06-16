@@ -21,6 +21,8 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from "lib/utils/common";
 import Link from "next/link";
 import Label from "components/common/ui/label";
+import { getInventoryAuth } from "lib/utils/inventory";
+import { ProductType } from "lib/types/product";
 
 interface CartProps {}
 const Cart = ({}: CartProps): JSX.Element => {
@@ -48,6 +50,15 @@ const Cart = ({}: CartProps): JSX.Element => {
   const [isWishListLoading, setIsWishListLoading] = useState(false);
   const [updatingCartItem, setUpdatingCartItem] = useState(false);
   const [deletingWishList, setDeletingWishList] = useState(false);
+  const [userAuth, setUserAuth] = useState("");
+
+  useEffect(() => {
+    const getAuth = async () => {
+      const userData = await getInventoryAuth();
+      setUserAuth(userData?.data?.accessToken);
+    };
+    getAuth();
+  }, []);
 
   async function getWishListData(wishList: [] = []) {
     // setDeletingWishList(false);
@@ -62,10 +73,10 @@ const Cart = ({}: CartProps): JSX.Element => {
         itemId: wishListData || [],
       };
       const response = await fetchProductPriceByItemId(payload);
-      const wishListArray: {}[] = [];
+      const wishListArray: ProductType[] = [];
       getItemsbyItemIds?.data?.products.filter(
         (product: { itemId: number }) => {
-          let wishListObj: {} = {};
+          let wishListObj: any = {};
           const matchedProduct = response?.data.find(
             (item: { itemId: number }) => product.itemId === item.itemId
           );
@@ -87,6 +98,10 @@ const Cart = ({}: CartProps): JSX.Element => {
       );
 
       if (getItemsbyItemIds?.status === 200) {
+        wishListArray?.map((product: ProductType, index) => {
+          const modifiedProduct = destructureAttributes(product);
+          wishListArray[index] = modifiedProduct;
+        });
         setIsWishListLoading(false);
         setWishListData({
           status: "",
@@ -106,12 +121,25 @@ const Cart = ({}: CartProps): JSX.Element => {
       "98b0ed93-aaf1-4001-b540-b61796c4663d"
     );
     if (cartData?.status === 200) {
+      cartData?.data?.items?.map((product: ProductType, index: number) => {
+        const modifiedProduct = destructureAttributes(product);
+        cartData.data.items[index] = modifiedProduct;
+      });
+
       setCartData(cartData?.data);
       setisLoadingCart(false);
     } else {
       setisLoadingCart(false);
     }
   }
+
+  const destructureAttributes = (product: ProductType) => {
+    const obj: { [key: string]: string } = {};
+    product?.attributes?.map((attr: any) => {
+      obj[attr?.name] = attr?.value;
+    });
+    return { ...product, ...obj };
+  };
 
   useEffect(() => {
     getCartData();
@@ -144,6 +172,10 @@ const Cart = ({}: CartProps): JSX.Element => {
     try {
       const response = await updateItemOfCart(cartData?.cartId, payload);
       if (response?.status === 200) {
+        response?.data?.items?.map((product: ProductType, index: number) => {
+          const modifiedProduct = destructureAttributes(product);
+          response.data.items[index] = modifiedProduct;
+        });
         setCartData(response?.data);
         setUpdatingCartItem(false);
       } else {
@@ -163,6 +195,10 @@ const Cart = ({}: CartProps): JSX.Element => {
         item?.lineItemId
       );
       if (response?.status === 200) {
+        response?.data?.items?.map((product: ProductType, index: number) => {
+          const modifiedProduct = destructureAttributes(product);
+          response.data.items[index] = modifiedProduct;
+        });
         setCartData(response?.data);
         setUpdatingCartItem(false);
       } else {
@@ -349,6 +385,7 @@ const Cart = ({}: CartProps): JSX.Element => {
                             <CartItem
                               key={index}
                               item={item}
+                              userAuth={userAuth}
                               updatingCartItem={updatingCartItem}
                               handleChange={handleChange}
                               removeItem={removeItem}
