@@ -227,7 +227,8 @@ const ProductListing = ({
         }
       );
     }
-
+    const nonVariantArray = filteredArray.filter((item: any) => item.isVariant === false)
+    filteredArray = nonVariantArray
     return filteredArray;
   };
 
@@ -314,7 +315,7 @@ const ProductListing = ({
     const header = document.getElementById("main-header");
     const headerHeight = header.getBoundingClientRect().height;
     const elementTop = listingWrapper?.current.offsetTop;
-    window.scroll({
+    document.body.scroll({
       top: elementTop - headerHeight,
       left: 0,
       behavior: "smooth",

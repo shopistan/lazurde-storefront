@@ -13,6 +13,8 @@ const renderComponent = () => {
         isOpened={isOpened}
         onClose={jest.fn()}
         productData={singleProductData}
+        setIsRatingError={jest.fn()}
+        isRatingError={"testing"}
       />
     </ContextProvider>
   );
@@ -25,6 +27,8 @@ const renderComponentAR = () => {
         isOpened={isOpened}
         onClose={jest.fn()}
         productData={singleProductData}
+        setIsRatingError={jest.fn()}
+        isRatingError={"testing"}
       />
     </AppContext.Provider>
   );

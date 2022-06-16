@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import Label from "components/common/ui/label";
 import { writeReview } from "lib/utils/reviews";
 // import ImageUploader from "./image-uploader";
-import Notification from "components/common/ui/alert";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 
@@ -23,9 +22,9 @@ const ReviewForm = ({
   productData = {},
   onClose,
   fetchingReviews,
+  setIsRatingError,
 }: any): JSX.Element => {
   const [fileUpload, setFileUpload] = useState<any>([{ fileArray: {} }]);
-  const [errorList, setErrorList] = useState([]);
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
   const arabicLabels: arabicLabelTypes = t(
@@ -79,42 +78,21 @@ const ReviewForm = ({
 
     const id = Math.floor(Math.random() * 100 + 1);
     if (rating === 0) {
-      const errorMsg = {
-        id: id,
-        title: appState?.lang === "en" ? "Error" : "خطأ",
-        description:
-          appState?.lang === "en" ? "please add rating" : "الرجاء إضافة تصنيف",
-        backgroundColor: "#d9534f",
-        icon: "/",
-      };
-      setErrorList([...errorList, errorMsg]);
+      setIsRatingError && setIsRatingError("Please Add Rating");
+      document
+        ?.getElementById("rating-stars")
+        ?.scrollIntoView({ behavior: "smooth" });
     } else {
+      setIsRatingError && setIsRatingError("");
       const response = await writeReview(formData);
       if (response?.hasError === false) {
-        const successMsg = {
-          id: id,
-          title: appState?.lang === "en" ? "Success" : "النجاح",
-          description:
-            appState?.lang === "en"
-              ? "review posted successfully"
-              : "تم نشر المراجعة بنجاح",
-          backgroundColor: "#5cb85c",
-          icon: "/",
-        };
-        setErrorList([...errorList, successMsg]);
+        setIsRatingError && setIsRatingError("");
         fetchingReviews && fetchingReviews();
         setTimeout(() => {
           onClose && onClose();
         }, 3000);
       } else {
-        const errorMsg = {
-          id: id,
-          title: "Error",
-          description: "NetWork Error",
-          backgroundColor: "#d9534f",
-          icon: "/",
-        };
-        setErrorList([...errorList, errorMsg]);
+        setIsRatingError && setIsRatingError("Network Error");
       }
     }
   };
@@ -268,12 +246,6 @@ const ReviewForm = ({
           )}
         </Formik>
       </div>
-      <Notification
-        toastList={errorList}
-        position="top-center"
-        autoDelete={true}
-        autoDeleteTime={6000}
-      />
     </>
   );
 };

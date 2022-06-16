@@ -10,17 +10,20 @@ import { useRouter } from "next/router";
 import SideBar from "components/common/side-bar/index";
 import AccountSection from "../account-section";
 import OrderDetails from "components/common/order-details/index";
+import OrderHistory from "../order-history";
 import { desktopScreenSize } from "lib/utils/common";
 
 interface AccountInformationProps {
-  title: string | "";
-  titleImage: ImageType | { url: ""; altText: "" };
-  barCode: ImageType | { url: ""; altText: "" };
-  firstName: string | "";
-  lastName: string | "";
-  reviewImage: ImageType;
-  reviewText: string | "";
-  details: DetailsProps[];
+  title?: string | "";
+  titleImage?: ImageType | { url: ""; altText: "" };
+  barCode?: ImageType | { url: ""; altText: "" };
+  firstName?: string | "";
+  lastName?: string | "";
+  reviewImage?: ImageType;
+  reviewText?: string | "";
+  orderId?: string | "";
+  details?: DetailsProps[];
+  order?: any;
 }
 
 type AccountsProps = {
@@ -44,12 +47,14 @@ const AccountInformation: FC<AccountInformationProps> = ({
   reviewImage,
   reviewText,
   details,
+  order,
 }) => {
   const { t } = useTranslation("common");
   const [width] = useWindowSize();
   const router = useRouter();
   const { appState } = useContext(AppContext);
   const [activeComponent, setActiveComponent] = useState("Account Overview");
+  const [orderDetails, setOrderDetails] = useState("");
 
   return (
     <>

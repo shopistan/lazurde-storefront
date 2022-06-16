@@ -3,9 +3,9 @@ import React from "react";
 const AppleButton = ({ ...props }) => {
   return (
     <svg
-      width="60"
-      height="24"
-      viewBox="0 0 60 24"
+      width="59"
+      height="23"
+      viewBox="0 0 59 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xlinkHref="http://www.w3.org/1999/xlink"

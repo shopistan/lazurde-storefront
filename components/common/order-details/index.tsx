@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, FC, useState, useEffect } from "react";
 import Image from "next/image";
 import Label from "../ui/label";
 import { orderData } from "lib/mock-data/data";
@@ -11,16 +11,39 @@ import { getOrders } from "lib/utils/order";
 import { updateOrderDate } from "lib/utils/common";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
+import OrderHistory from "../order-history";
+import { ProductType } from "lib/types/product";
 
-const OrderDetails = ({}) => {
+interface OrderDetailsProps {}
+
+const OrderDetails: FC<OrderDetailsProps> = ({}) => {
   const payload = {
     authToken: "",
   };
-  const response = getOrders(payload);
+  // const response = getOrders(payload);
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
   const [width] = useWindowSize();
-  return (
+  const [orderObject, setOrderObject] = useState({});
+  const [orderDetails, setOrderDetails] = useState("");
+
+  console.log("testing", orderObject);
+
+  const destructureAttributes = (product: ProductType) => {
+    const obj: { [key: string]: string } = {};
+    product?.attributes?.map((attr: any) => {
+      obj[attr?.name] = attr?.value;
+    });
+    return { ...product, ...obj };
+  };
+
+  const handleOrderDetail = (order: any) => {
+    order && setOrderObject(order);
+    console.log("orders", order);
+    setOrderDetails("Order Details");
+  };
+
+  return orderDetails != "Order Details" ? (
     <div className={styles["order-container"]}>
       <div className={styles["order-main"]}>
         <Image src={"/order.png"} width={13.75} height={15.28} />
@@ -111,7 +134,7 @@ const OrderDetails = ({}) => {
                       : <span> {orderData?.orders[index]?.orderId}</span>
                     </p>
                   </div>
-                  <div className={styles["order-date"]}>
+                  {/* <div className={styles["order-date"]}>
                     <Image src={"/calendar.png"} width={18} height={18} />
                     <Link href={"/"}>
                       <a className={styles["order-link"]}>
@@ -120,9 +143,15 @@ const OrderDetails = ({}) => {
                           : t("View Digital Receipt & Warranty")}
                       </a>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
-                <Button className={styles["view-button"]} onClick={() => {}}>
+                <Button
+                  className={styles["view-button"]}
+                  onClick={() => {
+                    handleOrderDetail(order);
+                    console.log("clicks", order);
+                  }}
+                >
                   {width > desktopScreenSize
                     ? appState?.lang == "en"
                       ? "View Order"
@@ -139,6 +168,8 @@ const OrderDetails = ({}) => {
         <></>
       )}
     </div>
+  ) : (
+    orderDetails === "Order Details" && <OrderHistory order={orderObject} />
   );
 };
 export default OrderDetails;

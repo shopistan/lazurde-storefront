@@ -44,13 +44,12 @@ const ImageUploader = ({
                   height={88}
                 />
 
-                <div
-                  className={styles["cross-btn"]}
-                  onClick={(event) => {
-                    deleteImage(event, index);
-                  }}
-                >
-                  <CrossSmall />
+                <div className={styles["cross-btn"]}>
+                  <CrossSmall
+                    onClick={(event: any) => {
+                      deleteImage(event, index);
+                    }}
+                  />
                 </div>
               </div>
             );

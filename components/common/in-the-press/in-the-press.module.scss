@@ -13,7 +13,7 @@
   }
 
   @media only screen and (min-width: 600px) and (max-width: 1400px) {
-    padding: 20px
+    padding: 20px;
   }
 
   @media only screen and (min-width: 600px) and (max-width: 1400px) {
@@ -30,6 +30,7 @@
     @media screen and (max-width: 600px) {
       padding: 16px;
       justify-content: center;
+      text-align: center;
     }
 
     span {
@@ -38,7 +39,7 @@
 
       /* Web/Header/H2 - Medium 32 */
 
-      font-family: 'Roboto';
+      font-family: "Roboto";
       font-style: normal;
       font-weight: 500;
       font-size: 32px;
@@ -72,7 +73,7 @@
       align-items: left;
       // gap: 40px;
       width: 400px;
-      height: 374px;
+      // height: 374px;
       overflow: hidden;
 
       @media screen and (max-width: 1439px) {
@@ -107,7 +108,7 @@
       }
 
       p {
-        font-family: 'Roboto';
+        font-family: "Roboto";
         font-style: normal;
         font-weight: 400;
         font-size: 14px;

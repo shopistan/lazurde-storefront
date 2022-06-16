@@ -17,6 +17,7 @@ const nextConfig = {
       "greatwall-sandbox-sandbox-image.imgix.net",
       "lazurdesandbox.imgix.net",
       "www.google.com",
+      "cdn.bfldr.com"
     ],
   },
 };

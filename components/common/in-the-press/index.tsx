@@ -23,7 +23,6 @@ const InThePress: FC<InThePressProps> = ({ bannerImage, heading, stories }) => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
   const [size] = useWindowSize();
-  console.log("stories", stories);
   return (
     <div className={styles["inthepress-container"]}>
       <div>
@@ -31,7 +30,7 @@ const InThePress: FC<InThePressProps> = ({ bannerImage, heading, stories }) => {
           src={bannerImage?.url}
           alt={bannerImage?.altText}
           width={size > desktopScreenSize ? 1280 : 375}
-          height={size > desktopScreenSize ? 308 : 266}
+          height={size > desktopScreenSize ? 308 : 207}
           layout="responsive"
           objectFit="cover"
         />
@@ -48,7 +47,7 @@ const InThePress: FC<InThePressProps> = ({ bannerImage, heading, stories }) => {
                 alt={story?.storyImage?.altText}
                 width={size > desktopScreenSize ? 400 : 343}
                 height={size > desktopScreenSize ? 200 : 200}
-                layout="responsive"
+                layout="fixed"
               />
               <a>
                 {appState?.lang === "en"
@@ -60,11 +59,16 @@ const InThePress: FC<InThePressProps> = ({ bannerImage, heading, stories }) => {
                   ? story?.storyHeading
                   : "هذا عنوان وهمي"}
               </span>
-              <p>
-                {appState?.lang === "en"
-                  ? story?.storyDescriptin
-                  : " نا والآن سنجعل هذا اختبارًا أكبر لمطابقة التصميم هذه فقرة وهمية مكتوبة هنا والآن سنجعل هذا اختبارًا أكبر لمطابقة التصميم"}
-              </p>
+              {appState.lang == "en" ? (
+                <p
+                  key={Math.random()}
+                  dangerouslySetInnerHTML={{
+                    __html: story?.storyDescriptin,
+                  }}
+                ></p>
+              ) : (
+                " نا والآن سنجعل هذا اختبارًا أكبر لمطابقة التصميم هذه فقرة وهمية مكتوبة هنا والآن سنجعل هذا اختبارًا أكبر لمطابقة التصميم"
+              )}
             </div>
           );
         })}
