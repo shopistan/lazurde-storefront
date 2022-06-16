@@ -12,6 +12,7 @@ import missLogo from "/public/missLogo.png";
 import kenazLogo from "/public/kenazLogo.png";
 import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
+import Spinner from "../ui/spinner";
 import { getInventoryByIds, getInventoryAuth } from "lib/utils/inventory";
 interface CartItemObject {
   title: string;
@@ -50,7 +51,7 @@ const CartItem = ({
   item,
   handleChange,
   updatingCartItem = false,
-  removeItem = () => {},
+  removeItem = () => { },
   getCartData,
   userAuth,
   wishListItem = false,
@@ -59,6 +60,7 @@ const CartItem = ({
   const [width] = useWindowSize();
   const [updatingItem, setUpdatingItem] = useState(false);
   const [removingItem, setRemovingItem] = useState(false);
+  const [addingItem, setAddingItem] = useState(false);
   const [value, setValue] = useState("");
   const [inventoryData, setInventoryData] = useState(100);
   const [showError, setShowError] = useState("");
@@ -87,11 +89,12 @@ const CartItem = ({
       setValue(item?.quantity?.toString());
       setUpdatingItem(false);
       setRemovingItem(false);
+      setAddingItem(false);
     }
   }, [updatingCartItem]);
 
   const handleAddToCart = async (item: CartItemObject) => {
-    setRemovingItem(true);
+    setAddingItem(true);
 
     const selectedProduct: {
       sku?: string;
@@ -143,17 +146,15 @@ const CartItem = ({
         />
         {!wishListItem && (
           <Label
-            className={`${styles["cart-image_tag"]} ${
-              styles[
-                `${
-                  brandName === `Miss L'`
-                    ? "bg_missl"
-                    : brandName === "Kenaz"
-                    ? "bg_kenaz"
-                    : "bg_lazurde"
-                }`
-              ]
-            }`}
+            className={`${styles["cart-image_tag"]} ${styles[
+              `${brandName === `Miss L'`
+                ? "bg_missl"
+                : brandName === "Kenaz"
+                  ? "bg_kenaz"
+                  : "bg_lazurde"
+              }`
+            ]
+              }`}
           >
             <Image
               width={"62px"}
@@ -163,8 +164,8 @@ const CartItem = ({
                 brandName === "Miss L'"
                   ? missLogo
                   : brandName === "Kenaz"
-                  ? kenazLogo
-                  : lazurdeLogo
+                    ? kenazLogo
+                    : lazurdeLogo
               }
               alt=""
             />
@@ -178,11 +179,10 @@ const CartItem = ({
               ? item?.["Product Title"] || "No Title"
               : "مجوهرات الماس تتصدر"}
           </span>
-          <span>{`$${
-            item?.totalPrice?.sale?.toLocaleString() ||
+          <span>{`$${item?.totalPrice?.sale?.toLocaleString() ||
             item?.totalPrice?.amount?.toLocaleString() ||
             "0.00"?.toLocaleString()
-          }`}</span>
+            }`}</span>
         </div>
         {/* {width > mobileScreenSize && (
           <div className={styles["item-category"]}>
@@ -233,20 +233,31 @@ const CartItem = ({
           </div>
         )}
         <div className={styles["remove-btn"]}>
-          <CrossSmall width={12} height={12} />
+          {addingItem || removingItem ? (
+            <Spinner width={12} height={12} stroke={2} />
+          ) : (
+            <CrossSmall width={12} height={12} />
+          )}
           <button
             onClick={() => {
               setRemovingItem(true);
               removeItem(item);
             }}
+            disabled={addingItem || removingItem}
           >
-            {appState?.lang === "en"
-              ? removingItem
-                ? "Removing..."
-                : "Remove"
-              : removingItem
-              ? "جارٍ الإزالة…"
-              : "إزالة"}
+            {addingItem ? (
+              appState?.lang === "en"
+                ? "Adding..."
+                : "جارٍ الإزالة…"
+            ) : (
+              appState?.lang === "en"
+                ? removingItem
+                  ? "Removing..."
+                  : "Remove"
+                : removingItem
+                  ? "جارٍ الإزالة…"
+                  : "إزالة"
+            )}
           </button>
         </div>
         {wishListItem && (
