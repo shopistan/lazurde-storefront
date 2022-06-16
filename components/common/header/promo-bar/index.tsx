@@ -27,8 +27,8 @@ const PromoBar: FC<PromoBarProps> = ({
   const { t } = useTranslation("common");
   const { appState, setSearchWrapperPosition } = useContext(AppContext);
   const [width] = useWindowSize();
-  // const dynamicText = width > desktopScreenSize ? linkText : mobileLinkText;
-  const [dynamicText, setDynamicText] = useState("");
+  const dynamicText = width > desktopScreenSize ? linkText : mobileLinkText;
+  //const [dynamicText, setDynamicText] = useState("");
 
   useEffect(() => {
     setIsClosed(
@@ -40,8 +40,8 @@ const PromoBar: FC<PromoBarProps> = ({
       promo: false,
       langSelector: false,
     });
-    let dT = width > desktopScreenSize ? linkText : mobileLinkText;
-    setDynamicText(dT);
+    // let dT = width > desktopScreenSize ? linkText : mobileLinkText;
+    // setDynamicText(dT);
   }, []);
 
   return (
@@ -53,11 +53,9 @@ const PromoBar: FC<PromoBarProps> = ({
     >
       <div className={styles["title"]} data-testid="test-title">
         {appState.lang === "en" ? `${title} ` : t("promoBarTitle")}
-        {/* {title} */}
         <Link href={link || "/"} locale={false}>
           <a className={styles["link-text"]}>
             <span data-testid="link-text">
-              {/* {dynamicText || <Skeleton />} */}
               {appState.lang === "en" ? dynamicText : t("promoBarLinkTitle")}
             </span>
           </a>
