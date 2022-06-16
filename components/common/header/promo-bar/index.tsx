@@ -7,6 +7,7 @@ import { AppContext } from "lib/context";
 import useWindowSize from "lib/utils/useWindowSize";
 import Button from "components/common/ui/button";
 import { desktopScreenSize } from "lib/utils/common";
+import Skeleton from "react-loading-skeleton";
 interface PromoBarProps {
   title: string;
   linkText: string;
@@ -27,6 +28,7 @@ const PromoBar: FC<PromoBarProps> = ({
   const { appState, setSearchWrapperPosition } = useContext(AppContext);
   const [width] = useWindowSize();
   const dynamicText = width > desktopScreenSize ? linkText : mobileLinkText;
+  //const [dynamicText, setDynamicText] = useState("");
 
   useEffect(() => {
     setIsClosed(
@@ -38,6 +40,8 @@ const PromoBar: FC<PromoBarProps> = ({
       promo: false,
       langSelector: false,
     });
+    // let dT = width > desktopScreenSize ? linkText : mobileLinkText;
+    // setDynamicText(dT);
   }, []);
 
   return (
