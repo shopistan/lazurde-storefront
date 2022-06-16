@@ -1,0 +1,19 @@
+.div-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-bottom-color: #000;
+  border-left-color: #000;
+  border-right-color: #000;
+  animation: spin 1s linear infinite;
+  -webkit-animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {transform: rotate(360deg)}
+}
+@-webkit-keyframes spin {
+  to {-webkit-transform: rotate(360deg)}
+}
