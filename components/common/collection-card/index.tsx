@@ -60,7 +60,7 @@ const CollectionCard: FC<CollectionCardProps> = ({
         className={`collection-swiper`}
       >
         <>
-          {(collectionCard &&
+          {collectionCard &&
             collectionCard.map((data, index) => {
               const {
                 collectionImage,
@@ -136,8 +136,7 @@ const CollectionCard: FC<CollectionCardProps> = ({
                   </div>
                 </SwiperSlide>
               );
-            })) ||
-            [1, 2, 3].map((s, i) => <Skeleton />)}
+            })}
         </>
       </Slider>
     </div>
