@@ -66,15 +66,14 @@ const PopupImageViewV2 = ({
                   ) : (
                     image?.url && (
                       <ImageMagnifier
-                      width={imageSize.width}
-                      height={imageSize.height}
-                      zoomNum={2}
-                      url={image?.url}
-                      imageIndex={index}
-                    />
+                        width={imageSize.width}
+                        height={imageSize.height}
+                        zoomNum={2}
+                        url={image?.url}
+                        imageIndex={index}
+                      />
                     )
                   )}
-
                 </div>
               </SwiperSlide>
             );
@@ -84,13 +83,17 @@ const PopupImageViewV2 = ({
         <div
           className={styles["div-close-button"]}
           onClick={() => {
-            closePopup && closePopup();
+            width >= desktopScreenSize && closePopup && closePopup();
           }}
         >
           {width >= desktopScreenSize ? (
             <Cross width={20}></Cross>
           ) : (
-            <CrossSmall></CrossSmall>
+            <CrossSmall
+              onClick={() => {
+                closePopup && closePopup();
+              }}
+            ></CrossSmall>
           )}
         </div>
       </div>

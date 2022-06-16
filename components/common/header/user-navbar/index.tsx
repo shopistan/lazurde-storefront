@@ -16,21 +16,26 @@ import { BrandSidebarProps, ErrorObject } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { desktopScreenSize } from "lib/utils/common";
-import { OKTA_CLIENT_ID, OKTA_DOMAIN, OKTA_REDIRECT_URI } from "general-config";
 import Axios from "axios";
 import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
+import Router from "next/router";
+import { loginUser } from "lib/identity";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
 }): JSX.Element => {
-  const { appState, saveAppState, allWishListProducts, setAllWishListProducts } =
-    useContext(AppContext);
+  const {
+    appState,
+    saveAppState,
+    allWishListProducts,
+    setAllWishListProducts,
+  } = useContext(AppContext);
   const { t } = useTranslation("common");
   const [isOpened, setIsOpened] = useState(false);
   const [width] = useWindowSize();
+  const GRANT_TYPE = "code";
 
   useEffect(() => {
-    
     const hasWishListData = allWishListProducts
     const initializeWislist = async () => {
       if(hasWishListData && hasWishListData.length > 1) return
@@ -60,22 +65,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   }, [isOpened]);
 
   const signInUser = async () => {
-    try {
-      const signInRes = await Axios.get(`${OKTA_DOMAIN}/authorize`, {
-        params: {
-          client_id: OKTA_CLIENT_ID,
-          responseType: "code",
-          scope: "openid",
-          redirect_uri: OKTA_REDIRECT_URI,
-          state: "state-8600b31f-52d1-4dca-987c-386e3d8967e9",
-          code_challenge_method: "S256",
-          code_challenge: "qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es",
-        },
-      });
-      console.log(signInRes);
-    } catch (error) {
-      console.log("Error signing in: ", (error as ErrorObject).message);
-    }
+    loginUser();
   };
 
   return (
@@ -162,7 +152,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
         </Link>
         {/* <Link href={"/"}>
           <a> */}
-        <div onClick={signInUser}>
+        <div onClick={signInUser} className="cursor-pointer">
           <User />
         </div>
         {/* </a>

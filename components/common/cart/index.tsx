@@ -322,11 +322,12 @@ const Cart = ({}: CartProps): JSX.Element => {
                     <span>{t("becomeMember")}</span>
                   )} */}
                 </div>
-                <div
-                  style={{ cursor: "pointer" }}
-                  onClick={() => showFreeShipping(false)}
-                >
-                  <CrossSmall width={12} height={12} />
+                <div style={{ cursor: "pointer" }}>
+                  <CrossSmall
+                    width={12}
+                    height={12}
+                    onClick={() => showFreeShipping(false)}
+                  />
                 </div>
               </div>
             )}
