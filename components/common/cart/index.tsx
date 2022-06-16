@@ -24,8 +24,8 @@ import Label from "components/common/ui/label";
 import { getInventoryAuth } from "lib/utils/inventory";
 import { ProductType } from "lib/types/product";
 
-interface CartProps {}
-const Cart = ({}: CartProps): JSX.Element => {
+interface CartProps { }
+const Cart = ({ }: CartProps): JSX.Element => {
   const [width] = useWindowSize();
   const { t } = useTranslation("common");
   const authToken =
@@ -64,7 +64,7 @@ const Cart = ({}: CartProps): JSX.Element => {
     // setDeletingWishList(false);
     setIsWishListLoading(true);
     // const wishListData = await getWishList(authToken);
-    
+
     const wishListData =
       wishList && wishList?.length > 0 ? wishList : allWishListProducts;
     if (wishListData && wishListData.length > 0) {
@@ -128,12 +128,19 @@ const Cart = ({}: CartProps): JSX.Element => {
       "98b0ed93-aaf1-4001-b540-b61796c4663d"
     );
     if (cartData?.status === 200) {
-      cartData?.data?.items?.map((product: ProductType, index: number) => {
+      const cartItems = cartData?.data
+      cartItems?.items?.map((product: ProductType, index: number) => {
         const modifiedProduct = destructureAttributes(product);
-        cartData.data.items[index] = modifiedProduct;
+        cartItems.items[index] = modifiedProduct;
       });
 
-      setCartData(cartData?.data);
+      cartItems?.items.sort((a: {Brand: string}, b: {Brand: string}) => {
+        if (b.Brand === 'Kenaz') return -1
+        if (a.Brand === 'Kenaz') return 1
+        return a.Brand.localeCompare(b.Brand)
+      })
+
+      setCartData(cartItems);
       setisLoadingCart(false);
     } else {
       setisLoadingCart(false);
@@ -183,6 +190,11 @@ const Cart = ({}: CartProps): JSX.Element => {
           const modifiedProduct = destructureAttributes(product);
           response.data.items[index] = modifiedProduct;
         });
+        response?.data?.items?.sort((a: {Brand: string}, b: {Brand: string}) => {
+          if (b.Brand === 'Kenaz') return -1
+          if (a.Brand === 'Kenaz') return 1
+          return a.Brand.localeCompare(b.Brand)
+        })
         setCartData(response?.data);
         setUpdatingCartItem(false);
       } else {
@@ -206,6 +218,12 @@ const Cart = ({}: CartProps): JSX.Element => {
           const modifiedProduct = destructureAttributes(product);
           response.data.items[index] = modifiedProduct;
         });
+
+        response?.data?.items?.sort((a: {Brand: string}, b: {Brand: string}) => {
+          if (b.Brand === 'Kenaz') return -1
+          if (a.Brand === 'Kenaz') return 1
+          return a.Brand.localeCompare(b.Brand)
+        })
         setCartData(response?.data);
         setUpdatingCartItem(false);
       } else {
@@ -223,7 +241,7 @@ const Cart = ({}: CartProps): JSX.Element => {
       const response = await deleteWishList(item?.itemId, authToken);
       if (response?.status === 200) {
         const wishListData = await updateWishListData();
-        
+
         setAllWishListProducts(wishListData);
         typeof window !== "undefined" &&
           window.sessionStorage.setItem(
@@ -279,7 +297,7 @@ const Cart = ({}: CartProps): JSX.Element => {
   };
 
   const renderWishListSection = () => {
-    
+
     return (
       <div
         className={styles["bag-wrapper"]}
