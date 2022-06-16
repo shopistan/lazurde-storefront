@@ -62,7 +62,7 @@ const Cart = ({ }: CartProps): JSX.Element => {
 
   async function getWishListData(wishList: [] = []) {
     // setDeletingWishList(false);
-    setIsWishListLoading(true);
+    // setIsWishListLoading(true);
     // const wishListData = await getWishList(authToken);
 
     const wishListData =
@@ -104,15 +104,22 @@ const Cart = ({ }: CartProps): JSX.Element => {
           wishListArray[index] = modifiedProduct;
         });
         setIsWishListLoading(false);
+      setDeletingWishList(false);
         setWishListData({
           status: "",
           cartId: cartData?.cartId || null,
           items: wishListArray,
           priceList: response?.data,
         });
-      } else setIsWishListLoading(false);
+      } else 
+      {
+        setIsWishListLoading(false);
+      setDeletingWishList(false);
+
+      }
     } else {
       setIsWishListLoading(false);
+      setDeletingWishList(false);
       setWishListData({
         status: "",
         items: [],
@@ -123,7 +130,6 @@ const Cart = ({ }: CartProps): JSX.Element => {
   }
 
   async function getCartData() {
-    setisLoadingCart(true);
     const cartData = await getCartByCartId(
       "98b0ed93-aaf1-4001-b540-b61796c4663d"
     );
@@ -157,6 +163,8 @@ const Cart = ({ }: CartProps): JSX.Element => {
 
   useEffect(() => {
     getCartData();
+    setisLoadingCart(true)
+    setIsWishListLoading(true)
   }, []);
 
   useEffect(() => {
@@ -249,7 +257,7 @@ const Cart = ({ }: CartProps): JSX.Element => {
             JSON.stringify(wishListData)
           );
       }
-      setDeletingWishList(false);
+      // setDeletingWishList(false);
     } catch (err) {
       console.log("Error!");
       setDeletingWishList(false);
