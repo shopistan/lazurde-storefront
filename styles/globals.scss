@@ -1,6 +1,27 @@
 @import "/styles/slider.scss";
 @import "/styles/alert.scss";
 
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto/Roboto-Regular.ttf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto/Roboto-Medium.ttf") format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto/Roboto-Bold.ttf") format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 html,
 body {
   display: flex;
