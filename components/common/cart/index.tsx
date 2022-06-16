@@ -64,6 +64,7 @@ const Cart = ({}: CartProps): JSX.Element => {
     // setDeletingWishList(false);
     setIsWishListLoading(true);
     // const wishListData = await getWishList(authToken);
+    
     const wishListData =
       wishList && wishList?.length > 0 ? wishList : allWishListProducts;
     if (wishListData && wishListData.length > 0) {
@@ -112,6 +113,12 @@ const Cart = ({}: CartProps): JSX.Element => {
       } else setIsWishListLoading(false);
     } else {
       setIsWishListLoading(false);
+      setWishListData({
+        status: "",
+        items: [],
+        cartId: "",
+        priceList: [],
+      });
     }
   }
 
@@ -216,7 +223,13 @@ const Cart = ({}: CartProps): JSX.Element => {
       const response = await deleteWishList(item?.itemId, authToken);
       if (response?.status === 200) {
         const wishListData = await updateWishListData();
-        getWishListData(wishListData);
+        
+        setAllWishListProducts(wishListData);
+        typeof window !== "undefined" &&
+          window.sessionStorage.setItem(
+            "wishListArray",
+            JSON.stringify(wishListData)
+          );
       }
       setDeletingWishList(false);
     } catch (err) {
@@ -266,6 +279,7 @@ const Cart = ({}: CartProps): JSX.Element => {
   };
 
   const renderWishListSection = () => {
+    
     return (
       <div
         className={styles["bag-wrapper"]}
@@ -281,7 +295,7 @@ const Cart = ({}: CartProps): JSX.Element => {
         ) : (
           <>
             {Object.keys(wishListData).length !== 0 ? (
-              wishListData?.items?.length ? (
+              wishListData?.items?.length > 0 ? (
                 wishListData?.items?.map((item, index) => {
                   return (
                     <>
