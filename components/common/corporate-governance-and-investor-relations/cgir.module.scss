@@ -159,6 +159,13 @@
       width: 650px;
     }
   }
+  p{
+    margin-top: 0px;
+    font-size: 14px;
+    @media (max-width: 1023px) {
+      font-size: 13px;
+    }
+  }
 }
 
 .back-button {
@@ -284,4 +291,7 @@ html[dir='rtl'] {
       }
     }
   }
+}
+.cgir_more-content-block__FJDOn p{
+  font-size: 13px;
 }
