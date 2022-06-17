@@ -563,7 +563,7 @@ export const reviewFilters = [
 
 export const accountInformationData = {
   title: "My Account",
-  titleImage: { url: "/person.png", altText: "" },
+  titleImage: { url: "/vector.png", altText: "" },
   barCode: { url: "/barcode.svg", altText: "" },
   firstName: "Hi",
   lastName: "San",
@@ -576,7 +576,7 @@ export const accountInformationData = {
         {
           text: "Account Overview",
           image: {
-            url: "/person.png",
+            url: "/vector.png",
             altText: "image-text",
           },
           width: "15.83px",
@@ -590,7 +590,7 @@ export const accountInformationData = {
         {
           text: "My Orders",
           image: {
-            url: "/order.png",
+            url: "/orders.png",
             altText: "image-text",
           },
           width: "13.75px",
@@ -610,7 +610,7 @@ export const accountInformationData = {
         {
           text: "My Reviews",
           image: {
-            url: "/reviews.png",
+            url: "/review.png",
             altText: "image-text",
           },
           width: "16.67px",
