@@ -222,8 +222,8 @@ const FilterBar: FC<FilterBarProps> = ({
 
   useEffect(() => {
     if (isOpened.opened) {
-      const currentFilter = currentFilterList.find((item) => item.filterName === isOpened.selected)
-      const currentFilterIndex = currentFilterList.findIndex((item) => item.filterName === isOpened.selected)
+      const currentFilter = currentFilterList.find((item) => item?.filterName === isOpened?.selected)
+      const currentFilterIndex = currentFilterList.findIndex((item) => item?.filterName === isOpened?.selected)
       setDropdownData({
         filterName: currentFilter?.filterName,
         filterIndex: currentFilterIndex,
@@ -249,6 +249,7 @@ const FilterBar: FC<FilterBarProps> = ({
           {Array.isArray(currentFilterList) &&
             currentFilterList.length > 0 &&
             currentFilterList.map((data, index) => {
+              if(!data) return
               const hasCategories = true;
               const selectedFilterCount = selectedFilters?.[index]
                 ? Object.keys(selectedFilters?.[index]?.selectedOptions).length
