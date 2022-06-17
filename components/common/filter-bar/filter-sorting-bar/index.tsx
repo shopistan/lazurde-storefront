@@ -260,7 +260,7 @@ const FilterBar: FC<FilterBarProps> = ({
               return (
                 <div
                   role={"links"}
-                  key={`${index}-${data?.filterOptions.length}`}
+                  key={`${index}-${data?.filterOptions?.length}`}
                   className={styles["links"]}
                   ref={
                     linkRefs && linkRefs?.current

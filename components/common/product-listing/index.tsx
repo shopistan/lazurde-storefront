@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import ProductCard from "components/common/product-card/ProductCard";
-import FilterBar from "./filter-sorting-bar";
 import useWindowSize from "lib/utils/useWindowSize";
-import FilterBarMobile from "./filter-bar-mobile";
 import styles from "./style.module.scss";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
@@ -15,6 +13,7 @@ import BreadCrumbs from "components/common/ui/bread-crumbs";
 import { ImageType } from "lib/types/common";
 import { desktopScreenSize } from "lib/utils/common";
 import Pagination from "../ui/pagination";
+import FilterBarMain from "../filter-bar";
 
 interface ProductCardProps {
   index?: number;
@@ -40,7 +39,9 @@ interface ProductCardProps {
 type SelectedFilterProps = {
   [key: string]: {
     name: string;
-    selectedOptions: { [key: string | number]: { selected: boolean; name: string } };
+    selectedOptions: {
+      [key: string | number]: { selected: boolean; name: string };
+    };
   };
 };
 type SortingFilterProps = {
@@ -262,7 +263,9 @@ const ProductListing = ({
         const name = filterItem?.filterName;
         const filterOptions: { optionName: string }[] = [];
         let selectedFilterIndex = -1;
-        let selectedFilterOptions: { [key: string | number]: { selected: boolean; name: string } } = {};
+        let selectedFilterOptions: {
+          [key: string | number]: { selected: boolean; name: string };
+        } = {};
 
         if (Object.keys(selectedFilters).length > 0) {
           Object.keys(selectedFilters).forEach((key) => {
@@ -373,23 +376,12 @@ const ProductListing = ({
           }}
         >
           <>
-            {width <= desktopScreenSize ? (
-              <FilterBarMobile
-                onApplyFilters={updateProductArray}
-                onSortingChange={updateProductArray}
-                onClear={updateProductArray}
-                filterList={filteredListData}
-                hasFilteredData={hasFilteredData}
-              ></FilterBarMobile>
-            ) : (
-              <FilterBar
-                onApplyFilters={updateProductArray}
-                onSortingChange={updateProductArray}
-                onClear={updateProductArray}
-                filterList={filteredListData}
-                hasFilteredData={hasFilteredData}
-              ></FilterBar>
-            )}
+            <FilterBarMain
+              updateProductArray={updateProductArray}
+              filterList={filteredListData}
+              hasFilteredData={hasFilteredData}
+            />
+
             <div className={styles["product-listing__cards"]}>
               {currentProductData && currentProductData?.length > 0 ? (
                 currentProductData?.map(
