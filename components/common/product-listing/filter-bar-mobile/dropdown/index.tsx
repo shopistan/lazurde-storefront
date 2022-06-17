@@ -19,7 +19,7 @@ interface CategoryDropDownProps {
   };
   setSelectedFilters: Function;
   setTotalSelectedFilterCount: Function;
-  onApplyFilter: Function;
+  onApplyFilter?: Function;
 }
 
 const DropDown = ({

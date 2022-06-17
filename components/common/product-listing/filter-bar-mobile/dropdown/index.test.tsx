@@ -27,6 +27,7 @@ const filterListData =
 const isOpenedFunc = jest.fn();
 const selectedFunc = jest.fn();
 const countFunc = jest.fn();
+const onApplyFilter = jest.fn();
 
 const renderComponent = (list: any = filterListData) => {
   render(
@@ -46,6 +47,7 @@ const renderComponent = (list: any = filterListData) => {
         }}
         setSelectedFilters={selectedFunc}
         setTotalSelectedFilterCount={countFunc}
+        onApplyFilter={onApplyFilter}
       />
     </ContextProvider>
   );
@@ -69,6 +71,7 @@ const renderComponentAR = (list: any = filterListData) => {
         }}
         setSelectedFilters={selectedFunc}
         setTotalSelectedFilterCount={countFunc}
+        onApplyFilter={onApplyFilter}
       />
     </AppContext.Provider>
   );
