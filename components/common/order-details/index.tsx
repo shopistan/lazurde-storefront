@@ -46,7 +46,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
   return orderDetails != "Order Details" ? (
     <div className={styles["order-container"]}>
       <div className={styles["order-main"]}>
-        <Image src={"/order.png"} width={13.75} height={15.28} />
+        <Image src={"/orders.png"} width={13.75} height={15.28} />
         <Label className={styles["order-heading"]}>
           {appState.lang == "en" ? "My Orders" : t("My Orders")}
         </Label>
