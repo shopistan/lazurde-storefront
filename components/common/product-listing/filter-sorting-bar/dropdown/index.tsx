@@ -25,6 +25,8 @@ interface DropDownProps {
   setSelectedFilters: Function;
   onApplyFilters: Function;
   hasFilteredData: Boolean;
+  listLoading?: Boolean;
+  setListLoading?: Function;
 }
 
 const DropDown = ({
@@ -34,6 +36,8 @@ const DropDown = ({
   setSelectedFilters = () => { },
   onApplyFilters = () => { },
   hasFilteredData = false,
+  listLoading = false,
+  setListLoading = () => {},
 }: DropDownProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
@@ -93,6 +97,8 @@ const DropDown = ({
                 key={index}
                 className={styles["title"]}
                 onClick={() => {
+                  if(listLoading) return
+                  setListLoading(true)
                   if (
                     selectedFilters?.[filterIndex]?.selectedOptions?.[index]
                       ?.selected
