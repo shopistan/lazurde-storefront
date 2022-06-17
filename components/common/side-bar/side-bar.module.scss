@@ -55,6 +55,9 @@
 .account-banner {
   position: absolute;
   top: 67px;
+  @media (min-width :$breakPoint-tablet) {
+    top: 200px;
+  }
 
   p {
     margin-top: 8px !important;
