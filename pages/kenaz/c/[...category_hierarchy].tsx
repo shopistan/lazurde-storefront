@@ -23,6 +23,7 @@ interface ProductListingPageProps extends PageProps {
     nbPages: number;
     hitsPerPage: number;
   };
+  filterProps: [];
   categoryHierarchy: string[];
 }
 
@@ -32,6 +33,7 @@ const KenazProductListingPage: FC<ProductListingPageProps> = ({
   brandSidebarProps,
   pageComponents = [],
   algoliaSearchResults,
+  filterProps,
 }) => {
   return (
     <>
@@ -50,6 +52,7 @@ const KenazProductListingPage: FC<ProductListingPageProps> = ({
                 <Component
                   {...component.params}
                   productDataArray={algoliaSearchResults.hits}
+                  filterList={filterProps}
                   key={index}
                 />
               );
@@ -111,6 +114,13 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         (item: XMComponent) => item.id === "BrandSideBar"
       ) || {}
     ).params || {};
+    const filterProps =
+    (
+      globalComponents.find(
+        (item: XMComponent) =>
+          item.id === "FilterBar"
+      ) || {}
+    ).params || {};
 
   const categoryName =
     (
@@ -148,6 +158,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         nbPages,
         hitsPerPage,
       },
+      filterProps,
     },
     revalidate: 5,
   };
