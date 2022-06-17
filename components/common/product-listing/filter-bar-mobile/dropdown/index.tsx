@@ -19,6 +19,7 @@ interface CategoryDropDownProps {
   };
   setSelectedFilters: Function;
   setTotalSelectedFilterCount: Function;
+  onApplyFilter?: Function;
 }
 
 const DropDown = ({
@@ -27,6 +28,7 @@ const DropDown = ({
   selectedFilters = {},
   setSelectedFilters = () => {},
   setTotalSelectedFilterCount = () => {},
+  onApplyFilter= () => {},
 }: CategoryDropDownProps): JSX.Element => {
   const filterName = categoryData?.filterName || "";
   const filterIndex = categoryData?.filterIndex || 0;
@@ -50,6 +52,8 @@ const DropDown = ({
     } else {
       setTotalSelectedFilterCount(0);
     }
+    onApplyFilter && onApplyFilter(selectedFilters);
+
   }, [selectedFilters]);
 
   return (
