@@ -43,6 +43,21 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
     setOrderDetails("Order Details");
   };
 
+  const orderImages = [
+    {
+      url: "/blue-ring.png",
+      altText: "alt text",
+    },
+    {
+      url: "/blue-ring.png",
+      altText: "alt text",
+    },
+    {
+      url: "/blue-ring.png",
+      altText: "alt text",
+    },
+  ];
+
   return orderDetails != "Order Details" ? (
     <div className={styles["order-container"]}>
       <div className={styles["order-main"]}>
@@ -70,13 +85,13 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
         orderData?.orders?.map((order, index) => {
           console.log("order", order);
           return (
-            <div className={styles["order-section"]}>
+            <div key={index} className={styles["order-section"]}>
               {orderData?.orders[index]?.tracking &&
                 orderData?.orders[index]?.tracking?.length > 0 &&
                 orderData?.orders[index]?.tracking?.map((track, i) => {
                   const { number } = track;
                   return (
-                    <div className={styles["order-details"]}>
+                    <div key={i} className={styles["order-details"]}>
                       <div className={styles["order-delivery"]}>
                         <div>
                           <Label className={styles["order-sent"]}>
@@ -95,21 +110,29 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                           </Label>
                         </div>
                         <div>
-                          <Button onClick={() => {}}>{`${
-                            appState?.lang == "en"
-                              ? "Track Parcel"
-                              : t("Track Parcel")
-                          } ${i + 1 || number}`}</Button>
+                          <Button buttonStyle="white" onClick={() => {}}>
+                            {`${
+                              appState?.lang == "en"
+                                ? "Track Parcel"
+                                : t("Track Parcel")
+                            } ${i + 1 || number}`}
+                          </Button>
                         </div>
                       </div>
                       <div className={styles["order-image"]}>
-                        {
-                          <Image
-                            src={"/small-ring.png"}
-                            width={100}
-                            height={100}
-                          />
-                        }
+                        {orderImages.map((image, index) => {
+                          return (
+                            <div key={index}>
+                              <Image
+                                src={image.url || "/"}
+                                alt={image.altText || ""}
+                                layout="fixed"
+                                width={100}
+                                height={100}
+                              />
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   );
@@ -126,7 +149,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                     </p>
                   </div>
                   <div className={styles["order-date"]}>
-                    <Image src={"/calendar.png"} width={18} height={18} />
+                    <Image src={"/ordernum.png"} width={18} height={18} />
                     <p className={styles["order-number-text"]}>
                       {appState?.lang == "en"
                         ? "Order Number"
@@ -134,8 +157,8 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                       : <span> {orderData?.orders[index]?.orderId}</span>
                     </p>
                   </div>
-                  {/* <div className={styles["order-date"]}>
-                    <Image src={"/calendar.png"} width={18} height={18} />
+                  <div className={styles["order-date"]}>
+                    <Image src={"/warrantybook.png"} width={18} height={18} />
                     <Link href={"/"}>
                       <a className={styles["order-link"]}>
                         {appState?.lang == "en"
@@ -143,7 +166,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                           : t("View Digital Receipt & Warranty")}
                       </a>
                     </Link>
-                  </div> */}
+                  </div>
                 </div>
                 <Button
                   className={styles["view-button"]}
