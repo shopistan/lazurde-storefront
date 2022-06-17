@@ -15,7 +15,7 @@ import BreadCrumbs from "components/common/ui/bread-crumbs";
 import { ImageType } from "lib/types/common";
 import { desktopScreenSize } from "lib/utils/common";
 import Pagination from "../ui/pagination";
-import { array } from "yup";
+
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -98,30 +98,6 @@ const ProductListing = ({
   useEffect(() => {
     createFilterBarList(productDataArray);
     setFilteredProductData("");
-    // console.log(
-    //   "something",
-    //   fetchCategoryProducts({
-    //     categoryName: "",
-    //   })
-    // );
-    // const str = `Lazurde,Miss'l`
-    // console.log("something", str.toLowerCase().includes(`miss'l`), productDataArray)
-    // const arr = productDataArray.filter((item) => {
-    //   if(appState.brand === `L'azurde`) {
-    //     return item
-    //   }
-    //   if(appState.brand === `Miss L'`) {
-    //     return item?.Brand?.toLowerCase().includes(`miss'l`)
-    //   }
-    //   if(appState.brand === "Kenaz") {
-    //     return item?.Brand?.toLowerCase().includes("kenaz")
-    //   }
-    //   return false
-    // })
-    // console.log("something",arr)
-    // console.log(performFilteredSearch({ filters: [`Gold`] }));
-    // console.log("categoryName",categoryName)
-    // console.log(performMultiFilteredSearch());
 
     if (productDataArray && productDataArray?.length > 0) {
       const filteredArray = productDataArray?.filter(
@@ -153,6 +129,13 @@ const ProductListing = ({
       initialProductData?.length > 0 &&
       createFilterBarList(initialProductData);
   }, [initialProductData]);
+
+  useEffect(() => {
+    selectedFilters &&
+      filteredProductData &&
+      filteredProductData.length > 0 &&
+      createFilterBarList(filteredProductData);
+  }, [filteredProductData]);
 
   const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
     if (Object.keys(selectedFilters)?.length < 1) {

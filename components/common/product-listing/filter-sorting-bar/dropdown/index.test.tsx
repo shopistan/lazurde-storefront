@@ -88,12 +88,12 @@ describe("filter bar dropdown tests", () => {
   test("click event tests", () => {
     renderComponent();
     const button = screen.getByText(/Clear All Filters/i);
-    const applybutton = screen.getByText(/Apply/i);
-    expect(applybutton).toBeInTheDocument();
+    // const applybutton = screen.getByText(/Apply/i);
+    // expect(applybutton).toBeInTheDocument();
     expect(button).toBeInTheDocument();
-    fireEvent.click(applybutton);
+    // fireEvent.click(applybutton);
     fireEvent.click(button);
-    expect(applyFunc).toBeCalled();
+    // expect(applyFunc).toBeCalled();
     expect(selectedFunc).toBeCalled();
 
     const dropDownDiv = screen.getByTestId("dropdown-div");
