@@ -145,6 +145,8 @@ html[dir="rtl"] {
   }
 
   &_cross-btn {
+    display: flex;
+    justify-content: flex-end;
     cursor: pointer;
     text-align: end;
   }

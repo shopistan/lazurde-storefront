@@ -31,4 +31,6 @@ export type ProductType = {
   attributes: ProductAttributeType[];
   variants: any[];
   dependants: any[];
+  priceList?: any;
+  totalPrice?: any;
 };
