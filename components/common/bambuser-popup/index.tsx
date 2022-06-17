@@ -27,7 +27,7 @@ const BambuserPopup = ({
         )}
       </div>
 
-      <Script id={scriptId}>
+      <Script id={scriptId} strategy='lazyOnload'>
         {`   (function() {
             if (!window.initBambuserLiveShopping){
               window.initBambuserLiveShopping = function(item) { window.initBambuserLiveShopping.queue.push(item) }; window.initBambuserLiveShopping.queue = [];

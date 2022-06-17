@@ -17,7 +17,7 @@ const BambuserEndedSessions = ({
         data-channel-locale=""
       ></div>
 
-      <Script id={"123"}>
+      <Script id={"123"} strategy='lazyOnload'>
         {`  (function(d, t, i) {
             if (d.getElementById(i)) return;
             var s, ss = d.getElementsByTagName(t)[0];

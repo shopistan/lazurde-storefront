@@ -9,9 +9,11 @@
     "descriptors": "node ./lib/xm/combine-descriptors.js",
     "prepare": "husky install",
     "test": "jest",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^12.1.6",
     "@teamfabric/xpm": "^1.5.0",
     "algoliasearch": "^4.12.1",
     "axios": "^0.25.0",
@@ -22,6 +24,7 @@
     "qs": "^6.10.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-loading-skeleton": "^3.1.0",
     "swiper": "^8.1.0",
     "swr": "^1.2.2",
     "yup": "^0.32.11"
