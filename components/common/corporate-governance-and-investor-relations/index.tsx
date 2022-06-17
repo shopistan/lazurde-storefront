@@ -346,7 +346,9 @@ const CGIR: FC<CGIRProps> = ({
                     return (
                       <div key={index}>
                         {heading && <span>{heading}</span>}
-                        {text && <p>{text}</p>}
+                        {/* {text && <p>{text}</p>} */}
+                       <p key={Math.random()}
+                        dangerouslySetInnerHTML={{__html: text}}></p>
                       </div>
                     );
                   })
