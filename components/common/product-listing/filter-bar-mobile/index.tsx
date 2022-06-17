@@ -95,6 +95,8 @@ interface FilterAccordionProps {
   onClear: Function;
   sortingSelected: string;
   hasFilteredData: Boolean;
+  listLoading: Boolean;
+  setListLoading: Function;
 }
 
 const FilterBarMobile: FC<FilterBarMobileProps> = ({
@@ -121,11 +123,8 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [sortingSelected, setSortingSelected] = useState("Our Recommendation");
   const [modalVisible, setModalVisible] = useState(false);
-  // const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>(
-  //   {}
-  // );
-  // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const [optionData, setOptionData] = useState<any>([]);
+  const [listLoading, setListLoading] = useState(false);
   const [currentFilterList, setCurrentFilterList] = useState<
     string | FilterListProps[]
   >(filterList);
@@ -154,6 +153,7 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
 
   useEffect(() => {
     setCurrentFilterList(filterList);
+    setListLoading(false)
   }, [filterList]);
 
   return (
@@ -187,6 +187,8 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
                 sortingSelected={sortingSelected}
                 hasFilteredData={hasFilteredData}
                 setModalVisible={setModalVisible}
+                listLoading={listLoading}
+                setListLoading={setListLoading}
               ></FilterAccordion>
             }
           ></BorderlessSelect>
@@ -235,6 +237,8 @@ const FilterAccordion = ({
   sortingSelected,
   hasFilteredData,
   setModalVisible,
+  listLoading,
+  setListLoading,
 }: FilterAccordionProps): JSX.Element => {
   const { appState } = useContext(AppContext);
 
@@ -276,6 +280,8 @@ const FilterAccordion = ({
                 setSelectedFilters={setSelectedFilters}
                 setTotalSelectedFilterCount={setTotalSelectedFilterCount}
                 onApplyFilter={onApplyButtonClick}
+                listLoading={listLoading}
+                setListLoading={setListLoading}
               ></DropDown>
             </Accordion>
           );
