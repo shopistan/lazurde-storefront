@@ -87,6 +87,8 @@
 }
 
 .close-btn {
+  display: flex;
+  justify-content: flex-end;
   margin-bottom: 5.03px;
   cursor: pointer;
   text-align: end;
