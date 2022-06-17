@@ -15,7 +15,7 @@ import BreadCrumbs from "components/common/ui/bread-crumbs";
 import { ImageType } from "lib/types/common";
 import { desktopScreenSize } from "lib/utils/common";
 import Pagination from "../ui/pagination";
-import { array } from "yup";
+
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -40,7 +40,7 @@ interface ProductCardProps {
 type SelectedFilterProps = {
   [key: string]: {
     name: string;
-    selectedOptions: { [key: string]: { selected: boolean; name: string } };
+    selectedOptions: { [key: string | number]: { selected: boolean; name: string } };
   };
 };
 type SortingFilterProps = {
@@ -98,30 +98,6 @@ const ProductListing = ({
   useEffect(() => {
     createFilterBarList(productDataArray);
     setFilteredProductData("");
-    // console.log(
-    //   "something",
-    //   fetchCategoryProducts({
-    //     categoryName: "",
-    //   })
-    // );
-    // const str = `Lazurde,Miss'l`
-    // console.log("something", str.toLowerCase().includes(`miss'l`), productDataArray)
-    // const arr = productDataArray.filter((item) => {
-    //   if(appState.brand === `L'azurde`) {
-    //     return item
-    //   }
-    //   if(appState.brand === `Miss L'`) {
-    //     return item?.Brand?.toLowerCase().includes(`miss'l`)
-    //   }
-    //   if(appState.brand === "Kenaz") {
-    //     return item?.Brand?.toLowerCase().includes("kenaz")
-    //   }
-    //   return false
-    // })
-    // console.log("something",arr)
-    // console.log(performFilteredSearch({ filters: [`Gold`] }));
-    // console.log("categoryName",categoryName)
-    // console.log(performMultiFilteredSearch());
 
     if (productDataArray && productDataArray?.length > 0) {
       const filteredArray = productDataArray?.filter(
@@ -153,6 +129,13 @@ const ProductListing = ({
       initialProductData?.length > 0 &&
       createFilterBarList(initialProductData);
   }, [initialProductData]);
+
+  useEffect(() => {
+    selectedFilters &&
+      filteredProductData &&
+      filteredProductData.length > 0 &&
+      createFilterBarList(filteredProductData);
+  }, [filteredProductData]);
 
   const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
     if (Object.keys(selectedFilters)?.length < 1) {
@@ -213,22 +196,21 @@ const ProductListing = ({
           isLazurde: string;
           isMissL: string;
           isKenaz: string;
+          isVariant: boolean;
         }) => {
-          if (appState.brand === `L'azurde`) {
-            return item;
-          }
-          if (appState.brand === `Miss L'`) {
-            return item?.isMissL;
-          }
-          if (appState.brand === "Kenaz") {
-            return item?.isKenaz;
-          }
+          if (item.isVariant === true) return false;
+
+          if (appState.brand === `L'azurde`) return item;
+
+          if (appState.brand === `Miss L'`) return item?.isMissL;
+
+          if (appState.brand === "Kenaz") return item?.isKenaz;
+
           return false;
         }
       );
     }
-    const nonVariantArray = filteredArray.filter((item: any) => item.isVariant === false)
-    filteredArray = nonVariantArray
+
     return filteredArray;
   };
 
@@ -272,17 +254,30 @@ const ProductListing = ({
       filterName: string;
       filterOptions: { optionName: string }[];
     }[] = [];
+
     filterList &&
       Array.isArray(filterList) &&
       filterList?.length > 0 &&
       filterList?.map((filterItem: { filterName: string }) => {
         const name = filterItem?.filterName;
         const filterOptions: { optionName: string }[] = [];
+        let selectedFilterIndex = -1;
+        let selectedFilterOptions: { [key: string | number]: { selected: boolean; name: string } } = {};
+
+        if (Object.keys(selectedFilters).length > 0) {
+          Object.keys(selectedFilters).forEach((key) => {
+            if (selectedFilters[key]?.name === name) {
+              selectedFilterIndex = Number(key);
+              selectedFilterOptions = selectedFilters[key].selectedOptions;
+            }
+          });
+        }
 
         dataArray?.map((itemData: { [key: string]: string }) => {
           if (itemData?.hasOwnProperty(name)) {
             let itemToAdd = itemData?.[name];
             let nameSplit: string[] = [];
+            let selectedOptionIndex = -1;
             if (name === "Category") nameSplit = itemData?.[name].split(">");
 
             const nameExists = filterOptions?.find(
@@ -293,15 +288,38 @@ const ProductListing = ({
                 return option?.optionName === itemToAdd;
               }
             );
-            if (nameExists === undefined && name === "Category") {
+            if (nameExists !== undefined) return;
+
+            if (name === "Category")
               itemToAdd = nameSplit[nameSplit.length - 1];
+
+            if (!itemToAdd) return;
+
+            if (Object.keys(selectedFilterOptions).length > 0) {
+              Object.keys(selectedFilterOptions).forEach((key) => {
+                if (
+                  selectedFilterOptions[key]?.selected === true &&
+                  selectedFilterOptions[key]?.name === itemToAdd
+                ) {
+                  selectedOptionIndex = Number(key);
+                }
+              });
             }
-            nameExists === undefined &&
-              itemToAdd &&
+            if (selectedOptionIndex > -1) {
+              filterOptions[selectedOptionIndex] = { optionName: itemToAdd };
+            } else {
               filterOptions.push({ optionName: itemToAdd });
+            }
           }
         });
-        if (filterOptions.length > 0) {
+        if (filterOptions.length < 1) return;
+
+        if (selectedFilterIndex > -1) {
+          newFilterList[selectedFilterIndex] = {
+            filterName: name,
+            filterOptions: filterOptions,
+          };
+        } else {
           newFilterList.push({
             filterName: name,
             filterOptions: filterOptions,

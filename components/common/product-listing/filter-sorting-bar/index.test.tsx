@@ -72,14 +72,14 @@ describe("filter sortin bar tests", () => {
   test("button click tests", () => {
     renderComponent();
     const button = screen.getAllByText(/Clear All Filters/i);
-    const applybutton = screen.getByText(/Apply/i);
-    expect(applybutton).toBeInTheDocument();
+    // const applybutton = screen.getByText(/Apply/i);
+    // expect(applybutton).toBeInTheDocument();
     expect(button[0]).toBeInTheDocument();
     expect(button[1]).toBeInTheDocument();
-    fireEvent.click(applybutton);
+    // fireEvent.click(applybutton);
     fireEvent.click(button[0]);
     fireEvent.click(button[1]);
-    expect(applyFunc).toBeCalled();
+    // expect(applyFunc).toBeCalled();
   });
 
   test("render arabic version", async () => {
