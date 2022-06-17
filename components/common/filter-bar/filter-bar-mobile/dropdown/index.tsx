@@ -78,7 +78,7 @@ const DropDown = ({
       <div className={styles["div-titles"]}>
         {categoryData &&
           Object.keys(categoryData).length > 0 &&
-          categoryData?.dropdownData.map((data, index) => {
+          categoryData?.dropdownData?.map((data, index) => {
             const { optionName } = data;
             return (
               <div
