@@ -23,7 +23,7 @@ interface ProductListingPageProps extends PageProps {
     nbPages: number;
     hitsPerPage: number;
   };
-  filterProps: [];
+  filterProps: {filterList: []};
   categoryHierarchy: string[];
 }
 
@@ -52,7 +52,7 @@ const KenazProductListingPage: FC<ProductListingPageProps> = ({
                 <Component
                   {...component.params}
                   productDataArray={algoliaSearchResults.hits}
-                  filterList={filterProps}
+                  filterList={filterProps?.filterList}
                   key={index}
                 />
               );
