@@ -19,6 +19,9 @@ interface CategoryDropDownProps {
   };
   setSelectedFilters: Function;
   setTotalSelectedFilterCount: Function;
+  onApplyFilter?: Function;
+  listLoading?: Boolean;
+  setListLoading?: Function;
 }
 
 const DropDown = ({
@@ -27,6 +30,9 @@ const DropDown = ({
   selectedFilters = {},
   setSelectedFilters = () => {},
   setTotalSelectedFilterCount = () => {},
+  onApplyFilter= () => {},
+  listLoading = false,
+  setListLoading = () => {},
 }: CategoryDropDownProps): JSX.Element => {
   const filterName = categoryData?.filterName || "";
   const filterIndex = categoryData?.filterIndex || 0;
@@ -50,6 +56,8 @@ const DropDown = ({
     } else {
       setTotalSelectedFilterCount(0);
     }
+    onApplyFilter && onApplyFilter(selectedFilters);
+
   }, [selectedFilters]);
 
   return (
@@ -70,13 +78,15 @@ const DropDown = ({
       <div className={styles["div-titles"]}>
         {categoryData &&
           Object.keys(categoryData).length > 0 &&
-          categoryData?.dropdownData.map((data, index) => {
+          categoryData?.dropdownData?.map((data, index) => {
             const { optionName } = data;
             return (
               <div
                 key={index}
                 className={styles["title"]}
                 onClick={() => {
+                  if(listLoading) return
+                  setListLoading && setListLoading(true)
                   if (
                     selectedFilters?.[filterIndex]?.selectedOptions?.[index]
                       ?.selected

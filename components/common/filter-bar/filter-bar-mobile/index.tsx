@@ -8,33 +8,6 @@ import SortingModal from "./sorting-modal";
 import { AppContext } from "lib/context";
 import DropDown from "./dropdown";
 
-const optionsData = [
-  {
-    label: "Our Recommendation",
-    value: "Our Recommendation",
-  },
-  {
-    label: "Most Viewed",
-    value: "most viewed",
-  },
-  {
-    label: "Best Sellers Online",
-    value: "Best Sellers Online",
-  },
-  {
-    label: "Best Sellers Store",
-    value: "Best Sellers Store",
-  },
-  {
-    label: "Price - Low to High",
-    value: "Price - Low to High",
-  },
-  {
-    label: "Price - High to Low",
-    value: "Price - High to Low",
-  },
-];
-
 const filterListData = [
   {
     filterName: "Brand",
@@ -118,9 +91,12 @@ interface FilterAccordionProps {
   setTotalSelectedFilterCount: Function;
   totalSelectedFilterCount: number;
   onApplyButtonClick: Function;
+  setModalVisible: Function;
   onClear: Function;
   sortingSelected: string;
   hasFilteredData: Boolean;
+  listLoading: Boolean;
+  setListLoading: Function;
 }
 
 const FilterBarMobile: FC<FilterBarMobileProps> = ({
@@ -146,11 +122,9 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
   } = useContext(AppContext);
   const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
   const [sortingSelected, setSortingSelected] = useState("Our Recommendation");
-  // const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>(
-  //   {}
-  // );
-  // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
   const [optionData, setOptionData] = useState<any>([]);
+  const [listLoading, setListLoading] = useState(false);
   const [currentFilterList, setCurrentFilterList] = useState<
     string | FilterListProps[]
   >(filterList);
@@ -179,6 +153,7 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
 
   useEffect(() => {
     setCurrentFilterList(filterList);
+    setListLoading(false)
   }, [filterList]);
 
   return (
@@ -192,8 +167,12 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
               <FilterCounter
                 appState={appState}
                 count={totalSelectedFilterCount}
-              />
-            }
+                />
+              }
+            visible={modalVisible}
+            onOpen={(state: boolean) => {
+              setModalVisible(state)
+            }}
             showInModal={true}
             modalChildren={
               <FilterAccordion
@@ -207,6 +186,9 @@ const FilterBarMobile: FC<FilterBarMobileProps> = ({
                 onClear={onClear}
                 sortingSelected={sortingSelected}
                 hasFilteredData={hasFilteredData}
+                setModalVisible={setModalVisible}
+                listLoading={listLoading}
+                setListLoading={setListLoading}
               ></FilterAccordion>
             }
           ></BorderlessSelect>
@@ -254,6 +236,9 @@ const FilterAccordion = ({
   onClear,
   sortingSelected,
   hasFilteredData,
+  setModalVisible,
+  listLoading,
+  setListLoading,
 }: FilterAccordionProps): JSX.Element => {
   const { appState } = useContext(AppContext);
 
@@ -294,6 +279,9 @@ const FilterAccordion = ({
                 selectedFilters={selectedFilters}
                 setSelectedFilters={setSelectedFilters}
                 setTotalSelectedFilterCount={setTotalSelectedFilterCount}
+                onApplyFilter={onApplyButtonClick}
+                listLoading={listLoading}
+                setListLoading={setListLoading}
               ></DropDown>
             </Accordion>
           );
@@ -319,7 +307,8 @@ const FilterAccordion = ({
           buttonStyle={"black"}
           buttonSize={"sm"}
           onClick={() => {
-            onApplyButtonClick(selectedFilters);
+            // onApplyButtonClick(selectedFilters);
+            setModalVisible(false);
           }}
         />
       </div>

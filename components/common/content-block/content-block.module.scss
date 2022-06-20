@@ -22,8 +22,13 @@
   line-height: 29px;
   letter-spacing: 0em;
   text-align: start;
+<<<<<<< HEAD
   margin-top: 10px;
   margin-bottom: 24px;
+=======
+  margin-top: 9.33px;
+  margin-bottom: 8px;
+>>>>>>> 95caf4c026848749948e2b135fce71a8d0573174
 
   @media (min-width: 1023px) {
     font-size: 24px;
@@ -31,15 +36,27 @@
     line-height: 29px;
     letter-spacing: 0em;
     text-align: start;
+<<<<<<< HEAD
     margin-top: 14px;
     margin-bottom: 24px;
+=======
+    margin-top: 9.33px;
+    margin-bottom: 8px;
+>>>>>>> 95caf4c026848749948e2b135fce71a8d0573174
   }
 }
 
 .image {
   width: 20px;
   height: 20px;
+  span{
+    img{
+      width: 20px;
+      height: 20px;
+    }
+  }
 }
+
 
 .content-container {
   background-color: white;
