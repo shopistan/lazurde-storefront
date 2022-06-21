@@ -57,7 +57,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
       altText: "alt text",
     },
   ];
-
+  
   return orderDetails != "Order Details" ? (
     <div className={styles["order-container"]}>
       <div className={styles["order-main"]}>
@@ -143,8 +143,8 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                     <Image
                       alt="icon"
                       src={"/calendar.png"}
-                      width={18}
-                      height={18}
+                      width={17}
+                      height={17}
                     />
                     <p className={styles["order-date-text"]}>
                       {appState?.lang == "en" ? "Order Date" : t("Order Date")}:{" "}

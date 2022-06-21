@@ -105,9 +105,9 @@ const SideBar: FC<SideBarProps> = ({
                         ? `Hi ${userName}`
                         : t("firstname")}
                     </span>
-                    {/* <span>
+                    <span>
                       {appState?.lang == "en" ? lastName : t("lastname")}
-                    </span> */}
+                    </span>
                   </>
                 </Label>
               </div>
