@@ -131,7 +131,7 @@
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
-        line-height: 120%;
+        line-height: 215%;
         /* identical to box height, or 17px */
 
         text-align: center;
@@ -139,7 +139,13 @@
         /* Dark/100 */
 
         color: #000000;
+        @media (max-width: $breakPoint-mobile) {
+          font-size: 13px;
+        }
       }
+    }
+    @media (max-width: $breakPoint-mobile) {
+      padding-bottom: 100px;
     }
   }
   .back-block {
