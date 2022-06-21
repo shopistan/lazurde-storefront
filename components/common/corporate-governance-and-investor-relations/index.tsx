@@ -142,8 +142,8 @@ const CGIR: FC<CGIRProps> = ({
                       <Image
                         src={icon?.url}
                         alt={icon?.altText}
-                        width={width || 40}
-                        height={height || 40}
+                        width={width || 20}
+                        height={height || 20}
                       />
                     </div>
                   )}
@@ -154,6 +154,16 @@ const CGIR: FC<CGIRProps> = ({
                 </div>
               );
             })}
+          <div className={styles["back-block"]}>
+            <button className={styles["button"]}>
+              <Image src={"/question.png"} width={20} height={20} alt="" />
+              <p>
+                {appState.lang == "en"
+                  ? "Have a question?"
+                  : t("customerButton")}
+              </p>
+            </button>
+          </div>
         </div>
         <div
           className={styles["cgir-right-container"]}
@@ -347,8 +357,10 @@ const CGIR: FC<CGIRProps> = ({
                       <div key={index}>
                         {heading && <span>{heading}</span>}
                         {/* {text && <p>{text}</p>} */}
-                       <p key={Math.random()}
-                        dangerouslySetInnerHTML={{__html: text}}></p>
+                        <p
+                          key={Math.random()}
+                          dangerouslySetInnerHTML={{ __html: text }}
+                        ></p>
                       </div>
                     );
                   })
@@ -381,15 +393,17 @@ const CGIR: FC<CGIRProps> = ({
                 ) : null}
               </div>
             )}
+            <div className={styles["back-block"]}>
+              <button className={styles["button"]}>
+                <Image src={"/question.png"} width={20} height={20} alt="" />
+                <p>
+                  {appState.lang == "en"
+                    ? "Have a question?"
+                    : t("customerButton")}
+                </p>
+              </button>
+            </div>
           </div>
-        </div>
-        <div className={styles["back-block"]}>
-          <button className={styles["button"]}>
-            <Image src={"/question.png"} width={20} height={20} alt="" />
-            <p>
-              {appState.lang == "en" ? "Have a question?" : t("customerButton")}
-            </p>
-          </button>
         </div>
       </div>
     </div>

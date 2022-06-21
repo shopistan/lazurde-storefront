@@ -91,7 +91,12 @@ const SideBar: FC<SideBarProps> = ({
             {width >= desktopScreenSize && (
               <div className={styles["account-profile"]}>
                 {barCode?.url && (
-                  <Image src={barCode?.url || "/"} width={100} height={100} />
+                  <Image
+                    alt="icon"
+                    src={barCode?.url || "/"}
+                    width={100}
+                    height={100}
+                  />
                 )}
                 <Label>
                   <>
@@ -100,9 +105,9 @@ const SideBar: FC<SideBarProps> = ({
                         ? `Hi ${userName}`
                         : t("firstname")}
                     </span>
-                    {/* <span>
+                    <span>
                       {appState?.lang == "en" ? lastName : t("lastname")}
-                    </span> */}
+                    </span>
                   </>
                 </Label>
               </div>
@@ -111,6 +116,7 @@ const SideBar: FC<SideBarProps> = ({
               <div className={styles["account-profile-mobile"]}>
                 <div className={styles["account-image-mobile"]}>
                   <Image
+                    alt="icon"
                     src={"/contact.png"}
                     width={375}
                     height={120}
@@ -119,7 +125,12 @@ const SideBar: FC<SideBarProps> = ({
                 </div>
                 <div className={styles["account-banner"]}>
                   {barCode?.url && (
-                    <Image src={barCode?.url || "/"} width={100} height={100} />
+                    <Image
+                      alt="icon"
+                      src={barCode?.url || "/"}
+                      width={100}
+                      height={100}
+                    />
                   )}
                   <Label>
                     <>
@@ -138,6 +149,7 @@ const SideBar: FC<SideBarProps> = ({
               <div className={styles["account-reviewsImage"]}>
                 {reviewImage?.url && (
                   <Image
+                    alt="icon"
                     src={reviewImage?.url || "/"}
                     width={16.67}
                     height={16.67}
@@ -155,7 +167,7 @@ const SideBar: FC<SideBarProps> = ({
               details?.map((object, i) => {
                 const { accounts } = object;
                 return (
-                  <div className={styles["account-details"]}>
+                  <div key={i} className={styles["account-details"]}>
                     {accounts &&
                       accounts?.map((account, index) => {
                         const { text, image, width, height, link } = account;
