@@ -38,12 +38,12 @@
   cursor: pointer;
   display: none;
   background-color: white;
-  padding: 32px 18px;
+  padding: 32px 24px 24px 18px;
   //   padding-inline-start: 18px;
   &[data-opened="true"] {
     display: block;
   }
-  @media (min-width: 1023px) {
+  @media (min-width: $breakPoint-desktop) {
     width: 360px;
     height: fit-content;
     display: block;
@@ -63,8 +63,8 @@
 
   .back-block {
     padding-top: 180px;
-    padding-inline-end: 24px;
-    padding-bottom: 24px;
+    // padding-inline-end: 6px;
+    // padding-bottom: 24px;
     background-color: white;
 
     @media (min-width: $breakPoint-desktop) {
@@ -144,8 +144,8 @@
   }
   .back-block {
     padding-top: 24px;
-    padding-inline-end: 24px;
-    padding-bottom: 24px;
+    // padding-inline-end: 24px;
+    // padding-bottom: 24px;
     background-color: white;
 
     @media (min-width: $breakPoint-desktop) {
