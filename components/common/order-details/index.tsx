@@ -61,7 +61,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
   return orderDetails != "Order Details" ? (
     <div className={styles["order-container"]}>
       <div className={styles["order-main"]}>
-        <Image src={"/orders.png"} width={13.75} height={15.28} />
+        <Image alt="icon" src={"/orders.png"} width={13.75} height={15.28} />
         <Label className={styles["order-heading"]}>
           {appState.lang == "en" ? "My Orders" : t("My Orders")}
         </Label>
@@ -140,7 +140,12 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
               <div className={styles["order-history"]}>
                 <div>
                   <div className={styles["order-date"]}>
-                    <Image src={"/calendar.png"} width={18} height={18} />
+                    <Image
+                      alt="icon"
+                      src={"/calendar.png"}
+                      width={18}
+                      height={18}
+                    />
                     <p className={styles["order-date-text"]}>
                       {appState?.lang == "en" ? "Order Date" : t("Order Date")}:{" "}
                       <span>
@@ -149,7 +154,12 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                     </p>
                   </div>
                   <div className={styles["order-date"]}>
-                    <Image src={"/ordernum.png"} width={18} height={18} />
+                    <Image
+                      alt="icon"
+                      src={"/ordernum.png"}
+                      width={18}
+                      height={18}
+                    />
                     <p className={styles["order-number-text"]}>
                       {appState?.lang == "en"
                         ? "Order Number"
@@ -158,7 +168,12 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                     </p>
                   </div>
                   <div className={styles["order-date"]}>
-                    <Image src={"/warrantybook.png"} width={18} height={18} />
+                    <Image
+                      alt="icon"
+                      src={"/warrantybook.png"}
+                      width={18}
+                      height={18}
+                    />
                     <Link href={"/"}>
                       <a className={styles["order-link"]}>
                         {appState?.lang == "en"

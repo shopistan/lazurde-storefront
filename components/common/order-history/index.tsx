@@ -29,7 +29,7 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
   return (
     <div className={styles["history-container"]}>
       <div className={styles["history-first"]}>
-        <Image src={"/order.png"} width={13.75} height={15.28} />
+        <Image alt="icon" src={"/order.png"} width={13.75} height={15.28} />
         <Label className={styles["history-first-title"]}>
           {appState.lang == "en" ? "Order Details" : t("Order Details")}
         </Label>
@@ -44,7 +44,12 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
           <div>
             <div className={styles["history-second-first-block"]}>
               <div className={styles["history-second-first-image"]}>
-                <Image src={"/calendar.png"} width={18} height={18} />
+                <Image
+                  alt="icon"
+                  src={"/calendar.png"}
+                  width={18}
+                  height={18}
+                />
               </div>
               <p className={styles["order-details-text"]}>
                 {appState.lang == "en" ? "Order No" : t("Order No")}:
@@ -55,7 +60,12 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
             </div>
             <div className={styles["history-second-first-block"]}>
               <div className={styles["history-second-first-image"]}>
-                <Image src={"/calendar.png"} width={18} height={18} />
+                <Image
+                  alt="icon"
+                  src={"/calendar.png"}
+                  width={18}
+                  height={18}
+                />
               </div>
               <p className={styles["order-details-text"]}>
                 {appState.lang == "en" ? "Order Date" : t("Order Date")}:
@@ -66,7 +76,12 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
             </div>
             <div className={styles["history-second-first-block"]}>
               <div className={styles["history-second-first-image"]}>
-                <Image src={"/calendar.png"} width={18} height={18} />
+                <Image
+                  alt="icon"
+                  src={"/calendar.png"}
+                  width={18}
+                  height={18}
+                />
               </div>
               <Label>
                 {appState.lang == "en"
@@ -76,7 +91,7 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
             </div>
           </div>
           <div className={styles["history-barcode"]}>
-            <Image src={"/barcode.svg"} width={160} height={160} />
+            <Image alt="icon" src={"/barcode.svg"} width={160} height={160} />
           </div>
         </div>
         <Button onClick={() => {}}>
@@ -128,6 +143,7 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
                     <div className={styles["history-forth-sections"]} key={i}>
                       <div className={styles["history-forth-image"]}>
                         <Image
+                          alt="icon"
                           src={"/small-ring.png" || obj["Image URL"]}
                           width={100}
                           height={100}
@@ -149,7 +165,7 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
                           {obj["Size"]}
                         </p>
                         <p className={styles["history-forth-sub"]}>
-                          {appState.lang == "en" ? "Color": t("Color")}:{" "}
+                          {appState.lang == "en" ? "Color" : t("Color")}:{" "}
                           {obj["Color"]}
                         </p>
                         <p className={styles["history-forth-sub"]}>
@@ -175,6 +191,7 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
                           }}
                         >
                           <Image
+                            alt="icon"
                             src={"/writeReview.png"}
                             width={20}
                             height={20}

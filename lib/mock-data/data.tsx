@@ -1303,3 +1303,21 @@ export const mockProductData = {
     },
   ],
 };
+
+export const productWithoutReview = [
+  {
+    image: "/collection-2.png",
+    title: "Love Ring with Diamond",
+    description: "Help the community decide",
+  },
+  {
+    image: "/dummy-image1.png",
+    title: "Love Ring with Diamond",
+    description: "Help the community decide",
+  },
+  {
+    image: "/collection-2.png",
+    title: "Love Ring with Diamond",
+    description: "Help the community decide",
+  },
+];

@@ -31,3 +31,4 @@ export { default as IconTick } from "./IconTick";
 export { default as TabbyIcon } from "./Tabby";
 export { default as PaypalButton } from "./PaypalButton";
 export { default as AppleButton } from "./AppleButton";
+export { default as ReviewIcon } from "./ReviewIcon";

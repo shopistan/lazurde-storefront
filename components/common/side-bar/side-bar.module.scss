@@ -4,6 +4,7 @@
   width: 100%;
   @media (min-width: $breakPoint-desktop) {
     width: 36.5%;
+    min-width: 360px;
     margin-inline-end: 60px;
   }
 }
@@ -55,7 +56,7 @@
 .account-banner {
   position: absolute;
   top: 67px;
-  @media (min-width :$breakPoint-tablet) {
+  @media (min-width: $breakPoint-tablet) {
     top: 200px;
   }
 
