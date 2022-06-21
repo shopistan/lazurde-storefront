@@ -16,11 +16,13 @@ interface PaginationProps {
   onInitialize?: Function;
   children?: JSX.Element;
   showPaginationCount?: boolean;
+  controlDivClass?: string;
 }
 
 const Pagination = ({
   pKey = "",
   paginationClass = "",
+  controlDivClass = "",
   defaultPageNumber,
   pageSize,
   totalSize,
@@ -131,7 +133,7 @@ const Pagination = ({
       {children}
 
       <div
-        className={styles["div-controls"]}
+        className={`${styles["div-controls"]} ${controlDivClass}`}
         data-visible={!showAll}
         data-hide={hidePagination}
       >

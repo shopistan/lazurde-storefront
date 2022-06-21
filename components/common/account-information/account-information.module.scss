@@ -12,6 +12,11 @@
     display: flex;
   }
 }
+.account-right-side {
+  @media (min-width: $breakPoint-desktop) {
+    width: 60.748%;
+  }
+}
 
 .account-main {
   display: none;

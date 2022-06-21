@@ -26,7 +26,7 @@ const Button = ({
       data-style={buttonStyle}
       data-size={buttonSize}
       className={`${styles["button"]} ${className}`}
-      onClick={(e) => onClick(e)}
+      onClick={(e) => onClick && onClick(e)}
       type={type}
     >
       {buttonText || ""}

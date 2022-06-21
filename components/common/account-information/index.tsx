@@ -12,6 +12,7 @@ import AccountSection from "../account-section";
 import OrderDetails from "components/common/order-details/index";
 import OrderHistory from "../order-history";
 import { desktopScreenSize } from "lib/utils/common";
+import UserReviews from "./account-reviews";
 
 interface AccountInformationProps {
   title?: string | "";
@@ -86,9 +87,11 @@ const AccountInformation: FC<AccountInformationProps> = ({
             setActiveComponent={setActiveComponent}
             activeComponent={activeComponent}
           />
-          {activeComponent == "Account Overview" && <AccountSection />}
-
-          {activeComponent === "My Orders" && <OrderDetails />}
+          <div className={styles["account-right-side"]}>
+            {activeComponent == "Account Overview" && <AccountSection />}
+            {activeComponent === "My Orders" && <OrderDetails />}
+            {activeComponent === "My Reviews" && <UserReviews />}
+          </div>
         </div>
       </div>
     </>
