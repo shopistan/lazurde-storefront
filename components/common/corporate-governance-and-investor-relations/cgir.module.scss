@@ -57,8 +57,19 @@
     line-height: 19px;
     letter-spacing: 0em;
     text-align: start;
-    margin-inline-start: 19px;
+    margin-inline-start: 12px;
     margin-block: 11px;
+  }
+
+  .back-block {
+    padding-top: 180px;
+    padding-inline-end: 24px;
+    padding-bottom: 24px;
+    background-color: white;
+
+    @media (min-width: $breakPoint-desktop) {
+      display: none;
+    }
   }
 }
 
@@ -131,6 +142,16 @@
       }
     }
   }
+  .back-block {
+    padding-top: 24px;
+    padding-inline-end: 24px;
+    padding-bottom: 24px;
+    background-color: white;
+
+    @media (min-width: $breakPoint-desktop) {
+      display: none;
+    }
+  }
 }
 
 .page-image {
@@ -148,7 +169,7 @@
   //   background-color: #f2f2f2;
   //   cursor: pointer;
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     // padding-block: 40px;
     // padding-inline: 48px;
     // padding: 24px;
@@ -219,17 +240,6 @@
     margin-inline-start: 10px;
     margin-top: 0;
     margin-bottom: 0;
-  }
-}
-
-.back-block {
-  padding-top: 24px;
-  padding-inline-end: 24px;
-  padding-bottom: 24px;
-  background-color: white;
-
-  @media (min-width: $breakPoint-desktop) {
-    display: none;
   }
 }
 
