@@ -86,7 +86,7 @@ const Slider = ({
       ) : (
         <>
           {[1, 2, 3].map((s, i) => (
-            <Skeleton />
+            <Skeleton key={i} />
           ))}
         </>
       )}
