@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./style.module.scss";
 import Label from "components/common/ui/label";
 import Slider from "components/common/ui/slider/slider";
@@ -9,9 +9,16 @@ import Image from "next/image";
 import Button from "components/common/ui/button";
 import StarRating from "components/common/ui/star-ratings";
 import WriteAReview from "components/common/reviews/write-review";
+import useTranslation from "next-translate/useTranslation";
+import { AppContext } from "lib/context/index";
 
 interface ProductWithOutReviewsProps {
   products?: any;
+}
+interface arabicDataProps {
+  myReviewHeading?: string;
+  myPastReviews?: string;
+  yourNextReviewHeading?: string;
 }
 
 const ProductWithOutReviews = ({
@@ -20,16 +27,33 @@ const ProductWithOutReviews = ({
   const [width] = useWindowSize();
   const [modalOpen, setModalOpen] = useState(false);
   const [isRatingError, setIsRatingError] = useState("");
+  const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
+
+  const arabicData: arabicDataProps = t(
+    "accountReviewData",
+    {},
+    { returnObjects: true }
+  );
+
+  const arabicDataProduct: arabicDataProps = t(
+    "accountReviewData.product",
+    {},
+    { returnObjects: true }
+  );
 
   return (
     <>
       <div className={styles["product-without-review_wrapper"]}>
-        <Label className={styles["main-label"]}>Your Next Review Awaits</Label>
+        <Label className={styles["main-label"]}>
+          {appState?.lang === "en"
+            ? "Your Next Review Awaits"
+            : arabicData?.yourNextReviewHeading}
+        </Label>
         <Slider
           desktopSlidePerView={2}
           mobileSlidePerView={1.45}
           navigation={width > desktopScreenSize ? true : false}
-          scrollbar={true}
           className={`account-review-slider`}
           hasScrollbar={false}
         >
@@ -50,7 +74,12 @@ const ProductWithOutReviews = ({
                           layout="responsive"
                         />
                       </div>
-                      <Label className={styles["title"]}>{title}</Label>
+                      <Label className={styles["title"]}>
+                        {appState?.lang === "en"
+                          ? title
+                          : Array.isArray(arabicDataProduct) &&
+                            arabicDataProduct[index]?.title}
+                      </Label>
                       <StarRating
                         count={5}
                         rating={3}
@@ -59,7 +88,10 @@ const ProductWithOutReviews = ({
                         starHeight={12}
                       />
                       <Label className={styles["description"]}>
-                        {description}
+                        {appState?.lang === "en"
+                          ? title
+                          : Array.isArray(arabicDataProduct) &&
+                            arabicDataProduct[index]?.description}
                       </Label>
                       <div>
                         <Button
@@ -68,7 +100,10 @@ const ProductWithOutReviews = ({
                             setModalOpen(true);
                           }}
                         >
-                          write review
+                          {appState?.lang === "en"
+                            ? "write review"
+                            : Array.isArray(arabicDataProduct) &&
+                              arabicDataProduct[index]?.writeReviewBtn}
                         </Button>
                       </div>
                     </div>

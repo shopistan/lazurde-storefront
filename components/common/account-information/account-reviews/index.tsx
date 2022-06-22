@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Label from "components/common/ui/label";
 import styles from "./style.module.scss";
 import { ReviewIcon } from "components/icons";
@@ -15,9 +15,18 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { getOrders } from "lib/utils/order";
 import ProductWithOutReviews from "./product-without-reviews";
 import { productWithoutReview } from "lib/mock-data/data";
+import useTranslation from "next-translate/useTranslation";
+import { AppContext } from "lib/context/index";
+
+interface arabicDataProps {
+  myReviewHeading?: string;
+  myPastReviews?: string;
+}
 
 const UserReviews = (): JSX.Element => {
   const [size] = useWindowSize();
+  const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [currentData, setCurrentData] = useState([]);
   const [reviewsData, setReviewsData] = useState<any>([]);
@@ -49,14 +58,22 @@ const UserReviews = (): JSX.Element => {
     response && response?.data && setCurrentData(response?.data?.results);
   };
 
-  console.log("orderData", productWithoutReview);
+  const arabicData: arabicDataProps = t(
+    "accountReviewData",
+    {},
+    { returnObjects: true }
+  );
 
   return (
     <>
       <div className={styles["account-review-wrapper"]}>
         <div className={styles["reviews-heading"]}>
           <ReviewIcon />
-          <Label className={styles["label"]}>my review</Label>
+          <Label className={styles["label"]}>
+            {appState?.lang === "en"
+              ? "my review"
+              : arabicData?.myReviewHeading}
+          </Label>
         </div>
 
         <ProductWithOutReviews products={productWithoutReview} />
@@ -65,7 +82,11 @@ const UserReviews = (): JSX.Element => {
           <>
             <div className={styles["reviews-heading"]}>
               <ReviewIcon />
-              <Label className={styles["label"]}>my past review</Label>
+              <Label className={styles["label"]}>
+                {appState?.lang === "en"
+                  ? "my past review"
+                  : arabicData?.myPastReviews}
+              </Label>
             </div>
             <div className={styles["past-reviews"]}>
               <Pagination
