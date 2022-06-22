@@ -16,7 +16,7 @@ const WishList: FC<WishListProps> = ({
   const [active, setActive] = useState(false);
   const { allWishListProducts, setAllWishListProducts } = useContext(AppContext);
   useEffect(() => {
-    const isSelected = allWishListProducts.find(
+    const isSelected = allWishListProducts?.find(
       (item: string) => item === itemId
     );
 
