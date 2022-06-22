@@ -1066,5 +1066,27 @@
   "Order Total": "الطلب الكلي",
   "Sub-Total": "المجموع الفرعي",
   "Discount": "تخفيض",
-  "Total": "كامل"
+  "Total": "كامل",
+  "accountReviewData": {
+    "myReviewHeading": "ملاحظاتي",
+    "yourNextReviewHeading": "مراجعتك القادمة في انتظار",
+    "myPastReviews": "تقييمي السابق",
+    "product": [
+      {
+        "title": "خاتم الحب مع الماس",
+        "description": "مساعدة المجتمع على اتخاذ القرار",
+        "writeReviewBtn": "أكتب مراجعة"
+      },
+      {
+        "title": "خاتم الحب مع الماس",
+        "description": "مساعدة المجتمع على اتخاذ القرار",
+        "writeReviewBtn": "أكتب مراجعة"
+      },
+      {
+        "title": "خاتم الحب مع الماس",
+        "description": "مساعدة المجتمع على اتخاذ القرار",
+        "writeReviewBtn": "أكتب مراجعة"
+      }
+    ]
+  }
 }
