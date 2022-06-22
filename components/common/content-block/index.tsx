@@ -35,8 +35,6 @@ const ContentBlock: FC<ContentBlockProps> = ({ content = {} }) => {
         content?.name === "Fact Sheet" ||
         content?.name === "الصفحة الرئيسية لـ IR" ||
         content?.name === "بيان حقائق" ||
-        content?.name === "Prospectus" ||
-        content?.name === "نشرة" ||
         content?.name === "Announcements" ||
         content?.name === "الإعلانات" ||
         content?.name === "Financial Calendar" ||
