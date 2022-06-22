@@ -150,3 +150,20 @@
 .arrowDown-open {
   transform: rotate(180deg);
 }
+
+.history-seven-text {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: start;
+  margin-block: 0 24px;
+
+  .div-heading {
+    border-bottom: 0;
+  }
+  .custom-content {
+    margin-top: 10px;
+    color: grey;
+  }
+}

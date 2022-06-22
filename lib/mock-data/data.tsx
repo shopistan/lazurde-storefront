@@ -1321,3 +1321,14 @@ export const productWithoutReview = [
     description: "Help the community decide",
   },
 ];
+
+export const needHelpData = [
+  {
+    ques: "How can I return an item?",
+    ans: "We don't know, Ask to google please!"
+  },
+  {
+    ques: "How can I return an item?",
+    ans: "Let me think about it."
+  }
+]
