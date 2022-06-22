@@ -12,7 +12,7 @@ import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 import useWindowSize from "lib/utils/useWindowSize";
-import { mobileScreenSize } from "lib/utils/common";
+import { mobileScreenSize, desktopScreenSize } from "lib/utils/common";
 
 type CGIRPagesProps = {
   name?: string | "";
@@ -57,7 +57,7 @@ const CGIR: FC<CGIRProps> = ({
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
   const [showPolicies, setShowPolicies] = useState(false);
-  const [width] = useWindowSize();
+  const [size] = useWindowSize();
 
   console.log("cgir", cgirPages);
 
@@ -338,8 +338,8 @@ const CGIR: FC<CGIRProps> = ({
                               <Image
                                 alt=""
                                 src={image?.url}
-                                width={213}
-                                height={276}
+                                width={size > desktopScreenSize ? 213 : 150}
+                                height={size > desktopScreenSize ? 276 : 195.21}
                                 // onClick={() =>}
                               />
                             </a>
