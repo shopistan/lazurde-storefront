@@ -29,6 +29,7 @@ const ProductWithOutReviews = ({
           desktopSlidePerView={2}
           mobileSlidePerView={1.45}
           navigation={width > desktopScreenSize ? true : false}
+          scrollbar={true}
           className={`account-review-slider`}
           hasScrollbar={false}
         >

@@ -6,39 +6,27 @@ import { CrossSmall, PlusIcon } from "components/icons";
 interface ImageUploaderProps {
   setFileUpload?: Function;
   file?: [];
-  setFileName?: Function;
-  uploadedFiles?: any;
 }
 let fileObj: any = [];
-let fileArray: any = [];
 
 const ImageUploader = ({
   setFileUpload,
   file,
-  setFileName,
-  uploadedFiles,
 }: ImageUploaderProps): JSX.Element => {
-  let fileName: any = [];
+  let fileArray: any = [];
 
   const uploadMultipleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const currentFile: any = event.target.files;
     fileObj.push(event.target.files);
-
-    currentFile[0].name && fileName.push(currentFile[0].name);
-    Object.keys(currentFile).forEach((file: any) => {
-      file = currentFile[file];
-      fileArray.push(URL?.createObjectURL(file));
-      setFileName((prev: any) => [...prev, file]);
-    });
+    for (let i = 0; i < fileObj.length; i++) {
+      fileObj[i][0] && fileArray.push(URL?.createObjectURL(fileObj[i][0]));
+    }
     setFileUpload({ fileArray });
   };
 
   const deleteImage = (event: any, index: number) => {
-    file?.splice(index, 1);
-    fileObj?.splice(index, 1);
+    file.splice(index, 1);
+    fileObj.splice(index, 1);
     setFileUpload({ fileArray: file });
-    uploadedFiles?.splice(index, 1);
-    setFileName([...uploadedFiles]);
   };
 
   return (
@@ -73,10 +61,11 @@ const ImageUploader = ({
             <input
               key={Math.random()}
               type="file"
-              accept="image/png,image/jpg,image/jpeg"
+              accept="image/*"
               name="imgUploader"
               id="imgUploader"
               onChange={uploadMultipleFiles}
+              // onClick={onInputClick}
               multiple
             />
             <PlusIcon />
