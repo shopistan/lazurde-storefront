@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import styles from "./style.module.scss";
 import { CrossSmall } from "components/icons";
 import Heading from "components/common/ui/heading";
@@ -15,6 +15,7 @@ interface WriteAReviewProps {
   fetchingReviews?: Function;
   setIsRatingError?: Function;
   isRatingError?: string;
+  reviewImagesRef?: any;
 }
 
 const WriteAReview = ({
@@ -22,6 +23,7 @@ const WriteAReview = ({
   onClose,
   productData = {},
   fetchingReviews,
+  reviewImagesRef,
 }: WriteAReviewProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
@@ -79,6 +81,7 @@ const WriteAReview = ({
               onClose={onClose}
               fetchingReviews={fetchingReviews}
               setIsRatingError={setIsRatingError}
+              reviewImagesRef={reviewImagesRef}
             />
           </div>
         </div>

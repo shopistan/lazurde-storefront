@@ -137,3 +137,16 @@
     }
   }
 }
+.uploaded-img-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .review-img {
+    margin-inline-end: 8px;
+
+    &:last-child {
+      margin-inline-end: 0;
+    }
+  }
+}
