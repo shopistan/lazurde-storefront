@@ -141,8 +141,9 @@
     }
 
     @media (max-width: $breakPoint-mobile) {
-      padding-bottom: 100px;
+      padding-bottom: 80px;
       gap: 24px;
+    justify-content: center;
     }
   }
   .back-block {
