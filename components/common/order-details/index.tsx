@@ -56,6 +56,10 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
       url: "/blue-ring.png",
       altText: "alt text",
     },
+    {
+      url: "/blue-ring.png",
+      altText: "alt text",
+    },
   ];
   const [renderCom, setRenderCom] = useState(false);
   useEffect(() => {
@@ -122,15 +126,18 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                               )}`}
                             </Label>
                           </div>
-                          <div>
-                            <Button buttonStyle="white" onClick={() => {}}>
-                              {`${
-                                appState?.lang == "en"
-                                  ? "Track Parcel"
-                                  : t("Track Parcel")
-                              } ${i + 1 || number}`}
-                            </Button>
-                          </div>
+                          {ordersArr[index].status !== "ORDER_CONFIRMED" &&
+                            ordersArr[index].status !== "ORDER_FULFILLED" && (
+                              <div>
+                                <Button buttonStyle="white" onClick={() => {}}>
+                                  {`${
+                                    appState?.lang == "en"
+                                      ? "Track Parcel"
+                                      : t("Track Parcel")
+                                  } ${i + 1 || number}`}
+                                </Button>
+                              </div>
+                            )}
                         </div>
                         <div className={styles["order-image"]}>
                           {orderImages.map((image, index) => {
@@ -219,7 +226,11 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
             );
           })}
           <div className={styles["order-count"]}>
-            <Label>{`Displaying ${orderData?.orders?.length} Orders`}</Label>
+            <Label>
+              {appState?.lang === "en"
+                ? `Displaying ${orderData?.orders?.length} Orders`
+                : ` العرض ${orderData?.orders?.length} الطلب`}
+            </Label>
           </div>
         </>
       ) : (

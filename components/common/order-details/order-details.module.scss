@@ -77,12 +77,20 @@
 }
 
 .order-image {
+  display: flex;
+  overflow-x: auto;
   margin-top: 16px;
   margin-bottom: 16px;
   padding-bottom: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  display: flex;
   gap: 8px;
+
+  @media (max-width: $breakPoint-mobile) {
+    margin-inline-end: -24px;
+  }
+
+  @media (min-width: $breakPoint-desktop) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
 }
 
 .order-main {
