@@ -54,16 +54,19 @@ const AccountInformation: FC<AccountInformationProps> = ({
   const [width] = useWindowSize();
   const router = useRouter();
   const { appState } = useContext(AppContext);
-  const [activeComponent, setActiveComponent] = useState("Account Overview");
+  const activeComp =
+    typeof window !== "undefined" && window.localStorage.getItem("active");
+  const [activeComponent, setActiveComponent] = useState(
+    activeComp || "Account Overview"
+  );
   const [orderDetails, setOrderDetails] = useState("");
-
   return (
     <>
       <div className={styles["account-container"]}>
         <div
           className={styles["account-main"]}
           onClick={() => {
-            router.push("/account-page");
+            router.push("/account");
           }}
         >
           <div className={styles["account-mainImage"]}>
@@ -89,8 +92,8 @@ const AccountInformation: FC<AccountInformationProps> = ({
           />
           <div className={styles["account-right-side"]}>
             {activeComponent == "Account Overview" && <AccountSection />}
-            {activeComponent === "My Orders" && <OrderDetails />}
-            {activeComponent === "My Reviews" && <UserReviews />}
+            {activeComponent == "My Orders" && <OrderDetails />}
+            {activeComponent == "My Reviews" && <UserReviews />}
           </div>
         </div>
       </div>

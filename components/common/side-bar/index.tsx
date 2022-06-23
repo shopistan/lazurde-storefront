@@ -69,9 +69,14 @@ const SideBar: FC<SideBarProps> = ({
     logoutUser();
   };
 
+  const [renderCom, setRenderCom] = useState(false);
+  useEffect(() => {
+    setRenderCom(true);
+  }, []);
+
   return (
     <>
-      {activeComponent !== "Account Overview" && width < desktopScreenSize ? (
+      {renderCom && activeComponent !== "Account Overview" && width < desktopScreenSize ? (
         <div
           className={styles["account-button"]}
           onClick={() => {
@@ -181,6 +186,7 @@ const SideBar: FC<SideBarProps> = ({
                               if (text.toLowerCase().includes("sign out")) {
                                 signOut();
                               } else {
+                                window.localStorage.setItem("active", text)
                                 setActiveComponent(text);
                               }
                             }}
