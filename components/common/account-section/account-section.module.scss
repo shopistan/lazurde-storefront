@@ -2,9 +2,10 @@
 
 .account-detail-section {
   display: flex;
-
+  
   @media (min-width: $breakPoint-desktop) {
     width: 100%;
+    flex-direction: column;
   }
 }
 

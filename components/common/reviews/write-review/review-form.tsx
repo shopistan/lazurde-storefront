@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import styles from "./style.module.scss";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -15,6 +15,7 @@ interface arabicLabelTypes {
   email?: string;
   phoneNumber?: string;
   submitBtnText?: string;
+  reviewImagesRef?: any;
 }
 
 const ReviewForm = ({
@@ -23,6 +24,7 @@ const ReviewForm = ({
   onClose,
   fetchingReviews,
   setIsRatingError,
+  reviewImagesRef,
 }: any): JSX.Element => {
   const [fileUpload, setFileUpload] = useState<any>([{ fileArray: {} }]);
   const [fileName, setFileName] = useState<any>([]);
@@ -239,6 +241,7 @@ const ReviewForm = ({
                 setFileUpload={setFileUpload}
                 setFileName={setFileName}
                 uploadedFiles={fileName}
+                imageUploadRef={reviewImagesRef}
               />
               <div className={styles["submit-btn"]}>
                 <button type="submit" disabled={isSubmitting}>

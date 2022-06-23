@@ -8,6 +8,7 @@ interface ImageUploaderProps {
   file?: [];
   setFileName?: Function;
   uploadedFiles?: any;
+  imageUploadRef?: any;
 }
 let fileObj: any = [];
 let fileArray: any = [];
@@ -17,8 +18,16 @@ const ImageUploader = ({
   file,
   setFileName,
   uploadedFiles,
+  imageUploadRef,
 }: ImageUploaderProps): JSX.Element => {
   let fileName: any = [];
+
+  useEffect(() => {
+    return () => {
+      fileArray = [];
+      setFileUpload([{ fileArray: {} }]);
+    };
+  }, []);
 
   const uploadMultipleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currentFile: any = event.target.files;
@@ -69,18 +78,21 @@ const ImageUploader = ({
         )}
 
         <div className={styles["img-upload-input"]}>
-          <label htmlFor="imgUploader" className={styles["img-label"]}>
-            <input
-              key={Math.random()}
-              type="file"
-              accept="image/png,image/jpg,image/jpeg"
-              name="imgUploader"
-              id="imgUploader"
-              onChange={uploadMultipleFiles}
-              multiple
-            />
-            <PlusIcon />
-          </label>
+          <form>
+            <label htmlFor="imgUploader" className={styles["img-label"]}>
+              <input
+                key="similar"
+                type="file"
+                accept="image/png,image/jpg,image/jpeg"
+                name="imgUploader"
+                id="imgUploader"
+                ref={imageUploadRef}
+                onChange={uploadMultipleFiles}
+                multiple
+              />
+              <PlusIcon />
+            </label>
+          </form>
         </div>
       </div>
     </>

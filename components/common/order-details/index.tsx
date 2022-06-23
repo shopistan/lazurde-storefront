@@ -57,11 +57,15 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
       altText: "alt text",
     },
   ];
-  
-  return orderDetails != "Order Details" ? (
+  const [renderCom, setRenderCom] = useState(false);
+  useEffect(() => {
+    setRenderCom(true);
+  }, []);
+
+  return renderCom && orderDetails != "Order Details" ? (
     <div className={styles["order-container"]}>
       <div className={styles["order-main"]}>
-        <Image alt="icon" src={"/orders.png"} width={13.75} height={15.28} />
+        <Image alt="icon" src={"/orders.png"} width={20} height={20} />
         <Label className={styles["order-heading"]}>
           {appState.lang == "en" ? "My Orders" : t("My Orders")}
         </Label>
