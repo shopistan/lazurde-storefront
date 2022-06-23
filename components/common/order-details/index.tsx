@@ -86,126 +86,142 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
         )}
       </div>
       {orderData?.orders && orderData?.orders?.length > 0 ? (
-        orderData?.orders?.map((order, index) => {
-          console.log("order", order);
-          return (
-            <div key={index} className={styles["order-section"]}>
-              {orderData?.orders[index]?.tracking &&
-                orderData?.orders[index]?.tracking?.length > 0 &&
-                orderData?.orders[index]?.tracking?.map((track, i) => {
-                  const { number } = track;
-                  return (
-                    <div key={i} className={styles["order-details"]}>
-                      <div className={styles["order-delivery"]}>
-                        <div>
-                          <Label className={styles["order-sent"]}>
-                            {appState?.lang == "en"
-                              ? "We’ve Sent It!"
-                              : t("We’ve Sent It!")}
-                          </Label>
-                          <Label className={styles["delivery-estimate"]}>
-                            {`${
-                              appState?.lang == "en"
-                                ? "Estimated Delivery"
-                                : t("Estimated Delivery")
-                            } ${ordeFormatDate(
-                              orderData?.orders[index]?.createdAt
-                            )}`}
-                          </Label>
+        <>
+          {orderData?.orders?.map((order, index, ordersArr) => {
+            console.log("order", order);
+            return (
+              <div key={index} className={styles["order-section"]}>
+                {orderData?.orders[index]?.tracking &&
+                  orderData?.orders[index]?.tracking?.length > 0 &&
+                  orderData?.orders[index]?.tracking?.map((track, i) => {
+                    const { number } = track;
+                    return (
+                      <div key={i} className={styles["order-details"]}>
+                        <div className={styles["order-delivery"]}>
+                          <div>
+                            <Label className={styles["order-sent"]}>
+                              {appState?.lang == "en"
+                                ? ordersArr[index].status === "ORDER_DELIVERED"
+                                  ? "We’ve Delivered It!"
+                                  : ordersArr[index].status ===
+                                    "ORDER_CONFIRMED"
+                                  ? "In-Store Order"
+                                  : ordersArr[index].status ===
+                                    "ORDER_FULFILLED"
+                                  ? "Click & Collect Order"
+                                  : "We’ve Sent It!"
+                                : t("We’ve Sent It!")}
+                            </Label>
+                            <Label className={styles["delivery-estimate"]}>
+                              {`${
+                                appState?.lang == "en"
+                                  ? "Estimated Delivery"
+                                  : t("Estimated Delivery")
+                              } ${ordeFormatDate(
+                                orderData?.orders[index]?.createdAt
+                              )}`}
+                            </Label>
+                          </div>
+                          <div>
+                            <Button buttonStyle="white" onClick={() => {}}>
+                              {`${
+                                appState?.lang == "en"
+                                  ? "Track Parcel"
+                                  : t("Track Parcel")
+                              } ${i + 1 || number}`}
+                            </Button>
+                          </div>
                         </div>
-                        <div>
-                          <Button buttonStyle="white" onClick={() => {}}>
-                            {`${
-                              appState?.lang == "en"
-                                ? "Track Parcel"
-                                : t("Track Parcel")
-                            } ${i + 1 || number}`}
-                          </Button>
+                        <div className={styles["order-image"]}>
+                          {orderImages.map((image, index) => {
+                            return (
+                              <div key={index}>
+                                <Image
+                                  src={image.url || "/"}
+                                  alt={image.altText || ""}
+                                  layout="fixed"
+                                  width={100}
+                                  height={100}
+                                />
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
-                      <div className={styles["order-image"]}>
-                        {orderImages.map((image, index) => {
-                          return (
-                            <div key={index}>
-                              <Image
-                                src={image.url || "/"}
-                                alt={image.altText || ""}
-                                layout="fixed"
-                                width={100}
-                                height={100}
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              <div className={styles["order-history"]}>
-                <div>
-                  <div className={styles["order-date"]}>
-                    <Image
-                      alt="icon"
-                      src={"/calendar.png"}
-                      width={17}
-                      height={17}
-                    />
-                    <p className={styles["order-date-text"]}>
-                      {appState?.lang == "en" ? "Order Date" : t("Order Date")}:{" "}
-                      <span>
-                        {updateOrderDate(orderData?.orders[index]?.createdAt)}
-                      </span>
-                    </p>
-                  </div>
-                  <div className={styles["order-date"]}>
-                    <Image
-                      alt="icon"
-                      src={"/ordernum.png"}
-                      width={18}
-                      height={18}
-                    />
-                    <p className={styles["order-number-text"]}>
-                      {appState?.lang == "en"
-                        ? "Order Number"
-                        : t("Order Number")}
-                      : <span> {orderData?.orders[index]?.orderId}</span>
-                    </p>
-                  </div>
-                  <div className={styles["order-date"]}>
-                    <Image
-                      alt="icon"
-                      src={"/warrantybook.png"}
-                      width={18}
-                      height={18}
-                    />
-                    <Link href={"/"}>
-                      <a className={styles["order-link"]}>
+                    );
+                  })}
+                <div className={styles["order-history"]}>
+                  <div>
+                    <div className={styles["order-date"]}>
+                      <Image
+                        alt="icon"
+                        src={"/calendar.png"}
+                        width={17}
+                        height={17}
+                      />
+                      <p className={styles["order-date-text"]}>
                         {appState?.lang == "en"
-                          ? " View Digital Receipt & Warranty"
-                          : t("View Digital Receipt & Warranty")}
-                      </a>
-                    </Link>
+                          ? "Order Date"
+                          : t("Order Date")}
+                        :{" "}
+                        <span>
+                          {updateOrderDate(orderData?.orders[index]?.createdAt)}
+                        </span>
+                      </p>
+                    </div>
+                    <div className={styles["order-date"]}>
+                      <Image
+                        alt="icon"
+                        src={"/ordernum.png"}
+                        width={18}
+                        height={18}
+                      />
+                      <p className={styles["order-number-text"]}>
+                        {appState?.lang == "en"
+                          ? "Order Number"
+                          : t("Order Number")}
+                        : <span> {orderData?.orders[index]?.orderId}</span>
+                      </p>
+                    </div>
+                    <div className={styles["order-date"]}>
+                      <Image
+                        alt="icon"
+                        src={"/warrantybook.png"}
+                        width={18}
+                        height={18}
+                      />
+                      <Link href={"/"}>
+                        <a className={styles["order-link"]}>
+                          {appState?.lang == "en"
+                            ? " View Digital Receipt & Warranty"
+                            : t("View Digital Receipt & Warranty")}
+                        </a>
+                      </Link>
+                    </div>
                   </div>
+                  <Button
+                    className={styles["view-button"]}
+                    onClick={() => {
+                      handleOrderDetail(order);
+                      console.log("clicks", order);
+                    }}
+                  >
+                    {width > desktopScreenSize
+                      ? appState?.lang == "en"
+                        ? "View Order"
+                        : t("View Order")
+                      : appState?.lang == "en"
+                      ? "View"
+                      : t("View")}
+                  </Button>
                 </div>
-                <Button
-                  className={styles["view-button"]}
-                  onClick={() => {
-                    handleOrderDetail(order);
-                    console.log("clicks", order);
-                  }}
-                >
-                  {width > desktopScreenSize
-                    ? appState?.lang == "en"
-                      ? "View Order"
-                      : t("View Order")
-                    : appState?.lang == "en"
-                    ? "View"
-                    : t("View")}
-                </Button>
               </div>
-            </div>
-          );
-        })
+            );
+          })}
+          <div className={styles["order-count"]}>
+            <Label>{`Displaying ${orderData?.orders?.length} Orders`}</Label>
+          </div>
+        </>
       ) : (
         <></>
       )}
