@@ -143,7 +143,7 @@ const Cart = ({ }: CartProps): JSX.Element => {
       cartItems?.items.sort((a: {Brand: string}, b: {Brand: string}) => {
         if (b.Brand === 'Kenaz') return -1
         if (a.Brand === 'Kenaz') return 1
-        return a.Brand.localeCompare(b.Brand)
+        return a.Brand?.localeCompare(b.Brand)
       })
 
       setCartData(cartItems);
