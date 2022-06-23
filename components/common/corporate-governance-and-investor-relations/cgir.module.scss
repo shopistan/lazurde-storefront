@@ -140,9 +140,10 @@
         }
       }
     }
-    
+
     @media (max-width: $breakPoint-mobile) {
       padding-bottom: 100px;
+      gap: 24px;
     }
   }
   .back-block {
