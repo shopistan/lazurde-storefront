@@ -209,7 +209,12 @@ const CGIR: FC<CGIRProps> = ({
                         // maxWidth: "650px",
                         maxHeight: "none",
                         minHeight: "0px",
-                        height: "2700px",
+                        height:
+                          size > desktopScreenSize
+                            ? "3850px"
+                            : size > 413
+                            ? "4150px"
+                            : "3500px",
                         width: "100%",
                         fontFamily: "Roboto",
                         fontSize: "14px",
@@ -230,7 +235,12 @@ const CGIR: FC<CGIRProps> = ({
                         // maxWidth: "650px",
                         maxHeight: "none",
                         minHeight: "0px",
-                        height: "2700px",
+                        height:
+                          size > desktopScreenSize
+                            ? "3850px"
+                            : size > 413
+                            ? "4150px"
+                            : "3500px",
                         width: "100%",
                         fontFamily: "Roboto",
                         fontSize: "14px",
@@ -254,7 +264,12 @@ const CGIR: FC<CGIRProps> = ({
                         width: "1px",
                         maxHeight: "none",
                         minHeight: "0px",
-                        height: "1500px",
+                        height:
+                          size > desktopScreenSize
+                            ? "1500px"
+                            : size > 413
+                            ? "1700"
+                            : "1800px",
                       }}
                       src="https://ksatools.eurolandir.com/tools/pressreleases/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
                       width="100%"
@@ -274,7 +289,12 @@ const CGIR: FC<CGIRProps> = ({
                         width: "1px",
                         maxHeight: "none",
                         minHeight: "0px",
-                        height: "1500px",
+                        height:
+                          size > desktopScreenSize
+                            ? "1500px"
+                            : size > 413
+                            ? "1700"
+                            : "1800px",
                       }}
                       src="https://ksatools.eurolandir.com/tools/pressreleases/?companycode=sa-lazurde&amp;v=2021&amp;lang=ar-ae"
                       width="100%"
@@ -296,11 +316,22 @@ const CGIR: FC<CGIRProps> = ({
                         maxWidth: "700px",
                         maxHeight: "none",
                         minHeight: "0px",
-                        height: "840px",
+                        height:
+                          size > desktopScreenSize
+                            ? "900px"
+                            : size > 413
+                            ? "1000"
+                            : "1000px",
                       }}
                       src="https://ksatools.eurolandir.com/tools/fincalendar2/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
                       width="100%"
-                      height="807"
+                      height={
+                        size > desktopScreenSize
+                          ? "840px"
+                          : size > 413
+                          ? "1000"
+                          : "1000px"
+                      }
                       frameBorder="0"
                       scrolling="no"
                     >
