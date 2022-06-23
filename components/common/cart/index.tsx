@@ -139,8 +139,7 @@ const Cart = ({ }: CartProps): JSX.Element => {
         const modifiedProduct = destructureAttributes(product);
         cartItems.items[index] = modifiedProduct;
       });
-
-      cartItems?.items.sort((a: {Brand: string}, b: {Brand: string}) => {
+      cartItems?.items?.sort((a: {Brand: string}, b: {Brand: string}) => {
         if (b.Brand === 'Kenaz') return -1
         if (a.Brand === 'Kenaz') return 1
         return a.Brand.localeCompare(b.Brand)
