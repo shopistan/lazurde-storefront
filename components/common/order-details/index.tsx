@@ -119,7 +119,13 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                             <Label className={styles["delivery-estimate"]}>
                               {`${
                                 appState?.lang == "en"
-                                  ? "Estimated Delivery"
+                                  ? ordersArr[index].status ===
+                                    "ORDER_CONFIRMED"
+                                    ? "Collected "
+                                    : ordersArr[index].status ===
+                                      "ORDER_FULFILLED"
+                                    ? "Estimated Collection "
+                                    : "Estimated Delivery"
                                   : t("Estimated Delivery")
                               } ${ordeFormatDate(
                                 orderData?.orders[index]?.createdAt
@@ -129,7 +135,11 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                           {ordersArr[index].status !== "ORDER_CONFIRMED" &&
                             ordersArr[index].status !== "ORDER_FULFILLED" && (
                               <div>
-                                <Button buttonStyle="white" onClick={() => {}}>
+                                <Button
+                                  buttonSize="sm"
+                                  buttonStyle="white"
+                                  onClick={() => {}}
+                                >
                                   {`${
                                     appState?.lang == "en"
                                       ? "Track Parcel"
@@ -163,8 +173,9 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                       <Image
                         alt="icon"
                         src={"/calendar.png"}
-                        width={17}
-                        height={17}
+                        width={20.5}
+                        height={18}
+                        layout="fixed"
                       />
                       <p className={styles["order-date-text"]}>
                         {appState?.lang == "en"
@@ -180,8 +191,9 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                       <Image
                         alt="icon"
                         src={"/ordernum.png"}
-                        width={18}
+                        width={20.5}
                         height={18}
+                        layout="fixed"
                       />
                       <p className={styles["order-number-text"]}>
                         {appState?.lang == "en"
@@ -196,6 +208,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                         src={"/warrantybook.png"}
                         width={18}
                         height={18}
+                        layout="fixed"
                       />
                       <Link href={"/"}>
                         <a className={styles["order-link"]}>
