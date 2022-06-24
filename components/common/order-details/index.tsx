@@ -27,8 +27,6 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
   const [orderObject, setOrderObject] = useState({});
   const [orderDetails, setOrderDetails] = useState("");
 
-  // console.log("testing", orderObject);
-
   const destructureAttributes = (product: ProductType) => {
     const obj: { [key: string]: string } = {};
     product?.attributes?.map((attr: any) => {
@@ -39,7 +37,6 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
 
   const handleOrderDetail = (order: any) => {
     order && setOrderObject(order);
-    // console.log("orders", order);
     setOrderDetails("Order Details");
   };
 
@@ -61,6 +58,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
       altText: "alt text",
     },
   ];
+
   const [renderCom, setRenderCom] = useState(false);
   useEffect(() => {
     setRenderCom(true);
@@ -71,13 +69,13 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
       <div className={styles["order-main"]}>
         <Image alt="icon" src={"/orders.png"} width={20} height={20} />
         <Label className={styles["order-heading"]}>
-          {appState.lang == "en" ? "My Orders" : t("My Orders")}
+          {appState?.lang == "en" ? "My Orders" : t("My Orders")}
         </Label>
-        {orderData.orders.length > 0 ? (
+        {orderData?.orders?.length > 0 ? (
           <Label className={styles["order-text"]}>
-            {`${appState.lang == "en" ? "Displaying" : t("Displaying")} ${
-              orderData.orders.length
-            }  ${appState.lang == "en" ? "Orders" : t("Orders")}`}
+            {`${appState?.lang == "en" ? "Displaying" : t("Displaying")} ${
+              orderData?.orders?.length
+            }  ${appState?.lang == "en" ? "Orders" : t("Orders")}`}
           </Label>
         ) : (
           <div className={styles["no-order"]}>
@@ -92,7 +90,6 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
       {orderData?.orders && orderData?.orders?.length > 0 ? (
         <>
           {orderData?.orders?.map((order, index, ordersArr) => {
-            // console.log("order", order);
             return (
               <div key={index} className={styles["order-section"]}>
                 {orderData?.orders[index]?.tracking &&
@@ -132,8 +129,8 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                               )}`}
                             </Label>
                           </div>
-                          {ordersArr[index].status !== "ORDER_CONFIRMED" &&
-                            ordersArr[index].status !== "ORDER_FULFILLED" && (
+                          {ordersArr[index]?.status !== "ORDER_CONFIRMED" &&
+                            ordersArr[index]?.status !== "ORDER_FULFILLED" && (
                               <div>
                                 <Button
                                   buttonSize="sm"
@@ -150,7 +147,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                             )}
                         </div>
                         <div className={styles["order-image"]}>
-                          {orderImages.map((image, index) => {
+                          {orderImages?.map((image, index) => {
                             return (
                               <div key={index}>
                                 <Image
@@ -223,7 +220,6 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                     className={styles["view-button"]}
                     onClick={() => {
                       handleOrderDetail(order);
-                      // console.log("clicks", order);
                     }}
                   >
                     {width > desktopScreenSize
