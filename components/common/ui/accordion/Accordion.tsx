@@ -1,8 +1,14 @@
 /* eslint-disable react/no-unknown-property */
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import styles from "./Accordion.module.scss";
 import { MinusIcon, PlusIcon, ChevronDown, ArrowDown } from "components/icons";
+import { AppContext } from "lib/context";
+
+type LinksArrType = {
+  text?: string;
+  url?: string;
+};
 interface AccordionProps {
   className?: string;
   index?: number;
@@ -14,6 +20,8 @@ interface AccordionProps {
   role?: string;
   arrowColor?: string;
   arrowDown?: Boolean;
+  footerArabicLinks?: LinksArrType[];
+  footerAccordion?: boolean;
 }
 
 const Accordion = ({
@@ -26,7 +34,10 @@ const Accordion = ({
   role = "",
   arrowColor,
   arrowDown = false,
+  footerArabicLinks = [],
+  footerAccordion = false,
 }: AccordionProps): JSX.Element => {
+  const { appState } = useContext(AppContext);
   const [isOpened, setIsOpened] = useState(false);
 
   return (
@@ -44,7 +55,7 @@ const Accordion = ({
         <div className={`${styles["heading-text"]}`}>{heading}</div>
         <div className={`${styles["heading-icons"]}`} data-opened={isOpened}>
           {arrowDown ? (
-            <div className={`${isOpened && styles['arrowDown-open']}`}>
+            <div className={`${isOpened && styles["arrowDown-open"]}`}>
               <ArrowDown />
             </div>
           ) : arrowIcon ? (
@@ -67,12 +78,23 @@ const Accordion = ({
         {links && links.length > 0 && (
           <ul className={styles["menu__links"]}>
             {links.map((link, index) => (
-                <li key={index}>
-                  <Link href={link.url || "/"}>
-                    <a className="opacity-60">{link.text}</a>
-                  </Link>
-                </li>
-              ))}
+              <li key={index}>
+                <Link href={link?.url || "/"}>
+                  <a className="opacity-60">
+                    {footerAccordion ? (
+                      <>
+                        {appState?.lang === "en"
+                          ? link.text
+                          : Array.isArray(footerArabicLinks) &&
+                            footerArabicLinks[index]?.text}
+                      </>
+                    ) : (
+                      link?.text
+                    )}
+                  </a>
+                </Link>
+              </li>
+            ))}
           </ul>
         )}
       </div>
