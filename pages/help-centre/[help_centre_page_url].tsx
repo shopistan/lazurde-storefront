@@ -1,3 +1,4 @@
+import React, { FC, useContext, useState, useEffect } from "react";
 import Footer from "components/common/footer";
 import Header from "components/common/header";
 import { componentsById } from "components/xm-component-library";
@@ -8,7 +9,6 @@ import {
   fetchXMComponents,
 } from "lib/xm";
 import Head from "next/head";
-import React, { FC, useContext } from "react";
 import AppContentWrapper from "../../components/common/app-content-wrapper";
 import Image from "next/image";
 import { AppContext } from "lib/context";
@@ -18,12 +18,32 @@ import { PageRouteType } from "lib/types/xm";
 
 const HelpCentrePages: FC<PageProps> = ({
   headerProps,
+  headerArray,
   brandSidebarProps,
   footerProps,
   pageComponents,
 }) => {
-  const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
+  const [headerData, setHeaderData] = useState<any>({});
+
+  const getCurrentBrandId = () => {
+    if (appState?.brand === `L'azurde`) return "lazurdeHeader";
+    else if (appState?.brand === `Miss L'`) return "missLHeader";
+    else if (appState?.brand === "Kenaz") return "kenazHeader";
+    else return "lazurdeHeader";
+  };
+
+  useEffect(() => {
+    const currentHeaderProps: any[] =
+      headerArray &&
+      headerArray?.length > 0 &&
+      headerArray?.filter((header: { params: any }) => {
+        return header.params.headerId === getCurrentBrandId();
+      });
+    setHeaderData(currentHeaderProps?.[0].params);
+  }, []);
+
   return (
     <>
       <Head>
@@ -32,7 +52,7 @@ const HelpCentrePages: FC<PageProps> = ({
           L&apos;AZURDE
         </title>
       </Head>
-      <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
+      <Header {...headerData} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
         <div className={"component-container"}>
           {pageComponents.map((component: XMComponent, index) => {
@@ -47,7 +67,13 @@ const HelpCentrePages: FC<PageProps> = ({
       <Footer {...footerProps}></Footer>
       <div className={"back-block"}>
         <button className={"button"}>
-          <Image src={"/question.png"} width={20} height={20} />
+          <Image
+            src={"/question.png"}
+            width={20}
+            height={20}
+            layout="fixed"
+            alt="icon"
+          />
           <p>
             {appState.lang == "en" ? "Have a question?" : t("customerButton")}
           </p>
@@ -87,6 +113,8 @@ export async function getStaticProps(context: any) {
   const globalComponents = (await fetchGlobalComponents()) || [];
   const pageComponents =
     (await fetchXMComponents(12, `/help-centre/${help_centre_page_url}`)) || [];
+  const headerArray =
+    globalComponents.filter((item: XMComponent) => item.id === "Header") || {};
   const headerProps =
     (
       globalComponents.find(
@@ -106,6 +134,7 @@ export async function getStaticProps(context: any) {
   return {
     props: {
       headerProps,
+      headerArray,
       footerProps,
       brandSidebarProps,
       pageComponents,

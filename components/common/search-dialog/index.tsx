@@ -145,7 +145,10 @@ const SearchDialog: FC<SearchDialogProps> = ({
             <CrossSmall
               width="12"
               height="12"
-              onClick={() => setOpenSearchDialog(false)}
+              onClick={() => {
+                setOpenSearchDialog(false);
+                document.body.className = "";
+              }}
             />
           </div>
         </div>

@@ -411,9 +411,9 @@
   margin-top: 8px;
   margin-bottom: 8px;
 
-  // @media (min-width: $breakPoint-desktop) {
-  //   display: none;
-  // }
+  @media (max-width: $breakPoint-mobile) {
+    margin-bottom: 0;
+  }
 
   .history-seven-heading {
     font-size: 15px;

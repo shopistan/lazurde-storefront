@@ -142,7 +142,10 @@ const SiteNavBar: FC<siteNavBarProps> = ({
       </div>
       <div
         role={"search"}
-        onClick={() => setOpenSearchDialog(true)}
+        onClick={() => {
+          setOpenSearchDialog(true);
+          document.body.className = "hide-scrollbar";
+        }}
         className={styles["search-icon"]}
       >
         <Search></Search>
