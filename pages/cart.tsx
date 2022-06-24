@@ -1,21 +1,43 @@
+import React, { FC, useContext, useEffect, useState } from "react";
 import Footer from "components/common/footer";
 import Header from "components/common/header";
 import { componentsById } from "components/xm-component-library";
 import { PageProps, XMComponent } from "lib/types/common";
 import { fetchGlobalComponents, fetchXMComponents } from "lib/xm";
 import Head from "next/head";
-import React, { FC } from "react";
 import AppContentWrapper from "components/common/app-content-wrapper";
 import Cart from "components/common/cart";
 import { GetServerSideProps } from "next";
 import { getCartByCartId } from "lib/utils/cart";
+import { AppContext } from "lib/context";
 
 const CartPage: FC<PageProps> = ({
   headerProps,
+  headerArray,
   brandSidebarProps,
   footerProps,
   pageComponents,
 }) => {
+  const { appState } = useContext(AppContext);
+  const [headerData, setHeaderData] = useState<any>({});
+
+  const getCurrentBrandId = () => {
+    if (appState?.brand === `L'azurde`) return "lazurdeHeader";
+    else if (appState?.brand === `Miss L'`) return "missLHeader";
+    else if (appState?.brand === "Kenaz") return "kenazHeader";
+    else return "lazurdeHeader";
+  };
+
+  useEffect(() => {
+    const currentHeaderProps: any[] =
+      headerArray &&
+      headerArray?.length > 0 &&
+      headerArray?.filter((header: { params: any }) => {
+        return header.params.headerId === getCurrentBrandId();
+      });
+    setHeaderData(currentHeaderProps?.[0].params);
+  }, []);
+
   return (
     <>
       <Head>
@@ -24,7 +46,7 @@ const CartPage: FC<PageProps> = ({
           L&apos;AZURDE
         </title>
       </Head>
-      <Header {...headerProps} brandSidebarProps={brandSidebarProps}></Header>
+      <Header {...headerData} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
         <div
           className={"component-container"}
@@ -50,6 +72,8 @@ export default CartPage;
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const globalComponents = (await fetchGlobalComponents()) || [];
   const pageComponents = (await fetchXMComponents(12, "/search")) || [];
+  const headerArray =
+    globalComponents.filter((item: XMComponent) => item.id === "Header") || {};
   const headerProps =
     (
       globalComponents.find(
@@ -69,6 +93,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   return {
     props: {
       headerProps,
+      headerArray,
       footerProps,
       brandSidebarProps,
       pageComponents,
