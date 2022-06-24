@@ -21,13 +21,17 @@
 }
 
 .order-sent {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 18px;
   letter-spacing: 0em;
   text-align: start;
   margin-top: 0;
   margin-bottom: 8px !important;
+
+  @media (min-width: $breakPoint-desktop) {
+    font-size: 15px;
+  }
 }
 
 .delivery-estimate {
@@ -195,7 +199,7 @@
 
 .view-button {
   width: 74px !important;
-  height: 38px !important;
+  height: 34px !important;
   font-size: 15px;
   font-weight: 600;
   line-height: 18px;
