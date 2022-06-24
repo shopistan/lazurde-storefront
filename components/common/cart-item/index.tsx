@@ -201,7 +201,7 @@ const CartItem = ({
                 // value={value}
                 onChange={(e) => {
                   // setValue(e.target.value);
-                  if(Number(e.target.value) > 999) e.target.value = '999'
+                  if(e.target.value.length > 3) e.target.value = e.target.value.slice(0, 3)
                   setShowError("");
                 }}
                 onKeyDown={(e) =>
