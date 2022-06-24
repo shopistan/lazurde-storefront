@@ -31,7 +31,13 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
   return (
     <div className={styles["history-container"]}>
       <div className={styles["history-first"]}>
-        <Image alt="icon" src={"/orders.png"} width={13.75} height={15.28} />
+        <Image
+          alt="icon"
+          src={"/orders.png"}
+          width={20}
+          height={20}
+          layout="fixed"
+        />
         <Label className={styles["history-first-title"]}>
           {appState.lang == "en" ? "Order Details" : t("Order Details")}
         </Label>
@@ -49,8 +55,9 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
                 <Image
                   alt="icon"
                   src={"/ordernum.png"}
-                  width={16}
-                  height={16}
+                  width={18}
+                  height={18}
+                  layout="fixed"
                 />
               </div>
               <p className={styles["order-details-text"]}>
@@ -65,8 +72,9 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
                 <Image
                   alt="icon"
                   src={"/calendar.png"}
-                  width={15}
-                  height={15}
+                  width={18}
+                  height={18}
+                  layout="fixed"
                 />
               </div>
               <p className={styles["order-details-text"]}>
@@ -81,8 +89,9 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
                 <Image
                   alt="icon"
                   src={"/warrantybook.png"}
-                  width={15}
-                  height={15}
+                  width={18}
+                  height={18}
+                  layout="fixed"
                 />
               </div>
               <Label className={styles["order-details-link"]}>
@@ -96,7 +105,8 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
             <Image alt="icon" src={"/barcode.svg"} width={160} height={160} />
           </div>
         </div>
-        <Button onClick={() => {}}>
+        <div className={styles["divider"]}></div>
+        <Button buttonSize="sm" onClick={() => {}}>
           {appState.lang == "en" ? "Return Order" : t("Return Order")}
         </Button>
       </div>
@@ -123,7 +133,11 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
             </Label>
             <p className={styles["history-forth-text"]}>
               {order?.items?.length}{" "}
-              {appState.lang == "en" ? "Items" : t("Items")}
+              {appState.lang == "en"
+                ? order?.items?.length > 1
+                  ? "Items"
+                  : "Item"
+                : t("Items")}
             </p>
           </div>
           <div>
