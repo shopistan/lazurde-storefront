@@ -59,44 +59,51 @@ const AccountInformation: FC<AccountInformationProps> = ({
   const [activeComponent, setActiveComponent] = useState(
     activeComp || "Account Overview"
   );
-  const [orderDetails, setOrderDetails] = useState("");
+  const [renderCom, setRenderCom] = useState(false);
+
+  useEffect(() => {
+    setRenderCom(true);
+  }, []);
+
   return (
     <>
-      <div className={styles["account-container"]}>
-        <div
-          className={styles["account-main"]}
-          onClick={() => {
-            router.push("/account");
-          }}
-        >
-          <div className={styles["account-mainImage"]}>
-            <Image
-              src={titleImage?.url || "/"}
-              alt={titleImage?.altText}
-              width={28.5}
-              height={30}
+      {renderCom && (
+        <div className={styles["account-container"]}>
+          <div
+            className={styles["account-main"]}
+            onClick={() => {
+              router.push("/account");
+            }}
+          >
+            <div className={styles["account-mainImage"]}>
+              <Image
+                src={titleImage?.url || "/"}
+                alt={titleImage?.altText}
+                width={28.5}
+                height={30}
+              />
+            </div>
+            <Label>{appState?.lang == "en" ? title : t("accountTitle")}</Label>
+          </div>
+          <div className={styles["details-section"]}>
+            <SideBar
+              barCode={barCode}
+              firstName={firstName}
+              lastName={lastName}
+              reviewImage={reviewImage}
+              reviewText={reviewText}
+              details={details}
+              setActiveComponent={setActiveComponent}
+              activeComponent={activeComponent}
             />
-          </div>
-          <Label>{appState?.lang == "en" ? title : t("accountTitle")}</Label>
-        </div>
-        <div className={styles["details-section"]}>
-          <SideBar
-            barCode={barCode}
-            firstName={firstName}
-            lastName={lastName}
-            reviewImage={reviewImage}
-            reviewText={reviewText}
-            details={details}
-            setActiveComponent={setActiveComponent}
-            activeComponent={activeComponent}
-          />
-          <div className={styles["account-right-side"]}>
-            {activeComponent == "Account Overview" && <AccountSection />}
-            {activeComponent == "My Orders" && <OrderDetails />}
-            {activeComponent == "My Reviews" && <UserReviews />}
+            <div className={styles["account-right-side"]}>
+              {activeComponent == "Account Overview" && <AccountSection />}
+              {activeComponent == "My Orders" && <OrderDetails />}
+              {activeComponent == "My Reviews" && <UserReviews />}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
