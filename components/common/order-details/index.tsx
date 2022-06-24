@@ -27,7 +27,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
   const [orderObject, setOrderObject] = useState({});
   const [orderDetails, setOrderDetails] = useState("");
 
-  console.log("testing", orderObject);
+  // console.log("testing", orderObject);
 
   const destructureAttributes = (product: ProductType) => {
     const obj: { [key: string]: string } = {};
@@ -39,7 +39,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
 
   const handleOrderDetail = (order: any) => {
     order && setOrderObject(order);
-    console.log("orders", order);
+    // console.log("orders", order);
     setOrderDetails("Order Details");
   };
 
@@ -92,7 +92,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
       {orderData?.orders && orderData?.orders?.length > 0 ? (
         <>
           {orderData?.orders?.map((order, index, ordersArr) => {
-            console.log("order", order);
+            // console.log("order", order);
             return (
               <div key={index} className={styles["order-section"]}>
                 {orderData?.orders[index]?.tracking &&
@@ -223,7 +223,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({}) => {
                     className={styles["view-button"]}
                     onClick={() => {
                       handleOrderDetail(order);
-                      console.log("clicks", order);
+                      // console.log("clicks", order);
                     }}
                   >
                     {width > desktopScreenSize
