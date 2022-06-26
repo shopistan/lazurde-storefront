@@ -56,8 +56,10 @@ const ContextProvider: FC = ({ children }) => {
   const [hasFilteredData, setHasFilteredData] = useState(false);
   const [priceListId, setPriceListId] = useState("100000");
   const [allWishListProducts, setAllWishListProducts] = useState(
-    typeof window !== "undefined" &&
-      JSON.parse(window.sessionStorage.getItem("wishListArray")) || []
+    (typeof window !== "undefined" &&
+      window.sessionStorage.getItem("wishListArray") !== "undefined" &&
+      JSON.parse(window.sessionStorage.getItem("wishListArray"))) ||
+      []
   );
 
   return (

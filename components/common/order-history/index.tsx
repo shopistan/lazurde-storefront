@@ -8,6 +8,8 @@ import { getReviews, writeReview } from "lib/utils/reviews";
 import WriteAReview from "components/common/reviews/write-review";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
+import Accordion from "components/common/ui/accordion/Accordion";
+import { needHelpData } from "lib/mock-data/data";
 
 interface OrderHistoryProps {
   order?: any;
@@ -29,7 +31,13 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
   return (
     <div className={styles["history-container"]}>
       <div className={styles["history-first"]}>
-        <Image src={"/order.png"} width={13.75} height={15.28} />
+        <Image
+          alt="icon"
+          src={"/orders.png"}
+          width={20}
+          height={20}
+          layout="fixed"
+        />
         <Label className={styles["history-first-title"]}>
           {appState.lang == "en" ? "Order Details" : t("Order Details")}
         </Label>
@@ -44,7 +52,13 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
           <div>
             <div className={styles["history-second-first-block"]}>
               <div className={styles["history-second-first-image"]}>
-                <Image src={"/calendar.png"} width={18} height={18} />
+                <Image
+                  alt="icon"
+                  src={"/ordernum.png"}
+                  width={18}
+                  height={18}
+                  layout="fixed"
+                />
               </div>
               <p className={styles["order-details-text"]}>
                 {appState.lang == "en" ? "Order No" : t("Order No")}:
@@ -55,7 +69,13 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
             </div>
             <div className={styles["history-second-first-block"]}>
               <div className={styles["history-second-first-image"]}>
-                <Image src={"/calendar.png"} width={18} height={18} />
+                <Image
+                  alt="icon"
+                  src={"/calendar.png"}
+                  width={18}
+                  height={18}
+                  layout="fixed"
+                />
               </div>
               <p className={styles["order-details-text"]}>
                 {appState.lang == "en" ? "Order Date" : t("Order Date")}:
@@ -66,9 +86,15 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
             </div>
             <div className={styles["history-second-first-block"]}>
               <div className={styles["history-second-first-image"]}>
-                <Image src={"/calendar.png"} width={18} height={18} />
+                <Image
+                  alt="icon"
+                  src={"/warrantybook.png"}
+                  width={18}
+                  height={18}
+                  layout="fixed"
+                />
               </div>
-              <Label>
+              <Label className={styles["order-details-link"]}>
                 {appState.lang == "en"
                   ? "View Digital Receipt & Warranty"
                   : t("View Digital Receipt & Warranty")}
@@ -76,10 +102,11 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
             </div>
           </div>
           <div className={styles["history-barcode"]}>
-            <Image src={"/barcode.svg"} width={160} height={160} />
+            <Image alt="icon" src={"/barcode.svg"} width={160} height={160} />
           </div>
         </div>
-        <Button onClick={() => {}}>
+        <div className={styles["divider"]}></div>
+        <Button buttonSize="sm" onClick={() => {}}>
           {appState.lang == "en" ? "Return Order" : t("Return Order")}
         </Button>
       </div>
@@ -106,7 +133,11 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
             </Label>
             <p className={styles["history-forth-text"]}>
               {order?.items?.length}{" "}
-              {appState.lang == "en" ? "Items" : t("Items")}
+              {appState.lang == "en"
+                ? order?.items?.length > 1
+                  ? "Items"
+                  : "Item"
+                : t("Items")}
             </p>
           </div>
           <div>
@@ -128,6 +159,7 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
                     <div className={styles["history-forth-sections"]} key={i}>
                       <div className={styles["history-forth-image"]}>
                         <Image
+                          alt="icon"
                           src={"/small-ring.png" || obj["Image URL"]}
                           width={100}
                           height={100}
@@ -140,33 +172,43 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
                         <p className={styles["history-forth-heading"]}>
                           ${object?.price}
                         </p>
-                        <p className={styles["history-forth-sub"]}>
-                          {appState.lang == "en" ? "Quantity" : t("Quantity")}:{" "}
-                          {object?.quantity}
-                        </p>
-                        <p className={styles["history-forth-sub"]}>
-                          {appState.lang == "en" ? "Size" : t("Size")}:{" "}
-                          {obj["Size"]}
-                        </p>
-                        <p className={styles["history-forth-sub"]}>
-                          {appState.lang == "en" ? "Color": t("Color")}:{" "}
-                          {obj["Color"]}
-                        </p>
-                        <p className={styles["history-forth-sub"]}>
-                          {appState.lang == "en"
-                            ? "Style Number"
-                            : t("Style Number")}
-                          : {object?.sku}
-                        </p>
-                        <p className={styles["history-forth-sub"]}>
-                          {appState.lang == "en"
-                            ? "Order Date"
-                            : t("Order Date")}
-                          : {updateOrderDate(order?.updatedAt)}
-                        </p>
+                        <div className={styles["history-forth-style"]}>
+                          <p className={styles["history-forth-sub-style"]}>
+                            {appState.lang == "en" ? "Quantity" : t("Quantity")}
+                            : {object?.quantity}
+                          </p>
+                          <p className={styles["history-forth-sub-style"]}>
+                            {appState.lang == "en" ? "Size" : t("Size")}:{" "}
+                            {obj["Size"]}
+                          </p>
+                          <p className={styles["history-forth-sub-style"]}>
+                            {appState.lang == "en" ? "Color" : t("Color")}:{" "}
+                            {obj["Color"]}
+                          </p>
+                        </div>
+                        <div className={styles["history-forth-detail"]}>
+                          <p className={styles["history-forth-sub-detail"]}>
+                            {appState.lang == "en"
+                              ? "Style Number"
+                              : t("Style Number")}
+                            : {object?.sku}
+                          </p>
+                          <p className={styles["history-forth-sub-detail"]}>
+                            {appState.lang == "en"
+                              ? "Order Date"
+                              : t("Order Date")}
+                            : {updateOrderDate(order?.updatedAt)}
+                          </p>
+                          <p className={styles["history-forth-sub-detail"]}>
+                            {appState.lang == "en"
+                              ? "Order Created"
+                              : t("Order Created")}
+                          </p>
+                        </div>
                         <p className={styles["history-forth-text"]}>
                           {order?.status}
                         </p>
+
                         <div
                           className={styles["reviews-section"]}
                           onClick={() => {
@@ -175,6 +217,7 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
                           }}
                         >
                           <Image
+                            alt="icon"
                             src={"/writeReview.png"}
                             width={20}
                             height={20}
@@ -254,6 +297,24 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
             </>
           );
         })}
+      <div className={styles["history-seven"]}>
+        <div className={styles["history-seven-heading"]}>
+          <Label>Need Help?</Label>
+        </div>
+        {needHelpData.map((data, index) => {
+          return (
+            <Accordion
+              key={index}
+              className={"history-seven-text"}
+              heading={data.ques}
+              arrowDown={true}
+            >
+              {data.ans}
+            </Accordion>
+          );
+        })}
+      </div>
+
       {modalOpen && (
         <WriteAReview
           isOpened={modalOpen}

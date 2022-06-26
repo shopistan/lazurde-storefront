@@ -132,9 +132,9 @@ interface DropdownDataProps {
 const FilterBar: FC<FilterBarProps> = ({
   headerId = "",
   filterList = filterListData,
-  onApplyFilters = () => {},
-  onSortingChange = () => {},
-  onClear = () => {},
+  onApplyFilters = () => { },
+  onSortingChange = () => { },
+  onClear = () => { },
   hasFilteredData = false,
 }): JSX.Element => {
   const {
@@ -165,11 +165,12 @@ const FilterBar: FC<FilterBarProps> = ({
     { returnObjects: true }
   );
 
-  const [currentFilterList, setCurrentFilterList] = useState<string | object>(
+  const [currentFilterList, setCurrentFilterList] = useState<FilterListProps[]>(
     filterList
   );
-  const [isOpened, setIsOpened] = useState({ opened: false, selected: -1 });
+  const [isOpened, setIsOpened] = useState({ opened: false, selected: "" });
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
+  const [listLoading, setListLoading] = useState(false);
   // const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
   // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const [linkRefs, setLinkRefs] = useState(link);
@@ -209,24 +210,48 @@ const FilterBar: FC<FilterBarProps> = ({
     });
 
     if (appState.lang === "en") {
-      setCurrentFilterList(filterList);
+      setCurrentFilterList([...filterList]);
     } else {
       // setCurrentFilterList(_arabicFilterBarData);
     }
   }, [appState]);
 
   useEffect(() => {
-    setCurrentFilterList(filterList);
+    setCurrentFilterList([...filterList]);
     setLinkRefs(link);
+    setListLoading(false)
   }, [filterList]);
 
+  useEffect(() => {
+    if (isOpened.opened) {
+      const currentFilter = currentFilterList.find((item) => item?.filterName === isOpened?.selected)
+      const currentFilterIndex = currentFilterList.findIndex((item) => item?.filterName === isOpened?.selected)
+      setDropdownData({
+        filterName: currentFilter?.filterName,
+        filterIndex: currentFilterIndex,
+        dropdownData: currentFilter?.filterOptions,
+        positionOffset:
+          appState?.lang === "en"
+            ? linkRefs?.current[
+              currentFilterIndex
+            ]?.current?.getBoundingClientRect().left
+            : width -
+            linkRefs?.current[
+              currentFilterIndex
+            ]?.current?.getBoundingClientRect().right -
+            17.4,
+      });
+    }
+  }, [currentFilterList]);
+
   return (
-    <div className={styles["filter-bar-main"]} data-header-id={headerId}>
+    <div key={currentFilterList.length} className={styles["filter-bar-main"]} data-header-id={headerId}>
       <div className={styles["div-filter-bar"]}>
         <div className={styles["filter-links"]}>
           {Array.isArray(currentFilterList) &&
             currentFilterList.length > 0 &&
             currentFilterList.map((data, index) => {
+              if(!data) return
               const hasCategories = true;
               const selectedFilterCount = selectedFilters?.[index]
                 ? Object.keys(selectedFilters?.[index]?.selectedOptions).length
@@ -235,7 +260,7 @@ const FilterBar: FC<FilterBarProps> = ({
               return (
                 <div
                   role={"links"}
-                  key={index}
+                  key={`${index}-${data?.filterOptions?.length}`}
                   className={styles["links"]}
                   ref={
                     linkRefs && linkRefs?.current
@@ -247,7 +272,7 @@ const FilterBar: FC<FilterBarProps> = ({
                     event.stopPropagation();
 
                     if (hasCategories) {
-                      setIsOpened({ opened: true, selected: index });
+                      setIsOpened({ opened: true, selected: data?.filterName });
                       setDropdownData({
                         filterName: data?.filterName,
                         filterIndex: index,
@@ -255,30 +280,30 @@ const FilterBar: FC<FilterBarProps> = ({
                         positionOffset:
                           appState?.lang === "en"
                             ? linkRefs?.current[
-                                index
-                              ]?.current?.getBoundingClientRect().left
+                              index
+                            ]?.current?.getBoundingClientRect().left
                             : width -
-                              linkRefs?.current[
-                                index
-                              ]?.current?.getBoundingClientRect().right -
-                              17.4,
+                            linkRefs?.current[
+                              index
+                            ]?.current?.getBoundingClientRect().right -
+                            17.4,
                       });
                     } else {
-                      setIsOpened({ opened: false, selected: index });
+                      setIsOpened({ opened: false, selected: data?.filterName });
                     }
                   }}
                   onMouseLeave={() => {
                     if (hasCategories) {
-                      setIsOpened({ opened: false, selected: index });
+                      setIsOpened({ opened: false, selected: data?.filterName });
                     } else {
-                      setIsOpened({ opened: false, selected: -1 });
+                      setIsOpened({ opened: false, selected: "-1" });
                     }
                   }}
                   data-selected={
                     hasCategories
                       ? isOpened?.opened === true &&
-                        isOpened?.selected === index
-                      : isOpened?.selected === index
+                      isOpened?.selected === data?.filterName
+                      : isOpened?.selected === data?.filterName
                   }
                 >
                   <span>{data?.filterName}</span>
@@ -323,6 +348,7 @@ const FilterBar: FC<FilterBarProps> = ({
       </div>
 
       <div
+        key={dropdownData?.dropdownData.length}
         className={styles["category-dropdown"]}
         data-opened={isOpened?.opened}
       >
@@ -333,6 +359,8 @@ const FilterBar: FC<FilterBarProps> = ({
           setSelectedFilters={setSelectedFilters}
           onApplyFilters={onApplyButtonClick}
           hasFilteredData={hasFilteredData}
+          listLoading={listLoading}
+          setListLoading={setListLoading}
         ></DropDown>
       </div>
       <div

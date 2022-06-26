@@ -12,7 +12,7 @@ import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 import useWindowSize from "lib/utils/useWindowSize";
-import { mobileScreenSize } from "lib/utils/common";
+import { desktopScreenSize } from "lib/utils/common";
 
 type CGIRPagesProps = {
   name?: string | "";
@@ -57,7 +57,7 @@ const CGIR: FC<CGIRProps> = ({
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
   const [showPolicies, setShowPolicies] = useState(false);
-  const [width] = useWindowSize();
+  const [size] = useWindowSize();
 
   console.log("cgir", cgirPages);
 
@@ -142,8 +142,8 @@ const CGIR: FC<CGIRProps> = ({
                       <Image
                         src={icon?.url}
                         alt={icon?.altText}
-                        width={width || 40}
-                        height={height || 40}
+                        width={width || 20}
+                        height={height || 20}
                       />
                     </div>
                   )}
@@ -154,6 +154,16 @@ const CGIR: FC<CGIRProps> = ({
                 </div>
               );
             })}
+          <div className={styles["back-block"]}>
+            <button className={styles["button"]}>
+              <Image src={"/question.png"} width={20} height={20} alt="" />
+              <p>
+                {appState.lang == "en"
+                  ? "Have a question?"
+                  : t("customerButton")}
+              </p>
+            </button>
+          </div>
         </div>
         <div
           className={styles["cgir-right-container"]}
@@ -199,7 +209,12 @@ const CGIR: FC<CGIRProps> = ({
                         // maxWidth: "650px",
                         maxHeight: "none",
                         minHeight: "0px",
-                        height: "2700px",
+                        height:
+                          size > desktopScreenSize
+                            ? "3850px"
+                            : size > 413
+                            ? "4150px"
+                            : "3500px",
                         width: "100%",
                         fontFamily: "Roboto",
                         fontSize: "14px",
@@ -220,7 +235,12 @@ const CGIR: FC<CGIRProps> = ({
                         // maxWidth: "650px",
                         maxHeight: "none",
                         minHeight: "0px",
-                        height: "2700px",
+                        height:
+                          size > desktopScreenSize
+                            ? "3850px"
+                            : size > 413
+                            ? "4150px"
+                            : "3500px",
                         width: "100%",
                         fontFamily: "Roboto",
                         fontSize: "14px",
@@ -244,7 +264,12 @@ const CGIR: FC<CGIRProps> = ({
                         width: "1px",
                         maxHeight: "none",
                         minHeight: "0px",
-                        height: "1500px",
+                        height:
+                          size > desktopScreenSize
+                            ? "1500px"
+                            : size > 413
+                            ? "1700"
+                            : "1800px",
                       }}
                       src="https://ksatools.eurolandir.com/tools/pressreleases/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
                       width="100%"
@@ -264,7 +289,12 @@ const CGIR: FC<CGIRProps> = ({
                         width: "1px",
                         maxHeight: "none",
                         minHeight: "0px",
-                        height: "1500px",
+                        height:
+                          size > desktopScreenSize
+                            ? "1500px"
+                            : size > 413
+                            ? "1700"
+                            : "1800px",
                       }}
                       src="https://ksatools.eurolandir.com/tools/pressreleases/?companycode=sa-lazurde&amp;v=2021&amp;lang=ar-ae"
                       width="100%"
@@ -286,11 +316,22 @@ const CGIR: FC<CGIRProps> = ({
                         maxWidth: "700px",
                         maxHeight: "none",
                         minHeight: "0px",
-                        height: "840px",
+                        height:
+                          size > desktopScreenSize
+                            ? "900px"
+                            : size > 413
+                            ? "1000"
+                            : "1000px",
                       }}
                       src="https://ksatools.eurolandir.com/tools/fincalendar2/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
                       width="100%"
-                      height="807"
+                      height={
+                        size > desktopScreenSize
+                          ? "840px"
+                          : size > 413
+                          ? "1000"
+                          : "1000px"
+                      }
                       frameBorder="0"
                       scrolling="no"
                     >
@@ -328,8 +369,8 @@ const CGIR: FC<CGIRProps> = ({
                               <Image
                                 alt=""
                                 src={image?.url}
-                                width={213}
-                                height={276}
+                                width={size > desktopScreenSize ? 213 : 150}
+                                height={size > desktopScreenSize ? 276 : 195.21}
                                 // onClick={() =>}
                               />
                             </a>
@@ -346,7 +387,11 @@ const CGIR: FC<CGIRProps> = ({
                     return (
                       <div key={index}>
                         {heading && <span>{heading}</span>}
-                        {text && <p>{text}</p>}
+                        {/* {text && <p>{text}</p>} */}
+                        <p
+                          key={Math.random()}
+                          dangerouslySetInnerHTML={{ __html: text }}
+                        ></p>
                       </div>
                     );
                   })
@@ -379,15 +424,17 @@ const CGIR: FC<CGIRProps> = ({
                 ) : null}
               </div>
             )}
+            <div className={styles["back-block"]}>
+              <button className={styles["button"]}>
+                <Image src={"/question.png"} width={20} height={20} alt="" />
+                <p>
+                  {appState.lang == "en"
+                    ? "Have a question?"
+                    : t("customerButton")}
+                </p>
+              </button>
+            </div>
           </div>
-        </div>
-        <div className={styles["back-block"]}>
-          <button className={styles["button"]}>
-            <Image src={"/question.png"} width={20} height={20} alt="" />
-            <p>
-              {appState.lang == "en" ? "Have a question?" : t("customerButton")}
-            </p>
-          </button>
         </div>
       </div>
     </div>

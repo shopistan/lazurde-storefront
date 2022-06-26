@@ -65,7 +65,6 @@ const CartItem = ({
   const [inventoryData, setInventoryData] = useState(100);
   const [showError, setShowError] = useState("");
   // const [removingItem, setRemovingItem]
-  console.log("comsething", item);
   const imageSrc = item?.["Image URL"];
   const brandName = item?.["Brand"];
 
@@ -86,7 +85,7 @@ const CartItem = ({
 
   useEffect(() => {
     if (!updatingCartItem) {
-      setValue(item?.quantity?.toString());
+      // setValue(item?.quantity?.toString());
       setUpdatingItem(false);
       setRemovingItem(false);
       setAddingItem(false);
@@ -197,28 +196,38 @@ const CartItem = ({
                 type="number"
                 id="quantity"
                 name="quantity"
+                max="999"
                 defaultValue={item?.quantity}
-                value={value}
+                // value={value}
                 onChange={(e) => {
-                  setValue(e.target.value);
+                  // setValue(e.target.value);
+                  if(e.target.value.length > 3) e.target.value = e.target.value.slice(0, 3)
                   setShowError("");
                 }}
                 onKeyDown={(e) =>
                   (e.keyCode === 69 || e.keyCode === 190) && e.preventDefault()
                 }
                 onBlur={(e) => {
-                  if (Number(value || 1) !== Number(item?.quantity)) {
-                    if (
-                      inventoryData &&
-                      e.target.value > inventoryData.toString()
-                    ) {
-                      setValue(inventoryData.toString());
-                      setShowError(item.itemId.toString());
-                      return;
-                    }
+                  const enteredValue = e.target.value
+                  if (!inventoryData) return
+                  if (Number(enteredValue || 1) === Number(item?.quantity)) { return }
+                  if (Number(enteredValue || 1) > Number(item?.quantity) && Number(inventoryData || 1) === Number(item?.quantity)) {
+                    e.target.value = inventoryData.toString()
+                    setShowError(item.itemId.toString());
+                    return
+                  }
+                  if (
+                    Number(enteredValue) > Number(inventoryData)
+                  ) {
+                    e.target.value = inventoryData.toString()
+                    // setValue(inventoryData.toString());
+                    setShowError(item.itemId.toString());
                     setUpdatingItem(true);
-                    handleChange(Number(value), item);
-                  } else setValue(item?.quantity);
+                    handleChange(Number(inventoryData), item);
+                    return;
+                  }
+                  setUpdatingItem(true);
+                  handleChange(Number(enteredValue), item);
                 }}
                 disabled={updatingItem}
               />

@@ -6,27 +6,48 @@ import { CrossSmall, PlusIcon } from "components/icons";
 interface ImageUploaderProps {
   setFileUpload?: Function;
   file?: [];
+  setFileName?: Function;
+  uploadedFiles?: any;
+  imageUploadRef?: any;
 }
 let fileObj: any = [];
+let fileArray: any = [];
 
 const ImageUploader = ({
   setFileUpload,
   file,
+  setFileName,
+  uploadedFiles,
+  imageUploadRef,
 }: ImageUploaderProps): JSX.Element => {
-  let fileArray: any = [];
+  let fileName: any = [];
+
+  useEffect(() => {
+    return () => {
+      fileArray = [];
+      setFileUpload([{ fileArray: {} }]);
+    };
+  }, []);
 
   const uploadMultipleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const currentFile: any = event.target.files;
     fileObj.push(event.target.files);
-    for (let i = 0; i < fileObj.length; i++) {
-      fileObj[i][0] && fileArray.push(URL?.createObjectURL(fileObj[i][0]));
-    }
+
+    currentFile[0].name && fileName.push(currentFile[0].name);
+    Object.keys(currentFile).forEach((file: any) => {
+      file = currentFile[file];
+      fileArray.push(URL?.createObjectURL(file));
+      setFileName((prev: any) => [...prev, file]);
+    });
     setFileUpload({ fileArray });
   };
 
   const deleteImage = (event: any, index: number) => {
-    file.splice(index, 1);
-    fileObj.splice(index, 1);
+    file?.splice(index, 1);
+    fileObj?.splice(index, 1);
     setFileUpload({ fileArray: file });
+    uploadedFiles?.splice(index, 1);
+    setFileName([...uploadedFiles]);
   };
 
   return (
@@ -57,19 +78,21 @@ const ImageUploader = ({
         )}
 
         <div className={styles["img-upload-input"]}>
-          <label htmlFor="imgUploader" className={styles["img-label"]}>
-            <input
-              key={Math.random()}
-              type="file"
-              accept="image/*"
-              name="imgUploader"
-              id="imgUploader"
-              onChange={uploadMultipleFiles}
-              // onClick={onInputClick}
-              multiple
-            />
-            <PlusIcon />
-          </label>
+          <form>
+            <label htmlFor="imgUploader" className={styles["img-label"]}>
+              <input
+                key="similar"
+                type="file"
+                accept="image/png,image/jpg,image/jpeg"
+                name="imgUploader"
+                id="imgUploader"
+                ref={imageUploadRef}
+                onChange={uploadMultipleFiles}
+                multiple
+              />
+              <PlusIcon />
+            </label>
+          </form>
         </div>
       </div>
     </>

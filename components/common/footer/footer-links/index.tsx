@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import Heading from "components/common/ui/heading";
 import styles from "./style.module.scss";
+import { AppContext } from "lib/context";
 
 type LinksArrType = {
   text?: string;
@@ -12,6 +13,7 @@ interface FooterLinkProps {
   links?: LinksArrType[];
   index?: number;
   role?: string;
+  arabicLinks?: LinksArrType[];
 }
 
 const FooterLinks = ({
@@ -19,7 +21,10 @@ const FooterLinks = ({
   links = [],
   index,
   role = "role",
+  arabicLinks = [],
 }: FooterLinkProps): JSX.Element => {
+  const { appState } = useContext(AppContext);
+
   return (
     <div role={role} className={styles["menu__column"]} key={index}>
       <Heading element="h2" className={styles["menu__heading"]}>
@@ -31,7 +36,11 @@ const FooterLinks = ({
           links.map((link, index) => (
             <li key={index}>
               <Link href={link.url}>
-                <a className="opacity-60">{link.text}</a>
+                <a className="opacity-60">
+                  {appState?.lang === "en"
+                    ? link.text
+                    : Array.isArray(arabicLinks) && arabicLinks[index]?.text}
+                </a>
               </Link>
             </li>
           ))}
