@@ -1,19 +1,9 @@
 import axios from "axios";
-import {
-  OKTA_DOMAIN_PERSONAL,
-  OKTA_REDIRECT_URI_PERSONAL,
-  OKTA_CLIENT_ID_PERSONAL,
-  OKTA_DOMAIN,
-  OKTA_CLIENT_ID,
-  OKTA_REDIRECT_URI_DEV,
-  OKTA_REDIRECT_URI_QA,
-  OKTA_REDIRECT_URI_UAT,
-  OKTA_REDIRECT_URI_LOCAL,
-} from "general-config";
+import { OKTA_DOMAIN, OKTA_CLIENT_ID, UMS_IDENTITY_URL } from "general-config";
 import Router from "next/router";
-import { AuthTokens, ErrorObject } from "lib/types/common";
+import { AuthTokens } from "lib/types/common";
+import ENDPOINTS from "lib/api/endpoints";
 
-const GRANT_TYPE = "code";
 export const codeVerifier =
   "M25iVXpKU3puUjFaYWg3T1NDTDQtcW1ROUY5YXlwalNoc0hhakxifmZHag";
 export const codeChallenge = "qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es";
@@ -69,7 +59,6 @@ export const fetchTokens = async (code: string) => {
         "content-type": "application/x-www-form-urlencoded",
       },
     });
-    console.log("tokens obtained", tokensRes);
     if (tokensRes && tokensRes.data) {
       if (tokensRes.data.access_token) {
         window.localStorage.setItem(
@@ -101,4 +90,78 @@ export const logoutUser = async () => {
   }
 };
 
-// export default oktaAuth;
+export const getUserInfo = async () => {
+  try {
+    const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
+    const { access_token = "" } = authTokens;
+
+    const userInfoRes = await axios.get(
+      `${UMS_IDENTITY_URL}${ENDPOINTS.IDENTITY.GET_USER_INFO}`,
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+    return userInfoRes.data;
+  } catch (error) {
+    console.log("Error fetching user info: ", error);
+  }
+};
+
+export const resetUserPassword = async (
+  oldPassword: string,
+  newPassword: string
+) => {
+  try {
+    const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
+    const { access_token = "" } = authTokens;
+
+    const resetPasswordRes = await axios.post(
+      `${UMS_IDENTITY_URL}${ENDPOINTS.IDENTITY.RESET_PASSWORD}`,
+      {
+        oldPassword,
+        newPassword,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+    console.log("reset pw res", resetPasswordRes);
+  } catch (error) {
+    console.log("Error fetching user info: ", error);
+  }
+};
+
+export const refreshAuthToken = async () => {
+  try {
+    const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
+    const { refresh_token = "" } = authTokens;
+
+    const params = new URLSearchParams();
+    params.append("grant_type", "refresh_token");
+    params.append("redirect_uri", getRedirectUri());
+    params.append("client_id", OKTA_CLIENT_ID);
+    params.append("refresh_token", refresh_token);
+    params.append("scope", "openid offline_access profile email");
+
+    const tokensRes = await axios.post(`${OKTA_DOMAIN}/v1/token`, params, {
+      headers: {
+        accept: "application/json",
+        "content-type": "application/x-www-form-urlencoded",
+      },
+    });
+    if (tokensRes && tokensRes.data) {
+      if (tokensRes.data.access_token) {
+        window.localStorage.setItem(
+          "auth_tokens",
+          JSON.stringify(tokensRes.data)
+        );
+      }
+    }
+  } catch (error) {
+    console.log("Error refreshing access token: ", error);
+  }
+};
