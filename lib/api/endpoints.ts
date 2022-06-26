@@ -48,6 +48,11 @@ const ENDPOINTS = {
       `/api-cart/wishlist/user/item/${itemID}`,
   },
 
+  IDENTITY: {
+    GET_USER_INFO: "/ums/v2/users/self",
+    RESET_PASSWORD: "/ums/v2/auth/self/password",
+  },
+
   GET: {
     REVIEWS: (storeHash: string | number, productId: string | number) =>
       `https://stamped.io/api/v2/${storeHash}/dashboard/reviews?search=${productId}`,
