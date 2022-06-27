@@ -10,7 +10,12 @@ import Router, { useRouter } from "next/router";
 import { desktopScreenSize } from "lib/utils/common";
 import { BackArrow } from "components/icons";
 import { OKTA_CLIENT_ID, OKTA_DOMAIN } from "general-config";
-import { logoutUser } from "lib/identity";
+import {
+  getUserInfo,
+  logoutUser,
+  refreshAuthToken,
+  resetUserPassword,
+} from "lib/identity";
 
 type AccountsProps = {
   image: ImageType;
@@ -62,8 +67,20 @@ const SideBar: FC<SideBarProps> = ({
     { returnObjects: true }
   );
 
-  const [userName, setUserName] = useState("");
-  useEffect(() => {}, []);
+  const [userName, setUserName] = useState("San");
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      let userInfo = (await getUserInfo()) || null;
+      if (!userInfo) {
+        await refreshAuthToken();
+        userInfo = (await getUserInfo()) || {};
+      }
+      if (userInfo.firstName) {
+        setUserName(userInfo.firstName);
+      }
+    };
+    fetchUserInfo();
+  }, []);
 
   const signOut = async () => {
     logoutUser();
@@ -112,9 +129,9 @@ const SideBar: FC<SideBarProps> = ({
                         ? `Hi ${userName}`
                         : t("firstname")}
                     </span>
-                    <span>
+                    {/* <span>
                       {appState?.lang == "en" ? lastName : t("lastname")}
-                    </span>
+                    </span> */}
                   </>
                 </Label>
               </div>
