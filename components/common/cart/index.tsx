@@ -247,7 +247,8 @@ const Cart = ({ }: CartProps): JSX.Element => {
     try {
       const response = await deleteWishList(item?.itemId, authToken);
       if (response?.status === 200) {
-        const wishListData = await updateWishListData();
+        // const wishListData = await updateWishListData();
+        const wishListData =response?.data?.items
 
         setAllWishListProducts(wishListData);
         typeof window !== "undefined" &&

@@ -77,7 +77,7 @@ const CartItem = ({
       const itemId = Number(item.itemId);
       const inventoryData = await getInventoryByIds(authToken, itemId);
       setInventoryData(
-        inventoryData?.data?.inventory[0]?.counters?.["on-hand"]
+        inventoryData?.data?.inventory[0]?.counters?.["on-hand"] || 100
       );
     };
     getInventoryData();
@@ -94,7 +94,7 @@ const CartItem = ({
 
   const handleAddToCart = async (item: CartItemObject) => {
     setAddingItem(true);
-
+  
     const selectedProduct: {
       sku?: string;
       itemId?: string;
@@ -189,7 +189,7 @@ const CartItem = ({
           </div>
         )} */}
         {!wishListItem && (
-          <div className={styles["item-quantity"]}>
+          <div className={styles["item-quantity"]} key={item?.quantity || 1}>
             <span>
               {appState?.lang === "en" ? "Quantity: " : "كمية "}
               <input
@@ -210,18 +210,18 @@ const CartItem = ({
                 onBlur={(e) => {
                   const enteredValue = e.target.value
                   if (!inventoryData) return
-                  if (Number(enteredValue || 1) === Number(item?.quantity)) { return }
-                  if (Number(enteredValue || 1) > Number(item?.quantity) && Number(inventoryData || 1) === Number(item?.quantity)) {
-                    e.target.value = inventoryData.toString()
-                    setShowError(item.itemId.toString());
+                  if (Number(enteredValue || 1) >= Number(item?.quantity) && Number(inventoryData || 1) <= Number(item?.quantity)) {
+                    e.target.value = inventoryData?.toString()
+                    setShowError(item?.itemId?.toString());
                     return
                   }
+                  if (Number(enteredValue || 1) === Number(item?.quantity)) { return }
                   if (
                     Number(enteredValue) > Number(inventoryData)
                   ) {
-                    e.target.value = inventoryData.toString()
+                    e.target.value = inventoryData?.toString()
                     // setValue(inventoryData.toString());
-                    setShowError(item.itemId.toString());
+                    setShowError(item?.itemId?.toString());
                     setUpdatingItem(true);
                     handleChange(Number(inventoryData), item);
                     return;
@@ -232,7 +232,7 @@ const CartItem = ({
                 disabled={updatingItem}
               />
             </span>
-            {showError === item.itemId.toString() ? (
+            {showError === item?.itemId?.toString() ? (
               <div>
                 <span style={{ color: "red", fontSize: "13px" }}>
                   Can not exceed stock quantity
