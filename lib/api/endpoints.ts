@@ -53,14 +53,15 @@ const ENDPOINTS = {
     RESET_PASSWORD: "/ums/v2/auth/self/password",
   },
 
-  GET: {
-    REVIEWS: (storeHash: string | number, productId: string | number) =>
+  REVIEWS: {
+    GET_REVIEWS: (storeHash: string | number, productId: string | number) =>
       `https://stamped.io/api/v2/${storeHash}/dashboard/reviews?search=${productId}`,
-  },
 
-  POST: {
     CREATE_REVIEW: (apikey: string | number, storeHash: string | number) =>
       `https://stamped.io/api/reviews3?apiKey=${apikey}&sId=${storeHash}`,
+
+    TRANSLATE_REVIEWS:
+      "https://translation.googleapis.com/language/translate/v2",
   },
 };
 
