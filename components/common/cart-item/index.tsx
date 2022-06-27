@@ -210,12 +210,12 @@ const CartItem = ({
                 onBlur={(e) => {
                   const enteredValue = e.target.value
                   if (!inventoryData) return
-                  if (Number(enteredValue || 1) === Number(item?.quantity)) { return }
-                  if (Number(enteredValue || 1) > Number(item?.quantity) && Number(inventoryData || 1) === Number(item?.quantity)) {
+                  if (Number(enteredValue || 1) >= Number(item?.quantity) && Number(inventoryData || 1) <= Number(item?.quantity)) {
                     e.target.value = inventoryData?.toString()
                     setShowError(item?.itemId?.toString());
                     return
                   }
+                  if (Number(enteredValue || 1) === Number(item?.quantity)) { return }
                   if (
                     Number(enteredValue) > Number(inventoryData)
                   ) {
