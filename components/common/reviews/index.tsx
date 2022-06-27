@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import styles from "./style.module.scss";
 import { getReviews } from "lib/utils/reviews";
 import Label from "components/common/ui/label";
@@ -38,7 +38,7 @@ const Reviews = ({
   const [currentData, setCurrentData] = useState([]);
   const [reviewsData, setReviewsData] = useState<any>([]);
   const [filterData, setFilterData] = useState<any>([]);
-
+  const reviewImagesRef = useRef(null);
   useEffect(() => {
     setFilterData("");
     fetchingReviews();
@@ -46,6 +46,7 @@ const Reviews = ({
 
   const onClose = () => {
     setModalOpen(false);
+    // reviewImagesRef.current.value = null;
     document.body.style.overflow = "auto";
   };
 
@@ -179,6 +180,7 @@ const Reviews = ({
               <>
                 {currentData?.map((reviews: any, index: number) => {
                   const { review = {}, customer = {} } = reviews;
+                  const uploadedImages = review?.imagesFileName?.split(",");
                   return (
                     <div className={styles["review"]} key={index}>
                       <Label className={styles["customer-name"]}>
@@ -202,18 +204,31 @@ const Reviews = ({
                       <Label className={styles["date"]}>
                         {formateDate(review?.dateAdded)}
                       </Label>
-                      {review?.productImageUrl ? (
-                        <div className={styles["review-img"]}>
-                          <img
-                            src={
-                              review?.productImageUrl?.replace(/"/g, "") || "/"
-                            }
-                            alt="review-img"
-                            width="100%"
-                            height="100%"
-                          />
-                        </div>
-                      ) : null}
+                      <div className={styles["uploaded-img-wrapper"]}>
+                        {uploadedImages && uploadedImages.length > 0
+                          ? uploadedImages?.map(
+                              (imgSrc: string, index: number) => {
+                                return (
+                                  <>
+                                    {imgSrc ? (
+                                      <div
+                                        className={styles["review-img"]}
+                                        key={index}
+                                      >
+                                        <img
+                                          src={`https://s3-us-west-2.amazonaws.com/stamped.io/uploads/photos/${imgSrc}`}
+                                          alt="review-img"
+                                          width="100%"
+                                          height="100%"
+                                        />
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              }
+                            )
+                          : null}
+                      </div>
                     </div>
                   );
                 })}
@@ -228,6 +243,7 @@ const Reviews = ({
           isOpened={modalOpen}
           onClose={onClose}
           fetchingReviews={fetchingReviews}
+          reviewImagesRef={reviewImagesRef}
         />
       )}
     </>

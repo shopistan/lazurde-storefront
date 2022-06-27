@@ -80,16 +80,18 @@ const SiteNavBar: FC<siteNavBarProps> = ({
         </Link>
       </div>
       <div>
-        <Link href={siteLogoUrl || ""}>
-          <a>
-            <Image
-              src={siteLogo?.url}
-              width={152}
-              height={20}
-              alt={siteLogo?.altText}
-            />
-          </a>
-        </Link>
+        {siteLogo?.url ? (
+          <Link href={siteLogoUrl || ""}>
+            <a>
+              <Image
+                src={siteLogo?.url || "/placeholder.jpg"}
+                width={152}
+                height={20}
+                alt={siteLogo?.altText}
+              />
+            </a>
+          </Link>
+        ) : null}
       </div>
       <div className={styles["nav-links"]}>
         {siteNavBar &&
@@ -140,7 +142,10 @@ const SiteNavBar: FC<siteNavBarProps> = ({
       </div>
       <div
         role={"search"}
-        onClick={() => setOpenSearchDialog(true)}
+        onClick={() => {
+          setOpenSearchDialog(true);
+          document.body.className = "hide-scrollbar";
+        }}
         className={styles["search-icon"]}
       >
         <Search></Search>

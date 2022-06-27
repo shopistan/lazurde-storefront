@@ -1,0 +1,167 @@
+@import "/styles/variables.scss";
+
+.account-review-wrapper {
+  width: 100%;
+}
+
+.reviews-heading {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 24px;
+  background-color: $white-color;
+
+  @media (min-width: $breakPoint-desktop) {
+    padding: 40px;
+  }
+
+  .label {
+    margin: 0;
+    margin-top: 4.5px;
+    padding: 0;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28.8px;
+    letter-spacing: 0em;
+    text-align: start;
+    text-transform: capitalize;
+    color: $black-color;
+  }
+}
+
+.past-reviews {
+  .review {
+    margin-bottom: 8px;
+    padding: 24px;
+    background-color: $white-color;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (min-width: $breakPoint-desktop) {
+      padding: 40px;
+    }
+  }
+
+  .review-img {
+    background-color: rgba(0, 0, 0, 0.02);
+    margin-bottom: 16px;
+  }
+
+  .product-title,
+  .product-price,
+  .customer-name,
+  .date {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: start;
+    text-transform: capitalize;
+  }
+
+  .product-price {
+    margin: 0;
+    margin-top: 8px;
+    margin-bottom: 24px;
+  }
+
+  .customer-name {
+    margin: 0;
+    margin-bottom: 8px;
+  }
+
+  .date {
+    margin: 0;
+    color: rgba(26, 26, 26, 0.4);
+  }
+
+  .review-content {
+    margin: 24px 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    letter-spacing: 0em;
+    text-align: start;
+  }
+
+  .review-content {
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+body {
+  .review-pagination {
+    .review-pagination-control {
+      @media (max-width: $breakPoint-mobile) {
+        margin-top: 0;
+        margin-bottom: 8px;
+        background-color: $white-color;
+      }
+
+      @media (min-width: $breakPoint-desktop) {
+        margin-top: 15px;
+      }
+    }
+  }
+}
+
+.product-without-review {
+  &_wrapper {
+    margin-bottom: 8px;
+    padding: 24px;
+    padding-inline-end: 0;
+    background-color: $white-color;
+
+    @media (min-width: $breakPoint-desktop) {
+      padding-top: 40px;
+      padding-bottom: 28px;
+      padding-inline: 40px;
+    }
+
+    .main-label {
+      margin: 0;
+      margin-bottom: -32px;
+      color: #1a1a1a;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 28.8px;
+      letter-spacing: 0em;
+      text-align: start;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.sldie-content {
+  text-align: center;
+
+  .title {
+    margin: 0;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: 0em;
+    text-align: center;
+    text-transform: capitalize;
+
+    @media (min-width: $breakPoint-desktop) {
+      font-size: 15px;
+      line-height: 18px;
+    }
+  }
+
+  .description {
+    margin: 0;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 15.6px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+}

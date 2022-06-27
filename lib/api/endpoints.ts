@@ -37,13 +37,20 @@ const ENDPOINTS = {
   },
 
   INVENTORY: {
-    GET_BY_IDS: "/api-inventory/inventory?itemIds=68",
+    GET_BY_IDS: (itemId: number) =>
+      `/api-inventory/inventory?itemIds=${itemId}`,
+    GET_AUTH: `/api-commerceIdentity/auth/local/login`,
   },
 
   WISHLIST: {
     GET_WISHLIST: "/api-cart/wishlist/user",
     DELETE_WISHLIST: (itemID: string | number) =>
       `/api-cart/wishlist/user/item/${itemID}`,
+  },
+
+  IDENTITY: {
+    GET_USER_INFO: "/ums/v2/users/self",
+    RESET_PASSWORD: "/ums/v2/auth/self/password",
   },
 
   GET: {

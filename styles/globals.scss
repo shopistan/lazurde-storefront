@@ -1,5 +1,54 @@
 @import "/styles/slider.scss";
 @import "/styles/alert.scss";
+@import "/styles/variables.scss";
+
+// @font-face {
+//   font-family: "Roboto";
+//   src: url("/fonts/roboto/Roboto-Regular.ttf") format("truetype");
+//   font-weight: normal;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
+// @font-face {
+//   font-family: "Roboto";
+//   src: url("/fonts/roboto/Roboto-Medium.ttf") format("truetype");
+//   font-weight: 500;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
+// @font-face {
+//   font-family: "Roboto";
+//   src: url("/fonts/roboto/Roboto-Bold.ttf") format("truetype");
+//   font-weight: bold;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto2/roboto-v30-latin-regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto2/roboto-v30-latin-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto2/roboto-v30-latin-700.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 
 html,
 body {
@@ -10,8 +59,19 @@ body {
   margin: 0;
   font-family: "Roboto", sans-serif;
   background-color: white;
-}
 
+  &.hide-scrollbar {
+    &::-webkit-scrollbar {
+      @media (min-width: $breakPoint-desktop) {
+        display: none;
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    overflow: hidden;
+  }
+}
 #__next {
   flex: 1;
   display: flex;
@@ -34,6 +94,9 @@ html[dir="rtl"] * {
 
   &:focus {
     outline: 0;
+  }
+  @media (max-width: $breakPoint-mobile) {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 

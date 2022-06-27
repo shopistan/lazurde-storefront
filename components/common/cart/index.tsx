@@ -21,9 +21,11 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from "lib/utils/common";
 import Link from "next/link";
 import Label from "components/common/ui/label";
+import { getInventoryAuth } from "lib/utils/inventory";
+import { ProductType } from "lib/types/product";
 
-interface CartProps {}
-const Cart = ({}: CartProps): JSX.Element => {
+interface CartProps { }
+const Cart = ({ }: CartProps): JSX.Element => {
   const [width] = useWindowSize();
   const { t } = useTranslation("common");
   const authToken =
@@ -48,11 +50,21 @@ const Cart = ({}: CartProps): JSX.Element => {
   const [isWishListLoading, setIsWishListLoading] = useState(false);
   const [updatingCartItem, setUpdatingCartItem] = useState(false);
   const [deletingWishList, setDeletingWishList] = useState(false);
+  const [userAuth, setUserAuth] = useState("");
+
+  useEffect(() => {
+    const getAuth = async () => {
+      const userData = await getInventoryAuth();
+      setUserAuth(userData?.data?.accessToken);
+    };
+    getAuth();
+  }, []);
 
   async function getWishListData(wishList: [] = []) {
     // setDeletingWishList(false);
-    setIsWishListLoading(true);
+    // setIsWishListLoading(true);
     // const wishListData = await getWishList(authToken);
+
     const wishListData =
       wishList && wishList?.length > 0 ? wishList : allWishListProducts;
     if (wishListData && wishListData.length > 0) {
@@ -62,10 +74,10 @@ const Cart = ({}: CartProps): JSX.Element => {
         itemId: wishListData || [],
       };
       const response = await fetchProductPriceByItemId(payload);
-      const wishListArray: {}[] = [];
+      const wishListArray: ProductType[] = [];
       getItemsbyItemIds?.data?.products.filter(
         (product: { itemId: number }) => {
-          let wishListObj: {} = {};
+          let wishListObj: any = {};
           const matchedProduct = response?.data.find(
             (item: { itemId: number }) => product.itemId === item.itemId
           );
@@ -87,36 +99,76 @@ const Cart = ({}: CartProps): JSX.Element => {
       );
 
       if (getItemsbyItemIds?.status === 200) {
+        wishListArray?.map((product: ProductType, index) => {
+          const modifiedProduct = destructureAttributes(product);
+          wishListArray[index] = modifiedProduct;
+        });
         setIsWishListLoading(false);
+      setDeletingWishList(false);
         setWishListData({
           status: "",
           cartId: cartData?.cartId || null,
           items: wishListArray,
           priceList: response?.data,
         });
-      } else setIsWishListLoading(false);
+      } else 
+      {
+        setIsWishListLoading(false);
+      setDeletingWishList(false);
+
+      }
     } else {
       setIsWishListLoading(false);
+      setDeletingWishList(false);
+      setWishListData({
+        status: "",
+        items: [],
+        cartId: "",
+        priceList: [],
+      });
     }
   }
 
   async function getCartData() {
-    setisLoadingCart(true);
     const cartData = await getCartByCartId(
       "98b0ed93-aaf1-4001-b540-b61796c4663d"
     );
     if (cartData?.status === 200) {
-      setCartData(cartData?.data);
+      const cartItems = cartData?.data
+      cartItems?.items?.map((product: ProductType, index: number) => {
+        const modifiedProduct = destructureAttributes(product);
+        cartItems.items[index] = modifiedProduct;
+      });
+      cartItems?.items?.sort((a: {Brand: string}, b: {Brand: string}) => {
+        if (b.Brand === 'Kenaz') return -1
+        if (a.Brand === 'Kenaz') return 1
+        return a.Brand.localeCompare(b.Brand)
+      })
+
+      setCartData(cartItems);
       setisLoadingCart(false);
     } else {
       setisLoadingCart(false);
     }
   }
 
+  const destructureAttributes = (product: ProductType) => {
+    const obj: { [key: string]: string } = {};
+    product?.attributes?.map((attr: any) => {
+      obj[attr?.name] = attr?.value;
+    });
+    return { ...product, ...obj };
+  };
+
   useEffect(() => {
     getCartData();
-    getWishListData();
+    setisLoadingCart(true)
+    setIsWishListLoading(true)
   }, []);
+
+  useEffect(() => {
+    getWishListData();
+  }, [allWishListProducts]);
 
   const handleChange = async (
     // e: React.ChangeEvent<HTMLInputElement>,
@@ -141,6 +193,15 @@ const Cart = ({}: CartProps): JSX.Element => {
     try {
       const response = await updateItemOfCart(cartData?.cartId, payload);
       if (response?.status === 200) {
+        response?.data?.items?.map((product: ProductType, index: number) => {
+          const modifiedProduct = destructureAttributes(product);
+          response.data.items[index] = modifiedProduct;
+        });
+        response?.data?.items?.sort((a: {Brand: string}, b: {Brand: string}) => {
+          if (b.Brand === 'Kenaz') return -1
+          if (a.Brand === 'Kenaz') return 1
+          return a.Brand.localeCompare(b.Brand)
+        })
         setCartData(response?.data);
         setUpdatingCartItem(false);
       } else {
@@ -160,6 +221,16 @@ const Cart = ({}: CartProps): JSX.Element => {
         item?.lineItemId
       );
       if (response?.status === 200) {
+        response?.data?.items?.map((product: ProductType, index: number) => {
+          const modifiedProduct = destructureAttributes(product);
+          response.data.items[index] = modifiedProduct;
+        });
+
+        response?.data?.items?.sort((a: {Brand: string}, b: {Brand: string}) => {
+          if (b.Brand === 'Kenaz') return -1
+          if (a.Brand === 'Kenaz') return 1
+          return a.Brand.localeCompare(b.Brand)
+        })
         setCartData(response?.data);
         setUpdatingCartItem(false);
       } else {
@@ -177,9 +248,15 @@ const Cart = ({}: CartProps): JSX.Element => {
       const response = await deleteWishList(item?.itemId, authToken);
       if (response?.status === 200) {
         const wishListData = await updateWishListData();
-        getWishListData(wishListData);
+
+        setAllWishListProducts(wishListData);
+        typeof window !== "undefined" &&
+          window.sessionStorage.setItem(
+            "wishListArray",
+            JSON.stringify(wishListData)
+          );
       }
-      setDeletingWishList(false);
+      // setDeletingWishList(false);
     } catch (err) {
       console.log("Error!");
       setDeletingWishList(false);
@@ -227,6 +304,7 @@ const Cart = ({}: CartProps): JSX.Element => {
   };
 
   const renderWishListSection = () => {
+
     return (
       <div
         className={styles["bag-wrapper"]}
@@ -242,7 +320,7 @@ const Cart = ({}: CartProps): JSX.Element => {
         ) : (
           <>
             {Object.keys(wishListData).length !== 0 ? (
-              wishListData?.items?.length ? (
+              wishListData?.items?.length > 0 ? (
                 wishListData?.items?.map((item, index) => {
                   return (
                     <>
@@ -319,11 +397,12 @@ const Cart = ({}: CartProps): JSX.Element => {
                     <span>{t("becomeMember")}</span>
                   )} */}
                 </div>
-                <div
-                  style={{ cursor: "pointer" }}
-                  onClick={() => showFreeShipping(false)}
-                >
-                  <CrossSmall width={12} height={12} />
+                <div style={{ cursor: "pointer" }}>
+                  <CrossSmall
+                    width={12}
+                    height={12}
+                    onClick={() => showFreeShipping(false)}
+                  />
                 </div>
               </div>
             )}
@@ -345,6 +424,7 @@ const Cart = ({}: CartProps): JSX.Element => {
                             <CartItem
                               key={index}
                               item={item}
+                              userAuth={userAuth}
                               updatingCartItem={updatingCartItem}
                               handleChange={handleChange}
                               removeItem={removeItem}

@@ -44,6 +44,7 @@ const LazurdeHeroBanner: FC<LazurdeHeroBannerProps> = ({ heroBannerArray }): JSX
                 objectFit="cover"
                 quality={100}
                 className={`${styles["bg-image"]}`}
+                priority
               />
               <div className={styles["banner-text-section"]}>
                 <h3 className={styles["banner-text"]} data-testid="banner-text">

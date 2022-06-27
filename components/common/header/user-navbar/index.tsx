@@ -16,7 +16,6 @@ import { BrandSidebarProps, ErrorObject } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { desktopScreenSize } from "lib/utils/common";
-import { OKTA_CLIENT_ID, OKTA_DOMAIN, OKTA_REDIRECT_URI } from "general-config";
 import Axios from "axios";
 import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
 import SideBar from "components/common/ui/sidebar";
@@ -24,12 +23,23 @@ import AccountSidebar from "./account-sidebar";
 import WhishListSidebar from "./whishlist-sidebar";
 import ShopBag from "./shopbag-sidebar";
 import Language from "./language-sidebar";
+import Router from "next/router";
+import { loginUser } from "lib/identity";
+import {
+  OKTA_CLIENT_ID,
+  OKTA_DOMAIN,
+  OKTA_REDIRECT_URI_LOCAL,
+} from "general-config";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
 }): JSX.Element => {
-  const { appState, saveAppState, allWishListProducts, setAllWishListProducts } =
-    useContext(AppContext);
+  const {
+    appState,
+    saveAppState,
+    allWishListProducts,
+    setAllWishListProducts,
+  } = useContext(AppContext);
   const { t } = useTranslation("common");
   const [isOpened, setIsOpened] = useState(false);
   const [width] = useWindowSize();
@@ -38,25 +48,28 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
     account: false,
     whishlist: false,
     shopbag: false,
-    language: false
+    language: false,
   });
+  const GRANT_TYPE = "code";
 
   useEffect(() => {
-    const hasWishListData = allWishListProducts
+    const hasWishListData = allWishListProducts;
     const initializeWislist = async () => {
+      if (hasWishListData && hasWishListData.length > 1) return;
       const authToken =
         "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MTUzMzYxLCJleHAiOjE2NTQxNTUxNjF9.FLBjzjjR3g1zreH03aIE9B92H5y1HL6RfhwoePFbKeASfqq2RcyGqkKiexRTELDTPMOJEa9XXklsqfaegYS-fKrEXoIjjHv4KpolommWzaSINL5C__zljx7QZtF5sRtyYKPPlwEcuPtdMJTCERIfyDIHsMF4oehEVvN-cd6DwOA";
 
       const wishlistArray = await getWishList(authToken);
-      if(!wishlistArray) return
-      setAllWishListProducts && setAllWishListProducts(wishlistArray?.data?.items);
+      if (wishlistArray?.data?.items.length < 1) return;
+      setAllWishListProducts &&
+        setAllWishListProducts(wishlistArray?.data?.items);
       typeof window !== "undefined" &&
         window.sessionStorage.setItem(
           "wishListArray",
           JSON.stringify(wishlistArray?.data?.items)
         );
     };
-    !hasWishListData && initializeWislist();
+    initializeWislist();
   }, []);
 
   useEffect(() => {
@@ -78,7 +91,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
           client_id: OKTA_CLIENT_ID,
           responseType: "code",
           scope: "openid",
-          redirect_uri: OKTA_REDIRECT_URI,
+          redirect_uri: OKTA_REDIRECT_URI_LOCAL,
           state: "state-8600b31f-52d1-4dca-987c-386e3d8967e9",
           code_challenge_method: "S256",
           code_challenge: "qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es",
@@ -88,6 +101,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
     } catch (error) {
       console.log("Error signing in: ", (error as ErrorObject).message);
     }
+    loginUser();
   };
 
   const handlewhishlist = () => {
@@ -97,7 +111,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
       whishlist: true,
       shopbag: false,
       account: false,
-      language: false
+      language: false,
     });
   };
 
@@ -108,7 +122,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
       shopbag: true,
       account: false,
       whishlist: false,
-      language: false
+      language: false,
     });
   };
 
@@ -119,9 +133,9 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
       shopbag: false,
       account: false,
       whishlist: false,
-      language: true
+      language: true,
     });
-  }
+  };
 
   return (
     <div className={styles["user-navbar"]} data-testid="product-card">
@@ -202,14 +216,14 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
         </Link>
         {/* <Link href={"/"}>
           <a> */}
-          <div onClick={handlelanguage}>
-            <Globe />
-            </div>
-          {/* </a>
+        <div onClick={handlelanguage}>
+          <Globe />
+        </div>
+        {/* </a>
         </Link> */}
         {/* <Link href={"/"}>
           <a> */}
-        <div onClick={signInUser}>
+        <div onClick={signInUser} className="cursor-pointer">
           <User />
         </div>
         {/* </a>
@@ -255,7 +269,9 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
             <ShopBag />
           ) : sidebarchild.language ? (
             <Language />
-          ): ""}
+          ) : (
+            ""
+          )}
         </SideBar>
       )}
     </div>

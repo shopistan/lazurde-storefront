@@ -23,7 +23,6 @@ const InThePress: FC<InThePressProps> = ({ bannerImage, heading, stories }) => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
   const [size] = useWindowSize();
-  console.log("stories", stories);
   return (
     <div className={styles["inthepress-container"]}>
       <div>

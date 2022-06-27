@@ -126,7 +126,7 @@ export const ordeFormatDate = (date: any) => {
     dayString = `${day}th`;
   }
 
-  return `${_day} ${month} ${dayString} ${year}`;
+  return `${_day}, ${month} ${dayString}, ${year}`;
 };
 
 export const updateOrderDate = (date: any) => {

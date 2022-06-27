@@ -4,6 +4,7 @@
   width: 100%;
   @media (min-width: $breakPoint-desktop) {
     width: 36.5%;
+    min-width: 360px;
     margin-inline-end: 60px;
   }
 }
@@ -18,6 +19,7 @@
 
   p {
     padding-inline-end: 100px;
+    margin-inline-start: 24px;
     font-size: 18px;
     font-weight: 500;
     line-height: 22px;
@@ -54,6 +56,10 @@
 .account-banner {
   position: absolute;
   top: 67px;
+
+  @media (min-width: $breakPoint-tablet) and (max-width: $breakPoint-mobile) {
+    top: 200px;
+  }
 
   p {
     margin-top: 8px !important;
@@ -151,7 +157,7 @@
   padding-block: 11px;
   padding-inline: 28px 32px;
   @media (min-width: $breakPoint-desktop) {
-    padding-inline: 18px;
+    padding-inline: 16px;
   }
   p {
     font-size: 16px;

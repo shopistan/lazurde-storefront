@@ -12,16 +12,19 @@ import AccountSection from "../account-section";
 import OrderDetails from "components/common/order-details/index";
 import OrderHistory from "../order-history";
 import { desktopScreenSize } from "lib/utils/common";
+import UserReviews from "./account-reviews";
 
 interface AccountInformationProps {
-  title: string | "";
-  titleImage: ImageType | { url: ""; altText: "" };
-  barCode: ImageType | { url: ""; altText: "" };
-  firstName: string | "";
-  lastName: string | "";
-  reviewImage: ImageType;
-  reviewText: string | "";
-  details: DetailsProps[];
+  title?: string | "";
+  titleImage?: ImageType | { url: ""; altText: "" };
+  barCode?: ImageType | { url: ""; altText: "" };
+  firstName?: string | "";
+  lastName?: string | "";
+  reviewImage?: ImageType;
+  reviewText?: string | "";
+  orderId?: string | "";
+  details?: DetailsProps[];
+  order?: any;
 }
 
 type AccountsProps = {
@@ -45,48 +48,62 @@ const AccountInformation: FC<AccountInformationProps> = ({
   reviewImage,
   reviewText,
   details,
+  order,
 }) => {
   const { t } = useTranslation("common");
   const [width] = useWindowSize();
   const router = useRouter();
   const { appState } = useContext(AppContext);
-  const [activeComponent, setActiveComponent] = useState("Account Overview");
+  const activeComp =
+    typeof window !== "undefined" && window.localStorage.getItem("active");
+  const [activeComponent, setActiveComponent] = useState(
+    activeComp || "Account Overview"
+  );
+  const [renderCom, setRenderCom] = useState(false);
+
+  useEffect(() => {
+    setRenderCom(true);
+  }, []);
 
   return (
     <>
-      <div className={styles["account-container"]}>
-        <div
-          className={styles["account-main"]}
-          onClick={() => {
-            router.push("/account-page");
-          }}
-        >
-          <div className={styles["account-mainImage"]}>
-            <Image
-              src={titleImage?.url || "/"}
-              alt={titleImage?.altText}
-              width={28.5}
-              height={30}
-            />
+      {renderCom && (
+        <div className={styles["account-container"]}>
+          <div
+            className={styles["account-main"]}
+            onClick={() => {
+              router.push("/account");
+            }}
+          >
+            <div className={styles["account-mainImage"]}>
+              <Image
+                src={titleImage?.url || "/"}
+                alt={titleImage?.altText}
+                width={28.5}
+                height={30}
+              />
+            </div>
+            <Label>{appState?.lang == "en" ? title : t("accountTitle")}</Label>
           </div>
-          <Label>{appState?.lang == "en" ? title : t("accountTitle")}</Label>
+          <div className={styles["details-section"]}>
+            <SideBar
+              barCode={barCode}
+              firstName={firstName}
+              lastName={lastName}
+              reviewImage={reviewImage}
+              reviewText={reviewText}
+              details={details}
+              setActiveComponent={setActiveComponent}
+              activeComponent={activeComponent}
+            />
+            <div className={styles["account-right-side"]}>
+              {activeComponent == "Account Overview" && <AccountSection />}
+              {activeComponent == "My Orders" && <OrderDetails />}
+              {activeComponent == "My Reviews" && <UserReviews />}
+            </div>
+          </div>
         </div>
-        <div className={styles["details-section"]}>
-          <SideBar
-            barCode={barCode}
-            firstName={firstName}
-            lastName={lastName}
-            reviewImage={reviewImage}
-            reviewText={reviewText}
-            details={details}
-            setActiveComponent={setActiveComponent}
-            activeComponent={activeComponent}
-          />
-          {activeComponent == "Account Overview" && <AccountSection />}
-
-          {activeComponent === "My Orders" && <OrderDetails />}
-        </div>
-      </div>
+      )}
     </>
   );
 };

@@ -1,14 +1,21 @@
 import { ImageType } from "lib/types/common";
-import React, { FC, useContext } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import Label from "../ui/label";
 import Image from "next/image";
 import styles from "./side-bar.module.scss";
 import useWindowSize from "lib/utils/useWindowSize";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { desktopScreenSize } from "lib/utils/common";
 import { BackArrow } from "components/icons";
+import { OKTA_CLIENT_ID, OKTA_DOMAIN } from "general-config";
+import {
+  getUserInfo,
+  logoutUser,
+  refreshAuthToken,
+  resetUserPassword,
+} from "lib/identity";
 
 type AccountsProps = {
   image: ImageType;
@@ -60,9 +67,35 @@ const SideBar: FC<SideBarProps> = ({
     { returnObjects: true }
   );
 
+  const [userName, setUserName] = useState("San");
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      let userInfo = (await getUserInfo()) || null;
+      if (!userInfo) {
+        await refreshAuthToken();
+        userInfo = (await getUserInfo()) || {};
+      }
+      if (userInfo.firstName) {
+        setUserName(userInfo.firstName);
+      }
+    };
+    fetchUserInfo();
+  }, []);
+
+  const signOut = async () => {
+    logoutUser();
+  };
+
+  const [renderCom, setRenderCom] = useState(false);
+  useEffect(() => {
+    setRenderCom(true);
+  }, []);
+
   return (
     <>
-      {activeComponent !== "Account Overview" && width < desktopScreenSize ? (
+      {renderCom &&
+      activeComponent !== "Account Overview" &&
+      width < desktopScreenSize ? (
         <div
           className={styles["account-button"]}
           onClick={() => {
@@ -82,16 +115,23 @@ const SideBar: FC<SideBarProps> = ({
             {width >= desktopScreenSize && (
               <div className={styles["account-profile"]}>
                 {barCode?.url && (
-                  <Image src={barCode?.url || "/"} width={100} height={100} />
+                  <Image
+                    alt="icon"
+                    src={barCode?.url || "/"}
+                    width={100}
+                    height={100}
+                  />
                 )}
                 <Label>
                   <>
                     <span className={styles["firstName-desktop"]}>
-                      {appState?.lang == "en" ? firstName : t("firstname")}
+                      {appState?.lang == "en"
+                        ? `Hi ${userName}`
+                        : t("firstname")}
                     </span>
-                    <span>
+                    {/* <span>
                       {appState?.lang == "en" ? lastName : t("lastname")}
-                    </span>
+                    </span> */}
                   </>
                 </Label>
               </div>
@@ -100,6 +140,7 @@ const SideBar: FC<SideBarProps> = ({
               <div className={styles["account-profile-mobile"]}>
                 <div className={styles["account-image-mobile"]}>
                   <Image
+                    alt="icon"
                     src={"/contact.png"}
                     width={375}
                     height={120}
@@ -108,7 +149,12 @@ const SideBar: FC<SideBarProps> = ({
                 </div>
                 <div className={styles["account-banner"]}>
                   {barCode?.url && (
-                    <Image src={barCode?.url || "/"} width={100} height={100} />
+                    <Image
+                      alt="icon"
+                      src={barCode?.url || "/"}
+                      width={100}
+                      height={100}
+                    />
                   )}
                   <Label>
                     <>
@@ -127,6 +173,7 @@ const SideBar: FC<SideBarProps> = ({
               <div className={styles["account-reviewsImage"]}>
                 {reviewImage?.url && (
                   <Image
+                    alt="icon"
                     src={reviewImage?.url || "/"}
                     width={16.67}
                     height={16.67}
@@ -144,18 +191,25 @@ const SideBar: FC<SideBarProps> = ({
               details?.map((object, i) => {
                 const { accounts } = object;
                 return (
-                  <div className={styles["account-details"]}>
+                  <div key={i} className={styles["account-details"]}>
                     {accounts &&
                       accounts?.map((account, index) => {
                         const { text, image, width, height, link } = account;
                         return (
                           <div
                             className={`${styles["account-detail"]} ${
-                              activeComponent == text && styles["active-block"]
+                              text == activeComponent && activeComponent
+                                ? styles["active-block"]
+                                : ""
                             }`}
                             key={index}
                             onClick={() => {
-                              setActiveComponent(text);
+                              if (text.toLowerCase().includes("sign out")) {
+                                signOut();
+                              } else {
+                                window.localStorage.setItem("active", text);
+                                setActiveComponent(text);
+                              }
                             }}
                           >
                             <div className={styles["account-image"]}>

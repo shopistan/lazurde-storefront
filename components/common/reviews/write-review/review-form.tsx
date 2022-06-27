@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import styles from "./style.module.scss";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Label from "components/common/ui/label";
 import { writeReview } from "lib/utils/reviews";
-// import ImageUploader from "./image-uploader";
+import ImageUploader from "./image-uploader";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 
@@ -15,6 +15,7 @@ interface arabicLabelTypes {
   email?: string;
   phoneNumber?: string;
   submitBtnText?: string;
+  reviewImagesRef?: any;
 }
 
 const ReviewForm = ({
@@ -23,8 +24,10 @@ const ReviewForm = ({
   onClose,
   fetchingReviews,
   setIsRatingError,
+  reviewImagesRef,
 }: any): JSX.Element => {
   const [fileUpload, setFileUpload] = useState<any>([{ fileArray: {} }]);
+  const [fileName, setFileName] = useState<any>([]);
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
   const arabicLabels: arabicLabelTypes = t(
@@ -73,7 +76,9 @@ const ReviewForm = ({
     formData.append("productImageUrl", productData && productData["Image URL"]);
     formData.append("productUrl", productData && productData["Image URL"]);
     formData.append("reviewSource", "api");
-    formData.append("photo0", null);
+    fileName.forEach((fileName: any, index: number) => {
+      formData.append(`photo${index}`, fileName);
+    });
     formData.append("video0", null);
 
     const id = Math.floor(Math.random() * 100 + 1);
@@ -231,10 +236,13 @@ const ReviewForm = ({
                 </div>
               </div>
 
-              {/* <ImageUploader
-              file={fileUpload?.fileArray}
-              setFileUpload={setFileUpload}
-            /> */}
+              <ImageUploader
+                file={fileUpload?.fileArray}
+                setFileUpload={setFileUpload}
+                setFileName={setFileName}
+                uploadedFiles={fileName}
+                imageUploadRef={reviewImagesRef}
+              />
               <div className={styles["submit-btn"]}>
                 <button type="submit" disabled={isSubmitting}>
                   {appState?.lang === "en"
