@@ -22,7 +22,7 @@ const TamaraModal = ({
             className="tamara-product-widget pdp-tamara"
             data-lang={appState?.lang}
             data-price={`${productPricing?.finalPrice}`}
-            data-currency={`${productPricing?.currency}`}
+            data-currency={`${appState?.region === 'sa' ? "SAR" : "AED"}`}
             data-country-code="SA"
             data-color-type="default"
             data-show-border="false"
