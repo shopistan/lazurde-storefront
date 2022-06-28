@@ -1,0 +1,270 @@
+@import "/styles/variables.scss";
+
+.account-wishlist-wrapper {
+  .wishlist-heading {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 24px;
+    background-color: $white-color;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 120%;
+
+    @media (min-width: $breakPoint-desktop) {
+      padding: 40px;
+    }
+
+    .label {
+      margin: 0;
+      margin-top: 5px;
+      padding: 0;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 28.8px;
+      letter-spacing: 0em;
+      text-align: start;
+      text-transform: capitalize;
+      color: $black-color;
+    }
+    .wishlist-main {
+      width: 100%;
+      .wishlist-notice {
+        margin-top: 8px;
+        margin-bottom: 24px;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 120%;
+
+        @media (max-width: $breakPoint-mobile) {
+          margin-bottom: 40px;
+        }
+      }
+      .wishlist-notices {
+        margin-top: 64px;
+        margin-bottom: 24px;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+
+        @media (max-width: $breakPoint-mobile) {
+          margin-top: 16px;
+          margin-bottom: 40px;
+        }
+      }
+      .shopping-btn {
+        display: none;
+        @media (max-width: $breakPoint-mobile) {
+          display: block;
+          Button {
+            width: 200px;
+            height: 51px;
+            padding: 16px;
+          }
+        }
+      }
+      .add-to-bag-btn {
+        margin-top: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        button {
+          border: none;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 120%;
+          text-decoration-line: underline;
+          text-transform: capitalize;
+          color: #000000;
+          cursor: pointer;
+          background: #fff;
+        }
+      }
+    }
+  }
+
+  .cart-item-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    background-color: $white-color;
+    margin-bottom: 16px;
+
+    @media (max-width: $breakPoint-mobile) {
+      margin-bottom: 0px;
+      align-items: center;
+    }
+    .cart-image {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      padding-bottom: 16px;
+
+      @media (max-width: $breakPoint-mobile) {
+        width: 100px;
+        height: 100px;
+        padding-bottom: 0px;
+      }
+    }
+
+    .item-details {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+
+      .item-title {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-bottom: 9px;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 120%;
+
+        @media (max-width: $breakPoint-mobile) {
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        span {
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 120%;
+          color: #000000;
+          max-width: 100%;
+
+          @media (min-width: $breakPoint-desktop) {
+            max-width: 80%;
+            font-size: 15px !important;
+          }
+        }
+      }
+
+      .item-buttons {
+        display: flex;
+        gap: 25px;
+
+        @media (max-width: $breakPoint-mobile) {
+          flex-direction: column;
+          gap: 11px;
+        }
+
+        .remove-btn {
+          display: flex;
+          align-items: center;
+
+          button {
+            border: none;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 120%;
+            text-decoration-line: underline;
+            text-transform: capitalize;
+            color: #000000;
+            cursor: pointer;
+            background: #fff;
+          }
+        }
+
+        .add-to-bag-btn {
+          margin-top: 0px;
+          display: flex;
+          align-items: center;
+          button {
+            border: none;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 120%;
+            text-decoration-line: underline;
+            text-transform: capitalize;
+            color: #000000;
+            cursor: pointer;
+            background: #fff;
+          }
+        }
+      }
+    }
+
+    .item-details {
+      .item-title {
+        span {
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 16.8px;
+          letter-spacing: 0em;
+          text-align: start;
+          margin-bottom: 8px;
+
+          @media (min-width: $breakPoint-desktop) {
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.error-notice {
+  width: 100%;
+  height: 44px;
+  background: rgba(255, 0, 0, 0.05);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px;
+  gap: 12px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 120%;
+  color: rgba(0, 0, 0, 0.6);
+
+  @media (max-width: $breakPoint-mobile) {
+    margin-top: 24px;
+  }
+}
+
+.account-wishlist-main {
+  background-color: $white-color;
+  margin-bottom: 8px;
+  padding: 24px;
+
+  @media (max-width: $breakPoint-mobile) {
+    padding: 32px 24px;
+  }
+}
+.display-item-number {
+  background-color: $white-color;
+  width: 100%;
+  height: 66px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 40px;
+  gap: 8px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 120%;
+  color: #000000;
+  margin-bottom: 8px;
+
+  p {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 120%;
+    margin: 0;
+  }
+}

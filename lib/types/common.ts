@@ -104,6 +104,7 @@ export type AppStateType = {
   locale: LocaleType;
   lang: LangType;
   region: RegionType;
+  locationNum: Number;
 };
 
 export type AuthTokens = {

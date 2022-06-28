@@ -6,4 +6,5 @@ export const DEFAULT_APP_STATE: AppStateType = {
   channel: 12,
   locale: "en-sa",
   brand: `L'azurde`,
+  locationNum: 100,
 };

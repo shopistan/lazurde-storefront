@@ -3,7 +3,7 @@ import styles from "./style.module.scss";
 import Select from "../ui/select";
 import Button from "components/common/ui/button/index";
 import useTranslation from "next-translate/useTranslation";
-
+import { LOCATION_ID_AE, LOCATION_ID_SA, LOCATION_ID_EG } from "general-config";
 import { useRouter } from "next/router";
 
 import { AppContext } from "lib/context";
@@ -94,6 +94,27 @@ const LanguageSelector = ({
       document.documentElement.dir = "rtl";
     }
   }, [appState]);
+
+  useEffect(() => {
+    if (appState?.region === "ae") {
+      saveAppState({
+        ...appState,
+        locationNum: LOCATION_ID_AE,
+      });
+    }
+    if (appState?.region === "sa") {
+      saveAppState({
+        ...appState,
+        locationNum: LOCATION_ID_SA,
+      });
+    }
+    if (appState?.region === "eg") {
+      saveAppState({
+        ...appState,
+        locationNum: LOCATION_ID_EG,
+      });
+    }
+  }, [appState?.region]);
 
   useEffect(() => {
     if (locale?.search("-") !== -1) {
