@@ -102,6 +102,7 @@
         font-size: 14px;
         line-height: 120%;
         color: rgba(0, 0, 0, 0.6);
+
         @media (max-width: 500px) {
           font-size: 13px;
           color: rgba(0, 0, 0, 0.6);
@@ -111,10 +112,10 @@
           width: 35px;
           height: 20px;
           border: 1px solid rgba(0, 0, 0, 0.2);
-          border-radius: 100px;
-          padding: 5px;
+          border-radius: 20px;
           color: rgba(0, 0, 0, 0.6);
           -webkit-text-fill-color: rgba(0, 0, 0, 0.6);
+          font-family: "Roboto";
         }
 
         input::-webkit-outer-spin-button,
