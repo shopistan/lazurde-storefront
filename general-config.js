@@ -56,3 +56,7 @@ export const GET_ORDER = process.env.NEXT_PUBLIC_GET_ORDER;
 export const WISHLIST = process.env.NEXT_PUBLIC_GET_WISHLIST;
 
 export const OMS_DOMAIN = process.env.NEXT_PUBLIC_OMS_DOMAIN;
+
+export const LOCATION_ID_AE = process.env.NEXT_PUBLIC_LOCATION_ID_AE;
+export const LOCATION_ID_SA = process.env.NEXT_PUBLIC_LOCATION_ID_SA;
+export const LOCATION_ID_EG = process.env.NEXT_PUBLIC_LOCATION_ID_EG;
