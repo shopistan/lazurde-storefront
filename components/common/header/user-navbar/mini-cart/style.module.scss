@@ -1,0 +1,160 @@
+@import "/styles/variables.scss";
+
+.content_wrapper {
+  height: 100%;
+
+  .filled-cart {
+    display: flex;
+    align-items: center;
+    margin-top: -60px;
+    padding-bottom: 42px;
+
+    .label {
+      margin: 0;
+      margin-inline-start: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0em;
+      text-align: start;
+      color: $black-color;
+    }
+  }
+
+  .shopabag-count {
+    .shopbag-heading {
+      margin: 0;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 38.4px;
+      letter-spacing: 0em;
+      text-align: start;
+      color: $black-color;
+    }
+
+    .shopbag-label {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16.8px;
+      letter-spacing: 0em;
+      text-align: start;
+      color: $black-color;
+    }
+  }
+
+  .minicart_items {
+    height: 354px;
+    overflow-y: auto;
+    padding-top: 40px;
+
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #fff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .divider {
+      margin: 32px 0;
+    }
+  }
+
+  .checkout_btn_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+
+    .checkout_btn {
+      cursor: pointer;
+      width: 100%;
+      min-height: 51px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $black-color;
+      border-radius: 100px;
+
+      .total_amount {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 18px;
+        letter-spacing: 0em;
+        text-align: center;
+        color: $white-color;
+      }
+
+      .divider {
+        margin: 0 24px;
+        color: rgba(255, 255, 255, 0.1);
+        height: 16px;
+      }
+
+      button {
+        cursor: pointer;
+        color: $white-color;
+        padding: 0;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19.2px;
+        letter-spacing: 0em;
+        border: 0;
+        background-color: transparent;
+        text-transform: capitalize;
+      }
+    }
+
+    .viewbag_btn {
+      margin-top: 16px;
+    }
+  }
+}
+
+.auth_btns {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .signin_btn {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
+    background: transparent;
+    color: #000;
+  }
+}
+
+.signout_btn {
+  display: flex;
+  align-items: center;
+  color: $black-color;
+  margin-top: 40px;
+  cursor: pointer;
+
+  svg {
+    transform: rotateY(180deg);
+    margin-inline-end: 8px;
+  }
+
+  span {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    letter-spacing: 0em;
+    text-align: start;
+    color: $black-color;
+    text-transform: capitalize;
+    text-decoration: underline;
+  }
+}

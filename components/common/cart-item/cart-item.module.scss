@@ -190,4 +190,23 @@
       }
     }
   }
+
+  &.mini-cart-item {
+    .cart-image {
+      width: auto;
+      height: auto;
+    }
+
+    .item-details {
+      .item-title {
+        flex-direction: column;
+
+        span {
+          &:first-child {
+            margin-bottom: 8px;
+          }
+        }
+      }
+    }
+  }
 }
