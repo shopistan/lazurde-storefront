@@ -46,15 +46,21 @@ interface CartItemProps {
   getCartData?: Function;
   userAuth?: string;
   wishListItem?: boolean;
+  className?: string;
+  productImgWidth?: string | number;
+  productImgHeight?: string | number;
 }
 const CartItem = ({
   item,
   handleChange,
   updatingCartItem = false,
-  removeItem = () => { },
+  removeItem = () => {},
   getCartData,
   userAuth,
   wishListItem = false,
+  className = "",
+  productImgWidth = "",
+  productImgHeight = "",
 }: CartItemProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const [width] = useWindowSize();
@@ -94,7 +100,7 @@ const CartItem = ({
 
   const handleAddToCart = async (item: CartItemObject) => {
     setAddingItem(true);
-  
+
     const selectedProduct: {
       sku?: string;
       itemId?: string;
@@ -134,26 +140,32 @@ const CartItem = ({
   };
 
   return (
-    <div className={styles["cart-item-wrapper"]}>
+    <div className={`${styles["cart-item-wrapper"]} ${styles[className]}`}>
       <div className={styles["cart-image"]}>
         <Image
-          width={width < desktopScreenSize ? "100px" : "146px"}
-          height={width < desktopScreenSize ? "100px" : "146px"}
+          width={
+            width < desktopScreenSize ? "100px" : productImgWidth || "146px"
+          }
+          height={
+            width < desktopScreenSize ? "100px" : productImgHeight || "146px"
+          }
           src={imageSrc || "/public/blue-ring.png"}
           alt=""
           layout="fixed"
         />
         {!wishListItem && (
           <Label
-            className={`${styles["cart-image_tag"]} ${styles[
-              `${brandName === `Miss L'`
-                ? "bg_missl"
-                : brandName === "Kenaz"
-                  ? "bg_kenaz"
-                  : "bg_lazurde"
-              }`
-            ]
-              }`}
+            className={`${styles["cart-image_tag"]} ${
+              styles[
+                `${
+                  brandName === `Miss L'`
+                    ? "bg_missl"
+                    : brandName === "Kenaz"
+                    ? "bg_kenaz"
+                    : "bg_lazurde"
+                }`
+              ]
+            }`}
           >
             <Image
               width={"62px"}
@@ -161,10 +173,10 @@ const CartItem = ({
               quality={100}
               src={
                 brandName === "Miss L'"
-                  ? missLogo
+                  ? "/public/missLogo.png"
                   : brandName === "Kenaz"
-                    ? kenazLogo
-                    : lazurdeLogo
+                  ? "/public/kenazLogo.png"
+                  : "/public/lazurdeLogo.png"
               }
               alt=""
             />
@@ -178,10 +190,11 @@ const CartItem = ({
               ? item?.["Product Title"] || "No Title"
               : "مجوهرات الماس تتصدر"}
           </span>
-          <span>{`$${item?.totalPrice?.sale?.toLocaleString() ||
+          <span>{`$${
+            item?.totalPrice?.sale?.toLocaleString() ||
             item?.totalPrice?.amount?.toLocaleString() ||
             "0.00"?.toLocaleString()
-            }`}</span>
+          }`}</span>
         </div>
         {/* {width > mobileScreenSize && (
           <div className={styles["item-category"]}>
@@ -201,25 +214,29 @@ const CartItem = ({
                 // value={value}
                 onChange={(e) => {
                   // setValue(e.target.value);
-                  if(e.target.value.length > 3) e.target.value = e.target.value.slice(0, 3)
+                  if (e.target.value.length > 3)
+                    e.target.value = e.target.value.slice(0, 3);
                   setShowError("");
                 }}
                 onKeyDown={(e) =>
                   (e.keyCode === 69 || e.keyCode === 190) && e.preventDefault()
                 }
                 onBlur={(e) => {
-                  const enteredValue = e.target.value
-                  if (!inventoryData) return
-                  if (Number(enteredValue || 1) >= Number(item?.quantity) && Number(inventoryData || 1) <= Number(item?.quantity)) {
-                    e.target.value = inventoryData?.toString()
-                    setShowError(item?.itemId?.toString());
-                    return
-                  }
-                  if (Number(enteredValue || 1) === Number(item?.quantity)) { return }
+                  const enteredValue = e.target.value;
+                  if (!inventoryData) return;
                   if (
-                    Number(enteredValue) > Number(inventoryData)
+                    Number(enteredValue || 1) >= Number(item?.quantity) &&
+                    Number(inventoryData || 1) <= Number(item?.quantity)
                   ) {
-                    e.target.value = inventoryData?.toString()
+                    e.target.value = inventoryData?.toString();
+                    setShowError(item?.itemId?.toString());
+                    return;
+                  }
+                  if (Number(enteredValue || 1) === Number(item?.quantity)) {
+                    return;
+                  }
+                  if (Number(enteredValue) > Number(inventoryData)) {
+                    e.target.value = inventoryData?.toString();
                     // setValue(inventoryData.toString());
                     setShowError(item?.itemId?.toString());
                     setUpdatingItem(true);
@@ -254,19 +271,17 @@ const CartItem = ({
             }}
             disabled={addingItem || removingItem}
           >
-            {addingItem ? (
-              appState?.lang === "en"
+            {addingItem
+              ? appState?.lang === "en"
                 ? "Adding..."
                 : "جارٍ الإزالة…"
-            ) : (
-              appState?.lang === "en"
-                ? removingItem
-                  ? "Removing..."
-                  : "Remove"
-                : removingItem
-                  ? "جارٍ الإزالة…"
-                  : "إزالة"
-            )}
+              : appState?.lang === "en"
+              ? removingItem
+                ? "Removing..."
+                : "Remove"
+              : removingItem
+              ? "جارٍ الإزالة…"
+              : "إزالة"}
           </button>
         </div>
         {wishListItem && (

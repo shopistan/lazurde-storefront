@@ -21,7 +21,7 @@ import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
 import SideBar from "components/common/ui/sidebar";
 import AccountSidebar from "./account-sidebar";
 import WhishListSidebar from "./whishlist-sidebar";
-import ShopBag from "./shopbag-sidebar";
+import MiniCart from "./mini-cart";
 import Language from "./language-sidebar";
 import Router from "next/router";
 import { loginUser } from "lib/identity";
@@ -73,14 +73,14 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   }, []);
 
   useEffect(() => {
-    if (isOpened) {
+    if (isOpened || sidebarOpened) {
       document.body.style.overflow = "hidden";
     } else {
       setTimeout(() => {
         document.body.style.overflow = "auto";
       }, 280);
     }
-  }, [isOpened]);
+  }, [isOpened, sidebarOpened]);
 
   const signInUser = async () => {
     setSidebarOpened(!sidebarOpened);
@@ -105,6 +105,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   };
 
   const handlewhishlist = () => {
+    setIsOpened(false);
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
       ...sidebarchild,
@@ -116,6 +117,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   };
 
   const handleshopbag = () => {
+    setIsOpened(false);
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
       ...sidebarchild,
@@ -127,6 +129,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   };
 
   const handlelanguage = () => {
+    setIsOpened(false);
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
       ...sidebarchild,
@@ -146,6 +149,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
             type="button"
             onClick={() => {
               setIsOpened(!isOpened);
+              setSidebarOpened(false);
             }}
           >
             <MenuIcon color="white" />
@@ -214,37 +218,26 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
             <MapPin />
           </a>
         </Link>
-        {/* <Link href={"/"}>
-          <a> */}
-        <div onClick={handlelanguage}>
+
+        <div className={styles["link"]} onClick={() => handlelanguage()}>
           <Globe />
         </div>
-        {/* </a>
-        </Link> */}
-        {/* <Link href={"/"}>
-          <a> */}
-        <div onClick={signInUser} className="cursor-pointer">
+
+        <div className={styles["link"]} onClick={() => signInUser()}>
           <User />
         </div>
-        {/* </a>
-        </Link> */}
-        {/* <Link href={"/"}>
-          <a> */}
-        <div onClick={handlewhishlist}>
+
+        <div className={styles["link"]} onClick={() => handlewhishlist()}>
           <Heart />
         </div>
-        {/* </a>
-        </Link> */}
+
         <div>
           <Divider />
         </div>
-        {/* <Link href={"/"}>
-          <a> */}
-        <div onClick={handleshopbag}>
+
+        <div className={styles["link"]} onClick={() => handleshopbag()}>
           <Bag />
         </div>
-        {/* </a>
-        </Link> */}
       </div>
       {width > desktopScreenSize && (
         <div
@@ -259,21 +252,34 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
         isOpened={isOpened}
         setIsOpened={setIsOpened}
       />
-      {sidebarOpened && (
-        <SideBar isopend={sidebarOpened} setIsOpened={setSidebarOpened}>
-          {sidebarchild.account ? (
+
+      <div
+        className={styles["rightside-drawer"]}
+        data-opened={sidebarOpened}
+        onClick={() => {
+          setSidebarOpened(false);
+        }}
+      >
+        <SideBar
+          isopend={sidebarOpened}
+          setIsOpened={setSidebarOpened}
+          onClick={(event: any) => {
+            event.stopPropagation();
+          }}
+        >
+          <MiniCart />
+
+          {/* {sidebarchild.account ? (
             <AccountSidebar />
           ) : sidebarchild.whishlist ? (
             <WhishListSidebar />
           ) : sidebarchild.shopbag ? (
-            <ShopBag />
+            <ShoppingBag />
           ) : sidebarchild.language ? (
             <Language />
-          ) : (
-            ""
-          )}
+          ) : null} */}
         </SideBar>
-      )}
+      </div>
     </div>
   );
 };
