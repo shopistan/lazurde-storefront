@@ -25,6 +25,9 @@
     text-align: start;
     text-transform: capitalize;
     color: $black-color;
+    @media (max-width: $breakPoint-desktop) {
+    font-weight: 600;
+    }
   }
 }
 
@@ -130,6 +133,11 @@ body {
       letter-spacing: 0em;
       text-align: start;
       text-transform: capitalize;
+
+      @media (max-width: $breakPoint-desktop) {
+        font-weight: 600;
+        margin-bottom: 24px;
+      }
     }
   }
 }
