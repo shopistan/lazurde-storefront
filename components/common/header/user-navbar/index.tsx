@@ -16,20 +16,13 @@ import { BrandSidebarProps, ErrorObject } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { desktopScreenSize } from "lib/utils/common";
-import Axios from "axios";
-import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
+import { getWishList } from "lib/utils/wishlist";
 import SideBar from "components/common/ui/sidebar";
 import AccountSidebar from "./account-sidebar";
 import WhishListSidebar from "./whishlist-sidebar";
 import MiniCart from "./mini-cart";
 import Language from "./language-sidebar";
-import Router from "next/router";
 import { loginUser } from "lib/identity";
-import {
-  OKTA_CLIENT_ID,
-  OKTA_DOMAIN,
-  OKTA_REDIRECT_URI_LOCAL,
-} from "general-config";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
@@ -85,22 +78,6 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   const signInUser = async () => {
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({ ...sidebarchild, account: true });
-    try {
-      const signInRes = await Axios.get(`${OKTA_DOMAIN}/authorize`, {
-        params: {
-          client_id: OKTA_CLIENT_ID,
-          responseType: "code",
-          scope: "openid",
-          redirect_uri: OKTA_REDIRECT_URI_LOCAL,
-          state: "state-8600b31f-52d1-4dca-987c-386e3d8967e9",
-          code_challenge_method: "S256",
-          code_challenge: "qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es",
-        },
-      });
-      console.log(signInRes);
-    } catch (error) {
-      console.log("Error signing in: ", (error as ErrorObject).message);
-    }
     loginUser();
   };
 
