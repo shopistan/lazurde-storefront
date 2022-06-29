@@ -38,8 +38,13 @@ const Pagination = ({
   const [showAll, setShowAll] = useState(false);
   const [hidePagination, setHidePagination] = useState(false);
   const firstPageIndex = (currentPage - 1) * pageSize;
-  const lastPageIndex =
-    firstPageIndex + (ifLessThanPageSize ? totalSize : pageSize);
+  if (firstPageIndex + pageSize > totalSize) {
+    var lastPageIndex = totalSize;
+  } else {
+    var lastPageIndex =
+      firstPageIndex + (ifLessThanPageSize ? totalSize : pageSize);
+  }
+  
   const isSingleItem = lastPageIndex === 1;
   const totalPages = Math.ceil(totalSize / pageSize);
   const { t } = useTranslation("common");

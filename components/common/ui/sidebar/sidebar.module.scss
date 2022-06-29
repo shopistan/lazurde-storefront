@@ -1,20 +1,34 @@
-.sidebar_wraper{
-    width: 500px;
-    background-color: white;
-    height: 100%;
-    top: 40px;
-    height: 876px;
-    position: absolute;
-    overflow-y: auto;
-    z-index: 50;
-    right: 0;
-    transition: height 0.1s 0.3s;
-    pointer-events: all;
-    &:-webkit-scrollbar {
-        display: none;
-        width: 0;
-    }
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none; 
-    
+@import "/styles/variables.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 500px;
+  background-color: white;
+  height: 100%;
+  top: 0;
+  height: 876px;
+  position: absolute;
+  overflow-y: hidden;
+  z-index: 50;
+  right: 0;
+  pointer-events: all;
+  transform: translateX(100%);
+  transition: all 0.3s;
+
+  &[data-opened="true"] {
+    transform: translateX(0);
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+
+  @media (min-width: $breakPoint-desktop) {
+    padding: 120px 60px;
+  }
 }

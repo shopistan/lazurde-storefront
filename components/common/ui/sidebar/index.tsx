@@ -1,14 +1,17 @@
+import React from "react";
 import styles from "./sidebar.module.scss";
-const SideBar = ({isopend, setIsOpened,children}: any ) => {
-return(
+
+const SideBar = ({ isopend, children }: any): JSX.Element => {
+  return (
     <>
-   { isopend && <div className={styles["sidebar_wraper"]} onClick={() => {
-        setIsOpened(false);
-      }}>
-    {children}
-   </div>
-   }
-   </>
-)
-}
-export default SideBar
+      <div
+        data-opened={isopend}
+        className={styles.wrapper}
+        onClick={(event) => event.stopPropagation()}
+      >
+        {children}
+      </div>
+    </>
+  );
+};
+export default SideBar;

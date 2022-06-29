@@ -34,12 +34,13 @@ const ContextProvider: FC = ({ children }) => {
     channel,
     locale,
     brand,
+    locationNum,
   }: AppStateType) => {
     window.localStorage.setItem(
       "app-state",
-      JSON.stringify({ lang, region, channel, locale, brand })
+      JSON.stringify({ lang, region, channel, locale, brand, locationNum })
     );
-    setAppState({ lang, region, channel, locale, brand });
+    setAppState({ lang, region, channel, locale, brand, locationNum });
   };
 
   type SelectedFilterProps = {
