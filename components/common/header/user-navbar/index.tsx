@@ -267,17 +267,15 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
             event.stopPropagation();
           }}
         >
-          <MiniCart />
-
-          {/* {sidebarchild.account ? (
+          {sidebarchild.account ? (
             <AccountSidebar />
           ) : sidebarchild.whishlist ? (
             <WhishListSidebar />
           ) : sidebarchild.shopbag ? (
-            <ShoppingBag />
+            <MiniCart />
           ) : sidebarchild.language ? (
             <Language />
-          ) : null} */}
+          ) : null}
         </SideBar>
       </div>
     </div>
