@@ -4,7 +4,7 @@ import HEADERS from "lib/api/headers";
 import { ErrorObject } from "lib/types/common";
 import { OMS_DOMAIN, WISHLIST } from "general-config";
 
-export const getInventoryByIds = async (authToken: string, itemId: number) => {
+export const getInventoryByIds = async (authToken: string, itemId: any) => {
   try {
     const response = await Axios.get(
       `${OMS_DOMAIN}${ENDPOINTS.INVENTORY.GET_BY_IDS(itemId)}`,

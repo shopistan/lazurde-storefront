@@ -210,3 +210,27 @@
     }
   }
 }
+
+.region-based-tag {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  padding-block: 14px;
+  padding-inline: 12px;
+  background: rgba(255, 0, 0, 0.05);
+
+  img {
+    opacity: 0.6;
+  }
+
+  .label {
+    margin: 0;
+    margin-inline-start: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: start;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}

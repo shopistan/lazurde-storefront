@@ -16,6 +16,7 @@ import CartItem from "components/common/cart-item";
 import { AppContext } from "lib/context";
 import Button from "components/common/ui/button";
 import { useRouter } from "next/router";
+import { getInventoryAuth } from "lib/utils/inventory";
 
 const MiniCart = (): JSX.Element => {
   const [loggedInUser, setLoggedInUser] = useState(true);
@@ -24,6 +25,7 @@ const MiniCart = (): JSX.Element => {
   const { appState } = useContext(AppContext);
   const [isLoadingCart, setisLoadingCart] = useState(false);
   const [updatingCartItem, setUpdatingCartItem] = useState(false);
+  const [inventoryToken, setInventoryToken] = useState("");
   const [cartData, setCartData] = useState({
     status: "",
     items: [],
@@ -143,6 +145,22 @@ const MiniCart = (): JSX.Element => {
     }
   };
 
+  const [renderComponent, setRenderComponent] = useState(false);
+  useEffect(() => {
+    if (!renderComponent) {
+      authInventory();
+    }
+  });
+  useEffect(() => {
+    setRenderComponent(true);
+  }, []);
+
+  const authInventory = async () => {
+    const auth = await getInventoryAuth();
+    const inventoryAuth = auth?.data?.accessToken;
+    setInventoryToken(inventoryAuth);
+  };
+
   const handleSignOut = () => {
     console.log("signout");
   };
@@ -155,99 +173,116 @@ const MiniCart = (): JSX.Element => {
 
   return (
     <>
-      <div className={styles.content_wrapper}>
-        <div className={styles["shopabag-count"]}>
-          {Object.keys(cartData).length !== 0 && cartData?.items?.length > 0 ? (
-            <div className={styles["filled-cart"]}>
-              <IconTick width="20" height="20" strokeWidth="1" stroke="#000" />
-              <Label className={styles.label}>Added to Bag</Label>
+      {renderComponent && (
+        <>
+          <div className={styles.content_wrapper}>
+            <div className={styles["shopabag-count"]}>
+              {Object.keys(cartData).length !== 0 &&
+              cartData?.items?.length > 0 ? (
+                <div className={styles["filled-cart"]}>
+                  <IconTick
+                    width="20"
+                    height="20"
+                    strokeWidth="1"
+                    stroke="#000"
+                  />
+                  <Label className={styles.label}>Added to Bag</Label>
+                </div>
+              ) : null}
+              <Bag width="40px" height="40px" fill="#000" />
+              <Heading className={styles["shopbag-heading"]} element="h1">
+                Shopping Bag
+              </Heading>
+              {Object.keys(cartData).length !== 0 &&
+              cartData?.items?.length > 0 ? null : (
+                <Label className={styles["shopbag-label"]}>
+                  Your shopping bag is empty
+                </Label>
+              )}
             </div>
-          ) : null}
-          <Bag width="40px" height="40px" fill="#000" />
-          <Heading className={styles["shopbag-heading"]} element="h1">
-            Shopping Bag
-          </Heading>
-          {Object.keys(cartData).length !== 0 &&
-          cartData?.items?.length > 0 ? null : (
-            <Label className={styles["shopbag-label"]}>
-              Your shopping bag is empty
-            </Label>
-          )}
-        </div>
-        <div className={styles.minicart_items}>
-          {Object.keys(cartData).length !== 0
-            ? cartData?.items?.length > 0
-              ? cartData?.items?.map((item, index) => {
-                  return (
-                    <>
-                      <CartItem
-                        className="mini-cart-item"
-                        productImgWidth="100px"
-                        productImgHeight="100px"
-                        key={index}
-                        item={item}
-                        // userAuth={userAuth}
-                        updatingCartItem={updatingCartItem}
-                        handleChange={handleChange}
-                        removeItem={removeItem}
-                      />
-                      {index < cartData?.items?.length - 1 ? (
-                        <hr className={styles.divider} />
-                      ) : null}
-                    </>
-                  );
-                })
-              : null
-            : null}
-        </div>
-        {Object.keys(cartData).length !== 0 && cartData?.items?.length > 0 ? (
-          <div
-            className={styles.checkout_btn_wrapper}
-            onClick={() => {
-              console.log("handle checkout");
-            }}
-          >
-            <div className={styles.checkout_btn}>
-              <Label
-                className={styles.total_amount}
-              >{`Total: $${cartData?.totalAmount?.toLocaleString()}`}</Label>
-              <div className={styles.divider}>|</div>
-              <button>checkout</button>
+            <div className={styles.minicart_items}>
+              {Object.keys(cartData).length !== 0
+                ? cartData?.items?.length > 0
+                  ? cartData?.items?.map((item, index) => {
+                      return (
+                        <>
+                          <CartItem
+                            miniCartItem={true}
+                            className="mini-cart-item"
+                            productImgWidth="100px"
+                            productImgHeight="100px"
+                            key={index}
+                            item={item}
+                            // userAuth={userAuth}
+                            inventoryToken={inventoryToken}
+                            updatingCartItem={updatingCartItem}
+                            handleChange={handleChange}
+                            removeItem={removeItem}
+                            renderComponent={renderComponent}
+                          />
+                          {index < cartData?.items?.length - 1 ? (
+                            <hr className={styles.divider} />
+                          ) : null}
+                        </>
+                      );
+                    })
+                  : null
+                : null}
             </div>
-            <div className={styles.viewbag_btn}>
-              <Button
-                buttonSize="lr"
-                buttonText={"View Bag"}
-                buttonStyle="white"
+            {Object.keys(cartData).length !== 0 &&
+            cartData?.items?.length > 0 ? (
+              <div
+                className={styles.checkout_btn_wrapper}
                 onClick={() => {
-                  router?.push("/cart");
+                  console.log("handle checkout");
                 }}
-              />
-            </div>
+              >
+                <div className={styles.checkout_btn}>
+                  <Label
+                    className={styles.total_amount}
+                  >{`Total: $${cartData?.totalAmount?.toLocaleString()}`}</Label>
+                  <div className={styles.divider}>|</div>
+                  <button>checkout</button>
+                </div>
+                <div className={styles.viewbag_btn}>
+                  <Button
+                    buttonSize="lr"
+                    buttonText={"View Bag"}
+                    buttonStyle="white"
+                    onClick={() => {
+                      router?.push("/cart");
+                    }}
+                  />
+                </div>
+              </div>
+            ) : null}
           </div>
-        ) : null}
-      </div>
-      <div className={styles.auth_btns}>
-        {loggedInUser ? (
-          <div className={styles.signout_btn} onClick={() => handleSignOut()}>
-            <SignOut fill="#000000" width="20px" height="20px" />
-            <span>sign out</span>
+          <div className={styles.auth_btns}>
+            {loggedInUser ? (
+              <div
+                className={styles.signout_btn}
+                onClick={() => handleSignOut()}
+              >
+                <SignOut fill="#000000" width="20px" height="20px" />
+                <span>sign out</span>
+              </div>
+            ) : (
+              <>
+                <Button
+                  buttonSize="xl"
+                  buttonText="Sign Up"
+                  onClick={() => handleSignUp()}
+                />
+                <Button
+                  buttonText={"Sign In"}
+                  className={styles.signin_btn}
+                  onClick={() => handleSignIn()}
+                />
+              </>
+            )}
           </div>
-        ) : (
-          <>
-            <Button
-              buttonSize="xl"
-              buttonText="Sign Up"
-              onClick={() => handleSignUp()}
-            />
-            <Button
-              buttonText={"Sign In"}
-              className={styles.signin_btn}
-              onClick={() => handleSignIn()}
-            />
-          </>
-        )}
-      </div>
+        </>
+      )}
     </>
   );
 };
