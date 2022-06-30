@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .term-comtainer {
   padding: 0;
   width: 100%;
@@ -34,6 +36,11 @@
   background-color: white;
   padding-block: 45px;
   padding-inline-start: 18px;
+
+  &[data-opened="true"] {
+    display: block;
+  }
+
   @media (min-width: 1023px) {
     width: 39%;
     height: fit-content;
@@ -54,27 +61,31 @@
 }
 
 .term-block {
-  display: none;
-  @media (min-width: 1023px) {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-  }
+  // @media (min-width: 1023px) {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  // }
 }
 
 .term-right {
   background-color: white;
-  padding-top: 24px;
-  padding-inline: 24px;
+  padding: 24px;
 
   &:nth-child(3) {
     padding-top: 0;
     padding-inline: 0;
   }
-  @media (min-width: 1023px) {
+  @media (min-width: $breakPoint-desktop) {
     width: 100%;
-    padding-top: 46px;
-    padding-inline: 47px 40px;
+    padding: 40px;
+  }
+  .content-container {
+    .content {
+      p {
+        font-size: 13px;
+      }
+    }
   }
 }
 
@@ -153,9 +164,7 @@
 }
 
 .back-block {
-  padding-top: 48px;
-  padding-inline-end: 24px;
-  padding-bottom: 24px;
+  padding: 24px;
   background-color: white;
 
   @media (min-width: 1024px) {
@@ -164,12 +173,14 @@
 }
 
 .term-right-container {
+  &[data-opened="true"] {
+    display: none;
+  }
+
   @media (min-width: 1024px) {
     width: 71%;
   }
 }
-
-@import "/styles/variables.scss";
 
 .bread-crumb {
   cursor: pointer;

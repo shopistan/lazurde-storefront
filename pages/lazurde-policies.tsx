@@ -64,7 +64,7 @@ export default LazurdeHome;
 
 export async function getStaticProps(context: any) {
   const globalComponents = (await fetchGlobalComponents()) || [];
-  const pageComponents = (await fetchXMComponents(12, "/terms-conditions")) || [];
+  const pageComponents = (await fetchXMComponents(12, "/lazurde-policies")) || [];
   const headerArray =
     globalComponents.filter((item: XMComponent) => item.id === "Header") || {};
   const headerProps =
