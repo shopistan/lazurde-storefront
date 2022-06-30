@@ -7,6 +7,7 @@ const CrossSmall = ({ ...props }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        cursor: "pointer",
       }}
     >
       <div
