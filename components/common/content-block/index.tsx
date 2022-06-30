@@ -12,14 +12,18 @@ interface ContentBlockProps {
     content: string;
     icon: { url: string; altText: string };
   };
+  className?: string;
 }
 
-const ContentBlock: FC<ContentBlockProps> = ({ content = {} }) => {
+const ContentBlock: FC<ContentBlockProps> = ({
+  content = {},
+  className = "",
+}) => {
   const { appState } = useContext(AppContext);
   const [width] = useWindowSize();
   return (
     <>
-      <div className={styles["content-container"]}>
+      <div className={`${styles["content-container"]} ${styles[className]}`}>
         {content?.icon?.url && (
           <div className={styles["image"]}>
             <Image
