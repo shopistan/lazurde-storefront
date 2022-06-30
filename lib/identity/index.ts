@@ -38,6 +38,7 @@ export const loginUser = () => {
   const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
   if (authTokens) {
     console.log("Already logged in: ", authTokens);
+    Router.push('/account')
   } else {
     Router.push(
       `${OKTA_DOMAIN}/v1/authorize?client_id=${OKTA_CLIENT_ID}&code_challenge=${codeChallenge}&code_challenge_method=S256&redirect_uri=${getRedirectUri()}&response_type=code&state=${state}&scope=openid%20email%20profile%20offline_access`
