@@ -59,13 +59,6 @@ const FeedbackPopUp: FC<FeedbackPopUpProps> = ({
       className={styles["feedback-modal"]}
     >
       <div className={styles["feedback-container"]}>
-        <div className={styles["cross-icon"]}>
-          <CrossSmall
-            onClick={() => {
-              onClose();
-            }}
-          />
-        </div>
         <Label className={styles["heading"]}>
           {appState.lang === "en" ? heading : t("feedbackHeading")}
         </Label>

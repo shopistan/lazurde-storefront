@@ -93,12 +93,12 @@
 
 .feedback-container {
   position: relative;
-  padding-block-start: 41px;
-  padding-inline: 24px;
+  // padding-block-start: 41px;
+  // padding-inline: 24px;
 
   @media (min-width: $breakPoint-desktop) {
-    padding-block-start: 60px;
-    padding-inline: 40px;
+    padding-block-start: 0;
+    padding-inline: 0;
   }
 }
 
@@ -128,16 +128,32 @@
 
 .feedback-modal {
   @media (min-width: $breakPoint-desktop) {
-    display: block;
-    padding-block-start: 100px;
-    padding-block-end: 178px;
-    padding-inline: 439px;
+    // display: block;
+    // padding-block-start: 100px;
+    // padding-block-end: 178px;
+    // padding-inline: 439px;
     display: flex;
     background-color: #e5e5e5;
   }
 
   .feedback-modalBody {
     background-color: white;
+    width: 562px;
+    margin-top: 0;
+    padding-block: 0;
+    padding-top: 26px;
+    padding-inline: 24px;
+    border-radius: 0;
+
+    @media (min-width: $breakPoint-desktop) {
+      padding-block: 0;
+      padding-top: 40px;
+      padding-inline: 40px;
+    }
+
+    & > div:first-child {
+      margin-bottom: 20px;
+    }
   }
 
   .div-rightModal {
@@ -145,20 +161,8 @@
     right: 38px;
   }
 
-  .div-topBar {
-    padding-top: 26px;
-    padding-inline-end: 25px;
-
-    @media (min-width: $breakPoint-desktop) {
-      display: none;
-    }
-  }
   .div-feedbackBody {
     margin-top: 0;
-    @media (min-width: $breakPoint-desktop) {
-      width: 562px;
-      margin-top: 0px;
-    }
   }
 }
 
