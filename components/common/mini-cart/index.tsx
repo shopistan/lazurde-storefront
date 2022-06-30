@@ -20,12 +20,24 @@ import { getInventoryAuth } from "lib/utils/inventory";
 import { desktopScreenSize } from "lib/utils/common";
 import useWindowSize from "lib/utils/useWindowSize";
 
+interface miniCartArabicDataProps {
+  addToBag?: string;
+  ShoppingBag?: string;
+  YourShoppingBagIsEmpty?: string;
+  checkoutBtnText?: string;
+  totalText?: string;
+  viewBag?: string;
+  signOut?: string;
+  signUp?: string;
+  signIn?: string;
+}
+
 const MiniCart = (): JSX.Element => {
   const [width] = useWindowSize();
-  const [loggedInUser, setLoggedInUser] = useState(true);
   const router = useRouter();
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
+  const [loggedInUser, setLoggedInUser] = useState(true);
   const [isLoadingCart, setisLoadingCart] = useState(false);
   const [updatingCartItem, setUpdatingCartItem] = useState(false);
   const [inventoryToken, setInventoryToken] = useState("");
@@ -41,6 +53,12 @@ const MiniCart = (): JSX.Element => {
     getCartData();
     setisLoadingCart(true);
   }, []);
+
+  const miniCartArabicData: miniCartArabicDataProps = t(
+    "miniCartArabicData",
+    {},
+    { returnObjects: true }
+  );
 
   async function getCartData() {
     const cartData = await getCartByCartId(
@@ -195,17 +213,25 @@ const MiniCart = (): JSX.Element => {
                       strokeWidth="1"
                       stroke="#000"
                     />
-                    <Label className={styles.label}>Added to Bag</Label>
+                    <Label className={styles.label}>
+                      {appState?.lang === "en"
+                        ? "Added to Bag"
+                        : miniCartArabicData?.addToBag}
+                    </Label>
                   </div>
                 ) : null}
                 <Bag width="40px" height="40px" fill="#000" />
                 <Heading className={styles["shopbag-heading"]} element="h1">
-                  Shopping Bag
+                  {appState?.lang === "en"
+                    ? "Shopping Bag"
+                    : miniCartArabicData?.ShoppingBag}
                 </Heading>
                 {Object.keys(cartData).length !== 0 &&
                 cartData?.items?.length > 0 ? null : (
                   <Label className={styles["shopbag-label"]}>
-                    Your shopping bag is empty
+                    {appState?.lang === "en"
+                      ? "Your shopping bag is empty"
+                      : miniCartArabicData?.YourShoppingBagIsEmpty}
                   </Label>
                 )}
               </div>
@@ -247,16 +273,26 @@ const MiniCart = (): JSX.Element => {
                   }}
                 >
                   <div className={styles.checkout_btn}>
-                    <Label
-                      className={styles.total_amount}
-                    >{`Total: $${cartData?.totalAmount?.toLocaleString()}`}</Label>
+                    <Label className={styles.total_amount}>{`${
+                      appState?.lang === "en"
+                        ? "Total"
+                        : miniCartArabicData?.totalText
+                    }: $ ${cartData?.totalAmount?.toLocaleString()}`}</Label>
                     <div className={styles.divider}>|</div>
-                    <button>checkout</button>
+                    <button>
+                      {appState?.lang === "en"
+                        ? "checkout"
+                        : miniCartArabicData?.checkoutBtnText}
+                    </button>
                   </div>
                   <div className={styles.viewbag_btn}>
                     <Button
                       buttonSize="lr"
-                      buttonText={"View Bag"}
+                      buttonText={
+                        appState?.lang === "en"
+                          ? "View Bag"
+                          : miniCartArabicData?.viewBag
+                      }
                       buttonStyle="white"
                       onClick={() => {
                         router?.push("/cart");
@@ -274,17 +310,29 @@ const MiniCart = (): JSX.Element => {
                 onClick={() => handleSignOut()}
               >
                 <SignOut fill="#000000" width="20px" height="20px" />
-                <span>sign out</span>
+                <span>
+                  {appState?.lang === "en"
+                    ? "sign out"
+                    : miniCartArabicData?.signOut}
+                </span>
               </div>
             ) : (
               <>
                 <Button
                   buttonSize="xl"
-                  buttonText="Sign Up"
+                  buttonText={
+                    appState?.lang === "en"
+                      ? "Sign Up"
+                      : miniCartArabicData?.signUp
+                  }
                   onClick={() => handleSignUp()}
                 />
                 <Button
-                  buttonText={"Sign In"}
+                  buttonText={
+                    appState?.lang === "en"
+                      ? "Sign In"
+                      : miniCartArabicData?.signIn
+                  }
                   className={styles.signin_btn}
                   onClick={() => handleSignIn()}
                 />
