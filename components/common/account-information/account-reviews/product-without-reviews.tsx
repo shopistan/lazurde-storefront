@@ -66,12 +66,14 @@ const ProductWithOutReviews = ({
                   <SwiperSlide key={index}>
                     <div className={styles["sldie-content"]}>
                       <div className={styles["img"]}>
-                        <Image
+                      <Image
                           src={image || ""}
                           alt="product-img"
-                          width={width > desktopScreenSize ? 281 : 238}
+                          width={width > desktopScreenSize ? 281 : 238.5}
                           height={width > desktopScreenSize ? 267 : 227}
-                          layout="responsive"
+                          layout={
+                            width > desktopScreenSize ? "responsive" : "fixed"
+                          }
                         />
                       </div>
                       <Label className={styles["title"]}>

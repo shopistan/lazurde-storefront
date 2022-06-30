@@ -19,8 +19,8 @@ import { desktopScreenSize } from "lib/utils/common";
 import { getWishList } from "lib/utils/wishlist";
 import SideBar from "components/common/ui/sidebar";
 import AccountSidebar from "./account-sidebar";
-import WhishListSidebar from "./whishlist-sidebar";
-import MiniCart from "./mini-cart";
+import WhishListSidebar from "components/common/whishlist-sidebar";
+import MiniCart from "components/common/mini-cart";
 import Language from "./language-sidebar";
 import { loginUser } from "lib/identity";
 
@@ -40,7 +40,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   const [sidebarchild, setSidebarChild] = useState({
     account: false,
     whishlist: false,
-    shopbag: false,
+    miniCart: false,
     language: false,
   });
   const GRANT_TYPE = "code";
@@ -76,8 +76,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   }, [isOpened, sidebarOpened]);
 
   const signInUser = async () => {
-    setSidebarOpened(!sidebarOpened);
-    setSidebarChild({ ...sidebarchild, account: true });
+    // setSidebarOpened(!sidebarOpened);
     loginUser();
   };
 
@@ -85,22 +84,20 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
     setIsOpened(false);
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
-      ...sidebarchild,
       whishlist: true,
-      shopbag: false,
       account: false,
+      miniCart: false,
       language: false,
     });
   };
 
-  const handleshopbag = () => {
+  const handleMiniCart = () => {
     setIsOpened(false);
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
-      ...sidebarchild,
-      shopbag: true,
-      account: false,
+      miniCart: true,
       whishlist: false,
+      account: false,
       language: false,
     });
   };
@@ -109,11 +106,10 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
     setIsOpened(false);
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
-      ...sidebarchild,
-      shopbag: false,
-      account: false,
-      whishlist: false,
       language: true,
+      miniCart: false,
+      whishlist: false,
+      account: false,
     });
   };
 
@@ -212,7 +208,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
           <Divider />
         </div>
 
-        <div className={styles["link"]} onClick={() => handleshopbag()}>
+        <div className={styles["link"]} onClick={() => handleMiniCart()}>
           <Bag />
         </div>
       </div>
@@ -248,7 +244,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
             <AccountSidebar />
           ) : sidebarchild.whishlist ? (
             <WhishListSidebar />
-          ) : sidebarchild.shopbag ? (
+          ) : sidebarchild.miniCart ? (
             <MiniCart />
           ) : sidebarchild.language ? (
             <Language />
