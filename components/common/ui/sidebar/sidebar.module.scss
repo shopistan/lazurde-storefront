@@ -73,4 +73,12 @@ html[dir="rtl"] {
       opacity: 1;
     }
   }
+
+  .close-menu-wrapper {
+    .back-btn {
+      svg {
+        transform: rotateY(180deg);
+      }
+    }
+  }
 }

@@ -178,3 +178,11 @@
     text-decoration: underline;
   }
 }
+
+html[dir="rtl"] {
+  .signout_btn {
+    svg {
+      transform: rotateY(0);
+    }
+  }
+}

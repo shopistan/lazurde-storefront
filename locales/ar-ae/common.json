@@ -1092,5 +1092,16 @@
         "writeReviewBtn": "أكتب مراجعة"
       }
     ]
+  },
+  "miniCartArabicData": {
+    "addToBag": "يضاف إلى الحقيبة",
+    "ShoppingBag": "كيس التسوق",
+    "YourShoppingBagIsEmpty": "حقيبة التسوق الخاصة بك فارغة",
+    "checkoutBtnText": "الدفع",
+    "totalText": "المجموع",
+    "viewBag": "حقيبة عرض",
+    "signOut": "خروج",
+    "signUp": "اشتراك",
+    "signIn": "تسجيل الدخول"
   }
 }
