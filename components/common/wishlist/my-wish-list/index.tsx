@@ -40,7 +40,6 @@ const MyWishList = (): JSX.Element => {
   const [wishListItem, setWishListItem] = useState([]);
   const [addingItems, setAddingItems] = useState(false);
   const [inventoryToken, setInventoryToken] = useState("");
-
   const { priceListId, appState, allWishListProducts, setAllWishListProducts } =
     useContext(AppContext);
 
@@ -271,7 +270,9 @@ const MyWishList = (): JSX.Element => {
                             // setModalOpen(true);
                           }}
                         >
-                          {appState?.lang === "en" ? "Start Shopping" : "ابدأ التسوق"}
+                          {appState?.lang === "en"
+                            ? "Start Shopping"
+                            : "ابدأ التسوق"}
                         </Button>
                       </div>
                     </>
@@ -285,7 +286,7 @@ const MyWishList = (): JSX.Element => {
                       <Bag
                         fill="#000000"
                         stroke="#000000"
-                        width="12px"
+                        width="16px"
                         height="16px"
                       />
                     )}
@@ -315,7 +316,7 @@ const MyWishList = (): JSX.Element => {
                 wishListItem.map((item, index) => {
                   return (
                     <WishListItems
-                      key={Math.random()}
+                      key={item.itemId}
                       item={item}
                       appState={appState}
                       removeWishListItem={removeWishListItem}
@@ -352,24 +353,25 @@ const WishListItems = ({
 }: WishListItemsProps) => {
   const [removingItem, setRemovingItem] = useState(false);
   const [addingItem, setAddingItem] = useState(false);
-  const [checkNumber, setCheckNumber] = useState<boolean>(true);
+  const [checkNumber, setCheckNumber] = useState<boolean>(false);
   const imageSrc = item?.["Image URL"];
 
   const handleInventory = async () => {
     const res = await getInventoryByIds(token, item?.itemId);
-    const num = res?.data?.inventory?.find((loc: any) => loc?.locationNum);
-    const numberMatched = num?.locationNum;
-    const isMatched = appState?.locationNum;
-    if (isMatched == numberMatched) {
-      setCheckNumber(false);
-    } else {
+    const num = res?.data?.inventory?.find(
+      (loc: any) => loc?.locationNum == appState?.locationNum
+    );
+    if (!num) {
       setCheckNumber(true);
+    } else {
+      setCheckNumber(false);
     }
   };
 
   useEffect(() => {
+    setCheckNumber(false);
     renderCom && handleInventory();
-  }, [appState.region]);
+  }, [appState.locationNum]);
 
   return (
     <>
@@ -398,33 +400,36 @@ const WishListItems = ({
               }`}</span>
             </div>
             <div className={styles["item-buttons"]}>
-              <div className={styles["add-to-bag-btn"]}>
-                {addingItem ? (
-                  <Spinner width={12} height={12} stroke={2} />
-                ) : (
-                  <Bag
-                    fill="#000000"
-                    stroke="#000000"
-                    width="12px"
-                    height="16px"
-                  />
-                )}
-                <button
-                  onClick={() => {
-                    setAddingItem(true);
-                    handleAddToBag(item);
-                  }}
-                  disabled={addingItem}
-                >
-                  {appState?.lang === "en"
-                    ? addingItem
-                      ? "Adding..."
-                      : "Add to Bag"
-                    : addingItem
-                    ? "جارٍ الإضافة ..."
-                    : "أضف الى الحقيبة"}
-                </button>
-              </div>
+              {!checkNumber && (
+                <div className={styles["add-to-bag-btn"]}>
+                  {addingItem ? (
+                    <Spinner width={12} height={12} stroke={2} />
+                  ) : (
+                    <Bag
+                      fill="#000000"
+                      stroke="#000000"
+                      width="16px"
+                      height="16px"
+                    />
+                  )}
+                  <button
+                    onClick={() => {
+                      setAddingItem(true);
+                      handleAddToBag(item);
+                    }}
+                    disabled={addingItem}
+                  >
+                    {appState?.lang === "en"
+                      ? addingItem
+                        ? "Adding..."
+                        : "Add to Bag"
+                      : addingItem
+                      ? "جارٍ الإضافة ..."
+                      : "أضف الى الحقيبة"}
+                  </button>
+                </div>
+              )}
+
               <div className={styles["remove-btn"]}>
                 {removingItem ? (
                   <Spinner width={12} height={12} stroke={2} />
