@@ -64,8 +64,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
     {},
     { returnObjects: true }
   );
-  const router = useRouter();
-  const [nonAccordian, setNonAccordian] = useState(true);
+  const [showPolicies, setShowPolicies] = useState(false)
   const [objects, setObjects] = useState({
     accordion: hyperLinks[0].accordion || [],
     name: hyperLinks[0]?.name || "",
@@ -76,13 +75,6 @@ const TermCondtion: FC<TermCondtionProps> = ({
     },
   });
 
-  const handleLinks = (object: any) => {
-    if (object?.name == "Terms and Conditions") {
-      setNonAccordian(false);
-    } else {
-      setNonAccordian(true);
-    }
-  };
 
   useEffect(() => {
     setObjects({
@@ -96,30 +88,16 @@ const TermCondtion: FC<TermCondtionProps> = ({
       },
     });
   }, [appState.lang]);
-
   return (
     <div className={styles["term-comtainer"]}>
       <Label className={styles["term-heading"]}>
         {appState?.lang == "en" ? title : t("termTitle")}
       </Label>
-      {objects?.name && (
-        <div className={styles["bread-crumb_item"]}>
-          <Link href={`/help-centre`}>
-            <a>
-              {appState?.lang === "en"
-                ? `Help Centre /`
-                : "/ تائفلا عيمج فشتكاا"}
-            </a>
-          </Link>
-          <Label>
-            {appState?.lang === "en" ? objects.name : " ةيسيئرلا ةحفصلا"}
-          </Label>
-        </div>
-      )}
       <div className={styles["term-section"]}>
         <div
           className={styles["term-left"]}
           style={{ backgroundColor: sideBarBgcolor }}
+          data-opened={showPolicies}
         >
           {hyperLinks &&
             hyperLinks.map((object, index) => {
@@ -137,6 +115,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
                   className={styles["term-block"]}
                   key={index}
                   onClick={() => {
+                    setShowPolicies(false);
                     setObjects({
                       accordion: accordion,
                       content:
@@ -147,7 +126,6 @@ const TermCondtion: FC<TermCondtionProps> = ({
                         altText: icon?.altText,
                       },
                     });
-                    handleLinks(object);
                   }}
                 >
                   {icon?.url && (
@@ -167,28 +145,32 @@ const TermCondtion: FC<TermCondtionProps> = ({
               );
             })}
         </div>
-        <div className={styles["term-right-container"]}>
+        <div className={styles["term-right-container"]}
+        data-opened={showPolicies}>
           <div
             className={styles["back-button"]}
             style={{ backgroundColor: contentBgcolor }}
             onClick={() => {
-              router.push("/help-centre");
+              setShowPolicies(true);
             }}
           >
             <div>
               <BackArrow />
             </div>
             <button className={styles["back-content"]}>
-              {appState?.lang == "en" ? "Back To Help centre" : "ءيش لك قوست"}
-            </button>
+                {appState?.lang == "en"
+                  ? "Back To L'azurde Policies"
+                  : "ءيش لك قوست"}
+              </button>
           </div>
           <div
             className={styles["term-right"]}
             style={{ backgroundColor: contentBgcolor }}
           >
-            <ContentBlock key={Math.random()} content={objects} />
+            <ContentBlock className={"terms-conditions"}key={Math.random()} content={objects} />
           </div>
-          {nonAccordian && (
+          {(objects?.accordion[0].heading || objects?.accordion[0].text)
+            .length > 0 && (
             <div
               className={styles["term-right"]}
               style={{ backgroundColor: contentBgcolor }}
