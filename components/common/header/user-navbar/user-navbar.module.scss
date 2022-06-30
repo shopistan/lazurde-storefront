@@ -218,16 +218,18 @@ html[dir="rtl"] {
   overflow-y: auto;
   z-index: 30;
   height: 0;
-  transition: height 0.01s 0.1s;
+  opacity: 0;
+  transition: opacity 0.2s;
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
 
   &[data-opened="true"] {
+    transition: none;
     height: 100vh;
+    opacity: 1;
   }
 
   @media (min-width: $breakPoint-desktop) {
     position: absolute;
-    top: 100%;
   }
 }

@@ -202,8 +202,10 @@
         flex-direction: column;
 
         span {
-          &:first-child {
-            margin-bottom: 8px;
+          @media (max-width: $breakPoint-mobile) {
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 18px;
           }
         }
       }
@@ -228,7 +230,7 @@
     margin-inline-start: 12px;
     font-size: 13px;
     font-weight: 500;
-    line-height: 16px;
+    line-height: 15.6px;
     letter-spacing: 0em;
     text-align: start;
     color: rgba(0, 0, 0, 0.6);

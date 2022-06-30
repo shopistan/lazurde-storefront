@@ -5,6 +5,9 @@ import Link from "next/link";
 import MobileMenu from "./mobile-menu/mobile-menu";
 import Image from "next/image";
 import { MobileHeaderProps } from "lib/types/mobile-header";
+import SideBar from "components/common/ui/sidebar";
+import WhishListSidebar from "components/common/whishlist-sidebar";
+import MiniCart from "components/common/mini-cart";
 
 const MobileNavBar = ({
   menuData,
@@ -15,6 +18,34 @@ const MobileNavBar = ({
   setOpenSearchDialog,
 }: MobileHeaderProps): JSX.Element => {
   const [menu, setMenu] = useState<Boolean>(false);
+  const [sidebarOpened, setSidebarOpened] = useState(false);
+  const [sidebarchild, setSidebarChild] = useState({
+    account: false,
+    whishlist: false,
+    miniCart: false,
+    language: false,
+  });
+
+  const handleMiniCart = () => {
+    setSidebarOpened(!sidebarOpened);
+    setSidebarChild({
+      miniCart: true,
+      whishlist: false,
+      account: false,
+      language: false,
+    });
+  };
+
+  const onSideBarClose = () => {
+    setSidebarOpened(false);
+    setSidebarChild({
+      miniCart: false,
+      whishlist: false,
+      account: false,
+      language: false,
+    });
+  };
+
   const handleMenu = () => {
     setMenu(!menu);
   };
@@ -57,7 +88,7 @@ const MobileNavBar = ({
           <button>
             <Heart fill="#000000" stroke="#000000" />
           </button>
-          <button>
+          <button onClick={() => handleMiniCart()}>
             <Bag fill="#000000" stroke="#000000" />
           </button>
         </div>
@@ -70,6 +101,20 @@ const MobileNavBar = ({
         headerId={headerId}
         brandSideBar={brandSideBar}
       />
+
+      <div className={styles["rightside-drawer"]} data-opened={sidebarOpened}>
+        <SideBar
+          isopend={sidebarOpened}
+          setIsOpened={setSidebarOpened}
+          onClose={onSideBarClose}
+        >
+          {sidebarchild.whishlist ? (
+            <WhishListSidebar />
+          ) : sidebarchild.miniCart ? (
+            <MiniCart />
+          ) : null}
+        </SideBar>
+      </div>
     </>
   );
 };
