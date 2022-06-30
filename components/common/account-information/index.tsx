@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import SideBar from "components/common/side-bar/index";
 import AccountSection from "../account-section";
 import OrderDetails from "components/common/order-details/index";
+import NewsSubscriptions from "components/common/newsletter-subscriptions/index";
 import OrderHistory from "../order-history";
 import { desktopScreenSize } from "lib/utils/common";
 import UserReviews from "./account-reviews";
@@ -102,6 +103,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
               {activeComponent == "My Orders" && <OrderDetails />}
               {activeComponent == "My Reviews" && <UserReviews />}
               {activeComponent == "My Wish List" && <MyWishList/>}
+              {activeComponent == "Newsletter Subscriptions" && <NewsSubscriptions/>}
             </div>
           </div>
         </div>
