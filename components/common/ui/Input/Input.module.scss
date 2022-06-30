@@ -1,5 +1,6 @@
 .input-container {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: flex-start;
   line-height: 18px;
@@ -18,4 +19,17 @@
   padding: 11px 20px;
   color: #000;
   outline: none;
+}
+
+.error-msg {
+  position: absolute;
+  top: 100%;
+  margin-top: 5px;
+  width: 100%;
+  display: block;
+  padding-inline-start: 20px;
+  color: red;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15.6px;
 }
