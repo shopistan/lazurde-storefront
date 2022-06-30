@@ -35,16 +35,15 @@ const Modal = ({
   const [size] = useWindowSize();
 
   useEffect(() => {
-    setOpenState(isOpened);
-  }, [isOpened]);
-
-  useEffect(() => {
-    if (openState) {
+    if (isOpened) {
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
     }
-  }, [openState]);
+    setOpenState(isOpened);
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpened]);
 
   return (
     <>
