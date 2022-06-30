@@ -65,6 +65,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
     { returnObjects: true }
   );
   const router = useRouter();
+  const [nonAccordian, setNonAccordian] = useState(true);
   const [objects, setObjects] = useState({
     accordion: hyperLinks[0].accordion || [],
     name: hyperLinks[0]?.name || "",
@@ -74,6 +75,14 @@ const TermCondtion: FC<TermCondtionProps> = ({
       altText: hyperLinks[0]?.icon?.altText || "",
     },
   });
+
+  const handleLinks = (object: any) => {
+    if (object?.name == "Terms and Conditions") {
+      setNonAccordian(false);
+    } else {
+      setNonAccordian(true);
+    }
+  };
 
   useEffect(() => {
     setObjects({
@@ -138,6 +147,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
                         altText: icon?.altText,
                       },
                     });
+                    handleLinks(object);
                   }}
                 >
                   {icon?.url && (
@@ -178,44 +188,46 @@ const TermCondtion: FC<TermCondtionProps> = ({
           >
             <ContentBlock key={Math.random()} content={objects} />
           </div>
-          <div
-            className={styles["term-right"]}
-            style={{ backgroundColor: contentBgcolor }}
-          >
-            {objects?.accordion && objects?.accordion?.length > 0 && (
-              <div className={styles["accordion-block"]}>
-                {objects?.accordion &&
-                  objects?.accordion.length > 0 &&
-                  objects?.accordion.map((object, index) => {
-                    const { heading, text } = object;
-                    return (
-                      <Accordion
-                        key={index}
-                        className={`accordion-help`}
-                        heading={
-                          appState.lang == "en"
-                            ? object?.heading
-                            : _accordion[index].heading
-                        }
-                        children={
-                          appState.lang == "en" ? (
-                            <p
-                              key={Math.random()}
-                              dangerouslySetInnerHTML={{
-                                __html: object?.text,
-                              }}
-                            ></p>
-                          ) : (
-                            _accordion[index].text
-                          )
-                        }
-                        arrowDown={true}
-                      />
-                    );
-                  })}
-              </div>
-            )}
-          </div>
+          {nonAccordian && (
+            <div
+              className={styles["term-right"]}
+              style={{ backgroundColor: contentBgcolor }}
+            >
+              {objects?.accordion && objects?.accordion?.length > 0 && (
+                <div className={styles["accordion-block"]}>
+                  {objects?.accordion &&
+                    objects?.accordion.length > 0 &&
+                    objects?.accordion.map((object, index) => {
+                      const { heading, text } = object;
+                      return (
+                        <Accordion
+                          key={index}
+                          className={`accordion-help`}
+                          heading={
+                            appState.lang == "en"
+                              ? object?.heading
+                              : _accordion[index].heading
+                          }
+                          children={
+                            appState.lang == "en" ? (
+                              <p
+                                key={Math.random()}
+                                dangerouslySetInnerHTML={{
+                                  __html: object?.text,
+                                }}
+                              ></p>
+                            ) : (
+                              _accordion[index].text
+                            )
+                          }
+                          arrowDown={true}
+                        />
+                      );
+                    })}
+                </div>
+              )}
+            </div>
+          )}
           <div className={styles["back-block"]}>
             <button className={styles["button"]}>
               <Image src={"/question.png"} width={20} height={20} />

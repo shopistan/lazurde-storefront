@@ -16,20 +16,13 @@ import { BrandSidebarProps, ErrorObject } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import { AppContext } from "lib/context";
 import { desktopScreenSize } from "lib/utils/common";
-import Axios from "axios";
-import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
+import { getWishList } from "lib/utils/wishlist";
 import SideBar from "components/common/ui/sidebar";
 import AccountSidebar from "./account-sidebar";
-import WhishListSidebar from "./whishlist-sidebar";
-import ShopBag from "./shopbag-sidebar";
+import WhishListSidebar from "components/common/whishlist-sidebar";
+import MiniCart from "components/common/mini-cart";
 import Language from "./language-sidebar";
-import Router from "next/router";
 import { loginUser } from "lib/identity";
-import {
-  OKTA_CLIENT_ID,
-  OKTA_DOMAIN,
-  OKTA_REDIRECT_URI_LOCAL,
-} from "general-config";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
@@ -47,7 +40,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   const [sidebarchild, setSidebarChild] = useState({
     account: false,
     whishlist: false,
-    shopbag: false,
+    miniCart: false,
     language: false,
   });
   const GRANT_TYPE = "code";
@@ -73,67 +66,50 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   }, []);
 
   useEffect(() => {
-    if (isOpened) {
+    if (isOpened || sidebarOpened) {
       document.body.style.overflow = "hidden";
     } else {
       setTimeout(() => {
         document.body.style.overflow = "auto";
       }, 280);
     }
-  }, [isOpened]);
+  }, [isOpened, sidebarOpened]);
 
   const signInUser = async () => {
-    setSidebarOpened(!sidebarOpened);
-    setSidebarChild({ ...sidebarchild, account: true });
-    try {
-      const signInRes = await Axios.get(`${OKTA_DOMAIN}/authorize`, {
-        params: {
-          client_id: OKTA_CLIENT_ID,
-          responseType: "code",
-          scope: "openid",
-          redirect_uri: OKTA_REDIRECT_URI_LOCAL,
-          state: "state-8600b31f-52d1-4dca-987c-386e3d8967e9",
-          code_challenge_method: "S256",
-          code_challenge: "qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es",
-        },
-      });
-      console.log(signInRes);
-    } catch (error) {
-      console.log("Error signing in: ", (error as ErrorObject).message);
-    }
+    // setSidebarOpened(!sidebarOpened);
     loginUser();
   };
 
   const handlewhishlist = () => {
+    setIsOpened(false);
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
-      ...sidebarchild,
       whishlist: true,
-      shopbag: false,
       account: false,
+      miniCart: false,
       language: false,
     });
   };
 
-  const handleshopbag = () => {
+  const handleMiniCart = () => {
+    setIsOpened(false);
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
-      ...sidebarchild,
-      shopbag: true,
-      account: false,
+      miniCart: true,
       whishlist: false,
+      account: false,
       language: false,
     });
   };
 
   const handlelanguage = () => {
+    setIsOpened(false);
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
-      ...sidebarchild,
-      shopbag: false,
-      account: false,
-      whishlist: false,
       language: true,
+      miniCart: false,
+      whishlist: false,
+      account: false,
     });
   };
 
@@ -146,6 +122,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
             type="button"
             onClick={() => {
               setIsOpened(!isOpened);
+              setSidebarOpened(false);
             }}
           >
             <MenuIcon color="white" />
@@ -214,37 +191,26 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
             <MapPin />
           </a>
         </Link>
-        {/* <Link href={"/"}>
-          <a> */}
-        <div onClick={handlelanguage}>
+
+        <div className={styles["link"]} onClick={() => handlelanguage()}>
           <Globe />
         </div>
-        {/* </a>
-        </Link> */}
-        {/* <Link href={"/"}>
-          <a> */}
-        <div onClick={signInUser} className="cursor-pointer">
+
+        <div className={styles["link"]} onClick={() => signInUser()}>
           <User />
         </div>
-        {/* </a>
-        </Link> */}
-        {/* <Link href={"/"}>
-          <a> */}
-        <div onClick={handlewhishlist}>
+
+        <div className={styles["link"]} onClick={() => handlewhishlist()}>
           <Heart />
         </div>
-        {/* </a>
-        </Link> */}
+
         <div>
           <Divider />
         </div>
-        {/* <Link href={"/"}>
-          <a> */}
-        <div onClick={handleshopbag}>
+
+        <div className={styles["link"]} onClick={() => handleMiniCart()}>
           <Bag />
         </div>
-        {/* </a>
-        </Link> */}
       </div>
       {width > desktopScreenSize && (
         <div
@@ -259,21 +225,32 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
         isOpened={isOpened}
         setIsOpened={setIsOpened}
       />
-      {sidebarOpened && (
-        <SideBar isopend={sidebarOpened} setIsOpened={setSidebarOpened}>
+
+      <div
+        className={styles["rightside-drawer"]}
+        data-opened={sidebarOpened}
+        onClick={() => {
+          setSidebarOpened(false);
+        }}
+      >
+        <SideBar
+          isopend={sidebarOpened}
+          setIsOpened={setSidebarOpened}
+          onClick={(event: any) => {
+            event.stopPropagation();
+          }}
+        >
           {sidebarchild.account ? (
             <AccountSidebar />
           ) : sidebarchild.whishlist ? (
             <WhishListSidebar />
-          ) : sidebarchild.shopbag ? (
-            <ShopBag />
+          ) : sidebarchild.miniCart ? (
+            <MiniCart />
           ) : sidebarchild.language ? (
             <Language />
-          ) : (
-            ""
-          )}
+          ) : null}
         </SideBar>
-      )}
+      </div>
     </div>
   );
 };

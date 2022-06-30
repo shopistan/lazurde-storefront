@@ -14,6 +14,7 @@ import OrderHistory from "../order-history";
 import { desktopScreenSize } from "lib/utils/common";
 import UserReviews from "./account-reviews";
 import AddressBook from "./account-addresses";
+import MyWishList from "../wishlist/my-wish-list/index"
 
 interface AccountInformationProps {
   title?: string | "";
@@ -102,6 +103,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
               {activeComponent == "My Orders" && <OrderDetails />}
               {activeComponent == "My Reviews" && <UserReviews />}
               {activeComponent == "Address Book" && <AddressBook />}
+              {activeComponent == "My Wish List" && <MyWishList/>}
             </div>
           </div>
         </div>

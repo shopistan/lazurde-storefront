@@ -2,7 +2,6 @@ import styles from "./accountsidebar.module.scss";
 import Login from "components/icons/login";
 import Heading from "components/common/ui/heading";
 import Label from "components/common/ui/label";
-import SignIn from "components/common/ui/signin";
 
 const AccountSidebar = () => {
   return (
@@ -17,10 +16,6 @@ const AccountSidebar = () => {
           history and access your shopping bag or saved items from any device.
         </Label>
       </div>
-      <div>
-          <SignIn />
-      </div>
-      
     </div>
   );
 };
