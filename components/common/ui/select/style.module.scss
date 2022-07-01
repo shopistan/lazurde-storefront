@@ -1,6 +1,8 @@
 @import "/styles/variables.scss";
 
 .dropdown {
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 100%;
   min-width: 137px;
@@ -8,6 +10,7 @@
 
   .label {
     margin-inline-start: 20px;
+    line-height: 120%;
     font-size: 12px;
     color: rgba(0, 0, 0, 0.6);
   }

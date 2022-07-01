@@ -8,6 +8,7 @@ import NewAddressModal from "./new-address-modal";
 import { getAllAddresses } from "lib/utils/addresses";
 import { desktopScreenSize } from "lib/utils/common";
 import useWindowSize from "lib/utils/useWindowSize";
+import useTranslation from "next-translate/useTranslation";
 
 type addressPayload = {
   id?: string | number;
@@ -64,6 +65,7 @@ const AddressBook = () => {
   const [editAddressModal, setEditAddressModal] = useState(false);
   const selectedAddress: any = useRef({});
   const [width] = useWindowSize();
+  const { t } = useTranslation("common");
 
   const getAddressData = async () => {
     // const addresses = await getAllAddresses('')
@@ -119,7 +121,6 @@ const AddressBook = () => {
     addresses[index] = payload;
     setAddressData(addresses);
   };
-  console.log("ADDRESS", addressData);
 
   const deleteAddress = () => {
     const index = addresses.findIndex(
@@ -134,9 +135,7 @@ const AddressBook = () => {
       <div className={styles["wrapper-address-book"]}>
         <div className={styles["reviews-heading"]}>
           <AddressBookIcon />
-          <Label className={styles["label"]}>
-            {appState?.lang === "en" ? "Address Book" : ""}
-          </Label>
+          <Label className={styles["label"]}>{t("AddressBook")}</Label>
           {addressData.length < 1 && width < desktopScreenSize ? (
             <div className={styles["div-message-mobile"]}>
               <p>
@@ -148,7 +147,7 @@ const AddressBook = () => {
           <div className={styles["div-add-address"]}>
             <Button
               buttonSize={"lr"}
-              buttonText={"Add New Address"}
+              buttonText={t("AddNewAddress")}
               onClick={() => {
                 setModalOpen(true);
               }}
@@ -191,7 +190,7 @@ const AddressBook = () => {
                   >
                     <Button
                       buttonStyle="underline"
-                      buttonText={"Edit"}
+                      buttonText={t("Edit")}
                     ></Button>
                     <div>{width > desktopScreenSize ? <EditIcon /> : null}</div>
                   </div>
