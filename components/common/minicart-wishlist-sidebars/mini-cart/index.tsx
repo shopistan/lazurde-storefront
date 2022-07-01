@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import styles from "./style.module.scss";
+import styles from "../style.module.scss";
 import Login from "components/icons/login";
 import useTranslation from "next-translate/useTranslation";
 import Heading from "components/common/ui/heading";
@@ -201,144 +201,161 @@ const MiniCart = (): JSX.Element => {
               {appState?.lang === "en" ? "Loading..." : t("loading")}
             </div>
           ) : (
-            <div className={styles.content_wrapper}>
-              <div className={styles["shopabag-count"]}>
-                {width > desktopScreenSize &&
+            <div
+              className={
                 Object.keys(cartData).length !== 0 &&
-                cartData?.items?.length > 0 ? (
-                  <div className={styles["filled-cart"]}>
-                    <IconTick
-                      width="20"
-                      height="20"
-                      strokeWidth="1"
-                      stroke="#000"
-                    />
-                    <Label className={styles.label}>
+                cartData?.items?.length > 0
+                  ? styles["filled-cart-wrapper"]
+                  : styles["empty-cart"]
+              }
+            >
+              <div className={`${styles.content_wrapper}`}>
+                <div className={styles["shopabag-count"]}>
+                  {width > desktopScreenSize &&
+                  Object.keys(cartData).length !== 0 &&
+                  cartData?.items?.length > 0 ? (
+                    <div className={styles["filled-cart"]}>
+                      <IconTick
+                        width="20"
+                        height="20"
+                        strokeWidth="1"
+                        stroke="#000"
+                      />
+                      <Label className={styles.label}>
+                        {appState?.lang === "en"
+                          ? "Added to Bag"
+                          : miniCartArabicData?.addToBag}
+                      </Label>
+                    </div>
+                  ) : null}
+                  <Bag width="40px" height="40px" fill="#000" />
+                  <Heading
+                    className={`${styles["shopbag-heading"]} ${
+                      Object.keys(cartData).length !== 0 &&
+                      cartData?.items?.length > 0
+                        ? styles["mb-fourty"]
+                        : ""
+                    }`}
+                    element="h1"
+                  >
+                    {appState?.lang === "en"
+                      ? "Shopping Bag"
+                      : miniCartArabicData?.ShoppingBag}
+                  </Heading>
+                  {Object.keys(cartData).length !== 0 &&
+                  cartData?.items?.length > 0 ? null : (
+                    <Label className={styles["shopbag-label"]}>
                       {appState?.lang === "en"
-                        ? "Added to Bag"
-                        : miniCartArabicData?.addToBag}
+                        ? "Your shopping bag is empty"
+                        : miniCartArabicData?.YourShoppingBagIsEmpty}
                     </Label>
+                  )}
+                </div>
+                <div className={styles.minicart_items}>
+                  {Object.keys(cartData).length !== 0
+                    ? cartData?.items?.length > 0
+                      ? cartData?.items?.map((item, index) => {
+                          return (
+                            <>
+                              <CartItem
+                                miniCartItem={true}
+                                className="minicart-wishlist-item"
+                                productImgWidth="100px"
+                                productImgHeight="100px"
+                                key={index}
+                                item={item}
+                                // userAuth={userAuth}
+                                inventoryToken={inventoryToken}
+                                updatingCartItem={updatingCartItem}
+                                handleChange={handleChange}
+                                removeItem={removeItem}
+                                renderComponent={renderComponent}
+                              />
+                              {index < cartData?.items?.length - 1 ? (
+                                <hr className={styles.divider} />
+                              ) : null}
+                            </>
+                          );
+                        })
+                      : null
+                    : null}
+                </div>
+                {Object.keys(cartData).length !== 0 &&
+                cartData?.items?.length > 0 ? (
+                  <div
+                    className={styles.checkout_btn_wrapper}
+                    onClick={() => {
+                      console.log("handle checkout");
+                    }}
+                  >
+                    <div className={styles.checkout_btn}>
+                      <Label className={styles.total_amount}>{`${
+                        appState?.lang === "en"
+                          ? "Total"
+                          : miniCartArabicData?.totalText
+                      }: $ ${cartData?.totalAmount?.toLocaleString()}`}</Label>
+                      <div className={styles.divider}>|</div>
+                      <button>
+                        {appState?.lang === "en"
+                          ? "checkout"
+                          : miniCartArabicData?.checkoutBtnText}
+                      </button>
+                    </div>
+                    <div className={styles.viewbag_btn}>
+                      <Button
+                        buttonSize="lr"
+                        buttonText={
+                          appState?.lang === "en"
+                            ? "View Bag"
+                            : miniCartArabicData?.viewBag
+                        }
+                        buttonStyle="white"
+                        onClick={() => {
+                          router?.push("/cart");
+                        }}
+                      />
+                    </div>
                   </div>
                 ) : null}
-                <Bag width="40px" height="40px" fill="#000" />
-                <Heading className={styles["shopbag-heading"]} element="h1">
-                  {appState?.lang === "en"
-                    ? "Shopping Bag"
-                    : miniCartArabicData?.ShoppingBag}
-                </Heading>
-                {Object.keys(cartData).length !== 0 &&
-                cartData?.items?.length > 0 ? null : (
-                  <Label className={styles["shopbag-label"]}>
-                    {appState?.lang === "en"
-                      ? "Your shopping bag is empty"
-                      : miniCartArabicData?.YourShoppingBagIsEmpty}
-                  </Label>
-                )}
               </div>
-              <div className={styles.minicart_items}>
-                {Object.keys(cartData).length !== 0
-                  ? cartData?.items?.length > 0
-                    ? cartData?.items?.map((item, index) => {
-                        return (
-                          <>
-                            <CartItem
-                              miniCartItem={true}
-                              className="mini-cart-item"
-                              productImgWidth="100px"
-                              productImgHeight="100px"
-                              key={index}
-                              item={item}
-                              // userAuth={userAuth}
-                              inventoryToken={inventoryToken}
-                              updatingCartItem={updatingCartItem}
-                              handleChange={handleChange}
-                              removeItem={removeItem}
-                              renderComponent={renderComponent}
-                            />
-                            {index < cartData?.items?.length - 1 ? (
-                              <hr className={styles.divider} />
-                            ) : null}
-                          </>
-                        );
-                      })
-                    : null
-                  : null}
-              </div>
-              {Object.keys(cartData).length !== 0 &&
-              cartData?.items?.length > 0 ? (
-                <div
-                  className={styles.checkout_btn_wrapper}
-                  onClick={() => {
-                    console.log("handle checkout");
-                  }}
-                >
-                  <div className={styles.checkout_btn}>
-                    <Label className={styles.total_amount}>{`${
-                      appState?.lang === "en"
-                        ? "Total"
-                        : miniCartArabicData?.totalText
-                    }: $ ${cartData?.totalAmount?.toLocaleString()}`}</Label>
-                    <div className={styles.divider}>|</div>
-                    <button>
+              <div className={styles.auth_btns}>
+                {loggedInUser ? (
+                  <div
+                    className={styles.signout_btn}
+                    onClick={() => handleSignOut()}
+                  >
+                    <SignOut fill="#000000" width="20px" height="20px" />
+                    <span>
                       {appState?.lang === "en"
-                        ? "checkout"
-                        : miniCartArabicData?.checkoutBtnText}
-                    </button>
+                        ? "sign out"
+                        : miniCartArabicData?.signOut}
+                    </span>
                   </div>
-                  <div className={styles.viewbag_btn}>
+                ) : (
+                  <>
                     <Button
-                      buttonSize="lr"
+                      buttonSize="xl"
                       buttonText={
                         appState?.lang === "en"
-                          ? "View Bag"
-                          : miniCartArabicData?.viewBag
+                          ? "Sign Up"
+                          : miniCartArabicData?.signUp
                       }
-                      buttonStyle="white"
-                      onClick={() => {
-                        router?.push("/cart");
-                      }}
+                      onClick={() => handleSignUp()}
                     />
-                  </div>
-                </div>
-              ) : null}
+                    <Button
+                      buttonText={
+                        appState?.lang === "en"
+                          ? "Sign In"
+                          : miniCartArabicData?.signIn
+                      }
+                      className={styles.signin_btn}
+                      onClick={() => handleSignIn()}
+                    />
+                  </>
+                )}
+              </div>
             </div>
           )}
-          <div className={styles.auth_btns}>
-            {loggedInUser ? (
-              <div
-                className={styles.signout_btn}
-                onClick={() => handleSignOut()}
-              >
-                <SignOut fill="#000000" width="20px" height="20px" />
-                <span>
-                  {appState?.lang === "en"
-                    ? "sign out"
-                    : miniCartArabicData?.signOut}
-                </span>
-              </div>
-            ) : (
-              <>
-                <Button
-                  buttonSize="xl"
-                  buttonText={
-                    appState?.lang === "en"
-                      ? "Sign Up"
-                      : miniCartArabicData?.signUp
-                  }
-                  onClick={() => handleSignUp()}
-                />
-                <Button
-                  buttonText={
-                    appState?.lang === "en"
-                      ? "Sign In"
-                      : miniCartArabicData?.signIn
-                  }
-                  className={styles.signin_btn}
-                  onClick={() => handleSignIn()}
-                />
-              </>
-            )}
-          </div>
         </>
       )}
     </>

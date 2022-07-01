@@ -4,12 +4,8 @@
   position: fixed;
   top: 0;
   inset-inline-end: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   height: 100vh;
-  padding: 24px;
   background-color: white;
   overflow-y: hidden;
   z-index: 50;
@@ -28,14 +24,19 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
 
+  @media (max-width: $breakPoint-mobile) {
+   display: flex;
+   flex-direction: column;
+  }
+
   @media (min-width: $breakPoint-desktop) {
     position: absolute;
     width: 500px;
     height: 876px;
-    padding: 120px 60px;
   }
 
   .close-menu-wrapper {
+    padding: 24px 24px 0;
     .closebtn {
       text-align: end;
     }
