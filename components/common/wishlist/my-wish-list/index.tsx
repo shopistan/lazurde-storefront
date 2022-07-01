@@ -241,13 +241,18 @@ const MyWishList = (): JSX.Element => {
       {renderCom && (
         <>
           <div className={styles["account-wishlist-wrapper"]}>
-            <div className={styles["wishlist-heading"]}>
+            <div
+              className={`${styles["wishlist-heading"]} ${
+                allWishListProducts?.length > 0 ? "" : styles["pb-sixteen"]
+              }`}
+            >
               <Heart fill={"black"} />
               <Label className={styles["label"]}>
                 {appState?.lang === "en"
                   ? "my wish list"
                   : arabicData?.myReviewHeading}
               </Label>
+
               <div className={styles["wishlist-main"]}>
                 <div className={styles["wishlist-items-numbers"]}>
                   {allWishListProducts?.length > 0 ? (
@@ -256,27 +261,7 @@ const MyWishList = (): JSX.Element => {
                         ? `Displaying ${allWishListProducts?.length} Items`
                         : ` العرض ${allWishListProducts?.length} العناصر`}
                     </p>
-                  ) : (
-                    <>
-                      <p className={styles["wishlist-notices"]}>
-                        {appState?.lang === "en"
-                          ? ` You currently don’t have any items on the wish list.`
-                          : `ليس لديك حاليا أي عناصر في قائمة الرغبات.`}
-                      </p>
-                      <div className={styles["shopping-btn"]}>
-                        <Button
-                          buttonSize="sm"
-                          onClick={() => {
-                            // setModalOpen(true);
-                          }}
-                        >
-                          {appState?.lang === "en"
-                            ? "Start Shopping"
-                            : "ابدأ التسوق"}
-                        </Button>
-                      </div>
-                    </>
-                  )}
+                  ) : null}
                 </div>
                 {allWishListProducts?.length > 0 && (
                   <div className={styles["add-to-bag-btn"]}>
@@ -309,6 +294,30 @@ const MyWishList = (): JSX.Element => {
                 )}
               </div>
             </div>
+            {allWishListProducts?.length > 0 ? null : (
+              <>
+                <div className={styles["wishlist-notices"]}>
+                  <p>
+                    {appState?.lang === "en"
+                      ? ` You currently don’t have any items on the wish list.`
+                      : `ليس لديك حاليا أي عناصر في قائمة الرغبات.`}
+                  </p>
+
+                  <div className={styles["shopping-btn"]}>
+                    <Button
+                      buttonSize="sm"
+                      onClick={() => {
+                        // setModalOpen(true);
+                      }}
+                    >
+                      {appState?.lang === "en"
+                        ? "Start Shopping"
+                        : "ابدأ التسوق"}
+                    </Button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
           {allWishListProducts?.length > 0 && wishListItem && (
             <div className={styles["account-wishlist-wrapper"]}>
