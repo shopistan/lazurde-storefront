@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./style.module.scss";
 import { Bag, Heart, MenuIcon, Search, LazurdeLogo } from "components/icons";
 import Link from "next/link";
@@ -25,6 +25,16 @@ const MobileNavBar = ({
     miniCart: false,
     language: false,
   });
+
+  useEffect(() => {
+    if (sidebarOpened) {
+      document.body.style.overflow = "hidden";
+    } else {
+      setTimeout(() => {
+        document.body.style.overflow = "auto";
+      }, 280);
+    }
+  }, [sidebarOpened]);
 
   const handleMiniCart = () => {
     setSidebarOpened(!sidebarOpened);
