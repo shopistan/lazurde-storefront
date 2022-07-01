@@ -13,13 +13,12 @@ interface SelectProps {
   defaultValue?: string;
   className?: string;
   optionClassName?: string;
-  showLabel?: boolean,
-  labelClassName?: string,
-  label?: string,
-  name?: string,
-  error?: string,
+  showLabel?: boolean;
+  labelClassName?: string;
+  label?: string;
+  name?: string;
+  error?: string;
 }
-
 
 const Select = ({
   options = [{ label: "label", img: "", value: "value" }],

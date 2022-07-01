@@ -14,6 +14,7 @@ import Link from "next/link";
 import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from "lib/utils/common";
 import Script from "next/script";
+import InfoSelector from "../info-selector";
 
 type CGIRPagesProps = {
   name?: string | "";
@@ -58,9 +59,9 @@ const CGIR: FC<CGIRProps> = ({
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
   const [showPolicies, setShowPolicies] = useState(false);
+  const [selectedVal, setSelectedVal] = useState("Share Overview");
   const [size] = useWindowSize();
 
-  console.log("cgir", cgirPages);
 
   const _links: _CGIRProps[] = t("cgirProps", {}, { returnObjects: true });
   const router = useRouter();
@@ -87,9 +88,11 @@ const CGIR: FC<CGIRProps> = ({
       icon: cgirPages[0]?.icon,
       engName: cgirPages[0]?.name,
     });
-  }, [appState.lang]);
 
-  //   console.log("object", objects);
+    setSelectedVal(
+      appState.lang === "en" ? "Share Overview" : "نظرة عامة على حصة"
+    );
+  }, [appState.lang]);
 
   return (
     <>
@@ -114,7 +117,6 @@ const CGIR: FC<CGIRProps> = ({
                   // pageUrl,
                   moreContent = [],
                 } = page;
-
                 return (
                   <div
                     className={styles["page-block"]}
@@ -125,7 +127,7 @@ const CGIR: FC<CGIRProps> = ({
                         moreContent:
                           appState.lang == "en"
                             ? moreContent
-                            : _links[index].moreContent,
+                            : _links[index]?.moreContent,
                         content:
                           appState.lang == "en"
                             ? content
@@ -194,6 +196,10 @@ const CGIR: FC<CGIRProps> = ({
             >
               <ContentBlock key={Math.random()} content={currentObject} />
             </div>
+            <div
+              className={styles["page-rights"]}
+              style={{ backgroundColor: contentBgcolor }}
+            ></div>
             <div
               className={styles["page-right-second"]}
               style={{ backgroundColor: contentBgcolor }}
@@ -345,6 +351,329 @@ const CGIR: FC<CGIRProps> = ({
                       >
                         <br />
                       </iframe>
+                    )
+                  ) : currentObject?.name === "Stock Information" ||
+                    currentObject?.name === "معلومات المخزون" ? (
+                    appState?.lang === "en" ? (
+                      <>
+                        <InfoSelector setSelectedVal={setSelectedVal} />
+                        {selectedVal === "Share Overview" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "900px"
+                                  : size > 413
+                                  ? "650"
+                                  : "650px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/shareseries/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                        {selectedVal === "Share Alerts" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "1450px"
+                                  : size > 413
+                                  ? "1000"
+                                  : "1000px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/sharealert/?cid=90735&amp;companycode=sa-lazurde&amp;lang=en-gb"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                        {selectedVal === "Share Graph" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "2000px"
+                                  : size > 413
+                                  ? "1300"
+                                  : "1300px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/sharegraph/?s=2245&amp;companycode=sa-lazurde&amp;lang=en-gb"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                        {selectedVal === "Investment Calculator" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "500px"
+                                  : size > 413
+                                  ? "1000"
+                                  : "1000px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/investmentcal2/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "400"
+                                : "400px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                        {selectedVal === "Share Price Look-Up" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "450px"
+                                  : size > 413
+                                  ? "350"
+                                  : "350px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/splookup/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <InfoSelector setSelectedVal={setSelectedVal} />
+                        {selectedVal === "نظرة عامة على حصة" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "1075px"
+                                  : size > 413
+                                  ? "800"
+                                  : "800px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/shareseries/?companycode=sa-lazurde&amp;v=2021&amp;lang=ar-ae"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                        {selectedVal === "تنبيهات المشاركة" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "1450px"
+                                  : size > 413
+                                  ? "1000"
+                                  : "1000px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/sharealert/?cid=90735&amp;companycode=sa-lazurde&amp;lang=ar-ae"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+
+                        {selectedVal === "مشاركة الرسم البياني" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "2050px"
+                                  : size > 413
+                                  ? "1400"
+                                  : "1400px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/sharegraph/?s=2245&amp;companycode=sa-lazurde&amp;lang=ar-ae"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+
+                        {selectedVal === "حاسبة الاستثمار" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "500px"
+                                  : size > 413
+                                  ? "1000"
+                                  : "1000px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/investmentcal2/?companycode=sa-lazurde&amp;v=2021&amp;lang=ar-ae"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "700px"
+                                : size > 413
+                                ? "400"
+                                : "400px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                        {selectedVal === "البحث عن سعر السهم" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "450px"
+                                  : size > 413
+                                  ? "1000"
+                                  : "1000px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/splookup/?companycode=sa-lazurde&amp;v=2021&amp;lang=ar-ae"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "350"
+                                : "350px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                      </>
                     )
                   ) : currentObject?.name === "Prospectus" ||
                     currentObject?.name === "نشرة" ? (
