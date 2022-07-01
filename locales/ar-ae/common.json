@@ -26,6 +26,34 @@
   "customerButton": "لدي سؤال؟",
   "addToCartBtnText": "أضف إلى السلة",
   "onlineExclusiveTag": "حصريا على الانترنت",
+  "Delete": "ىكل رخدي",
+  "Save": "ىكل رخدي",
+  "Cancel": "ىكل رخدي",
+  "Add": "ىكل رخدي",
+  "Edit": "ىكل رخدي",
+  "AddNewAddress": "حصريا على الانترنت",
+  "AddressBook": "حصريا على الانترنت",
+  "CheckBoxShipping": "ىانيدل تاحصريا على الانترنت",
+  "DeleteAddressMessage": "ىانيدل تاضيفختلا عيمج قوست",
+
+  "formHeadings": {
+    "NickName": "ىكل رخدي",
+    "Title": "ىكل رخدي",
+    "FirstName": "ىكل رخدي",
+    "LastName":"ىكل رخدي",
+    "StreetAddress": "ىكل رخدي",
+    "City":"ىكل رخدي",
+    "Governorate": "ىكل رخدي",
+    "Country": "ىكل رخدي",
+    "PostalCode": "ىكل رخدي"
+  },
+
+    "addressBookHeading": {
+    "add": "حصريا على الانترنت",
+    "edit": "حصريا على الانترنت",
+    "delete": "حصريا على الانترنت"
+  },
+
   "servicesProps": [
     {
       "iconTitle": "ءيش لك قوست",

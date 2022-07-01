@@ -56,8 +56,12 @@
         overflow: auto;
 
         @media (min-width: $breakPoint-desktop) {
-          padding-bottom: 20px;
+          padding-bottom: 5px;
           padding-inline-end: 2px;
+
+          &.delete-form {
+            padding-bottom: 0;
+          }
         }
 
         & > div {
@@ -92,6 +96,10 @@
 
         @media (min-width: $breakPoint-desktop) {
           box-shadow: 0px -10px 30px 10px white;
+
+          &.delete-form{
+            box-shadow: none;
+          }
         }
 
         .div-checkbox {

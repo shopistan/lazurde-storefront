@@ -1,19 +1,16 @@
 import React, { useState, FC, useContext, useEffect } from "react";
-import Image from "next/image";
-import Label from "components/common/ui/label/index";
 import Button from "components/common/ui/button/index";
 import Modal from "components/common/ui/modal/index";
 import styles from "./new-address-modal.module.scss";
-import { ImageType } from "lib/types/common";
-import CrossSmall from "components/icons/CrossSmall";
 import Input from "components/common/ui/Input";
 import Select from "components/common/ui/select";
 import CheckBox from "components/common/ui/checkbox";
 import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from "lib/utils/common";
-import { Formik, useFormikContext } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 import { AppContext } from "lib/context";
+import useTranslation from "next-translate/useTranslation";
 
 type addressPayload = {
   id?: string | number;
@@ -32,14 +29,32 @@ type addressPayload = {
   checkbox?: string;
 };
 
+type formHeadingPayload = {
+  NickName?: string;
+  Title?: string;
+  FirstName?: string;
+  LastName?: string;
+  StreetAddress?: string;
+  City?: string;
+  Governorate?: string;
+  Country?: string;
+  PostalCode?: string;
+};
+
+type addressBookHeadingProps = {
+  add: string;
+  edit: string;
+  delete: string;
+};
+
 interface NewAddressModalProps {
   address: addressPayload;
   isOpen?: boolean;
-  setIsOpen? : Function,
-  isEditAddress: boolean,
-  createAddressPayload: Function,
-  updateAddress: Function,
-  deleteAddress: Function,
+  setIsOpen?: Function;
+  isEditAddress: boolean;
+  createAddressPayload: Function;
+  updateAddress: Function;
+  deleteAddress: Function;
 }
 
 const titleOptions = [
@@ -91,6 +106,18 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
   const [width] = useWindowSize();
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const { appState } = useContext(AppContext);
+  const { t } = useTranslation("common");
+  const addressBookHeading: addressBookHeadingProps = t(
+    "addressBookHeading",
+    {},
+    { returnObjects: true }
+  );
+  const formHeadings: formHeadingPayload = t(
+    "formHeadings",
+    {},
+    { returnObjects: true }
+  );
+
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -136,8 +163,8 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
   });
 
   useEffect(() => {
-    isOpen && setShowDeleteDialog(false)
-  }, [isOpen])
+    isOpen && setShowDeleteDialog(false);
+  }, [isOpen]);
 
   return (
     <Modal
@@ -162,7 +189,9 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
           data-show-data={!showDeleteDialog}
         >
           <div className={styles["div-form-heading"]}>
-            <h2>{isEditAddress ? "Edit Address" : "Add New Address"}</h2>
+            <h2>
+              {isEditAddress ? addressBookHeading.edit : addressBookHeading.add}
+            </h2>
           </div>
           {isOpen ? (
             <Formik
@@ -205,12 +234,11 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                 setFieldValue,
               }: any) => (
                 <form onSubmit={handleSubmit}>
-                  {/* <>{console.log("SOMETHING", errors, touched)}</> */}
                   <div className={styles["container-form"]}>
                     <div className={styles["div-top"]}>
                       <div>
                         <Input
-                          label={"Nick Name"}
+                          label={t(formHeadings.NickName)}
                           name={"nickName"}
                           value={values.nickName}
                           className={styles["address-input"]}
@@ -226,12 +254,12 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                       <div>
                         <Select
                           showLabel={true}
-                          label={"Title"}
+                          label={t(formHeadings.Title)}
                           name={"title"}
                           options={titleOptions}
                           defaultValue={values.title}
                           error={errors.title}
-                          onChange={(value: {value: string}) => {
+                          onChange={(value: { value: string }) => {
                             setFieldValue("title", value.value);
                           }}
                         ></Select>
@@ -244,7 +272,7 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                         }
                       >
                         <Input
-                          label={"First Name"}
+                          label={t(formHeadings.FirstName)}
                           name={"firstName"}
                           value={values.firstName}
                           className={styles["address-input"]}
@@ -258,7 +286,7 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                         />
 
                         <Input
-                          label={"Last Name"}
+                          label={t(formHeadings.LastName)}
                           name={"lastName"}
                           value={values.lastName}
                           className={styles["address-input"]}
@@ -273,7 +301,7 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                       </div>
                       <div>
                         <Input
-                          label={"Street Address"}
+                          label={t(formHeadings.StreetAddress)}
                           name={"address"}
                           value={values.address}
                           className={styles["address-input"]}
@@ -286,7 +314,7 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                       </div>
                       <div className={styles["div-two-columns"]}>
                         <Input
-                          label={"City"}
+                          label={t(formHeadings.City)}
                           name={"city"}
                           value={values.city}
                           className={styles["address-input"]}
@@ -296,12 +324,12 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                         />
                         <Select
                           showLabel={true}
-                          label={"Governorate"}
+                          label={t(formHeadings.Governorate)}
                           name={"governorate"}
                           options={governorateOptions}
                           defaultValue={values.governorate}
                           error={errors.governorate}
-                          onChange={(value: {value: string}) => {
+                          onChange={(value: { value: string }) => {
                             setFieldValue("governorate", value.value);
                           }}
                         ></Select>
@@ -309,19 +337,19 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                       <div>
                         <Select
                           showLabel={true}
-                          label={"Country"}
+                          label={t(formHeadings.Country)}
                           name={"country"}
                           options={CountryOptions}
                           defaultValue={values.country}
                           error={errors.country}
-                          onChange={(value: {value: string}) => {
+                          onChange={(value: { value: string }) => {
                             setFieldValue("country", value.value);
                           }}
                         ></Select>
                       </div>
                       <div>
                         <Input
-                          label={"Postal Code"}
+                          label={t(formHeadings.PostalCode)}
                           name={"postalCode"}
                           value={values.postalCode}
                           className={styles["address-input"]}
@@ -341,7 +369,7 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                           className={styles["main-checkbox"]}
                           name={"checkbox"}
                           defaultChecked={values.checkbox}
-                          label={"Make this my default shipping address"}
+                          label={t("CheckBoxShipping")}
                           onChange={(value) => {
                             setFieldValue("checkbox", value);
                           }}
@@ -353,7 +381,7 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                             <Button
                               buttonSize={"xsm"}
                               buttonStyle="underline"
-                              buttonText={"Delete"}
+                              buttonText={t("Delete")}
                               onClick={() => {
                                 setShowDeleteDialog(true);
                               }}
@@ -361,14 +389,14 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                             <Button
                               type="submit"
                               buttonSize={"lr"}
-                              buttonText={"Save"}
+                              buttonText={t("Save")}
                             ></Button>
                           </>
                         ) : (
                           <Button
                             type="submit"
                             buttonSize={"lr"}
-                            buttonText={"Add"}
+                            buttonText={t("Add")}
                           ></Button>
                         )}
                       </div>
@@ -386,29 +414,28 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
           data-show-data={showDeleteDialog}
         >
           <div className={styles["div-form-heading"]}>
-            <h2>Delete Delivery Address</h2>
+            <h2>{addressBookHeading.delete}</h2>
           </div>
           <div className={styles["container-form"]}>
-            <div className={styles["div-top"]}>
+            <div className={`${styles["div-top"]} ${styles["delete-form"]}`}>
               <div className={styles["message-text"]}>
-                Are you sure you want to delete this address? This action cannot
-                be undone.
+                {t("DeleteAddressMessage")}
               </div>
             </div>
-            <div className={styles["div-bottom"]}>
+            <div className={`${styles["div-bottom"]} ${styles["delete-form"]}`}>
               <div className={styles["div-button"]}>
                 <>
                   <Button
                     buttonSize={"xsm"}
                     buttonStyle="underline"
-                    buttonText={"Cancel"}
+                    buttonText={t("Cancel")}
                     onClick={() => {
                       setShowDeleteDialog(false);
                     }}
                   ></Button>
                   <Button
                     buttonSize={"lr"}
-                    buttonText={"Delete"}
+                    buttonText={t("Delete")}
                     onClick={() => {
                       deleteAddress && deleteAddress();
                       setIsOpen(false);
