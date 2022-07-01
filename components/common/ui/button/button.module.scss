@@ -33,6 +33,11 @@
     color: $black-color;
   }
 
+  &[data-size="xsm"] {
+    width: 88px;
+    // height: 40px;
+  }
+
   &[data-size="sm"] {
     width: 138px;
     height: 40px;
