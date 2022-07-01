@@ -156,9 +156,10 @@
     }
 
     .add-to-bag-btn {
-      margin-top: 0px;
+      margin-top: 8px;
       display: flex;
       align-items: center;
+
       button {
         border: none;
         font-weight: 500;
@@ -191,7 +192,9 @@
     }
   }
 
-  &.mini-cart-item {
+  &.minicart-wishlist-item {
+    align-items: center;
+
     .cart-image {
       width: auto;
       height: auto;
@@ -202,12 +205,34 @@
         flex-direction: column;
 
         span {
+          &:first-child {
+            margin-bottom: 8px;
+          }
+
           @media (max-width: $breakPoint-mobile) {
             font-size: 15px;
             font-weight: 500;
             line-height: 18px;
           }
         }
+      }
+
+      .remove-addtobag-btn {
+        display: flex;
+        flex-direction: column-reverse;
+        margin-top: 16px;
+
+        .remove-btn {
+          margin-top: 11px;
+        }
+
+        .add-to-bag-btn {
+          margin-top: 0;
+        }
+      }
+
+      .remove-btn {
+        margin-top: 17px;
       }
     }
   }

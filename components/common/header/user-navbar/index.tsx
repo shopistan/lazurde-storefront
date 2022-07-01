@@ -19,8 +19,8 @@ import { desktopScreenSize } from "lib/utils/common";
 import { getWishList } from "lib/utils/wishlist";
 import SideBar from "components/common/ui/sidebar";
 import AccountSidebar from "./account-sidebar";
-import WhishListSidebar from "components/common/whishlist-sidebar";
-import MiniCart from "components/common/mini-cart";
+import WhishListSidebar from "components/common/minicart-wishlist-sidebars/wish-list";
+import MiniCart from "components/common/minicart-wishlist-sidebars/mini-cart";
 import Language from "./language-sidebar";
 import { loginUser } from "lib/identity";
 

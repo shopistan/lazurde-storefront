@@ -49,6 +49,7 @@ interface CartItemProps {
   productImgHeight?: string | number;
   renderComponent?: boolean;
   miniCartItem?: boolean;
+  wishListSideBarItem?: boolean;
 }
 const CartItem = ({
   item,
@@ -64,6 +65,7 @@ const CartItem = ({
   productImgHeight = "",
   renderComponent = false,
   miniCartItem = false,
+  wishListSideBarItem = false,
 }: CartItemProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const [width] = useWindowSize();
@@ -281,47 +283,65 @@ const CartItem = ({
               ) : null}
             </div>
           )}
-          <div className={styles["remove-btn"]}>
-            {addingItem || removingItem ? (
-              <Spinner width={12} height={12} stroke={2} />
-            ) : (
-              <CrossSmall width={12} height={12} />
-            )}
-            <button
-              onClick={() => {
-                setRemovingItem(true);
-                removeItem(item);
-              }}
-              disabled={addingItem || removingItem}
-            >
-              {addingItem
-                ? appState?.lang === "en"
-                  ? "Adding..."
-                  : "جارٍ الإزالة…"
-                : appState?.lang === "en"
-                ? removingItem
-                  ? "Removing..."
-                  : "Remove"
-                : removingItem
-                ? "جارٍ الإزالة…"
-                : "إزالة"}
-            </button>
-          </div>
-          {wishListItem && (
-            <div className={styles["add-to-bag-btn"]}>
-              <Bag fill="#000000" stroke="#000000" width="12px" height="16px" />
+          <div
+            className={`${
+              wishListSideBarItem ? styles["remove-addtobag-btn"] : ""
+            }`}
+          >
+            <div className={styles["remove-btn"]}>
+              {removingItem ? (
+                <Spinner width={12} height={12} stroke={2} />
+              ) : (
+                <CrossSmall width={12} height={12} />
+              )}
               <button
                 onClick={() => {
-                  handleAddToCart(item);
+                  setRemovingItem(true);
+                  removeItem(item);
                 }}
+                disabled={addingItem || removingItem}
               >
-                {appState?.lang === "en" ? "Add to Bag" : "أضف الى الحقيبة"}
+                {appState?.lang === "en"
+                  ? removingItem
+                    ? "Removing..."
+                    : "Remove"
+                  : removingItem
+                  ? "جارٍ الإزالة…"
+                  : "إزالة"}
               </button>
             </div>
-          )}
+            {wishListItem && (
+              <div className={styles["add-to-bag-btn"]}>
+                {addingItem ? (
+                  <Spinner width={12} height={12} stroke={2} />
+                ) : (
+                  <Bag
+                    fill="#000000"
+                    stroke="#000000"
+                    width="16px"
+                    height="16px"
+                  />
+                )}
+                <button
+                  onClick={() => {
+                    handleAddToCart(item);
+                  }}
+                  disabled={addingItem || removingItem}
+                >
+                  {appState?.lang === "en"
+                    ? addingItem
+                      ? "Adding..."
+                      : "Add To Bag"
+                    : addingItem
+                    ? "الإزالة…"
+                    : "أضف الى الحقيبة"}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      {miniCartItem && isProductAvailable && (
+      {(miniCartItem || wishListSideBarItem) && isProductAvailable && (
         <div className={styles["region-based-tag"]}>
           <Image width={20} height={20} src={"/help.png"} alt="icon" />
           <Label className={styles.label}>

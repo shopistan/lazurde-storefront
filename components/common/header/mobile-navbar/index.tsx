@@ -6,8 +6,8 @@ import MobileMenu from "./mobile-menu/mobile-menu";
 import Image from "next/image";
 import { MobileHeaderProps } from "lib/types/mobile-header";
 import SideBar from "components/common/ui/sidebar";
-import WhishListSidebar from "components/common/whishlist-sidebar";
-import MiniCart from "components/common/mini-cart";
+import WhishListSidebar from "components/common/minicart-wishlist-sidebars/wish-list";
+import MiniCart from "components/common/minicart-wishlist-sidebars/mini-cart";
 
 const MobileNavBar = ({
   menuData,
@@ -31,6 +31,16 @@ const MobileNavBar = ({
     setSidebarChild({
       miniCart: true,
       whishlist: false,
+      account: false,
+      language: false,
+    });
+  };
+
+  const handleWishListCart = () => {
+    setSidebarOpened(!sidebarOpened);
+    setSidebarChild({
+      miniCart: false,
+      whishlist: true,
       account: false,
       language: false,
     });
@@ -85,7 +95,7 @@ const MobileNavBar = ({
         </div>
         {renderSiteLogo()}
         <div className={styles["mobile-header__right"]}>
-          <button>
+          <button onClick={() => handleWishListCart()}>
             <Heart fill="#000000" stroke="#000000" />
           </button>
           <button onClick={() => handleMiniCart()}>
