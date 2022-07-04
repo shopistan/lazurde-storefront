@@ -6,7 +6,7 @@ import MobileMenu from "./mobile-menu/mobile-menu";
 import Image from "next/image";
 import { MobileHeaderProps } from "lib/types/mobile-header";
 import SideBar from "components/common/ui/sidebar";
-import WhishListSidebar from "components/common/minicart-wishlist-sidebars/wish-list";
+import WishListSidebar from "components/common/minicart-wishlist-sidebars/wish-list";
 import MiniCart from "components/common/minicart-wishlist-sidebars/mini-cart";
 import AccountSidebar from "components/common/right-sidebars/account-sidebar";
 
@@ -22,7 +22,7 @@ const MobileNavBar = ({
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const [sidebarChild, setSidebarChild] = useState({
     account: false,
-    whishlist: false,
+    wishlist: false,
     miniCart: false,
     language: false,
   });
@@ -41,7 +41,7 @@ const MobileNavBar = ({
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
       miniCart: true,
-      whishlist: false,
+      wishlist: false,
       account: false,
       language: false,
     });
@@ -51,7 +51,7 @@ const MobileNavBar = ({
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
       miniCart: false,
-      whishlist: true,
+      wishlist: true,
       account: false,
       language: false,
     });
@@ -61,7 +61,7 @@ const MobileNavBar = ({
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
       miniCart: false,
-      whishlist: false,
+      wishlist: false,
       account: true,
       language: false,
     });
@@ -71,7 +71,7 @@ const MobileNavBar = ({
     setSidebarOpened(false);
     setSidebarChild({
       miniCart: false,
-      whishlist: false,
+      wishlist: false,
       account: false,
       language: false,
     });
@@ -141,8 +141,8 @@ const MobileNavBar = ({
           onClose={onSideBarClose}
           closeMobileNavBar={closeMenu}
         >
-          {sidebarChild.whishlist ? (
-            <WhishListSidebar />
+          {sidebarChild.wishlist ? (
+            <WishListSidebar />
           ) : sidebarChild.miniCart ? (
             <MiniCart />
           ) : sidebarChild.account ? (

@@ -19,7 +19,7 @@ import { desktopScreenSize } from "lib/utils/common";
 import { getWishList } from "lib/utils/wishlist";
 import SideBar from "components/common/ui/sidebar";
 import AccountSidebar from "components/common/right-sidebars/account-sidebar";
-import WhishListSidebar from "components/common/minicart-wishlist-sidebars/wish-list";
+import WishListSidebar from "components/common/minicart-wishlist-sidebars/wish-list";
 import MiniCart from "components/common/minicart-wishlist-sidebars/mini-cart";
 import Language from "./language-sidebar";
 
@@ -38,7 +38,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const [sidebarchild, setSidebarChild] = useState({
     account: false,
-    whishlist: false,
+    wishlist: false,
     miniCart: false,
     language: false,
   });
@@ -77,18 +77,18 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   const signInUser = async () => {
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
-      whishlist: false,
+      wishlist: false,
       account: true,
       miniCart: false,
       language: false,
     });
   };
 
-  const handlewhishlist = () => {
+  const handlewishlist = () => {
     setIsOpened(false);
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
-      whishlist: true,
+      wishlist: true,
       account: false,
       miniCart: false,
       language: false,
@@ -100,7 +100,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
       miniCart: true,
-      whishlist: false,
+      wishlist: false,
       account: false,
       language: false,
     });
@@ -112,7 +112,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
     setSidebarChild({
       language: true,
       miniCart: false,
-      whishlist: false,
+      wishlist: false,
       account: false,
     });
   };
@@ -204,7 +204,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
           <User />
         </div>
 
-        <div className={styles["link"]} onClick={() => handlewhishlist()}>
+        <div className={styles["link"]} onClick={() => handlewishlist()}>
           <Heart />
         </div>
 
@@ -246,8 +246,8 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
         >
           {sidebarchild.account ? (
             <AccountSidebar />
-          ) : sidebarchild.whishlist ? (
-            <WhishListSidebar />
+          ) : sidebarchild.wishlist ? (
+            <WishListSidebar />
           ) : sidebarchild.miniCart ? (
             <MiniCart />
           ) : sidebarchild.language ? (
