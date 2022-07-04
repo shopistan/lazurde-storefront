@@ -55,11 +55,8 @@
 }
 
 .term-block {
-  // @media (min-width: 1023px) {
   cursor: pointer;
   display: flex;
-  // align-items: center;
-  // }
 }
 
 .term-right {
@@ -82,7 +79,7 @@
     }
   }
   .back-block {
-    padding-top: 24px;
+    padding-top: 48px;
 
     @media (min-width: $breakPoint-desktop) {
       display: none;
@@ -181,7 +178,6 @@
       font-weight: 500;
       line-height: 38px;
       letter-spacing: 0em;
-      // margin-inline-start: 38%;
       margin-top: 0px;
       margin-bottom: 32px;
     }
