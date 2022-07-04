@@ -26,6 +26,8 @@ export interface MenuProps {
   siteLogo?: any;
   headerId?: string;
   brandSideBar?: BrandSidebarProps;
+  setSidebarChild?: Function;
+  handleAccountSidebar?: Function;
 }
 
 export type LinkPropsType = {

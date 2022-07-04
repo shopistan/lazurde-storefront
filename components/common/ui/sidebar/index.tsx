@@ -6,8 +6,8 @@ import useWindowSize from "lib/utils/useWindowSize";
 
 const SideBar = ({
   isopend,
-  onClick = () => {},
   onClose = () => {},
+  closeMobileNavBar = () => {},
   children,
 }: any): JSX.Element => {
   const [width] = useWindowSize();
@@ -25,6 +25,7 @@ const SideBar = ({
                 <CrossSmall
                   onClick={() => {
                     onClose && onClose();
+                    closeMobileNavBar && closeMobileNavBar();
                   }}
                 ></CrossSmall>
               </button>

@@ -7,7 +7,7 @@ import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 import MobileLanguageSelector from "./lang-selector";
 
-const UserLinks = (): JSX.Element => {
+const UserLinks = ({ handleAccountSidebar = () => {} }: any): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
 
@@ -40,8 +40,13 @@ const UserLinks = (): JSX.Element => {
           </Link>
         </li> */}
         <li className={styles["mobile-header__user-links-item"]}>
-          <Link href={"/"}>
-            <a>
+          <Link href={""}>
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                handleAccountSidebar && handleAccountSidebar();
+              }}
+            >
               <Account width="20px" height="20px" fill="#000" />
               <span>
                 {appState.lang === "en" ? "My Account" : t("myAccountText")}
