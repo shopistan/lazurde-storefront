@@ -19,6 +19,7 @@ import { useRouter } from "next/router";
 import { getInventoryAuth } from "lib/api/inventory";
 import { desktopScreenSize } from "lib/utils/common";
 import useWindowSize from "lib/utils/useWindowSize";
+import { logoutUser, loginUser } from "lib/identity";
 
 interface miniCartArabicDataProps {
   addToBag?: string;
@@ -36,8 +37,8 @@ const MiniCart = (): JSX.Element => {
   const [width] = useWindowSize();
   const router = useRouter();
   const { t } = useTranslation("common");
-  const { appState } = useContext(AppContext);
-  const [loggedInUser, setLoggedInUser] = useState(true);
+  const { appState } = useContext(AppContext);  
+  const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingCart, setisLoadingCart] = useState(false);
   const [updatingCartItem, setUpdatingCartItem] = useState(false);
   const [inventoryToken, setInventoryToken] = useState("");
@@ -48,6 +49,18 @@ const MiniCart = (): JSX.Element => {
     subTotal: 0.0,
     totalAmount: 0.0,
   });
+
+
+  useEffect(() => {
+    const authToken =
+      typeof window !== "undefined" &&
+      JSON.parse(window.localStorage.getItem("auth_tokens"));
+    if (authToken?.access_token) {
+      setIsLoginUser(true);
+    } else {
+      setIsLoginUser(false);
+    }
+  }, []);
 
   useEffect(() => {
     getCartData();
@@ -183,13 +196,13 @@ const MiniCart = (): JSX.Element => {
   };
 
   const handleSignOut = () => {
-    console.log("signout");
+    logoutUser();
   };
   const handleSignUp = () => {
-    console.log("signup");
+    loginUser();
   };
   const handleSignIn = () => {
-    console.log("signin");
+    loginUser();
   };
 
   return (
@@ -210,149 +223,155 @@ const MiniCart = (): JSX.Element => {
               }
             >
               <div className={`${styles.content_wrapper}`}>
-                <div className={styles["shopabag-count"]}>
-                  {width > desktopScreenSize &&
-                  Object.keys(cartData).length !== 0 &&
-                  cartData?.items?.length > 0 ? (
-                    <div className={styles["filled-cart"]}>
-                      <IconTick
-                        width="20"
-                        height="20"
-                        strokeWidth="1"
-                        stroke="#000"
-                      />
-                      <Label className={styles.label}>
+                <>
+                  <div className={styles["shopabag-count"]}>
+                    {width > desktopScreenSize &&
+                    Object.keys(cartData).length !== 0 &&
+                    cartData?.items?.length > 0 ? (
+                      <div className={styles["filled-cart"]}>
+                        <IconTick
+                          width="20"
+                          height="20"
+                          strokeWidth="1"
+                          stroke="#000"
+                        />
+                        <Label className={styles.label}>
+                          {appState?.lang === "en"
+                            ? "Added to Bag"
+                            : miniCartArabicData?.addToBag}
+                        </Label>
+                      </div>
+                    ) : null}
+                    <Bag width="40px" height="40px" fill="#000" />
+                    <Heading
+                      className={`${styles["shopbag-heading"]} ${
+                        Object.keys(cartData).length !== 0 &&
+                        cartData?.items?.length > 0
+                          ? styles["mb-fourty"]
+                          : ""
+                      }`}
+                      element="h1"
+                    >
+                      {appState?.lang === "en"
+                        ? "Shopping Bag"
+                        : miniCartArabicData?.ShoppingBag}
+                    </Heading>
+                    {Object.keys(cartData).length !== 0 &&
+                    cartData?.items?.length > 0 ? null : (
+                      <Label className={styles["shopbag-label"]}>
                         {appState?.lang === "en"
-                          ? "Added to Bag"
-                          : miniCartArabicData?.addToBag}
+                          ? "Your shopping bag is empty"
+                          : miniCartArabicData?.YourShoppingBagIsEmpty}
                       </Label>
-                    </div>
-                  ) : null}
-                  <Bag width="40px" height="40px" fill="#000" />
-                  <Heading
-                    className={`${styles["shopbag-heading"]} ${
-                      Object.keys(cartData).length !== 0 &&
-                      cartData?.items?.length > 0
-                        ? styles["mb-fourty"]
-                        : ""
-                    }`}
-                    element="h1"
-                  >
-                    {appState?.lang === "en"
-                      ? "Shopping Bag"
-                      : miniCartArabicData?.ShoppingBag}
-                  </Heading>
-                  {Object.keys(cartData).length !== 0 &&
-                  cartData?.items?.length > 0 ? null : (
-                    <Label className={styles["shopbag-label"]}>
-                      {appState?.lang === "en"
-                        ? "Your shopping bag is empty"
-                        : miniCartArabicData?.YourShoppingBagIsEmpty}
-                    </Label>
-                  )}
-                </div>
-                <div className={styles.minicart_items}>
-                  {Object.keys(cartData).length !== 0
-                    ? cartData?.items?.length > 0
-                      ? cartData?.items?.map((item, index) => {
-                          return (
-                            <>
-                              <CartItem
-                                miniCartItem={true}
-                                className="minicart-wishlist-item"
-                                productImgWidth="100px"
-                                productImgHeight="100px"
-                                key={index}
-                                item={item}
-                                // userAuth={userAuth}
-                                inventoryToken={inventoryToken}
-                                updatingCartItem={updatingCartItem}
-                                handleChange={handleChange}
-                                removeItem={removeItem}
-                                renderComponent={renderComponent}
-                              />
-                              {index < cartData?.items?.length - 1 ? (
-                                <hr className={styles.divider} />
-                              ) : null}
-                            </>
-                          );
-                        })
-                      : null
-                    : null}
-                </div>
-                {Object.keys(cartData).length !== 0 &&
-                cartData?.items?.length > 0 ? (
-                  <div
-                    className={styles.checkout_btn_wrapper}
-                    onClick={() => {
-                      console.log("handle checkout");
-                    }}
-                  >
-                    <div className={styles.checkout_btn}>
-                      <Label className={styles.total_amount}>{`${
-                        appState?.lang === "en"
-                          ? "Total"
-                          : miniCartArabicData?.totalText
-                      }: $ ${cartData?.totalAmount?.toLocaleString()}`}</Label>
-                      <div className={styles.divider}>|</div>
-                      <button>
-                        {appState?.lang === "en"
-                          ? "checkout"
-                          : miniCartArabicData?.checkoutBtnText}
-                      </button>
-                    </div>
-                    <div className={styles.viewbag_btn}>
-                      <Button
-                        buttonSize="lr"
-                        buttonText={
-                          appState?.lang === "en"
-                            ? "View Bag"
-                            : miniCartArabicData?.viewBag
-                        }
-                        buttonStyle="white"
+                    )}
+                  </div>
+                  <div className={styles.minicart_items}>
+                    {Object.keys(cartData).length !== 0
+                      ? cartData?.items?.length > 0
+                        ? cartData?.items?.map((item, index) => {
+                            return (
+                              <>
+                                <CartItem
+                                  miniCartItem={true}
+                                  className="minicart-wishlist-item"
+                                  productImgWidth="100px"
+                                  productImgHeight="100px"
+                                  key={index}
+                                  item={item}
+                                  // userAuth={userAuth}
+                                  inventoryToken={inventoryToken}
+                                  updatingCartItem={updatingCartItem}
+                                  handleChange={handleChange}
+                                  removeItem={removeItem}
+                                  renderComponent={renderComponent}
+                                />
+                                {index < cartData?.items?.length - 1 ? (
+                                  <hr className={styles.divider} />
+                                ) : null}
+                              </>
+                            );
+                          })
+                        : null
+                      : null}
+                  </div>
+
+                  <div>
+                    {Object.keys(cartData).length !== 0 &&
+                    cartData?.items?.length > 0 ? (
+                      <div
+                        className={styles.checkout_btn_wrapper}
                         onClick={() => {
-                          router?.push("/cart");
+                          console.log("handle checkout");
                         }}
-                      />
+                      >
+                        <div className={styles.checkout_btn}>
+                          <Label className={styles.total_amount}>{`${
+                            appState?.lang === "en"
+                              ? "Total"
+                              : miniCartArabicData?.totalText
+                          }: $ ${cartData?.totalAmount?.toLocaleString()}`}</Label>
+                          <div className={styles.divider}>|</div>
+                          <button>
+                            {appState?.lang === "en"
+                              ? "checkout"
+                              : miniCartArabicData?.checkoutBtnText}
+                          </button>
+                        </div>
+                        <div className={styles.viewbag_btn}>
+                          <Button
+                            buttonSize="lr"
+                            buttonText={
+                              appState?.lang === "en"
+                                ? "View Bag"
+                                : miniCartArabicData?.viewBag
+                            }
+                            buttonStyle="white"
+                            onClick={() => {
+                              router?.push("/cart");
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ) : null}
+                    <div className={styles.auth_btns}>
+                      {isLoginUser ? (
+                        <div
+                          className={styles.signout_btn}
+                          onClick={() => handleSignOut()}
+                        >
+                          <SignOut fill="#000000" width="20px" height="20px" />
+                          <span>
+                            {appState?.lang === "en"
+                              ? "sign out"
+                              : miniCartArabicData?.signOut}
+                          </span>
+                        </div>
+                      ) : (
+                        <>
+                          <Button
+                            buttonSize="xl"
+                            buttonText={
+                              appState?.lang === "en"
+                                ? "Sign Up"
+                                : miniCartArabicData?.signUp
+                            }
+                            onClick={() => handleSignUp()}
+                          />
+                          <Button
+                            buttonText={
+                              appState?.lang === "en"
+                                ? "Sign In"
+                                : miniCartArabicData?.signIn
+                            }
+                            buttonStyle="underline"
+                            className={styles.signin_btn}
+                            onClick={() => handleSignIn()}
+                          />
+                        </>
+                      )}
                     </div>
                   </div>
-                ) : null}
-              </div>
-              <div className={styles.auth_btns}>
-                {loggedInUser ? (
-                  <div
-                    className={styles.signout_btn}
-                    onClick={() => handleSignOut()}
-                  >
-                    <SignOut fill="#000000" width="20px" height="20px" />
-                    <span>
-                      {appState?.lang === "en"
-                        ? "sign out"
-                        : miniCartArabicData?.signOut}
-                    </span>
-                  </div>
-                ) : (
-                  <>
-                    <Button
-                      buttonSize="xl"
-                      buttonText={
-                        appState?.lang === "en"
-                          ? "Sign Up"
-                          : miniCartArabicData?.signUp
-                      }
-                      onClick={() => handleSignUp()}
-                    />
-                    <Button
-                      buttonText={
-                        appState?.lang === "en"
-                          ? "Sign In"
-                          : miniCartArabicData?.signIn
-                      }
-                      className={styles.signin_btn}
-                      onClick={() => handleSignIn()}
-                    />
-                  </>
-                )}
+                </>
               </div>
             </div>
           )}

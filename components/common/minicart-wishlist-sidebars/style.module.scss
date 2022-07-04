@@ -3,10 +3,10 @@
 .filled-cart-wrapper {
   display: flex;
   flex-direction: column;
+  flex: 1;
   justify-content: space-between;
-  height: 100%;
   padding: 0 24px 24px;
-  overflow: auto;
+  overflow: hidden;
 
   @media (min-width: $breakPoint-desktop) {
     height: 100%;
@@ -30,10 +30,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-
-  @media (max-width: $breakPoint-mobile) {
-    overflow: unset;
-  }
+  height: 100%;
 
   .filled-cart {
     display: flex;
@@ -90,7 +87,7 @@
   }
 
   .minicart_items {
-    height: 350px;
+    height: 230px;
     overflow-y: auto;
 
     @media (min-width: $breakPoint-desktop) {
@@ -184,6 +181,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 40px;
 
   .signin_btn {
     font-size: 14px;
@@ -200,7 +198,6 @@
   display: flex;
   align-items: center;
   color: $black-color;
-  margin-top: 40px;
   cursor: pointer;
 
   svg {
