@@ -55,6 +55,7 @@ const ProductCard = ({
   const { t } = useTranslation("common");
   const router = useRouter();
   // const [showWishListIcon, setShowWishListIcon] = useState(false);
+  const [outOfStockError, setOutOfStockError] = useState(false);
 
   const handleAddToCart = async (event: any) => {
     event.stopPropagation();
@@ -78,7 +79,10 @@ const ProductCard = ({
     };
     const response = await addProductToCart(payload);
     if (response?.hasError) {
-      alert("error while adding product");
+      
+      if(response?.code === 'ITEM_OUT_OF_STOCK') {
+        setOutOfStockError(true)
+      }
     } else {
       router?.push("/cart");
     }
@@ -229,6 +233,11 @@ const ProductCard = ({
           )}
         </div>
       </div>
+      {outOfStockError && (
+        <div className={styles["error-msg"]}>
+          Out of Stock
+        </div>
+      )}
     </div>
   );
 };

@@ -5,7 +5,6 @@ import styles from "./address.module.scss";
 import { AppContext } from "lib/context/index";
 import Button from "components/common/ui/button";
 import NewAddressModal from "./new-address-modal";
-import { getAllAddresses } from "lib/utils/addresses";
 import { desktopScreenSize } from "lib/utils/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import useTranslation from "next-translate/useTranslation";
