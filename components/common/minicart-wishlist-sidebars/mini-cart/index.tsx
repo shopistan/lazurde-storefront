@@ -19,6 +19,7 @@ import { useRouter } from "next/router";
 import { getInventoryAuth } from "lib/utils/inventory";
 import { desktopScreenSize } from "lib/utils/common";
 import useWindowSize from "lib/utils/useWindowSize";
+import { logoutUser, loginUser } from "lib/identity";
 
 interface miniCartArabicDataProps {
   addToBag?: string;
@@ -36,8 +37,8 @@ const MiniCart = (): JSX.Element => {
   const [width] = useWindowSize();
   const router = useRouter();
   const { t } = useTranslation("common");
-  const { appState } = useContext(AppContext);
-  const [loggedInUser, setLoggedInUser] = useState(true);
+  const { appState } = useContext(AppContext);  
+  const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingCart, setisLoadingCart] = useState(false);
   const [updatingCartItem, setUpdatingCartItem] = useState(false);
   const [inventoryToken, setInventoryToken] = useState("");
@@ -48,6 +49,18 @@ const MiniCart = (): JSX.Element => {
     subTotal: 0.0,
     totalAmount: 0.0,
   });
+
+
+  useEffect(() => {
+    const authToken =
+      typeof window !== "undefined" &&
+      JSON.parse(window.localStorage.getItem("auth_tokens"));
+    if (authToken?.access_token) {
+      setIsLoginUser(true);
+    } else {
+      setIsLoginUser(false);
+    }
+  }, []);
 
   useEffect(() => {
     getCartData();
@@ -183,13 +196,13 @@ const MiniCart = (): JSX.Element => {
   };
 
   const handleSignOut = () => {
-    console.log("signout");
+    logoutUser();
   };
   const handleSignUp = () => {
-    console.log("signup");
+    loginUser();
   };
   const handleSignIn = () => {
-    console.log("signin");
+    loginUser();
   };
 
   return (
@@ -321,7 +334,7 @@ const MiniCart = (): JSX.Element => {
                       </div>
                     ) : null}
                     <div className={styles.auth_btns}>
-                      {loggedInUser ? (
+                      {isLoginUser ? (
                         <div
                           className={styles.signout_btn}
                           onClick={() => handleSignOut()}
@@ -350,6 +363,7 @@ const MiniCart = (): JSX.Element => {
                                 ? "Sign In"
                                 : miniCartArabicData?.signIn
                             }
+                            buttonStyle="underline"
                             className={styles.signin_btn}
                             onClick={() => handleSignIn()}
                           />

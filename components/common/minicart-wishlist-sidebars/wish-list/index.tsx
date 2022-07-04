@@ -18,6 +18,7 @@ import { getInventoryAuth } from "lib/utils/inventory";
 import { desktopScreenSize } from "lib/utils/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import { deleteWishList, getWishList } from "lib/utils/wishlist";
+import { loginUser, logoutUser } from "lib/identity";
 
 interface wishlistArabicData {
   wishList?: string;
@@ -34,7 +35,7 @@ const WhishListSidebar = (): JSX.Element => {
     useContext(AppContext);
   const { t } = useTranslation("common");
   const [renderComponent, setRenderComponent] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState(true);
+  const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingCart, setisLoadingCart] = useState(false);
   const [isWishListLoading, setIsWishListLoading] = useState(false);
   const [inventoryToken, setInventoryToken] = useState("");
@@ -52,6 +53,17 @@ const WhishListSidebar = (): JSX.Element => {
     cartId: "",
     priceList: [],
   });
+
+  useEffect(() => {
+    const authToken =
+      typeof window !== "undefined" &&
+      JSON.parse(window.localStorage.getItem("auth_tokens"));
+    if (authToken?.access_token) {
+      setIsLoginUser(true);
+    } else {
+      setIsLoginUser(false);
+    }
+  }, []);
 
   useEffect(() => {
     getCartData();
@@ -197,13 +209,13 @@ const WhishListSidebar = (): JSX.Element => {
   };
 
   const handleSignOut = () => {
-    console.log("signout");
+    logoutUser();
   };
   const handleSignUp = () => {
-    console.log("signup");
+    loginUser();
   };
   const handleSignIn = () => {
-    console.log("signin");
+    loginUser();
   };
 
   return (
@@ -277,7 +289,7 @@ const WhishListSidebar = (): JSX.Element => {
                 </div>
               </div>
               <div className={styles.auth_btns}>
-                {loggedInUser ? (
+                {isLoginUser ? (
                   <div
                     className={styles.signout_btn}
                     onClick={() => handleSignOut()}
@@ -306,6 +318,7 @@ const WhishListSidebar = (): JSX.Element => {
                           ? "Sign In"
                           : wishlistArabicData?.signIn
                       }
+                      buttonStyle="underline"
                       className={styles.signin_btn}
                       onClick={() => handleSignIn()}
                     />

@@ -18,11 +18,10 @@ import { AppContext } from "lib/context";
 import { desktopScreenSize } from "lib/utils/common";
 import { getWishList } from "lib/utils/wishlist";
 import SideBar from "components/common/ui/sidebar";
-import AccountSidebar from "./account-sidebar";
+import AccountSidebar from "components/common/right-sidebars/account-sidebar";
 import WhishListSidebar from "components/common/minicart-wishlist-sidebars/wish-list";
 import MiniCart from "components/common/minicart-wishlist-sidebars/mini-cart";
 import Language from "./language-sidebar";
-import { loginUser } from "lib/identity";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
@@ -76,8 +75,13 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   }, [isOpened, sidebarOpened]);
 
   const signInUser = async () => {
-    // setSidebarOpened(!sidebarOpened);
-    loginUser();
+    setSidebarOpened(!sidebarOpened);
+    setSidebarChild({
+      whishlist: false,
+      account: true,
+      miniCart: false,
+      language: false,
+    });
   };
 
   const handlewhishlist = () => {

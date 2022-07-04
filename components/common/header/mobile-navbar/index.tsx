@@ -8,6 +8,7 @@ import { MobileHeaderProps } from "lib/types/mobile-header";
 import SideBar from "components/common/ui/sidebar";
 import WhishListSidebar from "components/common/minicart-wishlist-sidebars/wish-list";
 import MiniCart from "components/common/minicart-wishlist-sidebars/mini-cart";
+import AccountSidebar from "components/common/right-sidebars/account-sidebar";
 
 const MobileNavBar = ({
   menuData,
@@ -19,7 +20,7 @@ const MobileNavBar = ({
 }: MobileHeaderProps): JSX.Element => {
   const [menu, setMenu] = useState<Boolean>(false);
   const [sidebarOpened, setSidebarOpened] = useState(false);
-  const [sidebarchild, setSidebarChild] = useState({
+  const [sidebarChild, setSidebarChild] = useState({
     account: false,
     whishlist: false,
     miniCart: false,
@@ -52,6 +53,16 @@ const MobileNavBar = ({
       miniCart: false,
       whishlist: true,
       account: false,
+      language: false,
+    });
+  };
+
+  const handleAccountSidebar = () => {
+    setSidebarOpened(!sidebarOpened);
+    setSidebarChild({
+      miniCart: false,
+      whishlist: false,
+      account: true,
       language: false,
     });
   };
@@ -120,6 +131,7 @@ const MobileNavBar = ({
         menuData={menuData}
         headerId={headerId}
         brandSideBar={brandSideBar}
+        handleAccountSidebar={handleAccountSidebar}
       />
 
       <div className={styles["rightside-drawer"]} data-opened={sidebarOpened}>
@@ -127,11 +139,14 @@ const MobileNavBar = ({
           isopend={sidebarOpened}
           setIsOpened={setSidebarOpened}
           onClose={onSideBarClose}
+          closeMobileNavBar={closeMenu}
         >
-          {sidebarchild.whishlist ? (
+          {sidebarChild.whishlist ? (
             <WhishListSidebar />
-          ) : sidebarchild.miniCart ? (
+          ) : sidebarChild.miniCart ? (
             <MiniCart />
+          ) : sidebarChild.account ? (
+            <AccountSidebar />
           ) : null}
         </SideBar>
       </div>
