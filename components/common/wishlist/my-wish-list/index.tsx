@@ -30,8 +30,6 @@ interface WishListItemsProps {
   appState: any;
   removeWishListItem: Function;
   handleAddToBag: Function;
-  token: string;
-  renderCom: boolean;
 }
 
 const MyWishList = (): JSX.Element => {
@@ -39,7 +37,8 @@ const MyWishList = (): JSX.Element => {
   const { t } = useTranslation("common");
   const [wishListItem, setWishListItem] = useState([]);
   const [addingItems, setAddingItems] = useState(false);
-  const [inventoryToken, setInventoryToken] = useState("");
+  const [checkNumber, setCheckNumber] = useState(true);
+  const [compRender, setCompRender] = useState(false);
   const { priceListId, appState, allWishListProducts, setAllWishListProducts } =
     useContext(AppContext);
 
@@ -54,24 +53,6 @@ const MyWishList = (): JSX.Element => {
     setRenderCom(true);
   }, []);
 
-  useEffect(() => {
-    fetchWishList(allWishListProducts);
-    if (allWishListProducts?.length === 0) {
-      setAddingItems(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!renderCom) {
-      authInventory();
-    }
-  });
-  const authInventory = async () => {
-    const auth = await getInventoryAuth();
-    const inventoryAuth = auth?.data?.accessToken;
-    setInventoryToken(inventoryAuth);
-  };
-
   const authToken =
     "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MTUzMzYxLCJleHAiOjE2NTQxNTUxNjF9.FLBjzjjR3g1zreH03aIE9B92H5y1HL6RfhwoePFbKeASfqq2RcyGqkKiexRTELDTPMOJEa9XXklsqfaegYS-fKrEXoIjjHv4KpolommWzaSINL5C__zljx7QZtF5sRtyYKPPlwEcuPtdMJTCERIfyDIHsMF4oehEVvN-cd6DwOA";
   const destructureAttributes = (product: ProductType) => {
@@ -82,7 +63,15 @@ const MyWishList = (): JSX.Element => {
     return { ...product, ...obj };
   };
 
+  useEffect(() => {
+    fetchWishList(allWishListProducts);
+    if (allWishListProducts?.length === 0) {
+      setAddingItems(false);
+    }
+  }, []);
+
   const fetchWishList = async (wishList: [] = []) => {
+    setCheckNumber(false);
     const wishListData =
       wishList && wishList?.length > 0 ? wishList : allWishListProducts;
     if (wishListData && wishListData.length > 0) {
@@ -115,16 +104,60 @@ const MyWishList = (): JSX.Element => {
           wishListArray.push(wishListObj);
         }
       );
-
+      const auth = await getInventoryAuth();
+      const inventoryAuth = auth?.data?.accessToken;
       if (getItemsbyItemIds?.status === 200) {
-        wishListArray?.map((product: ProductType, index) => {
-          const modifiedProduct = destructureAttributes(product);
+        for (let index = 0; index < wishListArray.length; index++) {
+          const product = wishListArray[index];
+
+          const locationNumber = await handleInventory(
+            inventoryAuth,
+            product?.itemId
+          );
+          let newObj = {
+            ...product,
+            isLocation: locationNumber,
+          };
+          const modifiedProduct = destructureAttributes(newObj);
           wishListArray[index] = modifiedProduct;
-        });
+          const checkLoc = wishListArray?.find(
+            (arr: any) => arr?.isLocation === "true"
+          );
+          if (checkLoc?.isLocation) {
+            setCheckNumber(true);
+          }
+        }
         wishListArray.length > 0 && setWishListItem(wishListArray);
+        setCompRender(true);
       }
     }
   };
+
+  const handleInventory = async (token: string, itemId: Number) => {
+    let locationNumber = "";
+    const resInventory = await getInventoryByIds(token, itemId);
+    const locationCheck = resInventory?.data?.inventory?.find(
+      (loc: any) => loc?.locationNum == appState?.locationNum
+    );
+    if (locationCheck) {
+      locationNumber = "true";
+    } else {
+      locationNumber = "false";
+    }
+
+    return locationNumber;
+  };
+
+  useEffect(() => {
+    setCompRender(false);
+    setCheckNumber(false);
+
+    renderCom && fetchWishList();
+  }, [appState.locationNum]);
+
+  useEffect(() => {
+    setCheckNumber(false);
+  }, [appState.region]);
 
   const removeWishListItem = async (item: any) => {
     try {
@@ -145,14 +178,16 @@ const MyWishList = (): JSX.Element => {
   };
 
   const addAllToBag = async (data: any) => {
+    const filterData = data?.filter((item: any) => item?.isLocation === "true");
     let items: any = [];
-    data.map((item: any) => {
+
+    filterData.map((filter: any) => {
       const selectedProduct: {
         sku?: string;
         itemId?: string;
         Size?: number;
         Color?: string;
-      } = item;
+      } = filter;
 
       const productPricing = {
         currency: "0",
@@ -174,27 +209,26 @@ const MyWishList = (): JSX.Element => {
       };
       items.push(obj);
     });
-
     const payLoadData = {
       cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
       items,
     };
     const response = addProductToCart(payLoadData);
-    items.map(async (item: any) => {
-      const array = [];
-      const ids = {
-        ...item,
-      };
-      array.push(ids);
+    let newItems = [];
+    for (let index = 0; index < items.length; index++) {
+      const item = items[index];
       if (response) {
         const res = await deleteWishList(item?.itemId, authToken);
-        items = res?.data?.items;
+
+        newItems = res?.data?.items;
       }
-    });
-    setAllWishListProducts();
+    }
+
+    await fetchWishList(newItems);
     typeof window !== "undefined" &&
-      window.sessionStorage.removeItem("wishListArray");
-    fetchWishList();
+      window.sessionStorage.setItem("wishListArray", JSON.stringify(newItems));
+    setAddingItems(false);
+    setAllWishListProducts(newItems);
   };
 
   const handleAddToBag = async (item: any) => {
@@ -236,6 +270,10 @@ const MyWishList = (): JSX.Element => {
     }
   };
 
+  const renderSpinner = () => {
+    return <Spinner width={12} height={12} stroke={2} />;
+  };
+
   return (
     <>
       {renderCom && (
@@ -255,13 +293,13 @@ const MyWishList = (): JSX.Element => {
 
               <div className={styles["wishlist-main"]}>
                 <div className={styles["wishlist-items-numbers"]}>
-                  {allWishListProducts?.length > 0 ? (
-                    <p className={styles["wishlist-notice"]}>
-                      {appState?.lang === "en"
-                        ? `Displaying ${allWishListProducts?.length} Items`
-                        : ` العرض ${allWishListProducts?.length} العناصر`}
-                    </p>
-                  ) : null}
+                  {/* {allWishListProducts?.length > 0 ? ( */}
+                  <p className={styles["wishlist-notice"]}>
+                    {appState?.lang === "en"
+                      ? `Displaying ${allWishListProducts?.length} Items`
+                      : ` العرض ${allWishListProducts?.length} العناصر`}
+                  </p>
+                  {/* ) : null} */}
                 </div>
                 {allWishListProducts?.length > 0 && (
                   <div className={styles["add-to-bag-btn"]}>
@@ -280,7 +318,7 @@ const MyWishList = (): JSX.Element => {
                         setAddingItems(true);
                         addAllToBag(wishListItem);
                       }}
-                      disabled={addingItems}
+                      disabled={!checkNumber}
                     >
                       {appState?.lang === "en"
                         ? addingItems
@@ -324,15 +362,15 @@ const MyWishList = (): JSX.Element => {
               {wishListItem.length > 0 &&
                 wishListItem.map((item, index) => {
                   return (
-                    <WishListItems
-                      key={item.itemId}
-                      item={item}
-                      appState={appState}
-                      removeWishListItem={removeWishListItem}
-                      handleAddToBag={handleAddToBag}
-                      token={inventoryToken}
-                      renderCom={renderCom}
-                    />
+                    compRender && (
+                      <WishListItems
+                        key={item.itemId}
+                        item={item}
+                        appState={appState}
+                        removeWishListItem={removeWishListItem}
+                        handleAddToBag={handleAddToBag}
+                      />
+                    )
                   );
                 })}
             </div>
@@ -344,6 +382,7 @@ const MyWishList = (): JSX.Element => {
                   ? `Displaying ${allWishListProducts?.length} Items`
                   : ` العرض ${allWishListProducts?.length} العناصر`}
               </p>
+              {!compRender && <p>... {renderSpinner()}</p>}
             </div>
           )}
         </>
@@ -357,30 +396,10 @@ const WishListItems = ({
   appState,
   removeWishListItem,
   handleAddToBag,
-  token,
-  renderCom,
 }: WishListItemsProps) => {
   const [removingItem, setRemovingItem] = useState(false);
   const [addingItem, setAddingItem] = useState(false);
-  const [checkNumber, setCheckNumber] = useState<boolean>(false);
   const imageSrc = item?.["Image URL"];
-
-  const handleInventory = async () => {
-    const res = await getInventoryByIds(token, item?.itemId);
-    const num = res?.data?.inventory?.find(
-      (loc: any) => loc?.locationNum == appState?.locationNum
-    );
-    if (!num) {
-      setCheckNumber(true);
-    } else {
-      setCheckNumber(false);
-    }
-  };
-
-  useEffect(() => {
-    setCheckNumber(false);
-    renderCom && handleInventory();
-  }, [appState.locationNum]);
 
   return (
     <>
@@ -409,7 +428,7 @@ const WishListItems = ({
               }`}</span>
             </div>
             <div className={styles["item-buttons"]}>
-              {!checkNumber && (
+              {item?.isLocation === "true" && (
                 <div className={styles["add-to-bag-btn"]}>
                   {addingItem ? (
                     <Spinner width={12} height={12} stroke={2} />
@@ -464,7 +483,7 @@ const WishListItems = ({
             </div>
           </div>
         </div>
-        {checkNumber && (
+        {item?.isLocation === "false" && (
           <div className={styles["error-notice"]}>
             <Image width={20} height={20} src={"/help.png"} alt="" />
             <p>
