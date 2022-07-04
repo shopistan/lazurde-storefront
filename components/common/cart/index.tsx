@@ -21,7 +21,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from "lib/utils/common";
 import Link from "next/link";
 import Label from "components/common/ui/label";
-import { getInventoryAuth } from "lib/utils/inventory";
+import { getInventoryAuth } from "lib/api/inventory";
 import { ProductType } from "lib/types/product";
 
 interface CartProps { }

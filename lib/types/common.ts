@@ -6,6 +6,9 @@ export type XMComponent = {
 export type ErrorObject = {
   code?: string | number;
   message: string;
+  response?: {
+    code?: string;
+  };
 };
 
 export type ImageType = {
