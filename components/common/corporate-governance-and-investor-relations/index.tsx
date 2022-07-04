@@ -60,8 +60,8 @@ const CGIR: FC<CGIRProps> = ({
   const { appState } = useContext(AppContext);
   const [showPolicies, setShowPolicies] = useState(false);
   const [selectedVal, setSelectedVal] = useState("Share Overview");
+  const [selectVal, setSelectVal] = useState("Quarterly Financial Statements");
   const [size] = useWindowSize();
-
 
   const _links: _CGIRProps[] = t("cgirProps", {}, { returnObjects: true });
   const router = useRouter();
@@ -91,6 +91,12 @@ const CGIR: FC<CGIRProps> = ({
 
     setSelectedVal(
       appState.lang === "en" ? "Share Overview" : "نظرة عامة على حصة"
+    );
+
+    setSelectVal(
+      appState.lang === "en"
+        ? "Quarterly Financial Statements"
+        : "البيانات المالية ربع السنوية"
     );
   }, [appState.lang]);
 
@@ -352,11 +358,68 @@ const CGIR: FC<CGIRProps> = ({
                         <br />
                       </iframe>
                     )
+                  ) : currentObject?.name === "Email Subscription Center" ||
+                    currentObject?.name ===
+                      "مركز الاشتراك بالبريد الإلكتروني" ? (
+                    appState?.lang === "en" ? (
+                      <iframe
+                        id="euroland_frame_id"
+                        className="EurolandTool"
+                        style={{
+                          background: "transparent",
+                          maxWidth: "700px",
+                          maxHeight: "none",
+                          minHeight: "0px",
+                          height:
+                            size > desktopScreenSize
+                              ? "600px"
+                              : size > 413
+                              ? "650"
+                              : "650px",
+                        }}
+                        src="https://ksatools.eurolandir.com/tools/subscriptioncentre2/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
+                        width="100%"
+                        height={
+                          size > desktopScreenSize
+                            ? "840px"
+                            : size > 413
+                            ? "1000"
+                            : "1000px"
+                        }
+                        frameBorder="0"
+                        scrolling="no"
+                      >
+                        <br />
+                      </iframe>
+                    ) : (
+                      <iframe
+                        id="euroland_frame_id"
+                        className="EurolandTool"
+                        style={{
+                          background: "transparent",
+                          maxWidth: "700px",
+                          maxHeight: "none",
+                          minHeight: "0px",
+                          height: "840px",
+                        }}
+                        src="https://ksatools.eurolandir.com/tools/subscriptioncentre2/?companycode=sa-lazurde&amp;v=2021&amp;lang=ar-ae"
+                        width="100%"
+                        height="807"
+                        frameBorder="0"
+                        scrolling="no"
+                      >
+                        <br />
+                      </iframe>
+                    )
                   ) : currentObject?.name === "Stock Information" ||
                     currentObject?.name === "معلومات المخزون" ? (
                     appState?.lang === "en" ? (
                       <>
-                        <InfoSelector setSelectedVal={setSelectedVal} />
+                        <InfoSelector
+                          setSelectedVal={setSelectedVal}
+                          setSelectVal={setSelectVal}
+                          currentObject={currentObject}
+                        />
                         {selectedVal === "Share Overview" && (
                           <iframe
                             id="euroland_frame_id"
@@ -430,7 +493,7 @@ const CGIR: FC<CGIRProps> = ({
                               minHeight: "0px",
                               height:
                                 size > desktopScreenSize
-                                  ? "2000px"
+                                  ? "1500px"
                                   : size > 413
                                   ? "1300"
                                   : "1300px",
@@ -492,7 +555,7 @@ const CGIR: FC<CGIRProps> = ({
                               minHeight: "0px",
                               height:
                                 size > desktopScreenSize
-                                  ? "450px"
+                                  ? "700px"
                                   : size > 413
                                   ? "350"
                                   : "350px",
@@ -515,7 +578,11 @@ const CGIR: FC<CGIRProps> = ({
                       </>
                     ) : (
                       <>
-                        <InfoSelector setSelectedVal={setSelectedVal} />
+                        <InfoSelector
+                          setSelectedVal={setSelectedVal}
+                          setSelectVal={setSelectVal}
+                          currentObject={currentObject}
+                        />
                         {selectedVal === "نظرة عامة على حصة" && (
                           <iframe
                             id="euroland_frame_id"
@@ -674,6 +741,264 @@ const CGIR: FC<CGIRProps> = ({
                           </iframe>
                         )}
                       </>
+                    )
+                  ) : currentObject?.name === "Financial Information" ||
+                    currentObject?.name === "معلومات المخزون" ? (
+                    appState?.lang === "en" ? (
+                      <>
+                        <InfoSelector
+                          setSelectedVal={setSelectedVal}
+                          setSelectVal={setSelectVal}
+                          currentObject={currentObject}
+                        />
+                        {selectVal === "Quarterly Financial Statements" && (
+                          <div className={styles["images-wrapper"]}>
+                            {currentObject?.moreContent?.length > 0 &&
+                              currentObject?.moreContent?.map((obj, index) => {
+                                const { image, imageTitle, pdfUrl, heading } =
+                                  obj;
+                                console.log("checkingsObj", obj);
+
+                                return (
+                                  <>
+                                    {heading ===
+                                      "Quarterly Financial Statements" && (
+                                      <div
+                                        key={index}
+                                        className={styles["image-block"]}
+                                      >
+                                        <a
+                                          href={pdfUrl}
+                                          target="_blank"
+                                          rel="noreferrer"
+                                        >
+                                          {image?.url && (
+                                            <Image
+                                              alt=""
+                                              src={image?.url || ""}
+                                              width={
+                                                size > desktopScreenSize
+                                                  ? 213
+                                                  : 190
+                                              }
+                                              height={
+                                                size > desktopScreenSize
+                                                  ? 276
+                                                  : 256
+                                              }
+                                            />
+                                          )}
+                                        </a>
+                                        <span>{imageTitle || "Image"}</span>
+                                      </div>
+                                    )}
+                                  </>
+                                );
+                              })}
+                          </div>
+                        )}
+                        {selectVal === "Annual Report" && (
+                          <div className={styles["images-wrapper"]}>
+                            {currentObject?.moreContent?.length > 0 &&
+                              currentObject?.moreContent?.map((obj, index) => {
+                                const { image, imageTitle, pdfUrl, heading } =
+                                  obj;
+                                console.log("checkingsObj", obj);
+
+                                return (
+                                  <>
+                                    {heading === "Annual Report" && (
+                                      <div
+                                        key={index}
+                                        className={styles["image-block"]}
+                                      >
+                                        <a
+                                          href={pdfUrl}
+                                          target="_blank"
+                                          rel="noreferrer"
+                                        >
+                                          {image?.url && (
+                                            <Image
+                                              alt=""
+                                              src={image?.url || ""}
+                                              width={
+                                                size > desktopScreenSize
+                                                  ? 213
+                                                  : 190
+                                              }
+                                              height={
+                                                size > desktopScreenSize
+                                                  ? 276
+                                                  : 256
+                                              }
+                                            />
+                                          )}
+                                        </a>
+                                        <span>{imageTitle || "Image"}</span>
+                                      </div>
+                                    )}
+                                  </>
+                                );
+                              })}
+                          </div>
+                        )}
+                        {selectVal === "Annual Key Figures" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "1200px"
+                                  : size > 413
+                                  ? "650"
+                                  : "650px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/ia/?companycode=sa-lazurde&amp;v=ad_2021&amp;lang=en-gb"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                        {selectVal === "Quarterly Key Figures" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "1150px"
+                                  : size > 413
+                                  ? "650"
+                                  : "650px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/ia/?companycode=sa-lazurde&amp;v=qd_2021&amp;lang=en-gb"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                        {selectVal === "Share Price Look-Up" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "700px"
+                                  : size > 413
+                                  ? "350"
+                                  : "350px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/splookup/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                        {selectVal ===
+                          "Minutes of General Assembly Meetings" && (
+                          <div className={styles["images-wrapper"]}>
+                            {currentObject?.moreContent?.length > 0 &&
+                              currentObject?.moreContent?.map((obj, index) => {
+                                const { image, imageTitle, pdfUrl, heading } =
+                                  obj;
+                                console.log("checkingsObj", obj);
+
+                                return (
+                                  <>
+                                    {heading ===
+                                      "Minutes of General Assembly Meetings" && (
+                                      <div
+                                        key={index}
+                                        className={styles["image-block"]}
+                                      >
+                                        <a
+                                          href={pdfUrl}
+                                          target="_blank"
+                                          rel="noreferrer"
+                                        >
+                                          {image?.url && (
+                                            <Image
+                                              alt=""
+                                              src={image?.url || ""}
+                                              width={
+                                                size > desktopScreenSize
+                                                  ? 213
+                                                  : 190
+                                              }
+                                              height={
+                                                size > desktopScreenSize
+                                                  ? 276
+                                                  : 256
+                                              }
+                                            />
+                                          )}
+                                        </a>
+                                        <span>{imageTitle || "Image"}</span>
+                                      </div>
+                                    )}
+                                  </>
+                                );
+                              })}
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      currentObject?.moreContent &&
+                      currentObject?.moreContent?.length > 0 &&
+                      currentObject?.moreContent?.map((obj, index) => {
+                        const { heading, text } = obj;
+                        return (
+                          <div key={index}>
+                            {heading && <span>{heading}</span>}
+                            {/* {text && <p>{text}</p>} */}
+                            <p
+                              key={Math.random()}
+                              dangerouslySetInnerHTML={{ __html: text }}
+                            ></p>
+                          </div>
+                        );
+                      })
                     )
                   ) : currentObject?.name === "Prospectus" ||
                     currentObject?.name === "نشرة" ? (
