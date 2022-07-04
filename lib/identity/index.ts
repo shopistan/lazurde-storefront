@@ -38,7 +38,7 @@ export const loginUser = () => {
   const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
   if (authTokens) {
     console.log("Already logged in: ", authTokens);
-    Router.push('/account')
+    Router.push("/account");
   } else {
     Router.push(
       `${OKTA_DOMAIN}/v1/authorize?client_id=${OKTA_CLIENT_ID}&code_challenge=${codeChallenge}&code_challenge_method=S256&redirect_uri=${getRedirectUri()}&response_type=code&state=${state}&scope=openid%20email%20profile%20offline_access`
@@ -67,6 +67,17 @@ export const fetchTokens = async (code: string) => {
           JSON.stringify(tokensRes.data)
         );
       }
+      let userInfo = (await getUserInfo()) || null;
+      if (!userInfo) {
+        await refreshAuthToken();
+        userInfo = (await getUserInfo()) || {};
+      }
+      if (userInfo) {
+        window.localStorage.setItem(
+          "user_info",
+          JSON.stringify(userInfo)
+        );
+      }
     }
   } catch (error) {
     console.log("Error fetching tokens: ", error);
@@ -86,6 +97,7 @@ export const logoutUser = async () => {
       );
     }
     window.localStorage.removeItem("auth_tokens");
+    window.localStorage.removeItem("user_info");
   } catch (error) {
     console.log("Error logging out: ", error);
   }

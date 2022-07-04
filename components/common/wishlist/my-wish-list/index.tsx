@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Bag, CrossSmall } from "components/icons";
 import Spinner from "components/common/ui/spinner";
 import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
-import { getInventoryByIds, getInventoryAuth } from "lib/utils/inventory";
+import { getInventoryByIds, getInventoryAuth } from "lib/api/inventory";
 import { addProductToCart } from "lib/utils/cart";
 import Button from "components/common/ui/button";
 import {

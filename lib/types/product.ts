@@ -34,4 +34,5 @@ export type ProductType = {
   priceList?: any;
   totalPrice?: any;
   isLocation?: string;
+  hasStock?: Boolean;
 };

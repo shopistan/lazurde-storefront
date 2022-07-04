@@ -37,7 +37,9 @@ const Input = ({
         onKeyDown={(e) => handleSubmit(e)}
         ref={inputRef as any}
       ></input>
-      <div className={styles["error-msg"]}>{error}</div>
+      <div className={`${styles["error-msg"]} ${error ? "div-error-msg" : ""}`}>
+        {error}
+      </div>
     </div>
   );
 };

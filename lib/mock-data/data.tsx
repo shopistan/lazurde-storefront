@@ -1500,7 +1500,7 @@ export const langSidebarData = [
     value: "ar-sa",
     langTitle: "عربي",
   },
-  
+
   {
     label: "مصر",
     img: "/icons/flag-egypt.png",
@@ -1657,5 +1657,41 @@ export const needHelpData = [
   {
     ques: "How can I return an item?",
     ans: "Let me think about it.",
+  },
+];
+
+export const accountSideBarLinks = [
+  {
+    label: "Go to My Account",
+  },
+  {
+    label: "My Orders",
+  },
+  {
+    label: "My Returns",
+  },
+  {
+    label: "My Reviews",
+  },
+  {
+    label: "My Wish List",
+  },
+  {
+    label: "My Details",
+  },
+  {
+    label: "Address Book",
+  },
+  {
+    label: "Payment Methods",
+  },
+  {
+    label: "My Gift Cards",
+  },
+  {
+    label: "Newsletter Subscriptions",
+  },
+  {
+    label: "Need Help?",
   },
 ];
