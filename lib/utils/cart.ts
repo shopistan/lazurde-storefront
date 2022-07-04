@@ -19,13 +19,11 @@ export const addProductToCart = async (payload?: ATCPayload) => {
       hasError: false,
       response: atcResponse,
     };
-  } catch (error: unknown) {
-    console.log(
-      "Error while adding product to cart: ",
-      (error as ErrorObject).message
-    );
+  } catch (error: any) {
+   
     return {
       hasError: true,
+      code: error?.response?.data?.code
     };
   }
 };

@@ -14,10 +14,11 @@ import CartItem from "components/common/cart-item";
 import { AppContext } from "lib/context";
 import Button from "components/common/ui/button";
 import { useRouter } from "next/router";
-import { getInventoryAuth } from "lib/utils/inventory";
+import { getInventoryAuth } from "lib/api/inventory";
 import { desktopScreenSize } from "lib/utils/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import { deleteWishList, getWishList } from "lib/utils/wishlist";
+import { loginUser, logoutUser } from "lib/identity";
 
 interface wishlistArabicData {
   wishList?: string;
@@ -27,14 +28,14 @@ interface wishlistArabicData {
   signIn?: string;
 }
 
-const WhishListSidebar = (): JSX.Element => {
+const WishListSidebar = (): JSX.Element => {
   const authToken =
     "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MTUzMzYxLCJleHAiOjE2NTQxNTUxNjF9.FLBjzjjR3g1zreH03aIE9B92H5y1HL6RfhwoePFbKeASfqq2RcyGqkKiexRTELDTPMOJEa9XXklsqfaegYS-fKrEXoIjjHv4KpolommWzaSINL5C__zljx7QZtF5sRtyYKPPlwEcuPtdMJTCERIfyDIHsMF4oehEVvN-cd6DwOA";
   const { priceListId, appState, allWishListProducts, setAllWishListProducts } =
     useContext(AppContext);
   const { t } = useTranslation("common");
   const [renderComponent, setRenderComponent] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState(true);
+  const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingCart, setisLoadingCart] = useState(false);
   const [isWishListLoading, setIsWishListLoading] = useState(false);
   const [inventoryToken, setInventoryToken] = useState("");
@@ -52,6 +53,17 @@ const WhishListSidebar = (): JSX.Element => {
     cartId: "",
     priceList: [],
   });
+
+  useEffect(() => {
+    const authToken =
+      typeof window !== "undefined" &&
+      JSON.parse(window.localStorage.getItem("auth_tokens"));
+    if (authToken?.access_token) {
+      setIsLoginUser(true);
+    } else {
+      setIsLoginUser(false);
+    }
+  }, []);
 
   useEffect(() => {
     getCartData();
@@ -197,13 +209,13 @@ const WhishListSidebar = (): JSX.Element => {
   };
 
   const handleSignOut = () => {
-    console.log("signout");
+    logoutUser();
   };
   const handleSignUp = () => {
-    console.log("signup");
+    loginUser();
   };
   const handleSignIn = () => {
-    console.log("signin");
+    loginUser();
   };
 
   return (
@@ -277,7 +289,7 @@ const WhishListSidebar = (): JSX.Element => {
                 </div>
               </div>
               <div className={styles.auth_btns}>
-                {loggedInUser ? (
+                {isLoginUser ? (
                   <div
                     className={styles.signout_btn}
                     onClick={() => handleSignOut()}
@@ -306,6 +318,7 @@ const WhishListSidebar = (): JSX.Element => {
                           ? "Sign In"
                           : wishlistArabicData?.signIn
                       }
+                      buttonStyle="underline"
                       className={styles.signin_btn}
                       onClick={() => handleSignIn()}
                     />
@@ -319,4 +332,4 @@ const WhishListSidebar = (): JSX.Element => {
     </>
   );
 };
-export default WhishListSidebar;
+export default WishListSidebar;

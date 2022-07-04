@@ -42,7 +42,7 @@ const Reviews = ({
   useEffect(() => {
     setFilterData("");
     fetchingReviews();
-  }, []);
+  }, [productData]);
 
   const onClose = () => {
     setModalOpen(false);
@@ -52,6 +52,8 @@ const Reviews = ({
 
   const fetchingReviews = async () => {
     const productId = productData && productData["itemId"];
+    if (productId === undefined) return;
+
     const response = await getReviews(productId);
     response && response?.data && setReviewsData(response?.data?.results);
     response &&

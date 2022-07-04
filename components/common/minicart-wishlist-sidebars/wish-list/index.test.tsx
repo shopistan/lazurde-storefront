@@ -1,12 +1,12 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import WhishListSidebar from "./index";
+import WishListSidebar from "./index";
 import ContextProvider, { AppContext } from "lib/context";
 
 const renderComponent = () => {
   render(
     <ContextProvider>
-      <WhishListSidebar />
+      <WishListSidebar />
     </ContextProvider>
   );
 };
@@ -14,7 +14,7 @@ const renderComponent = () => {
 const renderComponentAR = () => {
   render(
     <AppContext.Provider value={{ appState: { lang: "ar" } }}>
-      <WhishListSidebar />
+      <WishListSidebar />
     </AppContext.Provider>
   );
 };

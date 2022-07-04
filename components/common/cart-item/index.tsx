@@ -10,7 +10,8 @@ import Label from "components/common/ui/label";
 import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
 import Spinner from "../ui/spinner";
-import { getInventoryByIds, getInventoryAuth } from "lib/utils/inventory";
+import { getInventoryByIds } from "lib/api/inventory";
+
 interface CartItemObject {
   title: string;
   ["Product Title"]: string;
@@ -72,11 +73,9 @@ const CartItem = ({
   const [updatingItem, setUpdatingItem] = useState(false);
   const [removingItem, setRemovingItem] = useState(false);
   const [addingItem, setAddingItem] = useState(false);
-  const [value, setValue] = useState("");
   const [inventoryData, setInventoryData] = useState(100);
   const [showError, setShowError] = useState("");
   const [isProductAvailable, setIsProductAvailable] = useState(true);
-  // const [removingItem, setRemovingItem]
   const imageSrc = item?.["Image URL"];
   const brandName = item?.["Brand"];
 
@@ -89,7 +88,7 @@ const CartItem = ({
       const itemId = Number(item.itemId);
       const inventoryData = await getInventoryByIds(authToken, itemId);
       setInventoryData(
-        inventoryData?.data?.inventory[0]?.counters?.["on-hand"] || 100
+        inventoryData?.data?.inventory[0]?.counters?.["on-hand"] || 0
       );
     };
     getInventoryData();
