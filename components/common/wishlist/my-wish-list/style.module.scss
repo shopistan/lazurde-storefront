@@ -38,7 +38,7 @@
     .wishlist-main {
       width: 100%;
       .wishlist-notice {
-        margin-top: 16px;
+        margin-top: 8px;
         margin-bottom: 24px;
         font-family: "Roboto";
         font-style: normal;
@@ -47,6 +47,7 @@
         line-height: 120%;
 
         @media (max-width: $breakPoint-mobile) {
+          margin-top: 16px;
           margin-bottom: 40px;
         }
       }
