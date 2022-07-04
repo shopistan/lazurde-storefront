@@ -61,6 +61,10 @@ const ColorSelection = ({
     getColors();
   }, [selectedSize]);
 
+  useEffect(() => {
+    selectedColor.color && onColorChange && onColorChange( selectedColor.color);
+  }, [selectedColor]);
+
   return (
     <>
       <div className={styles["color-wrapper"]}>
@@ -82,7 +86,6 @@ const ColorSelection = ({
                     <div
                       onClick={() => {
                         setActiveColor(index);
-                        onColorChange && onColorChange(color);
                         setSelectedColor({
                           color: color,
                           index: index,
