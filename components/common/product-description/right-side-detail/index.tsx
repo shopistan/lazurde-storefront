@@ -205,7 +205,8 @@ const RightSideDetail = ({
       itemId?: string;
       Size?: number;
       Color?: string;
-    } = getProductSku() || productData;
+    } = await getProductSku() || productData;
+
 
     const payload: ATCPayload = {
       cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
