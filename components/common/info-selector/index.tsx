@@ -50,20 +50,80 @@ const stockInfoArabic = [
   },
 ];
 
+const financialInfo = [
+  {
+    label: "Quarterly Financial Statements",
+    value: "Quarterly Financial Statements",
+  },
+  {
+    label: "Annual Report",
+    value: "Annual Report",
+  },
+  {
+    label: "Annual Key Figures",
+    value: "Annual Key Figures",
+  },
+  {
+    label: "Quarterly Key Figures",
+    value: "Quarterly Key Figures",
+  },
+  {
+    label: "Share Price Look-Up",
+    value: "Share Price Look-Up",
+  },
+  {
+    label: "Minutes of General Assembly Meetings",
+    value: "Minutes of General Assembly Meetings",
+  },
+];
+
+const financialInfoArabic = [
+  {
+    label: "البيانات المالية ربع السنوية",
+    value: "البيانات المالية ربع السنوية",
+  },
+  {
+    label: "تقرير سنوي",
+    value: "تقرير سنوي",
+  },
+  {
+    label: "الأرقام السنوية الرئيسية",
+    value: "الأرقام السنوية الرئيسية",
+  },
+  {
+    label: "الأرقام الفصلية الرئيسية",
+    value: "الأرقام الفصلية الرئيسية",
+  },
+  {
+    label: "البحث عن سعر السهم",
+    value: "البحث عن سعر السهم",
+  },
+  {
+    label: "محاضر اجتماعات الجمعية العمومية",
+    value: "محاضر اجتماعات الجمعية العمومية",
+  },
+];
 const InfoSelector = ({
   className = "",
   mainWrapperClass = "",
   optionClassName = "",
   setSelectedVal = () => {},
+  setSelectVal = () => {},
+  currentObject = "",
 }: {
   className?: string;
   mainWrapperClass?: string;
   optionClassName?: string;
   setSelectedVal: Function;
+  setSelectVal: Function;
+  currentObject: any;
 }): JSX.Element => {
-  
   const onStockChange = (selectedData: optionProps) => {
     setSelectedVal(selectedData.value);
+  };
+
+  const onInfoChange = (selectedData: optionProps) => {
+    setSelectVal(selectedData.value);
   };
   const { appState } = useContext(AppContext);
   return (
@@ -71,15 +131,61 @@ const InfoSelector = ({
       data-testid={"main-wrapper"}
       className={`${styles["info-selector"]} ${mainWrapperClass}`}
     >
-      <Select
-        options={appState.lang === "en" ? stockInfo : stockInfoArabic}
-        onChange={onStockChange}
-        defaultValue={
-          appState.lang === "en" ? stockInfo[0].value : stockInfoArabic[0].value
-        }
-        className={className}
-        optionClassName={optionClassName}
-      ></Select>
+      {currentObject?.name === "Stock Information" && (
+        <Select
+          options={appState.lang === "en" ? stockInfo : stockInfoArabic}
+          onChange={onStockChange}
+          defaultValue={
+            appState.lang === "en"
+              ? stockInfo[0].value
+              : stockInfoArabic[0].value
+          }
+          className={className}
+          optionClassName={optionClassName}
+        ></Select>
+      )}
+
+      {currentObject?.name === "معلومات المخزون" && (
+        <Select
+          options={appState.lang === "en" ? stockInfo : stockInfoArabic}
+          onChange={onStockChange}
+          defaultValue={
+            appState.lang === "en"
+              ? stockInfo[0].value
+              : stockInfoArabic[0].value
+          }
+          className={className}
+          optionClassName={optionClassName}
+        ></Select>
+      )}
+
+      {currentObject?.name === "Financial Information" && (
+        <Select
+          options={appState.lang === "en" ? financialInfo : financialInfoArabic}
+          onChange={onInfoChange}
+          defaultValue={
+            appState.lang === "en"
+              ? financialInfo[0].value
+              : financialInfoArabic[0].value
+          }
+          className={className}
+          optionClassName={optionClassName}
+        ></Select>
+      )}
+
+      {currentObject?.name === "معلومات مالية" && (
+        <Select
+          options={appState.lang === "en" ? financialInfo : financialInfoArabic}
+          onChange={onInfoChange}
+          defaultValue={
+            appState.lang === "en"
+              ? financialInfo[0].value
+              : financialInfoArabic[0].value
+          }
+          className={className}
+          optionClassName={optionClassName}
+        ></Select>
+      )}
     </div>
   );
 };

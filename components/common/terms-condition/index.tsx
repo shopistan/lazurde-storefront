@@ -64,7 +64,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
     {},
     { returnObjects: true }
   );
-  const [showPolicies, setShowPolicies] = useState(false)
+  const [showPolicies, setShowPolicies] = useState(false);
   const [objects, setObjects] = useState({
     accordion: hyperLinks[0].accordion || [],
     name: hyperLinks[0]?.name || "",
@@ -74,7 +74,6 @@ const TermCondtion: FC<TermCondtionProps> = ({
       altText: hyperLinks[0]?.icon?.altText || "",
     },
   });
-
 
   useEffect(() => {
     setObjects({
@@ -90,15 +89,22 @@ const TermCondtion: FC<TermCondtionProps> = ({
   }, [appState.lang]);
   return (
     <div className={styles["term-comtainer"]}>
-      <Label className={styles["term-heading"]}>
-        {appState?.lang == "en" ? title : t("termTitle")}
-      </Label>
+      <div
+        className={styles["back-button"]}
+        style={{ backgroundColor: contentBgcolor }}
+        onClick={() => {
+          setShowPolicies(true);
+        }}
+      >
+        <div>
+          <BackArrow />
+        </div>
+        <button className={styles["back-content"]}>
+          {appState?.lang == "en" ? "Back To L'azurde Policies" : "ءيش لك قوست"}
+        </button>
+      </div>
       <div className={styles["term-section"]}>
-        <div
-          className={styles["term-left"]}
-          style={{ backgroundColor: sideBarBgcolor }}
-          data-opened={showPolicies}
-        >
+        <div className={styles["term-left"]} data-opened={showPolicies}>
           {hyperLinks &&
             hyperLinks.map((object, index) => {
               const {
@@ -144,30 +150,44 @@ const TermCondtion: FC<TermCondtionProps> = ({
                 </div>
               );
             })}
-        </div>
-        <div className={styles["term-right-container"]}
-        data-opened={showPolicies}>
-          <div
-            className={styles["back-button"]}
-            style={{ backgroundColor: contentBgcolor }}
-            onClick={() => {
-              setShowPolicies(true);
-            }}
-          >
-            <div>
-              <BackArrow />
-            </div>
-            <button className={styles["back-content"]}>
-                {appState?.lang == "en"
-                  ? "Back To L'azurde Policies"
-                  : "ءيش لك قوست"}
-              </button>
+          <div className={styles["back-block"]}>
+            <button className={styles["button"]}>
+              <Image src={"/question.png"} width={20} height={20} alt="" />
+              <p>
+                {appState.lang == "en"
+                  ? "Have a question?"
+                  : t("customerButton")}
+              </p>
+            </button>
           </div>
+        </div>
+
+        <div
+          className={styles["term-right-container"]}
+          data-opened={showPolicies}
+        >
+          <Label className={styles["term-heading"]}>
+            {appState?.lang == "en" ? title : t("termTitle")}
+          </Label>
           <div
             className={styles["term-right"]}
             style={{ backgroundColor: contentBgcolor }}
           >
-            <ContentBlock className={"terms-conditions"}key={Math.random()} content={objects} />
+            <ContentBlock
+              className={"terms-conditions"}
+              key={Math.random()}
+              content={objects}
+            />
+            <div className={styles["back-block"]}>
+              <button className={styles["button"]}>
+                <Image src={"/question.png"} width={20} height={20} />
+                <p>
+                  {appState.lang == "en"
+                    ? "Have a question?"
+                    : t("customerButton")}
+                </p>
+              </button>
+            </div>
           </div>
           {(objects?.accordion[0].heading || objects?.accordion[0].text)
             .length > 0 && (
@@ -210,16 +230,6 @@ const TermCondtion: FC<TermCondtionProps> = ({
               )}
             </div>
           )}
-          <div className={styles["back-block"]}>
-            <button className={styles["button"]}>
-              <Image src={"/question.png"} width={20} height={20} />
-              <p>
-                {appState.lang == "en"
-                  ? "Have a question?"
-                  : t("customerButton")}
-              </p>
-            </button>
-          </div>
         </div>
       </div>
     </div>
