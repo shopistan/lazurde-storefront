@@ -56,50 +56,53 @@ const ProductDescription = ({
   }, [appState?.brand]);
 
   useLayoutEffect(() => {
-    const itemIds = [];
-    let modifiedProdArray = destructureAttributes(product);
-    itemIds.push(modifiedProdArray.itemId);
-    if (modifiedProdArray && modifiedProdArray?.children.length > 0) {
-      modifiedProdArray?.children?.map((variant, index) => {
-        modifiedProdArray?.children?.splice(
-          index,
-          1,
-          destructureAttributes(variant)
-        );
-        itemIds.push(variant.itemId);
+    // const itemIds = [];
+    let modifiedProdArray = []
+    modifiedProdArray.push(destructureAttributes(product));
+    // itemIds.push(modifiedProdArray.itemId);
+    if (modifiedProdArray?.[0] && modifiedProdArray[0]?.children.length > 0) {
+      modifiedProdArray[0]?.children?.map((variant, index) => {
+        // modifiedProdArray?.children?.splice(
+        //   index,
+        //   1,
+        //   destructureAttributes(variant)
+        // );
+        modifiedProdArray?.push(destructureAttributes(variant))
+        // itemIds.push(variant.itemId);
       });
     }
-
-    const getProductInventory = async (itemIds: number[]) => {
-      const userData = await getInventoryAuth();
-
-      const authToken =
-        userData?.data?.accessToken ||
-        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU1Mzg0MTUzLCJleHAiOjE2NTUzODU5NTN9.W3PtK3P0VUST_btUg_vR8gCoAwNUezTw1EpCiYS5VBHqu063Q1eQLUONZsbjIfrxO6X9PlWJi-S2Uxmlvpd302XupGTRatfEfJN4L6RSgFQ_gFbU_DI7HZ5JNXnZ0M92ozvZtzR91gRZ874iujUZJgvKzg6zd_Smnh37SuM2RvU";
-      const id = itemIds[0];
-      const itemId = Number(id);
-      const inventoryData = await getInventoryByIds(authToken, itemId);
-      if (modifiedProdArray.itemId === itemId) {
-        modifiedProdArray["hasStock"] =
-          inventoryData?.data?.inventory.length > 0 &&
-          inventoryData?.data?.inventory[0]?.counters?.["on-hand"] > 0;
-      } else {
-        modifiedProdArray?.children?.map((item) => {
-          if (item.itemId === itemId) {
-            item["hasStock"] =
-              inventoryData?.data?.inventory.length > 0 &&
-              inventoryData?.data?.inventory[0]?.counters?.["on-hand"] > 0;
-          }
-        });
-      }
       setProdArray(modifiedProdArray);
-    };
-    getProductInventory(itemIds);
+
+    // const getProductInventory = async (itemIds: number[]) => {
+    //   const userData = await getInventoryAuth();
+
+    //   const authToken =
+    //     userData?.data?.accessToken ||
+    //     "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU1Mzg0MTUzLCJleHAiOjE2NTUzODU5NTN9.W3PtK3P0VUST_btUg_vR8gCoAwNUezTw1EpCiYS5VBHqu063Q1eQLUONZsbjIfrxO6X9PlWJi-S2Uxmlvpd302XupGTRatfEfJN4L6RSgFQ_gFbU_DI7HZ5JNXnZ0M92ozvZtzR91gRZ874iujUZJgvKzg6zd_Smnh37SuM2RvU";
+    //   const id = itemIds[0];
+    //   const itemId = Number(id);
+    //   const inventoryData = await getInventoryByIds(authToken, itemId);
+    //   if (modifiedProdArray.itemId === itemId) {
+    //     modifiedProdArray["hasStock"] =
+    //       inventoryData?.data?.inventory.length > 0 &&
+    //       inventoryData?.data?.inventory[0]?.counters?.["on-hand"] > 0;
+    //   } else {
+    //     modifiedProdArray?.children?.map((item) => {
+    //       if (item.itemId === itemId) {
+    //         item["hasStock"] =
+    //           inventoryData?.data?.inventory.length > 0 &&
+    //           inventoryData?.data?.inventory[0]?.counters?.["on-hand"] > 0;
+    //       }
+    //     });
+    //   }
+    //   setProdArray(modifiedProdArray);
+    // };
+    // getProductInventory(itemIds);
   }, [product]);
 
   useEffect(() => {
-    if (prodArray?.hasOwnProperty("Image URL")) {
-      getImageArray(prodArray);
+    if (prodArray[0]?.hasOwnProperty("Image URL")) {
+      getImageArray(prodArray[0]);
     }
   }, [prodArray]);
 
@@ -115,13 +118,7 @@ const ProductDescription = ({
     setImageArray(imageArray);
   };
 
-  const onSizeChange = (val: number) => {
-    console.log("sizevalue", val);
-  };
-
-  const onColorChange = (val: number) => {
-    console.log("colroValue", val);
-  };
+ 
 
   return (
     <>
@@ -152,9 +149,7 @@ const ProductDescription = ({
           <div className={styles["right-side"]}>
             <RightSideDetail
               productData={prodArray}
-              productSizeArray={prodArray?.children}
-              onSizeChange={onSizeChange}
-              onColorChange={onColorChange}
+              productSizeArray={prodArray[0]?.children}
               totalRating={totalRating}
               setIsRatingError={setIsRatingError}
               isRatingError={isRatingError}
@@ -167,13 +162,13 @@ const ProductDescription = ({
         <div className={styles["product-feature-detail"]}>
           <ProductDetail
             productDetail={productDescriptionData?.productDetail}
-            productData={prodArray}
+            productData={prodArray[0]}
           />
         </div>
         <Reviews
           setTotalRating={setTotalRating}
           totalRating={totalRating}
-          productData={prodArray}
+          productData={prodArray[0]}
           setIsRatingError={setIsRatingError}
           isRatingError={isRatingError}
         />
