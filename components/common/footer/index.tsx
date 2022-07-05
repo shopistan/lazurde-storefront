@@ -88,6 +88,7 @@ const Footer = ({
                     />
                   ) : (
                     <Accordion
+                      key={index}
                       footerAccordion={true}
                       className={"footer-accordion"}
                       index={index}
