@@ -8,9 +8,9 @@
   "subscriptionText": "",
   "socialIconText": "",
   "userNavBarTitle": "Shop By Boutique",
-  "langSelectorBtnTxt" : "Continue",
+  "langSelectorBtnTxt": "Continue",
   "navbarBackBtn": "Back to L’azurde",
-  "NavbarLangSelectorTitle" : "Select your preferred language and location",
+  "NavbarLangSelectorTitle": "Select your preferred language and location",
   "textShow": "Showing",
   "textOf": "of",
   "textViewAll": "View All",
@@ -24,8 +24,11 @@
   "AddressBook": "Address Book",
   "CheckBoxShipping": "Make this my default shipping address",
   "DeleteAddressMessage": "Are you sure you want to delete this address? This action cannot be undone",
+  "signOut": "Sign Out",
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
 
-    "formHeadings": {
+  "formHeadings": {
     "NickName": "Nick Name",
     "Title": "Title",
     "FirstName": "First Name",
