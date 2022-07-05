@@ -1,7 +1,6 @@
 import React, { FC, useState, useContext } from "react";
 import Label from "components/common/ui/label";
 import Image from "next/image";
-import { ImageType } from "lib/types/common";
 import styles from "./customer-service.module.scss";
 import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from "lib/utils/common";
@@ -9,14 +8,14 @@ import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 
-type ServicesProps = {
+interface ServicesProps {
   icon?: { url: ""; altText: "" };
   iconTitle?: string | "";
   iconText?: string | "";
   url?: string | "";
   width?: string | number;
   height?: string | number;
-};
+}
 
 type _ServiceProps = {
   iconTitle?: string | "";
