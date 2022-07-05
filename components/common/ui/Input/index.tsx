@@ -6,13 +6,17 @@ const Input = ({
   className,
   style,
   value,
-  placeHolder = "This is placeholder text",
+  type = "text",
+  placeHolder = "",
   label = "Placeholder",
   labelClassName,
   onChange = (e) => {},
+  onBlur = (e) => {},
   showLabel = true,
   handleSubmit = (e) => {},
   inputRef,
+  name = "",
+  error = "",
 }: InputType): JSX.Element => {
   return (
     <div className={styles["input-container"]}>
@@ -23,13 +27,19 @@ const Input = ({
       )}
       <input
         className={`${styles["input-c"]} ${className}`}
+        type={type}
+        name={name}
         style={style}
         value={value}
         placeholder={placeHolder}
         onChange={(e) => onChange(e)}
+        onBlur={(e) => onBlur(e)}
         onKeyDown={(e) => handleSubmit(e)}
         ref={inputRef as any}
       ></input>
+      <div className={`${styles["error-msg"]} ${error ? "div-error-msg" : ""}`}>
+        {error}
+      </div>
     </div>
   );
 };

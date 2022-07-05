@@ -32,3 +32,6 @@ export { default as TabbyIcon } from "./Tabby";
 export { default as PaypalButton } from "./PaypalButton";
 export { default as AppleButton } from "./AppleButton";
 export { default as ReviewIcon } from "./ReviewIcon";
+export { default as AddressBookIcon } from "./AddressBookIcon";
+export { default as EditIcon } from "./EditIcon";
+export { default as Login } from "./login";

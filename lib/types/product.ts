@@ -33,4 +33,6 @@ export type ProductType = {
   dependants: any[];
   priceList?: any;
   totalPrice?: any;
+  isLocation?: string;
+  hasStock?: Boolean;
 };

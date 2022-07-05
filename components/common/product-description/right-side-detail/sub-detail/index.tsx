@@ -27,10 +27,10 @@ const SubDetail = ({
     <>
       <div
         className={`${styles["sub-detail-wrapper"]} ${
-          !isStockAvailable ? "" : styles["product-not-available-wrapper"]
+          isStockAvailable ? "" : styles["product-not-available-wrapper"]
         }`}
       >
-        {!isStockAvailable ? (
+        {isStockAvailable ? (
           <>
             <div
               className={styles["sub-detail-point"]}

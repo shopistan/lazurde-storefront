@@ -155,7 +155,7 @@
   align-items: center;
   background-color: white;
   padding-block: 11px;
-  padding-inline: 28px 32px;
+  padding-inline: 26px 32px;
   @media (min-width: $breakPoint-desktop) {
     padding-inline: 16px;
   }
@@ -167,7 +167,7 @@
     text-align: start;
     margin-block: 0;
     margin-inline-end: 0;
-    margin-inline-start: 18px;
+    margin-inline-start: 16px;
     color: rgba(0, 0, 0, 0.8);
   }
 }

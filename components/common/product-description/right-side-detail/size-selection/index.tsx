@@ -52,6 +52,10 @@ const SizeChart = ({
     getSizes();
   }, [productData, productSizeArray]);
 
+  useEffect(() => {
+    selectedSize.size && onSizeChange && onSizeChange( selectedSize.size);
+  }, [selectedSize]);
+
   return (
     <div className={styles["sizechart-wrapper"]}>
       {sizeArray && sizeArray.length > 0 ? (
@@ -67,7 +71,6 @@ const SizeChart = ({
                   key={index}
                   onClick={() => {
                     setActiveSize(index);
-                    onSizeChange && onSizeChange(size);
                     setSelectedSize({
                       size: size,
                       index: index,

@@ -316,6 +316,9 @@ body .swiper-pagination-bullet {
 
   &.swiper {
     padding-top: 65px;
+    @media (max-width: $breakPoint-desktop) {
+      padding-top: 0px;
+    }
   }
 
   .swiper-button-next,
@@ -326,7 +329,7 @@ body .swiper-pagination-bullet {
     color: $black-color;
 
     &:after {
-      font-size: 12px;
+      font-size: 8px;
     }
 
     &.swiper-button-disabled {

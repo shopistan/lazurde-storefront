@@ -579,8 +579,8 @@ export const accountInformationData = {
             url: "/vector.png",
             altText: "image-text",
           },
-          width: "15.83px",
-          height: "16.67px",
+          width: "20px",
+          height: "20px",
           link: "",
         },
       ],
@@ -593,8 +593,8 @@ export const accountInformationData = {
             url: "/orders.png",
             altText: "image-text",
           },
-          width: "13.75px",
-          height: "15.28px",
+          width: "20px",
+          height: "20px",
           link: "",
         },
         {
@@ -603,8 +603,8 @@ export const accountInformationData = {
             url: "/return.png",
             altText: "image-text",
           },
-          width: "15.83px",
-          height: "15.83px",
+          width: "20px",
+          height: "20px",
           link: "",
         },
         {
@@ -613,8 +613,8 @@ export const accountInformationData = {
             url: "/review.png",
             altText: "image-text",
           },
-          width: "16.67px",
-          height: "16.67px",
+          width: "20px",
+          height: "20px",
           link: "",
         },
         {
@@ -623,8 +623,8 @@ export const accountInformationData = {
             url: "/wishlist.png",
             altText: "image-text",
           },
-          width: "16.67px",
-          height: "14.58px",
+          width: "20px",
+          height: "20px",
           link: "",
         },
       ],
@@ -637,8 +637,8 @@ export const accountInformationData = {
             url: "/details.png",
             altText: "image-text",
           },
-          width: "16.67px",
-          height: "16.67px",
+          width: "20px",
+          height: "20px",
           link: "",
         },
         {
@@ -647,8 +647,8 @@ export const accountInformationData = {
             url: "/address-book.png",
             altText: "image-text",
           },
-          width: "16.67px",
-          height: "17.08px",
+          width: "20px",
+          height: "20px",
           link: "",
         },
         {
@@ -657,8 +657,8 @@ export const accountInformationData = {
             url: "/payment.png",
             altText: "image-text",
           },
-          width: "16.67px",
-          height: "13.33px",
+          width: "20px",
+          height: "20px",
           link: "",
         },
         {
@@ -667,8 +667,8 @@ export const accountInformationData = {
             url: "/gift-card.png",
             altText: "image-text",
           },
-          width: "16.67px",
-          height: "16.67px",
+          width: "20px",
+          height: "20px",
           link: "",
         },
       ],
@@ -681,8 +681,8 @@ export const accountInformationData = {
             url: "/newsletter.png",
             altText: "image-text",
           },
-          width: "16.67px",
-          height: "16.67px",
+          width: "20px",
+          height: "20px",
           link: "",
         },
         {
@@ -691,8 +691,8 @@ export const accountInformationData = {
             url: "/help.png",
             altText: "image-text",
           },
-          width: "16.67px",
-          height: "16.67px",
+          width: "20px",
+          height: "20px",
           link: "",
         },
       ],
@@ -705,8 +705,8 @@ export const accountInformationData = {
             url: "/sign-out.png",
             altText: "image-text",
           },
-          width: "15.59px",
-          height: "15.83px",
+          width: "20px",
+          height: "20px",
           link: "",
         },
       ],
@@ -1500,7 +1500,7 @@ export const langSidebarData = [
     value: "ar-sa",
     langTitle: "عربي",
   },
-  
+
   {
     label: "مصر",
     img: "/icons/flag-egypt.png",
@@ -1657,5 +1657,41 @@ export const needHelpData = [
   {
     ques: "How can I return an item?",
     ans: "Let me think about it.",
+  },
+];
+
+export const accountSideBarLinks = [
+  {
+    label: "Go to My Account",
+  },
+  {
+    label: "My Orders",
+  },
+  {
+    label: "My Returns",
+  },
+  {
+    label: "My Reviews",
+  },
+  {
+    label: "My Wish List",
+  },
+  {
+    label: "My Details",
+  },
+  {
+    label: "Address Book",
+  },
+  {
+    label: "Payment Methods",
+  },
+  {
+    label: "My Gift Cards",
+  },
+  {
+    label: "Newsletter Subscriptions",
+  },
+  {
+    label: "Need Help?",
   },
 ];

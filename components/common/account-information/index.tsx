@@ -10,9 +10,12 @@ import { useRouter } from "next/router";
 import SideBar from "components/common/side-bar/index";
 import AccountSection from "../account-section";
 import OrderDetails from "components/common/order-details/index";
+import NewsSubscriptions from "components/common/newsletter-subscriptions/index";
 import OrderHistory from "../order-history";
 import { desktopScreenSize } from "lib/utils/common";
 import UserReviews from "./account-reviews";
+import AddressBook from "./account-addresses";
+import MyWishList from "../wishlist/my-wish-list/index"
 
 interface AccountInformationProps {
   title?: string | "";
@@ -100,6 +103,9 @@ const AccountInformation: FC<AccountInformationProps> = ({
               {activeComponent == "Account Overview" && <AccountSection />}
               {activeComponent == "My Orders" && <OrderDetails />}
               {activeComponent == "My Reviews" && <UserReviews />}
+              {activeComponent == "Address Book" && <AddressBook />}
+              {activeComponent == "My Wish List" && <MyWishList/>}
+              {activeComponent == "Newsletter Subscriptions" && <NewsSubscriptions/>}
             </div>
           </div>
         </div>

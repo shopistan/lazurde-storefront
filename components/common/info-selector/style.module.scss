@@ -1,0 +1,11 @@
+@import "/styles/variables.scss";
+
+.info-selector {
+  width: 314px;
+  padding-bottom: 24px;
+  margin-inline-start: auto;
+
+  @media (max-width: $breakPoint-desktop) {
+    width: 100%;
+  }
+}

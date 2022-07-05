@@ -12,14 +12,18 @@ interface ContentBlockProps {
     content: string;
     icon: { url: string; altText: string };
   };
+  className?: string;
 }
 
-const ContentBlock: FC<ContentBlockProps> = ({ content = {} }) => {
+const ContentBlock: FC<ContentBlockProps> = ({
+  content = {},
+  className = "",
+}) => {
   const { appState } = useContext(AppContext);
   const [width] = useWindowSize();
   return (
     <>
-      <div className={styles["content-container"]}>
+      <div className={`${styles["content-container"]} ${styles[className]}`}>
         {content?.icon?.url && (
           <div className={styles["image"]}>
             <Image
@@ -40,7 +44,13 @@ const ContentBlock: FC<ContentBlockProps> = ({ content = {} }) => {
         content?.name === "Announcements" ||
         content?.name === "الإعلانات" ||
         content?.name === "Financial Calendar" ||
-        content?.name === "التقويم المالي" ? (
+        content?.name === "التقويم المالي" ||
+        content?.name === "Stock Information" ||
+        content?.name === "معلومات المخزون" ||
+        content?.name === "Financial Information" ||
+        content?.name === "معلومات مالية" ||
+        content?.name === "Email Subscription Center" ||
+        content?.name === "مركز الاشتراك بالبريد الإلكتروني" ? (
           appState?.lang === "en" ? (
             <iframe
               title="Scrolling Iframe"

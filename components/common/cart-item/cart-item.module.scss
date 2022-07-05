@@ -1,4 +1,4 @@
-@import '/styles/variables.scss';
+@import "/styles/variables.scss";
 
 .cart-item-wrapper {
   display: flex;
@@ -102,6 +102,7 @@
         font-size: 14px;
         line-height: 120%;
         color: rgba(0, 0, 0, 0.6);
+
         @media (max-width: 500px) {
           font-size: 13px;
           color: rgba(0, 0, 0, 0.6);
@@ -111,10 +112,10 @@
           width: 35px;
           height: 20px;
           border: 1px solid rgba(0, 0, 0, 0.2);
-          border-radius: 100px;
-          padding: 5px;
+          border-radius: 20px;
           color: rgba(0, 0, 0, 0.6);
           -webkit-text-fill-color: rgba(0, 0, 0, 0.6);
+          font-family: "Roboto";
         }
 
         input::-webkit-outer-spin-button,
@@ -128,7 +129,7 @@
           color: rgba(0, 0, 0, 0.6) !important;
         }
 
-        input[type='number'] {
+        input[type="number"] {
           -moz-appearance: textfield; /* Firefox */
         }
       }
@@ -155,9 +156,10 @@
     }
 
     .add-to-bag-btn {
-      margin-top: 0px;
+      margin-top: 8px;
       display: flex;
       align-items: center;
+
       button {
         border: none;
         font-weight: 500;
@@ -188,5 +190,74 @@
         }
       }
     }
+  }
+
+  &.minicart-wishlist-item {
+    align-items: center;
+
+    .cart-image {
+      width: auto;
+      height: auto;
+    }
+
+    .item-details {
+      .item-title {
+        flex-direction: column;
+
+        span {
+          &:first-child {
+            margin-bottom: 8px;
+          }
+
+          @media (max-width: $breakPoint-mobile) {
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 18px;
+          }
+        }
+      }
+
+      .remove-addtobag-btn {
+        display: flex;
+        flex-direction: column-reverse;
+        margin-top: 16px;
+
+        .remove-btn {
+          margin-top: 11px;
+        }
+
+        .add-to-bag-btn {
+          margin-top: 0;
+        }
+      }
+
+      .remove-btn {
+        margin-top: 17px;
+      }
+    }
+  }
+}
+
+.region-based-tag {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  padding-block: 14px;
+  padding-inline: 12px;
+  background: rgba(255, 0, 0, 0.05);
+
+  img {
+    opacity: 0.6;
+  }
+
+  .label {
+    margin: 0;
+    margin-inline-start: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 15.6px;
+    letter-spacing: 0em;
+    text-align: start;
+    color: rgba(0, 0, 0, 0.6);
   }
 }

@@ -24,7 +24,7 @@
   line-height: 29px;
   letter-spacing: 0em;
   text-align: start;
-  margin-top: 9.33px;
+  margin-top: 8px;
   margin-bottom: 24px;
 
   @media (min-width: $breakPoint-desktop) {
@@ -33,7 +33,7 @@
     line-height: 29px;
     letter-spacing: 0em;
     text-align: start;
-    margin-top: 9.33px;
+    margin-top: 8px;
     margin-bottom: 8px;
   }
 }
@@ -51,4 +51,27 @@
 
 .content-container {
   background-color: white;
+}
+
+.terms-conditions {
+  .heading {
+    margin-bottom: 40px;
+  }
+  .content {
+    padding-bottom: 0;
+    p {
+      font-size: 12px;
+    }
+    strong {
+      font-size: 15px;
+    }
+  }
+  .back-block {
+    padding-top: 36px;
+  }
+  @media (max-width: $breakPoint-mobile) {
+    .heading {
+      margin-bottom: 24px;
+    }
+  }
 }

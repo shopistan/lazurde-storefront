@@ -26,6 +26,37 @@
   "customerButton": "لدي سؤال؟",
   "addToCartBtnText": "أضف إلى السلة",
   "onlineExclusiveTag": "حصريا على الانترنت",
+  "Delete": "ىكل رخدي",
+  "Save": "ىكل رخدي",
+  "Cancel": "ىكل رخدي",
+  "Add": "ىكل رخدي",
+  "Edit": "ىكل رخدي",
+  "AddNewAddress": "حصريا على الانترنت",
+  "AddressBook": "حصريا على الانترنت",
+  "CheckBoxShipping": "ىانيدل تاحصريا على الانترنت",
+  "DeleteAddressMessage": "ىانيدل تاضيفختلا عيمج قوست",
+  "signOut": "خروج",
+  "signUp": "اشتراك",
+  "signIn": "تسجيل الدخول",
+
+  "formHeadings": {
+    "NickName": "ىكل رخدي",
+    "Title": "ىكل رخدي",
+    "FirstName": "ىكل رخدي",
+    "LastName": "ىكل رخدي",
+    "StreetAddress": "ىكل رخدي",
+    "City": "ىكل رخدي",
+    "Governorate": "ىكل رخدي",
+    "Country": "ىكل رخدي",
+    "PostalCode": "ىكل رخدي"
+  },
+
+  "addressBookHeading": {
+    "add": "حصريا على الانترنت",
+    "edit": "حصريا على الانترنت",
+    "delete": "حصريا على الانترنت"
+  },
+
   "servicesProps": [
     {
       "iconTitle": "ءيش لك قوست",
@@ -100,6 +131,15 @@
     },
     {
       "name": "التقويم المالي"
+    },
+    {
+      "name" : "معلومات المخزون"
+    },
+    {
+      "name":  "معلومات مالية" 
+    },
+    {
+      "name": "مركز الاشتراك بالبريد الإلكتروني"
     }
   ],
   "linksProps": [
@@ -210,6 +250,13 @@
   "email": "لكلا ةدهاشم",
   "sent": "لكلا ةدهاشم",
   "helpHeading": "لكلا ةدهاشم",
+  "save": "يحفظ",
+  "Newsletter Subscriptions": "اشتراك الرسائل الإخبارية",
+  "All Subscriptions": "كل الاشتراكات",
+  "L’azurde Subscriptions": "اشتراكات",
+  "Miss L ‘ Subscriptions": "اشتراكات ملكة جمال",
+  "InStyle Subscriptions": "في الاسلوب",
+  "Kenaz Subscriptions": "يحاشتراكات قنازفظ",
   "categories": [
     {
       "title": "استكشف جميع الفئات",
@@ -1093,6 +1140,63 @@
         "title": "خاتم الحب مع الماس",
         "description": "مساعدة المجتمع على اتخاذ القرار",
         "writeReviewBtn": "أكتب مراجعة"
+      }
+    ]
+  },
+  "miniCartArabicData": {
+    "addToBag": "يضاف إلى الحقيبة",
+    "ShoppingBag": "كيس التسوق",
+    "YourShoppingBagIsEmpty": "حقيبة التسوق الخاصة بك فارغة",
+    "checkoutBtnText": "الدفع",
+    "totalText": "المجموع",
+    "viewBag": "حقيبة عرض",
+    "signOut": "خروج",
+    "signUp": "اشتراك",
+    "signIn": "تسجيل الدخول"
+  },
+  "wishlistArabicData": {
+    "wishList": "قائمة الرغبات",
+    "emptyNote": "عرض المفضلة المحفوظة ، وبناء تصاميم المجوهرات الساحرة الخاصة بك وإرسال تلميحات.",
+    "signOut": "خروج",
+    "signUp": "اشتراك",
+    "signIn": "تسجيل الدخول"
+  },
+  "accountSideBarData": {
+    "heading": "تسجيل الدخول أو إنشاء حساب",
+    "subHeading": "باستخدام حساب يمكنك التحقق بشكل أسرع وعرض سجل الطلبات عبر الإنترنت والوصول إلى حقيبة التسوق أو العناصر المحفوظة من أي جهاز.",
+    "accountSideBarLinks": [
+      {
+        "label": "اذهب إلى حسابي"
+      },
+      {
+        "label": "طلباتي"
+      },
+      {
+        "label": "عوائدي"
+      },
+      {
+        "label": "ملاحظاتي"
+      },
+      {
+        "label": "قائمة امنياتي"
+      },
+      {
+        "label": "تفاصيلي"
+      },
+      {
+        "label": "دليل العناوين"
+      },
+      {
+        "label": "طرق الدفع"
+      },
+      {
+        "label": "بطاقات الهدايا الخاصة بي"
+      },
+      {
+        "label": "اشتراك الرسائل الإخبارية"
+      },
+      {
+        "label": "تحتاج مساعدة؟"
       }
     ]
   }
