@@ -11,7 +11,7 @@ const TamaraModal = ({
   const [renderScript, setRendeScript] = useState(false);
 
   useEffect(() => {
-    setRendeScript(true);
+    productPricing?.finalPrice && setRendeScript(true);
   }, [appState?.lang, productPricing?.finalPrice]);
 
   return (
