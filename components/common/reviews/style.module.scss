@@ -137,6 +137,7 @@
     }
   }
 }
+
 .uploaded-img-wrapper {
   display: flex;
   align-items: center;
@@ -148,5 +149,19 @@
     &:last-child {
       margin-inline-end: 0;
     }
+  }
+}
+
+.translate-btn {
+  margin-top: 3px;
+
+  button {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    text-transform: capitalize;
+    text-decoration: underline;
+    font-weight: 600;
   }
 }
