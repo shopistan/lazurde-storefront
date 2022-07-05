@@ -16,7 +16,7 @@ import CartItem from "components/common/cart-item";
 import { AppContext } from "lib/context";
 import Button from "components/common/ui/button";
 import { useRouter } from "next/router";
-import { getInventoryAuth } from "lib/utils/inventory";
+import { getInventoryAuth } from "lib/api/inventory";
 import { desktopScreenSize } from "lib/utils/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import { logoutUser, loginUser } from "lib/identity";

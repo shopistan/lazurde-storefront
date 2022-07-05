@@ -6,6 +6,8 @@ import { OMS_DOMAIN, WISHLIST } from "general-config";
 
 export const getInventoryByIds = async (authToken: string, itemId: any) => {
   try {
+    // const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
+    // const { access_token = "" } = authTokens;
     const response = await Axios.get(
       `${OMS_DOMAIN}${ENDPOINTS.INVENTORY.GET_BY_IDS(itemId)}`,
       {

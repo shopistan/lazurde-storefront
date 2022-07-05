@@ -7,6 +7,7 @@ import Select from "components/common/ui/select";
 import CheckBox from "components/common/ui/checkbox";
 import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from "lib/utils/common";
+
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { AppContext } from "lib/context";
@@ -107,6 +108,7 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
+
   const addressBookHeading: addressBookHeadingProps = t(
     "addressBookHeading",
     {},
@@ -230,7 +232,6 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                isSubmitting,
                 setFieldValue,
               }: any) => (
                 <form onSubmit={handleSubmit}>
@@ -397,6 +398,20 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                             type="submit"
                             buttonSize={"lr"}
                             buttonText={t("Add")}
+                            onClick={() => {
+                              setTimeout(() => {
+                                const errorList =
+                                  document.getElementsByClassName(
+                                    "div-error-msg"
+                                  );
+
+                                errorList &&
+                                  errorList.length > 0 &&
+                                  errorList[0].parentElement.scrollIntoView({
+                                    behavior: "smooth",
+                                  });
+                              }, 300);
+                            }}
                           ></Button>
                         )}
                       </div>
