@@ -30,6 +30,8 @@ interface WishListItemsProps {
   appState: any;
   removeWishListItem: Function;
   handleAddToBag: Function;
+  renderSpinner: Function;
+  adding: Boolean;
 }
 
 const MyWishList = (): JSX.Element => {
@@ -39,6 +41,7 @@ const MyWishList = (): JSX.Element => {
   const [addingItems, setAddingItems] = useState(false);
   const [checkNumber, setCheckNumber] = useState(true);
   const [compRender, setCompRender] = useState(false);
+  const [adding, setAdding] = useState(false);
   const { priceListId, appState, allWishListProducts, setAllWishListProducts } =
     useContext(AppContext);
 
@@ -107,29 +110,31 @@ const MyWishList = (): JSX.Element => {
       const auth = await getInventoryAuth();
       const inventoryAuth = auth?.data?.accessToken;
       if (getItemsbyItemIds?.status === 200) {
-        for (let index = 0; index < wishListArray.length; index++) {
-          const product = wishListArray[index];
-
-          const locationNumber = await handleInventory(
-            inventoryAuth,
-            product?.itemId
-          );
-          let newObj = {
-            ...product,
-            isLocation: locationNumber,
-          };
-          const modifiedProduct = destructureAttributes(newObj);
-          wishListArray[index] = modifiedProduct;
-          const checkLoc = wishListArray?.find(
-            (arr: any) => arr?.isLocation === "true"
-          );
-          if (checkLoc?.isLocation) {
-            setCheckNumber(true);
-          }
-        }
-        wishListArray.length > 0 && setWishListItem(wishListArray);
+        const newArray = await Promise.all(
+          wishListArray.map(async (product, index) => {
+            const locationNumber = await handleInventory(
+              inventoryAuth,
+              product?.itemId
+            );
+            let newObj = {
+              ...product,
+              isLocation: locationNumber,
+            };
+            const modifiedProduct = destructureAttributes(newObj);
+            wishListArray[index] = modifiedProduct;
+            const checkLoc = wishListArray?.find(
+              (arr: any) => arr?.isLocation === "true"
+            );
+            if (checkLoc?.isLocation) {
+              setCheckNumber(true);
+            }
+            return modifiedProduct;
+          })
+        );
+        newArray.length > 0 && setWishListItem(newArray);
         setCompRender(true);
       }
+      setAdding(false);
     }
   };
 
@@ -178,6 +183,7 @@ const MyWishList = (): JSX.Element => {
   };
 
   const addAllToBag = async (data: any) => {
+    setAdding(true);
     const filterData = data?.filter((item: any) => item?.isLocation === "true");
     let items: any = [];
 
@@ -293,18 +299,18 @@ const MyWishList = (): JSX.Element => {
 
               <div className={styles["wishlist-main"]}>
                 <div className={styles["wishlist-items-numbers"]}>
-                  {/* {allWishListProducts?.length > 0 ? ( */}
-                  <p className={styles["wishlist-notice"]}>
-                    {appState?.lang === "en"
-                      ? `Displaying ${allWishListProducts?.length} Items`
-                      : ` العرض ${allWishListProducts?.length} العناصر`}
-                  </p>
-                  {/* ) : null} */}
+                  {allWishListProducts?.length > 0 ? (
+                    <p className={styles["wishlist-notice"]}>
+                      {appState?.lang === "en"
+                        ? `Displaying ${allWishListProducts?.length} Items`
+                        : ` العرض ${allWishListProducts?.length} العناصر`}
+                    </p>
+                  ) : null}
                 </div>
                 {allWishListProducts?.length > 0 && (
                   <div className={styles["add-to-bag-btn"]}>
                     {addingItems ? (
-                      <Spinner width={12} height={12} stroke={2} />
+                      renderSpinner()
                     ) : (
                       <Bag
                         fill="#000000"
@@ -369,6 +375,8 @@ const MyWishList = (): JSX.Element => {
                         appState={appState}
                         removeWishListItem={removeWishListItem}
                         handleAddToBag={handleAddToBag}
+                        renderSpinner={renderSpinner}
+                        adding={adding}
                       />
                     )
                   );
@@ -382,7 +390,7 @@ const MyWishList = (): JSX.Element => {
                   ? `Displaying ${allWishListProducts?.length} Items`
                   : ` العرض ${allWishListProducts?.length} العناصر`}
               </p>
-              {!compRender && <p>... {renderSpinner()}</p>}
+              {!compRender && <p>{renderSpinner()} ...</p>}
             </div>
           )}
         </>
@@ -396,6 +404,8 @@ const WishListItems = ({
   appState,
   removeWishListItem,
   handleAddToBag,
+  renderSpinner,
+  adding,
 }: WishListItemsProps) => {
   const [removingItem, setRemovingItem] = useState(false);
   const [addingItem, setAddingItem] = useState(false);
@@ -430,8 +440,8 @@ const WishListItems = ({
             <div className={styles["item-buttons"]}>
               {item?.isLocation === "true" && (
                 <div className={styles["add-to-bag-btn"]}>
-                  {addingItem ? (
-                    <Spinner width={12} height={12} stroke={2} />
+                  {addingItem || adding ? (
+                    renderSpinner()
                   ) : (
                     <Bag
                       fill="#000000"
@@ -448,7 +458,7 @@ const WishListItems = ({
                     disabled={addingItem}
                   >
                     {appState?.lang === "en"
-                      ? addingItem
+                      ? addingItem || adding
                         ? "Adding..."
                         : "Add to Bag"
                       : addingItem
@@ -460,7 +470,7 @@ const WishListItems = ({
 
               <div className={styles["remove-btn"]}>
                 {removingItem ? (
-                  <Spinner width={12} height={12} stroke={2} />
+                  renderSpinner()
                 ) : (
                   <CrossSmall width={12} height={12} />
                 )}

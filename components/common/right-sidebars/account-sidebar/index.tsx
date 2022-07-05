@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./style.module.scss";
 import Login from "components/icons/login";
 import Heading from "components/common/ui/heading";
@@ -6,10 +6,21 @@ import Label from "components/common/ui/label";
 import Button from "components/common/ui/button";
 import { loginUser } from "lib/identity";
 import LoggedInlinks from "./login-links";
+import useTranslation from "next-translate/useTranslation";
+import { AppContext } from "lib/context";
+import { translateText } from "lib/utils/reviews";
+
+interface arabicDataProps {
+  heading?: string;
+  subHeading?: string;
+}
 
 const AccountSidebar = (): JSX.Element => {
+  const { t } = useTranslation("common");
+  const { appState } = useContext(AppContext);
   const [userName, setUserName] = useState("San");
   const [isLoginUser, setIsLoginUser] = useState(false);
+  const [arabicUserName, setArabicUserName] = useState("");
 
   useEffect(() => {
     const authToken =
@@ -29,25 +40,54 @@ const AccountSidebar = (): JSX.Element => {
     }
   }, []);
 
+  const arabicData: arabicDataProps = t(
+    "accountSideBarData",
+    {},
+    { returnObjects: true }
+  );
+
+  useEffect(() => {
+    if (appState?.lang === "ar") {
+      handleUserNameTranslation();
+    }
+  }, [appState?.lang]);
+
+  const handleUserNameTranslation = async () => {
+    if (userName) {
+      const res = await translateText(userName, "ar");
+      if (res.hasError === false) {
+        setArabicUserName(
+          res?.response?.data?.data?.translations[0]?.translatedText
+        );
+      } else {
+        console.log("error while translate username to arabic");
+      }
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       {!isLoginUser ? (
         <div className={styles.content}>
           <div>
-            <Login width="40px" height="40px" fill="#000" />
+            <Login width={31.67} height={33.33} fill="#000" />
             <Heading className={styles.heading} element="h1">
-              Sign In or Create an Account
+              {appState?.lang === "en"
+                ? "Sign In or Create an Account"
+                : arabicData?.heading}
             </Heading>
             <Label className={styles.label}>
-              With an account you can check out faster, view your online order
+              {appState?.lang === "en"
+                ? `With an account you can check out faster, view your online order
               history and access your shopping bag or saved items from any
-              device.
+              device.`
+                : arabicData?.subHeading}
             </Label>
           </div>
           <div className={styles.auth_btns}>
             <Button
               buttonSize={"xl"}
-              buttonText={"Sign Up"}
+              buttonText={t("signUp")}
               onClick={() => {
                 loginUser();
               }}
@@ -55,7 +95,7 @@ const AccountSidebar = (): JSX.Element => {
             <Button
               buttonSize={"xsm"}
               buttonStyle="underline"
-              buttonText={"Sign In"}
+              buttonText={t("signIn")}
               onClick={() => {
                 loginUser();
               }}
@@ -63,7 +103,7 @@ const AccountSidebar = (): JSX.Element => {
           </div>
         </div>
       ) : (
-        <LoggedInlinks userName={userName} />
+        <LoggedInlinks userName={userName} arabicUserName={arabicUserName} />
       )}
     </div>
   );

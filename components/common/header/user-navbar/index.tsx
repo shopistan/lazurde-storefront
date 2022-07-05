@@ -243,6 +243,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
           onClick={(event: any) => {
             event.stopPropagation();
           }}
+          sidebarHeight={sidebarchild.account ? "892px" : "876px"}
         >
           {sidebarchild.account ? (
             <AccountSidebar />
