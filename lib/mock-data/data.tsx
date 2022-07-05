@@ -1663,35 +1663,46 @@ export const needHelpData = [
 export const accountSideBarLinks = [
   {
     label: "Go to My Account",
+    value: "Account Overview",
   },
   {
     label: "My Orders",
+    value: "My Orders",
   },
   {
     label: "My Returns",
+    value: "My Returns",
   },
   {
     label: "My Reviews",
+    value: "My Reviews",
   },
   {
     label: "My Wish List",
+    value: "My Wish List",
   },
   {
     label: "My Details",
+    value: "My Details",
   },
   {
     label: "Address Book",
+    value: "Address Book",
   },
   {
     label: "Payment Methods",
+    value: "Payment Methods",
   },
   {
     label: "My Gift Cards",
+    value: "My Gift Cards",
   },
   {
     label: "Newsletter Subscriptions",
+    value: "Newsletter Subscriptions",
   },
   {
     label: "Need Help?",
+    value: "Need Help?",
   },
 ];

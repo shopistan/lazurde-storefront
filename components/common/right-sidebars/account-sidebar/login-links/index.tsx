@@ -36,7 +36,7 @@ const LoggedInlinks = ({
     <>
       <div className={styles.links_wrapper}>
         <div className={styles.name}>
-          <Login width={31.67} height={33.33} fill="#000" />
+          <Login width={40} height={40} fill="#000" />
           <Label>
             {appState?.lang === "en"
               ? `Hi, ${userName}`
@@ -45,13 +45,13 @@ const LoggedInlinks = ({
         </div>
         <div className={styles.links}>
           {accountSideBarLinks?.map((link, index) => {
-            const { label } = link;
+            const { label, value } = link;
             return (
               <div className={styles.link_wrapper} key={index}>
                 <div className={styles.link_btn}>
                   <button
                     onClick={() => {
-                      window.localStorage.setItem("active", label);
+                      window.localStorage.setItem("active", value);
                       router?.push("/account");
                     }}
                   >
@@ -62,7 +62,7 @@ const LoggedInlinks = ({
                   </button>
                 </div>
                 <div className={styles.icon}>
-                  <ArrowRight fill="#000000" width="6" height="8px" />
+                  <ArrowRight fill="#000000" width="6px" height="8px" />
                 </div>
               </div>
             );
@@ -75,7 +75,7 @@ const LoggedInlinks = ({
           logoutUser();
         }}
       >
-        <SignOut fill="#000000" width={15.59} height={15.89} />
+        <SignOut fill="#000000" width={20} height={20} />
         <Button
           buttonStyle="underline"
           buttonSize="xsm"
