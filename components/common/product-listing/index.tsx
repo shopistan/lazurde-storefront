@@ -131,12 +131,12 @@ const ProductListing = ({
       createFilterBarList(initialProductData);
   }, [initialProductData]);
 
-  useEffect(() => {
-    selectedFilters &&
-      filteredProductData &&
-      filteredProductData.length > 0 &&
-      createFilterBarList(filteredProductData);
-  }, [filteredProductData]);
+  // useEffect(() => {
+  //   selectedFilters &&
+  //     filteredProductData &&
+  //     filteredProductData.length > 0 &&
+  //     createFilterBarList(filteredProductData);
+  // }, [filteredProductData]);
 
   const applyFilters = async (selectedFilters: SelectedFilterProps = {}) => {
     if (Object.keys(selectedFilters)?.length < 1) {

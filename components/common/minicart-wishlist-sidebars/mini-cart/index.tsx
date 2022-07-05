@@ -144,7 +144,7 @@ const MiniCart = (): JSX.Element => {
       }
     } catch (err) {
       setUpdatingCartItem(false);
-      console.log("Error", err);
+      // console.log("Error", err);
     }
   };
 
@@ -175,7 +175,7 @@ const MiniCart = (): JSX.Element => {
       }
     } catch (err) {
       setUpdatingCartItem(false);
-      console.log("Error", err);
+      // console.log("Error", err);
     }
   };
 
@@ -301,7 +301,7 @@ const MiniCart = (): JSX.Element => {
                       <div
                         className={styles.checkout_btn_wrapper}
                         onClick={() => {
-                          console.log("handle checkout");
+                          // console.log("handle checkout");
                         }}
                       >
                         <div className={styles.checkout_btn}>

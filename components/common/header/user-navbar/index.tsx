@@ -53,10 +53,12 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
 
       const wishlistArray = await getWishList(authToken);
       if (wishlistArray?.data?.items.length < 1) return;
+
       setAllWishListProducts &&
         setAllWishListProducts(wishlistArray?.data?.items);
+      
       typeof window !== "undefined" &&
-        window.sessionStorage.setItem(
+        window?.sessionStorage?.setItem(
           "wishListArray",
           JSON.stringify(wishlistArray?.data?.items)
         );

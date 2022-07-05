@@ -17,7 +17,6 @@ interface OrderHistoryProps {
 
 const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
   const { t } = useTranslation("common");
-  console.log("order", order);
   const { appState } = useContext(AppContext);
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -25,7 +24,6 @@ const OrderHistory: FC<OrderHistoryProps> = ({ order }) => {
   const [isRatingError, setIsRatingError] = useState("");
   const fetchingReviews = async () => {
     const response = await getReviews(productDetails?.itemId);
-    console.log(response);
   };
 
   return (

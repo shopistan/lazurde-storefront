@@ -117,7 +117,6 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
           item.id === "FilterBar"
       ) || {}
     ).params || {};
-    console.log("FILTERBAR", filterProps, globalComponents);
 
   const categoryName =
     (
