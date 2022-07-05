@@ -277,7 +277,7 @@ const SingleReview = ({
       <Label className={styles["review-content"]}>
         {reviewText.lang === "en" ? reviewText.english : reviewText.arabic}
       </Label>
-      <div className={styles["translate-btn"]}>
+      {/* <div className={styles["translate-btn"]}>
         <button
           key={index}
           onClick={() => {
@@ -286,7 +286,7 @@ const SingleReview = ({
         >
           {reviewText.lang === "en" ? "translate" : "show original"}
         </button>
-      </div>
+      </div> */}
       <Label className={styles["date"]}>{formateDate(review?.dateAdded)}</Label>
       <div className={styles["uploaded-img-wrapper"]}>
         {uploadedImages && uploadedImages.length > 0
