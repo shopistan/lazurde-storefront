@@ -45,8 +45,6 @@ const DropDown = ({
   const filterIndex = categoryData?.filterIndex || 0;
 
   useEffect(() => {
-    console.log("something", selectedFilters);
-
     let totalCount = 0;
     if (selectedFilters && Object.keys(selectedFilters)?.length > 0) {
       for (
