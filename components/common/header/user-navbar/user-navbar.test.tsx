@@ -72,19 +72,25 @@ describe("", () => {
   };
 
   const renderComponentAR = (object: any) => {
-    render(
-      <AppContext.Provider value={{ appState: { lang: "ar" } }}>
-        <UserNavBar brandSideBar={object} />
-      </AppContext.Provider>
-    );
+    act(() => {
+      render(
+        <AppContext.Provider
+          value={{ appState: { lang: "ar" }, allWishListProducts: [100, 200] }}
+        >
+          <UserNavBar brandSideBar={object} />
+        </AppContext.Provider>
+      );
+    });
   };
 
   test("links", () => {
     act(() => {
       render(
-        <ContextProvider>
+        <AppContext.Provider
+          value={{ appState: { lang: "en" }, allWishListProducts: [100, 200] }}
+        >
           <UserNavBar brandSideBar={object} />
-        </ContextProvider>
+          </AppContext.Provider>
       );
       const links = document.querySelector("a").getAttribute("href");
       expect(links).toBe("/");
