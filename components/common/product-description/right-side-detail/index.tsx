@@ -81,7 +81,7 @@ const RightSideDetail = ({
     if (productDataCopy?.length < 1) return;
 
     getProductSku();
-  }, [productDataCopy]);
+  }, [selectedColor]);
 
   const getPrice = async () => {
     if (!productDataCopy && !productDataCopy[0]?.itemId) return;
@@ -132,6 +132,7 @@ const RightSideDetail = ({
       }
       return selectedSku;
     });
+    if(!item) return
     getSelectedPrice(item || productDataCopy[0]);
     await getProductInventory(item || productDataCopy[0]);
     setSelectedItem(item || productDataCopy[0]);
@@ -274,11 +275,11 @@ const RightSideDetail = ({
   };
 
   const onSizeChange = (val: number) => {
-    getProductSku();
+    // getProductSku();
   };
 
   const onColorChange = (val: number) => {
-    getProductSku();
+    // getProductSku();
   };
 
   return (
@@ -332,6 +333,7 @@ const RightSideDetail = ({
         onSizeChange={onSizeChange}
         setSelectedSize={setSelectedSize}
         selectedSize={selectedSize}
+        setSelectedColor={setSelectedColor}
       />
 
       <ColorSelection

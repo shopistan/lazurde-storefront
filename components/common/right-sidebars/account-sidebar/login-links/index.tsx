@@ -13,7 +13,15 @@ interface detailsProps {
   label?: string;
 }
 
-const LoggedInlinks = ({ userName = "" }): JSX.Element => {
+interface LoggedInlinksProps {
+  userName?: string;
+  arabicUserName?: string;
+}
+
+const LoggedInlinks = ({
+  userName = "",
+  arabicUserName = "",
+}: LoggedInlinksProps): JSX.Element => {
   const router = useRouter();
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
@@ -28,22 +36,22 @@ const LoggedInlinks = ({ userName = "" }): JSX.Element => {
     <>
       <div className={styles.links_wrapper}>
         <div className={styles.name}>
-          <Login width={31.67} height={33.33} fill="#000" />
+          <Login width={40} height={40} fill="#000" />
           <Label>
             {appState?.lang === "en"
               ? `Hi, ${userName}`
-              : `مرحبا, ${t("firstname")}`}
+              : `مرحبا, ${arabicUserName}`}
           </Label>
         </div>
         <div className={styles.links}>
           {accountSideBarLinks?.map((link, index) => {
-            const { label } = link;
+            const { label, value } = link;
             return (
               <div className={styles.link_wrapper} key={index}>
                 <div className={styles.link_btn}>
                   <button
                     onClick={() => {
-                      window.localStorage.setItem("active", label);
+                      window.localStorage.setItem("active", value);
                       router?.push("/account");
                     }}
                   >
@@ -54,7 +62,7 @@ const LoggedInlinks = ({ userName = "" }): JSX.Element => {
                   </button>
                 </div>
                 <div className={styles.icon}>
-                  <ArrowRight fill="#000000" width="6" height="8px" />
+                  <ArrowRight fill="#000000" width="6px" height="8px" />
                 </div>
               </div>
             );
@@ -67,7 +75,7 @@ const LoggedInlinks = ({ userName = "" }): JSX.Element => {
           logoutUser();
         }}
       >
-        <SignOut fill="#000000" width={15.59} height={15.89} />
+        <SignOut fill="#000000" width={20} height={20} />
         <Button
           buttonStyle="underline"
           buttonSize="xsm"

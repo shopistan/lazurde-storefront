@@ -95,7 +95,7 @@ const ReviewForm = ({
         fetchingReviews && fetchingReviews();
         setTimeout(() => {
           onClose && onClose();
-        }, 3000);
+        }, 2000);
       } else {
         setIsRatingError && setIsRatingError("Network Error");
       }

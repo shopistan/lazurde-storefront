@@ -31,8 +31,8 @@ const DropDown = ({
   setSelectedFilters = () => {},
   setTotalSelectedFilterCount = () => {},
   onApplyFilter= () => {},
-  listLoading = false,
-  setListLoading = () => {},
+  // listLoading = false,
+  // setListLoading = () => {},
 }: CategoryDropDownProps): JSX.Element => {
   const filterName = categoryData?.filterName || "";
   const filterIndex = categoryData?.filterIndex || 0;
@@ -85,8 +85,8 @@ const DropDown = ({
                 key={index}
                 className={styles["title"]}
                 onClick={() => {
-                  if(listLoading) return
-                  setListLoading && setListLoading(true)
+                  // if(listLoading) return
+                  // setListLoading && setListLoading(true)
                   if (
                     selectedFilters?.[filterIndex]?.selectedOptions?.[index]
                       ?.selected

@@ -170,7 +170,7 @@ const FilterBar: FC<FilterBarProps> = ({
   );
   const [isOpened, setIsOpened] = useState({ opened: false, selected: "" });
   const [dropdownData, setDropdownData] = useState<DropdownDataProps>();
-  const [listLoading, setListLoading] = useState(false);
+  // const [listLoading, setListLoading] = useState(false);
   // const [selectedFilters, setSelectedFilters] = useState<SelectedFilterProps>();
   // const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
   const [linkRefs, setLinkRefs] = useState(link);
@@ -219,7 +219,7 @@ const FilterBar: FC<FilterBarProps> = ({
   useEffect(() => {
     setCurrentFilterList([...filterList]);
     setLinkRefs(link);
-    setListLoading(false)
+    // setListLoading(false)
   }, [filterList]);
 
   useEffect(() => {
@@ -359,8 +359,8 @@ const FilterBar: FC<FilterBarProps> = ({
           setSelectedFilters={setSelectedFilters}
           onApplyFilters={onApplyButtonClick}
           hasFilteredData={hasFilteredData}
-          listLoading={listLoading}
-          setListLoading={setListLoading}
+          // listLoading={listLoading}
+          // setListLoading={setListLoading}
         ></DropDown>
       </div>
       <div

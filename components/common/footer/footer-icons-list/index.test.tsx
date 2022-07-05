@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import FooterIcons from "./index";
 import { socialIconSize } from "lib/mock-data/data";
+import { act } from "react-dom/test-utils";
 
 const testingData = [
   {
@@ -25,23 +26,27 @@ const testingData = [
 ];
 
 test("footer icons unit testing", () => {
-  render(
-    <FooterIcons
-      iconsList={testingData}
-      iconSize={socialIconSize}
-      isFooterIcons={false}
-    />
-  );
-  const icons = screen.getAllByRole("icons");
-  expect(icons[0]).toBeInTheDocument();
+  act(() => {
+    render(
+      <FooterIcons
+        iconsList={testingData}
+        iconSize={socialIconSize}
+        isFooterIcons={false}
+      />
+    );
+    const icons = screen.getAllByRole("icons");
+    expect(icons[0]).toBeInTheDocument();
+  });
 });
 
 test("else part for boolean", () => {
-  render(
-    <FooterIcons
-      iconsList={testingData}
-      iconSize={socialIconSize}
-      isFooterIcons={true}
-    />
-  );
+  act(() => {
+    render(
+      <FooterIcons
+        iconsList={testingData}
+        iconSize={socialIconSize}
+        isFooterIcons={true}
+      />
+    );
+  });
 });

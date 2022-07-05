@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import useWindowSize from "lib/utils/useWindowSize";
 import { HeaderProps, BrandSidebarProps } from "lib/types/common";
-import styles from "./Header.module.css";
+import styles from "./Header.module.scss";
 import PromoBar from "./promo-bar";
 import UserNavBar from "./user-navbar";
 import LangSelector from "./navbar-lang-selector/index";

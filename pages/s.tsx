@@ -36,8 +36,6 @@ const SearchPage: FC<SearchPageProps> = ({
     selectedFilter,
     hasFilteredData,
   } = useContext(AppContext);
-  console.log("Search Page Props: ", algoliaSearchResults);
-  console.log("selected filters", selectedFilter);
   return (
     <>
       <Head>

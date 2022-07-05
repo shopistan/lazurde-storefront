@@ -36,8 +36,8 @@ const DropDown = ({
   setSelectedFilters = () => { },
   onApplyFilters = () => { },
   hasFilteredData = false,
-  listLoading = false,
-  setListLoading = () => {},
+  // listLoading = false,
+  // setListLoading = () => {},
 }: DropDownProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const [totalSelectedFilterCount, setTotalSelectedFilterCount] = useState(0);
@@ -45,8 +45,6 @@ const DropDown = ({
   const filterIndex = categoryData?.filterIndex || 0;
 
   useEffect(() => {
-    console.log("something", selectedFilters);
-
     let totalCount = 0;
     if (selectedFilters && Object.keys(selectedFilters)?.length > 0) {
       for (
@@ -97,8 +95,8 @@ const DropDown = ({
                 key={index}
                 className={styles["title"]}
                 onClick={() => {
-                  if(listLoading) return
-                  setListLoading(true)
+                  // if(listLoading) return
+                  // setListLoading(true)
                   if (
                     selectedFilters?.[filterIndex]?.selectedOptions?.[index]
                       ?.selected
