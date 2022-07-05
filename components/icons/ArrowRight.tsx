@@ -1,6 +1,12 @@
 import React from "react";
 
-const ArrowRight = ({ fill = "#000", fillOpacity='1', width = "5", height = "8", className = '' }) => {
+const ArrowRight = ({
+  fill = "#000",
+  fillOpacity = "1",
+  width = "5",
+  height = "8",
+  className = "",
+}) => {
   return (
     <>
       <svg
