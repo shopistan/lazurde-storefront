@@ -2,21 +2,26 @@ import { render } from "@testing-library/react";
 import React from "react";
 import MiniCart from "./index";
 import ContextProvider, { AppContext } from "lib/context";
+import { act } from "react-dom/test-utils";
 
 const renderComponent = () => {
-  render(
-    <ContextProvider>
-      <MiniCart />
-    </ContextProvider>
-  );
+  act(() => {
+    render(
+      <ContextProvider>
+        <MiniCart />
+      </ContextProvider>
+    );
+  });
 };
 
 const renderComponentAR = () => {
-  render(
-    <AppContext.Provider value={{ appState: { lang: "ar" } }}>
-      <MiniCart />
-    </AppContext.Provider>
-  );
+  act(() => {
+    render(
+      <AppContext.Provider value={{ appState: { lang: "ar" } }}>
+        <MiniCart />
+      </AppContext.Provider>
+    );
+  });
 };
 
 test("Mini Cart Test", () => {
