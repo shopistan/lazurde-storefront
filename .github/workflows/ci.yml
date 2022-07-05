@@ -5,7 +5,7 @@ name: Lazurde storefront CI
 
 on:
   push:
-    branches: [main, qa-testing, stage, develop]
+    branches: [main, qa-testing, stage, develop, fix/ci-cd]
 
 jobs:
   build:
