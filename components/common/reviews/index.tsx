@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect, useContext, useRef } from "react";
 import styles from "./style.module.scss";
-import { getReviews } from "lib/utils/reviews";
+import { getReviews, translateReviews } from "lib/utils/reviews";
 import Label from "components/common/ui/label";
 import StarRating from "components/common/ui/star-ratings";
 import { formateDate, reviewStarAvg } from "lib/utils/common";
@@ -10,7 +10,6 @@ import ReviewTabs from "./review-tabs";
 import Pagination from "components/common/ui/pagination";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
-
 interface ReviewsProps {
   setTotalRating?: Function;
   totalRating?: number;
@@ -46,7 +45,6 @@ const Reviews = ({
 
   const onClose = () => {
     setModalOpen(false);
-    // reviewImagesRef.current.value = null;
     document.body.style.overflow = "auto";
   };
 
@@ -184,54 +182,12 @@ const Reviews = ({
                   const { review = {}, customer = {} } = reviews;
                   const uploadedImages = review?.imagesFileName?.split(",");
                   return (
-                    <div className={styles["review"]} key={index}>
-                      <Label className={styles["customer-name"]}>
-                        {review?.author?.replace(/"/g, "")}
-                      </Label>
-                      <div
-                        className={styles["review-rating"]}
-                        style={{
-                          pointerEvents: "none",
-                        }}
-                      >
-                        <StarRating
-                          count={5}
-                          rating={review?.rating?.toFixed(2)}
-                          pointerEventsNone={true}
-                        />
-                      </div>
-                      <Label className={styles["review-content"]}>
-                        {review?.body?.replace(/"/g, "")}
-                      </Label>
-                      <Label className={styles["date"]}>
-                        {formateDate(review?.dateAdded)}
-                      </Label>
-                      <div className={styles["uploaded-img-wrapper"]}>
-                        {uploadedImages && uploadedImages.length > 0
-                          ? uploadedImages?.map(
-                              (imgSrc: string, index: number) => {
-                                return (
-                                  <>
-                                    {imgSrc ? (
-                                      <div
-                                        className={styles["review-img"]}
-                                        key={index}
-                                      >
-                                        <img
-                                          src={`https://s3-us-west-2.amazonaws.com/stamped.io/uploads/photos/${imgSrc}`}
-                                          alt="review-img"
-                                          width="100%"
-                                          height="100%"
-                                        />
-                                      </div>
-                                    ) : null}
-                                  </>
-                                );
-                              }
-                            )
-                          : null}
-                      </div>
-                    </div>
+                    <SingleReview
+                      key={index}
+                      index={index}
+                      review={review}
+                      uploadedImages={uploadedImages}
+                    />
                   );
                 })}
               </>
@@ -253,3 +209,105 @@ const Reviews = ({
 };
 
 export default Reviews;
+
+const SingleReview = ({
+  index = 0,
+  review = {},
+  uploadedImages = [],
+}: any): JSX.Element => {
+  const onlyEnglishString = (str: any) => {
+    return /^[0-9a-zA-Z\s]*$/.test(str);
+  };
+
+  const [reviewText, setReviewText] = useState({
+    english: review?.body,
+    arabic: "",
+    lang: "en",
+  });
+
+  const handleReviewsTranslation = async (text: string, lang: string) => {
+    const res = await translateReviews(text, lang);
+    if (res.hasError === false) {
+      setReviewText({
+        ...reviewText,
+        arabic: res?.response?.data?.data?.translations[0]?.translatedText,
+        lang: "ar",
+      });
+    } else {
+      console.log("review translate err");
+    }
+  };
+
+  const handleTranslate = () => {
+    if (reviewText.arabic == "" || reviewText.english == "") {
+      const detectLang = onlyEnglishString(review?.body);
+      handleReviewsTranslation(review?.body, detectLang ? "ar" : "en");
+      return;
+    }
+    if (reviewText.lang === "ar") {
+      setReviewText({
+        ...reviewText,
+        lang: "en",
+      });
+    } else {
+      setReviewText({
+        ...reviewText,
+        lang: "ar",
+      });
+    }
+  };
+
+  return (
+    <div className={styles["review"]} key={index}>
+      <Label className={styles["customer-name"]}>
+        {review?.author?.replace(/"/g, "")}
+      </Label>
+      <div
+        className={styles["review-rating"]}
+        style={{
+          pointerEvents: "none",
+        }}
+      >
+        <StarRating
+          count={5}
+          rating={review?.rating?.toFixed(2)}
+          pointerEventsNone={true}
+        />
+      </div>
+      <Label className={styles["review-content"]}>
+        {reviewText.lang === "en" ? reviewText.english : reviewText.arabic}
+      </Label>
+      {/* <div className={styles["translate-btn"]}>
+        <button
+          key={index}
+          onClick={() => {
+            handleTranslate();
+          }}
+        >
+          {reviewText.lang === "en" ? "translate" : "show original"}
+        </button>
+      </div> */}
+      <Label className={styles["date"]}>{formateDate(review?.dateAdded)}</Label>
+      <div className={styles["uploaded-img-wrapper"]}>
+        {uploadedImages && uploadedImages.length > 0
+          ? uploadedImages?.map((imgSrc: string, index: number) => {
+              return (
+                <>
+                  {imgSrc ? (
+                    <div className={styles["review-img"]} key={index}>
+                      <img
+                        src={`https://s3-us-west-2.amazonaws.com/stamped.io/uploads/photos/${imgSrc}`}
+                        alt="review-img"
+                        width="100%"
+                        height="100%"
+                      />
+                    </div>
+                  ) : null}
+                </>
+              );
+            })
+          : null}
+      </div>
+    </div>
+  );
+};
