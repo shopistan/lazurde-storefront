@@ -119,11 +119,19 @@ const InfoSelector = ({
   currentObject: any;
 }): JSX.Element => {
   const onStockChange = (selectedData: optionProps) => {
-    setSelectedVal(selectedData.value);
+    setSelectedVal(selectedData?.value);
   };
 
+  useEffect(() => {
+    currentObject?.name === "Stock Information" &&
+      setSelectedVal("Share Overview");
+
+    currentObject?.name === "Financial Information" &&
+      setSelectVal("Quarterly Financial Statements");
+  }, [currentObject?.name]);
+
   const onInfoChange = (selectedData: optionProps) => {
-    setSelectVal(selectedData.value);
+    setSelectVal(selectedData?.value);
   };
   const { appState } = useContext(AppContext);
   return (
@@ -133,57 +141,37 @@ const InfoSelector = ({
     >
       {currentObject?.name === "Stock Information" && (
         <Select
-          options={appState.lang === "en" ? stockInfo : stockInfoArabic}
+          options={stockInfo}
           onChange={onStockChange}
-          defaultValue={
-            appState.lang === "en"
-              ? stockInfo[0].value
-              : stockInfoArabic[0].value
-          }
-          className={className}
-          optionClassName={optionClassName}
+          defaultValue={stockInfo[0]?.value}
+          optionClassName={className}
         ></Select>
       )}
 
       {currentObject?.name === "معلومات المخزون" && (
         <Select
-          options={appState.lang === "en" ? stockInfo : stockInfoArabic}
+          options={stockInfoArabic}
           onChange={onStockChange}
-          defaultValue={
-            appState.lang === "en"
-              ? stockInfo[0].value
-              : stockInfoArabic[0].value
-          }
-          className={className}
-          optionClassName={optionClassName}
+          defaultValue={stockInfoArabic[0]?.value}
+          optionClassName={className}
         ></Select>
       )}
 
       {currentObject?.name === "Financial Information" && (
         <Select
-          options={appState.lang === "en" ? financialInfo : financialInfoArabic}
+          options={financialInfo}
           onChange={onInfoChange}
-          defaultValue={
-            appState.lang === "en"
-              ? financialInfo[0].value
-              : financialInfoArabic[0].value
-          }
-          className={className}
-          optionClassName={optionClassName}
+          defaultValue={financialInfo[0]?.value}
+          optionClassName={className}
         ></Select>
       )}
 
       {currentObject?.name === "معلومات مالية" && (
         <Select
-          options={appState.lang === "en" ? financialInfo : financialInfoArabic}
+          options={financialInfoArabic}
           onChange={onInfoChange}
-          defaultValue={
-            appState.lang === "en"
-              ? financialInfo[0].value
-              : financialInfoArabic[0].value
-          }
-          className={className}
-          optionClassName={optionClassName}
+          defaultValue={financialInfoArabic[0]?.value}
+          optionClassName={className}
         ></Select>
       )}
     </div>
