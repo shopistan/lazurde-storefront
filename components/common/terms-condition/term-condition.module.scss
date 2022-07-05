@@ -17,7 +17,6 @@
 }
 
 .term-left {
-  margin-top: 150px;
   cursor: pointer;
   display: none;
   background-color: white;
@@ -34,6 +33,7 @@
     display: block;
     padding-inline-start: 16px;
     margin-inline-end: 60px;
+    margin-top: 150px;
   }
 
   p {
