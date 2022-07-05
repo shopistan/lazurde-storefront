@@ -1,9 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import styles from "./style.module.scss";
 import ProductDetail from "./product-detail";
 import { productDescriptionData } from "lib/mock-data/data";
@@ -20,13 +15,13 @@ interface ProductDescriptionProps {
   product: ProductType;
 }
 
- const destructureAttributes = (product: ProductType) => {
-    const obj: { [key: string]: string } = {};
-    product?.attributes?.map((attr: any) => {
-      obj[attr?.name] = attr?.value;
-    });
-    return { ...product, ...obj };
-  };
+const destructureAttributes = (product: ProductType) => {
+  const obj: { [key: string]: string } = {};
+  product?.attributes?.map((attr: any) => {
+    obj[attr?.name] = attr?.value;
+  });
+  return { ...product, ...obj };
+};
 
 const ProductDescription = ({
   product,
@@ -41,9 +36,9 @@ const ProductDescription = ({
   const [isRatingError, setIsRatingError] = useState("");
   const [isLoading, setIsloading] = useState(true);
 
-  useEffect(()=> {
-    document.body.scrollTo(0, 0 );
-  }, [])
+  useEffect(() => {
+    document.body.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const redriectBreadCrumbs =
@@ -57,7 +52,7 @@ const ProductDescription = ({
 
   useLayoutEffect(() => {
     // const itemIds = [];
-    let modifiedProdArray = []
+    let modifiedProdArray = [];
     modifiedProdArray.push(destructureAttributes(product));
     // itemIds.push(modifiedProdArray.itemId);
     if (modifiedProdArray?.[0] && modifiedProdArray[0]?.children.length > 0) {
@@ -67,11 +62,11 @@ const ProductDescription = ({
         //   1,
         //   destructureAttributes(variant)
         // );
-        modifiedProdArray?.push(destructureAttributes(variant))
+        modifiedProdArray?.push(destructureAttributes(variant));
         // itemIds.push(variant.itemId);
       });
     }
-      setProdArray(modifiedProdArray);
+    setProdArray(modifiedProdArray);
 
     // const getProductInventory = async (itemIds: number[]) => {
     //   const userData = await getInventoryAuth();
@@ -106,8 +101,6 @@ const ProductDescription = ({
     }
   }, [prodArray]);
 
- 
-
   const getImageArray = (product: any) => {
     const imageArray: { url: string; altText: string }[] = [];
     Object.keys(product).map((attr: any) => {
@@ -117,8 +110,6 @@ const ProductDescription = ({
     });
     setImageArray(imageArray);
   };
-
- 
 
   return (
     <>
@@ -147,15 +138,17 @@ const ProductDescription = ({
             <ImageSection imageArray={imageArray}></ImageSection>
           </div>
           <div className={styles["right-side"]}>
-            <RightSideDetail
-              productData={prodArray}
-              productSizeArray={prodArray[0]?.children}
-              totalRating={totalRating}
-              setIsRatingError={setIsRatingError}
-              isRatingError={isRatingError}
-              priceListId={priceListId}
-              setIsloading={setIsloading}
-            />
+            {prodArray && prodArray.length > 0 ? (
+              <RightSideDetail
+                productData={prodArray}
+                productSizeArray={prodArray[0]?.children}
+                totalRating={totalRating}
+                setIsRatingError={setIsRatingError}
+                isRatingError={isRatingError}
+                priceListId={priceListId}
+                setIsloading={setIsloading}
+              />
+            ) : null}
           </div>
         </div>
 
