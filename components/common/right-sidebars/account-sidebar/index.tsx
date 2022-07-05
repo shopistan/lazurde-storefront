@@ -70,7 +70,7 @@ const AccountSidebar = (): JSX.Element => {
       {!isLoginUser ? (
         <div className={styles.content}>
           <div>
-            <Login width={31.67} height={33.33} fill="#000" />
+            <Login width={40} height={40} fill="#000" />
             <Heading className={styles.heading} element="h1">
               {appState?.lang === "en"
                 ? "Sign In or Create an Account"
