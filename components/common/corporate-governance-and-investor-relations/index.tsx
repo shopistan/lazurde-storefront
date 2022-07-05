@@ -433,14 +433,14 @@ const CGIR: FC<CGIRProps> = ({
                                 size > desktopScreenSize
                                   ? "900px"
                                   : size > 413
-                                  ? "650"
-                                  : "650px",
+                                  ? "1000"
+                                  : "1000px",
                             }}
                             src="https://ksatools.eurolandir.com/tools/shareseries/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
                             width="100%"
                             height={
                               size > desktopScreenSize
-                                ? "840px"
+                                ? "900px"
                                 : size > 413
                                 ? "1000"
                                 : "1000px"
@@ -464,17 +464,17 @@ const CGIR: FC<CGIRProps> = ({
                                 size > desktopScreenSize
                                   ? "1450px"
                                   : size > 413
-                                  ? "1000"
-                                  : "1000px",
+                                  ? "1500"
+                                  : "1500px",
                             }}
                             src="https://ksatools.eurolandir.com/tools/sharealert/?cid=90735&amp;companycode=sa-lazurde&amp;lang=en-gb"
                             width="100%"
                             height={
                               size > desktopScreenSize
-                                ? "840px"
+                                ? "1450px"
                                 : size > 413
-                                ? "1000"
-                                : "1000px"
+                                ? "1500"
+                                : "1500px"
                             }
                             frameBorder="0"
                             scrolling="no"
@@ -493,19 +493,19 @@ const CGIR: FC<CGIRProps> = ({
                               minHeight: "0px",
                               height:
                                 size > desktopScreenSize
-                                  ? "1500px"
+                                  ? "2000px"
                                   : size > 413
-                                  ? "1300"
-                                  : "1300px",
+                                  ? "1800"
+                                  : "1800px",
                             }}
                             src="https://ksatools.eurolandir.com/tools/sharegraph/?s=2245&amp;companycode=sa-lazurde&amp;lang=en-gb"
                             width="100%"
                             height={
                               size > desktopScreenSize
-                                ? "840px"
+                                ? "2000px"
                                 : size > 413
-                                ? "1000"
-                                : "1000px"
+                                ? "1800"
+                                : "1800px"
                             }
                             frameBorder="0"
                             scrolling="no"
@@ -526,17 +526,17 @@ const CGIR: FC<CGIRProps> = ({
                                 size > desktopScreenSize
                                   ? "500px"
                                   : size > 413
-                                  ? "1000"
-                                  : "1000px",
+                                  ? "700"
+                                  : "700px",
                             }}
                             src="https://ksatools.eurolandir.com/tools/investmentcal2/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
                             width="100%"
                             height={
                               size > desktopScreenSize
-                                ? "840px"
+                                ? "500px"
                                 : size > 413
-                                ? "400"
-                                : "400px"
+                                ? "700"
+                                : "700px"
                             }
                             frameBorder="0"
                             scrolling="no"
@@ -557,17 +557,17 @@ const CGIR: FC<CGIRProps> = ({
                                 size > desktopScreenSize
                                   ? "700px"
                                   : size > 413
-                                  ? "350"
-                                  : "350px",
+                                  ? "500"
+                                  : "500px",
                             }}
                             src="https://ksatools.eurolandir.com/tools/splookup/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
                             width="100%"
                             height={
                               size > desktopScreenSize
-                                ? "840px"
+                                ? "700px"
                                 : size > 413
-                                ? "1000"
-                                : "1000px"
+                                ? "500"
+                                : "500px"
                             }
                             frameBorder="0"
                             scrolling="no"
