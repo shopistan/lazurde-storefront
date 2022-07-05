@@ -26,28 +26,24 @@ const StarRating = ({
       }}
     >
       {[...Array(count)]?.map((_, index) => {
-        return (
-          <>
-            {rating > index ? (
-              <FilledStar
-                key={index}
-                className={styles["filled-star"]}
-                fill="#C3A956"
-                onClick={() => onClick && onClick(index)}
-                width={starWidth}
-                height={starHeight}
-              />
-            ) : (
-              <Star
-                key={index}
-                className={styles["empty-star"]}
-                icon="star"
-                onClick={() => onClick && onClick(index)}
-                width={starWidth}
-                height={starHeight}
-              />
-            )}
-          </>
+        return rating > index ? (
+          <FilledStar
+            key={index}
+            className={styles["filled-star"]}
+            fill="#C3A956"
+            onClick={() => onClick && onClick(index)}
+            width={starWidth}
+            height={starHeight}
+          />
+        ) : (
+          <Star
+            key={index}
+            className={styles["empty-star"]}
+            icon="star"
+            onClick={() => onClick && onClick(index)}
+            width={starWidth}
+            height={starHeight}
+          />
         );
       })}
     </div>
