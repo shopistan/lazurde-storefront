@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect, useContext, useRef } from "react";
 import styles from "./style.module.scss";
-import { getReviews, translateReviews } from "lib/utils/reviews";
+import { getReviews, translateText } from "lib/utils/reviews";
 import Label from "components/common/ui/label";
 import StarRating from "components/common/ui/star-ratings";
 import { formateDate, reviewStarAvg } from "lib/utils/common";
@@ -226,7 +226,7 @@ const SingleReview = ({
   });
 
   const handleReviewsTranslation = async (text: string, lang: string) => {
-    const res = await translateReviews(text, lang);
+    const res = await translateText(text, lang);
     if (res.hasError === false) {
       setReviewText({
         ...reviewText,
