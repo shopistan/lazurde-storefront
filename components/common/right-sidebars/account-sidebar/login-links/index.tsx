@@ -20,7 +20,7 @@ interface LoggedInlinksProps {
 
 const LoggedInlinks = ({
   userName = "",
-  arabicUserName,
+  arabicUserName = "",
 }: LoggedInlinksProps): JSX.Element => {
   const router = useRouter();
   const { t } = useTranslation("common");
