@@ -1,4 +1,10 @@
-import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react";
 import styles from "./right-side-detail.module.scss";
 import WriteAReview from "components/common/reviews/write-review";
 import Button from "components/common/ui/button";
@@ -51,6 +57,9 @@ const RightSideDetail = ({
   priceListId,
   setIsloading,
 }: RightSideDetailProps): JSX.Element => {
+  const productDataCopy = useRef(productData).current;
+  const allProductPrices = useRef([]);
+  const userAuth = useRef("");
   const router = useRouter();
   const { appState } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
@@ -58,53 +67,52 @@ const RightSideDetail = ({
   const [quantityCounter, setQuantityCounter] = useState(1);
   const [selectedSize, setSelectedSize] = useState({ size: -1, index: 0 });
   const [selectedColor, setSelectedColor] = useState({ color: "", index: 0 });
-  const [selectedItem, setSelectedItem] = useState(productData[0]);
-
+  const [selectedItem, setSelectedItem] = useState(productDataCopy[0]);
   const [productPricing, setProductPricing] = useState<{
     currency: string;
     base: number | string;
     discount: string | number;
     finalPrice: number | string;
   }>();
-  const [allProductPrices, setAllProductPrices] = useState([]);
+  // const [allProductPrices, setAllProductPrices] = useState([]);
   const { t } = useTranslation("common");
 
-  useLayoutEffect(() => {
-    if (productData?.length < 1) return;
-    const getPrice = async () => {
-      if (allProductPrices.length > 0) return;
-      if (!productData && !productData[0]?.itemId) return;
-      const itemIdArray: number[] = [];
-      productData.length > 0 &&
-        productData?.map((item: { itemId: number }) => {
-          itemIdArray.push(item.itemId);
-        });
+  useEffect(() => {
+    if (productDataCopy?.length < 1) return;
 
-      if (itemIdArray[0] === undefined) return;
-
-      const payload = {
-        priceList: [priceListId],
-        itemId: itemIdArray,
-      };
-      const response = await fetchProductPriceByItemId(payload);
-      if (response && response?.status === 200) {
-        setAllProductPrices(response?.data);
-      }
-      setIsloading(false);
-    };
-    getPrice();
     getProductSku();
-  }, [productData]);
+  }, [productDataCopy]);
+
+  const getPrice = async () => {
+    if (!productDataCopy && !productDataCopy[0]?.itemId) return;
+    const itemIdArray: number[] = [];
+    productDataCopy.length > 0 &&
+      productDataCopy?.map((item: { itemId: number }) => {
+        itemIdArray.push(item.itemId);
+      });
+
+    if (itemIdArray[0] === undefined) return;
+
+    const payload = {
+      priceList: [priceListId],
+      itemId: itemIdArray,
+    };
+    const response = await fetchProductPriceByItemId(payload);
+    if (response && response?.status === 200) {
+      allProductPrices.current = response?.data;
+    }
+    setIsloading(false);
+  };
 
   const getProductSku = async () => {
-    if (productData?.length < 1) return;
+    if (productDataCopy?.length < 1) return;
     let skuType = "";
     if (selectedSize?.size > -1) skuType = "sizeOnly";
 
     if (selectedColor?.color)
       skuType = skuType === "sizeOnly" ? "sizeAndColor" : "colorOnly";
 
-    const item = productData?.find((item: ProductProps) => {
+    const item = productDataCopy?.find((item: ProductProps) => {
       let selectedSku = false;
       switch (skuType) {
         case "sizeOnly":
@@ -124,21 +132,29 @@ const RightSideDetail = ({
       }
       return selectedSku;
     });
-    // if (!item ) return;
-    getSelectedPrice(item || productData[0]);
-    const invenData = await getProductInventory(item || productData[0]);
-    const hasStock = invenData ? invenData?.hasStock : productData[0]?.hasStock;
-    if (item) {
-      item["hasStock"] = hasStock;
+    getSelectedPrice(item || productDataCopy[0]);
+    await getProductInventory(item || productDataCopy[0]);
+    setSelectedItem(item || productDataCopy[0]);
+    for (let index = 0; index < productDataCopy.length; index++) {
+      if (index === 0) continue;
+      if (productDataCopy[index]?.hasOwnProperty("hasStock")) continue;
+      const remainigItem = productDataCopy[index];
+      await getProductInventory(remainigItem);
     }
-    setSelectedItem(item || productData[0]);
     return item;
   };
 
-  const getSelectedPrice = (selectedProduct: { itemId: number } | any) => {
+  const getSelectedPrice = async (
+    selectedProduct: { itemId: number } | any
+  ) => {
+    if (allProductPrices?.current?.length < 1) {
+      allProductPrices.current = [{}];
+      await getPrice();
+    }
+
     if (selectedProduct.length < 1) return;
 
-    const price = allProductPrices.find(
+    const price = allProductPrices?.current?.find(
       (item) => item.itemId === selectedProduct.itemId
     );
 
@@ -170,15 +186,16 @@ const RightSideDetail = ({
     if (product?.hasOwnProperty("hasStock")) {
       return;
     }
+    if (!userAuth.current) {
+      userAuth.current = "true"
+      const response = await getInventoryAuth();
+      userAuth.current = response?.data?.accessToken;
+    }
+    if (userAuth.current === 'true') return
     product["hasStock"] = false;
-    const userData = await getInventoryAuth();
-
-    const authToken =
-      userData?.data?.accessToken ||
-      "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU1Mzg0MTUzLCJleHAiOjE2NTUzODU5NTN9.W3PtK3P0VUST_btUg_vR8gCoAwNUezTw1EpCiYS5VBHqu063Q1eQLUONZsbjIfrxO6X9PlWJi-S2Uxmlvpd302XupGTRatfEfJN4L6RSgFQ_gFbU_DI7HZ5JNXnZ0M92ozvZtzR91gRZ874iujUZJgvKzg6zd_Smnh37SuM2RvU";
     const id = product?.itemId;
     const itemId = Number(id);
-    const inventoryData = await getInventoryByIds(authToken, itemId);
+    const inventoryData = await getInventoryByIds(userAuth.current, itemId);
     if (product?.itemId === id) {
       product["hasStock"] =
         inventoryData?.data?.inventory.length > 0 &&
@@ -228,7 +245,7 @@ const RightSideDetail = ({
       itemId?: string;
       Size?: number;
       Color?: string;
-    } = (await getProductSku()) || productData[0];
+    } = (await getProductSku()) || productDataCopy[0];
 
     const payload: ATCPayload = {
       cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
@@ -267,7 +284,7 @@ const RightSideDetail = ({
   return (
     <>
       <div className={styles["detail"]}>
-        {!selectedItem?.hasStock ? (
+        {selectedItem?.hasStock === false ? (
           <div className={styles["collection-and-outofstock"]}>
             <Label className={styles["collection-tag"]}>
               <>
@@ -281,9 +298,9 @@ const RightSideDetail = ({
         ) : null}
         <Label className={styles["title"]}>
           {appState.lang == "en"
-            ? productData &&
-              productData.length > 0 &&
-              productData[0]["Product Title"]
+            ? productDataCopy &&
+              productDataCopy.length > 0 &&
+              productDataCopy[0]["Product Title"]
             : t("pdpTitle-arabic")}
         </Label>
         <div className={styles["review-section"]}>
@@ -310,16 +327,16 @@ const RightSideDetail = ({
       {getProductPricing()}
 
       <SizeChart
-        productData={productData}
-        productSizeArray={productData}
+        productData={productDataCopy}
+        productSizeArray={productDataCopy}
         onSizeChange={onSizeChange}
         setSelectedSize={setSelectedSize}
         selectedSize={selectedSize}
       />
 
       <ColorSelection
-        productData={productData}
-        productSizeArray={productData}
+        productData={productDataCopy}
+        productSizeArray={productDataCopy}
         onColorChange={onColorChange}
         selectedSize={selectedSize}
         selectedColor={selectedColor}
@@ -378,7 +395,7 @@ const RightSideDetail = ({
         <WriteAReview
           isOpened={modalOpen}
           onClose={() => setModalOpen(false)}
-          productData={productData}
+          productData={productDataCopy}
           fetchingReviews={fetchingReviews}
           setIsRatingError={setIsRatingError}
           isRatingError={isRatingError}
