@@ -187,7 +187,7 @@ const WishListSidebar = (): JSX.Element => {
           );
       }
     } catch (err) {
-      console.log("Error!");
+      // console.log("Error!");
       setDeletingWishList(false);
     }
   };
