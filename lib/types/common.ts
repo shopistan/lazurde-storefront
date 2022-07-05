@@ -11,7 +11,7 @@ export type ErrorObject = {
   };
 };
 
-export type ImageType = {
+export interface ImageType  {
   url: string;
   altText: string;
 };

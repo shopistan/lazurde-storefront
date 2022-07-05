@@ -179,8 +179,10 @@ const BrandSideBar: FC<SidebarProps> = ({
         </div>
         <div className={styles["brand_div"]}>
           {brandArr?.length > 0 &&
-            brandArr.map((data) => {
-              return BrandContainer({ ...data });
+            brandArr.map((data, index) => {
+              return (
+                <React.Fragment key={index}>{BrandContainer({ ...data })}</React.Fragment>
+              );
             })}
         </div>
       </div>

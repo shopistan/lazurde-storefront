@@ -17,7 +17,7 @@ interface ServicesProps {
   height?: string | number;
 }
 
-type _ServicesProps = {
+type _ServiceProps = {
   iconTitle?: string | "";
   iconText?: string | "";
 };
@@ -30,17 +30,17 @@ interface CustomerServiceProps {
   title?: string | "";
 }
 
-const CustomerService = ({
+const CustomerService  = ({
   title,
   bannerImage,
   heading,
   services,
   inputIcon,
-}: CustomerServiceProps): JSX.Element => {
+}: CustomerServiceProps): JSX.Element=> {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
 
-  const _servicesProps: _ServicesProps[] = t(
+  const _servicesProps: _ServiceProps[] = t(
     "servicesProps",
     {},
     { returnObjects: true }
