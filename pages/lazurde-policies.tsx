@@ -32,7 +32,7 @@ const LazurdeHome: FC<PageProps> = ({
       headerArray?.filter((header: { params: any }) => {
         return header.params.headerId === getCurrentBrandId();
       });
-    setHeaderData(currentHeaderProps?.[0].params);
+    setHeaderData(currentHeaderProps?.[0]?.params);
   }, []);
 
   return (

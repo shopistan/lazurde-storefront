@@ -10,41 +10,29 @@
   }
 }
 
-.term-heading {
-  display: none;
-  @media (min-width: 1023px) {
-    display: block;
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 38px;
-    letter-spacing: 0em;
-    margin-inline-start: 39.5%;
-    margin-top: 88px;
-    margin-bottom: 5.5px;
-  }
-}
-
 .term-section {
-  @media (min-width: 1023px) {
+  @media (min-width: $breakPoint-desktop) {
     display: flex;
   }
 }
 
 .term-left {
+  margin-top: 150px;
   cursor: pointer;
   display: none;
   background-color: white;
-  padding-block: 45px;
-  padding-inline-start: 18px;
+  padding-block-start: 43px;
+  padding: 43px 24px 24px;
 
   &[data-opened="true"] {
     display: block;
   }
 
-  @media (min-width: 1023px) {
+  @media (min-width: $breakPoint-desktop) {
     width: 39%;
     height: fit-content;
     display: block;
+    padding-inline-start: 16px;
     margin-inline-end: 60px;
   }
 
@@ -55,17 +43,20 @@
     line-height: 19px;
     letter-spacing: 0em;
     text-align: start;
-    margin-inline-start: 19px;
-    margin-block: 11px;
+    margin: 0 16px 22px;
+  }
+  .back-block {
+    padding-top: 340px;
+
+    @media (min-width: $breakPoint-desktop) {
+      display: none;
+    }
   }
 }
 
 .term-block {
-  // @media (min-width: 1023px) {
   cursor: pointer;
   display: flex;
-  align-items: center;
-  // }
 }
 
 .term-right {
@@ -85,6 +76,13 @@
       p {
         font-size: 13px;
       }
+    }
+  }
+  .back-block {
+    padding-top: 48px;
+
+    @media (min-width: $breakPoint-desktop) {
+      display: none;
     }
   }
 }
@@ -163,22 +161,26 @@
   }
 }
 
-.back-block {
-  padding: 24px;
-  background-color: white;
-
-  @media (min-width: 1024px) {
-    display: none;
-  }
-}
-
 .term-right-container {
   &[data-opened="true"] {
     display: none;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     width: 71%;
+    margin-top: 80px;
+  }
+  .term-heading {
+    display: none;
+    @media (min-width: $breakPoint-desktop) {
+      display: block;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 38px;
+      letter-spacing: 0em;
+      margin-top: 0px;
+      margin-bottom: 32px;
+    }
   }
 }
 

@@ -46,7 +46,11 @@ const ContentBlock: FC<ContentBlockProps> = ({
         content?.name === "Financial Calendar" ||
         content?.name === "التقويم المالي" ||
         content?.name === "Stock Information" ||
-        content?.name === "معلومات المخزون" ? (
+        content?.name === "معلومات المخزون" ||
+        content?.name === "Financial Information" ||
+        content?.name === "معلومات مالية" ||
+        content?.name === "Email Subscription Center" ||
+        content?.name === "مركز الاشتراك بالبريد الإلكتروني" ? (
           appState?.lang === "en" ? (
             <iframe
               title="Scrolling Iframe"
