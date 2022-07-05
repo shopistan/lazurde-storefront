@@ -8,6 +8,7 @@ import { loginUser } from "lib/identity";
 import LoggedInlinks from "./login-links";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
+import { translateText } from "lib/utils/reviews";
 
 interface arabicDataProps {
   heading?: string;
@@ -19,6 +20,7 @@ const AccountSidebar = (): JSX.Element => {
   const { appState } = useContext(AppContext);
   const [userName, setUserName] = useState("San");
   const [isLoginUser, setIsLoginUser] = useState(false);
+  const [arabicUserName, setArabicUserName] = useState("");
 
   useEffect(() => {
     const authToken =
@@ -43,6 +45,25 @@ const AccountSidebar = (): JSX.Element => {
     {},
     { returnObjects: true }
   );
+
+  useEffect(() => {
+    if (appState?.lang === "ar") {
+      handleUserNameTranslation();
+    }
+  }, [appState?.lang]);
+
+  const handleUserNameTranslation = async () => {
+    if (userName) {
+      const res = await translateText(userName, "ar");
+      if (res.hasError === false) {
+        setArabicUserName(
+          res?.response?.data?.data?.translations[0]?.translatedText
+        );
+      } else {
+        console.log("error while translate username to arabic");
+      }
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -82,7 +103,7 @@ const AccountSidebar = (): JSX.Element => {
           </div>
         </div>
       ) : (
-        <LoggedInlinks userName={userName} />
+        <LoggedInlinks userName={userName} arabicUserName={arabicUserName} />
       )}
     </div>
   );

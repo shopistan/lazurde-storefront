@@ -49,7 +49,7 @@ export const writeReview = async (payload?: any) => {
   }
 };
 
-export const translateReviews = async (payload?: any, targetLang?: string) => {
+export const translateText = async (payload?: any, targetLang?: string) => {
   try {
     const translateReview = await Axios.post(
       `${ENDPOINTS.REVIEWS.TRANSLATE_REVIEWS}`,

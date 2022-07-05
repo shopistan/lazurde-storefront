@@ -13,7 +13,15 @@ interface detailsProps {
   label?: string;
 }
 
-const LoggedInlinks = ({ userName = "" }): JSX.Element => {
+interface LoggedInlinksProps {
+  userName?: string;
+  arabicUserName?: string;
+}
+
+const LoggedInlinks = ({
+  userName = "",
+  arabicUserName = "",
+}: LoggedInlinksProps): JSX.Element => {
   const router = useRouter();
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
@@ -32,7 +40,7 @@ const LoggedInlinks = ({ userName = "" }): JSX.Element => {
           <Label>
             {appState?.lang === "en"
               ? `Hi, ${userName}`
-              : `مرحبا, ${t("firstname")}`}
+              : `مرحبا, ${arabicUserName}`}
           </Label>
         </div>
         <div className={styles.links}>
