@@ -35,10 +35,6 @@ export const addWishList = async (authToken: any, itemID: any) => {
     return response;
   } catch (error: unknown) {
     return false
-    // console.log(
-    //   "Error while fecthing wishlist",
-    //   (error as ErrorObject)?.message
-    // );
   }
 };
 

@@ -27,7 +27,7 @@ const StarRating = ({
     >
       {[...Array(count)]?.map((_, index) => {
         return (
-          <>
+          <React.Fragment key={index}>
             {rating > index ? (
               <FilledStar
                 key={index}
@@ -47,7 +47,7 @@ const StarRating = ({
                 height={starHeight}
               />
             )}
-          </>
+          </React.Fragment>
         );
       })}
     </div>

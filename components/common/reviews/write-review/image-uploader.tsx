@@ -25,7 +25,7 @@ const ImageUploader = ({
   useEffect(() => {
     return () => {
       fileArray = [];
-      setFileUpload([{ fileArray: {} }]);
+      setFileUpload && setFileUpload([{ fileArray: {} }]);
     };
   }, []);
 
@@ -39,13 +39,13 @@ const ImageUploader = ({
       fileArray.push(URL?.createObjectURL(file));
       setFileName((prev: any) => [...prev, file]);
     });
-    setFileUpload({ fileArray });
+    setFileUpload && setFileUpload({ fileArray });
   };
 
   const deleteImage = (event: any, index: number) => {
     file?.splice(index, 1);
     fileObj?.splice(index, 1);
-    setFileUpload({ fileArray: file });
+    setFileUpload && setFileUpload({ fileArray: file });
     uploadedFiles?.splice(index, 1);
     setFileName([...uploadedFiles]);
   };
