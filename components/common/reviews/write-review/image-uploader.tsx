@@ -4,7 +4,7 @@ import Image from "next/image";
 import { CrossSmall, PlusIcon } from "components/icons";
 
 interface ImageUploaderProps {
-  setFileUpload?: Function;
+  setFileUpload?: any;
   file?: [];
   setFileName?: Function;
   uploadedFiles?: any;

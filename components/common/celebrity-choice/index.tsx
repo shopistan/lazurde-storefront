@@ -7,7 +7,7 @@ import { desktopScreenSize } from "lib/utils/common";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 
-type CelebritiesProps = {
+interface CelebritiesProps {
   celebrityImage?: ImageType | { url: ""; altText: "" };
   celebritySign?: ImageType | { url: ""; altText: "" };
 };
