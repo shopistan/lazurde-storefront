@@ -362,35 +362,38 @@ const CGIR: FC<CGIRProps> = ({
                     currentObject?.name ===
                       "مركز الاشتراك بالبريد الإلكتروني" ? (
                     appState?.lang === "en" ? (
-                      <iframe
-                        id="euroland_frame_id"
-                        className="EurolandTool"
-                        style={{
-                          background: "transparent",
-                          maxWidth: "700px",
-                          maxHeight: "none",
-                          minHeight: "0px",
-                          height:
+                      <div className={styles["subscription-iframe"]}>
+                        <iframe
+                          id="euroland_frame_id"
+                          className="EurolandTool"
+                          style={{
+                            padding: 0,
+                            background: "transparent",
+                            maxWidth: "700px",
+                            maxHeight: "none",
+                            minHeight: "0px",
+                            height:
+                              size > desktopScreenSize
+                                ? "600px"
+                                : size > 413
+                                ? "650"
+                                : "650px",
+                          }}
+                          src="https://ksatools.eurolandir.com/tools/subscriptioncentre2/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
+                          width="100%"
+                          height={
                             size > desktopScreenSize
-                              ? "600px"
+                              ? "840px"
                               : size > 413
-                              ? "650"
-                              : "650px",
-                        }}
-                        src="https://ksatools.eurolandir.com/tools/subscriptioncentre2/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
-                        width="100%"
-                        height={
-                          size > desktopScreenSize
-                            ? "840px"
-                            : size > 413
-                            ? "1000"
-                            : "1000px"
-                        }
-                        frameBorder="0"
-                        scrolling="no"
-                      >
-                        <br />
-                      </iframe>
+                              ? "1000"
+                              : "1000px"
+                          }
+                          frameBorder="0"
+                          scrolling="no"
+                        >
+                          <br />
+                        </iframe>
+                      </div>
                     ) : (
                       <iframe
                         id="euroland_frame_id"
@@ -416,6 +419,7 @@ const CGIR: FC<CGIRProps> = ({
                     appState?.lang === "en" ? (
                       <>
                         <InfoSelector
+                          className={styles["info-selector-dropdown"]}
                           setSelectedVal={setSelectedVal}
                           setSelectVal={setSelectVal}
                           currentObject={currentObject}
@@ -579,6 +583,7 @@ const CGIR: FC<CGIRProps> = ({
                     ) : (
                       <>
                         <InfoSelector
+                          className={styles["info-selector-dropdown"]}
                           setSelectedVal={setSelectedVal}
                           setSelectVal={setSelectVal}
                           currentObject={currentObject}
@@ -743,10 +748,11 @@ const CGIR: FC<CGIRProps> = ({
                       </>
                     )
                   ) : currentObject?.name === "Financial Information" ||
-                    currentObject?.name === "معلومات المخزون" ? (
+                    currentObject?.name === "معلومات مالية" ? (
                     appState?.lang === "en" ? (
                       <>
                         <InfoSelector
+                          className={styles["info-selector-dropdown"]}
                           setSelectedVal={setSelectedVal}
                           setSelectVal={setSelectVal}
                           currentObject={currentObject}
@@ -757,7 +763,6 @@ const CGIR: FC<CGIRProps> = ({
                               currentObject?.moreContent?.map((obj, index) => {
                                 const { image, imageTitle, pdfUrl, heading } =
                                   obj;
-                                console.log("checkingsObj", obj);
 
                                 return (
                                   <>
@@ -771,6 +776,12 @@ const CGIR: FC<CGIRProps> = ({
                                           href={pdfUrl}
                                           target="_blank"
                                           rel="noreferrer"
+                                          style={{
+                                            width:
+                                              size > desktopScreenSize
+                                                ? "100%"
+                                                : 150,
+                                          }}
                                         >
                                           {image?.url && (
                                             <Image
@@ -778,18 +789,19 @@ const CGIR: FC<CGIRProps> = ({
                                               src={image?.url || ""}
                                               width={
                                                 size > desktopScreenSize
-                                                  ? 213
-                                                  : 190
+                                                  ? 190
+                                                  : 150
                                               }
                                               height={
                                                 size > desktopScreenSize
-                                                  ? 276
-                                                  : 256
+                                                  ? 256
+                                                  : 195.21
                                               }
+                                              layout="responsive"
                                             />
                                           )}
                                         </a>
-                                        <span>{imageTitle || "Image"}</span>
+                                        <span>{imageTitle}</span>
                                       </div>
                                     )}
                                   </>
@@ -803,7 +815,6 @@ const CGIR: FC<CGIRProps> = ({
                               currentObject?.moreContent?.map((obj, index) => {
                                 const { image, imageTitle, pdfUrl, heading } =
                                   obj;
-                                console.log("checkingsObj", obj);
 
                                 return (
                                   <>
@@ -942,7 +953,6 @@ const CGIR: FC<CGIRProps> = ({
                               currentObject?.moreContent?.map((obj, index) => {
                                 const { image, imageTitle, pdfUrl, heading } =
                                   obj;
-                                console.log("checkingsObj", obj);
 
                                 return (
                                   <>
@@ -984,21 +994,248 @@ const CGIR: FC<CGIRProps> = ({
                         )}
                       </>
                     ) : (
-                      currentObject?.moreContent &&
-                      currentObject?.moreContent?.length > 0 &&
-                      currentObject?.moreContent?.map((obj, index) => {
-                        const { heading, text } = obj;
-                        return (
-                          <div key={index}>
-                            {heading && <span>{heading}</span>}
-                            {/* {text && <p>{text}</p>} */}
-                            <p
-                              key={Math.random()}
-                              dangerouslySetInnerHTML={{ __html: text }}
-                            ></p>
+                      <>
+                        <InfoSelector
+                          className={styles["info-selector-dropdown"]}
+                          setSelectedVal={setSelectedVal}
+                          setSelectVal={setSelectVal}
+                          currentObject={currentObject}
+                        />
+                        {selectVal === "البيانات المالية ربع السنوية" && (
+                          <div className={styles["images-wrapper"]}>
+                            {currentObject?.moreContent?.length > 0 &&
+                              currentObject?.moreContent?.map((obj, index) => {
+                                const { image, imageTitle, pdfUrl, heading } =
+                                  obj;
+
+                                return (
+                                  <>
+                                    {heading ===
+                                      "البيانات المالية ربع السنوية" && (
+                                      <div
+                                        key={index}
+                                        className={styles["image-block"]}
+                                      >
+                                        <a
+                                          href={pdfUrl}
+                                          target="_blank"
+                                          rel="noreferrer"
+                                          style={{
+                                            width:
+                                              size > desktopScreenSize
+                                                ? "100%"
+                                                : 150,
+                                          }}
+                                        >
+                                          {image?.url && (
+                                            <Image
+                                              alt=""
+                                              src={image?.url || ""}
+                                              width={
+                                                size > desktopScreenSize
+                                                  ? 190
+                                                  : 150
+                                              }
+                                              height={
+                                                size > desktopScreenSize
+                                                  ? 256
+                                                  : 195.21
+                                              }
+                                              layout="responsive"
+                                            />
+                                          )}
+                                        </a>
+                                        <span>{imageTitle}</span>
+                                      </div>
+                                    )}
+                                  </>
+                                );
+                              })}
                           </div>
-                        );
-                      })
+                        )}
+                        {selectVal === "تقرير سنوي" && (
+                          <div className={styles["images-wrapper"]}>
+                            {currentObject?.moreContent?.length > 0 &&
+                              currentObject?.moreContent?.map((obj, index) => {
+                                const { image, imageTitle, pdfUrl, heading } =
+                                  obj;
+
+                                return (
+                                  <>
+                                    {heading === "تقرير سنوي" && (
+                                      <div
+                                        key={index}
+                                        className={styles["image-block"]}
+                                      >
+                                        <a
+                                          href={pdfUrl}
+                                          target="_blank"
+                                          rel="noreferrer"
+                                        >
+                                          {image?.url && (
+                                            <Image
+                                              alt=""
+                                              src={image?.url || ""}
+                                              width={
+                                                size > desktopScreenSize
+                                                  ? 213
+                                                  : 190
+                                              }
+                                              height={
+                                                size > desktopScreenSize
+                                                  ? 276
+                                                  : 256
+                                              }
+                                            />
+                                          )}
+                                        </a>
+                                        <span>{imageTitle || "Image"}</span>
+                                      </div>
+                                    )}
+                                  </>
+                                );
+                              })}
+                          </div>
+                        )}
+                        {selectVal === "الأرقام السنوية الرئيسية" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "1200px"
+                                  : size > 413
+                                  ? "650"
+                                  : "650px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/ia/?companycode=sa-lazurde&amp;v=ad_2021&amp;lang=en-gb"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                        {selectVal === "الأرقام الفصلية الرئيسية" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "1150px"
+                                  : size > 413
+                                  ? "650"
+                                  : "650px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/ia/?companycode=sa-lazurde&amp;v=qd_2021&amp;lang=en-gb"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                        {selectVal === "البحث عن سعر السهم" && (
+                          <iframe
+                            id="euroland_frame_id"
+                            className="EurolandTool"
+                            style={{
+                              background: "transparent",
+                              maxWidth: "700px",
+                              maxHeight: "none",
+                              minHeight: "0px",
+                              height:
+                                size > desktopScreenSize
+                                  ? "700px"
+                                  : size > 413
+                                  ? "350"
+                                  : "350px",
+                            }}
+                            src="https://ksatools.eurolandir.com/tools/splookup/?companycode=sa-lazurde&amp;v=2021&amp;lang=en-gb"
+                            width="100%"
+                            height={
+                              size > desktopScreenSize
+                                ? "840px"
+                                : size > 413
+                                ? "1000"
+                                : "1000px"
+                            }
+                            frameBorder="0"
+                            scrolling="no"
+                          >
+                            <br />
+                          </iframe>
+                        )}
+                        {selectVal === "محاضر اجتماعات الجمعية العمومية" && (
+                          <div className={styles["images-wrapper"]}>
+                            {currentObject?.moreContent?.length > 0 &&
+                              currentObject?.moreContent?.map((obj, index) => {
+                                const { image, imageTitle, pdfUrl, heading } =
+                                  obj;
+
+                                return (
+                                  <>
+                                    {heading ===
+                                      "محاضر اجتماعات الجمعية العمومية" && (
+                                      <div
+                                        key={index}
+                                        className={styles["image-block"]}
+                                      >
+                                        <a
+                                          href={pdfUrl}
+                                          target="_blank"
+                                          rel="noreferrer"
+                                        >
+                                          {image?.url && (
+                                            <Image
+                                              alt=""
+                                              src={image?.url || ""}
+                                              width={
+                                                size > desktopScreenSize
+                                                  ? 213
+                                                  : 190
+                                              }
+                                              height={
+                                                size > desktopScreenSize
+                                                  ? 276
+                                                  : 256
+                                              }
+                                            />
+                                          )}
+                                        </a>
+                                        <span>{imageTitle || "Image"}</span>
+                                      </div>
+                                    )}
+                                  </>
+                                );
+                              })}
+                          </div>
+                        )}
+                      </>
                     )
                   ) : currentObject?.name === "Prospectus" ||
                     currentObject?.name === "نشرة" ? (
@@ -1016,7 +1253,6 @@ const CGIR: FC<CGIRProps> = ({
                                   height={
                                     size > desktopScreenSize ? 276 : 195.21
                                   }
-                                  // onClick={() =>}
                                 />
                               </a>
                               <span>{imageTitle || "Image"}</span>

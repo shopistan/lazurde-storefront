@@ -91,32 +91,29 @@
   @media (min-width: $breakPoint-desktop) {
     width: 100%;
     padding: 40px;
-    // padding-top: 46px;
-    // padding-inline: 47px 40px;
   }
 }
 
 .page-right-second {
+  overflow: hidden;
   background-color: white;
-  //   padding-top: 24px;
-  //   padding-inline: 24px;
   padding: 24px;
 
-  //   &:nth-child(3) {
-  //     padding-top: 0;
-  //     padding-inline: 0;
-  //   }
   @media (min-width: 1023px) {
     width: 100%;
     padding: 24px;
-    // padding-top: 46px;
-    // padding-inline: 47px 40px;
   }
 
   .images-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 24px;
+    grid-row-gap: 24px;
+
+    @media (min-width: $breakPoint-desktop) {
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-column-gap: 16px;
+    }
 
     .image-block {
       display: flex;
@@ -130,8 +127,8 @@
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
-        line-height: 215%;
-        text-align: center;
+        line-height: 16.8px;
+        text-align: start;
         color: #000000;
 
         @media (max-width: $breakPoint-mobile) {
@@ -148,8 +145,6 @@
   }
   .back-block {
     padding-top: 24px;
-    // padding-inline-end: 24px;
-    // padding-bottom: 24px;
     background-color: white;
 
     @media (min-width: $breakPoint-desktop) {
@@ -169,14 +164,11 @@
 }
 
 .more-content-block {
-  //   margin-top: 8px;
-  //   background-color: #f2f2f2;
-  //   cursor: pointer;
+  .info-selector-dropdown {
+    font-size: 14px;
+  }
 
   @media (min-width: $breakPoint-desktop) {
-    // padding-block: 40px;
-    // padding-inline: 48px;
-    // padding: 24px;
     background-color: white;
   }
 
@@ -305,4 +297,8 @@ html[dir="rtl"] {
       }
     }
   }
+}
+
+.subscription-iframe {
+  margin-top: -45px;
 }
