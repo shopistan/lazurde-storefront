@@ -12,8 +12,7 @@
 
   .cgir-heading {
     display: none;
-    @media (min-width: 1023px) {
-      display: block;
+    @media (min-width: $breakPoint-desktop) {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -21,7 +20,6 @@
       font-weight: 500;
       line-height: 120%;
       letter-spacing: 0em;
-      // margin-inline-start: 39.5%;
       margin-top: 88px;
       margin-bottom: 32px;
     }
@@ -38,8 +36,7 @@
   cursor: pointer;
   display: none;
   background-color: white;
-  padding: 32px 24px 24px 18px;
-  //   padding-inline-start: 18px;
+  padding: 32px 24px 24px 16px;
   &[data-opened="true"] {
     display: block;
   }
@@ -57,14 +54,12 @@
     line-height: 19px;
     letter-spacing: 0em;
     text-align: start;
-    margin-inline-start: 12px;
+    margin-inline-start: 16px;
     margin-block: 11px;
   }
 
   .back-block {
     padding-top: 180px;
-    // padding-inline-end: 6px;
-    // padding-bottom: 24px;
     background-color: white;
 
     @media (min-width: $breakPoint-desktop) {
@@ -222,7 +217,7 @@
   background-color: #922840;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   border: none;
   border-radius: 100px;
   font-size: 14px;
@@ -240,15 +235,13 @@
 }
 
 .cgir-right-container {
-  // display: none;
   &[data-opened="true"] {
     display: none;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: $breakPoint-desktop) {
     width: 650px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
   }
 }
 
