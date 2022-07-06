@@ -1,27 +1,22 @@
 import React, { FC, useState, useContext } from "react";
 import { Formik } from "formik";
 import Input from "components/common/ui/Input";
+import { ImageType } from "lib/types/common";
 import styles from "./style.module.scss";
 import useTranslation from "next-translate/useTranslation";
-import { desktopScreenSize } from "lib/utils/common";
 import { AppContext } from "lib/context";
 import Button from "components/common/ui/button/index";
-import useWindowSize from "lib/utils/useWindowSize";
 import Image from "next/image";
 import * as Yup from "yup";
 
 type NewsletterSignupTypes = {
-  backgroundImage: any;
+  backgroundImage: ImageType;
   bannerBodyText: string;
   bannerText: string;
   heading?: string;
   upperText: string;
   lowerText: string;
 };
-
-// interface NewsletterSignupProps {
-//   newsletterArray: NewsletterSignupTypes[];
-// }
 
 const NewsletterSignup: FC<NewsletterSignupTypes> = ({
   backgroundImage,
@@ -32,7 +27,6 @@ const NewsletterSignup: FC<NewsletterSignupTypes> = ({
   lowerText,
 }): JSX.Element => {
   const { t } = useTranslation("common");
-  const [width] = useWindowSize();
   const { appState } = useContext(AppContext);
   const mobileRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -70,28 +64,35 @@ const NewsletterSignup: FC<NewsletterSignupTypes> = ({
       <div className={styles["hero-banner-wrapper"]}>
         <div className={styles["hero-banner-container"]}>
           <Image
-            src={backgroundImage || "/screenshot-banner.png"}
+            src={backgroundImage?.url || "/screenshot-banner.png"}
             layout="fill"
-            objectFit="cover"
+            // objectFit="cover"
             quality={100}
             className={`${styles["bg-image"]}`}
             alt=""
           />
           <div className={styles["banner-text-section"]}>
             <h3 className={styles["banner-text"]} data-testid="banner-text">
-              {appState?.lang == "en" ? bannerText || "" : t("bannerText")}
-            </h3>
-            <h5 className={styles["sample-text"]} data-testid="bannerBodyText">
               {appState?.lang == "en"
-                ? bannerBodyText || ""
-                : t("bannerBodyText")}
-            </h5>
+                ? bannerText || "Newsletter Signup"
+                : t("bannerText")}
+            </h3>
+            {bannerBodyText && (
+              <h5
+                className={styles["sample-text"]}
+                data-testid="bannerBodyText"
+              >
+                {appState?.lang == "en"
+                  ? bannerBodyText || ""
+                  : t("bannerBodyText")}
+              </h5>
+            )}
           </div>
         </div>
       </div>
       <div className={styles["main-wrapper"]}>
         <div className={styles["heading-wrapper"]}>
-          <p>{appState?.lang == "en" ? heading || "" : t("heading")}</p>
+          <h2>{appState?.lang == "en" ? heading || "" : t("heading")}</h2>
         </div>
 
         <div className={styles["text-wrapper"]}>
@@ -113,23 +114,9 @@ const NewsletterSignup: FC<NewsletterSignupTypes> = ({
               setSubmitting(false);
             }}
           >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-            }: // handleSubmit,
-            // isSubmitting,
-            any) => (
+            {({ values, errors, touched, handleChange, handleBlur }: any) => (
               <>
-                <div
-                  className={
-                    width > desktopScreenSize
-                      ? styles["div-two-columns"]
-                      : styles["div-gap"]
-                  }
-                >
+                <div className={styles["div-two-columns"]}>
                   <Input
                     label={"First Name"}
                     name={"firstName"}
@@ -217,9 +204,11 @@ const NewsletterSignup: FC<NewsletterSignupTypes> = ({
             )}
           </Formik>
         </div>
-        <div className={styles["text-wrapper"]}>
-          <p>{appState?.lang == "en" ? lowerText || "" : t("lowerText")} </p>
-        </div>
+        {lowerText && (
+          <div className={styles["text-wrapper"]}>
+            <p>{appState?.lang == "en" ? lowerText || "" : t("lowerText")} </p>
+          </div>
+        )}
       </div>
     </>
   );

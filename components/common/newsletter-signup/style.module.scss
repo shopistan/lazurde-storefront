@@ -3,8 +3,12 @@
 .hero-banner-wrapper {
   width: 100%;
 
+  @media (max-width: $breakPoint-mobile) {
+    padding: 0;
+  }
+
   .hero-banner-container {
-    height: 454px;
+    height: 308px;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -13,68 +17,106 @@
     padding-block-start: 24px;
     background: linear-gradient(to bottom right, gray, white);
 
-    .banner-text-section {
-      width: 98%;
-      .banner-text {
-        font-size: 13px;
-        font-weight: 400;
-        line-height: 16px;
-        letter-spacing: 0em;
-        color: $black-color;
-        text-align: start;
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-inline-end: 145px;
-        z-index: 99;
-      }
-      .sample-text {
-        width: 190px;
-        font-size: 15px;
-        font-weight: 500;
-        line-height: 18px;
-        letter-spacing: 0em;
-        margin-top: 0;
-        margin-bottom: 24px;
-        color: black;
-        @media (min-width: $breakPoint-desktop) {
-          width: 330px;
-          font-size: 24px;
-          line-height: 29px;
-          margin-bottom: 32px;
-          color: black;
-          z-index: 99;
-        }
-      }
+    @media (max-width: $breakPoint-mobile) {
+      padding: 0;
+      height: 170px;
     }
 
-    @media (min-width: $breakPoint-desktop) {
-      padding: 76px 50px 50px 80px;
-      height: 700px;
+    .banner-text-section {
+      z-index: 1;
+      margin: auto;
+
+      .banner-text {
+        text-align: center;
+        font-weight: 500;
+        font-size: 64px;
+        line-height: 120%;
+        color: #ffffff;
+        margin: 8px auto;
+
+        @media (max-width: $breakPoint-mobile) {
+          font-size: 36px;
+          line-height: 120%;
+          text-align: center;
+          color: #ffffff;
+        }
+      }
+      .sample-text {
+        font-size: 18px;
+        line-height: 120%;
+        color: #ffffff;
+        margin: 0 auto;
+
+        @media (max-width: $breakPoint-mobile) {
+          font-size: 16px;
+          line-height: 120%;
+          text-align: center;
+          width: 186px;
+          font-family: "Roboto";
+          font-style: normal;
+          font-weight: 500;
+        }
+      }
     }
   }
 }
 
 .main-wrapper {
   padding-top: 80px;
-  width: 577px;
+  width: 40%;
+
+  @media (max-width: $breakPoint-mobile) {
+    padding-top: 40px;
+    width: 100%;
+  }
 
   .heading-wrapper {
-    font-size: 32px;
-    line-height: 120%;
     font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
     text-align: center;
     margin-bottom: 40px;
     color: black;
+
+    h2 {
+      font-size: 32px;
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: $breakPoint-mobile) {
+      margin-bottom: 0;
+
+      h2 {
+        font-size: 24px;
+        margin-top: 0;
+        margin-bottom: 24px;
+      }
+    }
   }
 
   .text-wrapper {
     font-size: 15px;
     line-height: 120%;
     text-align: center;
+
+    p {
+      margin-bottom: 0;
+
+      @media (max-width: $breakPoint-mobile) {
+        margin-top: 0;
+        font-size: 14px;
+      }
+    }
   }
 
   .form-wrapper {
     margin-top: 40px;
+
+    @media (max-width: $breakPoint-mobile) {
+      margin-top: 24px;
+    }
 
     .address-input {
       width: 100%;
