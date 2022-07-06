@@ -15,7 +15,7 @@ import OrderHistory from "../order-history";
 import { desktopScreenSize } from "lib/utils/common";
 import UserReviews from "./account-reviews";
 import AddressBook from "./account-addresses";
-import MyWishList from "../wishlist/my-wish-list/index"
+import MyWishList from "../wishlist/my-wish-list/index";
 
 interface AccountInformationProps {
   title?: string | "";
@@ -56,17 +56,19 @@ const AccountInformation: FC<AccountInformationProps> = ({
   const { t } = useTranslation("common");
   const [width] = useWindowSize();
   const router = useRouter();
-  const { appState } = useContext(AppContext);
-  const activeComp =
-    typeof window !== "undefined" && window.localStorage.getItem("active");
+  const { appState, activeAccountPageTab } = useContext(AppContext);
   const [activeComponent, setActiveComponent] = useState(
-    activeComp || "Account Overview"
+    activeAccountPageTab || "Account Overview"
   );
   const [renderCom, setRenderCom] = useState(false);
 
   useEffect(() => {
     setRenderCom(true);
   }, []);
+
+  useEffect(() => {
+    setActiveComponent(activeAccountPageTab)
+  }, [activeAccountPageTab]);
 
   return (
     <>
@@ -104,8 +106,10 @@ const AccountInformation: FC<AccountInformationProps> = ({
               {activeComponent == "My Orders" && <OrderDetails />}
               {activeComponent == "My Reviews" && <UserReviews />}
               {activeComponent == "Address Book" && <AddressBook />}
-              {activeComponent == "My Wish List" && <MyWishList/>}
-              {activeComponent == "Newsletter Subscriptions" && <NewsSubscriptions/>}
+              {activeComponent == "My Wish List" && <MyWishList />}
+              {activeComponent == "Newsletter Subscriptions" && (
+                <NewsSubscriptions />
+              )}
             </div>
           </div>
         </div>

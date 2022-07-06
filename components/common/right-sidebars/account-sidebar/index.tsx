@@ -15,7 +15,11 @@ interface arabicDataProps {
   subHeading?: string;
 }
 
-const AccountSidebar = (): JSX.Element => {
+interface AccountSidebarProps {
+  closeSideBar?: Function;
+}
+
+const AccountSidebar = ({ closeSideBar }: AccountSidebarProps): JSX.Element => {
   const { t } = useTranslation("common");
   const { appState } = useContext(AppContext);
   const [userName, setUserName] = useState("San");
@@ -71,12 +75,12 @@ const AccountSidebar = (): JSX.Element => {
         <div className={styles.content}>
           <div>
             <Login width={40} height={40} fill="#000" />
-            <Heading className={styles.heading} element="h1">
+            <Heading testId="title" className={styles.heading} element="h1">
               {appState?.lang === "en"
                 ? "Sign In or Create an Account"
                 : arabicData?.heading}
             </Heading>
-            <Label className={styles.label}>
+            <Label testId="subheading" className={styles.label}>
               {appState?.lang === "en"
                 ? `With an account you can check out faster, view your online order
               history and access your shopping bag or saved items from any
@@ -103,7 +107,11 @@ const AccountSidebar = (): JSX.Element => {
           </div>
         </div>
       ) : (
-        <LoggedInlinks userName={userName} arabicUserName={arabicUserName} />
+        <LoggedInlinks
+          userName={userName}
+          arabicUserName={arabicUserName}
+          closeSideBar={closeSideBar}
+        />
       )}
     </div>
   );
