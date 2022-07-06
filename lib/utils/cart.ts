@@ -41,10 +41,10 @@ export const getCartByCartId = async (cartId: string) => {
     );
     return response;
   } catch (error: unknown) {
-    console.log(
-      "Error while fecthing wishlist",
-      (error as ErrorObject)?.message
-    );
+    // console.log(
+    //   "Error while fecthing wishlist",
+    //   (error as ErrorObject)?.message
+    // );
   }
 };
 
@@ -63,10 +63,10 @@ export const updateItemOfCart = async (cartId: string, payload: {}) => {
     );
     return response;
   } catch (error: unknown) {
-    console.log(
-      "Error while fecthing wishlist",
-      (error as ErrorObject)?.message
-    );
+    // console.log(
+    //   "Error while fecthing wishlist",
+    //   (error as ErrorObject)?.message
+    // );
   }
 };
 
@@ -90,9 +90,9 @@ export const removeItemFromCart = async (
     );
     return response;
   } catch (error: unknown) {
-    console.log(
-      "Error while fecthing wishlist",
-      (error as ErrorObject)?.message
-    );
+    // console.log(
+    //   "Error while fecthing wishlist",
+    //   (error as ErrorObject)?.message
+    // );
   }
 };

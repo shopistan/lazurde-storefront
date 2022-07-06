@@ -16,11 +16,13 @@ interface detailsProps {
 interface LoggedInlinksProps {
   userName?: string;
   arabicUserName?: string;
+  closeSideBar?: Function;
 }
 
 const LoggedInlinks = ({
   userName = "",
   arabicUserName = "",
+  closeSideBar,
 }: LoggedInlinksProps): JSX.Element => {
   const router = useRouter();
   const { t } = useTranslation("common");
@@ -37,7 +39,7 @@ const LoggedInlinks = ({
       <div className={styles.links_wrapper}>
         <div className={styles.name}>
           <Login width={40} height={40} fill="#000" />
-          <Label>
+          <Label testId="username">
             {appState?.lang === "en"
               ? `Hi, ${userName}`
               : `مرحبا, ${arabicUserName}`}
@@ -47,14 +49,17 @@ const LoggedInlinks = ({
           {accountSideBarLinks?.map((link, index) => {
             const { label, value } = link;
             return (
-              <div className={styles.link_wrapper} key={index}>
+              <div
+                className={styles.link_wrapper}
+                key={index}
+                onClick={() => {
+                  window.localStorage.setItem("active", value);
+                  router?.push("/account");
+                  closeSideBar && closeSideBar();
+                }}
+              >
                 <div className={styles.link_btn}>
-                  <button
-                    onClick={() => {
-                      window.localStorage.setItem("active", value);
-                      router?.push("/account");
-                    }}
-                  >
+                  <button>
                     {appState?.lang === "en"
                       ? label
                       : Array.isArray(arabicDataLinks) &&
