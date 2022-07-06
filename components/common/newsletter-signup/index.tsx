@@ -19,12 +19,17 @@ type NewsletterSignupTypes = {
   lowerText: string;
 };
 
-interface NewsletterSignupProps {
-  newsletterArray: NewsletterSignupTypes[];
-}
+// interface NewsletterSignupProps {
+//   newsletterArray: NewsletterSignupTypes[];
+// }
 
-const NewsletterSignup: FC<NewsletterSignupProps> = ({
-  newsletterArray,
+const NewsletterSignup: FC<NewsletterSignupTypes> = ({
+  backgroundImage,
+  bannerBodyText,
+  bannerText,
+  heading,
+  upperText,
+  lowerText,
 }): JSX.Element => {
   const { t } = useTranslation("common");
   const [width] = useWindowSize();
@@ -63,199 +68,158 @@ const NewsletterSignup: FC<NewsletterSignupProps> = ({
   return (
     <>
       <div className={styles["hero-banner-wrapper"]}>
-        {newsletterArray &&
-          newsletterArray?.map((object: any, index: any) => {
-            const {
-              backgroundImage,
-              bannerBodyText,
-              bannerText,
-              heading,
-              upperText,
-              lowerText,
-            } = object;
-            return (
-              <div className={styles["hero-banner-container"]} key={index}>
-                <Image
-                  src={backgroundImage || "/screenshot-banner.png"}
-                  layout="fill"
-                  objectFit="cover"
-                  quality={100}
-                  className={`${styles["bg-image"]}`}
-                  alt=""
-                />
-                <div className={styles["banner-text-section"]}>
-                  <h3
-                    className={styles["banner-text"]}
-                    data-testid="banner-text"
-                  >
-                    {appState?.lang == "en"
-                      ? bannerText || ""
-                      : t("bannerText")}
-                  </h3>
-                  <h5
-                    className={styles["sample-text"]}
-                    data-testid="bannerBodyText"
-                  >
-                    {appState?.lang == "en"
-                      ? bannerBodyText || ""
-                      : t("bannerBodyText")}
-                  </h5>
+        <div className={styles["hero-banner-container"]}>
+          <Image
+            src={backgroundImage || "/screenshot-banner.png"}
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+            className={`${styles["bg-image"]}`}
+            alt=""
+          />
+          <div className={styles["banner-text-section"]}>
+            <h3 className={styles["banner-text"]} data-testid="banner-text">
+              {appState?.lang == "en" ? bannerText || "" : t("bannerText")}
+            </h3>
+            <h5 className={styles["sample-text"]} data-testid="bannerBodyText">
+              {appState?.lang == "en"
+                ? bannerBodyText || ""
+                : t("bannerBodyText")}
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div className={styles["main-wrapper"]}>
+        <div className={styles["heading-wrapper"]}>
+          <p>{appState?.lang == "en" ? heading || "" : t("heading")}</p>
+        </div>
+
+        <div className={styles["text-wrapper"]}>
+          <p>{appState?.lang == "en" ? upperText || "" : t("upperText")} </p>
+        </div>
+
+        <div className={styles["form-wrapper"]}>
+          <Formik
+            initialValues={{
+              firstName: "",
+              lastName: "",
+              email: "",
+              mobileNumber: "",
+              birthDate: "",
+            }}
+            validationSchema={SignupSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              renderValues(values);
+              setSubmitting(false);
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+            }: // handleSubmit,
+            // isSubmitting,
+            any) => (
+              <>
+                <div
+                  className={
+                    width > desktopScreenSize
+                      ? styles["div-two-columns"]
+                      : styles["div-gap"]
+                  }
+                >
+                  <Input
+                    label={"First Name"}
+                    name={"firstName"}
+                    value={values.firstName}
+                    className={styles["address-input"]}
+                    error={
+                      errors.firstName && touched.firstName && errors.firstName
+                    }
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+
+                  <Input
+                    label={"Last Name"}
+                    name={"lastName"}
+                    value={values.lastName}
+                    className={styles["address-input"]}
+                    error={
+                      errors.lastName && touched.lastName && errors.lastName
+                    }
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
                 </div>
 
-                <div className={styles["main-wrapper"]}>
-                  <div className={styles["heading-wrapper"]}>
-                    <p>
-                      {appState?.lang == "en" ? heading || "" : t("heading")} ||
-                      Newsletter Signup
-                    </p>
-                  </div>
-
-                  <div className={styles["text-wrapper"]}>
-                    <p>
-                      {appState?.lang == "en"
-                        ? upperText || ""
-                        : t("upperText")}{" "}
-                      || Newsletter Text
-                    </p>
-                  </div>
-
-                  <div className={styles["form-wrapper"]}>
-                    <Formik
-                      initialValues={{
-                        firstName: "",
-                        lastName: "",
-                        email: "",
-                        mobileNumber: "",
-                        birthDate: "",
-                      }}
-                      validationSchema={SignupSchema}
-                      onSubmit={(values, { setSubmitting }) => {
-                        renderValues(values);
-                        setSubmitting(false);
-                      }}
-                    >
-                      {({
-                        values,
-                        errors,
-                        touched,
-                        handleChange,
-                        handleBlur,
-                      }: // handleSubmit,
-                      // isSubmitting,
-                      any) => (
-                        <>
-                          <div
-                            className={
-                              width > desktopScreenSize
-                                ? styles["div-two-columns"]
-                                : styles["div-gap"]
-                            }
-                          >
-                            <Input
-                              label={"First Name"}
-                              name={"firstName"}
-                              value={values.firstName}
-                              className={styles["address-input"]}
-                              error={
-                                errors.firstName &&
-                                touched.firstName &&
-                                errors.firstName
-                              }
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                            />
-
-                            <Input
-                              label={"Last Name"}
-                              name={"lastName"}
-                              value={values.lastName}
-                              className={styles["address-input"]}
-                              error={
-                                errors.lastName &&
-                                touched.lastName &&
-                                errors.lastName
-                              }
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                            />
-                          </div>
-
-                          <div className={styles["field-input"]}>
-                            <div>
-                              <Input
-                                label={"Email"}
-                                name={"email"}
-                                value={values.email}
-                                className={styles["address-input"]}
-                                error={
-                                  errors.email && touched.email && errors.email
-                                }
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                              />
-                            </div>
-                          </div>
-                          <div className={styles["field-input"]}>
-                            <div>
-                              <Input
-                                label={"Mobile Number"}
-                                name={"mobileNumber"}
-                                value={values.mobileNumber}
-                                className={styles["address-input"]}
-                                error={
-                                  errors.mobileNumber &&
-                                  touched.mobileNumber &&
-                                  errors.mobileNumber
-                                }
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                              />
-                            </div>
-                          </div>
-                          <div className={styles["field-input"]}>
-                            <div>
-                              <Input
-                                label={"Date of Birth"}
-                                name={"birthDate"}
-                                type={"date"}
-                                value={values.birthDate}
-                                className={styles["address-input"]}
-                                error={
-                                  errors.birthDate &&
-                                  touched.birthDate &&
-                                  errors.birthDate
-                                }
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                              />
-                            </div>
-                          </div>
-                          <div className={styles["signup-btn"]}>
-                            <Button
-                              type="submit"
-                              buttonSize={"lr"}
-                              buttonText={t("Sign Up")}
-                              onClick={() => {
-                                renderValues(values);
-                              }}
-                            ></Button>
-                          </div>
-                        </>
-                      )}
-                    </Formik>
-                  </div>
-                  <div className={styles["text-wrapper"]}>
-                    <p>
-                      {appState?.lang == "en"
-                        ? lowerText || ""
-                        : t("lowerText")}{" "}
-                      || Newsletter Text
-                    </p>
+                <div className={styles["field-input"]}>
+                  <div>
+                    <Input
+                      label={"Email"}
+                      name={"email"}
+                      value={values.email}
+                      className={styles["address-input"]}
+                      error={errors.email && touched.email && errors.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
                   </div>
                 </div>
-              </div>
-            );
-          })}
+                <div className={styles["field-input"]}>
+                  <div>
+                    <Input
+                      label={"Mobile Number"}
+                      name={"mobileNumber"}
+                      value={values.mobileNumber}
+                      className={styles["address-input"]}
+                      error={
+                        errors.mobileNumber &&
+                        touched.mobileNumber &&
+                        errors.mobileNumber
+                      }
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                  </div>
+                </div>
+                <div className={styles["field-input"]}>
+                  <div>
+                    <Input
+                      label={"Date of Birth"}
+                      name={"birthDate"}
+                      type={"date"}
+                      value={values.birthDate}
+                      className={styles["address-input"]}
+                      error={
+                        errors.birthDate &&
+                        touched.birthDate &&
+                        errors.birthDate
+                      }
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                  </div>
+                </div>
+                <div className={styles["signup-btn"]}>
+                  <Button
+                    type="submit"
+                    buttonSize={"lr"}
+                    buttonText={t("Sign Up")}
+                    onClick={() => {
+                      renderValues(values);
+                    }}
+                  ></Button>
+                </div>
+              </>
+            )}
+          </Formik>
+        </div>
+        <div className={styles["text-wrapper"]}>
+          <p>{appState?.lang == "en" ? lowerText || "" : t("lowerText")} </p>
+        </div>
       </div>
     </>
   );
