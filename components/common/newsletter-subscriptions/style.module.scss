@@ -12,9 +12,9 @@
     background: #ffffff;
     margin-bottom: 8px;
     @media (max-width: $breakPoint-desktop) {
-        margin-bottom: 0px;
-        padding: 24px;
-      }
+      margin-bottom: 0px;
+      padding: 24px;
+    }
     .account-newsletter-heading {
       font-family: "Roboto";
       font-style: normal;
@@ -30,9 +30,9 @@
     padding: 40px;
     background: #ffffff;
     @media (max-width: $breakPoint-desktop) {
-        padding: 24px;
-        padding-top: 0px;
-      }
+      padding: 24px;
+      padding-top: 0px;
+    }
     .form {
       display: flex;
       flex-direction: column;
@@ -41,28 +41,22 @@
       .Save-button {
         display: flex;
         justify-content: right;
-        input {
-          width: 200px;
-          height: 51px;
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          padding: 16px;
-          padding-left: 82.5px;
-          padding-right: 82.5px;
-          background: #000000;
-          border-radius: 100px;
-          font-family: "Roboto";
-          font-style: normal;
-          font-weight: 600;
-          font-size: 16px;
-          line-height: 120%;
-          display: flex;
-          text-align: center;
-          text-transform: capitalize;
-          color: #ffffff;
-        }
+        width: 200px;
+        height: 51px;
+        flex-direction: row;
+        align-items: center;
+        padding: 16px;
+        padding-left: 82.5px;
+        padding-right: 82.5px;
+        background: #000000;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 120%;
+        display: flex;
+        text-align: center;
+        text-transform: capitalize;
+        color: #ffffff;
       }
     }
   }
@@ -99,7 +93,7 @@
       justify-content: center;
     }
     input[type="checkbox"] {
-        accent-color: black;
+      accent-color: black;
     }
   }
 }
