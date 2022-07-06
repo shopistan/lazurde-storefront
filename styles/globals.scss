@@ -118,6 +118,10 @@ ul {
   justify-content: center;
   flex-direction: column;
   padding: 0 81px 80px;
+
+  @media (max-width: $breakPoint-mobile) {
+    padding: 0 17px 24px;
+  }
 }
 
 .button {
