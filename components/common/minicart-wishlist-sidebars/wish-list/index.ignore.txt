@@ -1,8 +1,7 @@
-import { render } from "@testing-library/react";
+import { render, act } from "@testing-library/react";
 import React from "react";
 import WishListSidebar from "./index";
 import ContextProvider, { AppContext } from "lib/context";
-import { act } from "react-dom/test-utils";
 
 const renderComponent = () => {
   act(() => {

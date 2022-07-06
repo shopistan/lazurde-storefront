@@ -1,8 +1,7 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, act } from "@testing-library/react";
 import React from "react";
 import UserNavBar from "./index";
 import ContextProvider, { AppContext } from "lib/context";
-import { act } from "react-dom/test-utils";
 
 describe("", () => {
   const object = {

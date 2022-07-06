@@ -1,8 +1,7 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import React from "react";
 import SiteNavBar from "./index";
 import ContextProvider, { AppContext } from "lib/context";
-import { act } from "react-dom/test-utils";
 
 describe("", () => {
   const siteUrl = "/modal.png";
