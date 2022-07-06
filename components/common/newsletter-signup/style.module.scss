@@ -1,8 +1,9 @@
 @import "/styles/variables.scss";
 
 .hero-banner-wrapper {
+  width: 100%;
+
   .hero-banner-container {
-    width: 100%;
     height: 454px;
     position: relative;
     display: flex;
@@ -12,74 +13,91 @@
     padding-block-start: 24px;
     background: linear-gradient(to bottom right, gray, white);
 
-    &.block-divison {
+    .banner-text-section {
       width: 98%;
-      margin-left: auto;
-      margin-right: auto;
-      &:nth-child(1) {
-        margin-bottom: 8px;
+      .banner-text {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 16px;
+        letter-spacing: 0em;
+        color: $black-color;
+        text-align: start;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-inline-end: 145px;
+        z-index: 99;
+      }
+      .sample-text {
+        width: 190px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0em;
+        margin-top: 0;
+        margin-bottom: 24px;
+        color: black;
+        @media (min-width: $breakPoint-desktop) {
+          width: 330px;
+          font-size: 24px;
+          line-height: 29px;
+          margin-bottom: 32px;
+          color: black;
+          z-index: 99;
+        }
       }
     }
 
     @media (min-width: $breakPoint-desktop) {
       padding: 76px 50px 50px 80px;
       height: 700px;
+    }
+  }
+}
 
-      &.block-divison {
-        width: 49.5%;
-        margin-bottom: 0;
+.main-wrapper {
+  padding-top: 80px;
+  width: 577px;
 
-        &:nth-child(1) {
-          margin-bottom: 0px;
-        }
-      }
+  .heading-wrapper {
+    font-size: 32px;
+    line-height: 120%;
+    font-family: "Roboto";
+    text-align: center;
+    margin-bottom: 40px;
+    color: black;
+  }
+
+  .text-wrapper {
+    font-size: 15px;
+    line-height: 120%;
+    text-align: center;
+  }
+
+  .form-wrapper {
+    margin-top: 40px;
+
+    .address-input {
+      width: 100%;
+      margin-top: 4px;
+    }
+    .field-input {
+      width: 100%;
+      margin-top: 4px;
+      margin-bottom: 24px;
     }
 
-    .main-wrapper {
-      padding-top: 80px;
-      width: 577px;
+    .div-two-columns {
+      display: flex;
+      column-gap: 16px;
+      margin-bottom: 24px;
+    }
 
-      .heading-wrapper {
-        font-size: 32px;
-        line-height: 120%;
-        font-family: "Roboto";
-        text-align: center;
-        margin-bottom: 40px;
-      }
-
-      .text-wrapper {
-        font-size: 15px;
-        line-height: 120%;
-        text-align: center;
-      }
-
-      .form-wrapper {
-        margin-top: 40px;
-
-        .address-input {
-          width: 100%;
-          margin-top: 4px;
-        }
-        .field-input {
-          width: 100%;
-          margin-top: 4px;
-          margin-bottom: 24px;
-        }
-
-        .div-two-columns {
-          display: flex;
-          column-gap: 16px;
-          margin-bottom: 24px;
-        }
-
-        .signup-btn {
-          width: 100%;
-          text-align: center;
-          Button {
-            margin-top: 16px;
-            margin-bottom: 24px;
-          }
-        }
+    .signup-btn {
+      width: 100%;
+      text-align: center;
+      Button {
+        margin-top: 16px;
+        margin-bottom: 24px;
       }
     }
   }
