@@ -1,8 +1,7 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import FooterIcons from "./index";
 import { socialIconSize } from "lib/mock-data/data";
-import { act } from "react-dom/test-utils";
 
 const testingData = [
   {
