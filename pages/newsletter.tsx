@@ -45,7 +45,7 @@ const LazurdeHome: FC<PageProps> = ({
       </Head>
       <Header {...headerData} brandSidebarProps={brandSidebarProps}></Header>
       <AppContentWrapper>
-        <div className={"component-container"}>
+        <div className={"component-container-newsletter "}>
           {pageComponents.map((component: XMComponent, index) => {
             const Component = componentsById[component.id];
             if (Component) {

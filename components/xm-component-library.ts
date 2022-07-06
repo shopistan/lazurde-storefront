@@ -1,3 +1,4 @@
+import NewsletterSignup from "./common/newsletter-signup";
 import LazurdeHeroBanner from "./common/hero-banner";
 import Header from "./common/header";
 import Footer from "./common/footer";
@@ -21,6 +22,7 @@ import ExponeaHomepageRecommendationsTrending from "components/common/exponea-ho
 import CGIR from "components/common/corporate-governance-and-investor-relations";
 
 export const componentsById: any = {
+  NewsletterSignup,
   LazurdeHeroBanner,
   BrandCards,
   BambuserPopup,
