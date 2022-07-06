@@ -28,6 +28,9 @@ const ContextProvider: FC = ({ children }) => {
     langSelector: false,
   });
 
+  const activeAccountPageTab =
+    typeof window !== "undefined" && window.localStorage.getItem("active");
+
   const saveAppState = ({
     lang,
     region,
@@ -80,6 +83,7 @@ const ContextProvider: FC = ({ children }) => {
         setPriceListId,
         allWishListProducts,
         setAllWishListProducts,
+        activeAccountPageTab,
       }}
     >
       {children}
