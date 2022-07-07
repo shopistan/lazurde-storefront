@@ -67,7 +67,8 @@ module.exports = {
     '!components/common/bambuser-card-slider/index.tsx',
     '!components/common/product-description/image-section/**/*.{js,jsx,tsx,ts}',
     '!components/common/product-description/index.{js,jsx,tsx,ts}',
-    '!components/common/product-description/right-side-detail/index.{js,jsx,tsx,ts}'
+    '!components/common/product-description/right-side-detail/index.{js,jsx,tsx,ts}',
+    '!components/common/account-information/account-reviews/product-without-reviews.tsx'
   ],
   setupFiles: ['./setup.js']
 }

@@ -1315,12 +1315,11 @@ const CGIR: FC<CGIRProps> = ({
       {currentObject && currentObject?.name === "Fact Sheet" && (
         <>
           <Script
-            id={Math?.random()?.toString()}
             type="text/javascript"
             src="http://tools.euroland.com/tools/common/eurolandiframeautoheight/eurolandtoolsintegrationobject.js"
           ></Script>
           <Script
-            id={Math?.random()?.toString()}
+            id={"euroland_frame_id_fact_sheet"}
             strategy="lazyOnload"
             type="text/javascript"
           >
