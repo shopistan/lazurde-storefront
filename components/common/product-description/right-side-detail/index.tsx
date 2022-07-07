@@ -43,19 +43,19 @@ interface RightSideDetailProps {
   fetchingReviews?: Function;
   setIsRatingError?: Function;
   isRatingError?: string;
-  priceListId?: number;
+  priceListId?: string;
   setIsloading?: Function;
 }
 
 const RightSideDetail = ({
   productSizeArray = [],
   totalRating = 0,
-  productData = {},
+  productData = [],
   fetchingReviews = () => {},
-  setIsRatingError,
-  isRatingError,
-  priceListId,
-  setIsloading,
+  setIsRatingError = () => {},
+  isRatingError = "",
+  priceListId = "100000",
+  setIsloading = () => {},
 }: RightSideDetailProps): JSX.Element => {
   const productDataCopy = useRef(productData).current;
   const allProductPrices = useRef([]);
@@ -74,7 +74,6 @@ const RightSideDetail = ({
     discount: string | number;
     finalPrice: number | string;
   }>();
-  // const [allProductPrices, setAllProductPrices] = useState([]);
   const { t } = useTranslation("common");
 
   useEffect(() => {
@@ -86,9 +85,9 @@ const RightSideDetail = ({
   const getPrice = async () => {
     if (!productDataCopy && !productDataCopy[0]?.itemId) return;
     const itemIdArray: number[] = [];
-    productDataCopy.length > 0 &&
+    productDataCopy?.length > 0 &&
       productDataCopy?.map((item: { itemId: number }) => {
-        itemIdArray.push(item.itemId);
+        itemIdArray?.push(item.itemId);
       });
 
     if (itemIdArray[0] === undefined) return;
@@ -136,7 +135,7 @@ const RightSideDetail = ({
     getSelectedPrice(item || productDataCopy[0]);
     await getProductInventory(item || productDataCopy[0]);
     setSelectedItem(item || productDataCopy[0]);
-    for (let index = 0; index < productDataCopy.length; index++) {
+    for (let index = 0; index < productDataCopy?.length; index++) {
       if (index === 0) continue;
       if (productDataCopy[index]?.hasOwnProperty("hasStock")) continue;
       const remainigItem = productDataCopy[index];
@@ -153,10 +152,10 @@ const RightSideDetail = ({
       await getPrice();
     }
 
-    if (selectedProduct.length < 1) return;
+    if (selectedProduct?.length < 1) return;
 
     const price = allProductPrices?.current?.find(
-      (item) => item.itemId === selectedProduct.itemId
+      (item) => item?.itemId === selectedProduct?.itemId
     );
 
     if (!price) return;
@@ -268,7 +267,7 @@ const RightSideDetail = ({
     };
     const response = await addProductToCart(payload);
     if (response?.hasError) {
-      alert("error while adding product");
+      // alert("error while adding product");
     } else {
       router?.push("/cart");
     }
@@ -300,7 +299,7 @@ const RightSideDetail = ({
         <Label className={styles["title"]}>
           {appState.lang == "en"
             ? productDataCopy &&
-              productDataCopy.length > 0 &&
+              productDataCopy?.length > 0 &&
               productDataCopy[0]["Product Title"]
             : t("pdpTitle-arabic")}
         </Label>

@@ -84,6 +84,7 @@ const ColorSelection = ({
                     }`}
                   >
                     <div
+                      role={"closeButton"}
                       onClick={() => {
                         setActiveColor(index);
                         setSelectedColor({

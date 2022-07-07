@@ -69,7 +69,7 @@ const QuantitySection = ({
   return (
     <>
       <div className={styles["div-quantity-counter"]}>
-        <button
+        <div
           onClick={() => {
             if (quantityCounter > 1) {
               setQuantityCounter(quantityCounter - 1);
@@ -78,16 +78,16 @@ const QuantitySection = ({
           className={styles["counter-decrement"]}
         >
           <MinusIcon color="white" width="20px" height="20px" />
-        </button>
+        </div>
         <span className={styles["counter-span"]}>{quantityCounter}</span>
-        <button
+        <div
           onClick={() => {
             setQuantityCounter(quantityCounter + 1);
           }}
           className={styles["counter-increment"]}
         >
           <PlusIcon width="20px" height="20px" color="white" />
-        </button>
+        </div>
       </div>
       <div className={styles["div-divider"]}></div>
     </>
