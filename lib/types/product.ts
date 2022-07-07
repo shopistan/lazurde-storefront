@@ -1,5 +1,5 @@
 export type ProductAttributeType = {
-  _id: string;
+  _id?: string;
   name: string;
   description: string;
   mapping: string;
@@ -20,14 +20,14 @@ export type ProductCategoryType = {
 };
 
 export type ProductType = {
-  _id: string;
+  _id?: string;
   sku: string;
   itemId: number;
   children: any[];
   type: string;
   status: boolean;
   bundleItems: any[];
-  categories: ProductCategoryType[];
+  categories?: ProductCategoryType[];
   attributes: ProductAttributeType[];
   variants: any[];
   dependants: any[];
