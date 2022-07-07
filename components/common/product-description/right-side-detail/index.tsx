@@ -126,12 +126,12 @@ const RightSideDetail = ({
             item.Color === selectedColor?.color;
           break;
         default:
-          selectedSku = false;
+          selectedSku = productDataCopy[0];
           break;
       }
       return selectedSku;
     });
-    if(!item) return
+    if (!item) return;
     getSelectedPrice(item || productDataCopy[0]);
     await getProductInventory(item || productDataCopy[0]);
     setSelectedItem(item || productDataCopy[0]);
@@ -187,11 +187,11 @@ const RightSideDetail = ({
       return;
     }
     if (!userAuth.current) {
-      userAuth.current = "true"
+      userAuth.current = "true";
       const response = await getInventoryAuth();
       userAuth.current = response?.data?.accessToken;
     }
-    if (userAuth.current === 'true') return
+    if (userAuth.current === "true") return;
     product["hasStock"] = false;
     const id = product?.itemId;
     const itemId = Number(id);
