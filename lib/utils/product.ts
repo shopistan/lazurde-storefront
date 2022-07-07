@@ -65,10 +65,10 @@ export const fetchProductPriceByItemId = async (requestBody: any) => {
     );
     return (priceResponse as any) || null;
   } catch (error) {
-    console.log(
-      `Error fetching price for itemId: ${requestBody.itemId}`,
-      (error as ErrorObject).message
-    );
+    // console.log(
+    //   `Error fetching price for itemId: ${requestBody.itemId}`,
+    //   (error as ErrorObject).message
+    // );
   }
   return null;
 };
