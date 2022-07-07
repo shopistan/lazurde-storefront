@@ -19,6 +19,7 @@ import { desktopScreenSize } from "lib/utils/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
+import WishListItems from "./wishlist-Item";
 
 interface arabicDataProps {
   myReviewHeading?: string;
@@ -291,7 +292,7 @@ const MyWishList = (): JSX.Element => {
               }`}
             >
               <Heart fill={"black"} />
-              <Label className={styles["label"]}>
+              <Label role="mywishlist" className={styles["label"]}>
                 {appState?.lang === "en"
                   ? "my wish list"
                   : arabicData?.myReviewHeading}
@@ -300,7 +301,10 @@ const MyWishList = (): JSX.Element => {
               <div className={styles["wishlist-main"]}>
                 <div className={styles["wishlist-items-numbers"]}>
                   {allWishListProducts?.length > 0 ? (
-                    <p className={styles["wishlist-notice"]}>
+                    <p
+                      role="wishlist-notice"
+                      className={styles["wishlist-notice"]}
+                    >
                       {appState?.lang === "en"
                         ? `Displaying ${allWishListProducts?.length} Items`
                         : ` العرض ${allWishListProducts?.length} العناصر`}
@@ -324,6 +328,7 @@ const MyWishList = (): JSX.Element => {
                         setAddingItems(true);
                         addAllToBag(wishListItem);
                       }}
+                      role="button"
                       disabled={!checkNumber}
                     >
                       {appState?.lang === "en"
@@ -353,6 +358,7 @@ const MyWishList = (): JSX.Element => {
                       onClick={() => {
                         // setModalOpen(true);
                       }}
+                      testId="shoppingbtn"
                     >
                       {appState?.lang === "en"
                         ? "Start Shopping"
@@ -364,9 +370,9 @@ const MyWishList = (): JSX.Element => {
             )}
           </div>
           {allWishListProducts?.length > 0 && wishListItem && (
-            <div className={styles["account-wishlist-wrapper"]}>
+            <div role="items" className={styles["account-wishlist-wrapper"]}>
               {wishListItem.length > 0 &&
-                wishListItem.map((item, index) => {
+                wishListItem.map((item) => {
                   return (
                     compRender && (
                       <WishListItems
@@ -385,125 +391,16 @@ const MyWishList = (): JSX.Element => {
           )}
           {allWishListProducts?.length > 0 && wishListItem && (
             <div className={styles["display-item-number"]}>
-              <p>
+              <p role="para">
                 {appState?.lang === "en"
                   ? `Displaying ${allWishListProducts?.length} Items`
                   : ` العرض ${allWishListProducts?.length} العناصر`}
               </p>
-              {!compRender && <p>{renderSpinner()} ...</p>}
+              {!compRender && <>{renderSpinner()} ...</>}
             </div>
           )}
         </>
       )}
-    </>
-  );
-};
-
-const WishListItems = ({
-  item,
-  appState,
-  removeWishListItem,
-  handleAddToBag,
-  renderSpinner,
-  adding,
-}: WishListItemsProps) => {
-  const [removingItem, setRemovingItem] = useState(false);
-  const [addingItem, setAddingItem] = useState(false);
-  const imageSrc = item?.["Image URL"];
-
-  return (
-    <>
-      <div className={styles["account-wishlist-main"]}>
-        <div className={styles["cart-item-wrapper"]}>
-          <div className={styles["cart-image"]}>
-            <Image
-              width={100}
-              height={100}
-              src={imageSrc || "/blue-ring.png"}
-              alt=""
-              layout="fixed"
-            />
-          </div>
-          <div className={styles["item-details"]}>
-            <div className={styles["item-title"]}>
-              <span>
-                {appState?.lang === "en"
-                  ? item?.["Product Title"] || "No Title"
-                  : "مجوهرات الماس تتصدر"}
-              </span>
-              <span>{`$${
-                item?.totalPrice?.sale?.toLocaleString() ||
-                item?.totalPrice?.amount?.toLocaleString() ||
-                "0.00"?.toLocaleString()
-              }`}</span>
-            </div>
-            <div className={styles["item-buttons"]}>
-              {item?.isLocation === "true" && (
-                <div className={styles["add-to-bag-btn"]}>
-                  {addingItem || adding ? (
-                    renderSpinner()
-                  ) : (
-                    <Bag
-                      fill="#000000"
-                      stroke="#000000"
-                      width="16px"
-                      height="16px"
-                    />
-                  )}
-                  <button
-                    onClick={() => {
-                      setAddingItem(true);
-                      handleAddToBag(item);
-                    }}
-                    disabled={addingItem}
-                  >
-                    {appState?.lang === "en"
-                      ? addingItem || adding
-                        ? "Adding..."
-                        : "Add to Bag"
-                      : addingItem
-                      ? "جارٍ الإضافة ..."
-                      : "أضف الى الحقيبة"}
-                  </button>
-                </div>
-              )}
-
-              <div className={styles["remove-btn"]}>
-                {removingItem ? (
-                  renderSpinner()
-                ) : (
-                  <CrossSmall width={12} height={12} />
-                )}
-                <button
-                  onClick={() => {
-                    setRemovingItem(true);
-                    removeWishListItem(item);
-                  }}
-                  disabled={removingItem}
-                >
-                  {appState?.lang === "en"
-                    ? removingItem
-                      ? "Removing..."
-                      : "Remove"
-                    : removingItem
-                    ? "جارٍ الإزالة…"
-                    : "إزالة"}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        {item?.isLocation === "false" && (
-          <div className={styles["error-notice"]}>
-            <Image width={20} height={20} src={"/help.png"} alt="" />
-            <p>
-              {appState?.lang === "en"
-                ? `This product is not available in your region`
-                : `هذا المنتج غير متوفر في منطقتك`}
-            </p>
-          </div>
-        )}
-      </div>
     </>
   );
 };
