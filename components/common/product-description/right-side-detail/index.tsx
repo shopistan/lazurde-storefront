@@ -131,12 +131,12 @@ const RightSideDetail = ({
       }
       return selectedSku;
     });
-    console.log("something", productData, productDataCopy, item);
-
+    
     if (!item) return;
     getSelectedPrice(item || productDataCopy[0]);
     await getProductInventory(item || productDataCopy[0]);
     if (!item.hasOwnProperty("hasStock")) return;
+    console.log("something", item);
     setSelectedItem(item || productDataCopy[0]);
     for (let index = 0; index < productDataCopy?.length; index++) {
       if (index === 0) continue;
