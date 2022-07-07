@@ -128,6 +128,12 @@ const InfoSelector = ({
 
     currentObject?.name === "Financial Information" &&
       setSelectVal("Quarterly Financial Statements");
+
+    currentObject?.name === "معلومات المخزون" &&
+      setSelectedVal("نظرة عامة على حصة");
+
+    currentObject?.name === "معلومات مالية" &&
+      setSelectVal("البيانات المالية ربع السنوية");
   }, [currentObject?.name]);
 
   const onInfoChange = (selectedData: optionProps) => {
