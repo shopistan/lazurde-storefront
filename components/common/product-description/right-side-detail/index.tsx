@@ -126,7 +126,7 @@ const RightSideDetail = ({
             item.Color === selectedColor?.color;
           break;
         default:
-          selectedSku = productDataCopy[0];
+          selectedSku = true;
           break;
       }
       return selectedSku;
