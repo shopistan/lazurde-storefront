@@ -126,14 +126,17 @@ const RightSideDetail = ({
             item.Color === selectedColor?.color;
           break;
         default:
-          selectedSku = false;
+          selectedSku = true;
           break;
       }
       return selectedSku;
     });
-    if(!item) return
+    
+    if (!item) return;
     getSelectedPrice(item || productDataCopy[0]);
     await getProductInventory(item || productDataCopy[0]);
+    if (!item.hasOwnProperty("hasStock")) return;
+    console.log("something", item);
     setSelectedItem(item || productDataCopy[0]);
     for (let index = 0; index < productDataCopy?.length; index++) {
       if (index === 0) continue;
@@ -143,6 +146,8 @@ const RightSideDetail = ({
     }
     return item;
   };
+  console.log("something 2", selectedItem);
+
 
   const getSelectedPrice = async (
     selectedProduct: { itemId: number } | any
@@ -182,17 +187,16 @@ const RightSideDetail = ({
   };
 
   const getProductInventory = async (product: ProductProps | any) => {
-    if (product?.length < 1) return {};
     if (product?.hasOwnProperty("hasStock")) {
       return;
     }
     if (!userAuth.current) {
-      userAuth.current = "true"
+      userAuth.current = "true";
       const response = await getInventoryAuth();
       userAuth.current = response?.data?.accessToken;
     }
-    if (userAuth.current === 'true') return
-    product["hasStock"] = false;
+    if (userAuth.current === "true") return;
+    // product["hasStock"] = false;
     const id = product?.itemId;
     const itemId = Number(id);
     const inventoryData = await getInventoryByIds(userAuth.current, itemId);

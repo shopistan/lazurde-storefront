@@ -22,6 +22,8 @@ import AccountSidebar from "components/common/right-sidebars/account-sidebar";
 import WishListSidebar from "components/common/minicart-wishlist-sidebars/wish-list";
 import MiniCart from "components/common/minicart-wishlist-sidebars/mini-cart";
 import Language from "./language-sidebar";
+import Label from "components/common/ui/label";
+import { translateText } from "lib/utils/reviews";
 
 const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   brandSideBar,
@@ -35,6 +37,9 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   const { t } = useTranslation("common");
   const [isOpened, setIsOpened] = useState(false);
   const [width] = useWindowSize();
+  const [userName, setUserName] = useState("");
+  const [arabicUserName, setArabicUserName] = useState("");
+  const [isLoginUser, setIsLoginUser] = useState(false);
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const [sidebarchild, setSidebarChild] = useState({
     account: false,
@@ -43,6 +48,43 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
     language: false,
   });
   const GRANT_TYPE = "code";
+
+  useEffect(() => {
+    const authToken =
+      typeof window !== "undefined" &&
+      JSON.parse(window.localStorage.getItem("auth_tokens"));
+    if (authToken?.access_token) {
+      setIsLoginUser(true);
+      const getUserInfo =
+        typeof window !== "undefined" &&
+        JSON.parse(window.localStorage.getItem("user_info"));
+
+      if (getUserInfo) {
+        setUserName(getUserInfo?.firstName);
+      }
+    } else {
+      setIsLoginUser(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (appState?.lang === "ar") {
+      handleUserNameTranslation();
+    }
+  }, [appState?.lang]);
+
+  const handleUserNameTranslation = async () => {
+    if (userName !== "") {
+      const res = await translateText(userName, "ar");
+      if (res.hasError === false) {
+        setArabicUserName(
+          res?.response?.data?.data?.translations[0]?.translatedText
+        );
+      } else {
+        console.log("error while translate username to arabic");
+      }
+    }
+  };
 
   useEffect(() => {
     const hasWishListData = allWishListProducts;
@@ -56,7 +98,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
 
       setAllWishListProducts &&
         setAllWishListProducts(wishlistArray?.data?.items);
-      
+
       typeof window !== "undefined" &&
         window?.sessionStorage?.setItem(
           "wishListArray",
@@ -205,6 +247,18 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
         <div className={styles["link"]} onClick={() => signInUser()}>
           <User />
         </div>
+
+        {isLoginUser && width > desktopScreenSize ? (
+          <div className={styles["link"]}>
+            <Label className={styles.name}>
+              {appState?.lang === "en"
+                ? `Hi, ${userName}`
+                : arabicUserName
+                ? `مرحبا, ${arabicUserName}`
+                : null}
+            </Label>
+          </div>
+        ) : null}
 
         <div className={styles["link"]} onClick={() => handlewishlist()}>
           <Heart />

@@ -143,6 +143,20 @@
         }
       }
     }
+
+    .link {
+      .name {
+        cursor: auto;
+        color: $white-color;
+        margin: 0;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0em;
+        text-align: start;
+        text-transform: capitalize;
+      }
+    }
   }
 }
 

@@ -89,20 +89,24 @@ const TermCondtion: FC<TermCondtionProps> = ({
   }, [appState.lang]);
   return (
     <div className={styles["term-comtainer"]}>
-      <div
-        className={styles["back-button"]}
-        style={{ backgroundColor: contentBgcolor }}
-        onClick={() => {
-          setShowPolicies(true);
-        }}
-      >
-        <div>
-          <BackArrow />
+      {!showPolicies && (
+        <div
+          className={styles["back-button"]}
+          style={{ backgroundColor: contentBgcolor }}
+          onClick={() => {
+            setShowPolicies(true);
+          }}
+        >
+          <div>
+            <BackArrow />
+          </div>
+          <button className={styles["back-content"]}>
+            {appState?.lang == "en"
+              ? "Back To L'azurde Policies"
+              : "ءيش لك قوست"}
+          </button>
         </div>
-        <button className={styles["back-content"]}>
-          {appState?.lang == "en" ? "Back To L'azurde Policies" : "ءيش لك قوست"}
-        </button>
-      </div>
+      )}
       <div className={styles["term-section"]}>
         <div className={styles["term-left"]} data-opened={showPolicies}>
           {hyperLinks &&

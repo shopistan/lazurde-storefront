@@ -11,15 +11,16 @@ const TabbyModal = ({
   return (
     <>
       <div key={appState?.region} id="TabbyPromo"></div>
-
       <Script
         id={Math.random()?.toString()}
         src="https://checkout.tabby.ai/tabby-promo.js"
+        strategy="beforeInteractive"
       ></Script>
+
       <Script strategy="lazyOnload" id={Math.random()?.toString()}>
         {`new TabbyPromo({
             selector: '#TabbyPromo',
-            currency: '${appState?.region === 'sa' ? "SAR" : "AED"}',
+            currency: '${appState?.region === "sa" ? "SAR" : "AED"}',
             price: ${productPricing?.finalPrice},
             installmentsCount: 4,
             lang: '${appState?.lang}',

@@ -374,7 +374,7 @@ const NewAddressModal: FC<NewAddressModalProps> = ({
                           onChange={(value) => {
                             setFieldValue("checkbox", value);
                           }}
-                        ></CheckBox>
+                        />
                       </div>
                       <div className={styles["div-button"]}>
                         {isEditAddress ? (

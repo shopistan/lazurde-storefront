@@ -14,6 +14,10 @@
   @media (min-width: $breakPoint-desktop) {
     display: flex;
   }
+
+  @media (max-width: $breakPoint-mobile) {
+    margin-top: 8px;
+  }
 }
 
 .term-left {
