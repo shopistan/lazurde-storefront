@@ -136,8 +136,7 @@ const RightSideDetail = ({
     getSelectedPrice(item || productDataCopy[0]);
     await getProductInventory(item || productDataCopy[0]);
     if (!item.hasOwnProperty("hasStock")) return;
-    console.log("something", item);
-    setSelectedItem(item || productDataCopy[0]);
+    setSelectedItem({...item});
     for (let index = 0; index < productDataCopy?.length; index++) {
       if (index === 0) continue;
       if (productDataCopy[index]?.hasOwnProperty("hasStock")) continue;
@@ -146,7 +145,6 @@ const RightSideDetail = ({
     }
     return item;
   };
-  console.log("something 2", selectedItem);
 
 
   const getSelectedPrice = async (
