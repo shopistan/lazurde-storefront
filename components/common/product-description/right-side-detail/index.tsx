@@ -131,6 +131,7 @@ const RightSideDetail = ({
       }
       return selectedSku;
     });
+    
     if (!item) return;
     getSelectedPrice(item || productDataCopy[0]);
     await getProductInventory(item || productDataCopy[0]);
@@ -182,7 +183,6 @@ const RightSideDetail = ({
   };
 
   const getProductInventory = async (product: ProductProps | any) => {
-    if (product?.length < 1) return {};
     if (product?.hasOwnProperty("hasStock")) {
       return;
     }
