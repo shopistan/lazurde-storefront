@@ -78,10 +78,7 @@ const CGIR: FC<CGIRProps> = ({
 
   useEffect(() => {
     setCurrentObject({
-      moreContent:
-        appState.lang == "en"
-          ? cgirPages[0]?.moreContent
-          : _links[0]?.moreContent,
+      moreContent: cgirPages[0]?.moreContent,
       content:
         appState.lang == "en" ? cgirPages[0]?.content : _links[0]?.content,
       name: appState.lang == "en" ? cgirPages[0]?.name : _links[0]?.name,
@@ -130,10 +127,7 @@ const CGIR: FC<CGIRProps> = ({
                     onClick={() => {
                       setShowPolicies(false);
                       setCurrentObject({
-                        moreContent:
-                          appState.lang == "en"
-                            ? moreContent
-                            : _links[index]?.moreContent,
+                        moreContent: moreContent,
                         content:
                           appState.lang == "en"
                             ? content
@@ -1059,7 +1053,6 @@ const CGIR: FC<CGIRProps> = ({
                               currentObject?.moreContent?.map((obj, index) => {
                                 const { image, imageTitle, pdfUrl, heading } =
                                   obj;
-
                                 return (
                                   <>
                                     {heading === "تقرير سنوي" && (
