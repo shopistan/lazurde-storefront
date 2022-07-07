@@ -112,6 +112,18 @@ ul {
   flex-direction: column;
 }
 
+.component-container-newsletter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 81px 80px;
+
+  @media (max-width: $breakPoint-mobile) {
+    padding: 0 17px 24px;
+  }
+}
+
 .button {
   padding-block: 16px;
   padding-inline: 40px;
