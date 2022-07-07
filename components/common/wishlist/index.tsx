@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useContext } from "react";
+import React, { FC, useState, useEffect, useContext } from "react";
 import { Heart } from "components/icons";
 import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
 import FillHeart from "components/icons/FillHeart";
