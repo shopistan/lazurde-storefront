@@ -42,7 +42,9 @@ const LoggedInlinks = ({
           <Label testId="username">
             {appState?.lang === "en"
               ? `Hi, ${userName}`
-              : `مرحبا, ${arabicUserName}`}
+              : arabicUserName
+              ? `مرحبا, ${arabicUserName}`
+              : null}
           </Label>
         </div>
         <div className={styles.links}>
