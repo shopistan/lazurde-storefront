@@ -56,7 +56,8 @@ const ContentBlock: FC<ContentBlockProps> = ({
               title="Scrolling Iframe"
               src="https://ksatools.eurolandir.com/tools/ticker/scrolling/?companycode=sa-lazurde&amp;v=scrolling2021&amp;lang=en-gb"
               width="100%"
-              height="25px"
+              height={width > desktopScreenSize ? "25px" : "40px"}
+              scrolling="no"
               style={{
                 border: 0,
                 fontSize: width > desktopScreenSize ? "15px" : "13px",
@@ -69,7 +70,8 @@ const ContentBlock: FC<ContentBlockProps> = ({
               title="Scrolling Iframe"
               src="https://ksatools.eurolandir.com/tools/ticker/scrolling/?companycode=sa-lazurde&amp;v=scrolling2021&amp;lang=ar-ae"
               width="100%"
-              height="25px"
+              height={width > desktopScreenSize ? "25px" : "40px"}
+              scrolling="no"
               style={{
                 border: 0,
                 fontSize: width > desktopScreenSize ? "15px" : "13px",
