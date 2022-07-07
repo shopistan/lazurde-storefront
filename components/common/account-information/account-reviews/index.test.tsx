@@ -4,6 +4,7 @@ import UserReviews from "./index";
 import { render, screen } from "@testing-library/react";
 import ContextProvider, { AppContext } from "lib/context";
 
+jest.mock("axios");
 const mockChildComponent = jest.fn();
 jest.mock("./product-without-reviews", () => (props: any) => {
   mockChildComponent(props);
