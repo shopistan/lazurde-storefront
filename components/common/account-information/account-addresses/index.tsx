@@ -26,7 +26,7 @@ type addressPayload = {
   checkbox?: string;
 };
 
-const addresses: addressPayload[] = [
+const addressesData: addressPayload[] = [
   {
     id: "1",
     name: "Home Address",
@@ -57,7 +57,11 @@ const addresses: addressPayload[] = [
   },
 ];
 
-const AddressBook = () => {
+const AddressBook = ({
+  addresses = addressesData,
+}: {
+  addresses?: addressPayload[];
+}): JSX.Element => {
   const { appState } = useContext(AppContext);
   const [addressData, setAddressData] = useState(addresses);
   const [modalOpen, setModalOpen] = useState(false);
