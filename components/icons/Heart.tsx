@@ -6,8 +6,8 @@ const Heart = ({
 }: {
   fill?: string;
   stroke?: string;
-  width?: string,
-  height?: string
+  width?: string;
+  height?: string;
 }) => {
   return (
     <svg
