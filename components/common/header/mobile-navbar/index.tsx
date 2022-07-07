@@ -146,7 +146,7 @@ const MobileNavBar = ({
           ) : sidebarChild.miniCart ? (
             <MiniCart />
           ) : sidebarChild.account ? (
-            <AccountSidebar />
+            <AccountSidebar closeSideBar={setSidebarOpened} />
           ) : null}
         </SideBar>
       </div>

@@ -248,7 +248,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
           sidebarHeight={sidebarchild.account ? "892px" : "876px"}
         >
           {sidebarchild.account ? (
-            <AccountSidebar />
+            <AccountSidebar closeSideBar={setSidebarOpened} />
           ) : sidebarchild.wishlist ? (
             <WishListSidebar />
           ) : sidebarchild.miniCart ? (
