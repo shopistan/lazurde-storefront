@@ -1,10 +1,11 @@
-import { render, act } from "@testing-library/react";
-import React from "react";
+import * as React from "react";
+import { render, act, screen } from "@testing-library/react";
 import MiniCart from "./index";
 import ContextProvider, { AppContext } from "lib/context";
 
-const renderComponent = () => {
-  act(() => {
+jest.mock("axios");
+const renderComponent = async () => {
+  await act(async () => {
     render(
       <ContextProvider>
         <MiniCart />
@@ -13,8 +14,8 @@ const renderComponent = () => {
   });
 };
 
-const renderComponentAR = () => {
-  act(() => {
+const renderComponentAR = async () => {
+  await act(async () => {
     render(
       <AppContext.Provider value={{ appState: { lang: "ar" } }}>
         <MiniCart />
@@ -23,7 +24,7 @@ const renderComponentAR = () => {
   });
 };
 
-test("Mini Cart Test", () => {
+test("Mini Cart Test", async () => {
   renderComponent();
 });
 

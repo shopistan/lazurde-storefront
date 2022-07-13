@@ -4,7 +4,7 @@ import { CrossSmall } from "components/icons";
 import Heading from "components/common/ui/heading";
 import Label from "components/common/ui/label";
 import StarRating from "components/common/ui/star-ratings";
-import ReviewForm from "./review-form";
+import ReviewForm from "components/common/reviews/write-review/review-form/review-form";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 
