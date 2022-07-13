@@ -10,9 +10,9 @@ import useTranslation from "next-translate/useTranslation";
 interface CelebritiesProps {
   celebrityImage?: ImageType | { url: ""; altText: "" };
   celebritySign?: ImageType | { url: ""; altText: "" };
-};
+}
 interface CelebrityChoiceProps {
-  bannerImage: ImageType | { url: ""; altText: "" };
+  bannerImage?: ImageType | { url: ""; altText: "" };
   heading: string | "";
   celebrities: CelebritiesProps[] | [];
   detailsHeading: string | "";
@@ -32,14 +32,16 @@ const CelebrityChoice: FC<CelebrityChoiceProps> = ({
   return (
     <div className={styles["celebrity-container"]}>
       <div className={styles["banner-heading-container"]}>
-        <Image
-          src={bannerImage?.url}
-          alt={bannerImage?.altText}
-          width={size > desktopScreenSize ? 1280 : 375}
-          height={size > desktopScreenSize ? 376 : 200}
-          layout="responsive"
-          objectFit="cover"
-        />
+        {bannerImage?.url ? (
+          <Image
+            src={bannerImage?.url}
+            alt={bannerImage?.altText}
+            width={size > desktopScreenSize ? 1280 : 375}
+            height={size > desktopScreenSize ? 376 : 200}
+            layout="responsive"
+            objectFit="cover"
+          />
+        ) : null}
         <div className={styles["banner-heading"]}>
           <span>{appState?.lang === "en" ? heading : t("bannerHeading")}</span>
         </div>
@@ -50,24 +52,28 @@ const CelebrityChoice: FC<CelebrityChoiceProps> = ({
           celebrities?.map((celeb, index) => {
             return (
               <div key={index} className={styles["celebrity-card"]}>
-                <Image
-                  src={celeb?.celebrityImage?.url}
-                  alt={celeb?.celebrityImage?.altText}
-                  width={
-                    size > desktopScreenSize ? 421 : size > 600 ? 250 : 343
-                  }
-                  height={
-                    size > desktopScreenSize ? 416 : size > 600 ? 280 : 302
-                  }
-                  objectFit="cover"
-                  layout="fixed"
-                />
-                <Image
-                  src={celeb?.celebritySign?.url}
-                  alt={celeb?.celebritySign?.altText}
-                  width={244}
-                  height={113}
-                />
+                {celeb?.celebrityImage?.url ? (
+                  <Image
+                    src={celeb?.celebrityImage?.url}
+                    alt={celeb?.celebrityImage?.altText}
+                    width={
+                      size > desktopScreenSize ? 421 : size > 600 ? 250 : 343
+                    }
+                    height={
+                      size > desktopScreenSize ? 416 : size > 600 ? 280 : 302
+                    }
+                    objectFit="cover"
+                    layout="fixed"
+                  />
+                ) : null}
+                {celeb?.celebritySign?.url ? (
+                  <Image
+                    src={celeb?.celebritySign?.url}
+                    alt={celeb?.celebritySign?.altText}
+                    width={244}
+                    height={113}
+                  />
+                ) : null}
               </div>
             );
           })}
