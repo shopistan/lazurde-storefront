@@ -1,8 +1,7 @@
 import React from "react";
-import { render, fireEvent, act } from "@testing-library/react";
+import { render, fireEvent, act, screen } from "@testing-library/react";
 import PromoBar from "./index";
 import ContextProvider, { AppContext } from "lib/context";
-import { screen } from "@testing-library/dom";
 
 const renderComponent = () => {
   render(

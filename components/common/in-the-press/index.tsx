@@ -26,14 +26,16 @@ const InThePress: FC<InThePressProps> = ({ bannerImage, heading, stories }) => {
   return (
     <div className={styles["inthepress-container"]}>
       <div>
-        <Image
-          src={bannerImage?.url}
-          alt={bannerImage?.altText}
-          width={size > desktopScreenSize ? 1280 : 375}
-          height={size > desktopScreenSize ? 308 : 207}
-          layout="responsive"
-          objectFit="cover"
-        />
+        {bannerImage?.url ? (
+          <Image
+            src={bannerImage?.url}
+            alt={bannerImage?.altText}
+            width={size > desktopScreenSize ? 1280 : 375}
+            height={size > desktopScreenSize ? 308 : 207}
+            layout="responsive"
+            objectFit="cover"
+          />
+        ) : null}
       </div>
       <div className={styles["heading"]}>
         <span>{appState?.lang === "en" ? heading : t("InThePress")}</span>
@@ -42,13 +44,15 @@ const InThePress: FC<InThePressProps> = ({ bannerImage, heading, stories }) => {
         {stories?.map((story, index) => {
           return (
             <div key={index} className={styles["story-card"]}>
-              <Image
-                src={story?.storyImage?.url}
-                alt={story?.storyImage?.altText}
-                width={size > desktopScreenSize ? 400 : 343}
-                height={size > desktopScreenSize ? 200 : 200}
-                layout="fixed"
-              />
+              {story?.storyImage?.url ? (
+                <Image
+                  src={story?.storyImage?.url}
+                  alt={story?.storyImage?.altText}
+                  width={size > desktopScreenSize ? 400 : 343}
+                  height={size > desktopScreenSize ? 200 : 200}
+                  layout="fixed"
+                />
+              ) : null}
               <a>
                 {appState?.lang === "en"
                   ? story?.storyTitle
