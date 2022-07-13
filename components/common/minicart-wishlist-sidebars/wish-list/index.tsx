@@ -70,6 +70,10 @@ const WishListSidebar = (): JSX.Element => {
     // getWishListData();
     setIsWishListLoading(true);
     setRenderComponent(true);
+    return () => {
+      setIsWishListLoading(false);
+      setRenderComponent(false);
+    };
   }, []);
 
   const wishlistArabicData: wishlistArabicData = t(

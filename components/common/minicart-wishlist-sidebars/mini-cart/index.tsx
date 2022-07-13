@@ -37,7 +37,7 @@ const MiniCart = (): JSX.Element => {
   const [width] = useWindowSize();
   const router = useRouter();
   const { t } = useTranslation("common");
-  const { appState } = useContext(AppContext);  
+  const { appState } = useContext(AppContext);
   const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingCart, setisLoadingCart] = useState(false);
   const [updatingCartItem, setUpdatingCartItem] = useState(false);
@@ -49,7 +49,6 @@ const MiniCart = (): JSX.Element => {
     subTotal: 0.0,
     totalAmount: 0.0,
   });
-
 
   useEffect(() => {
     const authToken =
@@ -65,6 +64,9 @@ const MiniCart = (): JSX.Element => {
   useEffect(() => {
     getCartData();
     setisLoadingCart(true);
+    return () => {
+      setisLoadingCart(false);
+    };
   }, []);
 
   const miniCartArabicData: miniCartArabicDataProps = t(
@@ -183,10 +185,14 @@ const MiniCart = (): JSX.Element => {
   useEffect(() => {
     if (!renderComponent) {
       authInventory();
+      return;
     }
   });
   useEffect(() => {
     setRenderComponent(true);
+    return () => {
+      setRenderComponent(false);
+    };
   }, []);
 
   const authInventory = async () => {
@@ -235,7 +241,7 @@ const MiniCart = (): JSX.Element => {
                           strokeWidth="1"
                           stroke="#000"
                         />
-                        <Label className={styles.label}>
+                        <Label role="addedtobag" className={styles.label}>
                           {appState?.lang === "en"
                             ? "Added to Bag"
                             : miniCartArabicData?.addToBag}
@@ -251,6 +257,7 @@ const MiniCart = (): JSX.Element => {
                           : ""
                       }`}
                       element="h1"
+                      testId="shoppingbag"
                     >
                       {appState?.lang === "en"
                         ? "Shopping Bag"
@@ -258,7 +265,7 @@ const MiniCart = (): JSX.Element => {
                     </Heading>
                     {Object.keys(cartData).length !== 0 &&
                     cartData?.items?.length > 0 ? null : (
-                      <Label className={styles["shopbag-label"]}>
+                      <Label role="emptycart" className={styles["shopbag-label"]}>
                         {appState?.lang === "en"
                           ? "Your shopping bag is empty"
                           : miniCartArabicData?.YourShoppingBagIsEmpty}
