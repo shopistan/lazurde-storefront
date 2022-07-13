@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./style.module.scss";
+import styles from "../style.module.scss";
 import Image from "next/image";
 import { CrossSmall, PlusIcon } from "components/icons";
 
@@ -78,7 +78,7 @@ const ImageUploader = ({
         )}
 
         <div className={styles["img-upload-input"]}>
-          <form>
+          {/* <form> */}
             <label htmlFor="imgUploader" className={styles["img-label"]}>
               <input
                 key="similar"
@@ -92,7 +92,7 @@ const ImageUploader = ({
               />
               <PlusIcon />
             </label>
-          </form>
+          {/* </form> */}
         </div>
       </div>
     </>

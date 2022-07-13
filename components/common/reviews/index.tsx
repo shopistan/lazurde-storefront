@@ -113,7 +113,7 @@ const Reviews = ({
         <div className={styles["reviews-wrapper"]}>
           <div className={styles["review-summary"]}>
             {reviewsData && reviewsData.length > 0 && (
-              <Label className={styles["total-review-label"]}>
+              <Label testId="heading" className={styles["total-review-label"]}>
                 {`${reviewsData?.length} ${
                   appState.lang == "en"
                     ? "customer reviews"
