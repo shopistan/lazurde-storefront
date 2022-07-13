@@ -1,10 +1,11 @@
+import * as React from "react";
 import { render, act } from "@testing-library/react";
-import React from "react";
 import WishListSidebar from "./index";
 import ContextProvider, { AppContext } from "lib/context";
 
-const renderComponent = () => {
-  act(() => {
+jest.mock("axios");
+const renderComponent = async () => {
+  await act(async () => {
     render(
       <ContextProvider>
         <WishListSidebar />
@@ -13,8 +14,8 @@ const renderComponent = () => {
   });
 };
 
-const renderComponentAR = () => {
-  act(() => {
+const renderComponentAR = async () => {
+  await act(async () => {
     render(
       <AppContext.Provider value={{ appState: { lang: "ar" } }}>
         <WishListSidebar />
@@ -23,10 +24,10 @@ const renderComponentAR = () => {
   });
 };
 
-test("wish list Test", () => {
+test("wish list Test", async () => {
   renderComponent();
 });
 
-test("wish list arabic version", () => {
+test("wish list arabic version", async () => {
   renderComponentAR();
 });
