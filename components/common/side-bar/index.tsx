@@ -1,5 +1,5 @@
-import { ImageType } from "lib/types/common";
 import React, { FC, useContext, useEffect, useState } from "react";
+import { ImageType } from "lib/types/common";
 import Label from "../ui/label";
 import Image from "next/image";
 import styles from "./side-bar.module.scss";
@@ -18,22 +18,15 @@ import {
 } from "lib/identity";
 
 type AccountsProps = {
-  image: ImageType;
-  text: string | "";
-  width: string | number;
-  height: string | number;
-  link: string | "";
+  image?: ImageType;
+  text?: string | "";
+  width?: string | number;
+  height?: string | number;
+  link?: string | "";
 };
 
 type DetailsProps = {
   accounts: AccountsProps[];
-};
-
-type _DetailsProps = {
-  accounts: _AccountsProps[];
-};
-type _AccountsProps = {
-  text: string | "";
 };
 
 interface SideBarProps {
@@ -61,7 +54,7 @@ const SideBar: FC<SideBarProps> = ({
   const router = useRouter();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const _detailsProps: _DetailsProps[] = t(
+  const _detailsProps: DetailsProps[] = t(
     "detailsProps",
     {},
     { returnObjects: true }
@@ -213,13 +206,15 @@ const SideBar: FC<SideBarProps> = ({
                             }}
                           >
                             <div className={styles["account-image"]}>
-                              <Image
-                                src={image.url || "/"}
-                                alt={image.altText}
-                                width={width}
-                                height={height}
-                                layout="fixed"
-                              />
+                              {image?.url ? (
+                                <Image
+                                  src={image?.url || "/"}
+                                  alt={image?.altText}
+                                  width={width}
+                                  height={height}
+                                  layout="fixed"
+                                />
+                              ) : null}
                             </div>
                             <Label
                               className={

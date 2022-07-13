@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import styles from "./style.module.scss";
+import styles from "../style.module.scss";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Label from "components/common/ui/label";
 import { writeReview } from "lib/utils/reviews";
-import ImageUploader from "./image-uploader";
+import ImageUploader from "components/common/reviews/write-review/image-uploader/image-uploader";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 

@@ -186,7 +186,7 @@ const CGIR: FC<CGIRProps> = ({
               </div>
               <button className={styles["back-content"]}>
                 {appState?.lang == "en"
-                  ? "Back To L'azurde Policies"
+                  ? `Back To ${appState.brand} Policies`
                   : "ءيش لك قوست"}
               </button>
             </div>
