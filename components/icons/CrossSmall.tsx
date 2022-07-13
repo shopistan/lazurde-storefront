@@ -19,6 +19,7 @@ const CrossSmall = ({ ...props }) => {
         onClick={() => {
           props.onClick && props.onClick();
         }}
+        role={props?.role}
       ></div>
       <svg
         width={props?.width || "10"}
