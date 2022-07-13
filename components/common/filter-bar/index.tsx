@@ -6,7 +6,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 
 interface FilterBarMainProps {
 updateProductArray: Function;
-  filterList: [];
+  filterList: any[];
   hasFilteredData: Boolean;
   }
 
