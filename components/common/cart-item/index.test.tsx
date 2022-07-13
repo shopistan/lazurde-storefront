@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import CartItem from "./index";
 import ContextProvider, { AppContext } from "lib/context";
 
@@ -37,7 +37,7 @@ const renderComponent = () => {
         removeItem={jest.fn()}
         getCartData={jest.fn()}
         inventoryToken={inventoryToken}
-        wishListItem={false}
+        wishListItem={true}
         className="classname"
         productImgWidth="38px"
         productImgHeight="38px"
@@ -59,7 +59,7 @@ const renderComponentAR = () => {
         removeItem={jest.fn()}
         getCartData={jest.fn()}
         inventoryToken={inventoryToken}
-        wishListItem={false}
+        wishListItem={true}
         className="classname"
         productImgWidth="38px"
         productImgHeight="38px"
@@ -74,6 +74,13 @@ const renderComponentAR = () => {
 describe("Cart page ", () => {
   test("cart item testing", () => {
     renderComponent();
+    const removeBtn = screen.getByRole("removeBtn");
+    expect(removeBtn).toBeInTheDocument();
+    fireEvent.click(removeBtn);
+
+    const addToCart = screen.getByRole("addtocart");
+    expect(addToCart).toBeInTheDocument();
+    fireEvent.click(addToCart);
   });
 
   test("cart item arabic version", () => {
