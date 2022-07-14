@@ -50,7 +50,9 @@ const ContentBlock: FC<ContentBlockProps> = ({
         content?.name === "Financial Information" ||
         content?.name === "معلومات مالية" ||
         content?.name === "Email Subscription Center" ||
-        content?.name === "مركز الاشتراك بالبريد الإلكتروني" ? (
+        content?.name === "مركز الاشتراك بالبريد الإلكتروني" ||
+        content?.name === "Contact IR" ||
+        content?.name === "اتصل بـ IR" ? (
           appState?.lang === "en" ? (
             <iframe
               title="Scrolling Iframe"
