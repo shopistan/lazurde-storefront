@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext } from "react";
+import * as React from "react";
 import Label from "components/common/ui/label";
 import Image from "next/image";
 import styles from "./customer-service.module.scss";
@@ -9,10 +9,10 @@ import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context";
 
 interface ServicesProps {
-  icon?: { url: ""; altText: "" };
-  iconTitle?: string | "";
-  iconText?: string | "";
-  url?: string | "";
+  icon?: { url?: ""; altText?: "" };
+  iconTitle?: string;
+  iconText?: string;
+  url?: string;
   width?: string | number;
   height?: string | number;
 }
@@ -23,21 +23,21 @@ type _ServiceProps = {
 };
 
 interface CustomerServiceProps {
-  bannerImage?: { url: ""; altText: "" };
+  bannerImage?: { url?: ""; altText?: "" };
   heading?: string | "";
-  services?: ServicesProps[] | [];
-  inputIcon?: { url: ""; altText: "" };
+  services?: ServicesProps[];
+  inputIcon?: { url?: ""; altText?: "" };
   title?: string | "";
 }
 
-const CustomerService  = ({
-  title,
-  bannerImage,
-  heading,
-  services,
-  inputIcon,
-}: CustomerServiceProps): JSX.Element=> {
-  const { appState } = useContext(AppContext);
+const CustomerService = ({
+  title = "",
+  bannerImage = {},
+  heading = "",
+  services = [],
+  inputIcon = {},
+}: CustomerServiceProps): JSX.Element => {
+  const { appState } = React.useContext(AppContext);
   const { t } = useTranslation("common");
 
   const _servicesProps: _ServiceProps[] = t(
@@ -46,7 +46,7 @@ const CustomerService  = ({
     { returnObjects: true }
   );
   const [size] = useWindowSize();
-  const [filterBlock, setFilterBlock] = useState(services);
+  const [filterBlock, setFilterBlock] = React.useState(services);
   const router = useRouter();
   const handleFilter = (event: any) => {
     const inputValue = event.target.value.toLowerCase();
@@ -61,27 +61,27 @@ const CustomerService  = ({
     <div className={styles["services-container"]}>
       <div className={styles["services_search-section"]}>
         <div>
-          {bannerImage?.url && (
+          {bannerImage?.url ? (
             <Image
               className={styles["services_banner-image"]}
-              src={bannerImage?.url}
+              src={bannerImage?.url || "/"}
               alt={bannerImage?.altText}
               width={size > desktopScreenSize ? 1280 : 375}
               height={size > desktopScreenSize ? 308 : 120}
               layout="responsive"
             />
-          )}
+          ) : null}
         </div>
         <div className={styles["text-section"]}>
           {heading && (
-            <Label className={styles["heading"]}>
+            <Label role="heading" className={styles["heading"]}>
               {appState.lang == "en" ? heading : t("customerHeading")}
             </Label>
           )}
           <div className={styles["search-bar"]}>
             <Image
-              src={inputIcon.url}
-              alt={inputIcon.altText}
+              src={inputIcon?.url || "/"}
+              alt={inputIcon?.altText || "alt text"}
               width={size > desktopScreenSize ? 20 : 16}
               height={size > desktopScreenSize ? 20 : 16}
             />
@@ -95,7 +95,7 @@ const CustomerService  = ({
         </div>
       </div>
       {title && (
-        <Label className={styles["title"]}>
+        <Label role="title" className={styles["title"]}>
           {appState.lang == "en" ? title : t("customerTitle")}
         </Label>
       )}
@@ -129,7 +129,7 @@ const CustomerService  = ({
                       />
                     )}
                     {iconTitle && (
-                      <Label className={styles["icon-title"]}>
+                      <Label role="iconTitle" className={styles["icon-title"]}>
                         {appState.lang == "en"
                           ? iconTitle
                           : _servicesProps[index].iconTitle}
@@ -137,7 +137,7 @@ const CustomerService  = ({
                     )}
                   </div>
                   {iconText && (
-                    <Label className={styles["icon-text"]}>
+                    <Label role="iconText" className={styles["icon-text"]}>
                       {appState.lang == "en"
                         ? iconText
                         : _servicesProps[index].iconText}

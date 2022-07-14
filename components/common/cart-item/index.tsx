@@ -299,6 +299,7 @@ const CartItem = ({
                   removeItem(item);
                 }}
                 disabled={addingItem || removingItem}
+                role="removeBtn"
               >
                 {appState?.lang === "en"
                   ? removingItem
@@ -326,6 +327,7 @@ const CartItem = ({
                     handleAddToCart(item);
                   }}
                   disabled={addingItem || removingItem}
+                  role="addtocart"
                 >
                   {appState?.lang === "en"
                     ? addingItem
