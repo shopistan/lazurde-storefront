@@ -9,7 +9,8 @@ import Slider from "components/common/ui/slider/slider";
 import Button from "components/common/ui/button";
 import { ImageType } from "lib/types/common";
 import { AppContext } from "lib/context";
-import { addProductToCart } from "lib/utils/cart";
+// import { addProductToCart } from "lib/utils/cart";
+import useCart from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
 import { checkMediaType, desktopScreenSize } from "lib/utils/common";
 import useTranslation from "next-translate/useTranslation";
@@ -50,7 +51,8 @@ const ProductCard = ({
   showATC = true,
 }: ProductCardProps): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState } = useContext(AppContext);
+  const { appState, setOpenMiniCart, cartId } = useContext(AppContext);
+  const { addProductToCart } = useCart();
   const [fill, setFill] = useState(false);
   const { t } = useTranslation("common");
   const router = useRouter();
@@ -60,7 +62,7 @@ const ProductCard = ({
   const handleAddToCart = async (event: any) => {
     event.stopPropagation();
     const payload: ATCPayload = {
-      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
+      cartId: cartId,
       items: [
         {
           sku: sku,
@@ -79,9 +81,8 @@ const ProductCard = ({
     };
     const response = await addProductToCart(payload);
     if (response?.hasError) {
-      
-      if(response?.code === 'ITEM_OUT_OF_STOCK') {
-        setOutOfStockError(true)
+      if (response?.code === "ITEM_OUT_OF_STOCK") {
+        setOutOfStockError(true);
       }
     } else {
       router?.push("/cart");
@@ -234,9 +235,7 @@ const ProductCard = ({
         </div>
       </div>
       {outOfStockError && (
-        <div className={styles["error-msg"]}>
-          Out of Stock
-        </div>
+        <div className={styles["error-msg"]}>Out of Stock</div>
       )}
     </div>
   );

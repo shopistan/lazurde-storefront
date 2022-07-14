@@ -87,7 +87,7 @@
   }
 
   .minicart_items {
-    height: 230px;
+    height: 100%;
     overflow-y: auto;
 
     @media (min-width: $breakPoint-desktop) {
