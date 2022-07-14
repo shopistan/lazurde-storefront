@@ -18,12 +18,12 @@ import WishList from "components/common/wishlist";
 import NotifyMeModal from "./notify-me-modal";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
-import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
 import { useRouter } from "next/router";
 import { fetchProductPriceByItemId } from "lib/utils/product";
 import { getInventoryByIds, getInventoryAuth } from "lib/api/inventory";
 import Skeleton from "react-loading-skeleton";
+import useCart from "lib/utils/cart";
 // import "react-loading-skeleton/dist/skeleton.css";
 
 type ProductProps = {
@@ -57,11 +57,12 @@ const RightSideDetail = ({
   priceListId = "100000",
   setIsloading = () => {},
 }: RightSideDetailProps): JSX.Element => {
+  const { addProductToCart } = useCart();
   const productDataCopy = useRef(productData).current;
   const allProductPrices = useRef([]);
   const userAuth = useRef("");
   const router = useRouter();
-  const { appState } = useContext(AppContext);
+  const { appState, cartId } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
   const [quantityCounter, setQuantityCounter] = useState(1);
@@ -131,12 +132,12 @@ const RightSideDetail = ({
       }
       return selectedSku;
     });
-    
+
     if (!item) return;
     getSelectedPrice(item || productDataCopy[0]);
     await getProductInventory(item || productDataCopy[0]);
     if (!item.hasOwnProperty("hasStock")) return;
-    setSelectedItem({...item});
+    setSelectedItem({ ...item });
     for (let index = 0; index < productDataCopy?.length; index++) {
       if (index === 0) continue;
       if (productDataCopy[index]?.hasOwnProperty("hasStock")) continue;
@@ -145,7 +146,6 @@ const RightSideDetail = ({
     }
     return item;
   };
-
 
   const getSelectedPrice = async (
     selectedProduct: { itemId: number } | any
@@ -250,7 +250,7 @@ const RightSideDetail = ({
     } = (await getProductSku()) || productDataCopy[0];
 
     const payload: ATCPayload = {
-      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
+      cartId: cartId,
       items: [
         {
           sku: selectedProduct && selectedProduct?.sku,
