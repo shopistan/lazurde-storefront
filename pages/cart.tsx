@@ -8,7 +8,6 @@ import Head from "next/head";
 import AppContentWrapper from "components/common/app-content-wrapper";
 import Cart from "components/common/cart";
 import { GetServerSideProps } from "next";
-import { getCartByCartId } from "lib/utils/cart";
 import { AppContext } from "lib/context";
 
 const CartPage: FC<PageProps> = ({

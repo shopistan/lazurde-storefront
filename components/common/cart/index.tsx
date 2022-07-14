@@ -1,11 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import styles from "./cart.module.scss";
 import CartItem from "components/common/cart-item";
-import {
-  getCartByCartId,
-  removeItemFromCart,
-  updateItemOfCart,
-} from "lib/utils/cart";
+import useCart from "lib/utils/cart";
 import { deleteWishList, getWishList } from "lib/utils/wishlist";
 import Image from "next/image";
 import { AppleButton, CrossSmall, PaypalButton } from "components/icons";
@@ -24,12 +20,18 @@ import { ProductType } from "lib/types/product";
 
 interface CartProps {}
 const Cart = ({}: CartProps): JSX.Element => {
+  const { getCartByCartId, removeItemFromCart, updateItemOfCart } = useCart();
   const [width] = useWindowSize();
   const { t } = useTranslation("common");
   const authToken =
     "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MTUzMzYxLCJleHAiOjE2NTQxNTUxNjF9.FLBjzjjR3g1zreH03aIE9B92H5y1HL6RfhwoePFbKeASfqq2RcyGqkKiexRTELDTPMOJEa9XXklsqfaegYS-fKrEXoIjjHv4KpolommWzaSINL5C__zljx7QZtF5sRtyYKPPlwEcuPtdMJTCERIfyDIHsMF4oehEVvN-cd6DwOA";
-  const { priceListId, appState, allWishListProducts, setAllWishListProducts } =
-    useContext(AppContext);
+  const {
+    cartId,
+    priceListId,
+    appState,
+    allWishListProducts,
+    setAllWishListProducts,
+  } = useContext(AppContext);
   const [freeShipping, showFreeShipping] = useState(true);
   const [cartData, setCartData] = useState({
     status: "",
@@ -122,9 +124,7 @@ const Cart = ({}: CartProps): JSX.Element => {
   };
 
   const getCartData = async () => {
-    const cartData = await getCartByCartId(
-      "98b0ed93-aaf1-4001-b540-b61796c4663d"
-    );
+    const cartData = await getCartByCartId(cartId);
     if (cartData?.status === 200) {
       const cartItems = cartData?.data;
       cartItems?.items?.map((product: ProductType, index: number) => {
