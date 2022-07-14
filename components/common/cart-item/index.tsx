@@ -7,10 +7,10 @@ import { desktopScreenSize, mobileScreenSize } from "lib/utils/common";
 import { Bag, CrossSmall } from "components/icons";
 import { AppContext } from "lib/context";
 import Label from "components/common/ui/label";
-import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
 import Spinner from "../ui/spinner";
 import { getInventoryByIds } from "lib/api/inventory";
+import useCart from "lib/utils/cart";
 
 interface CartItemObject {
   title: string;
@@ -68,7 +68,8 @@ const CartItem = ({
   miniCartItem = false,
   wishListSideBarItem = false,
 }: CartItemProps): JSX.Element => {
-  const { appState } = useContext(AppContext);
+  const { addProductToCart } = useCart();
+  const { appState, cartId } = useContext(AppContext);
   const [width] = useWindowSize();
   const [updatingItem, setUpdatingItem] = useState(false);
   const [removingItem, setRemovingItem] = useState(false);
@@ -120,7 +121,7 @@ const CartItem = ({
     };
 
     const payload: ATCPayload = {
-      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
+      cartId: cartId,
       items: [
         {
           sku: selectedProduct && selectedProduct?.sku,

@@ -4,7 +4,6 @@ import useTranslation from "next-translate/useTranslation";
 import Heading from "components/common/ui/heading";
 import Label from "components/common/ui/label";
 import { Bag, Heart, IconTick, SignOut } from "components/icons";
-import { getCartByCartId, updateItemOfCart } from "lib/utils/cart";
 import {
   fetchProductPriceByItemId,
   fetchProductsByItemId,
@@ -15,10 +14,9 @@ import { AppContext } from "lib/context";
 import Button from "components/common/ui/button";
 import { useRouter } from "next/router";
 import { getInventoryAuth } from "lib/api/inventory";
-import { desktopScreenSize } from "lib/utils/common";
-import useWindowSize from "lib/utils/useWindowSize";
 import { deleteWishList, getWishList } from "lib/utils/wishlist";
 import { loginUser, logoutUser } from "lib/identity";
+import useCart from "lib/utils/cart";
 
 interface wishlistArabicData {
   wishList?: string;
@@ -29,10 +27,16 @@ interface wishlistArabicData {
 }
 
 const WishListSidebar = (): JSX.Element => {
+  const { getCartByCartId } = useCart();
   const authToken =
     "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MTUzMzYxLCJleHAiOjE2NTQxNTUxNjF9.FLBjzjjR3g1zreH03aIE9B92H5y1HL6RfhwoePFbKeASfqq2RcyGqkKiexRTELDTPMOJEa9XXklsqfaegYS-fKrEXoIjjHv4KpolommWzaSINL5C__zljx7QZtF5sRtyYKPPlwEcuPtdMJTCERIfyDIHsMF4oehEVvN-cd6DwOA";
-  const { priceListId, appState, allWishListProducts, setAllWishListProducts } =
-    useContext(AppContext);
+  const {
+    cartId,
+    priceListId,
+    appState,
+    allWishListProducts,
+    setAllWishListProducts,
+  } = useContext(AppContext);
   const { t } = useTranslation("common");
   const [renderComponent, setRenderComponent] = useState(false);
   const [isLoginUser, setIsLoginUser] = useState(false);
@@ -83,9 +87,7 @@ const WishListSidebar = (): JSX.Element => {
   );
 
   async function getCartData() {
-    const cartData = await getCartByCartId(
-      "98b0ed93-aaf1-4001-b540-b61796c4663d"
-    );
+    const cartData = await getCartByCartId(cartId);
     if (cartData?.status === 200) {
       const cartItems = cartData?.data;
       cartItems?.items?.map((product: ProductType, index: number) => {
