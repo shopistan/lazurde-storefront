@@ -27,16 +27,20 @@ exports.default = Types.Component({
             }),
           }),
           dividend: Types.Array({
-            label: "Dividend History",
+            label: "Dividend",
             children: Types.Shape({
               children: {
                 heading: Types.String({ label: "Heading" }),
                 text: Types.RichText({ label: "Paragraph" }),
                 dividendHistory: Types.Array({
                   label: "Dividend Table",
-                  heading: Types.String({ label: "Heading" }),
-                  year: Types.String({ label: "Year" }),
-                  value: Types.String({ label: "Value" }),
+                  children: Types.Shape({
+                    children: {
+                      heading: Types.String({ label: "Heading" }),
+                      year: Types.String({ label: "Year" }),
+                      value: Types.String({ label: "Value" }),
+                    },
+                  }),
                 }),
                 content: Types.RichText({ label: "Content" }),
               },
