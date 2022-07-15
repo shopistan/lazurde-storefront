@@ -1253,6 +1253,19 @@ const CGIR: FC<CGIRProps> = ({
                           );
                         })}
                     </div>
+                  ) : currentObject?.name === "Contact IR" ||
+                    currentObject?.name === "الاتصال بـ IR" ? (
+                    <div className={styles["text-wrapper"]}>
+                      {currentObject?.moreContent?.length > 0 &&
+                        currentObject?.moreContent?.map((obj, index) => {
+                          const { text } = obj;
+                          return (
+                            <div key={index} className={styles["text-block"]}>
+                              <p dangerouslySetInnerHTML={{ __html: text }}></p>
+                            </div>
+                          );
+                        })}
+                    </div>
                   ) : (
                     currentObject?.moreContent &&
                     currentObject?.moreContent?.length > 0 &&

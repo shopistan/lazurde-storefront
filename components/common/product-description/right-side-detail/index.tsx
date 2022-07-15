@@ -24,7 +24,7 @@ import { fetchProductPriceByItemId } from "lib/utils/product";
 import { getInventoryByIds, getInventoryAuth } from "lib/api/inventory";
 import Skeleton from "react-loading-skeleton";
 import useCart from "lib/utils/cart";
-// import "react-loading-skeleton/dist/skeleton.css";
+import Splash from "components/common/ui/splash";
 
 type ProductProps = {
   Size?: number;
@@ -69,6 +69,7 @@ const RightSideDetail = ({
   const [selectedSize, setSelectedSize] = useState({ size: -1, index: 0 });
   const [selectedColor, setSelectedColor] = useState({ color: "", index: 0 });
   const [selectedItem, setSelectedItem] = useState(productDataCopy[0]);
+  const [isLoadingData, setIsloadingData] = useState<boolean>(true);
   const [productPricing, setProductPricing] = useState<{
     currency: string;
     base: number | string;
@@ -144,6 +145,7 @@ const RightSideDetail = ({
       const remainigItem = productDataCopy[index];
       await getProductInventory(remainigItem);
     }
+    setIsloadingData(false);
     return item;
   };
 
@@ -284,7 +286,8 @@ const RightSideDetail = ({
   };
 
   return (
-    <>
+    <div className={styles["container"]}>
+      <Splash isLoading={isLoadingData}></Splash>
       <div className={styles["detail"]}>
         {selectedItem?.hasStock === false ? (
           <div className={styles["collection-and-outofstock"]}>
@@ -410,7 +413,7 @@ const RightSideDetail = ({
           onClose={() => setNotifyModalOpen(false)}
         />
       )}
-    </>
+    </div>
   );
 };
 export default RightSideDetail;

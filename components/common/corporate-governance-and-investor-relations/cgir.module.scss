@@ -180,6 +180,24 @@
       font-size: 13px;
     }
   }
+  .text-wrapper {
+    .text-block {
+      p {
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        @media (max-width: $breakPoint-mobile) {
+          font-size: 13px;
+        }
+        strong {
+          margin-top: 24px;
+          font-size: 15px;
+          font-weight: 600;
+          display: inline-block;
+        }
+      }
+    }
+  }
 }
 
 .back-button {
