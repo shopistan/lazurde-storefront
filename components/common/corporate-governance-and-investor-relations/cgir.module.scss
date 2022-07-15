@@ -183,16 +183,18 @@
   .text-wrapper {
     .text-block {
       p {
-        margin-bottom: 24px;
+        margin-bottom: 0;
         font-size: 14px;
         font-weight: 400;
         @media (max-width: $breakPoint-mobile) {
           font-size: 13px;
         }
-      }
-      strong {
-        font-size: 15px;
-        font-weight: 600;
+        strong {
+          margin-top: 24px;
+          font-size: 15px;
+          font-weight: 600;
+          display: inline-block;
+        }
       }
     }
   }
