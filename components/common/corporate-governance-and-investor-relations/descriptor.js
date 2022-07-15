@@ -33,6 +33,7 @@ exports.default = Types.Component({
                 heading: Types.String({ label: "Heading" }),
                 text: Types.RichText({ label: "Paragraph" }),
                 dividendHistory: Types.Array({
+                  label: "Dividend Table",
                   heading: Types.String({ label: "Heading" }),
                   year: Types.String({ label: "Year" }),
                   value: Types.String({ label: "Value" }),
