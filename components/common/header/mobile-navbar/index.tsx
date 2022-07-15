@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./style.module.scss";
 import { Bag, Heart, MenuIcon, Search, LazurdeLogo } from "components/icons";
+import Label from "components/common/ui/label";
 import Link from "next/link";
 import MobileMenu from "./mobile-menu/mobile-menu";
 import Image from "next/image";
@@ -9,6 +10,7 @@ import SideBar from "components/common/ui/sidebar";
 import WishListSidebar from "components/common/minicart-wishlist-sidebars/wish-list";
 import MiniCart from "components/common/minicart-wishlist-sidebars/mini-cart";
 import AccountSidebar from "components/common/right-sidebars/account-sidebar";
+import { AppContext } from "lib/context";
 
 const MobileNavBar = ({
   menuData,
@@ -18,6 +20,8 @@ const MobileNavBar = ({
   siteLogoUrl,
   setOpenSearchDialog,
 }: MobileHeaderProps): JSX.Element => {
+  const { openMiniCart, setOpenMiniCart, cartItemCounter } =
+    useContext(AppContext);
   const [menu, setMenu] = useState<Boolean>(false);
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const [sidebarChild, setSidebarChild] = useState({
@@ -36,6 +40,16 @@ const MobileNavBar = ({
       }, 280);
     }
   }, [sidebarOpened]);
+
+  useEffect(() => {
+    if (openMiniCart) {
+      handleMiniCart();
+      setTimeout(() => {
+        onSideBarClose();
+        setOpenMiniCart(false);
+      }, 5000);
+    }
+  }, [openMiniCart]);
 
   const handleMiniCart = () => {
     setSidebarOpened(!sidebarOpened);
@@ -119,8 +133,16 @@ const MobileNavBar = ({
           <button onClick={() => handleWishListCart()}>
             <Heart fill="#000000" stroke="#000000" />
           </button>
-          <button onClick={() => handleMiniCart()}>
+          <button
+            className={styles.minicart_btn}
+            onClick={() => handleMiniCart()}
+          >
             <Bag fill="#000000" stroke="#000000" />
+            {cartItemCounter > 0 ? (
+              <div className={styles.rounded_counter}>
+                <Label>{cartItemCounter}</Label>
+              </div>
+            ) : null}
           </button>
         </div>
       </div>

@@ -81,11 +81,12 @@ const ProductCard = ({
     };
     const response = await addProductToCart(payload);
     if (response?.hasError) {
+      setOpenMiniCart(false);
       if (response?.code === "ITEM_OUT_OF_STOCK") {
         setOutOfStockError(true);
       }
-    } else {
-      router?.push("/cart");
+    } else if (response?.response?.status === 200) {
+      setOpenMiniCart(true);
     }
   };
 
