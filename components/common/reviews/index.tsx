@@ -31,7 +31,7 @@ const Reviews = ({
   productData = {},
 }: ReviewsProps): JSX.Element => {
   const { t } = useTranslation("common");
-  const { appState } = useContext(AppContext);
+  const { appState, isFetchingReview } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [currentData, setCurrentData] = useState([]);
@@ -42,6 +42,13 @@ const Reviews = ({
     setFilterData("");
     fetchingReviews();
   }, [productData]);
+
+  useEffect(() => {
+    if (isFetchingReview) {
+      setFilterData("");
+      fetchingReviews();
+    }
+  }, [isFetchingReview]);
 
   const onClose = () => {
     setModalOpen(false);
@@ -200,7 +207,6 @@ const Reviews = ({
           productData={productData}
           isOpened={modalOpen}
           onClose={onClose}
-          fetchingReviews={fetchingReviews}
           reviewImagesRef={reviewImagesRef}
         />
       )}

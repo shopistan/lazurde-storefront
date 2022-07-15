@@ -28,7 +28,7 @@ const ReviewForm = ({
 }: any): JSX.Element => {
   const [fileUpload, setFileUpload] = useState<any>([{ fileArray: {} }]);
   const [fileName, setFileName] = useState<any>([]);
-  const { appState } = useContext(AppContext);
+  const { appState, setIsFetchingReview } = useContext(AppContext);
   const { t } = useTranslation("common");
   const arabicLabels: arabicLabelTypes = t(
     "reviewFormData",
@@ -66,7 +66,7 @@ const ReviewForm = ({
     formData.append("productId", productData && productData["itemId"]);
     formData.append("author", `${values?.firstName} ${values?.lastName}`);
     formData.append("email", values?.email);
-    formData.append("location", "KSA");
+    formData.append("location", appState?.region);
     formData.append("reviewRating", rating ? rating : null);
     formData.append("reviewTitle", values?.review);
     formData.append("reviewMessage", values?.review);
@@ -92,13 +92,14 @@ const ReviewForm = ({
       const response = await writeReview(formData);
       if (response?.hasError === false) {
         setIsRatingError && setIsRatingError("");
-        fetchingReviews && fetchingReviews();
+        setIsFetchingReview(true);
         setTimeout(() => {
           onClose && onClose();
         }, 2000);
       } else {
         setIsRatingError && setIsRatingError("Network Error");
       }
+      setIsFetchingReview(false);
     }
   };
 
