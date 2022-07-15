@@ -2,13 +2,17 @@ import Axios from "axios";
 import ENDPOINTS from "lib/api/endpoints";
 import HEADERS from "lib/api/headers";
 import { ErrorObject } from "lib/types/common";
-import { STAMPED_STORE_HASH_ID, STAMPED_USERNAME } from "general-config";
+import {
+  STAMPED_STORE_HASH_ID,
+  STAMPED_USERNAME,
+  GOOGLE_TRANSLATE_API_KEY,
+} from "general-config";
 
 export const getReviews = async (productId: number | string) => {
   try {
     const payload = STAMPED_STORE_HASH_ID;
     const response = await Axios.get(
-      `${ENDPOINTS.GET.REVIEWS(payload, productId)}`,
+      `${ENDPOINTS.REVIEWS.GET_REVIEWS(payload, productId)}`,
       {
         headers: HEADERS.reviews,
       }
@@ -28,7 +32,7 @@ export const writeReview = async (payload?: any) => {
     const storeHash = STAMPED_STORE_HASH_ID;
 
     const writeReview = await Axios.post(
-      `${ENDPOINTS.POST.CREATE_REVIEW(apiKey, storeHash)}`,
+      `${ENDPOINTS.REVIEWS.CREATE_REVIEW(apiKey, storeHash)}`,
       payload,
       {
         headers: HEADERS.reviews,
@@ -42,9 +46,29 @@ export const writeReview = async (payload?: any) => {
     return {
       hasError: true,
     };
-    console.log(
-      "Error while adding a review: ",
-      (error as ErrorObject).message
+  }
+};
+
+export const translateText = async (payload?: any, targetLang?: string) => {
+  try {
+    const translateReview = await Axios.post(
+      `${ENDPOINTS.REVIEWS.TRANSLATE_REVIEWS}`,
+      {},
+      {
+        params: {
+          q: payload,
+          target: targetLang || "en",
+          key: GOOGLE_TRANSLATE_API_KEY,
+        },
+      }
     );
+    return {
+      hasError: false,
+      response: translateReview,
+    };
+  } catch (error: unknown) {
+    return {
+      hasError: true,
+    };
   }
 };

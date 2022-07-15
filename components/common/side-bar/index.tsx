@@ -1,5 +1,5 @@
-import { ImageType } from "lib/types/common";
 import React, { FC, useContext, useEffect, useState } from "react";
+import { ImageType } from "lib/types/common";
 import Label from "../ui/label";
 import Image from "next/image";
 import styles from "./side-bar.module.scss";
@@ -10,25 +10,23 @@ import Router, { useRouter } from "next/router";
 import { desktopScreenSize } from "lib/utils/common";
 import { BackArrow } from "components/icons";
 import { OKTA_CLIENT_ID, OKTA_DOMAIN } from "general-config";
-import { logoutUser } from "lib/identity";
+import {
+  getUserInfo,
+  logoutUser,
+  refreshAuthToken,
+  resetUserPassword,
+} from "lib/identity";
 
 type AccountsProps = {
-  image: ImageType;
-  text: string | "";
-  width: string | number;
-  height: string | number;
-  link: string | "";
+  image?: ImageType;
+  text?: string | "";
+  width?: string | number;
+  height?: string | number;
+  link?: string | "";
 };
 
 type DetailsProps = {
   accounts: AccountsProps[];
-};
-
-type _DetailsProps = {
-  accounts: _AccountsProps[];
-};
-type _AccountsProps = {
-  text: string | "";
 };
 
 interface SideBarProps {
@@ -56,22 +54,41 @@ const SideBar: FC<SideBarProps> = ({
   const router = useRouter();
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
-  const _detailsProps: _DetailsProps[] = t(
+  const _detailsProps: DetailsProps[] = t(
     "detailsProps",
     {},
     { returnObjects: true }
   );
 
-  const [userName, setUserName] = useState("");
-  useEffect(() => {}, []);
+  const [userName, setUserName] = useState("San");
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      let userInfo = (await getUserInfo()) || null;
+      if (!userInfo) {
+        await refreshAuthToken();
+        userInfo = (await getUserInfo()) || {};
+      }
+      if (userInfo.firstName) {
+        setUserName(userInfo.firstName);
+      }
+    };
+    fetchUserInfo();
+  }, []);
 
   const signOut = async () => {
     logoutUser();
   };
 
+  const [renderCom, setRenderCom] = useState(false);
+  useEffect(() => {
+    setRenderCom(true);
+  }, []);
+
   return (
     <>
-      {activeComponent !== "Account Overview" && width < desktopScreenSize ? (
+      {renderCom &&
+      activeComponent !== "Account Overview" &&
+      width < desktopScreenSize ? (
         <div
           className={styles["account-button"]}
           onClick={() => {
@@ -91,7 +108,12 @@ const SideBar: FC<SideBarProps> = ({
             {width >= desktopScreenSize && (
               <div className={styles["account-profile"]}>
                 {barCode?.url && (
-                  <Image src={barCode?.url || "/"} width={100} height={100} />
+                  <Image
+                    alt="icon"
+                    src={barCode?.url || "/"}
+                    width={100}
+                    height={100}
+                  />
                 )}
                 <Label>
                   <>
@@ -111,6 +133,7 @@ const SideBar: FC<SideBarProps> = ({
               <div className={styles["account-profile-mobile"]}>
                 <div className={styles["account-image-mobile"]}>
                   <Image
+                    alt="icon"
                     src={"/contact.png"}
                     width={375}
                     height={120}
@@ -119,7 +142,12 @@ const SideBar: FC<SideBarProps> = ({
                 </div>
                 <div className={styles["account-banner"]}>
                   {barCode?.url && (
-                    <Image src={barCode?.url || "/"} width={100} height={100} />
+                    <Image
+                      alt="icon"
+                      src={barCode?.url || "/"}
+                      width={100}
+                      height={100}
+                    />
                   )}
                   <Label>
                     <>
@@ -138,6 +166,7 @@ const SideBar: FC<SideBarProps> = ({
               <div className={styles["account-reviewsImage"]}>
                 {reviewImage?.url && (
                   <Image
+                    alt="icon"
                     src={reviewImage?.url || "/"}
                     width={16.67}
                     height={16.67}
@@ -155,32 +184,37 @@ const SideBar: FC<SideBarProps> = ({
               details?.map((object, i) => {
                 const { accounts } = object;
                 return (
-                  <div className={styles["account-details"]}>
+                  <div key={i} className={styles["account-details"]}>
                     {accounts &&
                       accounts?.map((account, index) => {
                         const { text, image, width, height, link } = account;
                         return (
                           <div
                             className={`${styles["account-detail"]} ${
-                              activeComponent == text && styles["active-block"]
+                              text == activeComponent && activeComponent
+                                ? styles["active-block"]
+                                : ""
                             }`}
                             key={index}
                             onClick={() => {
                               if (text.toLowerCase().includes("sign out")) {
                                 signOut();
                               } else {
+                                window.localStorage.setItem("active", text);
                                 setActiveComponent(text);
                               }
                             }}
                           >
                             <div className={styles["account-image"]}>
-                              <Image
-                                src={image.url || "/"}
-                                alt={image.altText}
-                                width={width}
-                                height={height}
-                                layout="fixed"
-                              />
+                              {image?.url ? (
+                                <Image
+                                  src={image?.url || "/"}
+                                  alt={image?.altText}
+                                  width={width}
+                                  height={height}
+                                  layout="fixed"
+                                />
+                              ) : null}
                             </div>
                             <Label
                               className={

@@ -27,11 +27,12 @@ export const saveAppStateToLocalStorage = (
   region: RegionType,
   channel: ChannelType,
   locale: LocaleType,
-  brand: BrandType
+  brand: BrandType,
+  locationNum: Number,
 ) => {
   window.localStorage.setItem(
     "app-state",
-    JSON.stringify({ lang, region, channel, locale, brand })
+    JSON.stringify({ lang, region, channel, locale, brand, locationNum })
   );
 };
 
@@ -126,7 +127,7 @@ export const ordeFormatDate = (date: any) => {
     dayString = `${day}th`;
   }
 
-  return `${_day} ${month} ${dayString} ${year}`;
+  return `${_day}, ${month} ${dayString}, ${year}`;
 };
 
 export const updateOrderDate = (date: any) => {

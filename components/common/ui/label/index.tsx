@@ -5,6 +5,7 @@ interface labelType {
   style?: Object;
   children?: string | JSX.Element;
   testId?: string;
+  role?: string;
 }
 
 const Label = ({
@@ -12,9 +13,15 @@ const Label = ({
   style = {},
   children,
   testId = "",
+  role = "",
 }: labelType): JSX.Element => {
   return (
-    <p data-testid={testId} className={`label-c ${className}`} style={style}>
+    <p
+      data-testid={testId}
+      role={role}
+      className={`label-c ${className}`}
+      style={style}
+    >
       {children}
     </p>
   );

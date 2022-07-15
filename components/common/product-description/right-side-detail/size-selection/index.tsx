@@ -11,6 +11,7 @@ interface SizeChartProps {
   productSizeArray?: { Size?: number }[];
   onSizeChange?: Function;
   setSelectedSize?: Function;
+  setSelectedColor?: Function;
   selectedSize: { size: number; index: number };
 }
 
@@ -20,6 +21,7 @@ const SizeChart = ({
   productSizeArray = [],
   onSizeChange = () => {},
   setSelectedSize = () => {},
+  setSelectedColor = () => {},
   selectedSize,
 }: SizeChartProps): JSX.Element => {
   const { appState } = useContext(AppContext);
@@ -52,6 +54,11 @@ const SizeChart = ({
     getSizes();
   }, [productData, productSizeArray]);
 
+  useEffect(() => {
+    setSelectedColor({ color: "", index: 0 });
+    selectedSize.size && onSizeChange && onSizeChange(selectedSize.size);
+  }, [selectedSize]);
+
   return (
     <div className={styles["sizechart-wrapper"]}>
       {sizeArray && sizeArray.length > 0 ? (
@@ -67,7 +74,6 @@ const SizeChart = ({
                   key={index}
                   onClick={() => {
                     setActiveSize(index);
-                    onSizeChange && onSizeChange(size);
                     setSelectedSize({
                       size: size,
                       index: index,

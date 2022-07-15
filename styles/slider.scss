@@ -293,7 +293,6 @@ body .swiper-pagination-bullet {
   @media (min-width: $breakPoint-desktop) {
     .swiper-button-next {
       inset-inline-end: 55px;
-
     }
     .swiper-button-prev {
       inset-inline-start: 55px;
@@ -303,5 +302,48 @@ body .swiper-pagination-bullet {
       font-size: 34px !important;
       color: $black-color;
     }
+  }
+}
+
+/*--------------Account Review Slider---------------*/
+
+.account-review-slider {
+  .swiper-slide {
+    img {
+      width: 100% !important;
+    }
+  }
+
+  &.swiper {
+    padding-top: 65px;
+    @media (max-width: $breakPoint-desktop) {
+      padding-top: 0px;
+    }
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 0;
+    width: auto;
+    align-items: flex-end;
+    color: $black-color;
+
+    &:after {
+      font-size: 8px;
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.2;
+    }
+  }
+
+  .swiper-button-prev {
+    inset-inline-start: auto !important;
+    inset-inline-end: 46.29px !important;
+  }
+
+  .swiper-button-next {
+    inset-inline-start: auto !important;
+    inset-inline-end: 16px !important;
   }
 }

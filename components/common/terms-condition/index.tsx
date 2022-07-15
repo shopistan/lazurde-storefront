@@ -64,7 +64,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
     {},
     { returnObjects: true }
   );
-  const router = useRouter();
+  const [showPolicies, setShowPolicies] = useState(false);
   const [objects, setObjects] = useState({
     accordion: hyperLinks[0].accordion || [],
     name: hyperLinks[0]?.name || "",
@@ -87,31 +87,28 @@ const TermCondtion: FC<TermCondtionProps> = ({
       },
     });
   }, [appState.lang]);
-
   return (
     <div className={styles["term-comtainer"]}>
-      <Label className={styles["term-heading"]}>
-        {appState?.lang == "en" ? title : t("termTitle")}
-      </Label>
-      {objects?.name && (
-        <div className={styles["bread-crumb_item"]}>
-          <Link href={`/help-centre`}>
-            <a>
-              {appState?.lang === "en"
-                ? `Help Centre /`
-                : "/ تائفلا عيمج فشتكاا"}
-            </a>
-          </Link>
-          <Label>
-            {appState?.lang === "en" ? objects.name : " ةيسيئرلا ةحفصلا"}
-          </Label>
+      {!showPolicies && (
+        <div
+          className={styles["back-button"]}
+          style={{ backgroundColor: contentBgcolor }}
+          onClick={() => {
+            setShowPolicies(true);
+          }}
+        >
+          <div>
+            <BackArrow />
+          </div>
+          <button className={styles["back-content"]}>
+            {appState?.lang == "en"
+              ? `Back To ${appState.brand} Policies`
+              : "ءيش لك قوست"}
+          </button>
         </div>
       )}
       <div className={styles["term-section"]}>
-        <div
-          className={styles["term-left"]}
-          style={{ backgroundColor: sideBarBgcolor }}
-        >
+        <div className={styles["term-left"]} data-opened={showPolicies}>
           {hyperLinks &&
             hyperLinks.map((object, index) => {
               const {
@@ -128,11 +125,12 @@ const TermCondtion: FC<TermCondtionProps> = ({
                   className={styles["term-block"]}
                   key={index}
                   onClick={() => {
+                    setShowPolicies(false);
                     setObjects({
                       accordion: accordion,
                       content:
-                        appState.lang == "en" ? content : _links[index].content,
-                      name: appState.lang == "en" ? name : _links[index].name,
+                        appState.lang == "en" ? content : _links[index]?.content,
+                      name: appState.lang == "en" ? name : _links[index]?.name,
                       icon: {
                         url: icon?.url,
                         altText: icon?.altText,
@@ -151,74 +149,14 @@ const TermCondtion: FC<TermCondtionProps> = ({
                     </div>
                   )}
                   <Label>
-                    {appState?.lang === "en" ? name : _links[index].name}
+                    {appState?.lang === "en" ? name : _links[index]?.name}
                   </Label>
                 </div>
               );
             })}
-        </div>
-        <div className={styles["term-right-container"]}>
-          <div
-            className={styles["back-button"]}
-            style={{ backgroundColor: contentBgcolor }}
-            onClick={() => {
-              router.push("/help-centre");
-            }}
-          >
-            <div>
-              <BackArrow />
-            </div>
-            <button className={styles["back-content"]}>
-              {appState?.lang == "en" ? "Back To Help centre" : "ءيش لك قوست"}
-            </button>
-          </div>
-          <div
-            className={styles["term-right"]}
-            style={{ backgroundColor: contentBgcolor }}
-          >
-            <ContentBlock key={Math.random()} content={objects} />
-          </div>
-          <div
-            className={styles["term-right"]}
-            style={{ backgroundColor: contentBgcolor }}
-          >
-            {objects?.accordion && objects?.accordion?.length > 0 && (
-              <div className={styles["accordion-block"]}>
-                {objects?.accordion &&
-                  objects?.accordion.length > 0 &&
-                  objects?.accordion.map((object, index) => {
-                    const { heading, text } = object;
-                    return (
-                      <Accordion
-                        key={index}
-                        className={`accordion-help`}
-                        heading={
-                          appState.lang == "en"
-                            ? object?.heading
-                            : _accordion[index].heading
-                        }
-                        children={
-                          appState.lang == "en" ? (
-                            <p
-                              key={Math.random()}
-                              dangerouslySetInnerHTML={{
-                                __html: object?.text,
-                              }}
-                            ></p>
-                          ) : (
-                            _accordion[index].text
-                          )
-                        }
-                        arrowDown={true}
-                      />
-                    );
-                  })}
-              </div>
-            )}
-          </div>
           <div className={styles["back-block"]}>
             <button className={styles["button"]}>
-              <Image src={"/question.png"} width={20} height={20} />
+              <Image src={"/question.png"} width={20} height={20} alt="" />
               <p>
                 {appState.lang == "en"
                   ? "Have a question?"
@@ -226,6 +164,76 @@ const TermCondtion: FC<TermCondtionProps> = ({
               </p>
             </button>
           </div>
+        </div>
+
+        <div
+          className={styles["term-right-container"]}
+          data-opened={showPolicies}
+        >
+          <Label className={styles["term-heading"]}>
+            {appState?.lang == "en" ? title : t("termTitle")}
+          </Label>
+          <div
+            className={styles["term-right"]}
+            style={{ backgroundColor: contentBgcolor }}
+          >
+            <ContentBlock
+              className={"terms-conditions"}
+              key={Math.random()}
+              content={objects}
+            />
+            <div className={styles["back-block"]}>
+              <button className={styles["button"]}>
+                <Image src={"/question.png"} width={20} height={20} />
+                <p>
+                  {appState.lang == "en"
+                    ? "Have a question?"
+                    : t("customerButton")}
+                </p>
+              </button>
+            </div>
+          </div>
+          {(objects?.accordion[0].heading || objects?.accordion[0].text)
+            .length > 0 && (
+            <div
+              className={styles["term-right"]}
+              style={{ backgroundColor: contentBgcolor }}
+            >
+              {objects?.accordion && objects?.accordion?.length > 0 && (
+                <div className={styles["accordion-block"]}>
+                  {objects?.accordion &&
+                    objects?.accordion.length > 0 &&
+                    objects?.accordion.map((object, index) => {
+                      const { heading, text } = object;
+                      return (
+                        <Accordion
+                          key={index}
+                          className={`accordion-help`}
+                          heading={
+                            appState.lang == "en"
+                              ? object?.heading
+                              : _accordion[index].heading
+                          }
+                          children={
+                            appState.lang == "en" ? (
+                              <p
+                                key={Math.random()}
+                                dangerouslySetInnerHTML={{
+                                  __html: object?.text,
+                                }}
+                              ></p>
+                            ) : (
+                              _accordion[index].text
+                            )
+                          }
+                          arrowDown={true}
+                        />
+                      );
+                    })}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

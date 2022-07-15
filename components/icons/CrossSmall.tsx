@@ -7,6 +7,7 @@ const CrossSmall = ({ ...props }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        cursor: "pointer",
       }}
     >
       <div
@@ -18,6 +19,7 @@ const CrossSmall = ({ ...props }) => {
         onClick={() => {
           props.onClick && props.onClick();
         }}
+        role={props?.role}
       ></div>
       <svg
         width={props?.width || "10"}

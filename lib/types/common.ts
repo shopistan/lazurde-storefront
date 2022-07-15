@@ -6,9 +6,12 @@ export type XMComponent = {
 export type ErrorObject = {
   code?: string | number;
   message: string;
+  response?: {
+    code?: string;
+  };
 };
 
-export type ImageType = {
+export interface ImageType  {
   url: string;
   altText: string;
 };
@@ -104,6 +107,7 @@ export type AppStateType = {
   locale: LocaleType;
   lang: LangType;
   region: RegionType;
+  locationNum: Number;
 };
 
 export type AuthTokens = {

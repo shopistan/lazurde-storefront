@@ -1,11 +1,10 @@
+import * as React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import React from "react";
 import WriteAReview from "./index";
 import ContextProvider, { AppContext } from "lib/context";
 import { singleProductData } from "lib/mock-data/data";
 
 const isOpened = true;
-
 const renderComponent = () => {
   render(
     <ContextProvider>

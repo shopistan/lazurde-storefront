@@ -112,16 +112,18 @@ const SearchDialog: FC<SearchDialogProps> = ({
       >
         <div className={styles["search-bar"]}>
           <div className={styles["brand-icon"]}>
-            <Link href={siteLogoUrl || ""}>
-              <a>
-                <Image
-                  src={siteLogo?.url}
-                  width={152}
-                  height={20}
-                  alt={siteLogo?.altText}
-                />
-              </a>
-            </Link>
+            {siteLogo?.url ? (
+              <Link href={siteLogoUrl || ""}>
+                <a>
+                  <Image
+                    src={siteLogo?.url || "/placeholder.jpg"}
+                    width={152}
+                    height={20}
+                    alt={siteLogo?.altText}
+                  />
+                </a>
+              </Link>
+            ) : null}
           </div>
           <div className={styles["search-input-div"]}>
             <div className={styles["search-icon"]}>
@@ -143,7 +145,10 @@ const SearchDialog: FC<SearchDialogProps> = ({
             <CrossSmall
               width="12"
               height="12"
-              onClick={() => setOpenSearchDialog(false)}
+              onClick={() => {
+                setOpenSearchDialog(false);
+                document.body.className = "";
+              }}
             />
           </div>
         </div>

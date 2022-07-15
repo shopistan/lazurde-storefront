@@ -12,14 +12,19 @@
     display: flex;
   }
 }
+.account-right-side {
+  @media (min-width: $breakPoint-desktop) {
+    width: 60.748%;
+  }
+}
 
 .account-main {
   display: none;
   cursor: pointer;
   @media (min-width: $breakPoint-desktop) {
     display: flex;
-    align-items: center;
-    margin-bottom: 24px;
+    align-items: flex-start;
+    margin-bottom: 29px;
 
     p {
       margin-inline-start: 20px;
@@ -27,7 +32,7 @@
       font-weight: 500;
       line-height: 29px;
       letter-spacing: 0em;
-      text-align: start;
+      text-align: flex-start;
       margin-block: 0;
     }
   }

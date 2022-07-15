@@ -37,7 +37,9 @@ const ENDPOINTS = {
   },
 
   INVENTORY: {
-    GET_BY_IDS: "/api-inventory/inventory?itemIds=68",
+    GET_BY_IDS: (itemId: number) =>
+      `/api-inventory/inventory?itemIds=${itemId}`,
+    GET_AUTH: `/api-commerceIdentity/auth/local/login`,
   },
 
   WISHLIST: {
@@ -46,14 +48,20 @@ const ENDPOINTS = {
       `/api-cart/wishlist/user/item/${itemID}`,
   },
 
-  GET: {
-    REVIEWS: (storeHash: string | number, productId: string | number) =>
-      `https://stamped.io/api/v2/${storeHash}/dashboard/reviews?search=${productId}`,
+  IDENTITY: {
+    GET_USER_INFO: "/ums/v2/users/self",
+    RESET_PASSWORD: "/ums/v2/auth/self/password",
   },
 
-  POST: {
+  REVIEWS: {
+    GET_REVIEWS: (storeHash: string | number, productId: string | number) =>
+      `https://stamped.io/api/v2/${storeHash}/dashboard/reviews?search=${productId}`,
+
     CREATE_REVIEW: (apikey: string | number, storeHash: string | number) =>
       `https://stamped.io/api/reviews3?apiKey=${apikey}&sId=${storeHash}`,
+
+    TRANSLATE_REVIEWS:
+      "https://translation.googleapis.com/language/translate/v2",
   },
 };
 

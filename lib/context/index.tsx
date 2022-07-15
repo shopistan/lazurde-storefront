@@ -23,10 +23,18 @@ const ContextProvider: FC = ({ children }) => {
   };
 
   const [appState, setAppState] = useState<AppStateType | string>(defaultState);
+  const [cartId, setCartId] = useState(
+    (typeof window !== "undefined" &&
+      window.sessionStorage.getItem("cartId")) ||
+      null
+  );
   const [searchWrapperPosition, setSearchWrapperPosition] = useState({
     promo: false,
     langSelector: false,
   });
+
+  const activeAccountPageTab =
+    typeof window !== "undefined" && window.localStorage.getItem("active");
 
   const saveAppState = ({
     lang,
@@ -34,12 +42,13 @@ const ContextProvider: FC = ({ children }) => {
     channel,
     locale,
     brand,
+    locationNum,
   }: AppStateType) => {
     window.localStorage.setItem(
       "app-state",
-      JSON.stringify({ lang, region, channel, locale, brand })
+      JSON.stringify({ lang, region, channel, locale, brand, locationNum })
     );
-    setAppState({ lang, region, channel, locale, brand });
+    setAppState({ lang, region, channel, locale, brand, locationNum });
   };
 
   type SelectedFilterProps = {
@@ -56,9 +65,13 @@ const ContextProvider: FC = ({ children }) => {
   const [hasFilteredData, setHasFilteredData] = useState(false);
   const [priceListId, setPriceListId] = useState("100000");
   const [allWishListProducts, setAllWishListProducts] = useState(
-    typeof window !== "undefined" &&
-      JSON.parse(window.sessionStorage.getItem("wishListArray")) || []
+    (typeof window !== "undefined" &&
+      window?.sessionStorage?.getItem("wishListArray") !== "undefined" &&
+      JSON.parse(window.sessionStorage.getItem("wishListArray"))) ||
+      []
   );
+  const [openMiniCart, setOpenMiniCart] = useState(false);
+  const [cartItemCounter, setCartItemCounter] = useState(0);
 
   return (
     <AppContext.Provider
@@ -77,6 +90,13 @@ const ContextProvider: FC = ({ children }) => {
         setPriceListId,
         allWishListProducts,
         setAllWishListProducts,
+        activeAccountPageTab,
+        openMiniCart,
+        setOpenMiniCart,
+        cartItemCounter,
+        setCartItemCounter,
+        cartId,
+        setCartId,
       }}
     >
       {children}

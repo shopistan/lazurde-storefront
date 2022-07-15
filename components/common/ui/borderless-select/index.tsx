@@ -18,6 +18,8 @@ interface SelectProps {
   selectedLabel?: string | JSX.Element;
   showInModal?: Boolean;
   modalChildren?: string | JSX.Element;
+  visible?: boolean;
+  onOpen?: Function;
 }
 
 const BorderlessSelect = ({
@@ -30,6 +32,8 @@ const BorderlessSelect = ({
   selectedLabel = "",
   showInModal = false,
   modalChildren = "",
+  visible = false,
+  onOpen = () => {},
 }: SelectProps): JSX.Element => {
   const dropdown = useRef(null);
   const [selectedVal, setSelectedVal] = useState<optionProps>({});
@@ -55,6 +59,14 @@ const BorderlessSelect = ({
           setSelectedVal({ ...currentOption });
       });
   }, [selectedValue]);
+
+  useEffect(() => {
+    setIsOpen(visible);
+  }, [visible]);
+
+  useEffect(() => {
+    isOpen && onOpen && onOpen(true);
+  }, [isOpen]);
 
   return (
     <div
@@ -92,7 +104,7 @@ const BorderlessSelect = ({
       </div>
       {showInModal ? (
         <Modal
-          className={styles['select-modal']}
+          modalBodyClassName={styles["select-modal"]}
           isOpened={isOpen}
           onClose={() => {
             setIsOpen(false);

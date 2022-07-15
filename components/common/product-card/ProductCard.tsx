@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { Heart } from "components/icons";
+import React, { useState, useContext, useRef } from "react";
 import { SwiperSlide } from "swiper/react";
 import useWindowSize from "lib/utils/useWindowSize";
 import Image from "next/image";
@@ -9,13 +8,15 @@ import Slider from "components/common/ui/slider/slider";
 import Button from "components/common/ui/button";
 import { ImageType } from "lib/types/common";
 import { AppContext } from "lib/context";
-import { addProductToCart } from "lib/utils/cart";
+// import { addProductToCart } from "lib/utils/cart";
+import useCart from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
 import { checkMediaType, desktopScreenSize } from "lib/utils/common";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
-import { fetchProductPriceByItemId } from "lib/utils/product";
+import { getInventoryByIds, getInventoryAuth } from "lib/api/inventory";
 import WishList from "components/common/wishlist/index";
+
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -50,16 +51,43 @@ const ProductCard = ({
   showATC = true,
 }: ProductCardProps): JSX.Element => {
   const [width] = useWindowSize();
-  const { appState } = useContext(AppContext);
+  const { appState, setOpenMiniCart, cartId } = useContext(AppContext);
+  const { addProductToCart } = useCart();
   const [fill, setFill] = useState(false);
   const { t } = useTranslation("common");
   const router = useRouter();
+  const userAuth = useRef("");
+  const hasStock = useRef(null);
   // const [showWishListIcon, setShowWishListIcon] = useState(false);
+  const [outOfStockError, setOutOfStockError] = useState(false);
+
+  const getProductInventory = async () => {
+    if (hasStock.current !== null) {
+      return hasStock.current;
+    }
+
+    const response = await getInventoryAuth();
+    const userAuth = response?.data?.accessToken;
+
+    const inventoryData = await getInventoryByIds(userAuth, itemId);
+    hasStock.current =
+      inventoryData?.data?.inventory.length > 0 &&
+      inventoryData?.data?.inventory[0]?.counters?.["on-hand"] > 0;
+    if (!hasStock.current) {
+      setOutOfStockError(true);
+    }
+    return hasStock.current;
+  };
 
   const handleAddToCart = async (event: any) => {
     event.stopPropagation();
+
+    const inventoryResponse = await getProductInventory();
+
+    if (!inventoryResponse) return;
+
     const payload: ATCPayload = {
-      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
+      cartId: cartId,
       items: [
         {
           sku: sku,
@@ -77,9 +105,7 @@ const ProductCard = ({
       ],
     };
     const response = await addProductToCart(payload);
-    if (response?.hasError) {
-      alert("error while adding product");
-    } else {
+    if (!response?.hasError) {
       router?.push("/cart");
     }
   };
@@ -229,6 +255,9 @@ const ProductCard = ({
           )}
         </div>
       </div>
+      {outOfStockError && (
+        <div className={styles["error-msg"]}>Out of Stock</div>
+      )}
     </div>
   );
 };

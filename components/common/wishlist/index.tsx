@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useContext } from "react";
+import React, { FC, useState, useEffect, useContext } from "react";
 import { Heart } from "components/icons";
 import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
 import FillHeart from "components/icons/FillHeart";
@@ -14,9 +14,10 @@ const WishList: FC<WishListProps> = ({
   itemId = "68",
 }): JSX.Element => {
   const [active, setActive] = useState(false);
-  const { allWishListProducts, setAllWishListProducts } = useContext(AppContext);
+  const { allWishListProducts, setAllWishListProducts } =
+    useContext(AppContext);
   useEffect(() => {
-    const isSelected = allWishListProducts.find(
+    const isSelected = allWishListProducts?.find(
       (item: string) => item === itemId
     );
 
@@ -25,7 +26,8 @@ const WishList: FC<WishListProps> = ({
 
   const getwishlist = async () => {
     const wishlistArray = await getWishList(authToken);
-    setAllWishListProducts && setAllWishListProducts(wishlistArray?.data?.items);
+    setAllWishListProducts &&
+      setAllWishListProducts(wishlistArray?.data?.items);
     typeof window !== "undefined" &&
       window.sessionStorage.setItem(
         "wishListArray",
@@ -50,6 +52,7 @@ const WishList: FC<WishListProps> = ({
             setActive(true);
             addwishlist();
           }}
+          role="button"
         >
           <Heart fill="black" stroke="black" />
         </div>
@@ -60,6 +63,7 @@ const WishList: FC<WishListProps> = ({
             setActive(false);
             deletewishlist();
           }}
+          role="buttontwo"
         >
           <FillHeart />
         </div>
