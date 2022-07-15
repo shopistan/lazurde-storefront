@@ -23,6 +23,11 @@ const ContextProvider: FC = ({ children }) => {
   };
 
   const [appState, setAppState] = useState<AppStateType | string>(defaultState);
+  const [cartId, setCartId] = useState(
+    (typeof window !== "undefined" &&
+      window.sessionStorage.getItem("cartId")) ||
+      null
+  );
   const [searchWrapperPosition, setSearchWrapperPosition] = useState({
     promo: false,
     langSelector: false,
@@ -65,6 +70,8 @@ const ContextProvider: FC = ({ children }) => {
       JSON.parse(window.sessionStorage.getItem("wishListArray"))) ||
       []
   );
+  const [openMiniCart, setOpenMiniCart] = useState(false);
+  const [cartItemCounter, setCartItemCounter] = useState(0);
 
   return (
     <AppContext.Provider
@@ -84,6 +91,12 @@ const ContextProvider: FC = ({ children }) => {
         allWishListProducts,
         setAllWishListProducts,
         activeAccountPageTab,
+        openMiniCart,
+        setOpenMiniCart,
+        cartItemCounter,
+        setCartItemCounter,
+        cartId,
+        setCartId,
       }}
     >
       {children}

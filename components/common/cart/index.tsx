@@ -1,12 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import styles from "./cart.module.scss";
 import CartItem from "components/common/cart-item";
-import { cartItems } from "lib/mock-data/data";
-import {
-  getCartByCartId,
-  removeItemFromCart,
-  updateItemOfCart,
-} from "lib/utils/cart";
+import useCart from "lib/utils/cart";
 import { deleteWishList, getWishList } from "lib/utils/wishlist";
 import Image from "next/image";
 import { AppleButton, CrossSmall, PaypalButton } from "components/icons";
@@ -25,12 +20,18 @@ import { ProductType } from "lib/types/product";
 
 interface CartProps {}
 const Cart = ({}: CartProps): JSX.Element => {
+  const { getCartByCartId, removeItemFromCart, updateItemOfCart } = useCart();
   const [width] = useWindowSize();
   const { t } = useTranslation("common");
   const authToken =
     "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNWRiMjliMGM0NjQ4MDM2YTI0NWZjMCIsInJvbGVzIjpbeyJpZCI6IjVlMTk2MjUwNWVmNjEyMDAwODlmM2IyMiJ9XSwicGVybWlzc2lvbnMiOltdLCJhY2NvdW50aWQiOiI2MjVkYjI5YWRlZTBlMjAwMDliMmRhNGQiLCJhY2NvdW50SWQiOm51bGwsInVzZXJUeXBlIjp7ImtpbmQiOiJSRUdJU1RFUkVEIn0sInRlbmFudElkIjoiNjFhNTEwZmEzN2JiNjQwMDA5YWNmNTVlIiwiaXNzdWVyIjoiNTczNzg1OTIzMjI0IiwiaWF0IjoxNjU0MTUzMzYxLCJleHAiOjE2NTQxNTUxNjF9.FLBjzjjR3g1zreH03aIE9B92H5y1HL6RfhwoePFbKeASfqq2RcyGqkKiexRTELDTPMOJEa9XXklsqfaegYS-fKrEXoIjjHv4KpolommWzaSINL5C__zljx7QZtF5sRtyYKPPlwEcuPtdMJTCERIfyDIHsMF4oehEVvN-cd6DwOA";
-  const { priceListId, appState, allWishListProducts, setAllWishListProducts } =
-    useContext(AppContext);
+  const {
+    cartId,
+    priceListId,
+    appState,
+    allWishListProducts,
+    setAllWishListProducts,
+  } = useContext(AppContext);
   const [freeShipping, showFreeShipping] = useState(true);
   const [cartData, setCartData] = useState({
     status: "",
@@ -123,9 +124,7 @@ const Cart = ({}: CartProps): JSX.Element => {
   };
 
   const getCartData = async () => {
-    const cartData = await getCartByCartId(
-      "98b0ed93-aaf1-4001-b540-b61796c4663d"
-    );
+    const cartData = await getCartByCartId(cartId);
     if (cartData?.status === 200) {
       const cartItems = cartData?.data;
       cartItems?.items?.map((product: ProductType, index: number) => {
@@ -283,12 +282,10 @@ const Cart = ({}: CartProps): JSX.Element => {
         <hr className={styles["bold-line"]} />
         <div className={styles["need-help-heading"]}>
           <span role="needhelp">
-            {" "}
             {appState?.lang === "en" ? "Need Help ?" : t("needHelp")}
           </span>
           <Link href={"/help-centre"}>
             <a role="help-center-link">
-              {" "}
               {appState?.lang === "en" ? "Help Center" : t("helpCenter")}
             </a>
           </Link>
@@ -298,7 +295,6 @@ const Cart = ({}: CartProps): JSX.Element => {
             return (
               <Label role="points" key={index}>
                 <>
-                  {" "}
                   {appState?.lang === "en"
                     ? "Lorem ipsum dolor sit"
                     : t("dummyText")}
@@ -345,7 +341,6 @@ const Cart = ({}: CartProps): JSX.Element => {
                 })
               ) : (
                 <div>
-                  {" "}
                   {appState?.lang === "en"
                     ? "No Cart Data Found!"
                     : t("noCartDataFound")}
@@ -353,7 +348,6 @@ const Cart = ({}: CartProps): JSX.Element => {
               )
             ) : (
               <div>
-                {" "}
                 {appState?.lang === "en"
                   ? "No Cart Data Found!"
                   : t("noCartDataFound")}
@@ -373,7 +367,7 @@ const Cart = ({}: CartProps): JSX.Element => {
             {freeShipping && (
               <div className={styles["free-shipping-card"]}>
                 <div className={styles["free-shipping-content"]}>
-                  <span>
+                  <span role="free-shipping">
                     {appState?.lang === "en"
                       ? "Free Shipping for Members"
                       : t("freeShipping")}
@@ -383,15 +377,15 @@ const Cart = ({}: CartProps): JSX.Element => {
                     {appState?.lang === "en"
                       ? `Become a L'azurde member for fast and free shipping`
                       : t("becomeMember")}
-                    .{" "}
+                    .
                     <Link href={"/"}>
                       <a>
                         {appState?.lang === "en"
                           ? "Join Us"
                           : t("signUpBtnText")}
                       </a>
-                    </Link>{" "}
-                    or{" "}
+                    </Link>
+                    or
                     <Link href={"/"}>
                       <a>
                         {appState?.lang === "en"
@@ -408,6 +402,7 @@ const Cart = ({}: CartProps): JSX.Element => {
                   <CrossSmall
                     width={12}
                     height={12}
+                    role="crossBtn"
                     onClick={() => showFreeShipping(false)}
                   />
                 </div>
@@ -449,7 +444,6 @@ const Cart = ({}: CartProps): JSX.Element => {
                     )
                   ) : (
                     <div>
-                      {" "}
                       {appState?.lang === "en"
                         ? "No Cart Data Found!"
                         : t("noCartDataFound")}
@@ -464,12 +458,11 @@ const Cart = ({}: CartProps): JSX.Element => {
         <div className={styles["inner-wrapper"]}>
           <div className={styles["summary-card"]}>
             <span role="summary-heading">
-              {" "}
               {appState?.lang === "en" ? "Summary" : t("summary")}
             </span>
             <div className={styles["order-details"]}>
               <div>
-                <span>
+                <span role="subHeading">
                   {appState?.lang === "en" ? "Subtotal" : t("subTotal")}
                 </span>
                 <span data-amount={true}>
@@ -477,8 +470,7 @@ const Cart = ({}: CartProps): JSX.Element => {
                 </span>
               </div>
               <div>
-                <span>
-                  {" "}
+                <span role="shpping-text">
                   {appState?.lang === "en"
                     ? "Estimated Shipping &amp; Handling"
                     : t("estimatedShipping")}
@@ -486,14 +478,16 @@ const Cart = ({}: CartProps): JSX.Element => {
                 <span data-amount={true}>$0.00</span>
               </div>
               <div>
-                <span>{appState?.lang === "en" ? "VAT Tax" : t("vatTax")}</span>
+                <span role="tax">
+                  {appState?.lang === "en" ? "VAT Tax" : t("vatTax")}
+                </span>
                 <span data-amount={true}>$0.00</span>
               </div>
             </div>
             <hr className={styles["horizontal-divider"]} />
             <div className={styles["order-details"]}>
               <div>
-                <span data-amount={true}>
+                <span role="totalPay" data-amount={true}>
                   {appState?.lang === "en" ? "Total to pay" : t("totalToPay")}
                 </span>
                 <span
@@ -502,12 +496,12 @@ const Cart = ({}: CartProps): JSX.Element => {
               </div>
             </div>
             <hr className={styles["horizontal-divider"]} />
-            <button className={styles["checkout-button"]}>
+            <button role="checkoutBtn" className={styles["checkout-button"]}>
               {appState?.lang === "en" ? "Checkout" : t("checkout")}
             </button>
             <div className={styles["half-divider"]}>
               <hr />
-              <span data-divider={true}>
+              <span role="continueText" data-divider={true}>
                 {appState?.lang === "en"
                   ? "Or Continue With"
                   : t("orContinueWith")}
@@ -521,7 +515,7 @@ const Cart = ({}: CartProps): JSX.Element => {
               <button className={styles["paypal-btn"]}>
                 <Image
                   src={"/paypal-logo.png"}
-                  alt=""
+                  alt="paypal-image"
                   width={174}
                   height={40}
                   quality={100}

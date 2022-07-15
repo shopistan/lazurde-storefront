@@ -8,7 +8,6 @@ import { Bag, CrossSmall } from "components/icons";
 import Spinner from "components/common/ui/spinner";
 import { getWishList, deleteWishList, addWishList } from "lib/utils/wishlist";
 import { getInventoryByIds, getInventoryAuth } from "lib/api/inventory";
-import { addProductToCart } from "lib/utils/cart";
 import Button from "components/common/ui/button";
 import {
   fetchProductsByItemId,
@@ -20,6 +19,7 @@ import useWindowSize from "lib/utils/useWindowSize";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
 import WishListItems from "./wishlist-Item";
+import useCart from "lib/utils/cart";
 
 interface arabicDataProps {
   myReviewHeading?: string;
@@ -36,6 +36,7 @@ interface WishListItemsProps {
 }
 
 const MyWishList = (): JSX.Element => {
+  const { addProductToCart } = useCart();
   const [width] = useWindowSize();
   const { t } = useTranslation("common");
   const [wishListItem, setWishListItem] = useState([]);
@@ -43,8 +44,13 @@ const MyWishList = (): JSX.Element => {
   const [checkNumber, setCheckNumber] = useState(true);
   const [compRender, setCompRender] = useState(false);
   const [adding, setAdding] = useState(false);
-  const { priceListId, appState, allWishListProducts, setAllWishListProducts } =
-    useContext(AppContext);
+  const {
+    cartId,
+    priceListId,
+    appState,
+    allWishListProducts,
+    setAllWishListProducts,
+  } = useContext(AppContext);
 
   const arabicData: arabicDataProps = t(
     "accountReviewData",
@@ -217,7 +223,7 @@ const MyWishList = (): JSX.Element => {
       items.push(obj);
     });
     const payLoadData = {
-      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
+      cartId: cartId,
       items,
     };
     const response = addProductToCart(payLoadData);
@@ -253,7 +259,7 @@ const MyWishList = (): JSX.Element => {
     };
 
     const payload = {
-      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
+      cartId: cartId,
       items: [
         {
           sku: selectedProduct && selectedProduct?.sku,

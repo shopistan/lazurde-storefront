@@ -1,6 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from "react";
 import Image from "next/image";
-import Label from "../ui/label";
+import Label from "components/common/ui/label";
 import styles from "./account-information.module.scss";
 import { ImageType } from "lib/types/common";
 import useWindowSize from "lib/utils/useWindowSize";
@@ -8,7 +8,7 @@ import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
 import { useRouter } from "next/router";
 import SideBar from "components/common/side-bar/index";
-import AccountSection from "../account-section";
+import AccountOverView from "components/common/account-information/account-overview";
 import OrderDetails from "components/common/order-details/index";
 import NewsSubscriptions from "components/common/newsletter-subscriptions/index";
 import OrderHistory from "../order-history";
@@ -102,7 +102,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
               activeComponent={activeComponent}
             />
             <div className={styles["account-right-side"]}>
-              {activeComponent == "Account Overview" && <AccountSection />}
+              {activeComponent == "Account Overview" && <AccountOverView />}
               {activeComponent == "My Orders" && <OrderDetails />}
               {activeComponent == "My Reviews" && <UserReviews />}
               {activeComponent == "Address Book" && <AddressBook />}
