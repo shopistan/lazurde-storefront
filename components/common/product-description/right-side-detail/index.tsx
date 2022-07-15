@@ -18,13 +18,13 @@ import WishList from "components/common/wishlist";
 import NotifyMeModal from "./notify-me-modal";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
-import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
 import { useRouter } from "next/router";
 import { fetchProductPriceByItemId } from "lib/utils/product";
 import { getInventoryByIds, getInventoryAuth } from "lib/api/inventory";
 import Skeleton from "react-loading-skeleton";
-// import "react-loading-skeleton/dist/skeleton.css";
+import useCart from "lib/utils/cart";
+import Splash from "components/common/ui/splash";
 
 type ProductProps = {
   Size?: number;
@@ -57,17 +57,19 @@ const RightSideDetail = ({
   priceListId = "100000",
   setIsloading = () => {},
 }: RightSideDetailProps): JSX.Element => {
+  const { addProductToCart } = useCart();
   const productDataCopy = useRef(productData).current;
   const allProductPrices = useRef([]);
   const userAuth = useRef("");
   const router = useRouter();
-  const { appState } = useContext(AppContext);
+  const { appState, cartId, setOpenMiniCart } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
   const [quantityCounter, setQuantityCounter] = useState(1);
   const [selectedSize, setSelectedSize] = useState({ size: -1, index: 0 });
   const [selectedColor, setSelectedColor] = useState({ color: "", index: 0 });
   const [selectedItem, setSelectedItem] = useState(productDataCopy[0]);
+  const [isLoadingData, setIsloadingData] = useState<boolean>(true);
   const [productPricing, setProductPricing] = useState<{
     currency: string;
     base: number | string;
@@ -131,21 +133,21 @@ const RightSideDetail = ({
       }
       return selectedSku;
     });
-    
+
     if (!item) return;
     getSelectedPrice(item || productDataCopy[0]);
     await getProductInventory(item || productDataCopy[0]);
     if (!item.hasOwnProperty("hasStock")) return;
-    setSelectedItem({...item});
+    setSelectedItem({ ...item });
     for (let index = 0; index < productDataCopy?.length; index++) {
       if (index === 0) continue;
       if (productDataCopy[index]?.hasOwnProperty("hasStock")) continue;
       const remainigItem = productDataCopy[index];
       await getProductInventory(remainigItem);
     }
+    setIsloadingData(false);
     return item;
   };
-
 
   const getSelectedPrice = async (
     selectedProduct: { itemId: number } | any
@@ -250,7 +252,7 @@ const RightSideDetail = ({
     } = (await getProductSku()) || productDataCopy[0];
 
     const payload: ATCPayload = {
-      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
+      cartId: cartId,
       items: [
         {
           sku: selectedProduct && selectedProduct?.sku,
@@ -269,9 +271,9 @@ const RightSideDetail = ({
     };
     const response = await addProductToCart(payload);
     if (response?.hasError) {
-      // alert("error while adding product");
-    } else {
-      router?.push("/cart");
+      console.log("error while adding product");
+    } else if (response?.response?.status === 200) {
+      setOpenMiniCart(true);
     }
   };
 
@@ -284,7 +286,8 @@ const RightSideDetail = ({
   };
 
   return (
-    <>
+    <div className={styles["container"]}>
+      <Splash isLoading={isLoadingData}></Splash>
       <div className={styles["detail"]}>
         {selectedItem?.hasStock === false ? (
           <div className={styles["collection-and-outofstock"]}>
@@ -410,7 +413,7 @@ const RightSideDetail = ({
           onClose={() => setNotifyModalOpen(false)}
         />
       )}
-    </>
+    </div>
   );
 };
 export default RightSideDetail;

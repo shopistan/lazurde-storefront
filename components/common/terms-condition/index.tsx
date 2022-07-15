@@ -102,7 +102,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
           </div>
           <button className={styles["back-content"]}>
             {appState?.lang == "en"
-              ? "Back To L'azurde Policies"
+              ? `Back To ${appState.brand} Policies`
               : "ءيش لك قوست"}
           </button>
         </div>
@@ -129,8 +129,8 @@ const TermCondtion: FC<TermCondtionProps> = ({
                     setObjects({
                       accordion: accordion,
                       content:
-                        appState.lang == "en" ? content : _links[index].content,
-                      name: appState.lang == "en" ? name : _links[index].name,
+                        appState.lang == "en" ? content : _links[index]?.content,
+                      name: appState.lang == "en" ? name : _links[index]?.name,
                       icon: {
                         url: icon?.url,
                         altText: icon?.altText,
@@ -149,7 +149,7 @@ const TermCondtion: FC<TermCondtionProps> = ({
                     </div>
                   )}
                   <Label>
-                    {appState?.lang === "en" ? name : _links[index].name}
+                    {appState?.lang === "en" ? name : _links[index]?.name}
                   </Label>
                 </div>
               );

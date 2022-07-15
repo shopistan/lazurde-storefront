@@ -68,7 +68,8 @@ module.exports = {
     '!components/common/product-description/image-section/**/*.{js,jsx,tsx,ts}',
     '!components/common/product-description/index.{js,jsx,tsx,ts}',
     '!components/common/product-description/right-side-detail/index.{js,jsx,tsx,ts}',
-    '!components/common/account-information/account-reviews/product-without-reviews.tsx'
+    '!components/common/account-information/account-reviews/product-without-reviews.tsx',
+    '!components/common/tabby-popup/index.{js,jsx,tsx,ts}'
   ],
   setupFiles: ['./setup.js']
 }

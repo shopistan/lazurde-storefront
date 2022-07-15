@@ -33,6 +33,9 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
     saveAppState,
     allWishListProducts,
     setAllWishListProducts,
+    openMiniCart,
+    setOpenMiniCart,
+    cartItemCounter,
   } = useContext(AppContext);
   const { t } = useTranslation("common");
   const [isOpened, setIsOpened] = useState(false);
@@ -118,6 +121,16 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
     }
   }, [isOpened, sidebarOpened]);
 
+  useEffect(() => {
+    if (openMiniCart) {
+      handleMiniCart();
+      setTimeout(() => {
+        onSideBarClose();
+        setOpenMiniCart(false);
+      }, 5000);
+    }
+  }, [openMiniCart]);
+
   const signInUser = async () => {
     setSidebarOpened(!sidebarOpened);
     setSidebarChild({
@@ -140,8 +153,6 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
   };
 
   const handleMiniCart = () => {
-    setIsOpened(false);
-    setSidebarOpened(!sidebarOpened);
     setSidebarChild({
       miniCart: true,
       wishlist: false,
@@ -158,6 +169,17 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
       miniCart: false,
       wishlist: false,
       account: false,
+    });
+  };
+
+  const onSideBarClose = () => {
+    setIsOpened(false);
+    setSidebarOpened(false);
+    setSidebarChild({
+      miniCart: false,
+      wishlist: false,
+      account: false,
+      language: false,
     });
   };
 
@@ -268,8 +290,17 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
           <Divider />
         </div>
 
-        <div className={styles["link"]} onClick={() => handleMiniCart()}>
+        <div
+          className={`${styles["link"]} ${styles.minicart_link}`}
+          onMouseEnter={() => handleMiniCart()}
+          onMouseLeave={() => onSideBarClose()}
+        >
           <Bag />
+          {cartItemCounter > 0 ? (
+            <div className={styles.rounded_counter}>
+              <Label>{cartItemCounter}</Label>
+            </div>
+          ) : null}
         </div>
       </div>
       {width > desktopScreenSize && (
@@ -305,11 +336,43 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
             <AccountSidebar closeSideBar={setSidebarOpened} />
           ) : sidebarchild.wishlist ? (
             <WishListSidebar />
-          ) : sidebarchild.miniCart ? (
-            <MiniCart />
           ) : sidebarchild.language ? (
             <Language />
           ) : null}
+        </SideBar>
+      </div>
+      <div
+        className={`${styles["rightside-drawer"]} ${
+          sidebarchild.miniCart ? styles.minicart_drawer : ""
+        }`}
+        data-opened={sidebarchild.miniCart}
+        onClick={() => {
+          setSidebarChild({
+            ...sidebarchild,
+            miniCart: false,
+          });
+        }}
+        onMouseEnter={() => {
+          setSidebarChild({
+            ...sidebarchild,
+            miniCart: true,
+          });
+        }}
+        onMouseLeave={() => onSideBarClose()}
+      >
+        <SideBar
+          isopend={sidebarchild.miniCart}
+          onClick={(event: any) => {
+            event.stopPropagation();
+          }}
+          onMouseEnter={() => {
+            setSidebarChild({
+              ...sidebarchild,
+              miniCart: true,
+            });
+          }}
+        >
+          <MiniCart />
         </SideBar>
       </div>
     </div>

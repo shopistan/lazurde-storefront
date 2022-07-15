@@ -113,10 +113,6 @@ const ProductDescription = ({
 
   return (
     <>
-      {/* <div className={styles["loading-splash"]} data-isLoading={isLoading}>
-        <Spinner></Spinner>
-        Loading...
-      </div> */}
       <div className={styles["product-description-wrapper"]}>
         <div className={styles["product-desc-breadcrumb"]}>
           <Link href={link}>

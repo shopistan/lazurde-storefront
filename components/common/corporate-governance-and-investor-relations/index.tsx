@@ -186,7 +186,7 @@ const CGIR: FC<CGIRProps> = ({
               </div>
               <button className={styles["back-content"]}>
                 {appState?.lang == "en"
-                  ? "Back To L'azurde Policies"
+                  ? `Back To ${appState.brand} Policies`
                   : "ءيش لك قوست"}
               </button>
             </div>
@@ -1249,6 +1249,19 @@ const CGIR: FC<CGIRProps> = ({
                                 />
                               </a>
                               <span>{imageTitle || "Image"}</span>
+                            </div>
+                          );
+                        })}
+                    </div>
+                  ) : currentObject?.name === "Contact IR" ||
+                    currentObject?.name === "الاتصال بـ IR" ? (
+                    <div className={styles["text-wrapper"]}>
+                      {currentObject?.moreContent?.length > 0 &&
+                        currentObject?.moreContent?.map((obj, index) => {
+                          const { text } = obj;
+                          return (
+                            <div key={index} className={styles["text-block"]}>
+                              <p dangerouslySetInnerHTML={{ __html: text }}></p>
                             </div>
                           );
                         })}

@@ -6,11 +6,6 @@ import Heading from "components/common/ui/heading";
 import Label from "components/common/ui/label";
 // import SignIn from "components/common/ui/signin";
 import { Bag, IconTick, SignOut } from "components/icons";
-import {
-  getCartByCartId,
-  removeItemFromCart,
-  updateItemOfCart,
-} from "lib/utils/cart";
 import { ProductType } from "lib/types/product";
 import CartItem from "components/common/cart-item";
 import { AppContext } from "lib/context";
@@ -20,6 +15,7 @@ import { getInventoryAuth } from "lib/api/inventory";
 import { desktopScreenSize } from "lib/utils/common";
 import useWindowSize from "lib/utils/useWindowSize";
 import { logoutUser, loginUser } from "lib/identity";
+import useCart from "lib/utils/cart";
 
 interface miniCartArabicDataProps {
   addToBag?: string;
@@ -34,10 +30,15 @@ interface miniCartArabicDataProps {
 }
 
 const MiniCart = (): JSX.Element => {
+  const { getCartByCartId, removeItemFromCart, updateItemOfCart } = useCart();
   const [width] = useWindowSize();
   const router = useRouter();
   const { t } = useTranslation("common");
-  const { appState } = useContext(AppContext);
+  const {
+    cartId,
+    appState,
+    openMiniCart,
+  } = useContext(AppContext);
   const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingCart, setisLoadingCart] = useState(false);
   const [updatingCartItem, setUpdatingCartItem] = useState(false);
@@ -69,6 +70,16 @@ const MiniCart = (): JSX.Element => {
     };
   }, []);
 
+  useEffect(() => {
+    if (openMiniCart) {
+      getCartData();
+      setisLoadingCart(true);
+      return () => {
+        setisLoadingCart(false);
+      };
+    }
+  }, [openMiniCart]);
+
   const miniCartArabicData: miniCartArabicDataProps = t(
     "miniCartArabicData",
     {},
@@ -76,9 +87,7 @@ const MiniCart = (): JSX.Element => {
   );
 
   async function getCartData() {
-    const cartData = await getCartByCartId(
-      "98b0ed93-aaf1-4001-b540-b61796c4663d"
-    );
+    const cartData = await getCartByCartId(cartId);
     if (cartData?.status === 200) {
       const cartItems = cartData?.data;
       cartItems?.items?.map((product: ProductType, index: number) => {
@@ -233,7 +242,8 @@ const MiniCart = (): JSX.Element => {
                   <div className={styles["shopabag-count"]}>
                     {width > desktopScreenSize &&
                     Object.keys(cartData).length !== 0 &&
-                    cartData?.items?.length > 0 ? (
+                    cartData?.items?.length > 0 &&
+                    openMiniCart ? (
                       <div className={styles["filled-cart"]}>
                         <IconTick
                           width="20"
@@ -265,7 +275,10 @@ const MiniCart = (): JSX.Element => {
                     </Heading>
                     {Object.keys(cartData).length !== 0 &&
                     cartData?.items?.length > 0 ? null : (
-                      <Label role="emptycart" className={styles["shopbag-label"]}>
+                      <Label
+                        role="emptycart"
+                        className={styles["shopbag-label"]}
+                      >
                         {appState?.lang === "en"
                           ? "Your shopping bag is empty"
                           : miniCartArabicData?.YourShoppingBagIsEmpty}
