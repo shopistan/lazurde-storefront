@@ -281,7 +281,10 @@ const SingleReview = ({
         />
       </div>
       <Label className={styles["review-content"]}>
-        {reviewText.lang === "en" ? reviewText.english : reviewText.arabic}
+        <>
+          {/* {reviewText?.lang === "en" ? reviewText?.english : reviewText?.arabic} */}
+          {review?.body}
+        </>
       </Label>
       {/* <div className={styles["translate-btn"]}>
         <button
