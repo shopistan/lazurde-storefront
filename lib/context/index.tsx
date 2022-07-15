@@ -71,7 +71,11 @@ const ContextProvider: FC = ({ children }) => {
       []
   );
   const [openMiniCart, setOpenMiniCart] = useState(false);
-  const [cartItemCounter, setCartItemCounter] = useState(0);
+  const [cartItemCounter, setCartItemCounter] = useState(
+    (typeof window !== "undefined" &&
+      window?.sessionStorage?.getItem("cartItem_counter")) ||
+      0
+  );
 
   return (
     <AppContext.Provider

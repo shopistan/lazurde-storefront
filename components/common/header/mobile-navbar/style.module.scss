@@ -439,6 +439,34 @@
   padding-inline-end: 16px;
 }
 
+.minicart_btn {
+  position: relative;
+
+  .rounded_counter {
+    position: absolute;
+    top: -8px;
+    inset-inline-end: -10px;
+    width: fit-content;
+    min-width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    color: $white-color;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0em;
+    background: $black-color;
+    border-radius: 100px;
+
+    p {
+      margin: 0;
+      padding: 3px;
+    }
+  }
+}
+
 html[dir="rtl"] {
   .mobile-header {
     &__menu {

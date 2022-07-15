@@ -34,7 +34,11 @@ const MiniCart = (): JSX.Element => {
   const [width] = useWindowSize();
   const router = useRouter();
   const { t } = useTranslation("common");
-  const { cartId, appState } = useContext(AppContext);
+  const {
+    cartId,
+    appState,
+    openMiniCart,
+  } = useContext(AppContext);
   const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingCart, setisLoadingCart] = useState(false);
   const [updatingCartItem, setUpdatingCartItem] = useState(false);
@@ -65,6 +69,16 @@ const MiniCart = (): JSX.Element => {
       setisLoadingCart(false);
     };
   }, []);
+
+  useEffect(() => {
+    if (openMiniCart) {
+      getCartData();
+      setisLoadingCart(true);
+      return () => {
+        setisLoadingCart(false);
+      };
+    }
+  }, [openMiniCart]);
 
   const miniCartArabicData: miniCartArabicDataProps = t(
     "miniCartArabicData",
@@ -228,7 +242,8 @@ const MiniCart = (): JSX.Element => {
                   <div className={styles["shopabag-count"]}>
                     {width > desktopScreenSize &&
                     Object.keys(cartData).length !== 0 &&
-                    cartData?.items?.length > 0 ? (
+                    cartData?.items?.length > 0 &&
+                    openMiniCart ? (
                       <div className={styles["filled-cart"]}>
                         <IconTick
                           width="20"
