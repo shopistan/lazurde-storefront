@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import * as React from "react";
 import AccountInformation from "./index";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import ContextProvider, { AppContext } from "lib/context";
 import { act } from "react-dom/test-utils";
 
@@ -11,11 +11,6 @@ jest.mock("./account-reviews/product-without-reviews", () => (props: any) => {
   mockChildComponent(props);
   return <div />;
 });
-jest.mock("lib/identity", () => ({
-  getUserInfo: () => {
-    return { firstName: "Test Name" };
-  },
-}));
 
 const detailsData = {
   image: { url: "/image", altText: "image text" },
@@ -64,9 +59,13 @@ const renderComponentAR = async () => {
 };
 
 test("account information testing", () => {
-  renderComponent();
+  waitFor(() => {
+    renderComponent();
+  });
 });
 
 test("account information arabic testing", () => {
-  renderComponentAR();
+  waitFor(() => {
+    renderComponentAR();
+  });
 });

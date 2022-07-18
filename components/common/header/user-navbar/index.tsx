@@ -21,7 +21,7 @@ import SideBar from "components/common/ui/sidebar";
 import AccountSidebar from "components/common/right-sidebars/account-sidebar";
 import WishListSidebar from "components/common/minicart-wishlist-sidebars/wish-list";
 import MiniCart from "components/common/minicart-wishlist-sidebars/mini-cart";
-import Language from "./language-sidebar";
+import LanguageSideBar from "components/common/right-sidebars/language-sidebar";
 import Label from "components/common/ui/label";
 import { translateText } from "lib/utils/reviews";
 
@@ -337,7 +337,7 @@ const UserNavBar: FC<{ brandSideBar: BrandSidebarProps }> = ({
           ) : sidebarchild.wishlist ? (
             <WishListSidebar />
           ) : sidebarchild.language ? (
-            <Language />
+            <LanguageSideBar />
           ) : null}
         </SideBar>
       </div>

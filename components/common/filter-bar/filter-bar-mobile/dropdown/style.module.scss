@@ -31,14 +31,14 @@
         width: 20px;
         height: 19px;
         display: inline-flex;
-        opacity: 0;
         align-items: center;
         justify-content: center;
         margin-inline-start: 8px;
-        transition: opacity 0.2s ease-in-out;
         color: $black-color;
-
+        opacity: 0;
+        
         &[data-show-tick="true"] {
+          transition: opacity 0.2s ease-in-out;
           opacity: 1;
         }
       }

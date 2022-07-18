@@ -31,7 +31,8 @@ const Reviews = ({
   productData = {},
 }: ReviewsProps): JSX.Element => {
   const { t } = useTranslation("common");
-  const { appState } = useContext(AppContext);
+  const { appState, isFetchingReview, setIsFetchingReview } =
+    useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [initialProductData, setInitialProductData] = useState<any>([]);
   const [currentData, setCurrentData] = useState([]);
@@ -42,6 +43,14 @@ const Reviews = ({
     setFilterData("");
     fetchingReviews();
   }, [productData]);
+
+  useEffect(() => {
+    if (isFetchingReview) {
+      setFilterData("");
+      fetchingReviews();
+      setIsFetchingReview(false);
+    }
+  }, [isFetchingReview]);
 
   const onClose = () => {
     setModalOpen(false);
@@ -200,7 +209,6 @@ const Reviews = ({
           productData={productData}
           isOpened={modalOpen}
           onClose={onClose}
-          fetchingReviews={fetchingReviews}
           reviewImagesRef={reviewImagesRef}
         />
       )}
@@ -275,7 +283,10 @@ const SingleReview = ({
         />
       </div>
       <Label className={styles["review-content"]}>
-        {reviewText.lang === "en" ? reviewText.english : reviewText.arabic}
+        <>
+          {/* {reviewText.lang === "en" ? reviewText.english : reviewText.arabic} */}
+          {review?.body}
+        </>
       </Label>
       {/* <div className={styles["translate-btn"]}>
         <button

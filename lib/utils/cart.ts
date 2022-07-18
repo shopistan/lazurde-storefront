@@ -54,7 +54,6 @@ const useCart = () => {
           response?.data?.totalItems
         );
       }
-
       return response;
     } catch (error: unknown) {
       console.log(

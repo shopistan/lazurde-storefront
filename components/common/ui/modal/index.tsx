@@ -3,7 +3,6 @@ import CrossSmall from "components/icons/CrossSmall";
 import styles from "./modal.module.scss";
 import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from "lib/utils/common";
-
 interface ModalProps {
   className?: string;
   modalBodyClassName?: string;
@@ -32,16 +31,21 @@ const Modal = ({
   divModalRight = "",
 }: ModalProps): JSX.Element => {
   const [openState, setOpenState] = useState(isOpened);
+  const [alertContainer, setAlertContainer] = useState<any>("");
   const [size] = useWindowSize();
 
   useEffect(() => {
     if (isOpened) {
       document.body.style.overflow = "hidden";
+      const html = document.querySelector("html");
+      html.style.overflow = "hidden";
     }
     setOpenState(isOpened);
 
     return () => {
       document.body.style.overflow = "auto";
+      const html = document.querySelector("html");
+      html.style.overflow = "auto";
     };
   }, [isOpened]);
 
@@ -57,7 +61,6 @@ const Modal = ({
         className={`${styles["div-modal-main"]} ${className}`}
         data-open={openState}
         onClick={() => {
-          // setOpenState(false);
           onClose && onClose();
         }}
       >
@@ -78,7 +81,6 @@ const Modal = ({
                 width={"12px"}
                 height={"12px"}
                 onClick={() => {
-                  // setOpenState(false);
                   onClose && onClose();
                 }}
               />

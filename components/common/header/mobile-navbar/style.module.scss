@@ -365,6 +365,7 @@
         color: $black-color;
 
         &[data-selected="true"] {
+          display: none;
           font-weight: 700;
         }
 
