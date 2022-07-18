@@ -1,7 +1,4 @@
-import axios from "axios";
-import { OKTA_CLIENT_ID, OKTA_DOMAIN } from "general-config";
-import { codeVerifier, fetchTokens } from "lib/identity";
-import { AuthTokens } from "lib/types/common";
+import { fetchTokens } from "lib/identity";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 

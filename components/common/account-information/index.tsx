@@ -16,6 +16,15 @@ import { desktopScreenSize } from "lib/utils/common";
 import UserReviews from "./account-reviews";
 import AddressBook from "./account-addresses";
 import MyWishList from "../wishlist/my-wish-list/index";
+import {
+  fetchCustomerProfile,
+  getUserInfo,
+  isAccessTokenExpired,
+  refreshAuthToken,
+  updateIndividualUserProfile,
+  updateOktaUser,
+} from "lib/identity";
+import { OktaUser } from "lib/types/identity";
 
 interface AccountInformationProps {
   title?: string | "";
@@ -61,13 +70,45 @@ const AccountInformation: FC<AccountInformationProps> = ({
     activeAccountPageTab || "Account Overview"
   );
   const [renderCom, setRenderCom] = useState(false);
+  const [oktaUserInfo, setOktaUserInfo] = useState<OktaUser>(null);
+  const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
     setRenderCom(true);
   }, []);
 
   useEffect(() => {
-    setActiveComponent(activeAccountPageTab)
+    const fetchUserInfo = async () => {
+      if (isAccessTokenExpired()) {
+        await refreshAuthToken();
+      }
+      let userInfo = (await getUserInfo()) || null;
+      if (userInfo) {
+        setOktaUserInfo(userInfo);
+      }
+    };
+    fetchUserInfo();
+  }, []);
+
+  useEffect(() => {
+    if (oktaUserInfo) {
+      fetchCustomerProfile(oktaUserInfo.id)
+        .then((profile) => {
+          /**
+           * NOTE: Use this profile information to maintain/update/display any
+           * additinal profile info
+           */
+          setUserProfile(profile);
+          console.log("User Profile: ", profile);
+        })
+        .catch((err) => {
+          console.log("Could not fetch user profile: ", err);
+        });
+    }
+  }, [oktaUserInfo]);
+
+  useEffect(() => {
+    setActiveComponent(activeAccountPageTab);
   }, [activeAccountPageTab]);
 
   return (
@@ -100,6 +141,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
               details={details}
               setActiveComponent={setActiveComponent}
               activeComponent={activeComponent}
+              oktaUserInfo={oktaUserInfo}
             />
             <div className={styles["account-right-side"]}>
               {activeComponent == "Account Overview" && <AccountOverView />}

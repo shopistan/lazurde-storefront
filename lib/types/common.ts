@@ -8,13 +8,15 @@ export type ErrorObject = {
   message: string;
   response?: {
     code?: string;
+    status?: string | number;
+    data?: any;
   };
 };
 
-export interface ImageType  {
+export interface ImageType {
   url: string;
   altText: string;
-};
+}
 
 export type NavLinks = {
   url: string;
