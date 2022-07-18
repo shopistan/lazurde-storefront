@@ -43,21 +43,23 @@ const useCart = () => {
         {
           headers: {
             ...HEADERS.common,
-            "x-api-key": "vil3wWGlGw97CVv5WeIqM9ZQJyX1WZx65i6gBg0i",
+            "x-api-key": CART_V2_X_API_KEY,
           },
         }
       );
       if (response?.status === 200) {
         setCartItemCounter(response?.data?.totalItems);
+        window.sessionStorage.setItem(
+          "cartItem_counter",
+          response?.data?.totalItems
+        );
       }
-      console.log("response", response);
-
       return response;
     } catch (error: unknown) {
-      // console.log(
-      //   "Error while fecthing wishlist",
-      //   (error as ErrorObject)?.message
-      // );
+      console.log(
+        "Error while fecthing products",
+        (error as ErrorObject)?.message
+      );
     }
   };
 
@@ -70,16 +72,23 @@ const useCart = () => {
         {
           headers: {
             ...HEADERS.common,
-            "x-api-key": "vil3wWGlGw97CVv5WeIqM9ZQJyX1WZx65i6gBg0i",
+            "x-api-key": CART_V2_X_API_KEY,
           },
         }
       );
+      if (response?.status === 200) {
+        setCartItemCounter(response?.data?.totalItems);
+        window.sessionStorage.setItem(
+          "cartItem_counter",
+          response?.data?.totalItems
+        );
+      }
       return response;
     } catch (error: unknown) {
-      // console.log(
-      //   "Error while fecthing wishlist",
-      //   (error as ErrorObject)?.message
-      // );
+      console.log(
+        "Error while updating product",
+        (error as ErrorObject)?.message
+      );
     }
   };
 
@@ -94,16 +103,23 @@ const useCart = () => {
         {
           headers: {
             ...HEADERS.common,
-            "x-api-key": "vil3wWGlGw97CVv5WeIqM9ZQJyX1WZx65i6gBg0i",
+            "x-api-key": CART_V2_X_API_KEY,
           },
         }
       );
+      if (response?.status === 200) {
+        setCartItemCounter(response?.data?.totalItems);
+        window.sessionStorage.setItem(
+          "cartItem_counter",
+          response?.data?.totalItems
+        );
+      }
       return response;
     } catch (error: unknown) {
-      // console.log(
-      //   "Error while fecthing wishlist",
-      //   (error as ErrorObject)?.message
-      // );
+      console.log(
+        "Error while removing product",
+        (error as ErrorObject)?.message
+      );
     }
   };
 

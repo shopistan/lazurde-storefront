@@ -51,6 +51,15 @@ const ENDPOINTS = {
   IDENTITY: {
     GET_USER_INFO: "/ums/v2/users/self",
     RESET_PASSWORD: "/ums/v2/auth/self/password",
+    GET_FABRIC_CUSTOMER: (fabricUserId: string) =>
+      `/data-customer/v1/users/${fabricUserId}`,
+    GET_CUSTOMER_PROFILE: (fabricCustomerId: string) =>
+      `/data-customer/v1/user-party/user/${fabricCustomerId}?offset=0&limit=10`,
+    CREATE_CUSTOMER_PROFILE: "/data-customer/v1/individuals",
+    LINK_USER_TO_INDIVIDUAL: "/data-customer/v1/user-party",
+    UPDATE_OKTA_USER: "/ums/v2/users/self",
+    UPDATE_CUSTOMER_PROFILE: (individualId: string) =>
+      `/data-customer/v1/individuals/${individualId}`,
   },
 
   REVIEWS: {
@@ -62,6 +71,15 @@ const ENDPOINTS = {
 
     TRANSLATE_REVIEWS:
       "https://translation.googleapis.com/language/translate/v2",
+  },
+
+  CHECKOUT: {
+    CREATE_CUSTOMER: `/customers`,
+    GET_CUSTOMER: (email: string) => `/customers/${email}`,
+    GET_PAYMENT_TOKEN: `/tokens`,
+    CREATE_PAYMENT_INSTRUMENT: `/instruments`,
+    UPDATE_PAYMENT_INSTRUMENT: (id: string) => `/instruments/${id}`,
+    DELETE_PAYMENT_INSTRUMENT: (id: string) => `/instruments/${id}`,
   },
 };
 

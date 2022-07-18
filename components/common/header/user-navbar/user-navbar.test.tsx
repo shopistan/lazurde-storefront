@@ -1,8 +1,9 @@
+import * as React from "react";
 import { fireEvent, render, screen, act } from "@testing-library/react";
-import React from "react";
 import UserNavBar from "./index";
 import ContextProvider, { AppContext } from "lib/context";
 
+jest.mock("axios");
 describe("", () => {
   const object = {
     mainImg: {
@@ -70,8 +71,8 @@ describe("", () => {
     window.dispatchEvent(new Event("resize"));
   };
 
-  const renderComponentAR = (object: any) => {
-    act(() => {
+  const renderComponentAR = async (object: any) => {
+    await act(async () => {
       render(
         <AppContext.Provider
           value={{ appState: { lang: "ar" }, allWishListProducts: [100, 200] }}
@@ -82,14 +83,14 @@ describe("", () => {
     });
   };
 
-  test("links", () => {
-    act(() => {
+  test("links", async () => {
+    await act(async () => {
       render(
         <AppContext.Provider
           value={{ appState: { lang: "en" }, allWishListProducts: [100, 200] }}
         >
           <UserNavBar brandSideBar={object} />
-          </AppContext.Provider>
+        </AppContext.Provider>
       );
       const links = document.querySelector("a").getAttribute("href");
       expect(links).toBe("/");
@@ -113,8 +114,8 @@ describe("", () => {
     });
   });
 
-  test("links", () => {
-    act(() => {
+  test("links", async () => {
+    await act(async () => {
       render(
         <ContextProvider>
           <UserNavBar brandSideBar={objectEmpty} />

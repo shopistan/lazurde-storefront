@@ -47,39 +47,39 @@ export const sliderData = {
 export const langSelectData = [
   {
     label: "KSA",
-    img: "/icons/flag-sa.jpg",
+    img: "/ksa.svg",
     value: "en-sa",
     langTitle: "english",
   },
   {
-    label: "KSA",
-    img: "/icons/flag-sa.png",
+    label: "السعودية",
+    img: "/ksa.svg",
     value: "ar-sa",
-    langTitle: "العربية",
+    langTitle: "عربي",
+  },
+  {
+    label: "مصر",
+    img: "/egypt.svg",
+    value: "ar-eg",
+    langTitle: "عربي",
   },
   {
     label: "egypt",
-    img: "/icons/flag-egypt.png",
+    img: "/egypt.svg",
     value: "en-eg",
     langTitle: "english",
   },
   {
-    label: "egypt",
-    img: "/icons/flag-egypt.png",
-    value: "ar-eg",
-    langTitle: "العربية",
+    label: "الإمارات",
+    img: "/uae.svg",
+    value: "ar-ae",
+    langTitle: "عربي",
   },
   {
     label: "u.a.e",
-    img: "/icons/flag-uae.png",
+    img: "/uae.svg",
     value: "en-ae",
     langTitle: "english",
-  },
-  {
-    label: "u.a.e",
-    img: "/icons/flag-uae.png",
-    value: "ar-ae",
-    langTitle: "العربية",
   },
 ];
 

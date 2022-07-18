@@ -71,7 +71,12 @@ const ContextProvider: FC = ({ children }) => {
       []
   );
   const [openMiniCart, setOpenMiniCart] = useState(false);
-  const [cartItemCounter, setCartItemCounter] = useState(0);
+  const [cartItemCounter, setCartItemCounter] = useState(
+    (typeof window !== "undefined" &&
+      window?.sessionStorage?.getItem("cartItem_counter")) ||
+      0
+  );
+  const [isFetchingReview, setIsFetchingReview] = useState(false);
 
   return (
     <AppContext.Provider
@@ -97,6 +102,8 @@ const ContextProvider: FC = ({ children }) => {
         setCartItemCounter,
         cartId,
         setCartId,
+        isFetchingReview,
+        setIsFetchingReview,
       }}
     >
       {children}

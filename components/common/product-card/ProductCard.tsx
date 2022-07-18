@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { Heart } from "components/icons";
+import React, { useState, useContext, useRef } from "react";
 import { SwiperSlide } from "swiper/react";
 import useWindowSize from "lib/utils/useWindowSize";
 import Image from "next/image";
@@ -15,8 +14,9 @@ import { ATCPayload } from "lib/types/cart";
 import { checkMediaType, desktopScreenSize } from "lib/utils/common";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
-import { fetchProductPriceByItemId } from "lib/utils/product";
+import { getInventoryByIds, getInventoryAuth } from "lib/api/inventory";
 import WishList from "components/common/wishlist/index";
+
 interface ProductCardProps {
   index?: number;
   title?: string;
@@ -56,11 +56,36 @@ const ProductCard = ({
   const [fill, setFill] = useState(false);
   const { t } = useTranslation("common");
   const router = useRouter();
+  const userAuth = useRef("");
+  const hasStock = useRef(null);
   // const [showWishListIcon, setShowWishListIcon] = useState(false);
   const [outOfStockError, setOutOfStockError] = useState(false);
 
+  const getProductInventory = async () => {
+    if (hasStock.current !== null) {
+      return hasStock.current;
+    }
+
+    const response = await getInventoryAuth();
+    const userAuth = response?.data?.accessToken;
+
+    const inventoryData = await getInventoryByIds(userAuth, itemId);
+    hasStock.current =
+      inventoryData?.data?.inventory.length > 0 &&
+      inventoryData?.data?.inventory[0]?.counters?.["on-hand"] > 0;
+    if (!hasStock.current) {
+      setOutOfStockError(true);
+    }
+    return hasStock.current;
+  };
+
   const handleAddToCart = async (event: any) => {
     event.stopPropagation();
+
+    const inventoryResponse = await getProductInventory();
+
+    if (!inventoryResponse) return;
+
     const payload: ATCPayload = {
       cartId: cartId,
       items: [
@@ -81,11 +106,10 @@ const ProductCard = ({
     };
     const response = await addProductToCart(payload);
     if (response?.hasError) {
-      if (response?.code === "ITEM_OUT_OF_STOCK") {
-        setOutOfStockError(true);
-      }
-    } else {
-      router?.push("/cart");
+      setOpenMiniCart(false);
+    }
+    if (response?.response?.status === 200) {
+      setOpenMiniCart(true);
     }
   };
 

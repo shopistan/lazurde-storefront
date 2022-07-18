@@ -65,10 +65,7 @@
         }
 
         & > div {
-          margin-bottom: 40px;
-          @media (min-width: $breakPoint-desktop) {
-            margin-bottom: 24px;
-          }
+          margin-bottom: 24px;
         }
 
         &:hover::-webkit-scrollbar-thumb {
@@ -100,7 +97,7 @@
         @media (min-width: $breakPoint-desktop) {
           box-shadow: 0px -10px 30px 10px white;
 
-          &.delete-form {
+          &.delete-form{
             box-shadow: none;
           }
         }
