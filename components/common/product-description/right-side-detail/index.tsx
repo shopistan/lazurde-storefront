@@ -40,7 +40,6 @@ interface RightSideDetailProps {
   totalRating?: number;
   onColorChange?: Function;
   productData?: any;
-  fetchingReviews?: Function;
   setIsRatingError?: Function;
   isRatingError?: string;
   priceListId?: string;
@@ -51,7 +50,6 @@ const RightSideDetail = ({
   productSizeArray = [],
   totalRating = 0,
   productData = [],
-  fetchingReviews = () => {},
   setIsRatingError = () => {},
   isRatingError = "",
   priceListId = "100000",
@@ -401,8 +399,7 @@ const RightSideDetail = ({
         <WriteAReview
           isOpened={modalOpen}
           onClose={() => setModalOpen(false)}
-          productData={productDataCopy}
-          fetchingReviews={fetchingReviews}
+          productData={productData[0]}
           setIsRatingError={setIsRatingError}
           isRatingError={isRatingError}
         />
