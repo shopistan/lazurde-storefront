@@ -50,8 +50,6 @@ const useCart = () => {
       if (response?.status === 200) {
         setCartItemCounter(response?.data?.totalItems);
       }
-      console.log("response", response);
-
       return response;
     } catch (error: unknown) {
       // console.log(

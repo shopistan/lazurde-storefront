@@ -136,8 +136,10 @@ const AddressBook = ({
   return (
     <>
       <div className={styles["wrapper-address-book"]}>
-        <div className={styles["reviews-heading"]}>
-          <AddressBookIcon />
+        <div className={styles["address-heading"]}>
+          <div className={styles["address-icon"]}>
+            <AddressBookIcon />
+          </div>
           <Label className={styles["label"]}>{t("AddressBook")}</Label>
           {addressData.length < 1 && width < desktopScreenSize ? (
             <div className={styles["div-message-mobile"]}>
