@@ -8,6 +8,8 @@ export type ErrorObject = {
   message: string;
   response?: {
     code?: string;
+    status?: string | number;
+    data?: any;
   };
 };
 

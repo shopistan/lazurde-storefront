@@ -6,16 +6,11 @@ import styles from "./side-bar.module.scss";
 import useWindowSize from "lib/utils/useWindowSize";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { desktopScreenSize } from "lib/utils/common";
 import { BackArrow } from "components/icons";
-// import { OKTA_CLIENT_ID, OKTA_DOMAIN } from "general-config";
-import {
-  getUserInfo,
-  logoutUser,
-  refreshAuthToken,
-  resetUserPassword,
-} from "lib/identity";
+import { logoutUser } from "lib/identity";
+import { OktaUser } from "lib/types/identity";
 
 type AccountsProps = {
   image?: ImageType;
@@ -38,6 +33,7 @@ interface SideBarProps {
   details?: DetailsProps[];
   setActiveComponent?: Function;
   activeComponent?: string | boolean;
+  oktaUserInfo?: OktaUser;
 }
 
 const SideBar: FC<SideBarProps> = ({
@@ -49,6 +45,7 @@ const SideBar: FC<SideBarProps> = ({
   details,
   setActiveComponent,
   activeComponent,
+  oktaUserInfo,
 }) => {
   const [width] = useWindowSize();
   const router = useRouter();
@@ -59,21 +56,6 @@ const SideBar: FC<SideBarProps> = ({
     {},
     { returnObjects: true }
   );
-
-  const [userName, setUserName] = useState("San");
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      let userInfo = (await getUserInfo()) || null;
-      if (!userInfo) {
-        await refreshAuthToken();
-        userInfo = (await getUserInfo()) || {};
-      }
-      if (userInfo.firstName) {
-        setUserName(userInfo.firstName);
-      }
-    };
-    fetchUserInfo();
-  }, []);
 
   const signOut = async () => {
     logoutUser();
@@ -119,12 +101,14 @@ const SideBar: FC<SideBarProps> = ({
                   <>
                     <span className={styles["firstName-desktop"]}>
                       {appState?.lang == "en"
-                        ? `Hi ${userName}`
+                        ? `Hi ${oktaUserInfo?.firstName}`
                         : t("firstname")}
                     </span>
-                    {/* <span>
-                      {appState?.lang == "en" ? lastName : t("lastname")}
-                    </span> */}
+                    <span>
+                      {appState?.lang == "en"
+                        ? oktaUserInfo?.lastName
+                        : t("lastname")}
+                    </span>
                   </>
                 </Label>
               </div>
