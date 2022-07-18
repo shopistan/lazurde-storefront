@@ -169,14 +169,14 @@
 
   .fact-sheet-iframe {
     width: 100%;
-    @media (min-width: 1023px) {
+    @media (min-width: $breakPoint-desktop) {
       width: 650px;
     }
   }
   p {
     margin-top: 0px;
     font-size: 14px;
-    @media (max-width: 1023px) {
+    @media (max-width: $breakPoint-desktop) {
       font-size: 13px;
     }
   }
@@ -196,6 +196,48 @@
           display: inline-block;
         }
       }
+    }
+  }
+  .dividend-wrapper {
+    .dividend-main {
+      font-size: 15px;
+      font-weight: 500;
+      margin-block-end: 8px;
+
+      @media (max-width: $breakPoint-mobile) {
+        margin-block-end: 24px;
+        font-size: 14px;
+      }
+    }
+    .dividend-main-block {
+      font-size: 14px;
+      font-weight: 400;
+      margin-block-end: 48px;
+
+      @media (max-width: $breakPoint-mobile) {
+        font-size: 13px;
+      }
+    }
+    .dividend-table {
+      margin-block-end: 48px;
+      .dividend-table-col {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 18px;
+        letter-spacing: 0em;
+        text-align: start;
+        width: 72px;
+      }
+      .dividend-table-row {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+        width: 72px;
+      }
+    }
+    .dividend-btn {
+      direction: rtl;
     }
   }
 }

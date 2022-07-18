@@ -1,0 +1,74 @@
+@import "/styles/variables.scss";
+
+.container {
+  width: 100%;
+  margin: auto auto 16px;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+
+  .tabs_heading {
+    display: flex;
+    border-bottom: 2px solid rgb(0, 0, 0, 0.2);
+    justify-content: space-between;
+    margin-bottom: 16px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 120%;
+
+    button {
+      padding: 8px 4px;
+      background-color: transparent;
+      border: 0;
+      color: rgb(0, 0, 0, 0.8);
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 120%;
+
+      &.active_tab {
+        border-bottom: 2px solid $black-color;
+        margin-bottom: -2px;
+      }
+    }
+  }
+
+  button:hover {
+    color: rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  button:disabled {
+    color: black;
+  }
+
+  .title {
+    color: black;
+    font-size: medium;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .content {
+    background-color: white;
+    font-weight: 300;
+    line-height: 30px;
+    font-size: 16px;
+    text-align: justify;
+
+    .tab-content {
+      .single_value {
+        display: flex;
+        gap: 3px;
+        line-height: 120%;
+      }
+
+      .tab-content-heading {
+        font-weight: 500;
+        margin-bottom: 16px;
+      }
+    }
+  }
+}

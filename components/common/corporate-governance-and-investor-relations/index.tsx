@@ -15,6 +15,9 @@ import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from "lib/utils/common";
 import Script from "next/script";
 import InfoSelector from "../info-selector";
+import { dividendHistoryAR } from "lib/mock-data/data";
+import Button from "components/common/ui/button";
+import Tabs from "components/common/tabs";
 
 type CGIRPagesProps = {
   name?: string | "";
@@ -23,6 +26,7 @@ type CGIRPagesProps = {
   width?: string | "";
   height?: string | "";
   moreContent?: MoreContentProps[];
+  dividend?: DividendProps[];
 };
 
 type _CGIRProps = {
@@ -43,6 +47,18 @@ type MoreContentProps = {
   pdfUrl?: string;
 };
 
+type DividendProps = {
+  heading?: string | "";
+  text?: string | "";
+  dividendHistory?: DividendHistoryProps[];
+  content?: string;
+};
+
+type DividendHistoryProps = {
+  heading?: string | "";
+  year?: string | "";
+  value?: string | "";
+};
 interface CGIRProps {
   cgirPages?: CGIRPagesProps[];
   sideBarBgcolor?: string | "";
@@ -67,6 +83,7 @@ const CGIR: FC<CGIRProps> = ({
   const router = useRouter();
   const [currentObject, setCurrentObject] = useState({
     moreContent: cgirPages[0]?.moreContent || [],
+    dividend: cgirPages[0]?.dividend || [],
     name: cgirPages[0]?.name || null,
     engName: cgirPages[0]?.name || null,
     content: cgirPages[0]?.content || "",
@@ -79,6 +96,7 @@ const CGIR: FC<CGIRProps> = ({
   useEffect(() => {
     setCurrentObject({
       moreContent: cgirPages[0]?.moreContent,
+      dividend: cgirPages[0]?.dividend || [],
       content:
         appState.lang == "en" ? cgirPages[0]?.content : _links[0]?.content,
       name: appState.lang == "en" ? cgirPages[0]?.name : _links[0]?.name,
@@ -96,6 +114,10 @@ const CGIR: FC<CGIRProps> = ({
         : "البيانات المالية ربع السنوية"
     );
   }, [appState.lang]);
+
+  const headingArr: string[] | undefined = [];
+  const yearArr: string[] | undefined = [];
+  let contentObj: any = {};
 
   return (
     <>
@@ -119,6 +141,7 @@ const CGIR: FC<CGIRProps> = ({
                   height,
                   // pageUrl,
                   moreContent = [],
+                  dividend = [],
                 } = page;
                 return (
                   <div
@@ -128,6 +151,7 @@ const CGIR: FC<CGIRProps> = ({
                       setShowPolicies(false);
                       setCurrentObject({
                         moreContent: moreContent,
+                        dividend: dividend,
                         content:
                           appState.lang == "en"
                             ? content
@@ -1253,6 +1277,203 @@ const CGIR: FC<CGIRProps> = ({
                           );
                         })}
                     </div>
+                  ) : currentObject?.name === "Dividends" ||
+                    currentObject?.name === "أرباح" ? (
+                    <div className={styles["dividend-wrapper"]}>
+                      {currentObject?.dividend?.length > 0 &&
+                        currentObject?.dividend.map((data) => {
+                          const { heading, content, text, dividendHistory } =
+                            data;
+                          return (
+                            <>
+                              <div className={styles["dividend-main"]}>
+                                {appState?.lang === "en"
+                                  ? heading
+                                  : dividendHistoryAR[0]?.heading}
+                                {}
+                              </div>
+                              <div className={styles["dividend-main-block"]}>
+                                <p
+                                  dangerouslySetInnerHTML={{
+                                    __html:
+                                      appState?.lang === "en"
+                                        ? text
+                                        : dividendHistoryAR[0]?.text,
+                                  }}
+                                ></p>
+                              </div>
+                              {size > desktopScreenSize ? (
+                                <div
+                                  className={styles["dividend-table"]}
+                                  style={{
+                                    display: "grid",
+                                    gridTemplateColumns: `repeat(${headingArr.length}, auto)`,
+                                    gridTemplateRows: `repeat(${yearArr.length}, auto)`,
+                                    gap: 16,
+                                  }}
+                                >
+                                  {dividendHistory?.length > 0 &&
+                                    dividendHistory.map((history, index) => {
+                                      const { heading, year, value } = history;
+                                      const findHeading = headingArr?.find(
+                                        (val) => val === heading
+                                      );
+                                      if (!findHeading) {
+                                        headingArr.push(heading);
+                                      }
+                                      const findYear = yearArr?.find(
+                                        (val) => val === year
+                                      );
+                                      if (!findYear) {
+                                        yearArr.push(year);
+                                      }
+
+                                      const divHeading = headingArr?.findIndex(
+                                        (val) => val === heading
+                                      );
+                                      const divYear = yearArr?.findIndex(
+                                        (val) => val === year
+                                      );
+
+                                      return (
+                                        <>
+                                          <div
+                                            key={index}
+                                            className={
+                                              styles["dividend-table-row"]
+                                            }
+                                            style={{
+                                              gridColumn: divHeading + 2,
+                                              gridRow: divYear + 2,
+                                            }}
+                                          >
+                                            {value}
+                                          </div>
+                                          {dividendHistory?.length - 1 ===
+                                            index && (
+                                            <div
+                                              className={
+                                                styles["dividend-table-col"]
+                                              }
+                                              style={{
+                                                gridColumn: 1,
+                                                gridRow: 1,
+                                              }}
+                                            >
+                                              {appState.lang === "en"
+                                                ? "Year"
+                                                : "سنة"}
+                                            </div>
+                                          )}
+                                          {headingArr?.length > 0 &&
+                                            dividendHistory?.length - 1 ===
+                                              index &&
+                                            headingArr.map((heading, index) => {
+                                              return (
+                                                <div
+                                                  key={index}
+                                                  className={
+                                                    styles["dividend-table-col"]
+                                                  }
+                                                  style={{
+                                                    gridColumn: `${index + 2}`,
+                                                    gridRow: 1,
+                                                  }}
+                                                >
+                                                  {heading}
+                                                </div>
+                                              );
+                                            })}
+                                          {yearArr?.length > 0 &&
+                                            dividendHistory?.length - 1 ===
+                                              index &&
+                                            yearArr.map((years, index) => {
+                                              return (
+                                                <>
+                                                  <div
+                                                    key={index}
+                                                    className={
+                                                      styles[
+                                                        "dividend-table-col"
+                                                      ]
+                                                    }
+                                                    style={{
+                                                      gridColumn: 1,
+                                                      gridRow: `${index + 2}`,
+                                                    }}
+                                                  >
+                                                    {years}
+                                                  </div>
+                                                </>
+                                              );
+                                            })}
+                                        </>
+                                      );
+                                    })}
+                                </div>
+                              ) : (
+                                <>
+                                  <div>
+                                    {dividendHistory?.length > 0 &&
+                                      dividendHistory.map((history) => {
+                                        const { heading, year, value } =
+                                          history;
+                                        const findYear = yearArr?.find(
+                                          (val) => val === year
+                                        );
+                                        if (!findYear) {
+                                          yearArr.push(year);
+                                        }
+                                        const divYear = yearArr?.findIndex(
+                                          (val) => val === year
+                                        );
+                                        const matchedYear =
+                                          dividendHistory?.find(
+                                            (data) =>
+                                              data?.year === yearArr[divYear]
+                                          );
+
+                                        contentObj = {
+                                          ...contentObj,
+                                          [matchedYear?.year]: {
+                                            ...contentObj[matchedYear?.year],
+                                            [heading]: value,
+                                          },
+                                        };
+                                      })}
+                                    <Tabs
+                                      yearArr={yearArr}
+                                      content={contentObj}
+                                    />
+                                  </div>
+                                </>
+                              )}
+
+                              <div className={styles["dividend-main-block"]}>
+                                <p
+                                  dangerouslySetInnerHTML={{
+                                    __html:
+                                      appState.lang === "en"
+                                        ? content
+                                        : dividendHistoryAR[0]?.content,
+                                  }}
+                                ></p>
+                              </div>
+                            </>
+                          );
+                        })}
+                      <div className={styles["dividend-btn"]}>
+                        <Button
+                          buttonSize={"lr"}
+                          buttonText={
+                            appState.lang === "en"
+                              ? t("Subscribe")
+                              : t("الإشتراك")
+                          }
+                          onClick={() => {}}
+                        ></Button>
+                      </div>
+                    </div>
                   ) : currentObject?.name === "Contact IR" ||
                     currentObject?.name === "الاتصال بـ IR" ? (
                     <div className={styles["text-wrapper"]}>
@@ -1274,7 +1495,6 @@ const CGIR: FC<CGIRProps> = ({
                       return (
                         <div key={index}>
                           {heading && <span>{heading}</span>}
-                          {/* {text && <p>{text}</p>} */}
                           <p
                             key={Math.random()}
                             dangerouslySetInnerHTML={{ __html: text }}
@@ -1311,16 +1531,26 @@ const CGIR: FC<CGIRProps> = ({
                   ) : null}
                 </div>
               )}
-              <div className={styles["back-block"]}>
-                <button className={styles["button"]}>
-                  <Image src={"/question.png"} width={20} height={20} alt="" />
-                  <p>
-                    {appState.lang == "en"
-                      ? "Have a question?"
-                      : t("customerButton")}
-                  </p>
-                </button>
-              </div>
+              {currentObject?.name != "Dividends" &&
+              currentObject?.name != "أرباح" ? (
+                <div className={styles["back-block"]}>
+                  <button className={styles["button"]}>
+                    <Image
+                      src={"/question.png"}
+                      width={20}
+                      height={20}
+                      alt=""
+                    />
+                    <p>
+                      {appState.lang == "en"
+                        ? "Have a question?"
+                        : t("customerButton")}
+                    </p>
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
