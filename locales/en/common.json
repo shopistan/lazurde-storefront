@@ -21,8 +21,12 @@
   "Add": "Add",
   "Edit": "Edit",
   "AddNewAddress": "Add New Address",
+  "AddNewMethod": "Add New Method",
+  "NoMethodMessage": "You currently don’t have any saved payment methods. Add a payment method here to be prefilled for quicker checkout.",
   "AddressBook": "Address Book",
+  "PaymentMethods": "Payment Methods",
   "CheckBoxShipping": "Make this my default shipping address",
+  "CheckBoxPayment": "Make this my default payment method",
   "DeleteAddressMessage": "Are you sure you want to delete this address? This action cannot be undone",
   "signOut": "Sign Out",
   "signIn": "Sign In",
@@ -40,10 +44,25 @@
     "PostalCode": "Postal Code"
   },
 
+  "paymentFormHeadings": {
+    "title": "Title",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "cardNumber": "Card Number",
+    "expDate": "Expiration Date",
+    "cvv": "cvv"
+  },
+
   "addressBookHeading": {
     "add": "Add New Address",
     "edit": "Edit Address",
     "delete": "Delete Delivery Address"
+  },
+  
+  "paymentModalHeading": {
+    "add": "Add New Payment Method",
+    "edit": "Edit Payment Method",
+    "delete": "Delete Payment Method"
   },
 
   "sortingFilter": [

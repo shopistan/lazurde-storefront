@@ -9,7 +9,7 @@ import { AppContext } from "lib/context/index";
 import Router, { useRouter } from "next/router";
 import { desktopScreenSize } from "lib/utils/common";
 import { BackArrow } from "components/icons";
-import { OKTA_CLIENT_ID, OKTA_DOMAIN } from "general-config";
+// import { OKTA_CLIENT_ID, OKTA_DOMAIN } from "general-config";
 import {
   getUserInfo,
   logoutUser,

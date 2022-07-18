@@ -11,10 +11,10 @@ export type ErrorObject = {
   };
 };
 
-export interface ImageType  {
+export interface ImageType {
   url: string;
   altText: string;
-};
+}
 
 export type NavLinks = {
   url: string;
@@ -117,4 +117,89 @@ export type AuthTokens = {
   scope?: string;
   token_type?: string;
   expires_in: number;
+};
+
+export type CheckoutCustomerProps = {
+  email: string;
+  name: string;
+  phone?: {
+    number: string;
+    country_code: string;
+  };
+  metadata?: {
+    coupon_code?: string;
+    partner_id?: number;
+  };
+};
+
+export type TokenProps = {
+  type: "card";
+  number: string;
+  expiry_month: number;
+  expiry_year: number;
+  name: string;
+  cvv: string;
+  billing_address?: {
+    address_line1: string;
+    address_line2: string;
+    city: string;
+    state: string;
+    zip: string;
+    country: "SA" | "EG" | "AE";
+  };
+  phone?: {
+    number: string;
+    country_code: string;
+  };
+};
+
+export type InstrumentProps = {
+  type: "token";
+  token: string;
+  account_holder?: {
+    billing_address?: {
+      address_line1: string;
+      address_line2: string;
+      city: string;
+      state: string;
+      zip: string;
+      country: "SA" | "EG" | "AE";
+    };
+    phone?: {
+      country_code: string;
+      number: string;
+    };
+  };
+  customer: {
+    id: string;
+    phone?: {
+      country_code: string;
+      number: string;
+    };
+    default: boolean;
+  };
+};
+
+export type UpdateInstrumentProps = {
+  expiry_month: number;
+  expiry_year: number;
+  name: string;
+  account_holder?: {
+    billing_address?: {
+      address_line1: string;
+      address_line2: string;
+      city: string;
+      state: string;
+      zip: string;
+      country: string;
+    };
+    phone?: {
+      country_code: string;
+      number: string;
+    };
+  };
+  customer: {
+    id: string;
+    default: boolean;
+  };
 };

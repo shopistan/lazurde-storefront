@@ -35,3 +35,4 @@ export { default as ReviewIcon } from "./ReviewIcon";
 export { default as AddressBookIcon } from "./AddressBookIcon";
 export { default as EditIcon } from "./EditIcon";
 export { default as Login } from "./login";
+export { default as PaymentMethodIcon } from "./PaymentMethodIcon";

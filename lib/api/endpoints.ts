@@ -63,6 +63,15 @@ const ENDPOINTS = {
     TRANSLATE_REVIEWS:
       "https://translation.googleapis.com/language/translate/v2",
   },
+
+  CHECKOUT: {
+    CREATE_CUSTOMER: `/customers`,
+    GET_CUSTOMER: (email: string) => `/customers/${email}`,
+    GET_PAYMENT_TOKEN: `/tokens`,
+    CREATE_PAYMENT_INSTRUMENT: `/instruments`,
+    UPDATE_PAYMENT_INSTRUMENT: (id: string) => `/instruments/${id}`,
+    DELETE_PAYMENT_INSTRUMENT: (id: string) => `/instruments/${id}`,
+  },
 };
 
 export default ENDPOINTS;

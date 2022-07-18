@@ -32,9 +32,13 @@
   "Add": "ىكل رخدي",
   "Edit": "ىكل رخدي",
   "AddNewAddress": "حصريا على الانترنت",
+  "AddNewMethod": "حصريا على الانترنت",
   "AddressBook": "حصريا على الانترنت",
+  "PaymentMethods": "حصريا على الانترنت",
   "CheckBoxShipping": "ىانيدل تاحصريا على الانترنت",
+  "CheckBoxPayment": "ىانيدل تاحصريا على الانترنت",
   "DeleteAddressMessage": "ىانيدل تاضيفختلا عيمج قوست",
+  "NoMethodMessage": " يمج قوسختلا عيمج ق ىانيدل تاضيفختلا عيمج قوست",
   "signOut": "خروج",
   "signUp": "اشتراك",
   "signIn": "تسجيل الدخول",
@@ -51,7 +55,22 @@
     "PostalCode": "ىكل رخدي"
   },
 
+  "paymentFormHeadings": {
+    "title": "ىكل رخدي",
+    "firstName": "ىكل رخدي",
+    "lastName": "ىكل رخدي",
+    "cardNumber": "ىكل رخدي",
+    "expDate": "ىكل رخدي",
+    "cvv": "ىكل رخدي"
+  },
+
   "addressBookHeading": {
+    "add": "حصريا على الانترنت",
+    "edit": "حصريا على الانترنت",
+    "delete": "حصريا على الانترنت"
+  },
+
+  "paymentModalHeading": {
     "add": "حصريا على الانترنت",
     "edit": "حصريا على الانترنت",
     "delete": "حصريا على الانترنت"

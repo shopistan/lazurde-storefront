@@ -16,6 +16,7 @@ import { desktopScreenSize } from "lib/utils/common";
 import UserReviews from "./account-reviews";
 import AddressBook from "./account-addresses";
 import MyWishList from "../wishlist/my-wish-list/index";
+import PaymentMethod from "./account-payment-method";
 
 interface AccountInformationProps {
   title?: string | "";
@@ -67,7 +68,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
   }, []);
 
   useEffect(() => {
-    setActiveComponent(activeAccountPageTab)
+    setActiveComponent(activeAccountPageTab);
   }, [activeAccountPageTab]);
 
   return (
@@ -110,6 +111,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
               {activeComponent == "Newsletter Subscriptions" && (
                 <NewsSubscriptions />
               )}
+              {activeComponent == "Payment Methods" && <PaymentMethod />}
             </div>
           </div>
         </div>
