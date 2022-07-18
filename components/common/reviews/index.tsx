@@ -44,8 +44,6 @@ const Reviews = ({
     fetchingReviews();
   }, [productData]);
 
-  console.log("isFetchingReview", isFetchingReview);
-
   useEffect(() => {
     if (isFetchingReview) {
       setFilterData("");
