@@ -76,6 +76,7 @@ const ContextProvider: FC = ({ children }) => {
       window?.sessionStorage?.getItem("cartItem_counter")) ||
       0
   );
+  const [isFetchingReview, setIsFetchingReview] = useState(false);
 
   return (
     <AppContext.Provider
@@ -101,6 +102,8 @@ const ContextProvider: FC = ({ children }) => {
         setCartItemCounter,
         cartId,
         setCartId,
+        isFetchingReview,
+        setIsFetchingReview,
       }}
     >
       {children}

@@ -1,14 +1,23 @@
 import * as React from "react";
 import axios from "axios";
-import { OKTA_DOMAIN, OKTA_CLIENT_ID, UMS_IDENTITY_URL } from "general-config";
+import {
+  OKTA_DOMAIN,
+  OKTA_CLIENT_ID,
+  UMS_IDENTITY_URL,
+  CUSTOMER_SERVICE_URL,
+} from "general-config";
 import Router from "next/router";
-import { AuthTokens } from "lib/types/common";
+import { AuthTokens, ErrorObject } from "lib/types/common";
 import ENDPOINTS from "lib/api/endpoints";
+import jwtDecode from "jwt-decode";
+import HEADERS from "lib/api/headers";
 
-export const codeVerifier =
+const codeVerifier =
   "M25iVXpKU3puUjFaYWg3T1NDTDQtcW1ROUY5YXlwalNoc0hhakxifmZHag";
-export const codeChallenge = "qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es";
-export const state = "state-8600b31f-52d1-4dca-987c-386e3d8967e9";
+const codeChallenge = "qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es";
+const state = "state-8600b31f-52d1-4dca-987c-386e3d8967e9";
+
+const INVALID_GRANT = "invalid_grant";
 
 const getRedirectUri = () => {
   // if (process.env.NODE_ENV === "production") {
@@ -37,7 +46,7 @@ const getPostLogoutRedirect = () => {
 
 export const loginUser = () => {
   const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
-  if (authTokens) {
+  if (authTokens && !isAccessTokenExpired()) {
     console.log("Already logged in: ", authTokens);
     Router.push("/account");
   } else {
@@ -74,10 +83,7 @@ export const fetchTokens = async (code: string) => {
         userInfo = (await getUserInfo()) || {};
       }
       if (userInfo) {
-        window.localStorage.setItem(
-          "user_info",
-          JSON.stringify(userInfo)
-        );
+        window.localStorage.setItem("user_info", JSON.stringify(userInfo));
       }
     }
   } catch (error) {
@@ -143,7 +149,7 @@ export const resetUserPassword = async (
         },
       }
     );
-    console.log("reset pw res", resetPasswordRes);
+    console.log("Reset password success: ", resetPasswordRes);
   } catch (error) {
     console.log("Error fetching user info: ", error);
   }
@@ -177,5 +183,228 @@ export const refreshAuthToken = async () => {
     }
   } catch (error) {
     console.log("Error refreshing access token: ", error);
+    const axiosError = error as ErrorObject;
+    if (axiosError && axiosError.response?.data?.error === INVALID_GRANT) {
+      loginUser();
+    }
+  }
+};
+
+export const isAccessTokenExpired = () => {
+  const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
+  const { access_token = "" } = authTokens;
+  if (access_token) {
+    const decodedToken = jwtDecode(access_token);
+    return new Date().getTime() / 1000 > (decodedToken as any).exp;
+  }
+  return false;
+};
+
+export const fetchFabricCustomer = async (fabricUserId: string) => {
+  try {
+    if (isAccessTokenExpired()) {
+      await refreshAuthToken();
+    }
+    const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
+    const { access_token = "" } = authTokens;
+    const fabricCustomerRes = await axios.get(
+      `${CUSTOMER_SERVICE_URL}${ENDPOINTS.IDENTITY.GET_FABRIC_CUSTOMER(
+        fabricUserId
+      )}`,
+      {
+        headers: {
+          ...HEADERS.common,
+          Authorization: access_token,
+        },
+      }
+    );
+    return fabricCustomerRes.data || null;
+  } catch (error) {
+    console.log("Error fetching fabric customer: ", error);
+  }
+};
+
+export const linkFabricCustomerObjectToIndividualProfile = async (
+  userId: string,
+  partyId: string
+) => {
+  try {
+    if (isAccessTokenExpired()) {
+      await refreshAuthToken();
+    }
+    const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
+    const { access_token = "" } = authTokens;
+    const linkUserToIndividualRes = await axios.post(
+      `${CUSTOMER_SERVICE_URL}${ENDPOINTS.IDENTITY.LINK_USER_TO_INDIVIDUAL}`,
+      { userId, partyId },
+      {
+        headers: {
+          ...HEADERS.common,
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+    return linkUserToIndividualRes.data;
+  } catch (error) {
+    console.log(
+      "Error linking fabric customer object to individual user profile: ",
+      error
+    );
+  }
+};
+
+export const createCustomerProfile = async (payload: any) => {
+  try {
+    if (isAccessTokenExpired()) {
+      await refreshAuthToken();
+    }
+    const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
+    const { access_token = "" } = authTokens;
+    const createCustomerProfileRes = await axios.post(
+      `${CUSTOMER_SERVICE_URL}${ENDPOINTS.IDENTITY.CREATE_CUSTOMER_PROFILE}`,
+      payload,
+      {
+        headers: {
+          ...HEADERS.common,
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+    return createCustomerProfileRes.data;
+  } catch (error) {
+    console.log("Error creating customer profile: ", error);
+  }
+};
+
+export const fetchCustomerProfile = async (fabricUserId: string) => {
+  /**
+   * Fetch fabric customer object from fabricUserId. fabricUserId is user id created
+   * in okta and obtained using /self endpoint.
+   */
+  const fabricCustomerObject = await fetchFabricCustomer(fabricUserId);
+
+  try {
+    if (isAccessTokenExpired()) {
+      await refreshAuthToken();
+    }
+    const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
+    const { access_token = "" } = authTokens;
+    /**
+     * Fetch customer/individual profiles using /v1/user-party/user/{userId} endpoint.
+     */
+    const customerProfilesRes = await axios.get(
+      `${CUSTOMER_SERVICE_URL}${ENDPOINTS.IDENTITY.GET_CUSTOMER_PROFILE(
+        fabricCustomerObject._id
+      )}`,
+      {
+        headers: {
+          ...HEADERS.common,
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+    const { list = [] } = customerProfilesRes.data;
+    /**
+     * Current user profile would be the 1st item in the list.
+     */
+    if (list.length > 0) {
+      return list[0];
+    } else {
+      /**
+       * Customer profile not created yet, create one and return
+       */
+      const createProfilePayload = {
+        name: `${fabricCustomerObject.firstName} ${fabricCustomerObject.lastName}`,
+        partyType: "P",
+        isActive: true,
+        email: fabricCustomerObject.email,
+        additionalAttributes: fabricCustomerObject.additionalAttributes,
+      };
+      /**
+       * Endpoint: /data-customer/v1/individuals
+       */
+      const customerProfile = await createCustomerProfile(createProfilePayload);
+      const { _id: individualProfileId = "" } = customerProfile;
+      /**
+       * Link fabric customer object to the profile just created. This profile will be
+       * returned at list[0] the next time you fetch customer/individual profile using
+       * /v1/user-party/user/{userId} endpoint.
+       */
+      const linkToUserRes = await linkFabricCustomerObjectToIndividualProfile(
+        fabricCustomerObject._id,
+        individualProfileId
+      );
+      const linkToUserId = (linkToUserRes as any)._id;
+      if (linkToUserId) {
+        return customerProfile;
+      } else
+        throw new Error(
+          "Creating individual profile: could not link fabric customer to fabric individual profile"
+        );
+    }
+  } catch (error) {
+    console.log("Error fetching customer profile: ", error);
+  }
+};
+
+/**
+ * Fields to be updated using /ums/v2/users/self endpoint: firstName, lastName, email,
+ * birthDate, anniversaryDate, title
+ * Fields to be updated/maintained using /v1/individuals/{individualId} endpoint: phone number,
+ * city, governorate, country, postalCode, checkoutCustomerId
+ */
+
+export const updateOktaUser = async (payload: any) => {
+  try {
+    if (isAccessTokenExpired()) {
+      await refreshAuthToken();
+    }
+    const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
+    const { access_token = "" } = authTokens;
+    const updateOktaUserRes = await axios.put(
+      `${UMS_IDENTITY_URL}${ENDPOINTS.IDENTITY.UPDATE_OKTA_USER}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+    return updateOktaUserRes.data;
+  } catch (error) {
+    console.log("Errro updating okta user: ", error);
+  }
+};
+
+/**
+ * NOTE: Always update corresponding information in user profile when updating firstName,
+ * lastName and email for okta user.
+ */
+
+export const updateIndividualUserProfile = async (
+  individualId: string,
+  payload: any
+) => {
+  try {
+    if (isAccessTokenExpired()) {
+      await refreshAuthToken();
+    }
+    const authTokens = JSON.parse(window.localStorage.getItem("auth_tokens"));
+    const { access_token = "" } = authTokens;
+    const updateIndividualUserProfileRes = await axios.put(
+      `${CUSTOMER_SERVICE_URL}${ENDPOINTS.IDENTITY.UPDATE_CUSTOMER_PROFILE(
+        individualId
+      )}`,
+      payload,
+      {
+        headers: {
+          ...HEADERS.common,
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+    return updateIndividualUserProfileRes.data;
+  } catch (error) {
+    console.log("Error updating user profile: ", error);
   }
 };
