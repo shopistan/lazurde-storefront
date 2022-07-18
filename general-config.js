@@ -61,6 +61,10 @@ export const WISHLIST = process.env.NEXT_PUBLIC_GET_WISHLIST;
 
 export const OMS_DOMAIN = process.env.NEXT_PUBLIC_OMS_DOMAIN;
 
+export const CHECKOUT_DOMAIN = process.env.NEXT_PUBLIC_CHECKOUT_DOMAIN_SB;
+export const CHECKOUT_SECRET_KEY = process.env.NEXT_PUBLIC_CHECKOUT_SECRET_KEY;
+export const CHECKOUT_PUBLIC_KEY = process.env.NEXT_PUBLIC_CHECKOUT_PUBLIC_KEY;
+
 export const LOCATION_ID_AE = process.env.NEXT_PUBLIC_LOCATION_ID_AE;
 export const LOCATION_ID_SA = process.env.NEXT_PUBLIC_LOCATION_ID_SA;
 export const LOCATION_ID_EG = process.env.NEXT_PUBLIC_LOCATION_ID_EG;

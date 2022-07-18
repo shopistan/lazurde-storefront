@@ -16,6 +16,7 @@ import { desktopScreenSize } from "lib/utils/common";
 import UserReviews from "./account-reviews";
 import AddressBook from "./account-addresses";
 import MyWishList from "../wishlist/my-wish-list/index";
+import PaymentMethod from "./account-payment-method";
 import {
   fetchCustomerProfile,
   getUserInfo,
@@ -79,8 +80,8 @@ const AccountInformation: FC<AccountInformationProps> = ({
 
   useEffect(() => {
     const fetchUserInfo = async () => {
-      if (isAccessTokenExpired()) {
-        await refreshAuthToken();
+      if (isAccessTokenExpired && isAccessTokenExpired()) {
+        refreshAuthToken && await refreshAuthToken();
       }
       let userInfo = (await getUserInfo()) || null;
       if (userInfo) {
@@ -88,11 +89,15 @@ const AccountInformation: FC<AccountInformationProps> = ({
       }
     };
     fetchUserInfo();
+
+    return (() => {
+      setOktaUserInfo(null)
+    })
   }, []);
 
   useEffect(() => {
     if (oktaUserInfo) {
-      fetchCustomerProfile(oktaUserInfo.id)
+      fetchCustomerProfile &&  fetchCustomerProfile(oktaUserInfo.id)
         .then((profile) => {
           /**
            * NOTE: Use this profile information to maintain/update/display any
@@ -152,6 +157,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
               {activeComponent == "Newsletter Subscriptions" && (
                 <NewsSubscriptions />
               )}
+              {activeComponent == "Payment Methods" && <PaymentMethod />}
             </div>
           </div>
         </div>
