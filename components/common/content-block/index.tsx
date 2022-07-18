@@ -49,6 +49,8 @@ const ContentBlock: FC<ContentBlockProps> = ({
         content?.name === "معلومات المخزون" ||
         content?.name === "Financial Information" ||
         content?.name === "معلومات مالية" ||
+        content?.name === "Dividends" ||
+        content?.name === "أرباح" ||
         content?.name === "Email Subscription Center" ||
         content?.name === "مركز الاشتراك بالبريد الإلكتروني" ||
         content?.name === "Contact IR" ||
