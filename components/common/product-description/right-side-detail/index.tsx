@@ -60,7 +60,7 @@ const RightSideDetail = ({
   const allProductPrices = useRef([]);
   const userAuth = useRef("");
   const router = useRouter();
-  const { appState, cartId } = useContext(AppContext);
+  const { appState, cartId, setOpenMiniCart } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
   const [quantityCounter, setQuantityCounter] = useState(1);
@@ -269,9 +269,9 @@ const RightSideDetail = ({
     };
     const response = await addProductToCart(payload);
     if (response?.hasError) {
-      // alert("error while adding product");
-    } else {
-      router?.push("/cart");
+      console.log("error while adding product");
+    } else if (response?.response?.status === 200) {
+      setOpenMiniCart(true);
     }
   };
 

@@ -105,8 +105,11 @@ const ProductCard = ({
       ],
     };
     const response = await addProductToCart(payload);
-    if (!response?.hasError) {
-      router?.push("/cart");
+    if (response?.hasError) {
+      setOpenMiniCart(false);
+    }
+    if (response?.response?.status === 200) {
+      setOpenMiniCart(true);
     }
   };
 

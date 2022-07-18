@@ -31,6 +31,7 @@ const Modal = ({
   divModalRight = "",
 }: ModalProps): JSX.Element => {
   const [openState, setOpenState] = useState(isOpened);
+  const [alertContainer, setAlertContainer] = useState<any>("");
   const [size] = useWindowSize();
 
   useEffect(() => {
