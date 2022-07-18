@@ -1,0 +1,704 @@
+@import "/styles/variables.scss";
+.account-mydetails-container {
+  width: 650px;
+  @media (max-width: $breakPoint-desktop) {
+    width: 375px;
+  }
+  .account-mydetails-heading-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px;
+    background: #ffffff;
+    margin-bottom: 8px;
+    @media (max-width: $breakPoint-desktop) {
+      margin-bottom: 0px;
+      padding: 24px;
+      padding-bottom: 40px;
+    }
+    .account-mydetails-heading {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 120%;
+      color: #000000;
+      margin-top: 4.21px;
+    }
+    .account-mydetails-icon {
+      @media (max-width: $breakPoint-desktop) {
+        display: none;
+      }
+    }
+  }
+
+  .account-mydetails-content-section {
+    padding: 24px;
+    background: #ffffff;
+    @media (max-width: $breakPoint-desktop) {
+      padding: 24px;
+      padding-top: 0px;
+    }
+
+    .container-form {
+      position: relative;
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 120%;
+      label {
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 130%;
+        color: rgba(0, 0, 0, 0.6);
+        // margin-bottom: 6px;
+        padding-left: 20px;
+        padding-right: 20px;
+        @media (max-width: $breakPoint-desktop) {
+          font-size: 11px;
+        }
+      }
+      select {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 40px;
+        border-radius: 100px;
+        margin-bottom: 16px;
+        margin-top: 3px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+        @media (max-width: $breakPoint-desktop) {
+          font-size: 13px;
+        }
+      }
+
+      input {
+        width: 100%;
+        height: 40px;
+        border: 1px solid rgba(0, 0, 0, 0.6);
+        border-radius: 100px;
+        margin-bottom: 16px;
+        margin-top: 3px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+        @media (max-width: $breakPoint-desktop) {
+          font-size: 13px;
+        }
+      }
+      .button {
+        width: 74px;
+        height: 34px;
+        padding: 8px;
+        background: #000000;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 120%;
+        align-items: center;
+        text-align: center;
+        text-transform: capitalize;
+        color: #ffffff;
+        @media (max-width: $breakPoint-desktop) {
+          width: 200px;
+          height: 51px;
+          font-size: 16px;
+        }
+      }
+      .button-dev {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        @media (max-width: $breakPoint-desktop) {
+          justify-content: center;
+          margin-top: 16px;
+        }
+        input {
+          margin-bottom: 0px;
+        }
+      }
+      .Password input {
+        width: 538px;
+        @media (max-width: $breakPoint-desktop) {
+          width: 263px;
+        }
+      }
+      .phone_number input {
+        width: 538px;
+        @media (max-width: $breakPoint-desktop) {
+          width: 263px;
+        }
+      }
+      .edit_div button {
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 120%;
+        border: none;
+        background: none;
+        text-decoration: underline;
+        padding-top: 11.5px;
+        padding-left: 16px;
+        padding-right: 4px;
+        cursor: pointer;
+      }
+      .password_flex {
+        display: flex;
+        flex-direction: row;
+      }
+      .phone_flex {
+        display: flex;
+        flex-direction: row;
+      }
+      .account-edit-icon {
+        padding-top: 10px;
+      }
+      .dropdownn1 {
+        display: flex;
+        flex-direction: row;
+      }
+      .dropdownn2 {
+        display: flex;
+        flex-direction: row;
+      }
+      .dropdownn3 {
+        display: flex;
+        flex-direction: row;
+      }
+      .dropdownn1 span {
+        position: absolute !important;
+        top: 30px;
+        right: 20px;
+      }
+      .dropdownn2 span {
+        position: absolute !important;
+        top: 635px;
+        right: 20px;
+      }
+      .dropdownn3 span {
+        position: absolute !important;
+        top: 712px;
+        right: 20px;
+      }
+      .arabicdropdownn1 {
+        display: flex;
+        flex-direction: row;
+      }
+      .arabicdropdownn2 {
+        display: flex;
+        flex-direction: row;
+      }
+      .arabicdropdownn3 {
+        display: flex;
+        flex-direction: row;
+      }
+      .arabicdropdownn1 span {
+        position: absolute !important;
+        top: 30px;
+        left: 20px;
+      }
+      .arabicdropdownn2 span {
+        position: absolute !important;
+        top: 640px;
+        left: 20px;
+      }
+      .arabicdropdownn3 span {
+        position: absolute !important;
+        top: 715px;
+        left: 20px;
+      }
+    }
+  }
+}
+
+//styling of Edit Modal
+
+.App {
+  width: 90%;
+  padding: 50px;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 110;
+}
+
+.modal {
+  position: fixed;
+  z-index: 120;
+  background: #fff;
+  border-radius: 10px;
+  /* Center the modal */
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  @media (max-width: $breakPoint-desktop) {
+    height: 100%;
+    overflow: auto;
+    border-radius: 0px;
+  }
+}
+
+.modal__header {
+  padding-top: 46px;
+  padding-right: 45.5px;
+  padding-left: 48px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: flex-end;
+  @media (max-width: $breakPoint-desktop) {
+    padding-top: 26px;
+    padding-right: 25.5px;
+    padding-left: 24px;
+    padding-bottom: 49px;
+  }
+}
+
+.modal__main {
+  padding: 20px;
+}
+
+.close-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: black;
+}
+
+.button {
+  background: green;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.main {
+  width: 100%;
+  background: #f2f2f2;
+  .main_section {
+    margin: 0 auto;
+    padding-right: 48px;
+    padding-left: 48px;
+    padding-bottom: 48px;
+    background: #ffffff;
+    @media (max-width: $breakPoint-desktop) {
+      padding-left: 24px;
+      padding-right: 24px;
+      padding-bottom: 222px;
+    }
+  }
+  .reset {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 120%;
+    color: #000000;
+    margin-bottom: 32px;
+    margin-top: 0px;
+  }
+  .signIn_form {
+    margin-top: 32px;
+  }
+  .signIn_Label {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 130%;
+    color: rgba(0, 0, 0, 0.6);
+    margin-left: 20px;
+    margin-right: 20px;
+    @media (max-width: $breakPoint-desktop) {
+      font-size: 11px;
+    }
+  }
+  .signIn_Input {
+    font-size: 14px;
+    width: 466px;
+    padding-right: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 100px;
+    height: 40px;
+    margin-top: 4px;
+    color: black;
+    @media (max-width: $breakPoint-desktop) {
+      width: 327px;
+      font-size: 13px;
+    }
+  }
+  .password_req {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    color: #000000;
+    margin-top: 60px;
+    margin-left: 8px;
+    margin-right: 8px;
+    @media (max-width: $breakPoint-desktop) {
+      margin-top: 30px;
+      font-size: 13px;
+    }
+    p {
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+  }
+  .signIn_button_div {
+    text-align: end;
+    margin-top: 32px;
+    @media (max-width: $breakPoint-desktop) {
+      margin-top: 76px;
+      text-align: center;
+    }
+  }
+  .signIn_button {
+    padding: 16px;
+    width: 200px;
+    height: 51px;
+    background: #000000;
+    border-radius: 100px;
+    color: white;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 120%;
+  }
+  .input1 span {
+    position: absolute !important;
+    top: 168px;
+    right: 75px;
+    @media (max-width: $breakPoint-desktop) {
+      top: 192px;
+      right: 50px;
+    }
+  }
+  .input2 span {
+    position: absolute !important;
+    top: 250px;
+    right: 75px;
+    @media (max-width: $breakPoint-desktop) {
+      top: 275px;
+      right: 50px;
+    }
+  }
+  .input3 span {
+    position: absolute !important;
+    top: 335px;
+    right: 75px;
+    @media (max-width: $breakPoint-desktop) {
+      top: 358px;
+      right: 50px;
+    }
+  }
+  .arabicInput1 span {
+    position: absolute !important;
+    top: 190px;
+    left: 70px;
+    @media (max-width: $breakPoint-desktop) {
+      top: 212px;
+      left: 50px;
+    }
+  }
+  .arabicInput2 span {
+    position: absolute !important;
+    top: 292px;
+    left: 70px;
+    @media (max-width: $breakPoint-desktop) {
+      top: 316px;
+      left: 50px;
+    }
+  }
+  .arabicInput3 span {
+    position: absolute !important;
+    top: 395px;
+    left: 70px;
+    @media (max-width: $breakPoint-desktop) {
+      top: 420px;
+      left: 50px;
+    }
+  }
+}
+
+//style of modal of phone number
+
+@import "/styles/variables.scss";
+.phone_overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 110;
+}
+
+.phone_modal {
+  position: fixed;
+  z-index: 120;
+  background: #fff;
+  border-radius: 10px;
+  /* Center the modal */
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  @media (max-width: $breakPoint-desktop) {
+    height: 100%;
+    overflow: auto;
+    border-radius: 0px;
+  }
+}
+
+.phone_modal__header {
+  height: 71px;
+  padding-top: 30px;
+  padding-right: 45.5px;
+  padding-left: 48px;
+  display: flex;
+  justify-content: flex-end;
+  @media (max-width: $breakPoint-desktop) {
+    padding-top: 11px;
+    padding-right: 25.5px;
+    padding-left: 24px;
+    padding-bottom: 49px;
+    height: 95px;
+  }
+}
+
+.phone_close-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #fff;
+  font-size: 36px;
+}
+
+.phone_main {
+  width: 100%;
+  background: #f2f2f2;
+  .phone_main_section {
+    margin: 0 auto;
+    padding-right: 48px;
+    padding-left: 48px;
+    padding-bottom: 48px;
+    background: #ffffff;
+    @media (max-width: $breakPoint-desktop) {
+      padding-left: 24px;
+      padding-right: 24px;
+      padding-bottom: 223px;
+    }
+  }
+  .phone_reset {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 120%;
+    color: #000000;
+    margin-bottom: 32px;
+    margin-top: 0px;
+  }
+
+  .phone_reset_para {
+    width: 466px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    color: #000000;
+    margin: 0px;
+    @media (max-width: $breakPoint-desktop) {
+      width: 327px;
+      font-size: 13px;
+    }
+  }
+  .phone_signIn_form {
+    margin-top: 24px;
+  }
+  .phone_signIn_Label {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 130%;
+    color: rgba(0, 0, 0, 0.6);
+    margin-left: 20px;
+    margin-right: 20px;
+    @media (max-width: $breakPoint-desktop) {
+      font-size: 11px;
+    }
+  }
+  .phone_signIn_Input {
+    font-size: 14px;
+    width: 466px;
+    padding-right: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 100px;
+    height: 40px;
+    margin-top: 4px;
+    color: black;
+    margin-bottom: 24px;
+    @media (max-width: $breakPoint-desktop) {
+      width: 327px;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+  }
+  .phone_signIn_button_div {
+    text-align: end;
+    margin-top: 39px;
+    @media (max-width: $breakPoint-desktop) {
+      margin-top: 24px;
+      text-align: center;
+    }
+  }
+  .phone_signIn_button {
+    padding: 16px;
+    width: 200px;
+    height: 51px;
+    background: #000000;
+    border-radius: 100px;
+    color: white;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 120%;
+  }
+  .send_code_button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    width: 138px;
+    height: 40px;
+    background: #000000;
+    border-radius: 100px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 130%;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    margin-left: 8px;
+    margin-top: 3px;
+    @media (max-width: $breakPoint-desktop) {
+      width: 74px;
+      height: 34px;
+      margin-top: 6px;
+    }
+  }
+  .arabicsend_code_button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    width: 138px;
+    height: 40px;
+    background: #000000;
+    border-radius: 100px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 130%;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    margin-right: 8px;
+    margin-top: 3px;
+    @media (max-width: $breakPoint-desktop) {
+      width: 74px;
+      height: 34px;
+      margin-top: 6px;
+    }
+  }
+  .phone_Input1_dev {
+    display: flex;
+    flex-direction: row;
+
+    .phone_signIn_Input {
+      width: 320px;
+      @media (max-width: $breakPoint-desktop) {
+        width: 245px;
+      }
+    }
+  }
+  .information_para {
+    width: 466px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    color: #000000;
+    margin: 0px;
+    margin-bottom: 24px;
+    @media (max-width: $breakPoint-desktop) {
+      width: 327px;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+  }
+  .Checkbox {
+    display: flex;
+    width: 466px;
+    @media (max-width: $breakPoint-desktop) {
+      width: 327px;
+    }
+    input {
+      width: 22px;
+      height: 20px;
+      @media (max-width: $breakPoint-desktop) {
+        width: 28.7px;
+      }
+    }
+    input[type="checkbox"] {
+      accent-color: #000;
+    }
+    p {
+      margin: 0px;
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 120%;
+      color: #000000;
+      margin-left: 16px;
+      margin-right: 16px;
+      @media (max-width: $breakPoint-desktop) {
+        font-size: 13px;
+      }
+    }
+  }
+}

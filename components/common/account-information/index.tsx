@@ -11,6 +11,7 @@ import SideBar from "components/common/side-bar/index";
 import AccountOverView from "components/common/account-information/account-overview";
 import OrderDetails from "components/common/order-details/index";
 import NewsSubscriptions from "components/common/newsletter-subscriptions/index";
+import MyDetails from "components/common/my-details/index";
 import OrderHistory from "../order-history";
 import { desktopScreenSize } from "lib/utils/common";
 import UserReviews from "./account-reviews";
@@ -152,6 +153,7 @@ const AccountInformation: FC<AccountInformationProps> = ({
               {activeComponent == "Newsletter Subscriptions" && (
                 <NewsSubscriptions />
               )}
+              {activeComponent == "My Details" && <MyDetails />}
             </div>
           </div>
         </div>
