@@ -89,6 +89,10 @@ const AccountInformation: FC<AccountInformationProps> = ({
       }
     };
     fetchUserInfo();
+
+    return (() => {
+      setOktaUserInfo(null)
+    })
   }, []);
 
   useEffect(() => {
