@@ -11,7 +11,7 @@ function LazurdeApp({ Component, pageProps }: AppProps) {
       setLoadScript(true);
     }, 2000);
   }, []);
-
+  // delete me
   return (
     <ContextProvider>
       {loadScript && (
