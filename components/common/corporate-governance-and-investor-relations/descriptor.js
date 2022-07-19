@@ -27,7 +27,7 @@ exports.default = Types.Component({
             }),
           }),
           dividend: Types.Array({
-            label: "Dividend",
+            label: "Dividend Array",
             children: Types.Shape({
               children: {
                 heading: Types.String({ label: "Heading" }),
@@ -43,6 +43,15 @@ exports.default = Types.Component({
                   }),
                 }),
                 content: Types.RichText({ label: "Content" }),
+              },
+            }),
+          }),
+          accordion: Types.Array({
+            label: "Accordion Array",
+            children: Types.Shape({
+              children: {
+                heading: Types.String({ label: "Name " }),
+                text: Types.RichText({ label: "Details" }),
               },
             }),
           }),
