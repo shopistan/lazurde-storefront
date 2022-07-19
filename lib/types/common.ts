@@ -6,12 +6,17 @@ export type XMComponent = {
 export type ErrorObject = {
   code?: string | number;
   message: string;
+  response?: {
+    code?: string;
+    status?: string | number;
+    data?: any;
+  };
 };
 
-export type ImageType = {
+export interface ImageType {
   url: string;
   altText: string;
-};
+}
 
 export type NavLinks = {
   url: string;
@@ -104,4 +109,14 @@ export type AppStateType = {
   locale: LocaleType;
   lang: LangType;
   region: RegionType;
+  locationNum: Number;
+};
+
+export type AuthTokens = {
+  access_token?: string;
+  id_token?: string;
+  refresh_token?: string;
+  scope?: string;
+  token_type?: string;
+  expires_in: number;
 };

@@ -12,12 +12,12 @@ import { AppContext } from "lib/context/index";
 
 interface SubDetailProps {
   isStockAvailable?: boolean;
-  productData?: any;
+  productPricing?: any;
 }
 
 const SubDetail = ({
   isStockAvailable,
-  productData = {},
+  productPricing = {},
 }: SubDetailProps): JSX.Element => {
   const date = new Date();
   const { appState } = useContext(AppContext);
@@ -27,10 +27,10 @@ const SubDetail = ({
     <>
       <div
         className={`${styles["sub-detail-wrapper"]} ${
-          !isStockAvailable ? "" : styles["product-not-available-wrapper"]
+          isStockAvailable ? "" : styles["product-not-available-wrapper"]
         }`}
       >
-        {!isStockAvailable ? (
+        {isStockAvailable ? (
           <>
             <div
               className={styles["sub-detail-point"]}
@@ -40,8 +40,8 @@ const SubDetail = ({
                 marginBottom: "3px",
               }}
             >
-              <TabbyModal />
-              <TamaraModal />
+              <TabbyModal productPricing={productPricing}/>
+              <TamaraModal productPricing={productPricing}/>
             </div>
             <div className={styles["sub-detail-point"]}>
               <Image
@@ -151,7 +151,7 @@ const SubDetail = ({
               <Link href="/contact-us">
                 <a className={styles["label-link"]}>
                   {appState.lang == "en"
-                    ? "Have a question?"
+                    ? "Ask an Expert"
                     : t("Have a question?")}
                 </a>
               </Link>

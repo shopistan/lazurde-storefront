@@ -1,0 +1,97 @@
+@import "/styles/variables.scss";
+.account-newsletter-container {
+  width: 650px;
+  @media (max-width: $breakPoint-desktop) {
+    width: 375px;
+  }
+  .account-newsletter-heading-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px;
+    background: #ffffff;
+    margin-bottom: 8px;
+    @media (max-width: $breakPoint-desktop) {
+      margin-bottom: 0px;
+      padding: 24px;
+    }
+    .account-newsletter-heading {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 120%;
+      color: #000000;
+      margin-top: 4.21px;
+    }
+  }
+
+  .account-newsletter-content-section {
+    padding: 40px;
+    background: #ffffff;
+    @media (max-width: $breakPoint-desktop) {
+      padding: 24px;
+      padding-top: 0px;
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+
+      .Save-button {
+        justify-content: center;
+        width: 200px;
+        flex-direction: row;
+        padding: 16px;
+        background: #000000;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 120%;
+        display: flex;
+        color: #ffffff;
+        margin: auto 0 auto auto;
+
+        @media (max-width: $breakPoint-mobile) {
+          margin: 0;
+        }
+      }
+    }
+  }
+  .Checkboxes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 24px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    color: #000000;
+
+    label {
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-top: 3px;
+    }
+    input {
+      margin: 0px;
+      width: 20px;
+      height: 20px;
+    }
+    .Checkbox-1,
+    .Checkbox-2,
+    .Checkbox-3,
+    .Checkbox-4,
+    .Checkbox-5 {
+      height: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    input[type="checkbox"] {
+      accent-color: black;
+    }
+  }
+}

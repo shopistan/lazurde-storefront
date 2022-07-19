@@ -30,16 +30,16 @@ const Footer = ({
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
 
-  const _footerLinks =
-    appState?.lang === "en"
-      ? footerLinks
-      : t("arabicfooterLinks", {}, { returnObjects: true });
+  const arabicFooterLinks = t("arabicfooterLinks", {}, { returnObjects: true });
 
   return (
     <>
       <div className={styles["footer__container"]}>
         <div className={styles["footer__content-wrapper"]}>
-          <div data-testid="wrapper" className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
+          <div
+            data-testid="wrapper"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full"
+          >
             <div className={`${styles["footer__sub-container"]}`}>
               <Heading element="h3" className={styles["footer__heading"]}>
                 {appState?.lang === "en" ? heading : t("footerHeading")}
@@ -66,23 +66,43 @@ const Footer = ({
             <div
               className={`grid grid-cols-1 lg:grid-cols-3 lg:gap-4 w-full ${styles["footer__sub-container"]}`}
             >
-              {Array.isArray(_footerLinks) &&
-                _footerLinks.length > 0 &&
-                _footerLinks.map((footerLink, index) =>
+              {footerLinks &&
+                footerLinks.length > 0 &&
+                footerLinks?.map((footerLink, index) =>
                   width > desktopScreenSize ? (
                     <FooterLinks
                       key={index}
-                      heading={footerLink.linkHeading}
-                      links={footerLink.links}
+                      heading={
+                        appState?.lang === "en"
+                          ? footerLink?.linkHeading
+                          : Array.isArray(arabicFooterLinks) &&
+                            arabicFooterLinks[index]?.linkHeading
+                      }
+                      links={footerLink?.links}
+                      arabicLinks={
+                        Array.isArray(arabicFooterLinks) &&
+                        arabicFooterLinks[index]?.links
+                      }
                       index={index}
                       role={"footerLinks"}
                     />
                   ) : (
                     <Accordion
+                      key={index}
+                      footerAccordion={true}
                       className={"footer-accordion"}
                       index={index}
-                      heading={footerLink?.linkHeading}
+                      heading={
+                        appState?.lang === "en"
+                          ? footerLink?.linkHeading
+                          : Array.isArray(arabicFooterLinks) &&
+                            arabicFooterLinks[index]?.linkHeading
+                      }
                       links={footerLink?.links}
+                      footerArabicLinks={
+                        Array.isArray(arabicFooterLinks) &&
+                        arabicFooterLinks[index]?.links
+                      }
                       arrowIcon={true}
                       role={"footerLinks-accordion"}
                     />

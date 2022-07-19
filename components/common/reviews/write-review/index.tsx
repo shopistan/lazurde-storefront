@@ -1,10 +1,10 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import styles from "./style.module.scss";
 import { CrossSmall } from "components/icons";
 import Heading from "components/common/ui/heading";
 import Label from "components/common/ui/label";
 import StarRating from "components/common/ui/star-ratings";
-import ReviewForm from "./review-form";
+import ReviewForm from "components/common/reviews/write-review/review-form/review-form";
 import { AppContext } from "lib/context";
 import useTranslation from "next-translate/useTranslation";
 
@@ -15,6 +15,7 @@ interface WriteAReviewProps {
   fetchingReviews?: Function;
   setIsRatingError?: Function;
   isRatingError?: string;
+  reviewImagesRef?: any;
 }
 
 const WriteAReview = ({
@@ -22,13 +23,12 @@ const WriteAReview = ({
   onClose,
   productData = {},
   fetchingReviews,
-  setIsRatingError,
-  isRatingError,
+  reviewImagesRef,
 }: WriteAReviewProps): JSX.Element => {
   const { appState } = useContext(AppContext);
   const { t } = useTranslation("common");
   const [ratingIndex, setRatingIndex] = useState(-1);
-
+  const [isRatingError, setIsRatingError] = useState("");
   return (
     <div
       className={styles["review-modal_wrapper"]}
@@ -45,14 +45,13 @@ const WriteAReview = ({
       >
         <div className={styles["review-modal_content"]}>
           <div className={styles["review-modal_header"]}>
-            <div
-              className={styles["close-btn"]}
-              onClick={() => {
-                onClose && onClose();
-                setIsRatingError("");
-              }}
-            >
-              <CrossSmall />
+            <div className={styles["close-btn"]}>
+              <CrossSmall
+                onClick={() => {
+                  onClose && onClose();
+                  setIsRatingError("");
+                }}
+              />
             </div>
             <Heading element="h3" className={styles["heading"]}>
               {appState.lang == "en" ? "Write a Review" : t("write a review")}
@@ -82,6 +81,7 @@ const WriteAReview = ({
               onClose={onClose}
               fetchingReviews={fetchingReviews}
               setIsRatingError={setIsRatingError}
+              reviewImagesRef={reviewImagesRef}
             />
           </div>
         </div>

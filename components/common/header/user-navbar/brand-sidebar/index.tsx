@@ -127,12 +127,15 @@ const BrandSideBar: FC<SidebarProps> = ({
               </span>
             </div>
             <button
-              onClick={() => setIsOpened(false)}
               style={{
                 padding: "0",
               }}
             >
-              <CrossSmall width={"12px"} height={"12px"} />
+              <CrossSmall
+                width={"12px"}
+                height={"12px"}
+                onClick={() => setIsOpened(false)}
+              />
             </button>
           </div>
         )}
@@ -176,8 +179,10 @@ const BrandSideBar: FC<SidebarProps> = ({
         </div>
         <div className={styles["brand_div"]}>
           {brandArr?.length > 0 &&
-            brandArr.map((data) => {
-              return BrandContainer({ ...data });
+            brandArr.map((data, index) => {
+              return (
+                <React.Fragment key={index}>{BrandContainer({ ...data })}</React.Fragment>
+              );
             })}
         </div>
       </div>

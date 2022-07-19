@@ -1,3 +1,5 @@
+@import "/styles/variables.scss";
+
 .content {
   font-size: 12px;
   font-weight: 400;
@@ -22,16 +24,16 @@
   line-height: 29px;
   letter-spacing: 0em;
   text-align: start;
-  margin-top: 10px;
-  margin-bottom: 8px;
+  margin-top: 8px;
+  margin-bottom: 24px;
 
-  @media (min-width: 1023px) {
+  @media (min-width: $breakPoint-desktop) {
     font-size: 24px;
     font-weight: 500;
     line-height: 29px;
     letter-spacing: 0em;
     text-align: start;
-    margin-top: 14px;
+    margin-top: 8px;
     margin-bottom: 8px;
   }
 }
@@ -39,8 +41,45 @@
 .image {
   width: 20px;
   height: 20px;
+  span {
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
 }
 
 .content-container {
   background-color: white;
+}
+
+.terms-conditions {
+  .heading {
+    margin-bottom: 40px;
+  }
+  .content {
+    padding-bottom: 0;
+    p {
+      font-size: 12px;
+    }
+    strong {
+      font-size: 15px;
+    }
+  }
+  .back-block {
+    padding-top: 36px;
+  }
+  @media (max-width: $breakPoint-mobile) {
+    .heading {
+      margin-bottom: 24px;
+    }
+    .content {
+      p {
+        font-size: 13px;
+      }
+      strong {
+        font-size: 14px;
+      }
+    }
+  }
 }

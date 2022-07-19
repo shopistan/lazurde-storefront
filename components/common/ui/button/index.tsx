@@ -5,10 +5,11 @@ interface ButtonProps {
   className?: string;
   buttonText?: string | Function;
   buttonStyle?: "black" | "white" | "underline";
-  buttonSize?: "sm" | "md" | "lr" | "xl" | "xxl" | "fill";
+  buttonSize?: "xsm" | "sm" | "md" | "lr" | "xl" | "xxl" | "fill";
   onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit";
   children?: JSX.Element | string;
+  testId?: string;
 }
 
 const Button = ({
@@ -19,14 +20,15 @@ const Button = ({
   buttonSize = "md",
   children,
   onClick,
+  testId = "",
 }: ButtonProps): JSX.Element => {
   return (
     <button
-      data-testid={"button"}
+      data-testid={testId || "button"}
       data-style={buttonStyle}
       data-size={buttonSize}
       className={`${styles["button"]} ${className}`}
-      onClick={(e) => onClick(e)}
+      onClick={(e) => onClick && onClick(e)}
       type={type}
     >
       {buttonText || ""}

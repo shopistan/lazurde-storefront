@@ -23,6 +23,7 @@ interface ProductListingPageProps extends PageProps {
     nbPages: number;
     hitsPerPage: number;
   };
+  filterProps: {filterList: []};
   categoryHierarchy: string[];
 }
 
@@ -32,6 +33,7 @@ const MisslProductListingPage: FC<ProductListingPageProps> = ({
   brandSidebarProps,
   pageComponents = [],
   algoliaSearchResults,
+  filterProps,
 }) => {
   return (
     <>
@@ -50,6 +52,7 @@ const MisslProductListingPage: FC<ProductListingPageProps> = ({
                 <Component
                   {...component.params}
                   productDataArray={algoliaSearchResults.hits}
+                  filterList={filterProps?.filterList}
                   key={index}
                 />
               );
@@ -105,7 +108,14 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         (item: XMComponent) => item.id === "BrandSideBar"
       ) || {}
     ).params || {};
-
+    const filterProps =
+    (
+      globalComponents.find(
+        (item: XMComponent) =>
+          item.id === "FilterBar"
+      ) || {}
+    ).params || {};
+      
   const categoryName =
     (
       pageComponents.find(
@@ -143,6 +153,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         nbPages,
         hitsPerPage,
       },
+      filterProps,
     },
     revalidate: 5,
   };

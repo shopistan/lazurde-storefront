@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { desktopScreenSize } from "lib/utils/common";
+import Skeleton from "react-loading-skeleton";
 
 interface SliderProps {
   children?: any | JSX.Element | string;
@@ -21,7 +22,7 @@ interface SliderProps {
   hasScrollbar?: boolean;
   isDraggable?: boolean;
   hasZoom?: boolean;
-  initialSlide?: number ;
+  initialSlide?: number;
 }
 
 const Slider = ({
@@ -77,11 +78,19 @@ const Slider = ({
   };
 
   return (
-    renderSlider && (
-      <Swiper {...(!productSlider ? sliderSetting : productSliderSetting)}>
-        {children}
-      </Swiper>
-    )
+    <>
+      {renderSlider ? (
+        <Swiper {...(!productSlider ? sliderSetting : productSliderSetting)}>
+          {children}
+        </Swiper>
+      ) : (
+        <>
+          {[1, 2, 3].map((s, i) => (
+            <Skeleton key={i} />
+          ))}
+        </>
+      )}
+    </>
   );
 };
 export default Slider;

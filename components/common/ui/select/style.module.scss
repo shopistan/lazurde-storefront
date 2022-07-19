@@ -1,10 +1,26 @@
 @import "/styles/variables.scss";
 
 .dropdown {
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 100%;
   min-width: 137px;
   outline: 0;
+
+  .label {
+    margin-inline-start: 20px;
+    margin-block-end: 4px;
+    line-height: 120%;
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .container-select {
+    position: relative;
+    width: 100%;
+    min-width: 137px;
+  }
 
   .select {
     display: flex;
@@ -92,6 +108,19 @@
       transform: rotateZ(-180deg);
       transform-origin: center;
     }
+  }
+
+  .error-msg {
+    position: absolute;
+    top: 100%;
+    margin-top: 5px;
+    width: 100%;
+    display: block;
+    padding-inline-start: 20px;
+    color: red;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15.6px;
   }
 }
 

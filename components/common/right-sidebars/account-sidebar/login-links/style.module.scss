@@ -1,0 +1,131 @@
+@import "/styles/variables.scss";
+
+.links_wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .name {
+    p {
+      margin: 0;
+      margin-top: 8px;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 28.8px;
+      letter-spacing: 0em;
+      text-align: start;
+      color: $black-color;
+
+      @media (min-width: $breakPoint-desktop) {
+        font-size: 32px;
+        line-height: 38.4px;
+      }
+    }
+  }
+
+  .links {
+    margin-top: 32px;
+    overflow: auto;
+    transition: all 0.3s;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+
+    &:hover {
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #fff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    @media (min-width: $breakPoint-desktop) {
+      margin-top: 48px;
+    }
+
+    .link_wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      cursor: pointer;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .link_btn {
+        button {
+          cursor: pointer;
+          padding: 0;
+          background-color: transparent;
+          border: 0;
+          outline: 0;
+          font-size: 15px;
+          font-weight: 500;
+          line-height: 18px;
+          letter-spacing: 0em;
+          text-align: start;
+          color: rgba(0, 0, 0, 0.8);
+          text-transform: capitalize;
+
+          @media (min-width: $breakPoint-desktop) {
+            font-size: 16px;
+            line-height: 19.2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.signout_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-top: 29px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  cursor: pointer;
+
+  @media (min-width: $breakPoint-desktop) {
+    margin-top: 34px;
+  }
+
+  svg {
+    transform: rotateY(180deg);
+  }
+
+  button {
+    margin-inline-start: 8px;
+    padding: 0;
+
+    &[data-size="xsm"] {
+      width: fit-content;
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .links {
+    .link_wrapper {
+      .icon {
+        transform: rotateY(180deg);
+      }
+    }
+  }
+
+  .signout_btn {
+    svg {
+      transform: rotateY(0);
+    }
+  }
+}

@@ -1,11 +1,11 @@
-import { render } from "@testing-library/react";
-import React from "react";
+import * as React from "react";
+import { render, screen } from "@testing-library/react";
 import Reviews from "./index";
 import ContextProvider, { AppContext } from "lib/context";
 import { singleProductData } from "lib/mock-data/data";
 
+jest.mock("axios");
 const totalRating = 4;
-
 const renderComponent = () => {
   render(
     <ContextProvider>

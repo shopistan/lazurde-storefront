@@ -23,6 +23,7 @@ const MobileMenu = ({
   menuData,
   headerId,
   brandSideBar,
+  handleAccountSidebar,
 }: MenuProps): JSX.Element => {
   const router = useRouter();
   const { appState, saveAppState } = useContext(AppContext);
@@ -70,12 +71,12 @@ const MobileMenu = ({
               </span>
             </div>
           )}
-          <button
-            data-testid="cross-btn1"
-            className=""
-            onClick={() => closeMenu()}
-          >
-            <CrossSmall width={"12px"} height={"12px"} />
+          <button data-testid="cross-btn1" className="">
+            <CrossSmall
+              width={"12px"}
+              height={"12px"}
+              onClick={() => closeMenu()}
+            />
           </button>
         </div>
         <div className={styles["mobile-header__brand-name"]}>
@@ -94,7 +95,7 @@ const MobileMenu = ({
                 const categoryData = navArr[0];
 
                 return (
-                  <>
+                  <React.Fragment key={index}>
                     <li
                       key={index}
                       className={styles["mobile-header__menu-list-item"]}
@@ -144,7 +145,7 @@ const MobileMenu = ({
                           <ArrowRight fill="#000000" width="6" height="8px" />
                         )}
                     </li>
-                  </>
+                  </React.Fragment>
                 );
               })}
           </ul>
@@ -160,7 +161,7 @@ const MobileMenu = ({
           </span>
           <ArrowRight fill="#000000" width="6" height="8px" />
         </div>
-        <UserLinks />
+        <UserLinks handleAccountSidebar={handleAccountSidebar} />
       </div>
       <MobileSubMenu
         active={isSubMenuOpen}

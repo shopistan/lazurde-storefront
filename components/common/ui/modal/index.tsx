@@ -3,7 +3,6 @@ import CrossSmall from "components/icons/CrossSmall";
 import styles from "./modal.module.scss";
 import useWindowSize from "lib/utils/useWindowSize";
 import { desktopScreenSize } from "lib/utils/common";
-
 interface ModalProps {
   className?: string;
   modalBodyClassName?: string;
@@ -26,74 +25,71 @@ const Modal = ({
   children,
   onClose = () => {},
   bgBluryModal = false,
-  modalWidth = "562px",
-  modalHeight = "381px",
+  modalWidth = "",
+  modalHeight = "",
   divTopBar = "",
-  divModalRight = ''
+  divModalRight = "",
 }: ModalProps): JSX.Element => {
   const [openState, setOpenState] = useState(isOpened);
   const [size] = useWindowSize();
 
   useEffect(() => {
+    if (isOpened) {
+      document.body.style.overflow = "hidden";
+      const html = document.querySelector("html");
+      html.style.overflow = "hidden";
+    }
     setOpenState(isOpened);
+
+    return () => {
+      document.body.style.overflow = "auto";
+      const html = document.querySelector("html");
+      html.style.overflow = "auto";
+    };
   }, [isOpened]);
 
   return (
     <>
-      {!bgBluryModal ? (
+      <div
+        role={"overlay"}
+        className={styles["overlay"]}
+        data-open={openState}
+        data-is-blurry={bgBluryModal}
+      />
+      <div
+        className={`${styles["div-modal-main"]} ${className}`}
+        data-open={openState}
+        onClick={() => {
+          onClose && onClose();
+        }}
+      >
         <div
-          className={`${styles["div-modal-main"]} ${className}`}
-          data-open={openState}
+          className={`${styles["modal-body"]} ${modalBodyClassName}`}
           onClick={(event) => {
             event.stopPropagation();
           }}
+          style={{
+            width: size > desktopScreenSize ? modalWidth : "100%",
+            height: size > desktopScreenSize ? modalHeight : "100%",
+          }}
         >
-          <div className={`${styles["modal-body"]} ${modalBodyClassName}`}>
-            <div className={`${styles["div-top-bar"]} ${divTopBar}`}>
-              <div className={styles["div-left"]}></div>
-              <div
-                className={`${styles["div-right"]} ${divModalRight}`}
+          <div className={`${styles["div-top-bar"]} ${divTopBar}`}>
+            <div className={styles["div-left"]}></div>
+            <div className={`${styles["div-right"]} ${divModalRight}`}>
+              <CrossSmall
+                width={"12px"}
+                height={"12px"}
                 onClick={() => {
-                  setOpenState(false);
                   onClose && onClose();
                 }}
-              >
-                <CrossSmall width={"12px"} height={"12px"} />
-              </div>
-            </div>
-            <div className={`${styles["div-modal-body"]} ${divModalBody}`}>
-              {children}
+              />
             </div>
           </div>
-        </div>
-      ) : (
-        <div
-          className={`${styles["bg-blury-modal_wrapper"]} ${className}`}
-          data-open={openState}
-        >
-          <div
-            onClick={(event) => {
-              event.stopPropagation();
-            }}
-            className={`${styles["bg-blury-modal_body"]} ${modalBodyClassName}`}
-            style={{
-              width: size > desktopScreenSize ? modalWidth : "100%",
-              height: size > desktopScreenSize ? modalHeight : "fit-content",
-            }}
-          >
-            <div
-              className={styles["bg-blury-modal_cross-btn"]}
-              onClick={() => {
-                setOpenState(false);
-                onClose && onClose();
-              }}
-            >
-              <CrossSmall width={"12px"} height={"12px"} />
-            </div>
-            <div className={styles["bg-blury-modal_content"]}>{children}</div>
+          <div className={`${styles["div-modal-body"]} ${divModalBody}`}>
+            {children}
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

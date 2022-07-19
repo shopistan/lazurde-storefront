@@ -5,6 +5,7 @@ interface headingType {
   children?: JSX.Element | string;
   className?: string;
   style?: object;
+  testId?: string;
 }
 
 const Heading = ({
@@ -12,11 +13,16 @@ const Heading = ({
   children,
   element,
   style = {},
+  testId = "",
 }: headingType): JSX.Element => {
   const TitleTag = element;
   return (
     <>
-      <TitleTag className={`heading-c ${className}`} style={style}>
+      <TitleTag
+        data-testid={testId}
+        className={`heading-c ${className}`}
+        style={style}
+      >
         {children}
       </TitleTag>
     </>

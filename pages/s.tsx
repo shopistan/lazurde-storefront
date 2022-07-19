@@ -36,8 +36,6 @@ const SearchPage: FC<SearchPageProps> = ({
     selectedFilter,
     hasFilteredData,
   } = useContext(AppContext);
-  console.log("Search Page Props: ", algoliaSearchResults);
-  console.log("selected filters", selectedFilter);
   return (
     <>
       <Head>
@@ -99,7 +97,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     else return [`Brand: L'azurde`, `Brand: Miss L'`, `Brand: Kenaz`];
   };
 
-  const {
+  let {
     hits = [],
     nbHits = 0,
     page = 0,
@@ -109,6 +107,9 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     query: query.keyword || "",
     facetFilters: getFaceFilters() || [],
   });
+
+  const nonVariantArray = hits.filter((item: any) => item.isVariant === false)
+  hits = nonVariantArray
 
   const getCurrentBrandId = () => {
     if (query?.brand === `L'azurde`) return "lazurdeHeader";

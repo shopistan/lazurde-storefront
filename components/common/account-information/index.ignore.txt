@@ -1,0 +1,72 @@
+/* eslint-disable react/display-name */
+import * as React from "react";
+import AccountInformation from "./index";
+import { render, screen } from "@testing-library/react";
+import ContextProvider, { AppContext } from "lib/context";
+import { act } from "react-dom/test-utils";
+
+jest.mock("axios");
+const mockChildComponent = jest.fn();
+jest.mock("./account-reviews/product-without-reviews", () => (props: any) => {
+  mockChildComponent(props);
+  return <div />;
+});
+jest.mock("lib/identity", () => ({
+  getUserInfo: () => {
+    return { firstName: "Test Name" };
+  },
+}));
+
+const detailsData = {
+  image: { url: "/image", altText: "image text" },
+  text: "detail text",
+  width: 200,
+  height: 200,
+  link: "/detail-link",
+};
+
+const title = "tilte text";
+const titleImage = { url: "/image", altText: "image text" };
+const barCode = { url: "/image", altText: "image text" };
+const firstName = "first name";
+const lastName = "last name";
+const reviewImage = { url: "/image", altText: "image text" };
+const reviewText = "review text";
+const details = [{ accounts: [detailsData] }];
+
+const renderComponent = async () => {
+  await act(async () => {
+    render(
+      <ContextProvider>
+        <AccountInformation
+          title={title}
+          titleImage={titleImage}
+          barCode={barCode}
+          firstName={firstName}
+          lastName={lastName}
+          reviewText={reviewText}
+          reviewImage={reviewImage}
+          details={details}
+        />
+      </ContextProvider>
+    );
+  });
+};
+
+const renderComponentAR = async () => {
+  await act(async () => {
+    render(
+      <AppContext.Provider value={{ appState: { lang: "ar" } }}>
+        <AccountInformation />
+      </AppContext.Provider>
+    );
+  });
+};
+
+test("account information testing", () => {
+  renderComponent();
+});
+
+test("account information arabic testing", () => {
+  renderComponentAR();
+});

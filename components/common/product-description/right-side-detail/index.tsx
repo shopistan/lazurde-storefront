@@ -1,116 +1,267 @@
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react";
+import styles from "./right-side-detail.module.scss";
 import WriteAReview from "components/common/reviews/write-review";
 import Button from "components/common/ui/button";
 import Label from "components/common/ui/label";
 import StarRating from "components/common/ui/star-ratings";
-import { Heart } from "components/icons";
-import React, { useState, useContext } from "react";
-// import ProductColorSelection from "../color-selection";
 import SizeChart from "./size-selection";
 import ColorSelection from "./color-selection";
 import ButtonATC from "components/common/ui/button-add-to-cart";
-import styles from "./right-side-detail.module.scss";
 import SubDetail from "./sub-detail";
 import WishList from "components/common/wishlist";
 import NotifyMeModal from "./notify-me-modal";
 import useTranslation from "next-translate/useTranslation";
 import { AppContext } from "lib/context/index";
-import { addProductToCart } from "lib/utils/cart";
 import { ATCPayload } from "lib/types/cart";
 import { useRouter } from "next/router";
+import { fetchProductPriceByItemId } from "lib/utils/product";
+import { getInventoryByIds, getInventoryAuth } from "lib/api/inventory";
+import Skeleton from "react-loading-skeleton";
+import useCart from "lib/utils/cart";
+import Splash from "components/common/ui/splash";
 
+type ProductProps = {
+  Size?: number;
+  Color?: string;
+  sku?: string;
+  itemId?: string;
+  hasStock?: Boolean;
+};
 interface RightSideDetailProps {
   onSizeChange?: Function;
   itemId?: string | number;
-  productSizeArray?: { Size?: string; Color?: string }[];
+  productSizeArray?: ProductProps[];
   totalRating?: number;
   onColorChange?: Function;
-  currency?: string;
-  basePrice?: number | string;
-  discount?: string | number;
-  finalPrice?: number | string;
   productData?: any;
-  fetchingReviews?: Function;
   setIsRatingError?: Function;
   isRatingError?: string;
+  priceListId?: string;
+  setIsloading?: Function;
 }
 
 const RightSideDetail = ({
-  onSizeChange,
-  onColorChange,
   productSizeArray = [],
-  itemId = "",
   totalRating = 0,
-  currency = "USD",
-  basePrice = 0,
-  discount = 0 || "",
-  finalPrice = 0,
-  productData = {},
-  fetchingReviews = () => {},
-  setIsRatingError,
-  isRatingError,
+  productData = [],
+  setIsRatingError = () => {},
+  isRatingError = "",
+  priceListId = "100000",
+  setIsloading = () => {},
 }: RightSideDetailProps): JSX.Element => {
+  const { addProductToCart } = useCart();
+  const productDataCopy = useRef(productData).current;
+  const allProductPrices = useRef([]);
+  const userAuth = useRef("");
   const router = useRouter();
-  const { appState } = useContext(AppContext);
+  const { appState, cartId } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
-  const [isStockAvailable, setIsStockAvailable] = useState(
-    productData?.sku === "TestItemStock"
-  );
   const [quantityCounter, setQuantityCounter] = useState(1);
+  const [selectedSize, setSelectedSize] = useState({ size: -1, index: 0 });
+  const [selectedColor, setSelectedColor] = useState({ color: "", index: 0 });
+  const [selectedItem, setSelectedItem] = useState(productDataCopy[0]);
+  const [isLoadingData, setIsloadingData] = useState<boolean>(true);
+  const [productPricing, setProductPricing] = useState<{
+    currency: string;
+    base: number | string;
+    discount: string | number;
+    finalPrice: number | string;
+  }>();
   const { t } = useTranslation("common");
 
-  const productPricing = () => {
+  useEffect(() => {
+    if (productDataCopy?.length < 1) return;
+
+    getProductSku();
+  }, [selectedColor]);
+
+  const getPrice = async () => {
+    if (!productDataCopy && !productDataCopy[0]?.itemId) return;
+    const itemIdArray: number[] = [];
+    productDataCopy?.length > 0 &&
+      productDataCopy?.map((item: { itemId: number }) => {
+        itemIdArray?.push(item.itemId);
+      });
+
+    if (itemIdArray[0] === undefined) return;
+
+    const payload = {
+      priceList: [priceListId],
+      itemId: itemIdArray,
+    };
+    const response = await fetchProductPriceByItemId(payload);
+    if (response && response?.status === 200) {
+      allProductPrices.current = response?.data;
+    }
+    setIsloading(false);
+  };
+
+  const getProductSku = async () => {
+    if (productDataCopy?.length < 1) return;
+    let skuType = "";
+    if (selectedSize?.size > -1) skuType = "sizeOnly";
+
+    if (selectedColor?.color)
+      skuType = skuType === "sizeOnly" ? "sizeAndColor" : "colorOnly";
+
+    const item = productDataCopy?.find((item: ProductProps) => {
+      let selectedSku = false;
+      switch (skuType) {
+        case "sizeOnly":
+          selectedSku = Number(item?.Size) === Number(selectedSize?.size);
+          break;
+        case "colorOnly":
+          selectedSku = item?.Color === selectedColor?.color;
+          break;
+        case "sizeAndColor":
+          selectedSku =
+            Number(item?.Size) === Number(selectedSize?.size) &&
+            item.Color === selectedColor?.color;
+          break;
+        default:
+          selectedSku = true;
+          break;
+      }
+      return selectedSku;
+    });
+
+    if (!item) return;
+    getSelectedPrice(item || productDataCopy[0]);
+    await getProductInventory(item || productDataCopy[0]);
+    if (!item.hasOwnProperty("hasStock")) return;
+    setSelectedItem({ ...item });
+    for (let index = 0; index < productDataCopy?.length; index++) {
+      if (index === 0) continue;
+      if (productDataCopy[index]?.hasOwnProperty("hasStock")) continue;
+      const remainigItem = productDataCopy[index];
+      await getProductInventory(remainigItem);
+    }
+    setIsloadingData(false);
+    return item;
+  };
+
+  const getSelectedPrice = async (
+    selectedProduct: { itemId: number } | any
+  ) => {
+    if (allProductPrices?.current?.length < 1) {
+      allProductPrices.current = [{}];
+      await getPrice();
+    }
+
+    if (selectedProduct?.length < 1) return;
+
+    const price = allProductPrices?.current?.find(
+      (item) => item?.itemId === selectedProduct?.itemId
+    );
+
+    if (!price) return;
+    const offers = price?.offers;
+    const discountArray = offers?.discounts;
+    let discountAmount: string = "0";
+    if (discountArray?.length > 0) {
+      const discountType = discountArray[0].discountType;
+      switch (discountType) {
+        case "PERCENTAGE":
+          discountAmount = `${discountArray[0].value}%`;
+          break;
+
+        default:
+          break;
+      }
+    }
+    setProductPricing({
+      currency: offers?.price?.currency,
+      base: offers?.price?.base,
+      discount: discountAmount,
+      finalPrice: offers?.price?.totalPrice,
+    });
+  };
+
+  const getProductInventory = async (product: ProductProps | any) => {
+    if (product?.hasOwnProperty("hasStock")) {
+      return;
+    }
+    if (!userAuth.current) {
+      userAuth.current = "true";
+      const response = await getInventoryAuth();
+      userAuth.current = response?.data?.accessToken;
+    }
+    if (userAuth.current === "true") return;
+    // product["hasStock"] = false;
+    const id = product?.itemId;
+    const itemId = Number(id);
+    const inventoryData = await getInventoryByIds(userAuth.current, itemId);
+    if (product?.itemId === id) {
+      product["hasStock"] =
+        inventoryData?.data?.inventory.length > 0 &&
+        inventoryData?.data?.inventory[0]?.counters?.["on-hand"] > 0;
+    }
+
+    return product;
+  };
+
+  const getProductPricing = () => {
+    if (!productPricing) return;
     return (
       <>
         <div className={styles["price-wrapper"]}>
-          {basePrice ? (
+          {productPricing?.base ? (
             <Label
               className={`${styles["base-price"]} ${
-                discount ? styles["line-through"] : ""
+                productPricing?.discount !== "0" ? styles["line-through"] : ""
               }`}
             >
-              {`${currency === "USD" ? "$" : "SAR"}${
-                basePrice && basePrice.toLocaleString()
+              {`${productPricing?.currency === "USD" ? "$" : "SAR"}${
+                productPricing?.base && productPricing?.base.toLocaleString()
               }`}
             </Label>
-          ) : (
-            ""
-          )}
-          {discount ? (
+          ) : null}
+          {productPricing?.discount !== "0" ? (
             <Label className={styles["discount"]}>
-              {`${discount?.toLocaleString()}% off`}
+              {`${productPricing?.discount} off`}
             </Label>
-          ) : (
-            ""
-          )}
-          {finalPrice ? (
+          ) : null}
+          {productPricing?.finalPrice && productPricing?.discount !== "0" ? (
             <Label className={styles["final-price"]}>
-              {`${currency === "USD" ? "$" : "SAR"}${
-                finalPrice && finalPrice.toLocaleString()
+              {`${productPricing?.currency === "USD" ? "$" : "SAR"}${
+                productPricing?.finalPrice &&
+                productPricing?.finalPrice.toLocaleString()
               }`}
             </Label>
-          ) : (
-            ""
-          )}
+          ) : null}
         </div>
       </>
     );
   };
 
   const handleAddToCart = async () => {
+    const selectedProduct: {
+      sku?: string;
+      itemId?: string;
+      Size?: number;
+      Color?: string;
+    } = (await getProductSku()) || productDataCopy[0];
+
     const payload: ATCPayload = {
-      cartId: "98b0ed93-aaf1-4001-b540-b61796c4663d",
+      cartId: cartId,
       items: [
         {
-          sku: productData && productData?.sku,
-          itemId: productData && productData?.itemId,
+          sku: selectedProduct && selectedProduct?.sku,
+          itemId: selectedProduct && selectedProduct?.itemId,
           quantity: quantityCounter,
           priceListId: "100000",
           price: {
-            currency: currency,
-            amount: basePrice,
+            currency: productPricing?.currency,
+            amount: productPricing?.base,
             discount: {
-              discountAmount: finalPrice,
+              discountAmount: productPricing?.finalPrice,
             },
           },
         },
@@ -118,35 +269,46 @@ const RightSideDetail = ({
     };
     const response = await addProductToCart(payload);
     if (response?.hasError) {
-      alert("error while adding product");
+      // alert("error while adding product");
     } else {
-      // router?.push("/cart");
+      router?.push("/cart");
     }
   };
 
+  const onSizeChange = (val: number) => {
+    // getProductSku();
+  };
+
+  const onColorChange = (val: number) => {
+    // getProductSku();
+  };
+
   return (
-    <>
+    <div className={styles["container"]}>
+      <Splash isLoading={isLoadingData}></Splash>
       <div className={styles["detail"]}>
-        <div className={styles["collection-and-outofstock"]}>
-          <Label className={styles["collection-tag"]}>
-            <>
-              {/* {appState?.lang == "en" ? `Collection` : t("pdpTag-arabic")} */}
-            </>
-          </Label>
-          {isStockAvailable ? (
+        {selectedItem?.hasStock === false ? (
+          <div className={styles["collection-and-outofstock"]}>
+            <Label className={styles["collection-tag"]}>
+              <>
+                {/* {appState?.lang == "en" ? `Collection` : t("pdpTag-arabic")} */}
+              </>
+            </Label>
             <Label className={styles["outofstock-tag"]}>
               {appState?.lang == "en" ? `Out of Stock` : t("pdpTag-arabic")}
             </Label>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
         <Label className={styles["title"]}>
           {appState.lang == "en"
-            ? productData && productData["Product Title"]
+            ? productDataCopy &&
+              productDataCopy?.length > 0 &&
+              productDataCopy[0]["Product Title"]
             : t("pdpTitle-arabic")}
         </Label>
         <div className={styles["review-section"]}>
           <div className={styles["wishlist-icon"]}>
-            <WishList itemID={productData && productData["itemId"]} />
+            <WishList itemId={selectedItem?.itemId} />
           </div>
           <div className={styles["rating-stars"]}>
             <StarRating
@@ -165,18 +327,29 @@ const RightSideDetail = ({
           </div>
         </div>
       </div>
-      {productPricing()}
+      {getProductPricing()}
+
       <SizeChart
-        productSizeArray={productSizeArray}
+        productData={productDataCopy}
+        productSizeArray={productDataCopy}
         onSizeChange={onSizeChange}
+        setSelectedSize={setSelectedSize}
+        selectedSize={selectedSize}
+        setSelectedColor={setSelectedColor}
       />
+
       <ColorSelection
-        productSizeArray={productSizeArray}
+        productData={productDataCopy}
+        productSizeArray={productDataCopy}
         onColorChange={onColorChange}
+        selectedSize={selectedSize}
+        selectedColor={selectedColor}
+        setSelectedColor={setSelectedColor}
       />
+
       <div className={styles["div-cart-buttons"]}>
         <div>
-          {!isStockAvailable ? (
+          {selectedItem?.hasStock ? (
             <ButtonATC
               onClick={() => {
                 handleAddToCart();
@@ -219,15 +392,14 @@ const RightSideDetail = ({
         ></Button> */}
       </div>
       <SubDetail
-        isStockAvailable={isStockAvailable}
-        productData={productData}
+        isStockAvailable={selectedItem?.hasStock}
+        productPricing={productPricing}
       />
       {modalOpen && (
         <WriteAReview
           isOpened={modalOpen}
           onClose={() => setModalOpen(false)}
-          productData={productData}
-          fetchingReviews={fetchingReviews}
+          productData={productData[0]}
           setIsRatingError={setIsRatingError}
           isRatingError={isRatingError}
         />
@@ -238,7 +410,7 @@ const RightSideDetail = ({
           onClose={() => setNotifyModalOpen(false)}
         />
       )}
-    </>
+    </div>
   );
 };
 export default RightSideDetail;
