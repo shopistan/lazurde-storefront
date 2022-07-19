@@ -9,6 +9,10 @@ import AppContentWrapper from "../components/common/app-content-wrapper";
 import { AppContext } from "lib/context";
 import ImageMagnifier from "components/common/ui/imageMagnifier";
 
+/**
+ * NOTE: Delete me!
+ */
+
 const LazurdeHome: FC<PageProps> = ({
   headerProps,
   brandSidebarProps,
